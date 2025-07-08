@@ -1,39 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getSortedRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
 
 // Define the data type
 const columnHelper = createColumnHelper();
 
-// Define columns
-const columns = [
-  columnHelper.display({
-    id: "rowNumber",
-    header: "#",
-    cell: (info) => info.row.index + 1,
-  }),
-  columnHelper.accessor("year", {
-    header: "Year",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("author", {
-    header: "Author",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("title.text", {
-    header: "Title",
-    cell: (info) => info.getValue(),
-  }),
-];
-
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [columnFilters, setColumnFilters] = useState([]);
+  const filterRef = useRef();
 
   useEffect(() => {
     const loadData = async () => {
@@ -54,11 +39,70 @@ function App() {
     loadData();
   }, []);
 
+  // Definizione colonne DENTRO il componente per accedere allo stato
+  const columns = [
+    columnHelper.display({
+      id: "rowNumber",
+      header: "#",
+      cell: (info) => info.row.index + 1,
+      enableSorting: false,
+    }),
+    columnHelper.accessor("year", {
+      header: "Year",
+      cell: (info) => info.getValue(),
+      enableSorting: true,
+    }),
+    columnHelper.accessor("author", {
+      header: "First Author",
+      cell: (info) => info.getValue(),
+      enableSorting: false,
+    }),
+    columnHelper.accessor("title.text", {
+      header: "Title",
+      cell: (info) => info.getValue(),
+      enableSorting: false,
+    }),
+    columnHelper.accessor(row => row["conference-journal"], {
+      id: "conference-journal",
+      header: "Conference/Journal",
+      cell: (info) => info.getValue(),
+      enableColumnFilter: false,
+      enableFacetedUniqueValues: false,
+      // filterFn rimosso
+      enableSorting: false,
+    }),
+  ];
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      columnFilters,
+    },
+    onColumnFiltersChange: setColumnFilters,
   });
+
+  // Chiudi il filtro facet se clicchi fuori
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        // setShowFacetFilter(false); // This line is removed
+      }
+    }
+    // if (showFacetFilter) { // This line is removed
+    document.addEventListener('mousedown', handleClickOutside);
+    // } else { // This line is removed
+    //   document.removeEventListener('mousedown', handleClickOutside); // This line is removed
+    // } // This line is removed
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []); // This line is changed
 
   if (loading) {
     return (
@@ -79,7 +123,11 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gray-900" style={{ position: 'relative' }}>
+      {/* Rimuovo FacetFilterDropdown e tutto il relativo stato */}
+      <div className="p-4">
+        {/* Rimuovo il filtro facet sempre visibile sopra la tabella */}
+      </div>
       <div className="overflow-auto h-screen">
         <table className="w-full table-auto">
           <thead className="bg-gray-800 sticky top-0 z-10">
@@ -89,6 +137,8 @@ function App() {
                   <th 
                     key={header.id}
                     className="px-6 py-4 text-left text-sm font-semibold text-gray-300 border-b border-gray-700"
+                    onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
+                    style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                   >
                     {header.isPlaceholder
                       ? null
@@ -96,6 +146,11 @@ function App() {
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                    {header.column.getCanSort() && (
+                      <span className="ml-2">
+                        {header.column.getIsSorted() === 'asc' ? '▲' : header.column.getIsSorted() === 'desc' ? '▼' : ''}
+                      </span>
+                    )}
                   </th>
                 ))}
               </tr>
