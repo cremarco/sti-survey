@@ -5,13 +5,17 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import "./App.css";
 
 // Define the data type
 const columnHelper = createColumnHelper();
 
 // Define columns
 const columns = [
+  columnHelper.display({
+    id: "rowNumber",
+    header: "#",
+    cell: (info) => info.row.index + 1,
+  }),
   columnHelper.accessor("year", {
     header: "Year",
     cell: (info) => info.getValue(),
@@ -58,29 +62,34 @@ function App() {
 
   if (loading) {
     return (
-      <div className="container">
-        <div className="loading">Loading data...</div>
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-gray-300 text-lg">Loading data...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="container">
-        <div className="error">Error: {error}</div>
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">
+          Error: {error}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container">
-      <div className="table-container">
-        <table>
-          <thead>
+    <div className="min-h-screen bg-gray-900">
+      <div className="overflow-auto h-screen">
+        <table className="w-full table-auto">
+          <thead className="bg-gray-800 sticky top-0 z-10">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
+                  <th 
+                    key={header.id}
+                    className="px-6 py-4 text-left text-sm font-semibold text-gray-300 border-b border-gray-700"
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -92,11 +101,17 @@ function App() {
               </tr>
             ))}
           </thead>
-          <tbody>
+          <tbody className="bg-gray-900">
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
+              <tr 
+                key={row.id}
+                className="hover:bg-gray-800 border-b border-gray-700 transition-colors duration-150"
+              >
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
+                  <td 
+                    key={cell.id}
+                    className="px-6 py-4 text-sm text-gray-300"
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
