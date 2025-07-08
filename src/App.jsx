@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
-  useReactTable,
   getSortedRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
+  useReactTable,
 } from "@tanstack/react-table";
 
 // Define the data type
@@ -18,6 +18,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [columnFilters, setColumnFilters] = useState([]);
+  const [sorting, setSorting] = useState([]);
   const filterRef = useRef();
 
   useEffect(() => {
@@ -39,8 +40,8 @@ function App() {
     loadData();
   }, []);
 
-  // Definizione colonne DENTRO il componente per accedere allo stato
-  const columns = [
+  // Colonne stabili con useMemo
+  const columns = useMemo(() => [
     columnHelper.display({
       id: "rowNumber",
       header: "#",
@@ -68,10 +69,9 @@ function App() {
       cell: (info) => info.getValue(),
       enableColumnFilter: false,
       enableFacetedUniqueValues: false,
-      // filterFn rimosso
       enableSorting: false,
     }),
-  ];
+  ], []);
 
   const table = useReactTable({
     data,
@@ -83,8 +83,10 @@ function App() {
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       columnFilters,
+      sorting,
     },
     onColumnFiltersChange: setColumnFilters,
+    onSortingChange: setSorting,
   });
 
   // Chiudi il filtro facet se clicchi fuori
@@ -94,15 +96,11 @@ function App() {
         // setShowFacetFilter(false); // This line is removed
       }
     }
-    // if (showFacetFilter) { // This line is removed
     document.addEventListener('mousedown', handleClickOutside);
-    // } else { // This line is removed
-    //   document.removeEventListener('mousedown', handleClickOutside); // This line is removed
-    // } // This line is removed
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []); // This line is changed
+  }, []);
 
   if (loading) {
     return (
@@ -124,9 +122,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900" style={{ position: 'relative' }}>
-      {/* Rimuovo FacetFilterDropdown e tutto il relativo stato */}
       <div className="p-4">
-        {/* Rimuovo il filtro facet sempre visibile sopra la tabella */}
+        {/* Filtro facet rimosso */}
       </div>
       <div className="overflow-auto h-screen">
         <table className="w-full table-auto">
@@ -136,6 +133,7 @@ function App() {
                 {headerGroup.headers.map((header) => (
                   <th 
                     key={header.id}
+                    colSpan={header.colSpan}
                     className="px-6 py-4 text-left text-sm font-semibold text-gray-300 border-b border-gray-700"
                     onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
                     style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
@@ -174,6 +172,7 @@ function App() {
             ))}
           </tbody>
         </table>
+        {/* Pagination Controls */}
       </div>
     </div>
   );
