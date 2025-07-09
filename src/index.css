@@ -44,3 +44,21 @@ body {
 .progress-animate {
   animation: progress-fill 1.5s ease-out forwards;
 }
+
+/* Counter animation */
+@keyframes count-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-count-up {
+  animation: count-up 1s ease-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
