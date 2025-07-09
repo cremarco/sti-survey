@@ -750,12 +750,19 @@ function App() {
     };
 
     const approachesWithCode = data.filter(row => row['code-availability'] && row['code-availability'].trim() !== '').length;
+    const approachesWithCodePercentage = totalEntries > 0 ? (approachesWithCode / totalEntries) * 100 : 0;
 
     const licenseDistribution = data.reduce((acc, row) => {
       const license = row['license'] || 'N/A';
       acc[license] = (acc[license] || 0) + 1;
       return acc;
     }, {});
+    const licenseDistributionWithPercentages = Object.fromEntries(
+      Object.entries(licenseDistribution).map(([key, value]) => [
+        key,
+        { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
+      ])
+    );
 
     const taskCounts = { cta: 0, cpa: 0, cea: 0, cnea: 0 };
     data.forEach(row => {
@@ -764,18 +771,41 @@ function App() {
       if (row.tasks?.cea) taskCounts.cea++;
       if (row.tasks?.cnea) taskCounts.cnea++;
     });
+    const taskPercentages = {
+      cta: totalEntries > 0 ? (taskCounts.cta / totalEntries) * 100 : 0,
+      cpa: totalEntries > 0 ? (taskCounts.cpa / totalEntries) * 100 : 0,
+      cea: totalEntries > 0 ? (taskCounts.cea / totalEntries) * 100 : 0,
+      cnea: totalEntries > 0 ? (taskCounts.cnea / totalEntries) * 100 : 0,
+    };
+
+    // Calculate percentages for distributions
+    const mainMethodTypeDistributionWithPercentages = Object.fromEntries(
+      Object.entries(mainMethodTypeDistribution).map(([key, value]) => [
+        key,
+        { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
+      ])
+    );
+
+    const domainDistributionWithPercentages = Object.fromEntries(
+      Object.entries(domainDistribution).map(([key, value]) => [
+        key,
+        { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
+      ])
+    );
     
     return {
       totalEntries,
       entriesWithMissingFields,
       totalMissingFields,
       mostMissing,
-      mainMethodTypeDistribution,
-      domainDistribution,
+      mainMethodTypeDistribution: mainMethodTypeDistributionWithPercentages,
+      domainDistribution: domainDistributionWithPercentages,
       yearRange,
       approachesWithCode,
-      licenseDistribution,
+      approachesWithCodePercentage,
+      licenseDistribution: licenseDistributionWithPercentages,
       taskCounts,
+      taskPercentages,
     };
   }, [data]);
 
@@ -831,16 +861,26 @@ function App() {
             </div>
             <div>
               <span className="font-medium text-gray-300">Approaches with Code:</span>
-              <span className="text-gray-400 ml-1">{summaryStats.approachesWithCode}</span>
+              <span className="text-gray-400 ml-1">{summaryStats.approachesWithCode} ({summaryStats.approachesWithCodePercentage.toFixed(1)}%)</span>
+              <div className="mt-1 h-2.5 w-full bg-gray-700 rounded">
+                <div className="h-2.5 bg-sky-500 rounded" style={{ width: `${summaryStats.approachesWithCodePercentage}%` }}></div>
+              </div>
             </div>
 
-            <div className="col-span-full sm:col-span-1 md:col-span-2"> {/* Allow more space for distributions */}
+            <div className="col-span-full sm:col-span-1 md:col-span-2">
               <span className="font-medium text-gray-300">Main Method Types:</span>
-              <div className="text-gray-400 mt-1 space-y-0.5 text-xs">
-                {Object.entries(summaryStats.mainMethodTypeDistribution).map(([type, count]) => (
-                  <div key={type} className="flex justify-between">
-                    <span>{type}:</span>
-                    <span>{count}</span>
+              <div className="text-gray-400 mt-1 space-y-1 text-xs">
+                {Object.entries(summaryStats.mainMethodTypeDistribution)
+                  .sort(([, a], [, b]) => b.count - a.count)
+                  .map(([type, data]) => (
+                  <div key={type}>
+                    <div className="flex justify-between">
+                      <span>{type}:</span>
+                      <span>{data.count} ({data.percentage.toFixed(1)}%)</span>
+                    </div>
+                    <div className="mt-0.5 h-1.5 w-full bg-gray-700 rounded">
+                      <div className="h-1.5 bg-indigo-500 rounded" style={{ width: `${data.percentage}%` }}></div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -848,11 +888,18 @@ function App() {
 
             <div className="col-span-full sm:col-span-1 md:col-span-2">
               <span className="font-medium text-gray-300">Domains:</span>
-              <div className="text-gray-400 mt-1 space-y-0.5 text-xs">
-                {Object.entries(summaryStats.domainDistribution).map(([domain, count]) => (
-                  <div key={domain} className="flex justify-between">
-                    <span>{domain}:</span>
-                    <span>{count}</span>
+              <div className="text-gray-400 mt-1 space-y-1 text-xs">
+                {Object.entries(summaryStats.domainDistribution)
+                  .sort(([, a], [, b]) => b.count - a.count)
+                  .map(([domain, data]) => (
+                  <div key={domain}>
+                    <div className="flex justify-between">
+                      <span>{domain}:</span>
+                      <span>{data.count} ({data.percentage.toFixed(1)}%)</span>
+                    </div>
+                    <div className="mt-0.5 h-1.5 w-full bg-gray-700 rounded">
+                      <div className="h-1.5 bg-emerald-500 rounded" style={{ width: `${data.percentage}%` }}></div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -860,23 +907,37 @@ function App() {
 
             <div className="col-span-full sm:col-span-1 md:col-span-2">
               <span className="font-medium text-gray-300">Licenses:</span>
-              <div className="text-gray-400 mt-1 space-y-0.5 text-xs">
-                {Object.entries(summaryStats.licenseDistribution).map(([license, count]) => (
-                  <div key={license} className="flex justify-between">
-                    <span>{license}:</span>
-                    <span>{count}</span>
+              <div className="text-gray-400 mt-1 space-y-1 text-xs">
+                {Object.entries(summaryStats.licenseDistribution)
+                  .sort(([, a], [, b]) => b.count - a.count)
+                  .map(([license, data]) => (
+                  <div key={license}>
+                    <div className="flex justify-between">
+                      <span>{license}:</span>
+                      <span>{data.count} ({data.percentage.toFixed(1)}%)</span>
+                    </div>
+                    <div className="mt-0.5 h-1.5 w-full bg-gray-700 rounded">
+                      <div className="h-1.5 bg-amber-500 rounded" style={{ width: `${data.percentage}%` }}></div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="col-span-full sm:col-span-2 md:col-span-2">
-              <span className="font-medium text-gray-300">Tasks Addressed:</span>
-              <div className="grid grid-cols-2 gap-x-4 text-gray-400 mt-1 text-xs">
-                <div>CTA: {summaryStats.taskCounts.cta}</div>
-                <div>CPA: {summaryStats.taskCounts.cpa}</div>
-                <div>CEA: {summaryStats.taskCounts.cea}</div>
-                <div>CNEA: {summaryStats.taskCounts.cnea}</div>
+              <span className="font-medium text-gray-300">Tasks Addressed (Percentage of Total Approaches):</span>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-gray-400 mt-1 text-xs">
+                {Object.entries(summaryStats.taskPercentages).map(([task, percentage]) => (
+                  <div key={task}>
+                    <div className="flex justify-between">
+                      <span>{task.toUpperCase()}: {summaryStats.taskCounts[task]}</span>
+                      <span>({percentage.toFixed(1)}%)</span>
+                    </div>
+                    <div className="mt-0.5 h-1.5 w-full bg-gray-700 rounded">
+                      <div className="h-1.5 bg-rose-500 rounded" style={{ width: `${percentage}%` }}></div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
