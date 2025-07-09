@@ -31,6 +31,26 @@ const getTypeBadgeColor = (type) => {
 };
 
 /**
+ * Get badge color styling based on domain type
+ * @param {string} domain - The domain type
+ * @returns {string} Tailwind CSS classes for the badge
+ */
+const getDomainBadgeColor = (domain) => {
+  const colorMap = {
+    'independent': 'bg-blue-500/20 text-blue-200',
+    'specific': 'bg-purple-500/20 text-purple-200',
+    'general': 'bg-teal-500/20 text-teal-200',
+    'biomedical': 'bg-pink-500/20 text-pink-200',
+    'geographic': 'bg-yellow-500/20 text-yellow-200',
+    'financial': 'bg-green-500/20 text-green-200',
+    'scientific': 'bg-cyan-500/20 text-cyan-200',
+    'educational': 'bg-lime-500/20 text-lime-200',
+  };
+  
+  return colorMap[domain?.toLowerCase()] || 'bg-gray-500/20 text-gray-200';
+};
+
+/**
  * Check if a value is empty or null
  * @param {any} value - The value to check
  * @returns {boolean} True if empty
@@ -102,7 +122,7 @@ const MissingFieldCell = ({ value, isMissing }) => (
 );
 
 /**
- * Render a task cell with checkbox
+ * Render a task cell with Material Design icons
  * @param {boolean} value - The task value
  * @param {boolean} isMissing - Whether the field is missing
  * @returns {JSX.Element} The rendered task cell
@@ -111,7 +131,11 @@ const TaskCell = ({ value, isMissing }) => {
   if (isMissing) {
     return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
   }
-  return value ? "✔️" : "";
+  return value ? (
+    <span className="material-icons-round text-green-500 text-lg">done</span>
+  ) : (
+    <span className="material-icons-round text-red-500 text-lg">clear</span>
+  );
 };
 
 /**
@@ -145,6 +169,37 @@ const MainMethodCell = ({ mainMethod, row }) => {
           MISSING
         </span>
       ) : null}
+    </div>
+  );
+};
+
+/**
+ * Render the domain cell with domain badge and type detail
+ * @param {object} domain - The domain object
+ * @param {object} row - The row data for validation
+ * @returns {JSX.Element} The rendered domain cell
+ */
+const DomainCell = ({ domain, row }) => {
+  const domainValue = domain?.domain || "";
+  const typeValue = domain?.type || "";
+  const isDomainMissing = isRequiredFieldMissing(row, 'domain.domain');
+  
+  if (!domainValue && !typeValue) return "";
+  
+  return (
+    <div className="flex items-center gap-2">
+      {domainValue ? (
+        <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-20 ${getDomainBadgeColor(domainValue)}`}>
+          {domainValue}
+        </span>
+      ) : isDomainMissing ? (
+        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20">
+          MISSING
+        </span>
+      ) : null}
+      {typeValue && (
+        <span className="text-[10px] text-gray-400">{typeValue}</span>
+      )}
     </div>
   );
 };
@@ -301,15 +356,10 @@ function App() {
     }),
     
     // Domain column
-    columnHelper.accessor(row => row["domain"]?.domain || "", {
-      id: "domain-domain",
+    columnHelper.accessor(row => row["domain"], {
+      id: "domain",
       header: "Domain",
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'domain.domain')} 
-        />
-      ),
+      cell: (info) => <DomainCell domain={info.getValue()} row={info.row.original} />,
       enableSorting: false,
     }),
     
@@ -525,7 +575,7 @@ function App() {
     }),
     
     // Checked by author column
-    columnHelper.accessor(row => row["checked-by-author"] !== undefined ? (row["checked-by-author"] ? "✔️" : "") : "", {
+    columnHelper.accessor(row => row["checked-by-author"], {
       id: "checked-by-author",
       header: "Checked by author",
       cell: (info) => {
@@ -534,7 +584,11 @@ function App() {
         if (isMissing) {
           return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
         }
-        return value;
+        return value ? (
+          <span className="material-icons-round text-green-500 text-lg">done</span>
+        ) : (
+          <span className="material-icons-round text-red-500 text-lg">clear</span>
+        );
       },
       enableSorting: false,
     }),
