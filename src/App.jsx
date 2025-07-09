@@ -19,6 +19,7 @@ function App() {
   const [error, setError] = useState(null);
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
+  const [showFacetFilter, setShowFacetFilter] = useState(false);
   const filterRef = useRef();
 
   useEffect(() => {
@@ -58,6 +59,34 @@ function App() {
       cell: (info) => info.getValue(),
       enableSorting: false,
     }),
+    columnHelper.accessor("name-of-approach", {
+      header: "Name of Approach",
+      cell: (info) => info.getValue(),
+      enableSorting: false,
+    }),
+    columnHelper.accessor(row => {
+      const type = row["main-method"]?.type || "";
+      const tech = row["main-method"]?.technique || "";
+      if (type && tech) return `${type}, ${tech}`;
+      return type || tech || "";
+    }, {
+      id: "main-method",
+      header: "Main Method",
+      cell: (info) => info.getValue(),
+      enableSorting: false,
+    }),
+    columnHelper.accessor(row => row["domain"]?.domain || "", {
+      id: "domain-domain",
+      header: "Domain",
+      cell: (info) => info.getValue(),
+      enableSorting: false,
+    }),
+    columnHelper.accessor(row => row["domain"]?.type || "", {
+      id: "domain-type",
+      header: "Domain Type",
+      cell: (info) => info.getValue(),
+      enableSorting: false,
+    }),
     columnHelper.accessor("title.text", {
       header: "Title",
       cell: (info) => info.getValue(),
@@ -67,10 +96,98 @@ function App() {
       id: "conference-journal",
       header: "Conference/Journal",
       cell: (info) => info.getValue(),
-      enableColumnFilter: false,
-      enableFacetedUniqueValues: false,
+      enableColumnFilter: true,
+      enableFacetedUniqueValues: true,
       enableSorting: false,
+      filterFn: (row, columnId, filterValue) => {
+        if (!Array.isArray(filterValue) || filterValue.length === 0) return true;
+        return filterValue.includes(row.getValue(columnId));
+      },
     }),
+    // Grouped Task columns
+    {
+      header: "Task",
+      columns: [
+        columnHelper.accessor(row => row.tasks?.cta, {
+          id: "cta",
+          header: "CTA",
+          cell: (info) => info.getValue() ? "✔️" : "",
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.tasks?.cpa, {
+          id: "cpa",
+          header: "CPA",
+          cell: (info) => info.getValue() ? "✔️" : "",
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.tasks?.cea, {
+          id: "cea",
+          header: "CEA",
+          cell: (info) => info.getValue() ? "✔️" : "",
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.tasks?.cnea, {
+          id: "cnea",
+          header: "CNEA",
+          cell: (info) => info.getValue() ? "✔️" : "",
+          enableSorting: false,
+        }),
+      ],
+    },
+    // Grouped Steps columns
+    {
+      header: "Steps",
+      columns: [
+        columnHelper.accessor(row => row.steps?.["data-preparation"]?.description || "", {
+          id: "data-preparation",
+          header: "Data Preparation",
+          cell: (info) => info.getValue(),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.steps?.["subject-detection"] || "", {
+          id: "subject-detection",
+          header: "Subject Detection",
+          cell: (info) => info.getValue(),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.steps?.["column-analysis"] || "", {
+          id: "column-analysis",
+          header: "Column Analysis",
+          cell: (info) => info.getValue(),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.steps?.["type-annotation"] || "", {
+          id: "type-annotation",
+          header: "Type Annotation",
+          cell: (info) => info.getValue(),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.steps?.["predicate-annotation"] || "", {
+          id: "predicate-annotation",
+          header: "Predicate Annotation",
+          cell: (info) => info.getValue(),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.steps?.["datatype-annotation"] || "", {
+          id: "datatype-annotation",
+          header: "Datatype Annotation",
+          cell: (info) => info.getValue(),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.steps?.["entity-linking"]?.description || "", {
+          id: "entity-linking",
+          header: "Entity Linking",
+          cell: (info) => info.getValue(),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.steps?.["nil-annotation"] || "", {
+          id: "nil-annotation",
+          header: "NIL Annotation",
+          cell: (info) => info.getValue(),
+          enableSorting: false,
+        }),
+      ],
+    },
   ], []);
 
   const table = useReactTable({
@@ -93,7 +210,7 @@ function App() {
   useEffect(() => {
     function handleClickOutside(event) {
       if (filterRef.current && !filterRef.current.contains(event.target)) {
-        // setShowFacetFilter(false); // This line is removed
+        setShowFacetFilter(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -123,7 +240,44 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-900" style={{ position: 'relative' }}>
       <div className="p-4">
-        {/* Filtro facet rimosso */}
+        {/* Facet filter per Conference/Journal */}
+        <div className="mb-4 relative" ref={filterRef}>
+          <span
+            className="text-gray-200 font-semibold mr-2 cursor-pointer select-none"
+            onClick={() => setShowFacetFilter((v) => !v)}
+          >
+            Conference/Journal:
+          </span>
+          {showFacetFilter && (
+            <div className="absolute left-0 mt-2 bg-gray-800 border border-gray-700 rounded shadow-lg z-20 max-h-[250px] overflow-y-auto p-3 min-w-[220px]">
+              {Array.from(table.getColumn("conference-journal")?.getFacetedUniqueValues()?.entries() || [])
+                .sort((a, b) => a[0].localeCompare(b[0]))
+                .map(([value, count]) => (
+                  <label key={value} className="flex items-center mb-2 text-gray-300 text-sm">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox bg-gray-800 border-gray-600 text-blue-500 focus:ring-blue-400 mr-2"
+                      checked={
+                        (Array.isArray(table.getColumn("conference-journal")?.getFilterValue()) &&
+                          table.getColumn("conference-journal")?.getFilterValue().includes(value)) || false
+                      }
+                      onChange={e => {
+                        const col = table.getColumn("conference-journal");
+                        let prev = col.getFilterValue() || [];
+                        if (!Array.isArray(prev)) prev = [];
+                        if (e.target.checked) {
+                          col.setFilterValue([...prev, value]);
+                        } else {
+                          col.setFilterValue(prev.filter(v => v !== value));
+                        }
+                      }}
+                    />
+                    <span>{value} <span className="text-gray-500">({count})</span></span>
+                  </label>
+                ))}
+            </div>
+          )}
+        </div>
       </div>
       <div className="overflow-auto h-screen">
         <table className="w-full table-auto">
@@ -134,7 +288,7 @@ function App() {
                   <th 
                     key={header.id}
                     colSpan={header.colSpan}
-                    className="px-6 py-4 text-left text-sm font-semibold text-gray-300 border-b border-gray-700"
+                    className="px-6 py-4 text-center text-sm font-semibold text-gray-300 border-b border-gray-700"
                     onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
                     style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                   >
