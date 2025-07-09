@@ -2191,7 +2191,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2019",
+        "validation": "SemTab 2019",
         "code-availability": "",
         "license": "Orange",
         "inputs": {
@@ -2539,7 +2539,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2019",
+        "validation": "SemTab 2019",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -2597,7 +2597,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2019",
+        "validation": "SemTab 2019",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -2713,7 +2713,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2019",
+        "validation": "SemTab 2019",
         "code-availability": "https://github.com/IBCNServices/CSV2KG",
         "license": "NotSpecified",
         "inputs": {
@@ -2829,7 +2829,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2019",
+        "validation": "SemTab 2019",
         "code-availability": "https://github.com/usc-isi-i2/wikidata-wikifier/blob/master/wikifier/wikifier.py",
         "license": "MIT",
         "inputs": {
@@ -2945,7 +2945,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "https://github.com/fusion-jena/JenTab ",
         "license": "MIT",
         "inputs": {
@@ -3003,8 +3003,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
-        "code-availability": "",
+        "validation": "SemtTab 2020",
         "license": "NotSpecified",
         "inputs": {
             "type-of-table": "CSV",
@@ -3061,7 +3060,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -3119,7 +3118,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -3177,7 +3176,7 @@
             "type": "Fully-automated",
             "description": ""
         },
-        "validation": "Semtab2019, T2D, Limaye",
+        "validation": "SemTab 2019, T2D, Limaye",
         "code-availability": "https://bitbucket.org/disco_unimib/mantistable-tool/",
         "license": "Apache 2.0",
         "inputs": {
@@ -3235,7 +3234,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "https://bitbucket.org/disco_unimib/mantistable-4 ",
         "license": "Apache 2.0",
         "inputs": {
@@ -3408,7 +3407,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -3524,7 +3523,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -3640,7 +3639,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -3698,7 +3697,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "https://github.com/UB-Mannheim/bbw",
         "license": "MIT",
         "inputs": {
@@ -3756,7 +3755,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "https://github.com/shaliniktyagi/TabularData_to_Knowledge_graph",
         "license": "NotSpecified",
         "inputs": {
@@ -3814,7 +3813,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2020",
+        "validation": "SemTab 2020",
         "code-availability": "https://github.com/semihyumusak/semtab_teamtr_2020",
         "license": "NotSpecified",
         "inputs": {
@@ -3930,7 +3929,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2021",
+        "validation": "SemTab 2021",
         "code-availability": "https://github.com/fusion-jena/JenTab",
         "license": "Apache 2.0",
         "inputs": {
@@ -3988,7 +3987,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2020",
+        "validation": "SemTab 2020",
         "code-availability": "https://github.com/fusion-jena/JenTab",
         "license": "Apache 2.0",
         "inputs": {
@@ -4046,7 +4045,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2021",
+        "validation": "SemTab 2021",
         "code-availability": "https://bitbucket.org/disco_unimib/mantistable-v ",
         "license": "Apache 2.0",
         "inputs": {
@@ -4104,7 +4103,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2021",
+        "validation": "SemTab 2021",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -4220,7 +4219,7 @@
             "type": "Fully-automated",
             "description": ""
         },
-        "validation": "SemTab2021",
+        "validation": "SemTab 2021",
         "code-availability": "",
         "license": "Orange",
         "inputs": {
@@ -4278,7 +4277,7 @@
             "type": "Fully-automated",
             "description": ""
         },
-        "validation": "SemTab2021",
+        "validation": "SemTab 2021",
         "code-availability": "https://github.com/phucty/mtab_tool (API DOCS FOR ONLINE TOOL)",
         "license": "MIT",
         "inputs": {
@@ -4336,7 +4335,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2021",
+        "validation": "SemTab 2021",
         "code-availability": "https://github.com/IBCNServices/Magic",
         "license": "imec",
         "inputs": {
@@ -4452,7 +4451,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2021",
+        "validation": "SemTab 2021",
         "code-availability": "",
         "license": "NotSpecified",
         "inputs": {
@@ -4568,7 +4567,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2020",
+        "validation": "SemTab 2020",
         "code-availability": "https://github.com/fusion-jena/JenTab",
         "license": "Apache 2.0",
         "inputs": {
@@ -4626,7 +4625,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "SemTab2021",
+        "validation": "SemTab 2021",
         "code-availability": "https://github.com/microsoft/vert-papers/tree/master/papers/LinkingPark",
         "license": "MIT",
         "inputs": {
@@ -4684,7 +4683,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Semtab2022",
+        "validation": "SemTab 2022",
         "code-availability": "https://bitbucket.org/disco_unimib/selbat/ ",
         "license": "Apache 2.0",
         "inputs": {

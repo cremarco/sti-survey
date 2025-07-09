@@ -81,7 +81,6 @@ const REQUIRED_FIELDS = {
   'tasks.cea': true,
   'tasks.cnea': true,
   'user-revision.type': true,
-  'validation': true,
   'code-availability': true,
   'license': true,
   'inputs.type-of-table': true,
@@ -216,6 +215,21 @@ const DomainCell = ({ domain, row }) => {
       )}
     </div>
   );
+};
+
+/**
+ * Get badge color styling for user revision type
+ * @param {string} type - The user revision type
+ * @returns {string} Tailwind CSS classes for the badge
+ */
+const getUserRevisionBadgeColor = (type) => {
+  const colorMap = {
+    'manual': 'bg-blue-500/20 text-blue-200',
+    'semi-automatic': 'bg-orange-500/20 text-orange-200',
+    'automatic': 'bg-emerald-500/20 text-emerald-200',
+    'none': 'bg-slate-500/20 text-slate-200',
+  };
+  return colorMap[type?.toLowerCase()] || 'bg-violet-500/20 text-violet-200';
 };
 
 /**
@@ -507,12 +521,37 @@ function App() {
     columnHelper.accessor(row => row["user-revision"]?.type || "", {
       id: "user-revision",
       header: "User Revision",
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'user-revision.type')} 
-        />
-      ),
+      cell: (info) => {
+        const value = info.getValue();
+        const isMissing = isRequiredFieldMissing(info.row.original, 'user-revision.type');
+        const description = info.row.original["user-revision"]?.description;
+        if (isMissing) {
+          return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+        }
+        if (description && description.trim() !== "") {
+          return (
+            <div className="relative group inline-flex items-center">
+              <span
+                className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${getUserRevisionBadgeColor(value)} cursor-pointer`}
+                style={{ textTransform: 'lowercase' }}
+              >
+                {value}
+                <span className="material-icons-round ml-1 align-middle leading-none" style={{ fontSize: '16px' }}>info_outline</span>
+              </span>
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg shadow-lg text-xs text-gray-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
+                {description}
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+              </div>
+            </div>
+          );
+        }
+        return (
+          <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${getUserRevisionBadgeColor(value)}`}
+            style={{ textTransform: 'lowercase' }}>
+            {value}
+          </span>
+        );
+      },
       enableSorting: false,
     }),
     
