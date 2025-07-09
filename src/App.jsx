@@ -697,6 +697,21 @@ function App() {
 
   // Calculate summary statistics
   const summaryStats = useMemo(() => {
+    if (data.length === 0) {
+      return {
+        totalEntries: 0,
+        entriesWithMissingFields: 0,
+        totalMissingFields: 0,
+        mostMissing: 'N/A',
+        mainMethodTypeDistribution: {},
+        domainDistribution: {},
+        yearRange: { min: 'N/A', max: 'N/A' },
+        approachesWithCode: 0,
+        licenseDistribution: {},
+        taskCounts: { cta: 0, cpa: 0, cea: 0, cnea: 0 },
+      };
+    }
+
     const totalEntries = data.length;
     const entriesWithMissingFields = data.filter(row => {
       return Object.keys(REQUIRED_FIELDS).some(field => isRequiredFieldMissing(row, field));
@@ -711,14 +726,56 @@ function App() {
       fieldCounts[field] = data.filter(row => isRequiredFieldMissing(row, field)).length;
     });
     
-    const mostMissing = Object.entries(fieldCounts)
+    const mostMissingEntry = Object.entries(fieldCounts)
       .sort(([,a], [,b]) => b - a)[0];
+    const mostMissing = mostMissingEntry ? `${mostMissingEntry[0]} (${mostMissingEntry[1]})` : 'None';
+
+    // Additional Statistics
+    const mainMethodTypeDistribution = data.reduce((acc, row) => {
+      const type = row['main-method']?.type || 'N/A';
+      acc[type] = (acc[type] || 0) + 1;
+      return acc;
+    }, {});
+
+    const domainDistribution = data.reduce((acc, row) => {
+      const domain = row['domain']?.domain || 'N/A';
+      acc[domain] = (acc[domain] || 0) + 1;
+      return acc;
+    }, {});
+
+    const years = data.map(row => row.year).filter(year => typeof year === 'number');
+    const yearRange = {
+      min: years.length > 0 ? Math.min(...years) : 'N/A',
+      max: years.length > 0 ? Math.max(...years) : 'N/A',
+    };
+
+    const approachesWithCode = data.filter(row => row['code-availability'] && row['code-availability'].trim() !== '').length;
+
+    const licenseDistribution = data.reduce((acc, row) => {
+      const license = row['license'] || 'N/A';
+      acc[license] = (acc[license] || 0) + 1;
+      return acc;
+    }, {});
+
+    const taskCounts = { cta: 0, cpa: 0, cea: 0, cnea: 0 };
+    data.forEach(row => {
+      if (row.tasks?.cta) taskCounts.cta++;
+      if (row.tasks?.cpa) taskCounts.cpa++;
+      if (row.tasks?.cea) taskCounts.cea++;
+      if (row.tasks?.cnea) taskCounts.cnea++;
+    });
     
     return {
       totalEntries,
       entriesWithMissingFields,
       totalMissingFields,
-      mostMissing: mostMissing ? `${mostMissing[0]} (${mostMissing[1]})` : 'None'
+      mostMissing,
+      mainMethodTypeDistribution,
+      domainDistribution,
+      yearRange,
+      approachesWithCode,
+      licenseDistribution,
+      taskCounts,
     };
   }, [data]);
 
@@ -760,6 +817,67 @@ function App() {
             </div>
             <div className="text-gray-300">
               <span className="font-medium">Most missing:</span> {summaryStats.mostMissing}
+            </div>
+          </div>
+        </div>
+
+        {/* Overall Data Snapshot */}
+        <div className="mb-4 p-4 bg-gray-800 rounded-lg border border-gray-700">
+          <h3 className="text-lg font-semibold text-gray-200 mb-3">Overall Data Snapshot</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
+            <div>
+              <span className="font-medium text-gray-300">Year Range:</span>
+              <span className="text-gray-400 ml-1">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</span>
+            </div>
+            <div>
+              <span className="font-medium text-gray-300">Approaches with Code:</span>
+              <span className="text-gray-400 ml-1">{summaryStats.approachesWithCode}</span>
+            </div>
+
+            <div className="col-span-full sm:col-span-1 md:col-span-2"> {/* Allow more space for distributions */}
+              <span className="font-medium text-gray-300">Main Method Types:</span>
+              <div className="text-gray-400 mt-1 space-y-0.5 text-xs">
+                {Object.entries(summaryStats.mainMethodTypeDistribution).map(([type, count]) => (
+                  <div key={type} className="flex justify-between">
+                    <span>{type}:</span>
+                    <span>{count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-span-full sm:col-span-1 md:col-span-2">
+              <span className="font-medium text-gray-300">Domains:</span>
+              <div className="text-gray-400 mt-1 space-y-0.5 text-xs">
+                {Object.entries(summaryStats.domainDistribution).map(([domain, count]) => (
+                  <div key={domain} className="flex justify-between">
+                    <span>{domain}:</span>
+                    <span>{count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-span-full sm:col-span-1 md:col-span-2">
+              <span className="font-medium text-gray-300">Licenses:</span>
+              <div className="text-gray-400 mt-1 space-y-0.5 text-xs">
+                {Object.entries(summaryStats.licenseDistribution).map(([license, count]) => (
+                  <div key={license} className="flex justify-between">
+                    <span>{license}:</span>
+                    <span>{count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-span-full sm:col-span-2 md:col-span-2">
+              <span className="font-medium text-gray-300">Tasks Addressed:</span>
+              <div className="grid grid-cols-2 gap-x-4 text-gray-400 mt-1 text-xs">
+                <div>CTA: {summaryStats.taskCounts.cta}</div>
+                <div>CPA: {summaryStats.taskCounts.cpa}</div>
+                <div>CEA: {summaryStats.taskCounts.cea}</div>
+                <div>CNEA: {summaryStats.taskCounts.cnea}</div>
+              </div>
             </div>
           </div>
         </div>
