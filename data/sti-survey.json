@@ -359,7 +359,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "sup",
-            "technique": "Markov Network + PGM"
+            "technique": "Markov Network, PGM"
         },
         "domain": {
             "domain": "independent",
@@ -591,7 +591,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "unsup",
-            "technique": "probabilistic graphical model"
+            "technique": "Probabilistic Graphical Model"
         },
         "domain": {
             "domain": "independent",
@@ -1577,7 +1577,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "sup",
-            "technique": "Hierarchical clustering (BKG)"
+            "technique": "hierarchical clustering (bkg)"
         },
         "domain": {
             "domain": "independent",
@@ -1693,7 +1693,7 @@
         "name-of-approach": "Karma",
         "main-method": {
             "type": "sup",
-            "technique": "Cosine similarity + statistical hypothesis"
+            "technique": "Cosine Similarity, statistical hypothesis"
         },
         "domain": {
             "domain": "dependent",
@@ -1809,7 +1809,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "hybrid",
-            "technique": "Hybrid"
+            "technique": "hybrid"
         },
         "domain": {
             "domain": "independent",
@@ -2041,7 +2041,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "sup",
-            "technique": "neural network"
+            "technique": "Neural Network"
         },
         "domain": {
             "domain": "independent",
@@ -2099,7 +2099,7 @@
         "name-of-approach": "STR",
         "main-method": {
             "type": "unsup",
-            "technique": "neural network"
+            "technique": "Neural Network"
         },
         "domain": {
             "domain": "independent",
@@ -2157,7 +2157,7 @@
         "name-of-approach": "DAGOBAH",
         "main-method": {
             "type": "hybrid",
-            "technique": "Rule Base & Embeddings"
+            "technique": "rule base, embeddings"
         },
         "domain": {
             "domain": "independent",
@@ -2389,7 +2389,7 @@
         "name-of-approach": "Sherlock",
         "main-method": {
             "type": "sup",
-            "technique": "Neural network"
+            "technique": "Neural Network"
         },
         "domain": {
             "domain": "independent",
@@ -2447,7 +2447,7 @@
         "name-of-approach": "TAKCO",
         "main-method": {
             "type": "hybrid",
-            "technique": "PGM + features"
+            "technique": "PGM, features"
         },
         "domain": {
             "domain": "independent",
@@ -2853,7 +2853,7 @@
         "name-of-approach": "Sato",
         "main-method": {
             "type": "sup",
-            "technique": "multi-layer NN + LDA topic modeling"
+            "technique": "multi-layer nn, lda topic modeling"
         },
         "domain": {
             "domain": "independent",
@@ -3259,7 +3259,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "hybrid",
-            "technique": "features & embeddings"
+            "technique": "features, embeddings"
         },
         "domain": {
             "domain": "independent",
@@ -3317,7 +3317,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "sup",
-            "technique": "Neural Network + CRF"
+            "technique": "Neural Network, CRF"
         },
         "domain": {
             "domain": "independent",
@@ -3374,7 +3374,7 @@
         "name-of-approach": "DAGOBAH SL 2020",
         "main-method": {
             "type": "hybrid",
-            "technique": "features + embeddings, matching"
+            "technique": "features, embeddings, matching"
         },
         "domain": {
             "domain": "independent",
@@ -3432,7 +3432,7 @@
         "name-of-approach": "C²",
         "main-method": {
             "type": "sup",
-            "technique": "Maximum Likelihood Estimation (MLE) through ensembles"
+            "technique": "maximum likelihood estimation (mle) through ensembles"
         },
         "domain": {
             "domain": "independent",
@@ -3838,7 +3838,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "sup",
-            "technique": "lexical + semantic features"
+            "technique": "lexical, semantic features"
         },
         "domain": {
             "domain": "independent",
@@ -4128,7 +4128,7 @@
         "name-of-approach": "CaLiGraph extraction framework",
         "main-method": {
             "type": "hybrid",
-            "technique": "distant supervision + rule mining"
+            "technique": "Distant Supervision, Rule Mining"
         },
         "domain": {
             "domain": "independent",
@@ -4186,7 +4186,7 @@
         "name-of-approach": "DAGOBAH SL 2021",
         "main-method": {
             "type": "hybrid",
-            "technique": "features + embeddings, Matching"
+            "technique": "features, embeddings, matching"
         },
         "domain": {
             "domain": "independent",
@@ -4766,7 +4766,7 @@
         "name-of-approach": "Tab2KG",
         "main-method": {
             "type": "sup",
-            "technique": "Siamese network"
+            "technique": "Siamese Network"
         },
         "domain": {
             "domain": "independent",
@@ -4824,7 +4824,7 @@
         "name-of-approach": "DAGOBAH SL2022",
         "main-method": {
             "type": "hybrid",
-            "technique": "Heuristics + Transformer-based embeddings"
+            "technique": "Heuristics, transformer-based embeddings"
         },
         "domain": {
             "domain": "independent",
@@ -4882,7 +4882,7 @@
         "name-of-approach": "Radar Station",
         "main-method": {
             "type": "hybrid",
-            "technique": "Heuristics + KG Embedding"
+            "technique": "Heuristics, KG embedding"
         },
         "domain": {
             "domain": "independent",
@@ -4998,7 +4998,7 @@
         "name-of-approach": "TableLlama",
         "main-method": {
             "type": "sup",
-            "technique": "LLama 2"
+            "technique": "Llama 2"
         },
         "domain": {
             "domain": "independent",

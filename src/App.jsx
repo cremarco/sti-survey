@@ -38,6 +38,7 @@ const getTypeBadgeColor = (type) => {
 const getDomainBadgeColor = (domain) => {
   const colorMap = {
     'independent': 'bg-blue-500/20 text-blue-200',
+    'dependent': 'bg-red-500/20 text-red-200',
     'specific': 'bg-purple-500/20 text-purple-200',
     'general': 'bg-teal-500/20 text-teal-200',
     'biomedical': 'bg-pink-500/20 text-pink-200',
@@ -72,7 +73,6 @@ const REQUIRED_FIELDS = {
   'year': true,
   'title.text': true,
   'conference-journal': true,
-  'name-of-approach': true,
   'main-method.type': true,
   'main-method.technique': true,
   'domain.domain': true,
@@ -132,6 +132,20 @@ const TaskCell = ({ value, isMissing }) => {
     return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
   }
   return value ? (
+    <span className="material-icons-round text-green-500 text-lg">done</span>
+  ) : (
+    <span className="material-icons-round text-red-500 text-lg">clear</span>
+  );
+};
+
+/**
+ * Render a step cell with Material Design icons
+ * @param {string} value - The step value
+ * @returns {JSX.Element} The rendered step cell
+ */
+const StepCell = ({ value }) => {
+  const hasContent = value && value.trim() !== '';
+  return hasContent ? (
     <span className="material-icons-round text-green-500 text-lg">done</span>
   ) : (
     <span className="material-icons-round text-red-500 text-lg">clear</span>
@@ -334,12 +348,7 @@ function App() {
     // Name of approach column
     columnHelper.accessor("name-of-approach", {
       header: "Name of approach",
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'name-of-approach')} 
-        />
-      ),
+      cell: (info) => info.getValue(),
       enableSorting: false,
     }),
     
@@ -377,6 +386,7 @@ function App() {
             />
           ),
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.tasks?.cpa, {
           id: "cpa",
@@ -388,6 +398,7 @@ function App() {
             />
           ),
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.tasks?.cea, {
           id: "cea",
@@ -399,6 +410,7 @@ function App() {
             />
           ),
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.tasks?.cnea, {
           id: "cnea",
@@ -410,6 +422,7 @@ function App() {
             />
           ),
           enableSorting: false,
+          meta: { align: 'center' }
         }),
       ],
     },
@@ -421,50 +434,58 @@ function App() {
         columnHelper.accessor(row => row.steps?.["data-preparation"]?.description || "", {
           id: "data-preparation",
           header: "Data Preparation",
-          cell: (info) => info.getValue(),
+          cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.steps?.["subject-detection"] || "", {
           id: "subject-detection",
           header: "Subject Detection",
-          cell: (info) => info.getValue(),
+          cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.steps?.["column-analysis"] || "", {
           id: "column-analysis",
           header: "Column Analysis",
-          cell: (info) => info.getValue(),
+          cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.steps?.["type-annotation"] || "", {
           id: "type-annotation",
           header: "Type Annotation",
-          cell: (info) => info.getValue(),
+          cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.steps?.["predicate-annotation"] || "", {
           id: "predicate-annotation",
           header: "Predicate Annotation",
-          cell: (info) => info.getValue(),
+          cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.steps?.["datatype-annotation"] || "", {
           id: "datatype-annotation",
           header: "Datatype Annotation",
-          cell: (info) => info.getValue(),
+          cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.steps?.["entity-linking"]?.description || "", {
           id: "entity-linking",
           header: "Entity Linking",
-          cell: (info) => info.getValue(),
+          cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
+          meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.steps?.["nil-annotation"] || "", {
           id: "nil-annotation",
           header: "NIL Annotation",
-          cell: (info) => info.getValue(),
+          cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
+          meta: { align: 'center' }
         }),
       ],
     },

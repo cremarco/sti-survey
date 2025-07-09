@@ -53,7 +53,8 @@
                 }
             },
             "required": [
-                "domain"
+                "independent",
+                "dependent"
             ]
         },
         "tasks": {
