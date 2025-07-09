@@ -141,8 +141,7 @@
                 }
             },
             "required": [
-                "type",
-                "description"
+                "type"
             ]
         },
         "validation": {
@@ -193,7 +192,6 @@
         "year",
         "title",
         "conference-journal",
-        "name-of-approach",
         "main-method",
         "domain",
         "tasks",
@@ -203,7 +201,6 @@
         "code-availability",
         "license",
         "inputs",
-        "output-format",
         "checked-by-author"
     ]
 }

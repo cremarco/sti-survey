@@ -10,8 +10,168 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-// Define the data type
+// Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
+
+/**
+ * Get badge color styling based on method type
+ * @param {string} type - The method type
+ * @returns {string} Tailwind CSS classes for the badge
+ */
+const getTypeBadgeColor = (type) => {
+  const colorMap = {
+    'unsup': 'bg-red-50 text-red-700 ring-1 ring-red-600/10',
+    'sup': 'bg-blue-50 text-blue-700 ring-1 ring-blue-700/10',
+    'semi-automated': 'bg-yellow-50 text-yellow-800 ring-1 ring-yellow-600/20',
+    'fully-automated': 'bg-green-50 text-green-700 ring-1 ring-green-600/20',
+    'hybrid': 'bg-purple-50 text-purple-700 ring-1 ring-purple-700/10',
+  };
+  
+  return colorMap[type?.toLowerCase()] || 'bg-gray-50 text-gray-600 ring-1 ring-gray-500/10';
+};
+
+/**
+ * Check if a value is empty or null
+ * @param {any} value - The value to check
+ * @returns {boolean} True if empty
+ */
+const isEmpty = (value) => {
+  if (value === null || value === undefined) return true;
+  if (typeof value === 'string') return value.trim() === '';
+  if (typeof value === 'object' && !Array.isArray(value)) {
+    return Object.keys(value).length === 0;
+  }
+  return false;
+};
+
+/**
+ * Required fields configuration for validation
+ */
+const REQUIRED_FIELDS = {
+  'author': true,
+  'year': true,
+  'title.text': true,
+  'conference-journal': true,
+  'name-of-approach': true,
+  'main-method.type': true,
+  'main-method.technique': true,
+  'domain.domain': true,
+  'tasks.cta': true,
+  'tasks.cpa': true,
+  'tasks.cea': true,
+  'tasks.cnea': true,
+  'user-revision.type': true,
+  'validation': true,
+  'code-availability': true,
+  'license': true,
+  'inputs.type-of-table': true,
+  'inputs.kg.triple-store': true,
+  'inputs.kg.index': true,
+  'output-format': true,
+  'checked-by-author': true
+};
+
+/**
+ * Check if a required field is missing from a row
+ * @param {object} row - The data row
+ * @param {string} fieldPath - The field path (e.g., 'title.text')
+ * @returns {boolean} True if the field is required and missing
+ */
+const isRequiredFieldMissing = (row, fieldPath) => {
+  if (!REQUIRED_FIELDS[fieldPath]) return false;
+
+  // Get nested value based on field path
+  const getNestedValue = (obj, path) => {
+    return path.split('.').reduce((current, key) => current?.[key], obj);
+  };
+
+  const value = getNestedValue(row, fieldPath);
+  return isEmpty(value);
+};
+
+/**
+ * Render a cell with missing field indicator
+ * @param {any} value - The cell value
+ * @param {boolean} isMissing - Whether the field is missing
+ * @returns {JSX.Element} The rendered cell content
+ */
+const MissingFieldCell = ({ value, isMissing }) => (
+  <span className={isMissing ? 'bg-red-500/20 text-red-200 px-2 py-1 rounded' : ''}>
+    {value || (isMissing ? 'MISSING' : '')}
+  </span>
+);
+
+/**
+ * Render a task cell with checkbox
+ * @param {boolean} value - The task value
+ * @param {boolean} isMissing - Whether the field is missing
+ * @returns {JSX.Element} The rendered task cell
+ */
+const TaskCell = ({ value, isMissing }) => {
+  if (isMissing) {
+    return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+  }
+  return value ? "✔️" : "";
+};
+
+/**
+ * Render the main method cell with type badge and technique
+ * @param {object} mainMethod - The main method object
+ * @param {object} row - The row data for validation
+ * @returns {JSX.Element} The rendered method cell
+ */
+const MainMethodCell = ({ mainMethod, row }) => {
+  const { type, tech } = mainMethod || {};
+  const isTypeMissing = isRequiredFieldMissing(row, 'main-method.type');
+  const isTechMissing = isRequiredFieldMissing(row, 'main-method.technique');
+  
+  if (!type && !tech) return "";
+  
+  return (
+    <div className="flex items-center gap-2">
+      {type ? (
+        <span className={`inline-flex items-center justify-center rounded-md px-1 py-0.5 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}`}>
+          {type}
+        </span>
+      ) : isTypeMissing ? (
+        <span className="bg-red-500/20 text-red-200 px-1 py-0.5 rounded text-[10px] font-medium w-16">
+          MISSING
+        </span>
+      ) : null}
+      {tech ? (
+        <span className="text-[10px] text-gray-400">{tech}</span>
+      ) : isTechMissing ? (
+        <span className="bg-red-500/20 text-red-200 px-1 py-0.5 rounded text-[10px]">
+          MISSING
+        </span>
+      ) : null}
+    </div>
+  );
+};
+
+/**
+ * Render the row number with missing fields count
+ * @param {object} row - The row data
+ * @param {number} index - The row index
+ * @returns {JSX.Element} The rendered row number cell
+ */
+const RowNumberCell = ({ row, index }) => {
+  const missingFields = Object.keys(REQUIRED_FIELDS)
+    .filter(field => isRequiredFieldMissing(row.original, field));
+  
+  const hasMissingFields = missingFields.length > 0;
+  
+  return (
+    <div className="flex flex-col items-center">
+      <span>{index + 1}</span>
+      {hasMissingFields && (
+        <span className="text-[10px] text-red-400 bg-red-900/30 px-1 rounded mt-1">
+          {missingFields.length} missing
+        </span>
+      )}
+    </div>
+  );
+};
 
 function App() {
   const [data, setData] = useState([]);
@@ -22,6 +182,7 @@ function App() {
   const [showFacetFilter, setShowFacetFilter] = useState(false);
   const filterRef = useRef();
 
+  // Load data on component mount
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -41,61 +202,71 @@ function App() {
     loadData();
   }, []);
 
-  // Colonne stabili con useMemo
+  // Close facet filter when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setShowFacetFilter(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Column definitions with useMemo for performance
   const columns = useMemo(() => [
-    columnHelper.display({
-      id: "rowNumber",
-      header: "#",
-      cell: (info) => info.row.index + 1,
-      enableSorting: false,
-    }),
+    // Year column
     columnHelper.accessor("year", {
       header: "Year",
       cell: (info) => info.getValue(),
       enableSorting: true,
+      meta: { align: 'center' }
     }),
+    
+    // Row number with missing fields indicator
+    columnHelper.display({
+      id: "rowNumber",
+      header: "#",
+      cell: (info) => <RowNumberCell row={info.row} index={info.row.index} />,
+      enableSorting: false,
+      meta: { align: 'center' }
+    }),
+    
+    // Author column
     columnHelper.accessor("author", {
-      header: "First Author",
-      cell: (info) => info.getValue(),
+      header: "First author",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'author')} 
+        />
+      ),
       enableSorting: false,
     }),
-    columnHelper.accessor("name-of-approach", {
-      header: "Name of Approach",
-      cell: (info) => info.getValue(),
-      enableSorting: false,
-    }),
-    columnHelper.accessor(row => {
-      const type = row["main-method"]?.type || "";
-      const tech = row["main-method"]?.technique || "";
-      if (type && tech) return `${type}, ${tech}`;
-      return type || tech || "";
-    }, {
-      id: "main-method",
-      header: "Main Method",
-      cell: (info) => info.getValue(),
-      enableSorting: false,
-    }),
-    columnHelper.accessor(row => row["domain"]?.domain || "", {
-      id: "domain-domain",
-      header: "Domain",
-      cell: (info) => info.getValue(),
-      enableSorting: false,
-    }),
-    columnHelper.accessor(row => row["domain"]?.type || "", {
-      id: "domain-type",
-      header: "Domain Type",
-      cell: (info) => info.getValue(),
-      enableSorting: false,
-    }),
+    
+    // Title column
     columnHelper.accessor("title.text", {
       header: "Title",
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'title.text')} 
+        />
+      ),
       enableSorting: false,
     }),
+    
+    // Conference/Journal column with filtering
     columnHelper.accessor(row => row["conference-journal"], {
       id: "conference-journal",
-      header: "Conference/Journal",
-      cell: (info) => info.getValue(),
+      header: "Conf. / Journal",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'conference-journal')} 
+        />
+      ),
       enableColumnFilter: true,
       enableFacetedUniqueValues: true,
       enableSorting: false,
@@ -104,37 +275,96 @@ function App() {
         return filterValue.includes(row.getValue(columnId));
       },
     }),
-    // Grouped Task columns
+    
+    // Name of approach column
+    columnHelper.accessor("name-of-approach", {
+      header: "Name of approach",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'name-of-approach')} 
+        />
+      ),
+      enableSorting: false,
+    }),
+    
+    // Main method column
+    columnHelper.accessor(row => {
+      const type = row["main-method"]?.type || "";
+      const tech = row["main-method"]?.technique || "";
+      return { type, tech };
+    }, {
+      id: "main-method",
+      header: "Main Method",
+      cell: (info) => <MainMethodCell mainMethod={info.getValue()} row={info.row.original} />,
+      enableSorting: false,
+    }),
+    
+    // Domain column
+    columnHelper.accessor(row => row["domain"]?.domain || "", {
+      id: "domain-domain",
+      header: "Domain",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'domain.domain')} 
+        />
+      ),
+      enableSorting: false,
+    }),
+    
+    // Task group columns
     {
       header: "Task",
       columns: [
         columnHelper.accessor(row => row.tasks?.cta, {
           id: "cta",
           header: "CTA",
-          cell: (info) => info.getValue() ? "✔️" : "",
+          cell: (info) => (
+            <TaskCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'tasks.cta')} 
+            />
+          ),
           enableSorting: false,
         }),
         columnHelper.accessor(row => row.tasks?.cpa, {
           id: "cpa",
           header: "CPA",
-          cell: (info) => info.getValue() ? "✔️" : "",
+          cell: (info) => (
+            <TaskCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'tasks.cpa')} 
+            />
+          ),
           enableSorting: false,
         }),
         columnHelper.accessor(row => row.tasks?.cea, {
           id: "cea",
           header: "CEA",
-          cell: (info) => info.getValue() ? "✔️" : "",
+          cell: (info) => (
+            <TaskCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'tasks.cea')} 
+            />
+          ),
           enableSorting: false,
         }),
         columnHelper.accessor(row => row.tasks?.cnea, {
           id: "cnea",
           header: "CNEA",
-          cell: (info) => info.getValue() ? "✔️" : "",
+          cell: (info) => (
+            <TaskCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'tasks.cnea')} 
+            />
+          ),
           enableSorting: false,
         }),
       ],
     },
-    // Grouped Steps columns
+    
+    // Steps group columns
     {
       header: "Steps",
       columns: [
@@ -188,8 +418,129 @@ function App() {
         }),
       ],
     },
+    
+    // User revision column
+    columnHelper.accessor(row => row["user-revision"]?.type || "", {
+      id: "user-revision",
+      header: "User Revision",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'user-revision.type')} 
+        />
+      ),
+      enableSorting: false,
+    }),
+    
+    // Validation column
+    columnHelper.accessor(row => row["validation"] || "", {
+      id: "validation",
+      header: "Validation",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'validation')} 
+        />
+      ),
+      enableSorting: false,
+    }),
+    
+    // Code availability column
+    columnHelper.accessor(row => row["code-availability"] || "", {
+      id: "code-availability",
+      header: "Code Availability",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'code-availability')} 
+        />
+      ),
+      enableSorting: false,
+    }),
+    
+    // License column
+    columnHelper.accessor(row => row["license"] || "", {
+      id: "source",
+      header: "Source",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'license')} 
+        />
+      ),
+      enableSorting: false,
+    }),
+    
+    // Inputs group columns
+    {
+      header: "Inputs",
+      columns: [
+        columnHelper.accessor(row => row.inputs?.["type-of-table"] || "", {
+          id: "type-of-table",
+          header: "Type of table",
+          cell: (info) => (
+            <MissingFieldCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.type-of-table')} 
+            />
+          ),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.inputs?.kg?.["triple-store"] || "", {
+          id: "knowledge-graph",
+          header: "Knowledge Graph",
+          cell: (info) => (
+            <MissingFieldCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.kg.triple-store')} 
+            />
+          ),
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.inputs?.kg?.index || "", {
+          id: "kg-index",
+          header: "KG Index",
+          cell: (info) => (
+            <MissingFieldCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.kg.index')} 
+            />
+          ),
+          enableSorting: false,
+        }),
+      ],
+    },
+    
+    // Output format column
+    columnHelper.accessor(row => row["output-format"] || "", {
+      id: "output-format",
+      header: "Output Format",
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'output-format')} 
+        />
+      ),
+      enableSorting: false,
+    }),
+    
+    // Checked by author column
+    columnHelper.accessor(row => row["checked-by-author"] !== undefined ? (row["checked-by-author"] ? "✔️" : "") : "", {
+      id: "checked-by-author",
+      header: "Checked by author",
+      cell: (info) => {
+        const value = info.getValue();
+        const isMissing = isRequiredFieldMissing(info.row.original, 'checked-by-author');
+        if (isMissing) {
+          return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+        }
+        return value;
+      },
+      enableSorting: false,
+    }),
   ], []);
 
+  // React Table instance
   const table = useReactTable({
     data,
     columns,
@@ -206,19 +557,34 @@ function App() {
     onSortingChange: setSorting,
   });
 
-  // Chiudi il filtro facet se clicchi fuori
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (filterRef.current && !filterRef.current.contains(event.target)) {
-        setShowFacetFilter(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+  // Calculate summary statistics
+  const summaryStats = useMemo(() => {
+    const totalEntries = data.length;
+    const entriesWithMissingFields = data.filter(row => {
+      return Object.keys(REQUIRED_FIELDS).some(field => isRequiredFieldMissing(row, field));
+    }).length;
+    
+    const totalMissingFields = data.reduce((total, row) => {
+      return total + Object.keys(REQUIRED_FIELDS).filter(field => isRequiredFieldMissing(row, field)).length;
+    }, 0);
+    
+    const fieldCounts = {};
+    Object.keys(REQUIRED_FIELDS).forEach(field => {
+      fieldCounts[field] = data.filter(row => isRequiredFieldMissing(row, field)).length;
+    });
+    
+    const mostMissing = Object.entries(fieldCounts)
+      .sort(([,a], [,b]) => b - a)[0];
+    
+    return {
+      totalEntries,
+      entriesWithMissingFields,
+      totalMissingFields,
+      mostMissing: mostMissing ? `${mostMissing[0]} (${mostMissing[1]})` : 'None'
     };
-  }, []);
+  }, [data]);
 
+  // Loading state
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -227,6 +593,7 @@ function App() {
     );
   }
 
+  // Error state
   if (error) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -238,9 +605,28 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900" style={{ position: 'relative' }}>
+    <div className="min-h-screen bg-gray-900">
       <div className="p-4">
-        {/* Facet filter per Conference/Journal */}
+        {/* Summary Statistics */}
+        <div className="mb-4 p-4 bg-gray-800 rounded-lg border border-gray-700">
+          <h3 className="text-lg font-semibold text-gray-200 mb-2">Missing Required Fields Summary</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div className="text-gray-300">
+              <span className="font-medium">Total entries:</span> {summaryStats.totalEntries}
+            </div>
+            <div className="text-gray-300">
+              <span className="font-medium">Entries with missing fields:</span> {summaryStats.entriesWithMissingFields}
+            </div>
+            <div className="text-gray-300">
+              <span className="font-medium">Total missing fields:</span> {summaryStats.totalMissingFields}
+            </div>
+            <div className="text-gray-300">
+              <span className="font-medium">Most missing:</span> {summaryStats.mostMissing}
+            </div>
+          </div>
+        </div>
+        
+        {/* Conference/Journal Filter */}
         <div className="mb-4 relative" ref={filterRef}>
           <span
             className="text-gray-200 font-semibold mr-2 cursor-pointer select-none"
@@ -279,8 +665,10 @@ function App() {
           )}
         </div>
       </div>
+      
+      {/* Data Table */}
       <div className="overflow-auto h-screen">
-        <table className="w-full table-auto">
+        <table className="w-full table-auto text-xs">
           <thead className="bg-gray-800 sticky top-0 z-10">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -288,7 +676,7 @@ function App() {
                   <th 
                     key={header.id}
                     colSpan={header.colSpan}
-                    className="px-6 py-4 text-center text-sm font-semibold text-gray-300 border-b border-gray-700"
+                    className="px-4 py-2 text-center text-xs font-semibold text-gray-300 border-r border-gray-700 border-b border-gray-700"
                     onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
                     style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                   >
@@ -309,27 +697,38 @@ function App() {
             ))}
           </thead>
           <tbody className="bg-gray-900">
-            {table.getRowModel().rows.map((row) => (
-              <tr 
-                key={row.id}
-                className="hover:bg-gray-800 border-b border-gray-700 transition-colors duration-150"
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td 
-                    key={cell.id}
-                    className="px-6 py-4 text-sm text-gray-300"
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            {table.getRowModel().rows.map((row, index) => {
+              // Check for missing fields to highlight row
+              const missingFields = Object.keys(REQUIRED_FIELDS)
+                .filter(field => isRequiredFieldMissing(row.original, field));
+              const hasMissingFields = missingFields.length > 0;
+              
+              return (
+                <tr 
+                  key={row.id}
+                  className={`hover:bg-gray-700 transition-colors duration-150 ${
+                    index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'
+                  } ${hasMissingFields ? 'border-l-4 border-l-red-500' : ''}`}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td 
+                      key={cell.id}
+                      className={`px-4 py-2 text-xs text-gray-300 border-r border-gray-700 ${
+                        cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'
+                      }`}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
-        {/* Pagination Controls */}
       </div>
     </div>
   );
 }
 
 export default App;
+
