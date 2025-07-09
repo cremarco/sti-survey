@@ -20,14 +20,14 @@ const columnHelper = createColumnHelper();
  */
 const getTypeBadgeColor = (type) => {
   const colorMap = {
-    'unsup': 'bg-red-50 text-red-700 ring-1 ring-red-600/10',
-    'sup': 'bg-blue-50 text-blue-700 ring-1 ring-blue-700/10',
-    'semi-automated': 'bg-yellow-50 text-yellow-800 ring-1 ring-yellow-600/20',
-    'fully-automated': 'bg-green-50 text-green-700 ring-1 ring-green-600/20',
-    'hybrid': 'bg-purple-50 text-purple-700 ring-1 ring-purple-700/10',
+    'unsup': 'bg-orange-500/20 text-orange-200',
+    'sup': 'bg-indigo-500/20 text-indigo-200',
+    'semi-automated': 'bg-amber-500/20 text-amber-200',
+    'fully-automated': 'bg-emerald-500/20 text-emerald-200',
+    'hybrid': 'bg-violet-500/20 text-violet-200',
   };
   
-  return colorMap[type?.toLowerCase()] || 'bg-gray-50 text-gray-600 ring-1 ring-gray-500/10';
+  return colorMap[type?.toLowerCase()] || 'bg-slate-500/20 text-slate-200';
 };
 
 /**
@@ -130,18 +130,18 @@ const MainMethodCell = ({ mainMethod, row }) => {
   return (
     <div className="flex items-center gap-2">
       {type ? (
-        <span className={`inline-flex items-center justify-center rounded-md px-1 py-0.5 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}`}>
+        <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}`}>
           {type}
         </span>
       ) : isTypeMissing ? (
-        <span className="bg-red-500/20 text-red-200 px-1 py-0.5 rounded text-[10px] font-medium w-16">
+        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16">
           MISSING
         </span>
       ) : null}
       {tech ? (
         <span className="text-[10px] text-gray-400">{tech}</span>
       ) : isTechMissing ? (
-        <span className="bg-red-500/20 text-red-200 px-1 py-0.5 rounded text-[10px]">
+        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]">
           MISSING
         </span>
       ) : null}
@@ -216,20 +216,20 @@ function App() {
 
   // Column definitions with useMemo for performance
   const columns = useMemo(() => [
-    // Year column
-    columnHelper.accessor("year", {
-      header: "Year",
-      cell: (info) => info.getValue(),
-      enableSorting: true,
-      meta: { align: 'center' }
-    }),
-    
     // Row number with missing fields indicator
     columnHelper.display({
       id: "rowNumber",
       header: "#",
       cell: (info) => <RowNumberCell row={info.row} index={info.row.index} />,
       enableSorting: false,
+      meta: { align: 'center' }
+    }),
+    
+    // Year column
+    columnHelper.accessor("year", {
+      header: "Year",
+      cell: (info) => info.getValue(),
+      enableSorting: true,
       meta: { align: 'center' }
     }),
     
