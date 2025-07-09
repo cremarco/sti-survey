@@ -595,14 +595,14 @@ function App() {
     // License column
     columnHelper.accessor(row => row["license"] || "", {
       id: "source",
-      header: "Source",
+      header: "Licence",
       cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'license')} 
-        />
+        <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-gray-500/20 text-gray-200">
+          {info.getValue()}
+        </span>
       ),
       enableSorting: false,
+      meta: { align: 'center' },
     }),
     
     // Inputs group columns
