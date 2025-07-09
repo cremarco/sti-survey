@@ -227,16 +227,29 @@ const DomainCell = ({ domain, row }) => {
 const RowNumberCell = ({ row, index }) => {
   const missingFields = Object.keys(REQUIRED_FIELDS)
     .filter(field => isRequiredFieldMissing(row.original, field));
-  
+
   const hasMissingFields = missingFields.length > 0;
-  
+
   return (
     <div className="flex flex-col items-center">
       <span>{index + 1}</span>
       {hasMissingFields && (
-        <span className="text-[10px] text-red-400 bg-red-900/30 px-1 rounded mt-1">
-          {missingFields.length} missing
-        </span>
+        <div className="relative group mt-1">
+          <span className="text-[11px] text-red-400 bg-red-900/60 rounded px-2 py-0.5 leading-none cursor-pointer flex items-center gap-1">
+            {missingFields.length} missing
+          </span>
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg shadow-lg text-xs text-gray-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
+            <div className="font-semibold mb-1">Missing fields:</div>
+            <div className="space-y-1">
+              {missingFields.map(field => (
+                <div key={field} className="text-[10px] text-gray-400">
+                  • {field}
+                </div>
+              ))}
+            </div>
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+          </div>
+        </div>
       )}
     </div>
   );
