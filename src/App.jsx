@@ -81,7 +81,6 @@ const REQUIRED_FIELDS = {
   'tasks.cea': true,
   'tasks.cnea': true,
   'user-revision.type': true,
-  'code-availability': true,
   'license': true,
   'inputs.type-of-table': true,
   'inputs.kg.triple-store': true,
@@ -572,13 +571,25 @@ function App() {
     columnHelper.accessor(row => row["code-availability"] || "", {
       id: "code-availability",
       header: "Code Availability",
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'code-availability')} 
-        />
-      ),
+      cell: (info) => {
+        const value = info.getValue();
+        if (!value || value.trim() === "") {
+          return <span className="material-icons-round text-red-500 text-lg">clear</span>;
+        }
+        return (
+          <a
+            href={value}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center text-blue-400 hover:text-blue-200"
+            title="Open code link"
+          >
+            <span className="material-icons-outlined">launch</span>
+          </a>
+        );
+      },
       enableSorting: false,
+      meta: { align: 'center' },
     }),
     
     // License column
