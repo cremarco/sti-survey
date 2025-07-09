@@ -832,112 +832,171 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-900">
       <div className="p-4">
-        {/* Summary Statistics */}
-        <div className="mb-4 p-4 bg-gray-800 rounded-lg border border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-200 mb-2">Missing Required Fields Summary</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <div className="text-gray-300">
-              <span className="font-medium">Total entries:</span> {summaryStats.totalEntries}
-            </div>
-            <div className="text-gray-300">
-              <span className="font-medium">Entries with missing fields:</span> {summaryStats.entriesWithMissingFields}
-            </div>
-            <div className="text-gray-300">
-              <span className="font-medium">Total missing fields:</span> {summaryStats.totalMissingFields}
-            </div>
-            <div className="text-gray-300">
-              <span className="font-medium">Most missing:</span> {summaryStats.mostMissing}
-            </div>
-          </div>
-        </div>
-
         {/* Overall Data Snapshot */}
-        <div className="mb-4 p-4 bg-gray-800 rounded-lg border border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-200 mb-3">Overall Data Snapshot</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
-            <div>
-              <span className="font-medium text-gray-300">Year Range:</span>
-              <span className="text-gray-400 ml-1">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</span>
-            </div>
-            <div>
-              <span className="font-medium text-gray-300">Approaches with Code:</span>
-              <span className="text-gray-400 ml-1">{summaryStats.approachesWithCode} ({summaryStats.approachesWithCodePercentage.toFixed(1)}%)</span>
-              <div className="mt-1 h-2.5 w-full bg-gray-700 rounded">
-                <div className="h-2.5 bg-sky-500 rounded" style={{ width: `${summaryStats.approachesWithCodePercentage}%` }}></div>
+        <div className="mb-6 p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-lg">
+          <h3 className="text-xl font-bold text-gray-100 mb-6 flex items-center">
+            <span className="material-icons-round mr-2 text-blue-400">analytics</span>
+            Data Overview
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Key Metrics */}
+            <div className="space-y-4">
+              <div className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 p-4 rounded-lg border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-blue-300 font-semibold text-sm">Year Range</span>
+                  <span className="material-icons-round text-blue-400">schedule</span>
+                </div>
+                <div className="text-2xl font-bold text-blue-100">
+                  {summaryStats.yearRange.min} - {summaryStats.yearRange.max}
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 p-4 rounded-lg border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:scale-105">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-emerald-300 font-semibold text-sm">Code Available</span>
+                  <span className="material-icons-round text-emerald-400">code</span>
+                </div>
+                <div className="text-2xl font-bold text-emerald-100 mb-2">
+                  {summaryStats.approachesWithCode}
+                </div>
+                <div className="text-sm text-emerald-300">
+                  {summaryStats.approachesWithCodePercentage.toFixed(1)}% of total
+                </div>
+                <div className="mt-2 h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                  <div 
+                    className="h-2 bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: `${summaryStats.approachesWithCodePercentage}%` }}
+                  ></div>
+                </div>
               </div>
             </div>
 
-            <div className="col-span-full sm:col-span-1 md:col-span-2">
-              <span className="font-medium text-gray-300">Main Method Types:</span>
-              <div className="text-gray-400 mt-1 space-y-1 text-xs">
+            {/* Main Method Types */}
+            <div className="bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 rounded-lg border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:scale-105">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-indigo-300 font-semibold">Main Method Types</span>
+                <span className="material-icons-round text-indigo-400">category</span>
+              </div>
+              <div className="space-y-3">
                 {Object.entries(summaryStats.mainMethodTypeDistribution)
                   .sort(([, a], [, b]) => b.count - a.count)
-                  .map(([type, data]) => (
-                  <div key={type}>
-                    <div className="flex justify-between">
-                      <span>{type}:</span>
-                      <span>{data.count} ({data.percentage.toFixed(1)}%)</span>
+                  .map(([type, data], index) => (
+                  <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-indigo-200 text-sm font-medium">{type}</span>
+                      <span className="text-indigo-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                     </div>
-                    <div className="mt-0.5 h-1.5 w-full bg-gray-700 rounded">
-                      <div className="h-1.5 bg-indigo-500 rounded" style={{ width: `${data.percentage}%` }}></div>
+                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-2 bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${data.percentage}%` }}
+                      ></div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="col-span-full sm:col-span-1 md:col-span-2">
-              <span className="font-medium text-gray-300">Domains:</span>
-              <div className="text-gray-400 mt-1 space-y-1 text-xs">
+            {/* Domains */}
+            <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 rounded-lg border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:scale-105">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-purple-300 font-semibold">Domains</span>
+                <span className="material-icons-round text-purple-400">public</span>
+              </div>
+              <div className="space-y-3">
                 {Object.entries(summaryStats.domainDistribution)
                   .sort(([, a], [, b]) => b.count - a.count)
-                  .map(([domain, data]) => (
-                  <div key={domain}>
-                    <div className="flex justify-between">
-                      <span>{domain}:</span>
-                      <span>{data.count} ({data.percentage.toFixed(1)}%)</span>
+                  .map(([domain, data], index) => (
+                  <div key={domain} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-purple-200 text-sm font-medium">{domain}</span>
+                      <span className="text-purple-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                     </div>
-                    <div className="mt-0.5 h-1.5 w-full bg-gray-700 rounded">
-                      <div className="h-1.5 bg-emerald-500 rounded" style={{ width: `${data.percentage}%` }}></div>
+                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-2 bg-purple-500 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${data.percentage}%` }}
+                      ></div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="col-span-full sm:col-span-1 md:col-span-2">
-              <span className="font-medium text-gray-300">Licenses:</span>
-              <div className="text-gray-400 mt-1 space-y-1 text-xs">
+            {/* Licenses */}
+            <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 rounded-lg border border-amber-500/20 hover:border-amber-500/40 transition-all duration-300 hover:scale-105">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-amber-300 font-semibold">Licenses</span>
+                <span className="material-icons-round text-amber-400">gavel</span>
+              </div>
+              <div className="space-y-3">
                 {Object.entries(summaryStats.licenseDistribution)
                   .sort(([, a], [, b]) => b.count - a.count)
-                  .map(([license, data]) => (
-                  <div key={license}>
-                    <div className="flex justify-between">
-                      <span>{license}:</span>
-                      <span>{data.count} ({data.percentage.toFixed(1)}%)</span>
+                  .map(([license, data], index) => (
+                  <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-amber-200 text-sm font-medium">{license}</span>
+                      <span className="text-amber-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                     </div>
-                    <div className="mt-0.5 h-1.5 w-full bg-gray-700 rounded">
-                      <div className="h-1.5 bg-amber-500 rounded" style={{ width: `${data.percentage}%` }}></div>
+                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-2 bg-amber-500 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${data.percentage}%` }}
+                      ></div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="col-span-full sm:col-span-2 md:col-span-2">
-              <span className="font-medium text-gray-300">Tasks Addressed (Percentage of Total Approaches):</span>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-gray-400 mt-1 text-xs">
-                {Object.entries(summaryStats.taskPercentages).map(([task, percentage]) => (
-                  <div key={task}>
-                    <div className="flex justify-between">
-                      <span>{task.toUpperCase()}: {summaryStats.taskCounts[task]}</span>
-                      <span>({percentage.toFixed(1)}%)</span>
+            {/* Tasks */}
+            <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 rounded-lg border border-rose-500/20 hover:border-rose-500/40 transition-all duration-300 hover:scale-105">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-rose-300 font-semibold">Tasks Addressed</span>
+                <span className="material-icons-round text-rose-400">assignment</span>
+              </div>
+              <div className="space-y-3">
+                {Object.entries(summaryStats.taskPercentages).map(([task, percentage], index) => (
+                  <div key={task} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-rose-200 text-sm font-medium">{task.toUpperCase()}</span>
+                      <span className="text-rose-300 text-sm">{summaryStats.taskCounts[task]} ({percentage.toFixed(1)}%)</span>
                     </div>
-                    <div className="mt-0.5 h-1.5 w-full bg-gray-700 rounded">
-                      <div className="h-1.5 bg-rose-500 rounded" style={{ width: `${percentage}%` }}></div>
+                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-2 bg-rose-500 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${percentage}%` }}
+                      ></div>
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Missing Fields Summary */}
+            <div className="bg-gradient-to-r from-red-500/10 to-red-600/10 p-4 rounded-lg border border-red-500/20 hover:border-red-500/40 transition-all duration-300 hover:scale-105">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-red-300 font-semibold">Data Quality</span>
+                <span className="material-icons-round text-red-400">warning</span>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-red-200 text-sm">Total Entries</span>
+                  <span className="text-red-100 font-bold">{summaryStats.totalEntries}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-red-200 text-sm">With Missing Fields</span>
+                  <span className="text-red-100 font-bold">{summaryStats.entriesWithMissingFields}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-red-200 text-sm">Total Missing</span>
+                  <span className="text-red-100 font-bold">{summaryStats.totalMissingFields}</span>
+                </div>
+                <div className="pt-2 border-t border-red-500/20">
+                  <div className="text-red-200 text-xs">Most Missing Field:</div>
+                  <div className="text-red-100 text-sm font-medium">{summaryStats.mostMissing}</div>
+                </div>
               </div>
             </div>
           </div>
