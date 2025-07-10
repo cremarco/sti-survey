@@ -66,6 +66,29 @@ const isEmpty = (value) => {
 };
 
 /**
+ * Format date string to a more readable format
+ * @param {string} dateString - The date string to format
+ * @returns {string} Formatted date string
+ */
+const formatDate = (dateString) => {
+  if (!dateString || dateString.trim() === '') return null;
+  
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return dateString; // Return original if invalid date
+    
+    // Format as DD/MM/YYYY
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  } catch (error) {
+    return dateString; // Return original if parsing fails
+  }
+};
+
+/**
  * Required fields configuration for validation
  */
 const REQUIRED_FIELDS = {
@@ -320,6 +343,34 @@ function App() {
       meta: { align: 'center' }
     }),
     
+    // Added column
+    columnHelper.accessor("added", {
+      header: "Added",
+      cell: (info) => {
+        const addedValue = info.getValue();
+        const formattedDate = formatDate(addedValue);
+        
+        if (formattedDate) {
+          return (
+            <div className="flex flex-col items-center">
+              <span className="text-xs text-gray-200 font-medium">{formattedDate}</span>
+              {addedValue !== formattedDate && (
+                <span className="text-[10px] text-gray-500" title={`Original: ${addedValue}`}>
+                  {addedValue}
+                </span>
+              )}
+            </div>
+          );
+        } else {
+          return (
+            <span className="text-xs text-gray-500 italic">-</span>
+          );
+        }
+      },
+      enableSorting: true,
+      meta: { align: 'center' }
+    }),
+    
     // Year column
     columnHelper.accessor("year", {
       header: "Year",
@@ -364,12 +415,31 @@ function App() {
     // Title column
     columnHelper.accessor("title.text", {
       header: "Title",
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'title.text')} 
-        />
-      ),
+      cell: (info) => {
+        const titleText = info.getValue();
+        const link = info.row.original.title?.link;
+        const isMissing = isRequiredFieldMissing(info.row.original, 'title.text');
+        
+        return (
+          <div className="flex items-center gap-2">
+            <MissingFieldCell 
+              value={titleText} 
+              isMissing={isMissing} 
+            />
+            {link && link.trim() !== '' && (
+              <a 
+                href={link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 transition-colors"
+                title="Open link"
+              >
+                <span className="material-icons-outlined text-sm">launch</span>
+              </a>
+            )}
+          </div>
+        );
+      },
       enableSorting: false,
     }),
     

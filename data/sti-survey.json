@@ -12,6 +12,7 @@
             "text": "An Ontology-Driven Annotation of Data Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "WISE",
         "name-of-approach": "",
         "main-method": {
@@ -71,6 +72,7 @@
             "text": "Fuzzy Annotation of Web Data Tables Driven by a Domain Ontology",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ESWC",
         "name-of-approach": "@Web",
         "main-method": {
@@ -121,7 +123,12 @@
         },
         "output-format": "RDF",
         "checked-by-author": false,
-        "authors": ["Gaëlle Hignette", "Patrice Buche", "Juliette Dibie-Barthélemy", "Ollivier Haemmerlé"],
+        "authors": [
+            "Gaëlle Hignette",
+            "Patrice Buche",
+            "Juliette Dibie-Barthélemy",
+            "Ollivier Haemmerlé"
+        ],
         "checked-by-ai": true
     },
     {
@@ -131,6 +138,7 @@
             "text": "Automatic hidden-Web table interpretation, conceptualization, and semantic annotation",
             "link": ""
         },
+        "added": "",
         "conference-journal": "DKE",
         "name-of-approach": "TISP++ (Table Interpretation with Sibling Pages)",
         "main-method": {
@@ -181,7 +189,10 @@
         },
         "output-format": "RDF/XML (OWL ontology + page annotations)",
         "checked-by-author": false,
-        "authors": ["Cui Tao", "David W. Embley"],
+        "authors": [
+            "Cui Tao",
+            "David W. Embley"
+        ],
         "checked-by-ai": true
     },
     {
@@ -191,6 +202,7 @@
             "text": "Annotating and Searching Web Tables Using Entities, Types and Relationships",
             "link": ""
         },
+        "added": "",
         "conference-journal": "VLDB",
         "name-of-approach": "",
         "main-method": {
@@ -251,6 +263,7 @@
             "text": "T2LD: Interpreting and Representing Tables as Linked Data⋆",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "T2LD",
         "main-method": {
@@ -311,6 +324,7 @@
             "text": "Exploting a Web of Semantic Data for Interpreting Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "WSC",
         "name-of-approach": "Wikitology",
         "main-method": {
@@ -371,6 +385,7 @@
             "text": "Automatically Generating Government Linked Data from Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "AAAI",
         "name-of-approach": "",
         "main-method": {
@@ -431,6 +446,7 @@
             "text": "Recovering Semantics of Tables on the Web",
             "link": ""
         },
+        "added": "",
         "conference-journal": "VLDB",
         "name-of-approach": "",
         "main-method": {
@@ -491,6 +507,7 @@
             "text": "Exploiting Structure within Data for Accurate Labeling using Conditional Random Fields",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ICAI",
         "name-of-approach": "",
         "main-method": {
@@ -551,6 +568,7 @@
             "text": "Semi-automatically Mapping Structured Sources into the Semantic Web",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ESWC",
         "name-of-approach": "Karma",
         "main-method": {
@@ -611,6 +629,7 @@
             "text": "Answering Table Queries on the Web using Column Keywords",
             "link": ""
         },
+        "added": "",
         "conference-journal": "VLDB",
         "name-of-approach": "",
         "main-method": {
@@ -671,6 +690,7 @@
             "text": "Understanding Tables on the Web",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ER",
         "name-of-approach": "",
         "main-method": {
@@ -731,6 +751,7 @@
             "text": "Fuzzy Web Data Tables Integration Guided by an Ontological and Terminological Resource",
             "link": ""
         },
+        "added": "",
         "conference-journal": "IEEE",
         "name-of-approach": "ONDINE",
         "main-method": {
@@ -791,6 +812,7 @@
             "text": "GIVA: A Semantic Framework for Geospatial and Temporal Data Integration, Visualization, and Analytics",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SIGSPATIAL",
         "name-of-approach": "Giva",
         "main-method": {
@@ -851,6 +873,7 @@
             "text": "Scalable Column Concept Determination for Web Tables Using Large Knowledge Bases",
             "link": ""
         },
+        "added": "",
         "conference-journal": "VLDB",
         "name-of-approach": "lookup",
         "main-method": {
@@ -911,6 +934,7 @@
             "text": "User-driven Semantic Mapping of Tabular Data",
             "link": ""
         },
+        "added": "",
         "conference-journal": "I-SEMANTICS",
         "name-of-approach": "",
         "main-method": {
@@ -971,6 +995,7 @@
             "text": "Semantic Message Passing for Generating Linked Data from Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "",
         "main-method": {
@@ -1031,6 +1056,7 @@
             "text": "Triplifying Wikipedia's Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "LD4IE",
         "name-of-approach": "",
         "main-method": {
@@ -1091,6 +1117,7 @@
             "text": "Entity Discovery and Annotation in Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "EDBT",
         "name-of-approach": "",
         "main-method": {
@@ -1151,6 +1178,7 @@
             "text": "InfoGather+: Semantic Matching and Annotation of Numeric and Time-Varying Attributes in Web Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SIGMOD",
         "name-of-approach": "InfoGather+",
         "main-method": {
@@ -1211,6 +1239,7 @@
             "text": "Towards Disambiguating Web Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "",
         "main-method": {
@@ -1271,6 +1300,7 @@
             "text": "Knowledge Base Augmentation using Tabular Data",
             "link": ""
         },
+        "added": "",
         "conference-journal": "LDOW",
         "name-of-approach": "",
         "main-method": {
@@ -1331,6 +1361,7 @@
             "text": "A Scalable Approach to Learn Semantic Models of Structured Sources",
             "link": ""
         },
+        "added": "",
         "conference-journal": "IEEE",
         "name-of-approach": "",
         "main-method": {
@@ -1391,6 +1422,7 @@
             "text": "TabEL: Entity Linking in Web Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "TabEL",
         "main-method": {
@@ -1451,6 +1483,7 @@
             "text": "Assigning Semantic Labels to Data Sources",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ESWC",
         "name-of-approach": "SemanticTyper",
         "main-method": {
@@ -1511,6 +1544,7 @@
             "text": "Matching HTML Tables to DBpedia",
             "link": ""
         },
+        "added": "",
         "conference-journal": "WIMS",
         "name-of-approach": "T2K Match",
         "main-method": {
@@ -1571,6 +1605,7 @@
             "text": "TAIPAN: Automatic Property Mapping for Tabular Data",
             "link": ""
         },
+        "added": "",
         "conference-journal": "EKAW",
         "name-of-approach": "TAIPAN",
         "main-method": {
@@ -1631,6 +1666,7 @@
             "text": "Multi-level semantic labelling of numerical values",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "",
         "main-method": {
@@ -1691,6 +1727,7 @@
             "text": "Semantic labeling: A domain-independent approach",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "DSL(Domain-independent SemanticLabeler)",
         "main-method": {
@@ -1751,6 +1788,7 @@
             "text": "Learning the semantics of structured data sources",
             "link": ""
         },
+        "added": "",
         "conference-journal": "JOWS",
         "name-of-approach": "Karma",
         "main-method": {
@@ -1811,6 +1849,7 @@
             "text": "Leveraging Linked Data to Discover Semantic Relations within Data Sources",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "Karma",
         "main-method": {
@@ -1871,6 +1910,7 @@
             "text": "Matching Web Tables with Knowledge Base Entities: From Entity Lookups to Entity Embeddings",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "",
         "main-method": {
@@ -1931,6 +1971,7 @@
             "text": "Towards a Large Corpus of Richly Annotated Web Tables for Knowledge Base Population",
             "link": ""
         },
+        "added": "",
         "conference-journal": "LD4IE",
         "name-of-approach": "This paper is not about an apporach rather than on proposing techniques or hypothesis about the tables in order to improve STI approaches performance",
         "main-method": {
@@ -1991,6 +2032,7 @@
             "text": "Effective and Efficient Semantic Table Interpretation using TableMiner+",
             "link": ""
         },
+        "added": "",
         "conference-journal": "JOWS",
         "name-of-approach": "TableMiner+",
         "main-method": {
@@ -2051,6 +2093,7 @@
             "text": "Making Sense of Numerical Data - Semantic Labelling of Web Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "EKAW",
         "name-of-approach": "NUMER",
         "main-method": {
@@ -2111,6 +2154,7 @@
             "text": "Cross-Lingual Entity Linking for Web Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "AAAI",
         "name-of-approach": "",
         "main-method": {
@@ -2171,6 +2215,7 @@
             "text": "Ad Hoc Table Retrieval using Semantic Similarity",
             "link": ""
         },
+        "added": "",
         "conference-journal": "WWW",
         "name-of-approach": "STR",
         "main-method": {
@@ -2231,6 +2276,7 @@
             "text": "DAGOBAH: An End-to-End Context-Free Tabular Data Semantic Annotation System",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "DAGOBAH",
         "main-method": {
@@ -2291,6 +2337,7 @@
             "text": "ColNet: Embedding the Semantics of Web Tables for Column Type Prediction",
             "link": ""
         },
+        "added": "",
         "conference-journal": "AAAI",
         "name-of-approach": "ColNet",
         "main-method": {
@@ -2351,6 +2398,7 @@
             "text": "Learning Semantic Annotations for Tabular Data",
             "link": ""
         },
+        "added": "",
         "conference-journal": "IJCAI",
         "name-of-approach": "ColNet",
         "main-method": {
@@ -2411,6 +2459,7 @@
             "text": "MantisTable: an Automatic Approach for the Semantic Table Interpretation",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "MantisTable",
         "main-method": {
@@ -2471,6 +2520,7 @@
             "text": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SIGKDD",
         "name-of-approach": "Sherlock",
         "main-method": {
@@ -2531,6 +2581,7 @@
             "text": "Extracting Novel Facts from Tables for Knowledge Graph Completion",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "TAKCO",
         "main-method": {
@@ -2591,6 +2642,7 @@
             "text": "Semantic Table Interpretation using LOD4ALL",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "LOD4ALL",
         "main-method": {
@@ -2651,6 +2703,7 @@
             "text": "MTab: Matching Tabular Data to Knowledge Graph using Probability Models",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "MTab",
         "main-method": {
@@ -2711,6 +2764,7 @@
             "text": "ADOG - Annotating Data with Ontologies and Graphs",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "ADOG",
         "main-method": {
@@ -2771,6 +2825,7 @@
             "text": "CSV2KG: Transforming Tabular Data into Semantic Knowledge",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "CSV2KG",
         "main-method": {
@@ -2831,6 +2886,7 @@
             "text": "Meimei: An Efficient Probabilistic Approach for Semantically Annotating Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "AAAI",
         "name-of-approach": "meimei",
         "main-method": {
@@ -2891,6 +2947,7 @@
             "text": "Entity Linking to Knowledge Graphs to Infer Column Types and Properties",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "",
         "main-method": {
@@ -2951,6 +3008,7 @@
             "text": "Sato: Contextual Semantic Type Detection in Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "VLDB",
         "name-of-approach": "Sato",
         "main-method": {
@@ -3011,6 +3069,7 @@
             "text": "JenTab: Matching Tabular Data to Knowledge Graphs",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "JenTab",
         "main-method": {
@@ -3071,6 +3130,7 @@
             "text": "AMALGAM: making tabular dataset explicit with knowledge graph",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "AMALGAM",
         "main-method": {
@@ -3130,6 +3190,7 @@
             "text": "Kepler-aSI : Kepler as A Semantic Interpreter",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "KEPLER-ASI",
         "main-method": {
@@ -3190,6 +3251,7 @@
             "text": "LinkingPark: An Integrated Approach for Semantic Table Interpretation",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "LinkingPark",
         "main-method": {
@@ -3250,6 +3312,7 @@
             "text": "A fully automated approach to a complete Semantic Table Interpretation",
             "link": ""
         },
+        "added": "",
         "conference-journal": "FGCS",
         "name-of-approach": "MantisTable",
         "main-method": {
@@ -3310,6 +3373,7 @@
             "text": "MantisTable SE: an Efficient Approach for the Semantic Table Interpretation",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "MantisTable SE",
         "main-method": {
@@ -3370,6 +3434,7 @@
             "text": "Annotating Web Tables through Knowledge Bases: A Context-Based Approach",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SDS",
         "name-of-approach": "",
         "main-method": {
@@ -3430,6 +3495,7 @@
             "text": "Web Table Column Type Detection Using Deep Learning and Probability Graph Model",
             "link": ""
         },
+        "added": "",
         "conference-journal": "WISA",
         "name-of-approach": "",
         "main-method": {
@@ -3489,6 +3555,7 @@
             "text": "DAGOBAH: Enhanced Scoring Algorithms for Scalable Annotations of Tabular Data",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "DAGOBAH SL 2020",
         "main-method": {
@@ -3549,6 +3616,7 @@
             "text": "Semantic Annotation for Tabular Data",
             "link": ""
         },
+        "added": "",
         "conference-journal": "CIKM",
         "name-of-approach": "C²",
         "main-method": {
@@ -3609,6 +3677,7 @@
             "text": "Generating Conceptual Subgraph from Tabular Data for Knowledge Graph Matching",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "SSL",
         "main-method": {
@@ -3669,6 +3738,7 @@
             "text": "Deep Entity Matching with Pre-Trained Language Models",
             "link": ""
         },
+        "added": "",
         "conference-journal": "VLDB",
         "name-of-approach": "Ditto",
         "main-method": {
@@ -3729,6 +3799,7 @@
             "text": "MTab4Wikidata at SemTab 2020: Tabular Data Annotation with Wikidata",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "Mtab4Wikidata",
         "main-method": {
@@ -3789,6 +3860,7 @@
             "text": "bbw: Matching CSV to Wikidata via Meta-lookup",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "bbw (boosted by wiki)",
         "main-method": {
@@ -3849,6 +3921,7 @@
             "text": "LexMa: Tabular Data to Knowledge Graph Matching using Lexical Techniques",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "LexMa",
         "main-method": {
@@ -3909,6 +3982,7 @@
             "text": "Knowledge graph matching with inter-service information transfer",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "TeamTR",
         "main-method": {
@@ -3969,6 +4043,7 @@
             "text": "Novel Entity Discovery from Web Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "WWW",
         "name-of-approach": "",
         "main-method": {
@@ -4029,6 +4104,7 @@
             "text": "JenTab Meets SemTab 2021's New Challenges",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "JenTab",
         "main-method": {
@@ -4089,6 +4165,7 @@
             "text": "JenTab: A Toolkit for Semantic Table Annotations",
             "link": ""
         },
+        "added": "",
         "conference-journal": "KGC",
         "name-of-approach": "JenTab",
         "main-method": {
@@ -4149,6 +4226,7 @@
             "text": "MantisTable V: a novel and efficient approach to Semantic Table Interpretation",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "MantisTable V",
         "main-method": {
@@ -4209,6 +4287,7 @@
             "text": "Kepler-aSI at SemTab 2021",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "KEPLER-ASI",
         "main-method": {
@@ -4269,6 +4348,7 @@
             "text": "Information Extraction From Co-Occurring Similar Entities",
             "link": ""
         },
+        "added": "",
         "conference-journal": "WWW",
         "name-of-approach": "CaLiGraph extraction framework",
         "main-method": {
@@ -4329,6 +4409,7 @@
             "text": "DAGOBAH: Table and Graph Contexts for Eﬀicient Semantic Annotation of Tabular Data",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "DAGOBAH SL 2021",
         "main-method": {
@@ -4389,6 +4470,7 @@
             "text": "SemTab 2021: Tabular Data Annotation with MTab Tool",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "MTab",
         "main-method": {
@@ -4449,6 +4531,7 @@
             "text": "MAGIC: Mining an Augmented Graph using INK, starting from a CSV",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "MAGIC",
         "main-method": {
@@ -4509,6 +4592,7 @@
             "text": "TCN: Table Convolutional Network for Web Table Interpretation",
             "link": ""
         },
+        "added": "",
         "conference-journal": "WWW",
         "name-of-approach": "TCN",
         "main-method": {
@@ -4569,6 +4653,7 @@
             "text": "GBMTab: A Graph-Based Method for Interpreting Noisy Semantic Table to Knowledge Graph",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "GBMTab",
         "main-method": {
@@ -4629,6 +4714,7 @@
             "text": "Tabular Data Concept Type Detection Using Star-Transformers",
             "link": ""
         },
+        "added": "",
         "conference-journal": "CIKM",
         "name-of-approach": "",
         "main-method": {
@@ -4689,6 +4775,7 @@
             "text": "JenTab: Do CTA solutions affect the entire scores?",
             "link": ""
         },
+        "added": "",
         "conference-journal": "KGC",
         "name-of-approach": "JenTab",
         "main-method": {
@@ -4749,6 +4836,7 @@
             "text": "LinkingPark: An automatic semantic table interpretation system",
             "link": ""
         },
+        "added": "",
         "conference-journal": "JOWS",
         "name-of-approach": "LinkingPark",
         "main-method": {
@@ -4809,6 +4897,7 @@
             "text": "s-elBat: a Semantic Interpretation Approach for Messy taBle-s",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "s-Elbat",
         "main-method": {
@@ -4869,6 +4958,7 @@
             "text": "TURL: Table Understanding through Representation Learning",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SIGMOD",
         "name-of-approach": "TURL",
         "main-method": {
@@ -4929,6 +5019,7 @@
             "text": "Tab2KG: Semantic table interpretation with lightweight semantic profiles",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SWJ",
         "name-of-approach": "Tab2KG",
         "main-method": {
@@ -4989,6 +5080,7 @@
             "text": "From Heuristics to Language Models: A Journey Through the Universe of Semantic Table Interpretation with DAGOBAH",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SemTab",
         "name-of-approach": "DAGOBAH SL2022",
         "main-method": {
@@ -5049,6 +5141,7 @@
             "text": "Radar Station: Using KG Embeddings for Semantic Table Interpretation and Entity Disambiguation",
             "link": ""
         },
+        "added": "",
         "conference-journal": "ISWC",
         "name-of-approach": "Radar Station",
         "main-method": {
@@ -5109,6 +5202,7 @@
             "text": "Annotating Columns with Pre-trained Language Models",
             "link": ""
         },
+        "added": "",
         "conference-journal": "SIGMOD",
         "name-of-approach": "Doduo",
         "main-method": {
@@ -5169,6 +5263,7 @@
             "text": "TableLlama: Towards Open Large Generalist Models for Tables",
             "link": ""
         },
+        "added": "",
         "conference-journal": "arXiv",
         "name-of-approach": "TableLlama",
         "main-method": {
@@ -5229,6 +5324,7 @@
             "text": "Table-GPT: Table-tuned GPT for Diverse Table Tasks",
             "link": ""
         },
+        "added": "",
         "conference-journal": "arXiv",
         "name-of-approach": "Table-GPT",
         "main-method": {
@@ -5284,62 +5380,67 @@
     },
     {
         "author": "Cremaschi",
-        "authors": ["Marco Cremaschi", "Fabio D’Adda", "Andrea Maurino"],
+        "authors": [
+            "Marco Cremaschi",
+            "Fabio D’Adda",
+            "Andrea Maurino"
+        ],
         "year": 2025,
         "title": {
-          "text": "stEELlm: An LLM for Generating Semantic Annotations of Tabular Data",
-          "link": "https://doi.org/10.1145/3719206"
+            "text": "stEELlm: An LLM for Generating Semantic Annotations of Tabular Data",
+            "link": "https://doi.org/10.1145/3719206"
         },
-        "conference-journal": "ACM Transactions on Intelligent Systems and Technology (TIST)",
+        "added": "2025-07-10",
+        "conference-journal": "TIST",
         "name-of-approach": "stEELlm",
         "main-method": {
-          "type": "sup",
-          "technique": "Fine-tuned Mixtral 8×7B LLM with LoRA adapters"
+            "type": "sup",
+            "technique": "Fine-tuned Mixtral 8×7B LLM with LoRA adapters"
         },
         "domain": {
-          "domain": "independent",
-          "type": ""
+            "domain": "independent",
+            "type": ""
         },
         "tasks": {
-          "cta": false,
-          "cpa": false,
-          "cea": true,
-          "cnea": false
+            "cta": false,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
         },
         "steps": {
-          "data-preparation": {
-            "description": "CSV tables from WikidataTables 2023, HardTables 2022 and SemTab 2020 (140 800 in total) are cleaned (URL prefixes, Unicode chars, case normalisation) and enriched with candidate entities retrieved through LamAPI.",
-            "spell-checker": "",
-            "units-of-measurements": ""
-          },
-          "subject-detection": "Not addressed.",
-          "column-analysis": "A heuristic column-classification step labels columns as Named-Entity (NE) or Literal (LIT) to steer the downstream linking.",
-          "type-annotation": "",
-          "predicate-annotation": "",
-          "datatype-annotation": "",
-          "entity-linking": {
-            "description": "Candidate generation via LamAPI lookup on Wikidata followed by disambiguation performed by the fine-tuned Mixtral 8×7B model that outputs the best QID for each cell.",
-            "candidate-generation": "LamAPI entity lookup",
-            "entity-disambiguation": "stEELlm (fine-tuned Mixtral 8×7B)"
-          },
-          "nil-annotation": ""
+            "data-preparation": {
+                "description": "CSV tables from WikidataTables 2023, HardTables 2022 and SemTab 2020 (140 800 in total) are cleaned (URL prefixes, Unicode chars, case normalisation) and enriched with candidate entities retrieved through LamAPI.",
+                "spell-checker": "",
+                "units-of-measurements": ""
+            },
+            "subject-detection": "Not addressed.",
+            "column-analysis": "A heuristic column-classification step labels columns as Named-Entity (NE) or Literal (LIT) to steer the downstream linking.",
+            "type-annotation": "",
+            "predicate-annotation": "",
+            "datatype-annotation": "",
+            "entity-linking": {
+                "description": "Candidate generation via LamAPI lookup on Wikidata followed by disambiguation performed by the fine-tuned Mixtral 8×7B model that outputs the best QID for each cell.",
+                "candidate-generation": "LamAPI entity lookup",
+                "entity-disambiguation": "stEELlm (fine-tuned Mixtral 8×7B)"
+            },
+            "nil-annotation": ""
         },
         "user-revision": {
-          "type": "none",
-          "description": ""
+            "type": "none",
+            "description": ""
         },
         "validation": "Custom gold standard: 140 800 tables (WikidataTables 2023, HardTables 2022, SemTab 2020). On a held-out test set of 300 tables stEELlm achieves Precision 0.874, Recall 0.860, F1 0.867 for CEA.",
         "code-availability": "https://github.com/unimib-datAI/steellm",
         "license": "GNU Affero General Public License v3",
         "inputs": {
-          "type-of-table": "CSV relational tables",
-          "kg": {
-            "triple-store": "Wikidata",
-            "index": "LamAPI candidate index"
-          }
+            "type-of-table": "CSV relational tables",
+            "kg": {
+                "triple-store": "Wikidata",
+                "index": "LamAPI candidate index"
+            }
         },
         "output-format": "CSV list of (row,column)=QID annotations",
         "checked-by-author": true,
         "checked-by-ai": true
-      }
+    }
 ]
