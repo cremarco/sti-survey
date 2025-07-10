@@ -8,39 +8,36 @@ on:
 
 jobs:
   build:
-    name: Build and upload artifact
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '20'
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
+      - run: npm run build
 
-      - name: Build
-        run: npm run build
+      - uses: actions/configure-pages@v3
 
-      - name: Configure Pages environment
-        uses: actions/configure-pages@v3
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
   deploy:
-    name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
+    # ← qui dichiariamo l’environment
+    environment:
+      name: github-pages
+      # opzionale: punta l’URL nell’UI di Actions verso il tuo sito
+      url: ${{ steps.deploy.outputs.page_url }}
     permissions:
       pages: write
       id-token: write
     steps:
       - name: Deploy
+        id: deploy
         uses: actions/deploy-pages@v4
