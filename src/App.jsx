@@ -254,7 +254,7 @@ function App() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await fetch('/public/data/sti-survey.json');
+        const response = await fetch(import.meta.env.BASE_URL + 'data/sti-survey.json');
         if (!response.ok) {
           throw new Error('Failed to load data');
         }
