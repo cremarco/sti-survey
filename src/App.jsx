@@ -905,8 +905,8 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900">
-      <div className="p-4">
+    <div className="min-h-screen bg-gray-900 flex flex-col">
+      <div className="p-4 flex-shrink-0">
         {/* Overall Data Snapshot */}
         <div className="mb-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-lg overflow-hidden">
           <div className="p-6 pb-0">
@@ -1276,7 +1276,7 @@ function App() {
       </div>
       
       {/* Data Table */}
-      <div className="overflow-auto h-screen">
+      <div className="overflow-auto flex-1 px-4 pb-4">
         <table className="w-full table-auto text-xs">
           <thead className="bg-gray-800 sticky top-0 z-10">
             {table.getHeaderGroups().map((headerGroup) => (
