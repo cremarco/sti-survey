@@ -340,6 +340,27 @@ function App() {
       enableSorting: false,
     }),
     
+    // Authors column
+    columnHelper.accessor("authors", {
+      header: "All authors",
+      cell: (info) => {
+        const authors = info.getValue();
+        if (!authors || authors.length === 0) {
+          return <span className="text-gray-500 text-xs">No authors listed</span>;
+        }
+        return (
+          <div className="text-xs">
+            {authors.map((author, index) => (
+              <div key={index} className="text-gray-300">
+                {author}
+              </div>
+            ))}
+          </div>
+        );
+      },
+      enableSorting: false,
+    }),
+    
     // Title column
     columnHelper.accessor("title.text", {
       header: "Title",

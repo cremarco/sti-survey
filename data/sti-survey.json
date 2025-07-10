@@ -1,7 +1,12 @@
 [
     {
         "author": "Hignette",
-        "authors": ["Gaëlle Hignette", "Patrice Buche", "Juliette Dibie-Barthélemy", "Ollivier Haemmerlé"],
+        "authors": [
+            "Gaëlle Hignette",
+            "Patrice Buche",
+            "Juliette Dibie-Barthélemy",
+            "Ollivier Haemmerlé"
+        ],
         "year": 2007,
         "title": {
             "text": "An Ontology-Driven Annotation of Data Tables",
@@ -67,14 +72,14 @@
             "link": ""
         },
         "conference-journal": "ESWC",
-        "name-of-approach": "",
+        "name-of-approach": "@Web",
         "main-method": {
             "type": "unsup",
-            "technique": "similarity"
+            "technique": "ontology-driven fuzzy similarity"
         },
         "domain": {
-            "domain": "independent",
-            "type": ""
+            "domain": "dependent",
+            "type": "food microbiology, chemical risk, aeronautics"
         },
         "tasks": {
             "cta": true,
@@ -104,7 +109,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "",
+        "validation": "Custom GS, 60 tables",
         "code-availability": "",
         "license": "Not specified",
         "inputs": {
@@ -115,7 +120,9 @@
             }
         },
         "output-format": "RDF",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": ["Gaëlle Hignette", "Patrice Buche", "Juliette Dibie-Barthélemy", "Ollivier Haemmerlé"],
+        "checked-by-ai": true
     },
     {
         "author": "Tao",
@@ -125,10 +132,10 @@
             "link": ""
         },
         "conference-journal": "DKE",
-        "name-of-approach": "TISP ++ (Table Interpretation with Sibling Pages)",
+        "name-of-approach": "TISP++ (Table Interpretation with Sibling Pages)",
         "main-method": {
             "type": "unsup",
-            "technique": "pattern"
+            "technique": "structural pattern induction from sibling pages (tree-matching + regex patterns)"
         },
         "domain": {
             "domain": "independent",
@@ -162,7 +169,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "",
+        "validation": "Custom GS, 2526 tables",
         "code-availability": "",
         "license": "Not specified",
         "inputs": {
@@ -172,8 +179,10 @@
                 "index": ""
             }
         },
-        "output-format": "RDF",
-        "checked-by-author": false
+        "output-format": "RDF/XML (OWL ontology + page annotations)",
+        "checked-by-author": false,
+        "authors": ["Cui Tao", "David W. Embley"],
+        "checked-by-ai": true
     },
     {
         "author": "Limaye",
@@ -231,7 +240,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Mulwad",
@@ -289,7 +300,9 @@
             }
         },
         "output-format": "N3",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Syed",
@@ -347,7 +360,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Mulwad",
@@ -405,7 +420,9 @@
             }
         },
         "output-format": "N3",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Venetis",
@@ -463,7 +480,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Goel",
@@ -521,7 +540,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Knoblock",
@@ -579,7 +600,9 @@
             }
         },
         "output-format": "Source model (used to generate RDF)",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Pimplikar",
@@ -637,7 +660,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Wang",
@@ -695,7 +720,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Buche",
@@ -753,7 +780,9 @@
             }
         },
         "output-format": "XML documents representing data tables; RDF annotations",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Cruz",
@@ -811,7 +840,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Deng",
@@ -869,7 +900,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Ermilov",
@@ -927,7 +960,9 @@
             }
         },
         "output-format": "RDF",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Mulwad",
@@ -985,7 +1020,9 @@
             }
         },
         "output-format": "RDF",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Munoz",
@@ -1043,7 +1080,9 @@
             }
         },
         "output-format": "RDF",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Quercini",
@@ -1101,7 +1140,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Zhang",
@@ -1159,7 +1200,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Zwicklbauer",
@@ -1217,7 +1260,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Sekhavat",
@@ -1275,7 +1320,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Taheriyan",
@@ -1333,7 +1380,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Bhagavatula",
@@ -1391,7 +1440,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Ramnandan",
@@ -1449,7 +1500,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Ritze",
@@ -1507,7 +1560,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Ermilov",
@@ -1565,7 +1620,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Neumaier",
@@ -1623,7 +1680,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Pham",
@@ -1681,7 +1740,9 @@
             }
         },
         "output-format": "The output is a set of top-k semantic types corresponding to the unlabeled attribute.",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Taheriyan",
@@ -1739,7 +1800,9 @@
             }
         },
         "output-format": "RDF",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Taheriyan",
@@ -1797,7 +1860,9 @@
             }
         },
         "output-format": "a semantic model expressing how the assigned labels are connected",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Efthymiou",
@@ -1855,7 +1920,9 @@
             }
         },
         "output-format": "JSON",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Ell",
@@ -1913,7 +1980,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Zhang",
@@ -1971,7 +2040,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Kacprzak",
@@ -2029,7 +2100,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Luo",
@@ -2087,7 +2160,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Zhang",
@@ -2145,7 +2220,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Chabot",
@@ -2203,7 +2280,9 @@
             }
         },
         "output-format": "RDF",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Chen",
@@ -2261,7 +2340,9 @@
             }
         },
         "output-format": "NE and entity linking",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Chen",
@@ -2319,7 +2400,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Cremaschi",
@@ -2377,7 +2460,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Hulsebos",
@@ -2435,7 +2520,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Kruit",
@@ -2493,7 +2580,9 @@
             }
         },
         "output-format": "New facts to complete KGs",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Morikawa",
@@ -2551,7 +2640,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Nguyen",
@@ -2609,7 +2700,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Oliveira",
@@ -2667,7 +2760,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Steenwinckel",
@@ -2725,7 +2820,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Takeoka",
@@ -2783,7 +2880,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Thawani",
@@ -2841,7 +2940,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Zhang",
@@ -2899,7 +3000,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Abdelmageed",
@@ -2957,7 +3060,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Azzi",
@@ -3014,7 +3119,9 @@
             }
         },
         "output-format": "CEA,CTA",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Baazouzi",
@@ -3072,7 +3179,9 @@
             }
         },
         "output-format": "CTA",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Chen",
@@ -3130,7 +3239,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Cremaschi",
@@ -3188,7 +3299,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Cremaschi",
@@ -3246,7 +3359,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Eslahi",
@@ -3304,7 +3419,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Guo",
@@ -3361,7 +3478,9 @@
                 "index": ""
             }
         },
-        "output-format": ""
+        "output-format": "",
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Huynh",
@@ -3419,7 +3538,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Khurana",
@@ -3477,7 +3598,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Kim",
@@ -3535,7 +3658,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Li",
@@ -3593,7 +3718,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Nguyen",
@@ -3651,7 +3778,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Shigapov",
@@ -3709,7 +3838,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Tyagi",
@@ -3767,7 +3898,9 @@
             }
         },
         "output-format": "CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Yumusak",
@@ -3825,7 +3958,9 @@
             }
         },
         "output-format": "CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Zhang",
@@ -3883,7 +4018,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Abdelmageed",
@@ -3941,7 +4078,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Abdelmageed",
@@ -3999,7 +4138,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Avogadro",
@@ -4057,7 +4198,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Baazouzi",
@@ -4115,7 +4258,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Heist",
@@ -4173,7 +4318,9 @@
             }
         },
         "output-format": "RDF assertions",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Huynh",
@@ -4231,7 +4378,9 @@
             }
         },
         "output-format": "JSON",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Nguyen",
@@ -4289,7 +4438,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Steenwinckel",
@@ -4347,7 +4498,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Wang",
@@ -4405,7 +4558,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Yang",
@@ -4463,7 +4618,9 @@
             }
         },
         "output-format": "CEA,CTA",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Zhou",
@@ -4521,7 +4678,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Abdelmageed",
@@ -4579,7 +4738,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Chen",
@@ -4637,7 +4798,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Cremaschi",
@@ -4695,7 +4858,9 @@
             }
         },
         "output-format": "CEA,CTA,CPA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Deng",
@@ -4753,7 +4918,9 @@
             }
         },
         "output-format": "CTA,CPA,CEA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Gottschalk",
@@ -4811,7 +4978,9 @@
             }
         },
         "output-format": "Data graph which represents the content of the table (TURTLE)",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Huynh",
@@ -4869,7 +5038,9 @@
             }
         },
         "output-format": "CTA,CPA,CEA",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Liu",
@@ -4927,7 +5098,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": true
+        "checked-by-author": true,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Suhara",
@@ -4985,7 +5158,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Zhang",
@@ -5043,7 +5218,9 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
     },
     {
         "author": "Li",
@@ -5101,6 +5278,68 @@
             }
         },
         "output-format": "",
-        "checked-by-author": false
-    }
+        "checked-by-author": false,
+        "authors": [],
+        "checked-by-ai": false
+    },
+    {
+        "author": "Cremaschi",
+        "authors": ["Marco Cremaschi", "Fabio D’Adda", "Andrea Maurino"],
+        "year": 2025,
+        "title": {
+          "text": "stEELlm: An LLM for Generating Semantic Annotations of Tabular Data",
+          "link": "https://doi.org/10.1145/3719206"
+        },
+        "conference-journal": "ACM Transactions on Intelligent Systems and Technology (TIST)",
+        "name-of-approach": "stEELlm",
+        "main-method": {
+          "type": "sup",
+          "technique": "Fine-tuned Mixtral 8×7B LLM with LoRA adapters"
+        },
+        "domain": {
+          "domain": "independent",
+          "type": ""
+        },
+        "tasks": {
+          "cta": false,
+          "cpa": false,
+          "cea": true,
+          "cnea": false
+        },
+        "steps": {
+          "data-preparation": {
+            "description": "CSV tables from WikidataTables 2023, HardTables 2022 and SemTab 2020 (140 800 in total) are cleaned (URL prefixes, Unicode chars, case normalisation) and enriched with candidate entities retrieved through LamAPI.",
+            "spell-checker": "",
+            "units-of-measurements": ""
+          },
+          "subject-detection": "Not addressed.",
+          "column-analysis": "A heuristic column-classification step labels columns as Named-Entity (NE) or Literal (LIT) to steer the downstream linking.",
+          "type-annotation": "",
+          "predicate-annotation": "",
+          "datatype-annotation": "",
+          "entity-linking": {
+            "description": "Candidate generation via LamAPI lookup on Wikidata followed by disambiguation performed by the fine-tuned Mixtral 8×7B model that outputs the best QID for each cell.",
+            "candidate-generation": "LamAPI entity lookup",
+            "entity-disambiguation": "stEELlm (fine-tuned Mixtral 8×7B)"
+          },
+          "nil-annotation": ""
+        },
+        "user-revision": {
+          "type": "none",
+          "description": ""
+        },
+        "validation": "Custom gold standard: 140 800 tables (WikidataTables 2023, HardTables 2022, SemTab 2020). On a held-out test set of 300 tables stEELlm achieves Precision 0.874, Recall 0.860, F1 0.867 for CEA.",
+        "code-availability": "https://github.com/unimib-datAI/steellm",
+        "license": "GNU Affero General Public License v3",
+        "inputs": {
+          "type-of-table": "CSV relational tables",
+          "kg": {
+            "triple-store": "Wikidata",
+            "index": "LamAPI candidate index"
+          }
+        },
+        "output-format": "CSV list of (row,column)=QID annotations",
+        "checked-by-author": true,
+        "checked-by-ai": true
+      }
 ]
