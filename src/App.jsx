@@ -1276,7 +1276,7 @@ function App() {
       </div>
       
       {/* Data Table */}
-      <div className="overflow-auto flex-1 px-4 pb-4">
+      <div className="overflow-auto flex-1 pb-4">
         <table className="w-full table-auto text-xs">
           <thead className="bg-gray-800 sticky top-0 z-10">
             {table.getHeaderGroups().map((headerGroup) => (
