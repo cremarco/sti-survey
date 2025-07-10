@@ -14,143 +14,123 @@ import {
 const columnHelper = createColumnHelper();
 
 /**
- * Get badge color styling based on method type
+ * Returns Tailwind CSS classes for a badge based on the method type.
  * @param {string} type - The method type
- * @returns {string} Tailwind CSS classes for the badge
  */
 const getTypeBadgeColor = (type) => {
   const colorMap = {
-    'unsup': 'bg-orange-500/20 text-orange-200',
-    'sup': 'bg-indigo-500/20 text-indigo-200',
-    'semi-automated': 'bg-amber-500/20 text-amber-200',
-    'fully-automated': 'bg-emerald-500/20 text-emerald-200',
-    'hybrid': 'bg-violet-500/20 text-violet-200',
+    unsup: "bg-orange-500/20 text-orange-200",
+    sup: "bg-indigo-500/20 text-indigo-200",
+    "semi-automated": "bg-amber-500/20 text-amber-200",
+    "fully-automated": "bg-emerald-500/20 text-emerald-200",
+    hybrid: "bg-violet-500/20 text-violet-200",
   };
-  
-  return colorMap[type?.toLowerCase()] || 'bg-slate-500/20 text-slate-200';
+  return colorMap[type?.toLowerCase()] || "bg-slate-500/20 text-slate-200";
 };
 
 /**
- * Get badge color styling based on domain type
+ * Returns Tailwind CSS classes for a badge based on the domain type.
  * @param {string} domain - The domain type
- * @returns {string} Tailwind CSS classes for the badge
  */
 const getDomainBadgeColor = (domain) => {
   const colorMap = {
-    'independent': 'bg-blue-500/20 text-blue-200',
-    'dependent': 'bg-red-500/20 text-red-200',
-    'specific': 'bg-purple-500/20 text-purple-200',
-    'general': 'bg-teal-500/20 text-teal-200',
-    'biomedical': 'bg-pink-500/20 text-pink-200',
-    'geographic': 'bg-yellow-500/20 text-yellow-200',
-    'financial': 'bg-green-500/20 text-green-200',
-    'scientific': 'bg-cyan-500/20 text-cyan-200',
-    'educational': 'bg-lime-500/20 text-lime-200',
+    independent: "bg-blue-500/20 text-blue-200",
+    dependent: "bg-red-500/20 text-red-200",
+    specific: "bg-purple-500/20 text-purple-200",
+    general: "bg-teal-500/20 text-teal-200",
+    biomedical: "bg-pink-500/20 text-pink-200",
+    geographic: "bg-yellow-500/20 text-yellow-200",
+    financial: "bg-green-500/20 text-green-200",
+    scientific: "bg-cyan-500/20 text-cyan-200",
+    educational: "bg-lime-500/20 text-lime-200",
   };
-  
-  return colorMap[domain?.toLowerCase()] || 'bg-gray-500/20 text-gray-200';
+  return colorMap[domain?.toLowerCase()] || "bg-gray-500/20 text-gray-200";
 };
 
 /**
- * Check if a value is empty or null
- * @param {any} value - The value to check
- * @returns {boolean} True if empty
+ * Checks if a value is empty, null, or undefined.
+ * @param {any} value
+ * @returns {boolean}
  */
 const isEmpty = (value) => {
   if (value === null || value === undefined) return true;
-  if (typeof value === 'string') return value.trim() === '';
-  if (typeof value === 'object' && !Array.isArray(value)) {
+  if (typeof value === "string") return value.trim() === "";
+  if (typeof value === "object" && !Array.isArray(value)) {
     return Object.keys(value).length === 0;
   }
   return false;
 };
 
 /**
- * Format date string to a more readable format
- * @param {string} dateString - The date string to format
- * @returns {string} Formatted date string
+ * Formats a date string to DD/MM/YYYY or returns null if invalid.
+ * @param {string} dateString
+ * @returns {string|null}
  */
 const formatDate = (dateString) => {
-  if (!dateString || dateString.trim() === '') return null;
-  
-  try {
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) return dateString; // Return original if invalid date
-    
-    // Format as DD/MM/YYYY
-    return date.toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
-  } catch (error) {
-    return dateString; // Return original if parsing fails
-  }
+  if (!dateString || dateString.trim() === "") return null;
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return dateString;
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
 };
 
+// --- Validation and Cell Rendering Helpers ---
+
 /**
- * Required fields configuration for validation
+ * Required fields configuration for validation.
+ * Add/remove fields as needed for your data model.
  */
 const REQUIRED_FIELDS = {
-  'author': true,
-  'year': true,
-  'title.text': true,
-  'conference-journal': true,
-  'main-method.type': true,
-  'main-method.technique': true,
-  'domain.domain': true,
-  'tasks.cta': true,
-  'tasks.cpa': true,
-  'tasks.cea': true,
-  'tasks.cnea': true,
-  'user-revision.type': true,
-  'license': true,
-  'inputs.type-of-table': true,
-  'inputs.kg.triple-store': true,
-  'output-format': true,
-  'checked-by-author': true
+  author: true,
+  year: true,
+  "title.text": true,
+  "conference-journal": true,
+  "main-method.type": true,
+  "main-method.technique": true,
+  "domain.domain": true,
+  "tasks.cta": true,
+  "tasks.cpa": true,
+  "tasks.cea": true,
+  "tasks.cnea": true,
+  "user-revision.type": true,
+  "license": true,
+  "inputs.type-of-table": true,
+  "inputs.kg.triple-store": true,
+  "output-format": true,
+  "checked-by-author": true,
 };
 
 /**
- * Check if a required field is missing from a row
+ * Checks if a required field is missing from a row.
  * @param {object} row - The data row
  * @param {string} fieldPath - The field path (e.g., 'title.text')
- * @returns {boolean} True if the field is required and missing
+ * @returns {boolean}
  */
 const isRequiredFieldMissing = (row, fieldPath) => {
   if (!REQUIRED_FIELDS[fieldPath]) return false;
-
   // Get nested value based on field path
-  const getNestedValue = (obj, path) => {
-    return path.split('.').reduce((current, key) => current?.[key], obj);
-  };
-
+  const getNestedValue = (obj, path) => path.split(".").reduce((cur, key) => cur?.[key], obj);
   const value = getNestedValue(row, fieldPath);
   return isEmpty(value);
 };
 
 /**
- * Render a cell with missing field indicator
- * @param {any} value - The cell value
- * @param {boolean} isMissing - Whether the field is missing
- * @returns {JSX.Element} The rendered cell content
+ * Renders a cell with a missing field indicator if needed.
  */
 const MissingFieldCell = ({ value, isMissing }) => (
-  <span className={isMissing ? 'bg-red-500/20 text-red-200 px-2 py-1 rounded' : ''}>
-    {value || (isMissing ? 'MISSING' : '')}
+  <span className={isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : ""}>
+    {value || (isMissing ? "MISSING" : "")}
   </span>
 );
 
 /**
- * Render a task cell with Material Design icons
- * @param {boolean} value - The task value
- * @param {boolean} isMissing - Whether the field is missing
- * @returns {JSX.Element} The rendered task cell
+ * Renders a task cell with Material Design icons and missing indicator.
  */
 const TaskCell = ({ value, isMissing }) => {
-  if (isMissing) {
-    return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
-  }
+  if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
   return value ? (
     <span className="material-icons-round text-green-500 text-lg">done</span>
   ) : (
@@ -159,12 +139,10 @@ const TaskCell = ({ value, isMissing }) => {
 };
 
 /**
- * Render a step cell with Material Design icons
- * @param {string} value - The step value
- * @returns {JSX.Element} The rendered step cell
+ * Renders a step cell with Material Design icons.
  */
 const StepCell = ({ value }) => {
-  const hasContent = value && value.trim() !== '';
+  const hasContent = value && value.trim() !== "";
   return hasContent ? (
     <span className="material-icons-round text-green-500 text-lg">done</span>
   ) : (
@@ -173,18 +151,13 @@ const StepCell = ({ value }) => {
 };
 
 /**
- * Render the main method cell with type badge and technique
- * @param {object} mainMethod - The main method object
- * @param {object} row - The row data for validation
- * @returns {JSX.Element} The rendered method cell
+ * Renders the main method cell with type badge and technique.
  */
 const MainMethodCell = ({ mainMethod, row }) => {
   const { type, tech } = mainMethod || {};
-  const isTypeMissing = isRequiredFieldMissing(row, 'main-method.type');
-  const isTechMissing = isRequiredFieldMissing(row, 'main-method.technique');
-  
+  const isTypeMissing = isRequiredFieldMissing(row, "main-method.type");
+  const isTechMissing = isRequiredFieldMissing(row, "main-method.technique");
   if (!type && !tech) return "";
-  
   return (
     <div className="flex items-center gap-2">
       {type ? (
@@ -192,34 +165,25 @@ const MainMethodCell = ({ mainMethod, row }) => {
           {type}
         </span>
       ) : isTypeMissing ? (
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16">
-          MISSING
-        </span>
+        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16">MISSING</span>
       ) : null}
       {tech ? (
         <span className="text-[10px] text-gray-400">{tech}</span>
       ) : isTechMissing ? (
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]">
-          MISSING
-        </span>
+        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]">MISSING</span>
       ) : null}
     </div>
   );
 };
 
 /**
- * Render the domain cell with domain badge and type detail
- * @param {object} domain - The domain object
- * @param {object} row - The row data for validation
- * @returns {JSX.Element} The rendered domain cell
+ * Renders the domain cell with domain badge and type detail.
  */
 const DomainCell = ({ domain, row }) => {
   const domainValue = domain?.domain || "";
   const typeValue = domain?.type || "";
-  const isDomainMissing = isRequiredFieldMissing(row, 'domain.domain');
-  
+  const isDomainMissing = isRequiredFieldMissing(row, "domain.domain");
   if (!domainValue && !typeValue) return "";
-  
   return (
     <div className="flex items-center gap-2">
       {domainValue ? (
@@ -227,44 +191,32 @@ const DomainCell = ({ domain, row }) => {
           {domainValue}
         </span>
       ) : isDomainMissing ? (
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20">
-          MISSING
-        </span>
+        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20">MISSING</span>
       ) : null}
-      {typeValue && (
-        <span className="text-[10px] text-gray-400">{typeValue}</span>
-      )}
+      {typeValue && <span className="text-[10px] text-gray-400">{typeValue}</span>}
     </div>
   );
 };
 
 /**
- * Get badge color styling for user revision type
- * @param {string} type - The user revision type
- * @returns {string} Tailwind CSS classes for the badge
+ * Returns Tailwind CSS classes for user revision type badge.
  */
 const getUserRevisionBadgeColor = (type) => {
   const colorMap = {
-    'manual': 'bg-blue-500/20 text-blue-200',
-    'semi-automatic': 'bg-orange-500/20 text-orange-200',
-    'automatic': 'bg-emerald-500/20 text-emerald-200',
-    'none': 'bg-slate-500/20 text-slate-200',
+    manual: "bg-blue-500/20 text-blue-200",
+    "semi-automatic": "bg-orange-500/20 text-orange-200",
+    automatic: "bg-emerald-500/20 text-emerald-200",
+    none: "bg-slate-500/20 text-slate-200",
   };
-  return colorMap[type?.toLowerCase()] || 'bg-violet-500/20 text-violet-200';
+  return colorMap[type?.toLowerCase()] || "bg-violet-500/20 text-violet-200";
 };
 
 /**
- * Render the row number with missing fields count
- * @param {object} row - The row data
- * @param {number} index - The row index
- * @returns {JSX.Element} The rendered row number cell
+ * Renders the row number with missing fields count and tooltip.
  */
 const RowNumberCell = ({ row, index }) => {
-  const missingFields = Object.keys(REQUIRED_FIELDS)
-    .filter(field => isRequiredFieldMissing(row.original, field));
-
+  const missingFields = Object.keys(REQUIRED_FIELDS).filter((field) => isRequiredFieldMissing(row.original, field));
   const hasMissingFields = missingFields.length > 0;
-
   return (
     <div className="flex flex-col items-center">
       <span>{index + 1}</span>
@@ -276,10 +228,8 @@ const RowNumberCell = ({ row, index }) => {
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg shadow-lg text-xs text-gray-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
             <div className="font-semibold mb-1">Missing fields:</div>
             <div className="space-y-1">
-              {missingFields.map(field => (
-                <div key={field} className="text-[10px] text-gray-400">
-                  • {field}
-                </div>
+              {missingFields.map((field) => (
+                <div key={field} className="text-[10px] text-gray-400">• {field}</div>
               ))}
             </div>
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>

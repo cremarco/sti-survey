@@ -5421,7 +5421,7 @@
             "entity-linking": {
                 "description": "Candidate generation via LamAPI lookup on Wikidata followed by disambiguation performed by the fine-tuned Mixtral 8×7B model that outputs the best QID for each cell.",
                 "candidate-generation": "LamAPI entity lookup",
-                "entity-disambiguation": "stEELlm (fine-tuned Mixtral 8×7B)"
+                "entity-disambiguation": "Fine-tuned Mixtral 8×7B"
             },
             "nil-annotation": ""
         },
@@ -5429,14 +5429,14 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Custom gold standard: 140 800 tables (WikidataTables 2023, HardTables 2022, SemTab 2020). On a held-out test set of 300 tables stEELlm achieves Precision 0.874, Recall 0.860, F1 0.867 for CEA.",
+        "validation": "WikidataTables 2023, HardTables 2022, SemTab 2020",
         "code-availability": "https://github.com/unimib-datAI/steellm",
         "license": "GNU Affero General Public License v3",
         "inputs": {
             "type-of-table": "CSV relational tables",
             "kg": {
                 "triple-store": "Wikidata",
-                "index": "LamAPI candidate index"
+                "index": "LamAPI"
             }
         },
         "output-format": "CSV list of (row,column)=QID annotations",
