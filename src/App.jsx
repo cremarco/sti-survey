@@ -84,7 +84,6 @@ const REQUIRED_FIELDS = {
   'license': true,
   'inputs.type-of-table': true,
   'inputs.kg.triple-store': true,
-  'inputs.kg.index': true,
   'output-format': true,
   'checked-by-author': true
 };
@@ -635,12 +634,7 @@ function App() {
         columnHelper.accessor(row => row.inputs?.kg?.index || "", {
           id: "kg-index",
           header: "KG Index",
-          cell: (info) => (
-            <MissingFieldCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.kg.index')} 
-            />
-          ),
+          cell: (info) => info.getValue(),
           enableSorting: false,
         }),
       ],
@@ -676,6 +670,22 @@ function App() {
         );
       },
       enableSorting: false,
+    }),
+    
+    // Checked by AI column
+    columnHelper.accessor(row => row["checked-by-ai"], {
+      id: "checked-by-ai",
+      header: "Checked by AI",
+      cell: (info) => {
+        const value = info.getValue();
+        return value ? (
+          <span className="material-icons-round text-green-500 text-lg">done</span>
+        ) : (
+          <span className="material-icons-round text-red-500 text-lg">clear</span>
+        );
+      },
+      enableSorting: false,
+      meta: { align: 'center' },
     }),
   ], []);
 

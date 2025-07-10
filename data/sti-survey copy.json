@@ -11,7 +11,7 @@
         "name-of-approach": "",
         "main-method": {
             "type": "unsup",
-            "technique": "rule-based / ontology-driven"
+            "technique": "pattern"
         },
         "domain": {
             "domain": "dependent",
@@ -45,7 +45,7 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Custom GS, 60 tables",
+        "validation": "",
         "code-availability": "",
         "license": "Not specified",
         "inputs": {
@@ -55,9 +55,8 @@
                 "index": ""
             }
         },
-        "output-format": "XML",
-        "checked-by-author": true,
-        "checked-by-ai": true
+        "output-format": "",
+        "checked-by-author": true
     },
     {
         "author": "Hignette",
