@@ -47,9 +47,9 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
-            "type-of-table": "web table",
+            "type-of-table": "Web table",
             "kg": {
                 "triple-store": "Personal ontologies",
                 "index": ""
@@ -105,7 +105,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Web table (XML)",
             "kg": {
@@ -120,7 +120,7 @@
         "author": "Tao",
         "year": 2009,
         "title": {
-            "text": "Automatic hidden-web table interpretation, conceptualization, and semantic annotation",
+            "text": "Automatic hidden-Web table interpretation, conceptualization, and semantic annotation",
             "link": ""
         },
         "conference-journal": "DKE",
@@ -163,7 +163,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "HTML tables",
             "kg": {
@@ -221,7 +221,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Web Table",
             "kg": {
@@ -279,7 +279,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Web tables",
             "kg": {
@@ -337,7 +337,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Wikipedia tables",
             "kg": {
@@ -395,7 +395,7 @@
         },
         "validation": "Custom GS, 15 tables",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV, XML",
             "kg": {
@@ -453,7 +453,7 @@
         },
         "validation": "Custom GS",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "HTML tables",
             "kg": {
@@ -511,7 +511,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Web tables",
             "kg": {
@@ -627,7 +627,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "HTML tables",
             "kg": {
@@ -685,7 +685,7 @@
         },
         "validation": "Custom, 200 wikipedia tables",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "HTML tables",
             "kg": {
@@ -743,9 +743,9 @@
         },
         "validation": "Custom, 90 tables",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
-            "type-of-table": "Domain specific web tables",
+            "type-of-table": "Domain specific Web tables",
             "kg": {
                 "triple-store": "",
                 "index": ""
@@ -801,7 +801,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "GML, KML, Shapefile, MapInfo TAB, HTML table",
             "kg": {
@@ -859,7 +859,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Web",
             "kg": {
@@ -917,7 +917,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV, TSV, XLS, XLSX",
             "kg": {
@@ -975,7 +975,7 @@
         },
         "validation": "Web Manual, Web Relation, Wiki Manual, Wiki Links",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Web and Wikipedia HTML tables",
             "kg": {
@@ -1033,7 +1033,7 @@
         },
         "validation": "They extract 250 triples from the set and manually annotate them to produce a GS to test the approach on.",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Wikipedia tables",
             "kg": {
@@ -1091,7 +1091,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Google Fusion Tables",
             "kg": {
@@ -1147,9 +1147,9 @@
             "type": "Semi-automated",
             "description": ""
         },
-        "validation": "Experiments conducted on three real-life datasets of web tables,extracted from a recent snapshot of Microsoft Bing search engine",
+        "validation": "Experiments conducted on three real-life datasets of Web tables,extracted from a recent snapshot of Microsoft Bing search engine",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "EAB (entity-attribute binary relationships) HTML Web tables ",
             "kg": {
@@ -1207,7 +1207,7 @@
         },
         "validation": "Subset of Limaye",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "DBpedia",
             "kg": {
@@ -1265,7 +1265,7 @@
         },
         "validation": "ClueWeb09 dataset",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "",
             "kg": {
@@ -1323,7 +1323,7 @@
         },
         "validation": "We evaluated our approach on a dataset of 29 museum data sources",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Multiple sources modeled using the EDM, AAC, SKOS, Dublin Core Metadata Terms, FOAF, ORE, and ElementsGr2 ontologies",
             "kg": {
@@ -1845,7 +1845,7 @@
         },
         "validation": "TD2, Limaye, Wikipedia (a GS constructed by the authors created by extracting the hyperlinks of existing Wikipedia tables to Wikipedia pages, which we have replaced with annotations to the corresponding entities from the October 2015 version of DBpedia.) Since the header rows in Wikipedia tables are not linked to properties, our gold standard does not contain schema-level mappings.",
         "code-availability": "http://www.cs.toronto.edu/~oktie/webtables/",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Web tables",
             "kg": {
@@ -2077,7 +2077,7 @@
         },
         "validation": "",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Tables",
             "kg": {
@@ -2135,7 +2135,7 @@
         },
         "validation": "TabEL",
         "code-availability": "https://github.com/iai-group/www2018-table",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "",
             "kg": {
@@ -2243,13 +2243,13 @@
                 "candidate-generation": "lookup",
                 "entity-disambiguation": "features, contextual inf"
             },
-            "nil-annotation": "ColNet is a framework that utilizes a KB, word representations and machine learning to automatically train prediction models for annotating types of entity columns that are assumed to have no metadata.. It first embeds the overall semantics of columns into vector space and then predicts their types with a set of candidate KB classes, using machine learning techniques like Convolutional Neural Networks (CNNs) and an ensemble of results from lookup. To automatically train robust prediction models, we use the cells to retrieve the candidate KB classes, infer their entities to construct training samples, and deal with the challenge of sample shortage using transfer learning. In summary, this study contributes a more accurate column type annotation framework by combining knowledge lookup and machine learning with the knowledge gap considered. As the framework does not assume any table metadata or table structure, it can be applied to not only web tables but also general tabular data. The study also provides a general approach that embeds the overall semantics of a column where the correlation between cells is incorporated."
+            "nil-annotation": "ColNet is a framework that utilizes a KB, word representations and machine learning to automatically train prediction models for annotating types of entity columns that are assumed to have no metadata.. It first embeds the overall semantics of columns into vector space and then predicts their types with a set of candidate KB classes, using machine learning techniques like Convolutional Neural Networks (CNNs) and an ensemble of results from lookup. To automatically train robust prediction models, we use the cells to retrieve the candidate KB classes, infer their entities to construct training samples, and deal with the challenge of sample shortage using transfer learning. In summary, this study contributes a more accurate column type annotation framework by combining knowledge lookup and machine learning with the knowledge gap considered. As the framework does not assume any table metadata or table structure, it can be applied to not only Web tables but also general tabular data. The study also provides a general approach that embeds the overall semantics of a column where the correlation between cells is incorporated."
         },
         "user-revision": {
             "type": "none",
             "description": ""
         },
-        "validation": "The method is evaluated with DBpedia and two different web table datasets, T2Dv2 from the general Web and Limaye from Wikipedia pages",
+        "validation": "The method is evaluated with DBpedia and two different Web table datasets, T2Dv2 from the general Web and Limaye from Wikipedia pages",
         "code-availability": "https://github.com/alan-turing-institute/SemAIDA",
         "license": "Apache 2.0",
         "inputs": {
@@ -2487,7 +2487,7 @@
         "inputs": {
             "type-of-table": "Tables",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
+                "triple-store": "DBpedia, Wikidata",
                 "index": ""
             }
         },
@@ -2541,7 +2541,7 @@
         },
         "validation": "SemTab 2019",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Tables",
             "kg": {
@@ -2599,7 +2599,7 @@
         },
         "validation": "SemTab 2019",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "vertical relational table.",
             "kg": {
@@ -2647,7 +2647,7 @@
             "entity-linking": {
                 "description": "string similarity",
                 "candidate-generation": "lookup, custom index",
-                "entity-disambiguation": "Lehvenstein distance"
+                "entity-disambiguation": "Levenshtein distance"
             },
             "nil-annotation": "the matching process can start by matching the data against the ElasticSearch index. When several matches are returned from the matching process, additional measures are employed to score the relevance of each match to the query, considering the context of the data to annotate. The three main steps are calculating the similarity and frequency of properties measures, and final score weighting. This measure finds the string similarity between query words and the matched terms. Both strings are normalised, punctuation is removed, and word inside brackets are ignored. The similarity measure uses Levenshtein Distance (LD). If any extra properties, besides the labels, were indexed from the source KG, this step calculates and normalises their frequencies for each match. For example, in DBpedia, these properties can be the categories, types or even other entities linked to the matched entity via an object property. The final score of each candidate will be weighted considering the previous steps, plus the normalised ElasticSearch score for each search performed. These weights are variable and can be adjusted to fit any model, giving more or less weight to similarity, search scores, or property frequencies."
         },
@@ -2657,7 +2657,7 @@
         },
         "validation": "",
         "code-availability": "https://github.com/danielapoliveira/iswc-annotation-challenge.",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "ontology, KG and Table",
             "kg": {
@@ -2715,7 +2715,7 @@
         },
         "validation": "SemTab 2019",
         "code-availability": "https://github.com/IBCNServices/CSV2KG",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -2773,7 +2773,7 @@
         },
         "validation": "Private company dataset",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3004,7 +3004,7 @@
             "description": ""
         },
         "validation": "SemtTab 2020",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3062,7 +3062,7 @@
         },
         "validation": "SemTab 2020",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3120,7 +3120,7 @@
         },
         "validation": "SemTab 2020",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3240,7 +3240,7 @@
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
+                "triple-store": "DBpedia, Wikidata",
                 "index": "LamAPI"
             }
         },
@@ -3294,7 +3294,7 @@
         },
         "validation": "Limaye, T2D",
         "code-availability": "https://github.com/eXascaleInfolab/sds2020_web_table_annotation",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Web table",
             "kg": {
@@ -3352,7 +3352,7 @@
         },
         "validation": "T2D, Limaye",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "",
             "kg": {
@@ -3394,7 +3394,7 @@
             "subject-detection": "",
             "column-analysis": "Discriminate Columns with String, DateTime, Numerical with Unit, Numerical w/o Unit",
             "type-annotation": "Same as previous year (with improvements)",
-            "predicate-annotation": "CPA is calculated from CEA by applying a majority voting techique (the most occuring relation between two cell annotations in two columns)",
+            "predicate-annotation": "CPA is calculated from CEA by applying a majority voting technique (the most occurring relation between two cell annotations in two columns)",
             "datatype-annotation": "The method uses the column type information (string or number) during the CPA step, but specific information of how they are obtained is not provided",
             "entity-linking": {
                 "description": "Iterative {CEA, CTA, CPA} disambiguation",
@@ -3409,7 +3409,7 @@
         },
         "validation": "SemTab 2020",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3467,7 +3467,7 @@
         },
         "validation": "Limaye, Semantification, SemTab rounds from 1 to 4, T2Dv2, ISWC17",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "",
             "kg": {
@@ -3525,7 +3525,7 @@
         },
         "validation": "SemTab 2020",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3641,7 +3641,7 @@
         },
         "validation": "SemTab 2020",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3757,7 +3757,7 @@
         },
         "validation": "SemTab 2020",
         "code-availability": "https://github.com/shaliniktyagi/TabularData_to_Knowledge_graph",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3815,7 +3815,7 @@
         },
         "validation": "SemTab 2020",
         "code-availability": "https://github.com/semihyumusak/semtab_teamtr_2020",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -3935,7 +3935,7 @@
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
+                "triple-store": "DBpedia, Wikidata",
                 "index": ""
             }
         },
@@ -3993,7 +3993,7 @@
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
+                "triple-store": "DBpedia, Wikidata",
                 "index": ""
             }
         },
@@ -4051,8 +4051,8 @@
         "inputs": {
             "type-of-table": "",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
-                "index": "Lamapi"
+                "triple-store": "DBpedia, Wikidata",
+                "index": "LamAPI"
             }
         },
         "output-format": "CEA,CTA,CPA",
@@ -4105,7 +4105,7 @@
         },
         "validation": "SemTab 2021",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -4165,7 +4165,7 @@
         "code-availability": "https://github.com/nheist/CaLiGraph ",
         "license": "GPL 3.0",
         "inputs": {
-            "type-of-table": "web tables",
+            "type-of-table": "Web tables",
             "kg": {
                 "triple-store": "CaliGraph,DBpedia,Yago",
                 "index": ""
@@ -4225,7 +4225,7 @@
         "inputs": {
             "type-of-table": "CSV, TXT, XLSX",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
+                "triple-store": "DBpedia, Wikidata",
                 "index": "ElasticSearch"
             }
         },
@@ -4283,7 +4283,7 @@
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
+                "triple-store": "DBpedia, Wikidata",
                 "index": "Custom BM25"
             }
         },
@@ -4395,7 +4395,7 @@
         },
         "validation": "custom dataset music domain",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "",
             "kg": {
@@ -4453,7 +4453,7 @@
         },
         "validation": "SemTab 2021",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
@@ -4511,7 +4511,7 @@
         },
         "validation": "custom dataset",
         "code-availability": "",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "",
             "kg": {
@@ -4573,7 +4573,7 @@
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
+                "triple-store": "DBpedia, Wikidata",
                 "index": ""
             }
         },
@@ -4631,7 +4631,7 @@
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
+                "triple-store": "DBpedia, Wikidata",
                 "index": "ElasticSearch"
             }
         },
@@ -4667,15 +4667,15 @@
                 "spell-checker": "",
                 "units-of-measurements": ""
             },
-            "subject-detection": "The S-column is identified in a non determinant way for the final annotation, but ir can positively influence the execution time. ",
+            "subject-detection": "The S-column is identified in a non deterministic way for the final annotation, but it can positively influence the execution time. ",
             "column-analysis": "Columns are classified as either subject (S-), named entity (NE-) or literal (LIT-) column in a preprocessing step. Cells from NE-columns are extracted to generate a set of potential candidates for the entity retrieval step.",
-            "type-annotation": "CTA performed by iterating the cell annotation over all the cells in the given column. A dictionary with the frequency of all the classes of the winning entities obtained in the previous step is created; the type with the maximum frequency will be select1ed as an annotation for the column under analysis.",
-            "predicate-annotation": "Most information for CPA is collcted during the CEA phase through LamAPI. A dictionary for every colomn containing all the winning properties and related frequencies is created and than the most frequent property is selected for CPA.",
+            "type-annotation": "CTA performed by iterating the cell annotation over all the cells in the given column. A dictionary with the frequency of all the classes of the winning entities obtained in the previous step is created; the type with the maximum frequency will be selected as an annotation for the column under analysis.",
+            "predicate-annotation": "Most information for CPA is collected during the CEA phase through LamAPI. A dictionary for every colomn containing all the winning properties and related frequencies is created and than the most frequent property is selected for CPA.",
             "datatype-annotation": "Datatypes are attributed during the preprocessing step for LIT columns",
             "entity-linking": {
                 "description": "EL, thus entity retrieval and disambiguation, is performed with LamAPI.",
                 "candidate-generation": "lookup, custom index",
-                "entity-disambiguation": "features, similarity, contextual inf"
+                "entity-disambiguation": "features, similarity, contextual information"
             },
             "nil-annotation": ""
         },
@@ -4689,8 +4689,8 @@
         "inputs": {
             "type-of-table": "CSV,JSON",
             "kg": {
-                "triple-store": "DBpedia,Wikidata",
-                "index": "Lamapi"
+                "triple-store": "DBpedia, Wikidata",
+                "index": "LamAPI"
             }
         },
         "output-format": "CEA,CTA,CPA",
@@ -4745,7 +4745,7 @@
         "code-availability": "https://github.com/sunlab-osu/TURL",
         "license": "Apache 2.0",
         "inputs": {
-            "type-of-table": "web tables",
+            "type-of-table": "Web tables",
             "kg": {
                 "triple-store": "Freebase, Wikidata, DBpedia",
                 "index": ""
@@ -4849,7 +4849,7 @@
             "entity-linking": {
                 "description": "Two stage approach consisting of: lookup step ad entity scoring step (DAGOBAH 2021 improved). The algorithm employs also the Entity Disambiguation by Reading Entity Descriptions",
                 "candidate-generation": "Elasticsearch ",
-                "entity-disambiguation": "BERT (the system uses entities description and teable headers)"
+                "entity-disambiguation": "BERT (the system uses entities description and table headers)"
             },
             "nil-annotation": ""
         },
@@ -4863,7 +4863,7 @@
         "inputs": {
             "type-of-table": "CSV",
             "kg": {
-                "triple-store": "DBpedia,Wikidata, Schema.org",
+                "triple-store": "DBpedia, Wikidata, Schema.org",
                 "index": "ElasticSearch"
             }
         },
@@ -5091,7 +5091,7 @@
         },
         "validation": "TURL Dataset",
         "code-availability": "https://github.com/OSU-NLP-Group/TableLlama",
-        "license": "NotSpecified",
+        "license": "Not specified",
         "inputs": {
             "type-of-table": "Efthymiou, Limaye, Sherlock, T2D",
             "kg": {

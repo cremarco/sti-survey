@@ -927,25 +927,21 @@ function App() {
                   <div className="text-2xl font-bold text-blue-100">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</div>
                   <div className="text-xs text-blue-300">Year Range</div>
                 </div>
-                <div className="bg-emerald-500/10 p-3 rounded-lg border border-emerald-500/20">
-                  <div className="text-2xl font-bold text-emerald-100">{summaryStats.approachesWithCode}</div>
-                  <div className="text-xs text-emerald-300">Code Available</div>
+                <div className="bg-rose-500/10 p-3 rounded-lg border border-rose-500/20">
+                  <div className="text-2xl font-bold text-rose-100">{summaryStats.taskCounts.cta}</div>
+                  <div className="text-xs text-rose-300">CTA</div>
                 </div>
-                <div className="bg-red-500/10 p-3 rounded-lg border border-red-500/20">
-                  <div className="text-2xl font-bold text-red-100">{summaryStats.entriesWithMissingFields}</div>
-                  <div className="text-xs text-red-300">Missing Data</div>
+                <div className="bg-orange-500/10 p-3 rounded-lg border border-orange-500/20">
+                  <div className="text-2xl font-bold text-orange-100">{summaryStats.taskCounts.cpa}</div>
+                  <div className="text-xs text-orange-300">CPA</div>
                 </div>
-                <div className="bg-indigo-500/10 p-3 rounded-lg border border-indigo-500/20">
-                  <div className="text-2xl font-bold text-indigo-100">
-                    {Object.keys(summaryStats.mainMethodTypeDistribution).length}
-                  </div>
-                  <div className="text-xs text-indigo-300">Method Types</div>
+                <div className="bg-amber-500/10 p-3 rounded-lg border border-amber-500/20">
+                  <div className="text-2xl font-bold text-amber-100">{summaryStats.taskCounts.cea}</div>
+                  <div className="text-xs text-amber-300">CEA</div>
                 </div>
-                <div className="bg-purple-500/10 p-3 rounded-lg border border-purple-500/20">
-                  <div className="text-2xl font-bold text-purple-100">
-                    {Object.keys(summaryStats.domainDistribution).length}
-                  </div>
-                  <div className="text-xs text-purple-300">Domains</div>
+                <div className="bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/20">
+                  <div className="text-2xl font-bold text-yellow-100">{summaryStats.taskCounts.cnea}</div>
+                  <div className="text-xs text-yellow-300">CNEA</div>
                 </div>
               </div>
             )}
