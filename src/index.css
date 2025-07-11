@@ -108,25 +108,16 @@ body {
   border-color: #ef4444;
 }
 
-@keyframes subtle-border-pulse {
-  0% {
-    border-color: #fca5a5; /* red-300 */
-    box-shadow: 0 0 0 0 #fca5a540;
-  }
-  50% {
-    border-color: #f87171; /* red-400 */
-    box-shadow: 0 0 6px 2px #fca5a580;
-  }
-  100% {
-    border-color: #fca5a5;
-    box-shadow: 0 0 0 0 #fca5a540;
-  }
+@keyframes border-gradient {
+  0% { border-color: #ef4444; }
+  50% { border-color: #b91c1c; }
+  100% { border-color: #ef4444; }
 }
 
 .subtle-animated-border {
-  border-width: 1.5px;
+  border-width: 2px;
   border-style: solid;
-  border-color: #fca5a5;
-  animation: subtle-border-pulse 2s infinite ease-in-out;
+  border-color: #ef4444;
+  animation: border-gradient 2s linear infinite;
   transition: border-color 0.3s;
 }
