@@ -384,7 +384,7 @@ function App() {
                 className="text-blue-400 hover:text-blue-300 transition-colors"
                 title="Open link"
               >
-                <span className="material-icons-outlined text-sm">launch</span>
+                <span className="material-icons-round text-sm">launch</span>
               </a>
             )}
           </div>
@@ -625,7 +625,7 @@ function App() {
             className="inline-flex items-center justify-center text-blue-400 hover:text-blue-200"
             title="Open code link"
           >
-            <span className="material-icons-outlined">launch</span>
+            <span className="material-icons-round">launch</span>
           </a>
         );
       },
@@ -1003,7 +1003,7 @@ function App() {
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main Method Types */}
-            <div className="bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 rounded-lg border border-indigo-500/20">
+            <div className="bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-indigo-300 font-semibold text-lg">Main Method Types</span>
                 <span className="material-icons-round text-indigo-400">category</span>
@@ -1029,7 +1029,7 @@ function App() {
             </div>
 
             {/* Domains */}
-            <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 rounded-lg border border-purple-500/20">
+            <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 border border-purple-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-purple-300 font-semibold text-lg">Domains</span>
                 <span className="material-icons-round text-purple-400">public</span>
@@ -1055,7 +1055,7 @@ function App() {
             </div>
 
             {/* Tasks Addressed */}
-            <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 rounded-lg border border-rose-500/20">
+            <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 border border-rose-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-rose-300 font-semibold text-lg">Tasks Addressed</span>
                 <span className="material-icons-round text-rose-400">assignment</span>
@@ -1079,7 +1079,7 @@ function App() {
             </div>
 
             {/* Steps Coverage */}
-            <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 rounded-lg border border-green-500/20">
+            <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 border border-green-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-green-300 font-semibold text-lg">Steps Coverage</span>
                 <span className="material-icons-round text-green-400">layers</span>
@@ -1105,7 +1105,7 @@ function App() {
             </div>
 
             {/* User Revision */}
-            <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 rounded-lg border border-teal-500/20">
+            <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 border border-teal-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-teal-300 font-semibold text-lg">User Revision</span>
                 <span className="material-icons-round text-teal-400">edit</span>
@@ -1131,7 +1131,7 @@ function App() {
             </div>
 
             {/* Licenses */}
-            <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 rounded-lg border border-amber-500/20">
+            <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-amber-300 font-semibold text-lg">Licenses</span>
                 <span className="material-icons-round text-amber-400">gavel</span>
