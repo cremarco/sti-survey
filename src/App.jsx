@@ -9,6 +9,7 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import * as d3 from "d3";
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -212,6 +213,100 @@ const getUserRevisionBadgeColor = (type) => {
 };
 
 /**
+ * Stacked Bar Chart Component for Main Method Distribution by Year
+ */
+const MainMethodStackedChart = ({ data }) => {
+  const svgRef = useRef();
+  const wrapperRef = useRef();
+
+  // Colori Tailwind coerenti con le barre
+  const methodTypes = ['unsup', 'sup', 'hybrid'];
+  const legendColors = {
+    unsup: 'bg-indigo-500',
+    sup: 'bg-orange-400',
+    hybrid: 'bg-violet-400',
+  };
+
+  useEffect(() => {
+    if (!data || data.length === 0) return;
+    const validData = data.filter(d => d.year && typeof d.year === 'number' && d['main-method']?.type);
+    if (validData.length === 0) return;
+
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    const rect = wrapper.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    // Margini per assi visibili e spazio sopra
+    const margin = { top: 24, right: 0, bottom: 36, left: 36 };
+    const years = [...new Set(validData.map(d => d.year))].sort();
+    const chartData = years.map(year => {
+      const yearData = validData.filter(d => d.year === year);
+      const counts = {};
+      methodTypes.forEach(type => {
+        counts[type] = yearData.filter(d => d['main-method']?.type?.toLowerCase() === type.toLowerCase()).length;
+      });
+      return { year, ...counts };
+    }).filter(d => d.unsup > 0 || d.sup > 0 || d.hybrid > 0);
+
+    d3.select(svgRef.current).selectAll("*").remove();
+    const svg = d3.select(svgRef.current)
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const chartW = width - margin.left - margin.right;
+    const chartH = height - margin.top - margin.bottom;
+    const x = d3.scaleBand()
+      .domain(years)
+      .range([0, chartW])
+      .padding(0.1);
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(chartData, d => d.unsup + d.sup + d.hybrid)])
+      .range([chartH, 0]);
+    const color = d3.scaleOrdinal()
+      .domain(methodTypes)
+      .range(['#6366f1', '#f59e42', '#a78bfa']);
+    const stack = d3.stack().keys(methodTypes);
+    const series = stack(chartData);
+
+    svg.append("g")
+      .selectAll("g")
+      .data(series)
+      .join("g")
+      .attr("fill", d => color(d.key))
+      .selectAll("rect")
+      .data(d => d)
+      .join("rect")
+      .attr("x", d => x(d.data.year))
+      .attr("y", d => y(d[1]))
+      .attr("height", d => y(d[0]) - y(d[1]))
+      .attr("width", x.bandwidth())
+      .attr("rx", 2);
+
+    // Visualizza assi
+    svg.append("g")
+      .attr("transform", `translate(0,${chartH})`)
+      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .call(g => g.selectAll("text").style("fill", "#a5b4fc").style("font-size", "13px"))
+      .call(g => g.selectAll("path, line").style("stroke", "#a5b4fc"));
+    svg.append("g")
+      .call(d3.axisLeft(y).ticks(5))
+      .call(g => g.selectAll("text").style("fill", "#a5b4fc").style("font-size", "13px"))
+      .call(g => g.selectAll("path, line").style("stroke", "#a5b4fc"));
+  }, [data]);
+
+  // Wrapper: flex-col, justify-end per allineare il grafico in basso
+  return (
+    <div ref={wrapperRef} className="w-full h-full flex flex-col justify-end items-center relative">
+      <svg ref={svgRef} width="100%" height="100%" style={{ display: 'block' }} />
+    </div>
+  );
+};
+
+/**
  * Renders the row number with missing fields count and tooltip.
  */
 const RowNumberCell = ({ row, index }) => {
@@ -248,7 +343,9 @@ function App() {
   const [sorting, setSorting] = useState([]);
   const [showFacetFilter, setShowFacetFilter] = useState(false);
   const [showStatistics, setShowStatistics] = useState(false);
+  const [showMainMethodChart, setShowMainMethodChart] = useState(false);
   const filterRef = useRef();
+  const chartRef = useRef();
 
   // Load data on component mount
   useEffect(() => {
@@ -1001,35 +1098,101 @@ function App() {
           <div className={`transition-all duration-300 ease-in-out ${showStatistics ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
             <div className="px-6 pb-6">
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {/* Main Method Types */}
-            <div className="bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-indigo-300 font-semibold text-lg">Main Method Types</span>
-                <span className="material-icons-round text-indigo-400">category</span>
-              </div>
-              <div className="space-y-3">
-                {Object.entries(summaryStats.mainMethodTypeDistribution)
-                  .sort(([, a], [, b]) => b.count - a.count)
-                  .map(([type, data], index) => (
-                  <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-indigo-200 text-sm font-medium">{type}</span>
-                      <span className="text-indigo-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
-                    </div>
-                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-2 bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${data.percentage}%` }}
-                      ></div>
+            <div className="relative perspective-1000 h-[500px]">
+              <div 
+                className={`bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${
+                  showMainMethodChart ? 'rotate-y-180' : ''
+                }`}
+                style={{ 
+                  transformStyle: 'preserve-3d',
+                  transform: showMainMethodChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                }}
+              >
+                {/* Front side - Statistics */}
+                <div className="backface-hidden h-[500px]">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-indigo-300 font-semibold text-lg">Main Method Types</span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setShowMainMethodChart(!showMainMethodChart)}
+                        className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
+                        title={showMainMethodChart ? "Show statistics" : "Show chart"}
+                      >
+                        <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showMainMethodChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                          bar_chart
+                        </span>
+                      </button>
+                      <span className="material-icons-round text-indigo-400">category</span>
                     </div>
                   </div>
-                ))}
+                  
+                  <div className="space-y-3">
+                    {Object.entries(summaryStats.mainMethodTypeDistribution)
+                      .sort(([, a], [, b]) => b.count - a.count)
+                      .map(([type, data], index) => (
+                      <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-indigo-200 text-sm font-medium">{type}</span>
+                          <span className="text-indigo-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                        </div>
+                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                          <div 
+                            className="h-2 bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
+                            style={{ width: `${data.percentage}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Back side - Chart */}
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 backface-hidden h-[500px]"
+                  style={{ 
+                    transform: 'rotateY(180deg)',
+                    backfaceVisibility: 'hidden'
+                  }}
+                >
+                  <div className="flex flex-col h-full w-full">
+                    {/* Riga 1: Titolo e icone */}
+                    <div className="flex items-center justify-between mb-4 w-full">
+                      <span className="text-indigo-300 font-semibold text-lg">Main Method Distribution by Year</span>
+                      <div className="flex items-center gap-4">
+                        <button
+                          onClick={() => setShowMainMethodChart(!showMainMethodChart)}
+                          className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
+                          title={showMainMethodChart ? "Show statistics" : "Show chart"}
+                        >
+                          <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showMainMethodChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                            {showMainMethodChart ? 'analytics' : 'bar_chart'}
+                          </span>
+                        </button>
+                        <span className="material-icons-round text-indigo-400">{showMainMethodChart ? 'bar_chart' : 'category'}</span>
+                      </div>
+                    </div>
+                    {/* Riga 2: Legenda */}
+                    <div className="flex flex-row gap-4 mb-2 w-full justify-end">
+                      {['unsup', 'sup', 'hybrid'].map(type => (
+                        <div key={type} className="flex items-center gap-2">
+                          <span className={`inline-block w-4 h-4 rounded ${type === 'unsup' ? 'bg-indigo-500' : type === 'sup' ? 'bg-orange-400' : 'bg-violet-400'}`}></span>
+                          <span className="text-indigo-100 text-sm font-semibold" style={{letterSpacing: 1}}>{type.toUpperCase()}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {/* Riga 3: Grafico */}
+                    <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full">
+                      <MainMethodStackedChart data={data} />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Domains */}
-            <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 border border-purple-500/20">
+            <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 border border-purple-500/20 h-[500px]">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-purple-300 font-semibold text-lg">Domains</span>
                 <span className="material-icons-round text-purple-400">public</span>
@@ -1055,7 +1218,7 @@ function App() {
             </div>
 
             {/* Tasks Addressed */}
-            <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 border border-rose-500/20">
+            <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 border border-rose-500/20 h-[500px]">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-rose-300 font-semibold text-lg">Tasks Addressed</span>
                 <span className="material-icons-round text-rose-400">assignment</span>
@@ -1079,7 +1242,7 @@ function App() {
             </div>
 
             {/* Steps Coverage */}
-            <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 border border-green-500/20">
+            <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 border border-green-500/20 h-[500px]">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-green-300 font-semibold text-lg">Steps Coverage</span>
                 <span className="material-icons-round text-green-400">layers</span>
@@ -1105,7 +1268,7 @@ function App() {
             </div>
 
             {/* User Revision */}
-            <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 border border-teal-500/20">
+            <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 border border-teal-500/20 h-[500px]">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-teal-300 font-semibold text-lg">User Revision</span>
                 <span className="material-icons-round text-teal-400">edit</span>
@@ -1131,7 +1294,7 @@ function App() {
             </div>
 
             {/* Licenses */}
-            <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20">
+            <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20 h-[500px]">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-amber-300 font-semibold text-lg">Licenses</span>
                 <span className="material-icons-round text-amber-400">gavel</span>
