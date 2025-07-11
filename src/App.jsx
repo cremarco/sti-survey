@@ -265,8 +265,8 @@ const MainMethodStackedChart = ({ data }) => {
   const COLORS = ['#6366f1', '#f59e42', '#a78bfa']; // Tailwind colors: indigo-500, orange-400, violet-400
   const MARGIN = { top: 24, right: 0, bottom: 36, left: 36 };
   const AXIS_STYLES = {
-    text: { fill: "#a5b4fc", fontSize: "13px" },
-    stroke: "#a5b4fc"
+    text: { fill: "#444", fontSize: "13px" },
+    stroke: "#444" // grigio medio-scuro, ottimo contrasto su chiaro e scuro
   };
 
   // Memoized data processing for better performance
@@ -362,7 +362,7 @@ const MainMethodStackedChart = ({ data }) => {
       
       axisGroup.call(axis)
         .call(g => g.selectAll("text").style("fill", AXIS_STYLES.text.fill).style("font-size", AXIS_STYLES.text.fontSize))
-        .call(g => g.selectAll("path, line").style("stroke", AXIS_STYLES.stroke));
+        .call(g => g.selectAll("path, line").style("stroke", AXIS_STYLES.stroke).style("stroke-width", "2px"));
     };
 
     renderAxis(d3.axisBottom(xScale).tickSizeOuter(0), `translate(0,${chartHeight})`);
@@ -405,6 +405,38 @@ const RowNumberCell = ({ row, index }) => {
     </div>
   );
 };
+
+// Funzione per scaricare l'SVG
+function downloadSVG(svgElement, filename = "chart.svg") {
+  const serializer = new XMLSerializer();
+  let source = serializer.serializeToString(svgElement);
+
+  // Aggiungi l'header XML se non presente
+  if (!source.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
+    source = source.replace(
+      /^<svg/,
+      '<svg xmlns="http://www.w3.org/2000/svg"'
+    );
+  }
+  if (!source.match(/^<svg[^>]+"http:\/\/www\.w3\.org\/1999\/xlink"/)) {
+    source = source.replace(
+      /^<svg/,
+      '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
+    );
+  }
+
+  // Crea il blob e il link per il download
+  const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
 function App() {
   const [data, setData] = useState([]);
@@ -1234,7 +1266,7 @@ function App() {
                   }}
                 >
                   <div className="flex flex-col h-full w-full">
-                    {/* Riga 1: Titolo e icone */}
+                    {/* Riga 1: Titolo e icone + Bottone Scarica SVG */}
                     <div className="flex items-center justify-between mb-4 w-full">
                       <span className="text-indigo-300 font-semibold text-lg">Main Method Distribution by Year</span>
                       <div className="flex items-center gap-4">
@@ -1246,6 +1278,18 @@ function App() {
                           <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showMainMethodChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                             {showMainMethodChart ? 'analytics' : 'bar_chart'}
                           </span>
+                        </button>
+                                                {/* Bottone Scarica SVG */}
+                                                <button
+                          onClick={() => {
+                            if (chartRef?.current?.children[0]?.children[0]) {
+                              downloadSVG(chartRef.current.children[0].children[0], "main-method-chart.svg");
+                            }
+                          }}
+                          className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
+                          title="Download SVG"
+                        >
+                          <span className="material-icons-round text-lg" style={{ fontSize: '1.5rem' }}>download</span>
                         </button>
                         <span className="material-icons-round text-indigo-400">{showMainMethodChart ? 'bar_chart' : 'category'}</span>
                       </div>
@@ -1260,7 +1304,7 @@ function App() {
                       ))}
                     </div>
                     {/* Riga 3: Grafico */}
-                    <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full">
+                    <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full" ref={chartRef}>
                       <MainMethodStackedChart data={data} />
                     </div>
                   </div>
