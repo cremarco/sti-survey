@@ -949,7 +949,7 @@ function App() {
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <div className="p-4 flex-shrink-0">
         {/* Overall Data Snapshot */}
-        <div className="mb-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-lg overflow-hidden">
+        <div className="mb-6 bg-gray-800 border border-gray-700 shadow-lg overflow-hidden">
           <div className="p-6 pb-0">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-gray-100 flex items-center">
@@ -1001,77 +1001,9 @@ function App() {
           <div className={`transition-all duration-300 ease-in-out ${showStatistics ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
             <div className="px-6 pb-6">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {/* Total Approaches - Large prominent box */}
-            <div className="lg:col-span-3 bg-gradient-to-r from-slate-500/10 to-slate-600/10 p-6 rounded-lg border border-slate-500/20 hover:border-slate-500/40 transition-all duration-300 hover:scale-105">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-slate-300 font-semibold text-lg">Total Approaches</span>
-                <span className="material-icons-round text-slate-400 text-2xl">science</span>
-              </div>
-              <div className="text-4xl font-bold text-slate-100 animate-count-up mb-2">
-                {summaryStats.totalEntries}
-              </div>
-              <div className="text-sm text-slate-300">
-                surveyed approaches
-              </div>
-            </div>
-
-            {/* Key Metrics - Medium boxes */}
-            <div className="lg:col-span-3 space-y-4">
-              <div className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 p-4 rounded-lg border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-105">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-blue-300 font-semibold text-sm">Year Range</span>
-                  <span className="material-icons-round text-blue-400">schedule</span>
-                </div>
-                <div className="text-2xl font-bold text-blue-100">
-                  {summaryStats.yearRange.min} - {summaryStats.yearRange.max}
-                </div>
-              </div>
-              
-              <div className="bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 p-4 rounded-lg border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 hover:scale-105">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-emerald-300 font-semibold text-sm">Code Available</span>
-                  <span className="material-icons-round text-emerald-400">code</span>
-                </div>
-                <div className="text-2xl font-bold text-emerald-100 mb-2">
-                  {summaryStats.approachesWithCode}
-                </div>
-                <div className="text-sm text-emerald-300">
-                  {summaryStats.approachesWithCodePercentage.toFixed(1)}% of total
-                </div>
-                <div className="mt-2 h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                  <div 
-                    className="h-2 bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
-                    style={{ width: `${summaryStats.approachesWithCodePercentage}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Data Quality - Medium box */}
-            <div className="lg:col-span-3 bg-gradient-to-r from-red-500/10 to-red-600/10 p-4 rounded-lg border border-red-500/20 hover:border-red-500/40 transition-all duration-300 hover:scale-105">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-red-300 font-semibold">Data Quality</span>
-                <span className="material-icons-round text-red-400">warning</span>
-              </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-red-200 text-sm">With Missing Fields</span>
-                  <span className="text-red-100 font-bold">{summaryStats.entriesWithMissingFields}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-red-200 text-sm">Total Missing</span>
-                  <span className="text-red-100 font-bold">{summaryStats.totalMissingFields}</span>
-                </div>
-                <div className="pt-2 border-t border-red-500/20">
-                  <div className="text-red-200 text-xs">Most Missing Field:</div>
-                  <div className="text-red-100 text-sm font-medium">{summaryStats.mostMissing}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Main Method Types - Large detailed box */}
-            <div className="lg:col-span-6 bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 rounded-lg border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 hover:scale-105">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Main Method Types */}
+            <div className="bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 rounded-lg border border-indigo-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-indigo-300 font-semibold text-lg">Main Method Types</span>
                 <span className="material-icons-round text-indigo-400">category</span>
@@ -1096,8 +1028,8 @@ function App() {
               </div>
             </div>
 
-            {/* Domains - Large detailed box */}
-            <div className="lg:col-span-6 bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 rounded-lg border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:scale-105">
+            {/* Domains */}
+            <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 rounded-lg border border-purple-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-purple-300 font-semibold text-lg">Domains</span>
                 <span className="material-icons-round text-purple-400">public</span>
@@ -1122,36 +1054,10 @@ function App() {
               </div>
             </div>
 
-            {/* Licenses - Medium box */}
-            <div className="lg:col-span-4 bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 rounded-lg border border-amber-500/20 hover:border-amber-500/40 transition-all duration-300 hover:scale-105">
+            {/* Tasks Addressed */}
+            <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 rounded-lg border border-rose-500/20">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-amber-300 font-semibold">Licenses</span>
-                <span className="material-icons-round text-amber-400">gavel</span>
-              </div>
-              <div className="space-y-3">
-                {Object.entries(summaryStats.licenseDistribution)
-                  .sort(([, a], [, b]) => b.count - a.count)
-                  .map(([license, data], index) => (
-                  <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-amber-200 text-sm font-medium">{license}</span>
-                      <span className="text-amber-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
-                    </div>
-                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-2 bg-amber-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${data.percentage}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Tasks - Medium box */}
-            <div className="lg:col-span-4 bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 rounded-lg border border-rose-500/20 hover:border-rose-500/40 transition-all duration-300 hover:scale-105">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-rose-300 font-semibold">Tasks Addressed</span>
+                <span className="text-rose-300 font-semibold text-lg">Tasks Addressed</span>
                 <span className="material-icons-round text-rose-400">assignment</span>
               </div>
               <div className="space-y-3">
@@ -1172,34 +1078,8 @@ function App() {
               </div>
             </div>
 
-            {/* User Revision - Medium box */}
-            <div className="lg:col-span-4 bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 rounded-lg border border-teal-500/20 hover:border-teal-500/40 transition-all duration-300 hover:scale-105">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-teal-300 font-semibold">User Revision</span>
-                <span className="material-icons-round text-teal-400">edit</span>
-              </div>
-              <div className="space-y-3">
-                {Object.entries(summaryStats.userRevisionDistribution)
-                  .sort(([, a], [, b]) => b - a)
-                  .map(([type, count], index) => (
-                  <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-teal-200 text-sm font-medium">{type}</span>
-                      <span className="text-teal-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
-                    </div>
-                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-2 bg-teal-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Steps Coverage - Large box */}
-            <div className="lg:col-span-6 bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all duration-300 hover:scale-105">
+            {/* Steps Coverage */}
+            <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 rounded-lg border border-green-500/20">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-green-300 font-semibold text-lg">Steps Coverage</span>
                 <span className="material-icons-round text-green-400">layers</span>
@@ -1224,51 +1104,55 @@ function App() {
               </div>
             </div>
 
-            {/* Knowledge Graph Usage - Medium box */}
-            <div className="lg:col-span-3 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 p-4 rounded-lg border border-yellow-500/20 hover:border-yellow-500/40 transition-all duration-300 hover:scale-105">
+            {/* User Revision */}
+            <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 rounded-lg border border-teal-500/20">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-yellow-300 font-semibold">KG Usage</span>
-                <span className="material-icons-round text-yellow-400">account_tree</span>
+                <span className="text-teal-300 font-semibold text-lg">User Revision</span>
+                <span className="material-icons-round text-teal-400">edit</span>
               </div>
               <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-yellow-200 text-sm">With Triple Store</span>
-                  <span className="text-yellow-100 font-bold">{summaryStats.kgUsage.withTripleStore}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-yellow-200 text-sm">With Index</span>
-                  <span className="text-yellow-100 font-bold">{summaryStats.kgUsage.withIndex}</span>
-                </div>
-                <div className="pt-2 border-t border-yellow-500/20">
-                  <div className="text-yellow-200 text-xs">Triple Store Coverage:</div>
-                  <div className="text-yellow-100 text-sm font-medium">{((summaryStats.kgUsage.withTripleStore / summaryStats.kgUsage.total) * 100).toFixed(1)}%</div>
-                </div>
+                {Object.entries(summaryStats.userRevisionDistribution)
+                  .sort(([, a], [, b]) => b - a)
+                  .map(([type, count], index) => (
+                  <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-teal-200 text-sm font-medium">{type}</span>
+                      <span className="text-teal-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
+                    </div>
+                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-2 bg-teal-500 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Author Verification - Medium box */}
-            <div className="lg:col-span-3 bg-gradient-to-r from-fuchsia-500/10 to-fuchsia-600/10 p-4 rounded-lg border border-fuchsia-500/20 hover:border-fuchsia-500/40 transition-all duration-300 hover:scale-105">
+            {/* Licenses */}
+            <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 rounded-lg border border-amber-500/20">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-fuchsia-300 font-semibold">Author Verification</span>
-                <span className="material-icons-round text-fuchsia-400">verified_user</span>
+                <span className="text-amber-300 font-semibold text-lg">Licenses</span>
+                <span className="material-icons-round text-amber-400">gavel</span>
               </div>
               <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-fuchsia-200 text-sm">Verified</span>
-                  <span className="text-fuchsia-100 font-bold">{summaryStats.authorVerification.verified}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-fuchsia-200 text-sm">Not Verified</span>
-                  <span className="text-fuchsia-100 font-bold">{summaryStats.authorVerification.notVerified}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-fuchsia-200 text-sm">Missing</span>
-                  <span className="text-fuchsia-100 font-bold">{summaryStats.authorVerification.missing}</span>
-                </div>
-                <div className="pt-2 border-t border-fuchsia-500/20">
-                  <div className="text-fuchsia-200 text-xs">Verification Rate:</div>
-                  <div className="text-fuchsia-100 text-sm font-medium">{((summaryStats.authorVerification.verified / summaryStats.totalEntries) * 100).toFixed(1)}%</div>
-                </div>
+                {Object.entries(summaryStats.licenseDistribution)
+                  .sort(([, a], [, b]) => b.count - a.count)
+                  .map(([license, data], index) => (
+                  <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-amber-200 text-sm font-medium">{license}</span>
+                      <span className="text-amber-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                    </div>
+                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-2 bg-amber-500 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${data.percentage}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
