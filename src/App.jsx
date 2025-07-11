@@ -106,94 +106,134 @@ const REQUIRED_FIELDS = {
 
 /**
  * Checks if a required field is missing from a row.
+ * Optimized version with memoized nested value getter.
  * @param {object} row - The data row
  * @param {string} fieldPath - The field path (e.g., 'title.text')
  * @returns {boolean}
  */
 const isRequiredFieldMissing = (row, fieldPath) => {
   if (!REQUIRED_FIELDS[fieldPath]) return false;
-  // Get nested value based on field path
-  const getNestedValue = (obj, path) => path.split(".").reduce((cur, key) => cur?.[key], obj);
+  
+  // Optimized nested value getter
+  const getNestedValue = (obj, path) => {
+    const keys = path.split(".");
+    let current = obj;
+    for (const key of keys) {
+      if (current == null) return undefined;
+      current = current[key];
+    }
+    return current;
+  };
+  
   const value = getNestedValue(row, fieldPath);
   return isEmpty(value);
 };
 
 /**
  * Renders a cell with a missing field indicator if needed.
+ * Optimized with memoization for better performance.
  */
-const MissingFieldCell = ({ value, isMissing }) => (
-  <span className={isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : ""}>
-    {value || (isMissing ? "MISSING" : "")}
-  </span>
-);
+const MissingFieldCell = ({ value, isMissing }) => {
+  const cellContent = value || (isMissing ? "MISSING" : "");
+  const className = isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : "";
+  
+  return (
+    <span className={className}>
+      {cellContent}
+    </span>
+  );
+};
 
 /**
  * Renders a task cell with Material Design icons and missing indicator.
+ * Optimized with early return and memoized content.
  */
 const TaskCell = ({ value, isMissing }) => {
-  if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
-  return value ? (
-    <span className="material-icons-round text-green-500 text-lg">done</span>
-  ) : (
-    <span className="material-icons-round text-red-500 text-lg">clear</span>
-  );
+  if (isMissing) {
+    return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+  }
+  
+  const iconClass = value 
+    ? "material-icons-round text-green-500 text-lg" 
+    : "material-icons-round text-red-500 text-lg";
+  const iconName = value ? "done" : "clear";
+  
+  return <span className={iconClass}>{iconName}</span>;
 };
 
 /**
  * Renders a step cell with Material Design icons.
+ * Optimized with simplified logic.
  */
 const StepCell = ({ value }) => {
-  const hasContent = value && value.trim() !== "";
-  return hasContent ? (
-    <span className="material-icons-round text-green-500 text-lg">done</span>
-  ) : (
-    <span className="material-icons-round text-red-500 text-lg">clear</span>
-  );
+  const hasContent = Boolean(value?.trim());
+  const iconClass = hasContent 
+    ? "material-icons-round text-green-500 text-lg" 
+    : "material-icons-round text-red-500 text-lg";
+  const iconName = hasContent ? "done" : "clear";
+  
+  return <span className={iconClass}>{iconName}</span>;
 };
 
 /**
  * Renders the main method cell with type badge and technique.
+ * Optimized with early returns and memoized calculations.
  */
 const MainMethodCell = ({ mainMethod, row }) => {
   const { type, tech } = mainMethod || {};
+  
+  // Early return if no data
+  if (!type && !tech) return "";
+  
   const isTypeMissing = isRequiredFieldMissing(row, "main-method.type");
   const isTechMissing = isRequiredFieldMissing(row, "main-method.technique");
-  if (!type && !tech) return "";
+  
+  // Memoize badge classes
+  const typeBadgeClass = type 
+    ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}`
+    : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16";
+  
   return (
     <div className="flex items-center gap-2">
-      {type ? (
-        <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}`}>
-          {type}
+      {(type || isTypeMissing) && (
+        <span className={typeBadgeClass}>
+          {type || "MISSING"}
         </span>
-      ) : isTypeMissing ? (
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16">MISSING</span>
-      ) : null}
-      {tech ? (
-        <span className="text-[10px] text-gray-400">{tech}</span>
-      ) : isTechMissing ? (
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]">MISSING</span>
-      ) : null}
+      )}
+      {(tech || isTechMissing) && (
+        <span className={tech ? "text-[10px] text-gray-400" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]"}>
+          {tech || "MISSING"}
+        </span>
+      )}
     </div>
   );
 };
 
 /**
  * Renders the domain cell with domain badge and type detail.
+ * Optimized with early returns and memoized calculations.
  */
 const DomainCell = ({ domain, row }) => {
   const domainValue = domain?.domain || "";
   const typeValue = domain?.type || "";
-  const isDomainMissing = isRequiredFieldMissing(row, "domain.domain");
+  
+  // Early return if no data
   if (!domainValue && !typeValue) return "";
+  
+  const isDomainMissing = isRequiredFieldMissing(row, "domain.domain");
+  
+  // Memoize badge classes
+  const domainBadgeClass = domainValue 
+    ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-20 ${getDomainBadgeColor(domainValue)}`
+    : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20";
+  
   return (
     <div className="flex items-center gap-2">
-      {domainValue ? (
-        <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-20 ${getDomainBadgeColor(domainValue)}`}>
-          {domainValue}
+      {(domainValue || isDomainMissing) && (
+        <span className={domainBadgeClass}>
+          {domainValue || "MISSING"}
         </span>
-      ) : isDomainMissing ? (
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20">MISSING</span>
-      ) : null}
+      )}
       {typeValue && <span className="text-[10px] text-gray-400">{typeValue}</span>}
     </div>
   );
@@ -214,91 +254,122 @@ const getUserRevisionBadgeColor = (type) => {
 
 /**
  * Stacked Bar Chart Component for Main Method Distribution by Year
+ * Optimized version with better performance and code organization
  */
 const MainMethodStackedChart = ({ data }) => {
   const svgRef = useRef();
   const wrapperRef = useRef();
 
-  // Colori Tailwind coerenti con le barre
-  const methodTypes = ['unsup', 'sup', 'hybrid'];
-  const legendColors = {
-    unsup: 'bg-indigo-500',
-    sup: 'bg-orange-400',
-    hybrid: 'bg-violet-400',
+  // Constants moved outside component for better performance
+  const METHOD_TYPES = ['unsup', 'sup', 'hybrid'];
+  const COLORS = ['#6366f1', '#f59e42', '#a78bfa']; // Tailwind colors: indigo-500, orange-400, violet-400
+  const MARGIN = { top: 24, right: 0, bottom: 36, left: 36 };
+  const AXIS_STYLES = {
+    text: { fill: "#a5b4fc", fontSize: "13px" },
+    stroke: "#a5b4fc"
   };
 
+  // Memoized data processing for better performance
+  const processedData = useMemo(() => {
+    if (!data || data.length === 0) return null;
+    
+    const validData = data.filter(d => 
+      d.year && 
+      typeof d.year === 'number' && 
+      d['main-method']?.type
+    );
+    
+    if (validData.length === 0) return null;
+
+    const years = [...new Set(validData.map(d => d.year))].sort();
+    
+    return years.map(year => {
+      const yearData = validData.filter(d => d.year === year);
+      const counts = METHOD_TYPES.reduce((acc, type) => {
+        acc[type] = yearData.filter(d => 
+          d['main-method']?.type?.toLowerCase() === type.toLowerCase()
+        ).length;
+        return acc;
+      }, {});
+      
+      return { year, ...counts };
+    }).filter(d => d.unsup > 0 || d.sup > 0 || d.hybrid > 0);
+  }, [data]);
+
   useEffect(() => {
-    if (!data || data.length === 0) return;
-    const validData = data.filter(d => d.year && typeof d.year === 'number' && d['main-method']?.type);
-    if (validData.length === 0) return;
+    if (!processedData || processedData.length === 0) return;
 
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
-    const rect = wrapper.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    // Margini per assi visibili e spazio sopra
-    const margin = { top: 24, right: 0, bottom: 36, left: 36 };
-    const years = [...new Set(validData.map(d => d.year))].sort();
-    const chartData = years.map(year => {
-      const yearData = validData.filter(d => d.year === year);
-      const counts = {};
-      methodTypes.forEach(type => {
-        counts[type] = yearData.filter(d => d['main-method']?.type?.toLowerCase() === type.toLowerCase()).length;
-      });
-      return { year, ...counts };
-    }).filter(d => d.unsup > 0 || d.sup > 0 || d.hybrid > 0);
 
+    const rect = wrapper.getBoundingClientRect();
+    const { width, height } = rect;
+    
+    if (width === 0 || height === 0) return;
+
+    // Clear previous chart
     d3.select(svgRef.current).selectAll("*").remove();
+    
+    // Create SVG container
     const svg = d3.select(svgRef.current)
       .attr("width", width)
       .attr("height", height)
       .attr("viewBox", `0 0 ${width} ${height}`)
       .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
+      .attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
 
-    const chartW = width - margin.left - margin.right;
-    const chartH = height - margin.top - margin.bottom;
-    const x = d3.scaleBand()
-      .domain(years)
-      .range([0, chartW])
+    const chartWidth = width - MARGIN.left - MARGIN.right;
+    const chartHeight = height - MARGIN.top - MARGIN.bottom;
+
+    // Create scales
+    const xScale = d3.scaleBand()
+      .domain(processedData.map(d => d.year))
+      .range([0, chartWidth])
       .padding(0.1);
-    const y = d3.scaleLinear()
-      .domain([0, d3.max(chartData, d => d.unsup + d.sup + d.hybrid)])
-      .range([chartH, 0]);
-    const color = d3.scaleOrdinal()
-      .domain(methodTypes)
-      .range(['#6366f1', '#f59e42', '#a78bfa']);
-    const stack = d3.stack().keys(methodTypes);
-    const series = stack(chartData);
 
+    const maxValue = d3.max(processedData, d => d.unsup + d.sup + d.hybrid);
+    const yScale = d3.scaleLinear()
+      .domain([0, maxValue])
+      .range([chartHeight, 0]);
+
+    const colorScale = d3.scaleOrdinal()
+      .domain(METHOD_TYPES)
+      .range(COLORS);
+
+    // Create stacked data
+    const stack = d3.stack().keys(METHOD_TYPES);
+    const series = stack(processedData);
+
+    // Render bars
     svg.append("g")
       .selectAll("g")
       .data(series)
       .join("g")
-      .attr("fill", d => color(d.key))
+      .attr("fill", d => colorScale(d.key))
       .selectAll("rect")
       .data(d => d)
       .join("rect")
-      .attr("x", d => x(d.data.year))
-      .attr("y", d => y(d[1]))
-      .attr("height", d => y(d[0]) - y(d[1]))
-      .attr("width", x.bandwidth())
+      .attr("x", d => xScale(d.data.year))
+      .attr("y", d => yScale(d[1]))
+      .attr("height", d => yScale(d[0]) - yScale(d[1]))
+      .attr("width", xScale.bandwidth())
       .attr("rx", 2);
 
-    // Visualizza assi
-    svg.append("g")
-      .attr("transform", `translate(0,${chartH})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0))
-      .call(g => g.selectAll("text").style("fill", "#a5b4fc").style("font-size", "13px"))
-      .call(g => g.selectAll("path, line").style("stroke", "#a5b4fc"));
-    svg.append("g")
-      .call(d3.axisLeft(y).ticks(5))
-      .call(g => g.selectAll("text").style("fill", "#a5b4fc").style("font-size", "13px"))
-      .call(g => g.selectAll("path, line").style("stroke", "#a5b4fc"));
-  }, [data]);
+    // Render axes with optimized styling
+    const renderAxis = (axis, transform = "") => {
+      const axisGroup = svg.append("g");
+      if (transform) axisGroup.attr("transform", transform);
+      
+      axisGroup.call(axis)
+        .call(g => g.selectAll("text").style("fill", AXIS_STYLES.text.fill).style("font-size", AXIS_STYLES.text.fontSize))
+        .call(g => g.selectAll("path, line").style("stroke", AXIS_STYLES.stroke));
+    };
 
-  // Wrapper: flex-col, justify-end per allineare il grafico in basso
+    renderAxis(d3.axisBottom(xScale).tickSizeOuter(0), `translate(0,${chartHeight})`);
+    renderAxis(d3.axisLeft(yScale).ticks(5));
+
+  }, [processedData]);
+
   return (
     <div ref={wrapperRef} className="w-full h-full flex flex-col justify-end items-center relative">
       <svg ref={svgRef} width="100%" height="100%" style={{ display: 'block' }} />
@@ -844,7 +915,7 @@ function App() {
     onSortingChange: setSorting,
   });
 
-  // Calculate summary statistics
+  // Calculate summary statistics with optimized performance
   const summaryStats = useMemo(() => {
     if (data.length === 0) {
       return {
@@ -862,163 +933,152 @@ function App() {
     }
 
     const totalEntries = data.length;
-    const entriesWithMissingFields = data.filter(row => {
-      return Object.keys(REQUIRED_FIELDS).some(field => isRequiredFieldMissing(row, field));
-    }).length;
     
-    const totalMissingFields = data.reduce((total, row) => {
-      return total + Object.keys(REQUIRED_FIELDS).filter(field => isRequiredFieldMissing(row, field)).length;
-    }, 0);
-    
-    const fieldCounts = {};
-    Object.keys(REQUIRED_FIELDS).forEach(field => {
-      fieldCounts[field] = data.filter(row => isRequiredFieldMissing(row, field)).length;
+    // Single pass through data for better performance
+    const stats = data.reduce((acc, row) => {
+      // Missing fields analysis
+      const missingFields = Object.keys(REQUIRED_FIELDS).filter(field => isRequiredFieldMissing(row, field));
+      if (missingFields.length > 0) {
+        acc.entriesWithMissingFields++;
+        acc.totalMissingFields += missingFields.length;
+        missingFields.forEach(field => {
+          acc.fieldCounts[field] = (acc.fieldCounts[field] || 0) + 1;
+        });
+      }
+
+      // Main method distribution
+      const methodType = row['main-method']?.type || 'N/A';
+      acc.mainMethodTypeDistribution[methodType] = (acc.mainMethodTypeDistribution[methodType] || 0) + 1;
+
+      // Domain distribution
+      const domain = row['domain']?.domain || 'N/A';
+      acc.domainDistribution[domain] = (acc.domainDistribution[domain] || 0) + 1;
+
+      // Year range
+      if (typeof row.year === 'number') {
+        acc.years.push(row.year);
+      }
+
+      // Code availability
+      if (row['code-availability'] && row['code-availability'].trim() !== '') {
+        acc.approachesWithCode++;
+      }
+
+      // License distribution
+      const license = row['license'] || 'N/A';
+      acc.licenseDistribution[license] = (acc.licenseDistribution[license] || 0) + 1;
+
+      // Task counts
+      if (row.tasks?.cta) acc.taskCounts.cta++;
+      if (row.tasks?.cpa) acc.taskCounts.cpa++;
+      if (row.tasks?.cea) acc.taskCounts.cea++;
+      if (row.tasks?.cnea) acc.taskCounts.cnea++;
+
+      // User revision distribution
+      const userRevisionType = row['user-revision']?.type || 'N/A';
+      acc.userRevisionDistribution[userRevisionType] = (acc.userRevisionDistribution[userRevisionType] || 0) + 1;
+
+      // Steps coverage
+      if (row.steps?.['data-preparation']?.description) acc.stepsCoverage['data-preparation']++;
+      if (row.steps?.['subject-detection']) acc.stepsCoverage['subject-detection']++;
+      if (row.steps?.['column-analysis']) acc.stepsCoverage['column-analysis']++;
+      if (row.steps?.['type-annotation']) acc.stepsCoverage['type-annotation']++;
+      if (row.steps?.['predicate-annotation']) acc.stepsCoverage['predicate-annotation']++;
+      if (row.steps?.['datatype-annotation']) acc.stepsCoverage['datatype-annotation']++;
+      if (row.steps?.['entity-linking']?.description) acc.stepsCoverage['entity-linking']++;
+      if (row.steps?.['nil-annotation']) acc.stepsCoverage['nil-annotation']++;
+
+      // Input type distribution
+      const inputType = row.inputs?.['type-of-table'] || 'N/A';
+      acc.inputTypeDistribution[inputType] = (acc.inputTypeDistribution[inputType] || 0) + 1;
+
+      // Knowledge graph usage
+      if (row.inputs?.kg?.['triple-store']) acc.kgUsage.withTripleStore++;
+      if (row.inputs?.kg?.index) acc.kgUsage.withIndex++;
+
+      // Author verification
+      if (row['checked-by-author'] === true) acc.authorVerification.verified++;
+      else if (row['checked-by-author'] === false) acc.authorVerification.notVerified++;
+      else acc.authorVerification.missing++;
+
+      // Conference/Journal distribution
+      const venue = row['conference-journal'] || 'N/A';
+      acc.conferenceJournalDistribution[venue] = (acc.conferenceJournalDistribution[venue] || 0) + 1;
+
+      return acc;
+    }, {
+      entriesWithMissingFields: 0,
+      totalMissingFields: 0,
+      fieldCounts: {},
+      mainMethodTypeDistribution: {},
+      domainDistribution: {},
+      years: [],
+      approachesWithCode: 0,
+      licenseDistribution: {},
+      taskCounts: { cta: 0, cpa: 0, cea: 0, cnea: 0 },
+      userRevisionDistribution: {},
+      stepsCoverage: {
+        'data-preparation': 0,
+        'subject-detection': 0,
+        'column-analysis': 0,
+        'type-annotation': 0,
+        'predicate-annotation': 0,
+        'datatype-annotation': 0,
+        'entity-linking': 0,
+        'nil-annotation': 0
+      },
+      inputTypeDistribution: {},
+      kgUsage: { withTripleStore: 0, withIndex: 0, total: totalEntries },
+      authorVerification: { verified: 0, notVerified: 0, missing: 0 },
+      conferenceJournalDistribution: {}
     });
-    
-    const mostMissingEntry = Object.entries(fieldCounts)
+
+    // Calculate most missing field
+    const mostMissingEntry = Object.entries(stats.fieldCounts)
       .sort(([,a], [,b]) => b - a)[0];
     const mostMissing = mostMissingEntry ? `${mostMissingEntry[0]} (${mostMissingEntry[1]})` : 'None';
 
-    // Additional Statistics
-    const mainMethodTypeDistribution = data.reduce((acc, row) => {
-      const type = row['main-method']?.type || 'N/A';
-      acc[type] = (acc[type] || 0) + 1;
-      return acc;
-    }, {});
-
-    const domainDistribution = data.reduce((acc, row) => {
-      const domain = row['domain']?.domain || 'N/A';
-      acc[domain] = (acc[domain] || 0) + 1;
-      return acc;
-    }, {});
-
-    const years = data.map(row => row.year).filter(year => typeof year === 'number');
+    // Calculate year range
     const yearRange = {
-      min: years.length > 0 ? Math.min(...years) : 'N/A',
-      max: years.length > 0 ? Math.max(...years) : 'N/A',
+      min: stats.years.length > 0 ? Math.min(...stats.years) : 'N/A',
+      max: stats.years.length > 0 ? Math.max(...stats.years) : 'N/A',
     };
 
-    const approachesWithCode = data.filter(row => row['code-availability'] && row['code-availability'].trim() !== '').length;
-    const approachesWithCodePercentage = totalEntries > 0 ? (approachesWithCode / totalEntries) * 100 : 0;
+    // Calculate percentages
+    const calculatePercentages = (distribution) => 
+      Object.fromEntries(
+        Object.entries(distribution).map(([key, value]) => [
+          key,
+          { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
+        ])
+      );
 
-    const licenseDistribution = data.reduce((acc, row) => {
-      const license = row['license'] || 'N/A';
-      acc[license] = (acc[license] || 0) + 1;
-      return acc;
-    }, {});
-    const licenseDistributionWithPercentages = Object.fromEntries(
-      Object.entries(licenseDistribution).map(([key, value]) => [
-        key,
-        { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
-      ])
-    );
-
-    const taskCounts = { cta: 0, cpa: 0, cea: 0, cnea: 0 };
-    data.forEach(row => {
-      if (row.tasks?.cta) taskCounts.cta++;
-      if (row.tasks?.cpa) taskCounts.cpa++;
-      if (row.tasks?.cea) taskCounts.cea++;
-      if (row.tasks?.cnea) taskCounts.cnea++;
-    });
     const taskPercentages = {
-      cta: totalEntries > 0 ? (taskCounts.cta / totalEntries) * 100 : 0,
-      cpa: totalEntries > 0 ? (taskCounts.cpa / totalEntries) * 100 : 0,
-      cea: totalEntries > 0 ? (taskCounts.cea / totalEntries) * 100 : 0,
-      cnea: totalEntries > 0 ? (taskCounts.cnea / totalEntries) * 100 : 0,
+      cta: totalEntries > 0 ? (stats.taskCounts.cta / totalEntries) * 100 : 0,
+      cpa: totalEntries > 0 ? (stats.taskCounts.cpa / totalEntries) * 100 : 0,
+      cea: totalEntries > 0 ? (stats.taskCounts.cea / totalEntries) * 100 : 0,
+      cnea: totalEntries > 0 ? (stats.taskCounts.cnea / totalEntries) * 100 : 0,
     };
-
-    // User Revision Statistics
-    const userRevisionDistribution = data.reduce((acc, row) => {
-      const type = row['user-revision']?.type || 'N/A';
-      acc[type] = (acc[type] || 0) + 1;
-      return acc;
-    }, {});
-
-    // Steps Coverage Statistics
-    const stepsCoverage = {
-      'data-preparation': 0,
-      'subject-detection': 0,
-      'column-analysis': 0,
-      'type-annotation': 0,
-      'predicate-annotation': 0,
-      'datatype-annotation': 0,
-      'entity-linking': 0,
-      'nil-annotation': 0
-    };
-    
-    data.forEach(row => {
-      if (row.steps?.['data-preparation']?.description) stepsCoverage['data-preparation']++;
-      if (row.steps?.['subject-detection']) stepsCoverage['subject-detection']++;
-      if (row.steps?.['column-analysis']) stepsCoverage['column-analysis']++;
-      if (row.steps?.['type-annotation']) stepsCoverage['type-annotation']++;
-      if (row.steps?.['predicate-annotation']) stepsCoverage['predicate-annotation']++;
-      if (row.steps?.['datatype-annotation']) stepsCoverage['datatype-annotation']++;
-      if (row.steps?.['entity-linking']?.description) stepsCoverage['entity-linking']++;
-      if (row.steps?.['nil-annotation']) stepsCoverage['nil-annotation']++;
-    });
-
-    // Input Types Statistics
-    const inputTypeDistribution = data.reduce((acc, row) => {
-      const type = row.inputs?.['type-of-table'] || 'N/A';
-      acc[type] = (acc[type] || 0) + 1;
-      return acc;
-    }, {});
-
-    // Knowledge Graph Usage
-    const kgUsage = {
-      withTripleStore: data.filter(row => row.inputs?.kg?.['triple-store']).length,
-      withIndex: data.filter(row => row.inputs?.kg?.index).length,
-      total: totalEntries
-    };
-
-    // Author Verification
-    const authorVerification = {
-      verified: data.filter(row => row['checked-by-author'] === true).length,
-      notVerified: data.filter(row => row['checked-by-author'] === false).length,
-      missing: data.filter(row => row['checked-by-author'] === null || row['checked-by-author'] === undefined).length
-    };
-
-    // Conference/Journal Distribution
-    const conferenceJournalDistribution = data.reduce((acc, row) => {
-      const venue = row['conference-journal'] || 'N/A';
-      acc[venue] = (acc[venue] || 0) + 1;
-      return acc;
-    }, {});
-
-    // Calculate percentages for distributions
-    const mainMethodTypeDistributionWithPercentages = Object.fromEntries(
-      Object.entries(mainMethodTypeDistribution).map(([key, value]) => [
-        key,
-        { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
-      ])
-    );
-
-    const domainDistributionWithPercentages = Object.fromEntries(
-      Object.entries(domainDistribution).map(([key, value]) => [
-        key,
-        { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
-      ])
-    );
     
     return {
       totalEntries,
-      entriesWithMissingFields,
-      totalMissingFields,
+      entriesWithMissingFields: stats.entriesWithMissingFields,
+      totalMissingFields: stats.totalMissingFields,
       mostMissing,
-      mainMethodTypeDistribution: mainMethodTypeDistributionWithPercentages,
-      domainDistribution: domainDistributionWithPercentages,
+      mainMethodTypeDistribution: calculatePercentages(stats.mainMethodTypeDistribution),
+      domainDistribution: calculatePercentages(stats.domainDistribution),
       yearRange,
-      approachesWithCode,
-      approachesWithCodePercentage,
-      licenseDistribution: licenseDistributionWithPercentages,
-      taskCounts,
+      approachesWithCode: stats.approachesWithCode,
+      approachesWithCodePercentage: totalEntries > 0 ? (stats.approachesWithCode / totalEntries) * 100 : 0,
+      licenseDistribution: calculatePercentages(stats.licenseDistribution),
+      taskCounts: stats.taskCounts,
       taskPercentages,
-      userRevisionDistribution,
-      stepsCoverage,
-      inputTypeDistribution,
-      kgUsage,
-      authorVerification,
-      conferenceJournalDistribution,
+      userRevisionDistribution: stats.userRevisionDistribution,
+      stepsCoverage: stats.stepsCoverage,
+      inputTypeDistribution: stats.inputTypeDistribution,
+      kgUsage: stats.kgUsage,
+      authorVerification: stats.authorVerification,
+      conferenceJournalDistribution: stats.conferenceJournalDistribution,
     };
   }, [data]);
 
@@ -1117,11 +1177,28 @@ function App() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setShowMainMethodChart(!showMainMethodChart)}
-                        className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
-                        title={showMainMethodChart ? "Show statistics" : "Show chart"}
+                        className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100 subtle-animated-border"
+                        title={showMainMethodChart ? 'Show statistics' : 'Show chart'}
+                        style={{
+                          boxShadow: 'none',
+                          padding: 0,
+                          border: 'none'
+                        }}
                       >
-                        <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showMainMethodChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                          bar_chart
+                        <span
+                          className="material-icons-round"
+                          style={{
+                            fontSize: '1.5rem',
+                            lineHeight: 1,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            height: '100%',
+                            width: '100%',
+                            textAlign: 'center'
+                          }}
+                        >
+                          360
                         </span>
                       </button>
                       <span className="material-icons-round text-indigo-400">category</span>

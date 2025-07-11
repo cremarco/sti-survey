@@ -80,3 +80,53 @@ body {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+/* Glow animation for the 360 icon */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 8px #ef4444cc;
+    text-shadow: 0 0 8px #ef4444cc;
+  }
+  50% {
+    box-shadow: 0 0 20px #ef4444ee, 0 0 30px #ef444488;
+    text-shadow: 0 0 15px #ef4444, 0 0 25px #ef4444cc;
+  }
+  100% {
+    box-shadow: 0 0 8px #ef4444cc;
+    text-shadow: 0 0 8px #ef4444cc;
+  }
+}
+
+.glow-animation {
+  animation: glow 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+.animated-border {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ef4444;
+}
+
+@keyframes subtle-border-pulse {
+  0% {
+    border-color: #fca5a5; /* red-300 */
+    box-shadow: 0 0 0 0 #fca5a540;
+  }
+  50% {
+    border-color: #f87171; /* red-400 */
+    box-shadow: 0 0 6px 2px #fca5a580;
+  }
+  100% {
+    border-color: #fca5a5;
+    box-shadow: 0 0 0 0 #fca5a540;
+  }
+}
+
+.subtle-animated-border {
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: #fca5a5;
+  animation: subtle-border-pulse 2s infinite ease-in-out;
+  transition: border-color 0.3s;
+}
