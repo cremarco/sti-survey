@@ -544,6 +544,9 @@ const ConferenceJournalBarChart = ({ data, total }) => {
   );
 };
 
+// =====================
+// MAIN APP COMPONENT
+// =====================
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
