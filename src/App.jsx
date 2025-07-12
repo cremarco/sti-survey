@@ -10,6 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import * as d3 from "d3";
+import CitationMap from "./CitationMap";
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -557,6 +558,7 @@ function App() {
   const [showStatistics, setShowStatistics] = useState(false);
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);
   const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false); // nuovo stato
+  const [showCitationMap, setShowCitationMap] = useState(false);
   const filterRef = useRef();
   const chartRef = useRef();
 
@@ -1244,8 +1246,34 @@ function App() {
     );
   }
 
+  if (showCitationMap) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex flex-col">
+        <div className="p-4 flex-shrink-0 flex items-center justify-between">
+          <button
+            onClick={() => setShowCitationMap(false)}
+            className="text-blue-400 hover:text-blue-200 underline text-sm"
+          >
+            ← Back to Main
+          </button>
+        </div>
+        <CitationMap />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
+      <div className="p-4 flex-shrink-0 flex items-center justify-between">
+        <div>
+          <button
+            onClick={() => setShowCitationMap(true)}
+            className="text-blue-400 hover:text-blue-200 underline text-sm mr-4"
+          >
+            Citation Map
+          </button>
+        </div>
+      </div>
       <div className="p-4 flex-shrink-0">
         {/* Overall Data Snapshot */}
         <div className="mb-6 bg-gray-800 border border-gray-700 shadow-lg overflow-hidden">
