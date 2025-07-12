@@ -262,7 +262,7 @@ const MainMethodStackedChart = ({ data }) => {
 
   // Constants moved outside component for better performance
   const METHOD_TYPES = ['unsup', 'sup', 'hybrid'];
-  const COLORS = ['#6366f1', '#f59e42', '#a78bfa']; // Tailwind colors: indigo-500, orange-400, violet-400
+  const COLORS = ['#6366f1', '#818cf8', '#a78bfa']; // Tailwind: indigo-500, indigo-400, violet-400
   const MARGIN = { top: 24, right: 0, bottom: 36, left: 36 };
   const AXIS_STYLES = {
     text: { fill: "#444", fontSize: "13px" },
@@ -438,6 +438,112 @@ function downloadSVG(svgElement, filename = "chart.svg") {
   URL.revokeObjectURL(url);
 }
 
+// D3 Horizontal Bar Chart for Conference/Journal
+const ConferenceJournalBarChart = ({ data, total }) => {
+  const svgRef = useRef();
+  const wrapperRef = useRef();
+
+  // Prepare data: array of { venue, count }
+  const processedData = useMemo(() => {
+    if (!data || Object.keys(data).length === 0) return [];
+    return Object.entries(data)
+      .map(([venue, count]) => ({ venue, count }))
+      .sort((a, b) => b.count - a.count);
+  }, [data]);
+
+  useEffect(() => {
+    if (!processedData.length) return;
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    // Migliora margini e altezza
+    const width = wrapper.offsetWidth || 600;
+    // Altezza dinamica ma massimo 440px
+    const maxChartHeight = 400;
+    const barHeight = 26;
+    const chartHeight = Math.min(maxChartHeight, processedData.length * barHeight + 20);
+    d3.select(svgRef.current).selectAll("*").remove();
+    const margin = { top: 16, right: 24, bottom: 36, left: 70 };
+    const svgWidth = width;
+    const svgHeight = chartHeight + margin.top + margin.bottom;
+    const innerWidth = svgWidth - margin.left - margin.right;
+    const innerHeight = chartHeight;
+    const svg = d3.select(svgRef.current)
+      .attr("width", svgWidth)
+      .attr("height", svgHeight)
+      .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+    // Y scale (venues)
+    const y = d3.scaleBand()
+      .domain(processedData.map(d => d.venue))
+      .range([0, innerHeight])
+      .padding(0.18);
+    // X scale (counts)
+    const x = d3.scaleLinear()
+      .domain([0, d3.max(processedData, d => d.count) || 1])
+      .range([0, innerWidth]);
+    // Bars
+    svg.append("g")
+      .selectAll("rect")
+      .data(processedData)
+      .join("rect")
+      .attr("y", d => y(d.venue))
+      .attr("x", 0)
+      .attr("height", y.bandwidth())
+      .attr("width", d => x(d.count))
+      .attr("rx", 3)
+      .attr("fill", "#06b6d4"); // Tailwind cyan-500
+    // Venue labels
+    svg.append("g")
+      .selectAll("text")
+      .data(processedData)
+      .join("text")
+      .attr("x", -8)
+      .attr("y", d => y(d.venue) + y.bandwidth() / 2)
+      .attr("text-anchor", "end")
+      .attr("dominant-baseline", "middle")
+      .attr("fill", "#bae6fd") // Tailwind cyan-200
+      .attr("font-size", 12)
+      .text(d => d.venue);
+    // Count labels (sempre visibili: dentro la barra se lunga, fuori se corta)
+    svg.append("g")
+      .selectAll("text.count")
+      .data(processedData)
+      .join("text")
+      .attr("class", "count")
+      .attr("x", d => {
+        const barEnd = x(d.count);
+        // Se la barra è lunga (>80% della larghezza), metti la label dentro
+        return barEnd > innerWidth * 0.8 ? barEnd - 8 : barEnd + 8;
+      })
+      .attr("y", d => y(d.venue) + y.bandwidth() / 2 - 2)
+      .attr("dominant-baseline", "middle")
+      .attr("text-anchor", d => {
+        const barEnd = x(d.count);
+        return barEnd > innerWidth * 0.8 ? "end" : "start";
+      })
+      .attr("fill", d => {
+        const barEnd = x(d.count);
+        return barEnd > innerWidth * 0.8 ? "#fff" : "#22d3ee";
+      })
+      .attr("font-size", 13)
+      .style("font-weight", 500)
+      .text(d => `${d.count} (${((d.count/total)*100).toFixed(1)}%)`);
+    // X axis
+    svg.append("g")
+      .attr("transform", `translate(0,${innerHeight})`)
+      .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format("d")))
+      .call(g => g.selectAll("text").style("fill", "#444").style("font-size", "13px"))
+      .call(g => g.selectAll("path, line").style("stroke", "#444").style("stroke-width", "2px"));
+  }, [processedData, total]);
+
+  return (
+    <div ref={wrapperRef} className="w-full h-full flex flex-col justify-end items-center relative overflow-y-auto max-h-[420px]">
+      <svg ref={svgRef} width="100%" height="100%" style={{ display: 'block' }} />
+    </div>
+  );
+};
+
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -447,6 +553,7 @@ function App() {
   const [showFacetFilter, setShowFacetFilter] = useState(false);
   const [showStatistics, setShowStatistics] = useState(false);
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);
+  const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false); // nuovo stato
   const filterRef = useRef();
   const chartRef = useRef();
 
@@ -1187,7 +1294,7 @@ function App() {
             )}
           </div>
           
-          <div className={`transition-all duration-300 ease-in-out ${showStatistics ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+          <div className={`transition-all duration-300 ease-in-out ${showStatistics ? 'max-h-[3000px] opacity-100' : 'max-h-0 opacity-0'}`}>
             <div className="px-6 pb-6">
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -1298,7 +1405,7 @@ function App() {
                     <div className="flex flex-row gap-4 mb-2 w-full justify-end">
                       {['unsup', 'sup', 'hybrid'].map(type => (
                         <div key={type} className="flex items-center gap-2">
-                          <span className={`inline-block w-4 h-4 rounded ${type === 'unsup' ? 'bg-indigo-500' : type === 'sup' ? 'bg-orange-400' : 'bg-violet-400'}`}></span>
+                          <span className={`inline-block w-4 h-4 rounded ${type === 'unsup' ? 'bg-indigo-500' : type === 'sup' ? 'bg-indigo-400' : 'bg-violet-400'}`}></span>
                           <span className="text-indigo-100 text-sm font-semibold" style={{letterSpacing: 1}}>{type.toUpperCase()}</span>
                         </div>
                       ))}
@@ -1440,6 +1547,84 @@ function App() {
               </div>
             </div>
           </div>
+          {/* Nuova riga: Approcci per Conference/Journal */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
+            {/* CARD FLIP Approaches per Conference/Journal */}
+            <div className="relative perspective-1000 h-[500px]">
+              <div 
+                className={`bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showConferenceJournalChart ? 'rotate-y-180' : ''}`}
+                style={{ 
+                  transformStyle: 'preserve-3d',
+                  transform: showConferenceJournalChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                }}
+              >
+                {/* Fronte: Statistiche testuali */}
+                <div className="backface-hidden h-[500px]">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
+                        className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100 subtle-animated-border"
+                        title={showConferenceJournalChart ? 'Mostra statistiche' : 'Mostra grafico'}
+                        style={{ boxShadow: 'none', padding: 0, border: 'none' }}
+                      >
+                        <span className="material-icons-round" style={{ fontSize: '1.5rem', lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%', textAlign: 'center' }}>360</span>
+                      </button>
+                      <span className="material-icons-round text-cyan-400">event</span>
+                    </div>
+                  </div>
+                  <div className="space-y-3 overflow-y-scroll max-h-[420px] pr-2">
+                    {Object.entries(summaryStats.conferenceJournalDistribution)
+                      .sort(([, a], [, b]) => b - a)
+                      .map(([venue, count], index) => (
+                        <div key={venue} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-cyan-200 text-sm font-medium truncate max-w-[180px]" title={venue}>{venue}</span>
+                            <span className="text-cyan-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
+                          </div>
+                          <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div 
+                              className="h-2 bg-cyan-500 rounded-full transition-all duration-1000 ease-out"
+                              style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))}
+                    {Object.keys(summaryStats.conferenceJournalDistribution).length === 0 && (
+                      <div className="text-cyan-200 text-sm">No data available</div>
+                    )}
+                  </div>
+                </div>
+                {/* Retro: Grafico D3 */}
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 backface-hidden h-[500px]"
+                  style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}
+                >
+                  <div className="flex flex-col h-full w-full">
+                    <div className="flex items-center justify-between mb-4 w-full">
+                      <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
+                      <div className="flex items-center gap-4">
+                        <button
+                          onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
+                          className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
+                          title={showConferenceJournalChart ? 'Mostra statistiche' : 'Mostra grafico'}
+                        >
+                          <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showConferenceJournalChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                            {showConferenceJournalChart ? 'analytics' : 'bar_chart'}
+                          </span>
+                        </button>
+                        <span className="material-icons-round text-cyan-400">bar_chart</span>
+                      </div>
+                    </div>
+                    <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full">
+                      <ConferenceJournalBarChart data={summaryStats.conferenceJournalDistribution} total={summaryStats.totalEntries} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
             </div>
           </div>
         </div>
@@ -1549,4 +1734,3 @@ function App() {
 }
 
 export default App;
-
