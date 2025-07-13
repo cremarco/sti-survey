@@ -1,5 +1,6 @@
 [
     {
+        "id": "hignette2007an",
         "author": "Hignette",
         "authors": [
             "Gaëlle Hignette",
@@ -63,9 +64,69 @@
         },
         "output-format": "XML",
         "checked-by-author": true,
-        "checked-by-ai": true
+        "checked-by-ai": true,
+        "doi": "https://doi.org/10.1007/978-3-540-77010-7_4",
+        "citations": [
+            {
+                "ref": "buche2005fuzzy",
+                "title": "fuzzy querying of incomplete, imprecise, and heterogeneously structured data in the relational model using ontologies and rules."
+            },
+            {
+                "ref": "zanibbi2004a",
+                "title": "a survey of table recognition: models, observations, transformations, and inferences."
+            },
+            {
+                "ref": "pivk2004from",
+                "title": "from tables to frames."
+            },
+            {
+                "ref": "tenier2006instantiation",
+                "title": "instantiation of relations for semantic annotation."
+            },
+            {
+                "ref": "embley2002automatically",
+                "title": "automatically extracting ontologically specified data from html tables of unknown structure."
+            },
+            {
+                "ref": "freitag2000boosted",
+                "title": "boosted wrapper induction."
+            },
+            {
+                "ref": "baumgartner2001visual",
+                "title": "visual web information extraction with Lixto."
+            },
+            {
+                "ref": "gagliardi2005an",
+                "title": "an automatic ontology-based approach to enrich tables semantically."
+            },
+            {
+                "ref": "lin1998an",
+                "title": "an information-theoretic definition of similarity."
+            },
+            {
+                "ref": "hignette2006fuzzy",
+                "title": "fuzzy semantic approach for data integration applied to risk in food: an example about the cold chain."
+            },
+            {
+                "ref": "vanrijsbergen1979information",
+                "title": "information retrieval, 2nd edition."
+            },
+            {
+                "ref": "yangarber2002unsupervised",
+                "title": "unsupervised learning of generalized names."
+            },
+            {
+                "ref": "platt1999fast",
+                "title": "fast training of support vector machines using sequential minimal optimization."
+            },
+            {
+                "ref": "zadeh1965fuzzy",
+                "title": "fuzzy sets."
+            }
+        ]
     },
     {
+        "id": "hignette2009fuzzy",
         "author": "Hignette",
         "year": 2009,
         "title": {
@@ -123,13 +184,88 @@
         },
         "output-format": "RDF",
         "checked-by-author": false,
+        "checked-by-ai": true,
+        "doi": "10.1007/978-3-642-02121-3_47",
         "authors": [
-            "Gaëlle Hignette",
-            "Patrice Buche",
-            "Juliette Dibie-Barthélemy",
-            "Ollivier Haemmerlé"
+          "Gaëlle Hignette",
+          "Patrice Buche",
+          "Juliette Dibie-Barthélemy",
+          "Ollivier Haemmerlé"
         ],
-        "checked-by-ai": true
+        "citations": [
+          {
+            "ref": "rahm2001a",
+            "title": "A survey of approaches to automatic schema matching"
+          },
+          {
+            "ref": "buche2008flexible",
+            "title": "Flexible querying of fuzzy rdf annotations using fuzzy conceptual graphs"
+          },
+          {
+            "ref": "doan2003learning",
+            "title": "Learning to match the schemas of data sources: A multistrategy approach"
+          },
+          {
+            "ref": "liu2007tableseer",
+            "title": "Tableseer: automatic table metadata extraction and searching in digital libraries"
+          },
+          {
+            "ref": "cafarella2008uncovering",
+            "title": "Uncovering the relational web"
+          },
+          {
+            "ref": "cafarella2008webtables",
+            "title": "Webtables: exploring the power of tables on the web"
+          },
+          {
+            "ref": "pivk2004from",
+            "title": "From tables to frames"
+          },
+          {
+            "ref": "tenier2006instantiation",
+            "title": "Instantiation of relations for semantic annotation"
+          },
+          {
+            "ref": "embley2002automatically",
+            "title": "Automatically extracting ontologically specified data from HTML tables of unknown structure"
+          },
+          {
+            "ref": "noy2006defining",
+            "title": "Defining n-ary relations on the semantic web"
+          },
+          {
+            "ref": "hignette2007an",
+            "title": "An ontology-driven annotation of data tables"
+          },
+          {
+            "ref": "vanrijsbergen1979information",
+            "title": "Information Retrieval"
+          },
+          {
+            "ref": "platt1999fast",
+            "title": "Fast training of support vector machines using sequential minimal optimization"
+          },
+          {
+            "ref": "gagliardi2005an",
+            "title": "An automatic ontology-based approach to enrich tables semantically"
+          },
+          {
+            "ref": "zadeh1965fuzzy",
+            "title": "Fuzzy sets"
+          },
+          {
+            "ref": "zadeh1978fuzzy",
+            "title": "Fuzzy sets as a basis for a theory of possibility"
+          },
+          {
+            "ref": "dubois1997the",
+            "title": "The three semantics of fuzzy sets"
+          },
+          {
+            "ref": "cliver2004foodborne",
+            "title": "Foodborne infections and intoxications"
+          }
+        ]
     },
     {
         "author": "Tao",
@@ -5441,6 +5577,7 @@
         },
         "output-format": "CSV list of (row,column)=QID annotations",
         "checked-by-author": true,
-        "checked-by-ai": true
+        "checked-by-ai": true,
+        "doi": "https://doi.org/10.1145/3719206"
     }
 ]

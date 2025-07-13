@@ -87,6 +87,8 @@ const formatDate = (dateString) => {
  * Add/remove fields as needed for your data model.
  */
 const REQUIRED_FIELDS = {
+  id: true,
+  authors: true,
   author: true,
   year: true,
   "title.text": true,
@@ -604,6 +606,15 @@ function App() {
       enableSorting: false,
       meta: { align: 'center' }
     }),
+    // ID column
+    columnHelper.accessor("id", {
+      header: "ID",
+      cell: (info) => (
+        <span className="text-[10px] text-gray-400 font-mono">{info.getValue()}</span>
+      ),
+      enableSorting: false,
+      meta: { align: 'center' }
+    }),
     
     // Added column
     columnHelper.accessor("added", {
@@ -659,16 +670,10 @@ function App() {
       cell: (info) => {
         const authors = info.getValue();
         if (!authors || authors.length === 0) {
-          return <span className="text-gray-500 text-xs">No authors listed</span>;
+          return <span className="text-gray-500 text-[10px]">No authors listed</span>;
         }
         return (
-          <div className="text-xs">
-            {authors.map((author, index) => (
-              <div key={index} className="text-gray-300">
-                {author}
-              </div>
-            ))}
-          </div>
+          <span className="text-[10px] text-gray-400">{authors.join(", ")}</span>
         );
       },
       enableSorting: false,

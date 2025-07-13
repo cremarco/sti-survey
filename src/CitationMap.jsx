@@ -21,40 +21,26 @@ function CitationMap() {
 
   useEffect(() => {
     if (!data || !chartRef.current) return;
-    // Pulizia
     chartRef.current.innerHTML = '';
+    renderChordChart(data, chartRef.current, setSvgNode);
+  }, [data]);
 
-    // --- D3 Chord Chart ---
+  // --- D3 Chord Chart rendering function ---
+  function renderChordChart(data, container, setSvgNode) {
     const width = 1180;
     const height = width + 150;
     const innerRadius = Math.min(width, height) * 0.5 - 200;
     const outerRadius = innerRadius + 10;
     const chordPadAngle = 8 / innerRadius;
 
-    function fade(opacity) {
-      return function (d, i) {
-        const indexes = [];
-        edges
-          .filter(function (d) {
-            if (d.source.index === i.index || d.target.index === i.index) indexes.push(d.source.index, d.target.index);
-            return d.source.index !== i.index && d.target.index !== i.index;
-          })
-          .attr('fill-opacity', opacity);
-        path
-          .filter(function (d) {
-            return indexes.indexOf(d.index) === -1;
-          })
-          .attr('fill-opacity', opacity);
-      };
-    }
-
+    // Helper: format year
     const fd = (str) => {
       const parsed = Date.parse(str);
       const date = new Date(parsed);
       return date.getFullYear();
     };
 
-    // Compute a dense matrix from the weighted links in data.
+    // Compute unique names
     const names = d3.sort(
       d3.union(
         data.map((d) => `${d.source} ${fd(d.source_date)}`).filter((name) => name !== ' NaN'),
@@ -63,6 +49,7 @@ function CitationMap() {
     );
     const index = new Map(names.map((name, i) => [name, i]));
 
+    // Map for 'evolve' type
     const dict = new Map();
     data.forEach((datum) => {
       if (datum.type === 'evolve') {
@@ -70,17 +57,18 @@ function CitationMap() {
       }
     });
 
+    // Build matrix
     const matrix = Array.from(index, () => new Array(names.length).fill(0));
     for (const { source, target, source_date, target_date, value } of data) {
       if (source === '') continue;
       matrix[index.get(`${source} ${fd(source_date)}`)][index.get(`${target} ${fd(target_date)}`)] += value;
     }
 
+    // D3 generators
     const chord = d3.chordDirected()
       .padAngle(chordPadAngle)
       .sortSubgroups(d3.descending)
       .sortChords(d3.descending);
-
     const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
     const selectingArea = d3.arc()
       .startAngle((d) => d.startAngle - chordPadAngle / 2)
@@ -90,6 +78,7 @@ function CitationMap() {
     const ribbon = d3.ribbon().radius(innerRadius + 1).padAngle(0);
     const colors = d3.quantize(d3.interpolateRainbow, names.length);
 
+    // SVG setup
     const svg = d3
       .create('svg')
       .attr('width', width)
@@ -99,19 +88,22 @@ function CitationMap() {
 
     const chords = chord(matrix);
 
+    // Groups
     const group = svg
       .append('g')
-      .selectAll()
+      .selectAll('g')
       .data(chords.groups)
       .join('g')
       .attr('class', (d) => `group-${d.index}`);
 
-    const path = group
+    // Arcs
+    group
       .append('path')
       .attr('fill', (d) => colors[d.index])
       .attr('d', arc);
 
-    const label = group
+    // Labels
+    group
       .append('text')
       .each((d) => (d.angle = (d.startAngle + d.endAngle) / 2))
       .attr('dy', '0.35em')
@@ -135,7 +127,8 @@ function CitationMap() {
         }
       });
 
-    const area = group
+    // Interactive area for fade
+    group
       .append('path')
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
@@ -143,6 +136,7 @@ function CitationMap() {
       .on('mouseover', fade(0))
       .on('mouseout', fade(1));
 
+    // Tooltip
     group
       .append('title')
       .text(
@@ -151,9 +145,10 @@ ${d3.sum(chords, (c) => (c.source.index === d.index) * c.source.value)} Cited â†
 ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â†`
       );
 
+    // Edges
     const edges = svg
       .append('g')
-      .selectAll()
+      .selectAll('path')
       .data(chords)
       .join('path')
       .attr('mix-blend-mode', 'darken')
@@ -165,10 +160,27 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
       .append('title')
       .text((d) => `${names[d.source.index]} â†’ ${names[d.target.index]} ${d.source.value}`);
 
-    chartRef.current.appendChild(svg.node());
-    setSvgNode(svg.node()); // Salva il riferimento all'SVG
-    // --- END D3 Chord Chart ---
-  }, [data]);
+    container.appendChild(svg.node());
+    setSvgNode(svg.node());
+
+    // Fade function for hover
+    function fade(opacity) {
+      return function (event, i) {
+        const indexes = [];
+        edges
+          .filter(function (d) {
+            if (d.source.index === i.index || d.target.index === i.index) indexes.push(d.source.index, d.target.index);
+            return d.source.index !== i.index && d.target.index !== i.index;
+          })
+          .attr('fill-opacity', opacity);
+        group.selectAll('path')
+          .filter(function (d) {
+            return indexes.indexOf(d.index) === -1;
+          })
+          .attr('fill-opacity', opacity);
+      };
+    }
+  }
 
   // Funzione per scaricare l'SVG
   const handleDownloadSVG = () => {
