@@ -6,11 +6,12 @@ function CitationMap() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [svgNode, setSvgNode] = useState(null); // nuovo stato per SVG
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/data@3.json`)
       .then((res) => {
-        if (!res.ok) throw new Error('Errore nel caricamento dei dati');
+        if (!res.ok) throw new Error('Error loading data');
         return res.json();
       })
       .then(setData)
@@ -165,27 +166,62 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing �
       .text((d) => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);
 
     chartRef.current.appendChild(svg.node());
+    setSvgNode(svg.node()); // Salva il riferimento all'SVG
     // --- END D3 Chord Chart ---
   }, [data]);
+
+  // Funzione per scaricare l'SVG
+  const handleDownloadSVG = () => {
+    if (!svgNode) return;
+    const serializer = new XMLSerializer();
+    let source = serializer.serializeToString(svgNode);
+    // Aggiungi dichiarazione XML per compatibilità
+    if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+      source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
+    const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'citation-map.svg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <span className="text-gray-300 text-lg">Caricamento dati...</span>
+        <span className="text-gray-300 text-lg">Loading data...</span>
       </div>
     );
   }
   if (error) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <span className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">Errore: {error}</span>
+        <span className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">Error: {error}</span>
       </div>
     );
   }
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center py-8">
-      <h1 className="text-3xl text-gray-200 font-bold mb-6">Citation Map</h1>
-      <div ref={chartRef} className="w-full flex justify-center items-center" style={{ minHeight: 700 }} />
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-gray-800 flex flex-col items-center justify-center py-12 px-1">
+      <div className="w-full max-w-7xl bg-gray-800 rounded-xl shadow-lg p-4 md:p-8 flex flex-col items-center">
+        <div className="w-full border-b border-gray-700 pb-4 mb-8 flex flex-col items-center">
+          <h1 className="text-3xl md:text-4xl text-gray-100 font-bold tracking-tight mb-2 text-center">Citation Map</h1>
+          <p className="text-gray-400 text-base text-center">Visualization of citations between documents</p>
+        </div>
+        <button
+          onClick={handleDownloadSVG}
+          className="mb-6 px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow transition-colors duration-150 self-end"
+          disabled={!svgNode}
+        >
+          Download SVG
+        </button>
+        <div className="w-full flex justify-center items-center overflow-x-auto" style={{ minHeight: 900 }}>
+          <div ref={chartRef} className="w-full flex justify-center items-center" />
+        </div>
+      </div>
     </div>
   );
 }

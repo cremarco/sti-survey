@@ -1699,7 +1699,7 @@ function App() {
                         <th 
                           key={header.id}
                           colSpan={header.colSpan}
-                          className="px-4 py-2 text-center text-xs font-semibold text-gray-300 border-r border-gray-700 border-b border-gray-700"
+                          className="px-4 py-2 text-center text-xs font-semibold text-gray-300 border-r border-b border-gray-700"
                           onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
                           style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                         >
