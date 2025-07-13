@@ -10,6 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import * as d3 from "d3";
+import { Routes, Route, Link } from 'react-router-dom';
 import CitationMap from "./CitationMap";
 
 // Column helper for type-safe column definitions
@@ -558,7 +559,6 @@ function App() {
   const [showStatistics, setShowStatistics] = useState(false);
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);
   const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false); // nuovo stato
-  const [showCitationMap, setShowCitationMap] = useState(false);
   const filterRef = useRef();
   const chartRef = useRef();
 
@@ -1246,521 +1246,514 @@ function App() {
     );
   }
 
-  if (showCitationMap) {
-    return (
-      <div className="min-h-screen bg-gray-900 flex flex-col">
-        <div className="p-4 flex-shrink-0 flex items-center justify-between">
-          <button
-            onClick={() => setShowCitationMap(false)}
-            className="text-blue-400 hover:text-blue-200 underline text-sm"
-          >
-            ← Back to Main
-          </button>
-        </div>
-        <CitationMap />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      <div className="p-4 flex-shrink-0 flex items-center justify-between">
-        <div>
-          <button
-            onClick={() => setShowCitationMap(true)}
-            className="text-blue-400 hover:text-blue-200 underline text-sm mr-4"
-          >
-            Citation Map
-          </button>
-        </div>
-      </div>
-      <div className="p-4 flex-shrink-0">
-        {/* Overall Data Snapshot */}
-        <div className="mb-6 bg-gray-800 border border-gray-700 shadow-lg overflow-hidden">
-          <div className="p-6 pb-0">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-gray-100 flex items-center">
-                <span className="material-icons-round mr-2 text-blue-400">analytics</span>
-                Data Overview
-              </h3>
-              <button
-                onClick={() => setShowStatistics(!showStatistics)}
-                className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors duration-200 text-gray-300 hover:text-gray-100"
-                title={showStatistics ? "Hide statistics" : "Show statistics"}
-              >
-                <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showStatistics ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                  expand_more
-                </span>
-              </button>
-            </div>
-            
-            {/* Summary when closed */}
-            {!showStatistics && (
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
-                <div className="bg-slate-500/10 p-3 border border-slate-500/20">
-                  <div className="text-2xl font-bold text-slate-100">{summaryStats.totalEntries}</div>
-                  <div className="text-xs text-slate-300">Total Approaches</div>
-                </div>
-                <div className="bg-blue-500/10 p-3 border border-blue-500/20">
-                  <div className="text-2xl font-bold text-blue-100">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</div>
-                  <div className="text-xs text-blue-300">Year Range</div>
-                </div>
-                <div className="bg-rose-500/10 p-3 border border-rose-500/20">
-                  <div className="text-2xl font-bold text-rose-100">{summaryStats.taskCounts.cta}</div>
-                  <div className="text-xs text-rose-300">CTA</div>
-                </div>
-                <div className="bg-orange-500/10 p-3 border border-orange-500/20">
-                  <div className="text-2xl font-bold text-orange-100">{summaryStats.taskCounts.cpa}</div>
-                  <div className="text-xs text-orange-300">CPA</div>
-                </div>
-                <div className="bg-amber-500/10 p-3 border border-amber-500/20">
-                  <div className="text-2xl font-bold text-amber-100">{summaryStats.taskCounts.cea}</div>
-                  <div className="text-xs text-amber-300">CEA</div>
-                </div>
-                <div className="bg-yellow-500/10 p-3 border border-yellow-500/20">
-                  <div className="text-2xl font-bold text-yellow-100">{summaryStats.taskCounts.cnea}</div>
-                  <div className="text-xs text-yellow-300">CNEA</div>
-                </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="min-h-screen bg-gray-900 flex flex-col">
+            <div className="p-4 flex-shrink-0 flex items-center justify-between">
+              <div>
+                <Link
+                  to="/citation-map"
+                  className="text-blue-400 hover:text-blue-200 underline text-sm mr-4"
+                >
+                  Citation Map
+                </Link>
               </div>
-            )}
-          </div>
-          
-          <div className={`transition-all duration-300 ease-in-out ${showStatistics ? 'max-h-[3000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-            <div className="px-6 pb-6">
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {/* Main Method Types */}
-            <div className="relative perspective-1000 h-[500px]">
-              <div 
-                className={`bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${
-                  showMainMethodChart ? 'rotate-y-180' : ''
-                }`}
-                style={{ 
-                  transformStyle: 'preserve-3d',
-                  transform: showMainMethodChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
-                }}
-              >
-                {/* Front side - Statistics */}
-                <div className="backface-hidden h-[500px]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-indigo-300 font-semibold text-lg">Main Method Types</span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setShowMainMethodChart(!showMainMethodChart)}
-                        className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100 subtle-animated-border"
-                        title={showMainMethodChart ? 'Show statistics' : 'Show chart'}
-                        style={{
-                          boxShadow: 'none',
-                          padding: 0,
-                          border: 'none'
-                        }}
-                      >
-                        <span
-                          className="material-icons-round"
-                          style={{
-                            fontSize: '1.5rem',
-                            lineHeight: 1,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            height: '100%',
-                            width: '100%',
-                            textAlign: 'center'
-                          }}
-                        >
-                          360
-                        </span>
-                      </button>
-                      <span className="material-icons-round text-indigo-400">category</span>
-                    </div>
+            </div>
+            {/* Overall Data Snapshot */}
+            <div className="p-4 flex-shrink-0">
+              {/* Overall Data Snapshot */}
+              <div className="mb-6 bg-gray-800 border border-gray-700 shadow-lg overflow-hidden">
+                <div className="p-6 pb-0">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-xl font-bold text-gray-100 flex items-center">
+                      <span className="material-icons-round mr-2 text-blue-400">analytics</span>
+                      Data Overview
+                    </h3>
+                    <button
+                      onClick={() => setShowStatistics(!showStatistics)}
+                      className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors duration-200 text-gray-300 hover:text-gray-100"
+                      title={showStatistics ? "Hide statistics" : "Show statistics"}
+                    >
+                      <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showStatistics ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                        expand_more
+                      </span>
+                    </button>
                   </div>
                   
-                  <div className="space-y-3">
-                    {Object.entries(summaryStats.mainMethodTypeDistribution)
-                      .sort(([, a], [, b]) => b.count - a.count)
-                      .map(([type, data], index) => (
-                      <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-indigo-200 text-sm font-medium">{type}</span>
-                          <span className="text-indigo-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
-                        </div>
-                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                          <div 
-                            className="h-2 bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
-                            style={{ width: `${data.percentage}%` }}
-                          ></div>
-                        </div>
+                  {/* Summary when closed */}
+                  {!showStatistics && (
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
+                      <div className="bg-slate-500/10 p-3 border border-slate-500/20">
+                        <div className="text-2xl font-bold text-slate-100">{summaryStats.totalEntries}</div>
+                        <div className="text-xs text-slate-300">Total Approaches</div>
                       </div>
-                    ))}
-                  </div>
+                      <div className="bg-blue-500/10 p-3 border border-blue-500/20">
+                        <div className="text-2xl font-bold text-blue-100">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</div>
+                        <div className="text-xs text-blue-300">Year Range</div>
+                      </div>
+                      <div className="bg-rose-500/10 p-3 border border-rose-500/20">
+                        <div className="text-2xl font-bold text-rose-100">{summaryStats.taskCounts.cta}</div>
+                        <div className="text-xs text-rose-300">CTA</div>
+                      </div>
+                      <div className="bg-orange-500/10 p-3 border border-orange-500/20">
+                        <div className="text-2xl font-bold text-orange-100">{summaryStats.taskCounts.cpa}</div>
+                        <div className="text-xs text-orange-300">CPA</div>
+                      </div>
+                      <div className="bg-amber-500/10 p-3 border border-amber-500/20">
+                        <div className="text-2xl font-bold text-amber-100">{summaryStats.taskCounts.cea}</div>
+                        <div className="text-xs text-amber-300">CEA</div>
+                      </div>
+                      <div className="bg-yellow-500/10 p-3 border border-yellow-500/20">
+                        <div className="text-2xl font-bold text-yellow-100">{summaryStats.taskCounts.cnea}</div>
+                        <div className="text-xs text-yellow-300">CNEA</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 
-                {/* Back side - Chart */}
-                <div 
-                  className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 backface-hidden h-[500px]"
-                  style={{ 
-                    transform: 'rotateY(180deg)',
-                    backfaceVisibility: 'hidden'
-                  }}
-                >
-                  <div className="flex flex-col h-full w-full">
-                    {/* Riga 1: Titolo e icone + Bottone Scarica SVG */}
-                    <div className="flex items-center justify-between mb-4 w-full">
-                      <span className="text-indigo-300 font-semibold text-lg">Main Method Distribution by Year</span>
-                      <div className="flex items-center gap-4">
-                        <button
-                          onClick={() => setShowMainMethodChart(!showMainMethodChart)}
-                          className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
-                          title={showMainMethodChart ? "Show statistics" : "Show chart"}
-                        >
-                          <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showMainMethodChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                            {showMainMethodChart ? 'analytics' : 'bar_chart'}
-                          </span>
-                        </button>
-                                                {/* Bottone Scarica SVG */}
-                                                <button
-                          onClick={() => {
-                            if (chartRef?.current?.children[0]?.children[0]) {
-                              downloadSVG(chartRef.current.children[0].children[0], "main-method-chart.svg");
-                            }
-                          }}
-                          className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
-                          title="Download SVG"
-                        >
-                          <span className="material-icons-round text-lg" style={{ fontSize: '1.5rem' }}>download</span>
-                        </button>
-                        <span className="material-icons-round text-indigo-400">{showMainMethodChart ? 'bar_chart' : 'category'}</span>
+                <div className={`transition-all duration-300 ease-in-out ${showStatistics ? 'max-h-[3000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="px-6 pb-6">
+              
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                  {/* Main Method Types */}
+                  <div className="relative perspective-1000 h-[500px]">
+                    <div 
+                      className={`bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${
+                        showMainMethodChart ? 'rotate-y-180' : ''
+                      }`}
+                      style={{ 
+                        transformStyle: 'preserve-3d',
+                        transform: showMainMethodChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                      }}
+                    >
+                      {/* Front side - Statistics */}
+                      <div className="backface-hidden h-[500px]">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-indigo-300 font-semibold text-lg">Main Method Types</span>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => setShowMainMethodChart(!showMainMethodChart)}
+                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100 subtle-animated-border"
+                              title={showMainMethodChart ? 'Show statistics' : 'Show chart'}
+                              style={{
+                                boxShadow: 'none',
+                                padding: 0,
+                                border: 'none'
+                              }}
+                            >
+                              <span
+                                className="material-icons-round"
+                                style={{
+                                  fontSize: '1.5rem',
+                                  lineHeight: 1,
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  height: '100%',
+                                  width: '100%',
+                                  textAlign: 'center'
+                                }}
+                              >
+                                360
+                              </span>
+                            </button>
+                            <span className="material-icons-round text-indigo-400">category</span>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          {Object.entries(summaryStats.mainMethodTypeDistribution)
+                            .sort(([, a], [, b]) => b.count - a.count)
+                            .map(([type, data], index) => (
+                            <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="text-indigo-200 text-sm font-medium">{type}</span>
+                                <span className="text-indigo-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                              </div>
+                              <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                <div 
+                                  className="h-2 bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
+                                  style={{ width: `${data.percentage}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Back side - Chart */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 backface-hidden h-[500px]"
+                        style={{ 
+                          transform: 'rotateY(180deg)',
+                          backfaceVisibility: 'hidden'
+                        }}
+                      >
+                        <div className="flex flex-col h-full w-full">
+                          {/* Riga 1: Titolo e icone + Bottone Scarica SVG */}
+                          <div className="flex items-center justify-between mb-4 w-full">
+                            <span className="text-indigo-300 font-semibold text-lg">Main Method Distribution by Year</span>
+                            <div className="flex items-center gap-4">
+                              <button
+                                onClick={() => setShowMainMethodChart(!showMainMethodChart)}
+                                className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
+                                title={showMainMethodChart ? "Show statistics" : "Show chart"}
+                              >
+                                <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showMainMethodChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                                  {showMainMethodChart ? 'analytics' : 'bar_chart'}
+                                </span>
+                              </button>
+                                                      {/* Bottone Scarica SVG */}
+                                                      <button
+                                onClick={() => {
+                                  if (chartRef?.current?.children[0]?.children[0]) {
+                                    downloadSVG(chartRef.current.children[0].children[0], "main-method-chart.svg");
+                                  }
+                                }}
+                                className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
+                                title="Download SVG"
+                              >
+                                <span className="material-icons-round text-lg" style={{ fontSize: '1.5rem' }}>download</span>
+                              </button>
+                              <span className="material-icons-round text-indigo-400">{showMainMethodChart ? 'bar_chart' : 'category'}</span>
+                            </div>
+                          </div>
+                          {/* Riga 2: Legenda */}
+                          <div className="flex flex-row gap-4 mb-2 w-full justify-end">
+                            {['unsup', 'sup', 'hybrid'].map(type => (
+                              <div key={type} className="flex items-center gap-2">
+                                <span className={`inline-block w-4 h-4 rounded ${type === 'unsup' ? 'bg-indigo-500' : type === 'sup' ? 'bg-indigo-400' : 'bg-violet-400'}`}></span>
+                                <span className="text-indigo-100 text-sm font-semibold" style={{letterSpacing: 1}}>{type.toUpperCase()}</span>
+                              </div>
+                            ))}
+                          </div>
+                          {/* Riga 3: Grafico */}
+                          <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full" ref={chartRef}>
+                            <MainMethodStackedChart data={data} />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    {/* Riga 2: Legenda */}
-                    <div className="flex flex-row gap-4 mb-2 w-full justify-end">
-                      {['unsup', 'sup', 'hybrid'].map(type => (
-                        <div key={type} className="flex items-center gap-2">
-                          <span className={`inline-block w-4 h-4 rounded ${type === 'unsup' ? 'bg-indigo-500' : type === 'sup' ? 'bg-indigo-400' : 'bg-violet-400'}`}></span>
-                          <span className="text-indigo-100 text-sm font-semibold" style={{letterSpacing: 1}}>{type.toUpperCase()}</span>
-                        </div>
-                      ))}
-                    </div>
-                    {/* Riga 3: Grafico */}
-                    <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full" ref={chartRef}>
-                      <MainMethodStackedChart data={data} />
-                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
 
-            {/* Domains */}
-            <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 border border-purple-500/20 h-[500px]">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-purple-300 font-semibold text-lg">Domains</span>
-                <span className="material-icons-round text-purple-400">public</span>
-              </div>
-              <div className="space-y-3">
-                {Object.entries(summaryStats.domainDistribution)
-                  .sort(([, a], [, b]) => b.count - a.count)
-                  .map(([domain, data], index) => (
-                  <div key={domain} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-purple-200 text-sm font-medium">{domain}</span>
-                      <span className="text-purple-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                  {/* Domains */}
+                  <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 border border-purple-500/20 h-[500px]">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-purple-300 font-semibold text-lg">Domains</span>
+                      <span className="material-icons-round text-purple-400">public</span>
                     </div>
-                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-2 bg-purple-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${data.percentage}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Tasks Addressed */}
-            <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 border border-rose-500/20 h-[500px]">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-rose-300 font-semibold text-lg">Tasks Addressed</span>
-                <span className="material-icons-round text-rose-400">assignment</span>
-              </div>
-              <div className="space-y-3">
-                {Object.entries(summaryStats.taskPercentages).map(([task, percentage], index) => (
-                  <div key={task} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-rose-200 text-sm font-medium">{task.toUpperCase()}</span>
-                      <span className="text-rose-300 text-sm">{summaryStats.taskCounts[task]} ({percentage.toFixed(1)}%)</span>
-                    </div>
-                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-2 bg-rose-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${percentage}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Steps Coverage */}
-            <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 border border-green-500/20 h-[500px]">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-green-300 font-semibold text-lg">Steps Coverage</span>
-                <span className="material-icons-round text-green-400">layers</span>
-              </div>
-              <div className="space-y-3">
-                {Object.entries(summaryStats.stepsCoverage)
-                  .sort(([, a], [, b]) => b - a)
-                  .map(([step, count], index) => (
-                  <div key={step} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-green-200 text-sm font-medium">{step.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
-                      <span className="text-green-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
-                    </div>
-                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-2 bg-green-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* User Revision */}
-            <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 border border-teal-500/20 h-[500px]">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-teal-300 font-semibold text-lg">User Revision</span>
-                <span className="material-icons-round text-teal-400">edit</span>
-              </div>
-              <div className="space-y-3">
-                {Object.entries(summaryStats.userRevisionDistribution)
-                  .sort(([, a], [, b]) => b - a)
-                  .map(([type, count], index) => (
-                  <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-teal-200 text-sm font-medium">{type}</span>
-                      <span className="text-teal-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
-                    </div>
-                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-2 bg-teal-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Licenses */}
-            <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20 h-[500px]">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-amber-300 font-semibold text-lg">Licenses</span>
-                <span className="material-icons-round text-amber-400">gavel</span>
-              </div>
-              <div className="space-y-3">
-                {Object.entries(summaryStats.licenseDistribution)
-                  .sort(([, a], [, b]) => b.count - a.count)
-                  .map(([license, data], index) => (
-                  <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-amber-200 text-sm font-medium">{license}</span>
-                      <span className="text-amber-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
-                    </div>
-                    <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-2 bg-amber-500 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${data.percentage}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          {/* Nuova riga: Approcci per Conference/Journal */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
-            {/* CARD FLIP Approaches per Conference/Journal */}
-            <div className="relative perspective-1000 h-[500px]">
-              <div 
-                className={`bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showConferenceJournalChart ? 'rotate-y-180' : ''}`}
-                style={{ 
-                  transformStyle: 'preserve-3d',
-                  transform: showConferenceJournalChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
-                }}
-              >
-                {/* Fronte: Statistiche testuali */}
-                <div className="backface-hidden h-[500px]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
-                        className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100 subtle-animated-border"
-                        title={showConferenceJournalChart ? 'Mostra statistiche' : 'Mostra grafico'}
-                        style={{ boxShadow: 'none', padding: 0, border: 'none' }}
-                      >
-                        <span className="material-icons-round" style={{ fontSize: '1.5rem', lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%', textAlign: 'center' }}>360</span>
-                      </button>
-                      <span className="material-icons-round text-cyan-400">event</span>
-                    </div>
-                  </div>
-                  <div className="space-y-3 overflow-y-scroll max-h-[420px] pr-2">
-                    {Object.entries(summaryStats.conferenceJournalDistribution)
-                      .sort(([, a], [, b]) => b - a)
-                      .map(([venue, count], index) => (
-                        <div key={venue} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                    <div className="space-y-3">
+                      {Object.entries(summaryStats.domainDistribution)
+                        .sort(([, a], [, b]) => b.count - a.count)
+                        .map(([domain, data], index) => (
+                        <div key={domain} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                           <div className="flex justify-between items-center mb-1">
-                            <span className="text-cyan-200 text-sm font-medium truncate max-w-[180px]" title={venue}>{venue}</span>
-                            <span className="text-cyan-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
+                            <span className="text-purple-200 text-sm font-medium">{domain}</span>
+                            <span className="text-purple-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                           </div>
                           <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
                             <div 
-                              className="h-2 bg-cyan-500 rounded-full transition-all duration-1000 ease-out"
+                              className="h-2 bg-purple-500 rounded-full transition-all duration-1000 ease-out"
+                              style={{ width: `${data.percentage}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tasks Addressed */}
+                  <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 border border-rose-500/20 h-[500px]">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-rose-300 font-semibold text-lg">Tasks Addressed</span>
+                      <span className="material-icons-round text-rose-400">assignment</span>
+                    </div>
+                    <div className="space-y-3">
+                      {Object.entries(summaryStats.taskPercentages).map(([task, percentage], index) => (
+                        <div key={task} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-rose-200 text-sm font-medium">{task.toUpperCase()}</span>
+                            <span className="text-rose-300 text-sm">{summaryStats.taskCounts[task]} ({percentage.toFixed(1)}%)</span>
+                          </div>
+                          <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div 
+                              className="h-2 bg-rose-500 rounded-full transition-all duration-1000 ease-out"
+                              style={{ width: `${percentage}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Steps Coverage */}
+                  <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 border border-green-500/20 h-[500px]">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-green-300 font-semibold text-lg">Steps Coverage</span>
+                      <span className="material-icons-round text-green-400">layers</span>
+                    </div>
+                    <div className="space-y-3">
+                      {Object.entries(summaryStats.stepsCoverage)
+                        .sort(([, a], [, b]) => b - a)
+                        .map(([step, count], index) => (
+                        <div key={step} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-green-200 text-sm font-medium">{step.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                            <span className="text-green-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
+                          </div>
+                          <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div 
+                              className="h-2 bg-green-500 rounded-full transition-all duration-1000 ease-out"
                               style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
                             ></div>
                           </div>
                         </div>
                       ))}
-                    {Object.keys(summaryStats.conferenceJournalDistribution).length === 0 && (
-                      <div className="text-cyan-200 text-sm">No data available</div>
-                    )}
+                    </div>
+                  </div>
+
+                  {/* User Revision */}
+                  <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 border border-teal-500/20 h-[500px]">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-teal-300 font-semibold text-lg">User Revision</span>
+                      <span className="material-icons-round text-teal-400">edit</span>
+                    </div>
+                    <div className="space-y-3">
+                      {Object.entries(summaryStats.userRevisionDistribution)
+                        .sort(([, a], [, b]) => b - a)
+                        .map(([type, count], index) => (
+                        <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-teal-200 text-sm font-medium">{type}</span>
+                            <span className="text-teal-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
+                          </div>
+                          <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div 
+                              className="h-2 bg-teal-500 rounded-full transition-all duration-1000 ease-out"
+                              style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Licenses */}
+                  <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20 h-[500px]">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-amber-300 font-semibold text-lg">Licenses</span>
+                      <span className="material-icons-round text-amber-400">gavel</span>
+                    </div>
+                    <div className="space-y-3">
+                      {Object.entries(summaryStats.licenseDistribution)
+                        .sort(([, a], [, b]) => b.count - a.count)
+                        .map(([license, data], index) => (
+                        <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-amber-200 text-sm font-medium">{license}</span>
+                            <span className="text-amber-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                          </div>
+                          <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div 
+                              className="h-2 bg-amber-500 rounded-full transition-all duration-1000 ease-out"
+                              style={{ width: `${data.percentage}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                {/* Retro: Grafico D3 */}
-                <div 
-                  className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 backface-hidden h-[500px]"
-                  style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}
-                >
-                  <div className="flex flex-col h-full w-full">
-                    <div className="flex items-center justify-between mb-4 w-full">
-                      <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
-                      <div className="flex items-center gap-4">
-                        <button
-                          onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
-                          className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
-                          title={showConferenceJournalChart ? 'Mostra statistiche' : 'Mostra grafico'}
-                        >
-                          <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showConferenceJournalChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                            {showConferenceJournalChart ? 'analytics' : 'bar_chart'}
-                          </span>
-                        </button>
-                        <span className="material-icons-round text-cyan-400">bar_chart</span>
+                {/* Nuova riga: Approcci per Conference/Journal */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
+                  {/* CARD FLIP Approaches per Conference/Journal */}
+                  <div className="relative perspective-1000 h-[500px]">
+                    <div 
+                      className={`bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showConferenceJournalChart ? 'rotate-y-180' : ''}`}
+                      style={{ 
+                        transformStyle: 'preserve-3d',
+                        transform: showConferenceJournalChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                      }}
+                    >
+                      {/* Fronte: Statistiche testuali */}
+                      <div className="backface-hidden h-[500px]">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
+                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100 subtle-animated-border"
+                              title={showConferenceJournalChart ? 'Mostra statistiche' : 'Mostra grafico'}
+                              style={{ boxShadow: 'none', padding: 0, border: 'none' }}
+                            >
+                              <span className="material-icons-round" style={{ fontSize: '1.5rem', lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%', textAlign: 'center' }}>360</span>
+                            </button>
+                            <span className="material-icons-round text-cyan-400">event</span>
+                          </div>
+                        </div>
+                        <div className="space-y-3 overflow-y-scroll max-h-[420px] pr-2">
+                          {Object.entries(summaryStats.conferenceJournalDistribution)
+                            .sort(([, a], [, b]) => b - a)
+                            .map(([venue, count], index) => (
+                              <div key={venue} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                                <div className="flex justify-between items-center mb-1">
+                                  <span className="text-cyan-200 text-sm font-medium truncate max-w-[180px]" title={venue}>{venue}</span>
+                                  <span className="text-cyan-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
+                                </div>
+                                <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                  <div 
+                                    className="h-2 bg-cyan-500 rounded-full transition-all duration-1000 ease-out"
+                                    style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
+                                  ></div>
+                                </div>
+                              </div>
+                            ))}
+                          {Object.keys(summaryStats.conferenceJournalDistribution).length === 0 && (
+                            <div className="text-cyan-200 text-sm">No data available</div>
+                          )}
+                        </div>
+                      </div>
+                      {/* Retro: Grafico D3 */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 backface-hidden h-[500px]"
+                        style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}
+                      >
+                        <div className="flex flex-col h-full w-full">
+                          <div className="flex items-center justify-between mb-4 w-full">
+                            <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
+                            <div className="flex items-center gap-4">
+                              <button
+                                onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
+                                className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
+                                title={showConferenceJournalChart ? 'Mostra statistiche' : 'Mostra grafico'}
+                              >
+                                <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showConferenceJournalChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                                  {showConferenceJournalChart ? 'analytics' : 'bar_chart'}
+                                </span>
+                              </button>
+                              <span className="material-icons-round text-cyan-400">bar_chart</span>
+                            </div>
+                          </div>
+                          <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full">
+                            <ConferenceJournalBarChart data={summaryStats.conferenceJournalDistribution} total={summaryStats.totalEntries} />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full">
-                      <ConferenceJournalBarChart data={summaryStats.conferenceJournalDistribution} total={summaryStats.totalEntries} />
-                    </div>
+                  </div>
+                </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Conference/Journal Filter */}
-        <div className="mb-4 relative" ref={filterRef}>
-          <span
-            className="text-gray-200 font-semibold mr-2 cursor-pointer select-none"
-            onClick={() => setShowFacetFilter((v) => !v)}
-          >
-            Conference/Journal:
-          </span>
-          {showFacetFilter && (
-            <div className="absolute left-0 mt-2 bg-gray-800 border border-gray-700 rounded shadow-lg z-20 max-h-[250px] overflow-y-auto p-3 min-w-[220px]">
-              {Array.from(table.getColumn("conference-journal")?.getFacetedUniqueValues()?.entries() || [])
-                .sort((a, b) => a[0].localeCompare(b[0]))
-                .map(([value, count]) => (
-                  <label key={value} className="flex items-center mb-2 text-gray-300 text-sm">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox bg-gray-800 border-gray-600 text-blue-500 focus:ring-blue-400 mr-2"
-                      checked={
-                        (Array.isArray(table.getColumn("conference-journal")?.getFilterValue()) &&
-                          table.getColumn("conference-journal")?.getFilterValue().includes(value)) || false
-                      }
-                      onChange={e => {
-                        const col = table.getColumn("conference-journal");
-                        let prev = col.getFilterValue() || [];
-                        if (!Array.isArray(prev)) prev = [];
-                        if (e.target.checked) {
-                          col.setFilterValue([...prev, value]);
-                        } else {
-                          col.setFilterValue(prev.filter(v => v !== value));
-                        }
-                      }}
-                    />
-                    <span>{value} <span className="text-gray-500">({count})</span></span>
-                  </label>
-                ))}
-            </div>
-          )}
-        </div>
-      </div>
-      
-      {/* Data Table */}
-      <div className="overflow-auto flex-1 pb-4">
-        <table className="w-full table-auto text-xs">
-          <thead className="bg-gray-800 sticky top-0 z-10">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th 
-                    key={header.id}
-                    colSpan={header.colSpan}
-                    className="px-4 py-2 text-center text-xs font-semibold text-gray-300 border-r border-gray-700 border-b border-gray-700"
-                    onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
-                    style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    {header.column.getCanSort() && (
-                      <span className="ml-2">
-                        {header.column.getIsSorted() === 'asc' ? '▲' : header.column.getIsSorted() === 'desc' ? '▼' : ''}
-                      </span>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="bg-gray-900">
-            {table.getRowModel().rows.map((row, index) => {
-              // Check for missing fields to highlight row
-              const missingFields = Object.keys(REQUIRED_FIELDS)
-                .filter(field => isRequiredFieldMissing(row.original, field));
-              const hasMissingFields = missingFields.length > 0;
               
-              return (
-                <tr 
-                  key={row.id}
-                  className={`hover:bg-gray-700 transition-colors duration-150 ${
-                    index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'
-                  } ${hasMissingFields ? 'border-l-4 border-l-red-500' : ''}`}
+              {/* Conference/Journal Filter */}
+              <div className="mb-4 relative" ref={filterRef}>
+                <span
+                  className="text-gray-200 font-semibold mr-2 cursor-pointer select-none"
+                  onClick={() => setShowFacetFilter((v) => !v)}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <td 
-                      key={cell.id}
-                      className={`px-4 py-2 text-xs text-gray-300 border-r border-gray-700 ${
-                        cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'
-                      }`}
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
+                  Conference/Journal:
+                </span>
+                {showFacetFilter && (
+                  <div className="absolute left-0 mt-2 bg-gray-800 border border-gray-700 rounded shadow-lg z-20 max-h-[250px] overflow-y-auto p-3 min-w-[220px]">
+                    {Array.from(table.getColumn("conference-journal")?.getFacetedUniqueValues()?.entries() || [])
+                      .sort((a, b) => a[0].localeCompare(b[0]))
+                      .map(([value, count]) => (
+                        <label key={value} className="flex items-center mb-2 text-gray-300 text-sm">
+                          <input
+                            type="checkbox"
+                            className="form-checkbox bg-gray-800 border-gray-600 text-blue-500 focus:ring-blue-400 mr-2"
+                            checked={
+                              (Array.isArray(table.getColumn("conference-journal")?.getFilterValue()) &&
+                                table.getColumn("conference-journal")?.getFilterValue().includes(value)) || false
+                            }
+                            onChange={e => {
+                              const col = table.getColumn("conference-journal");
+                              let prev = col.getFilterValue() || [];
+                              if (!Array.isArray(prev)) prev = [];
+                              if (e.target.checked) {
+                                col.setFilterValue([...prev, value]);
+                              } else {
+                                col.setFilterValue(prev.filter(v => v !== value));
+                              }
+                            }}
+                          />
+                          <span>{value} <span className="text-gray-500">({count})</span></span>
+                        </label>
+                      ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {/* Data Table */}
+            <div className="overflow-auto flex-1 pb-4">
+              <table className="w-full table-auto text-xs">
+                <thead className="bg-gray-800 sticky top-0 z-10">
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <tr key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => (
+                        <th 
+                          key={header.id}
+                          colSpan={header.colSpan}
+                          className="px-4 py-2 text-center text-xs font-semibold text-gray-300 border-r border-gray-700 border-b border-gray-700"
+                          onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
+                          style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
+                        >
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                          {header.column.getCanSort() && (
+                            <span className="ml-2">
+                              {header.column.getIsSorted() === 'asc' ? '▲' : header.column.getIsSorted() === 'desc' ? '▼' : ''}
+                            </span>
+                          )}
+                        </th>
+                      ))}
+                    </tr>
                   ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
+                </thead>
+                <tbody className="bg-gray-900">
+                  {table.getRowModel().rows.map((row, index) => {
+                    // Check for missing fields to highlight row
+                    const missingFields = Object.keys(REQUIRED_FIELDS)
+                      .filter(field => isRequiredFieldMissing(row.original, field));
+                    const hasMissingFields = missingFields.length > 0;
+                    
+                    return (
+                      <tr 
+                        key={row.id}
+                        className={`hover:bg-gray-700 transition-colors duration-150 ${
+                          index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'
+                        } ${hasMissingFields ? 'border-l-4 border-l-red-500' : ''}`}
+                      >
+                        {row.getVisibleCells().map((cell) => (
+                          <td 
+                            key={cell.id}
+                            className={`px-4 py-2 text-xs text-gray-300 border-r border-gray-700 ${
+                              cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'
+                            }`}
+                          >
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
+      />
+      <Route path="/citation-map" element={<CitationMap />} />
+    </Routes>
   );
 }
 
