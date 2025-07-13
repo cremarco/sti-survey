@@ -173,6 +173,13 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
   // Funzione per scaricare l'SVG
   const handleDownloadSVG = () => {
     if (!svgNode) return;
+    // Trova tutti i testi delle etichette e salva il colore originale
+    const texts = svgNode.querySelectorAll('text');
+    const originalFills = [];
+    texts.forEach((el) => {
+      originalFills.push(el.getAttribute('fill'));
+      el.setAttribute('fill', '#000');
+    });
     const serializer = new XMLSerializer();
     let source = serializer.serializeToString(svgNode);
     // Aggiungi dichiarazione XML per compatibilitÃ 
@@ -188,6 +195,14 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    // Ripristina i colori originali
+    texts.forEach((el, i) => {
+      if (originalFills[i]) {
+        el.setAttribute('fill', originalFills[i]);
+      } else {
+        el.removeAttribute('fill');
+      }
+    });
   };
 
   if (loading) {
