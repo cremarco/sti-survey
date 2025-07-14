@@ -270,8 +270,8 @@ const MainMethodStackedChart = ({ data }) => {
   const COLORS = ['#6366f1', '#818cf8', '#a78bfa']; // Tailwind: indigo-500, indigo-400, violet-400
   const MARGIN = { top: 24, right: 0, bottom: 36, left: 36 };
   const AXIS_STYLES = {
-    text: { fill: "#444", fontSize: "13px" },
-    stroke: "#444" // grigio medio-scuro, ottimo contrasto su chiaro e scuro
+    text: { fill: "#e5e7eb", fontSize: "13px" },
+    stroke: "#e5e7eb" // grigio chiaro, ottimo contrasto su sfondo scuro
   };
 
   // Memoized data processing for better performance
@@ -444,7 +444,7 @@ function downloadSVG(svgElement, filename = "chart.svg") {
 }
 
 // D3 Horizontal Bar Chart for Conference/Journal
-const ConferenceJournalBarChart = ({ data, total }) => {
+const ConferenceJournalBarChart = ({ data, total, barColor = "#06b6d4", labelColor = "#bae6fd" }) => {
   const svgRef = useRef();
   const wrapperRef = useRef();
 
@@ -455,6 +455,12 @@ const ConferenceJournalBarChart = ({ data, total }) => {
       .map(([venue, count]) => ({ venue, count }))
       .sort((a, b) => b.count - a.count);
   }, [data]);
+
+  // Calculate max label length for dynamic left margin
+  const maxLabelLength = useMemo(() => {
+    if (!processedData.length) return 0;
+    return Math.max(...processedData.map(d => (d.venue || '').length));
+  }, [processedData]);
 
   useEffect(() => {
     if (!processedData.length) return;
@@ -467,7 +473,7 @@ const ConferenceJournalBarChart = ({ data, total }) => {
     const barHeight = 26;
     const chartHeight = Math.min(maxChartHeight, processedData.length * barHeight + 20);
     d3.select(svgRef.current).selectAll("*").remove();
-    const margin = { top: 16, right: 24, bottom: 36, left: 70 };
+    const margin = { top: 16, right: 24, bottom: 36, left: 70 + maxLabelLength * 6 };
     const svgWidth = width;
     const svgHeight = chartHeight + margin.top + margin.bottom;
     const innerWidth = svgWidth - margin.left - margin.right;
@@ -497,7 +503,7 @@ const ConferenceJournalBarChart = ({ data, total }) => {
       .attr("height", y.bandwidth())
       .attr("width", d => x(d.count))
       .attr("rx", 3)
-      .attr("fill", "#06b6d4"); // Tailwind cyan-500
+      .attr("fill", barColor); // Customizable bar color
     // Venue labels
     svg.append("g")
       .selectAll("text")
@@ -507,7 +513,7 @@ const ConferenceJournalBarChart = ({ data, total }) => {
       .attr("y", d => y(d.venue) + y.bandwidth() / 2)
       .attr("text-anchor", "end")
       .attr("dominant-baseline", "middle")
-      .attr("fill", "#bae6fd") // Tailwind cyan-200
+      .attr("fill", labelColor) // Customizable label color
       .attr("font-size", 12)
       .text(d => d.venue);
     // Count labels (sempre visibili: dentro la barra se lunga, fuori se corta)
@@ -529,18 +535,22 @@ const ConferenceJournalBarChart = ({ data, total }) => {
       })
       .attr("fill", d => {
         const barEnd = x(d.count);
-        return barEnd > innerWidth * 0.8 ? "#fff" : "#22d3ee";
+        // Use white inside, amber-300 outside for licenses, cyan-400 for conference/journal
+        return barEnd > innerWidth * 0.8 ? "#fff" : (barColor === "#f59e42" ? "#fcd34d" : "#22d3ee");
       })
       .attr("font-size", 13)
       .style("font-weight", 500)
-      .text(d => `${d.count} (${((d.count/total)*100).toFixed(1)}%)`);
+      .text(d => {
+        const percent = total > 0 ? ((d.count/total)*100).toFixed(1) : "0.0";
+        return `${d.count} (${percent}%)`;
+      });
     // X axis
     svg.append("g")
       .attr("transform", `translate(0,${innerHeight})`)
       .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format("d")))
-      .call(g => g.selectAll("text").style("fill", "#444").style("font-size", "13px"))
-      .call(g => g.selectAll("path, line").style("stroke", "#444").style("stroke-width", "2px"));
-  }, [processedData, total]);
+      .call(g => g.selectAll("text").style("fill", "#e5e7eb").style("font-size", "13px"))
+      .call(g => g.selectAll("path, line").style("stroke", "#e5e7eb").style("stroke-width", "2px"));
+  }, [processedData, total, barColor, labelColor, maxLabelLength]);
 
   return (
     <div ref={wrapperRef} className="w-full h-full flex flex-col justify-end items-center relative overflow-y-auto max-h-[420px]">
@@ -562,6 +572,7 @@ function App() {
   const [showStatistics, setShowStatistics] = useState(false);
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);
   const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false); // nuovo stato
+  const [showLicensesChart, setShowLicensesChart] = useState(false); // nuovo stato per licenses
   const filterRef = useRef();
   const chartRef = useRef();
 
@@ -1337,9 +1348,7 @@ function App() {
                   {/* Main Method Types */}
                   <div className="relative perspective-1000 h-[500px]">
                     <div 
-                      className={`bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${
-                        showMainMethodChart ? 'rotate-y-180' : ''
-                      }`}
+                      className={`bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showMainMethodChart ? 'rotate-y-180' : ''}`}
                       style={{ 
                         transformStyle: 'preserve-3d',
                         transform: showMainMethodChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
@@ -1558,28 +1567,97 @@ function App() {
                   </div>
 
                   {/* Licenses */}
-                  <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20 h-[500px]">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-amber-300 font-semibold text-lg">Licenses</span>
-                      <span className="material-icons-round text-amber-400">gavel</span>
-                    </div>
-                    <div className="space-y-3">
-                      {Object.entries(summaryStats.licenseDistribution)
-                        .sort(([, a], [, b]) => b.count - a.count)
-                        .map(([license, data], index) => (
-                        <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-amber-200 text-sm font-medium">{license}</span>
-                            <span className="text-amber-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
-                          </div>
-                          <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                            <div 
-                              className="h-2 bg-amber-500 rounded-full transition-all duration-1000 ease-out"
-                              style={{ width: `${data.percentage}%` }}
-                            ></div>
+                  <div className="relative perspective-1000 h-[500px]">
+                    <div 
+                      className={`bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showLicensesChart ? 'rotate-y-180' : ''}`}
+                      style={{ 
+                        transformStyle: 'preserve-3d',
+                        transform: showLicensesChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                      }}
+                    >
+                      {/* Front side - Statistics */}
+                      <div className="backface-hidden h-[500px]">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-amber-300 font-semibold text-lg">Licenses</span>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => setShowLicensesChart(!showLicensesChart)}
+                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 transition-colors duration-200 text-amber-300 hover:text-amber-100 subtle-animated-border"
+                              title={showLicensesChart ? 'Show statistics' : 'Show chart'}
+                              style={{ boxShadow: 'none', padding: 0, border: 'none' }}
+                            >
+                              <span className="material-icons-round" style={{ fontSize: '1.5rem', lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%', textAlign: 'center' }}>360</span>
+                            </button>
+                            <span className="material-icons-round text-amber-400">gavel</span>
                           </div>
                         </div>
-                      ))}
+                        <div className="space-y-3">
+                          {Object.entries(summaryStats.licenseDistribution)
+                            .sort(([, a], [, b]) => b.count - a.count)
+                            .map(([license, data], index) => (
+                            <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="text-amber-200 text-sm font-medium">{license}</span>
+                                <span className="text-amber-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                              </div>
+                              <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                <div 
+                                  className="h-2 bg-amber-500 rounded-full transition-all duration-1000 ease-out"
+                                  style={{ width: `${data.percentage}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Back side - Chart */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20 backface-hidden h-[500px]"
+                        style={{ 
+                          transform: 'rotateY(180deg)',
+                          backfaceVisibility: 'hidden'
+                        }}
+                      >
+                        <div className="flex flex-col h-full w-full">
+                          <div className="flex items-center justify-between mb-4 w-full">
+                            <span className="text-amber-300 font-semibold text-lg">License Distribution</span>
+                            <div className="flex items-center gap-4">
+                              <button
+                                onClick={() => setShowLicensesChart(!showLicensesChart)}
+                                className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 transition-colors duration-200 text-amber-300 hover:text-amber-100"
+                                title={showLicensesChart ? 'Show statistics' : 'Show chart'}
+                              >
+                                <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showLicensesChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                                  {showLicensesChart ? 'analytics' : 'bar_chart'}
+                                </span>
+                              </button>
+                              {/* Bottone Scarica SVG */}
+                              <button
+                                onClick={() => {
+                                  const chartElement = document.querySelector('.licenses-chart svg');
+                                  if (chartElement) {
+                                    downloadSVG(chartElement, "licenses-chart.svg");
+                                  }
+                                }}
+                                className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 transition-colors duration-200 text-amber-300 hover:text-amber-100"
+                                title="Download SVG"
+                              >
+                                <span className="material-icons-round text-lg" style={{ fontSize: '1.5rem' }}>download</span>
+                              </button>
+                              <span className="material-icons-round text-amber-400">bar_chart</span>
+                            </div>
+                          </div>
+                          <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full licenses-chart">
+                            <ConferenceJournalBarChart 
+                              data={Object.fromEntries(Object.entries(summaryStats.licenseDistribution).map(([k, v]) => [k, v.count]))} 
+                              total={summaryStats.totalEntries} 
+                              barColor="#f59e42" // Tailwind amber-500
+                              labelColor="#fde68a" // Tailwind amber-200
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1650,11 +1728,29 @@ function App() {
                                   {showConferenceJournalChart ? 'analytics' : 'bar_chart'}
                                 </span>
                               </button>
+                              {/* Bottone Scarica SVG */}
+                              <button
+                                onClick={() => {
+                                  const chartElement = document.querySelector('.conference-journal-chart svg');
+                                  if (chartElement) {
+                                    downloadSVG(chartElement, "conference-journal-chart.svg");
+                                  }
+                                }}
+                                className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
+                                title="Download SVG"
+                              >
+                                <span className="material-icons-round text-lg" style={{ fontSize: '1.5rem' }}>download</span>
+                              </button>
                               <span className="material-icons-round text-cyan-400">bar_chart</span>
                             </div>
                           </div>
-                          <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full">
-                            <ConferenceJournalBarChart data={summaryStats.conferenceJournalDistribution} total={summaryStats.totalEntries} />
+                          <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full conference-journal-chart">
+                            <ConferenceJournalBarChart 
+                              data={summaryStats.conferenceJournalDistribution} 
+                              total={summaryStats.totalEntries} 
+                              barColor="#06b6d4" // Tailwind cyan-500
+                              labelColor="#bae6fd" // Tailwind cyan-200
+                            />
                           </div>
                         </div>
                       </div>
