@@ -1040,6 +1040,10 @@
               "title": "Webtables: exploring the power of tables on the web"
             },
             {
+              "ref": "dataset2009dataset",
+              "title": "Dataset 1425 - Census of Agriculture Race, Ethnicity and Gender Profile Data"
+            },
+            {
               "ref": "ding2010twc",
               "title": "Twc data-gov corpus: incrementally generating linked government data from data.gov"
             },
@@ -1258,10 +1262,86 @@
                 "index": ""
             }
         },
-        "output-format": "",
+        "output-format": "CRF graph",
         "checked-by-author": false,
-        "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "goel2012exploiting",
+        "doi": "",
+        "authors": [
+          "Aman Goel",
+          "Craig A. Knoblock",
+          "Kristina Lerman"
+        ],
+        "citations": [
+          {
+            "ref": "borkar2001automatic",
+            "title": "Automatic segmentation of text into structured records"
+          },
+          {
+            "ref": "doan2000learning",
+            "title": "Learning source descriptions for data integration"
+          },
+          {
+            "ref": "kschischang2001factor",
+            "title": "Factor graphs and the sum-product algorithm"
+          },
+          {
+            "ref": "lafferty2001conditional",
+            "title": "Conditional random fields: Probabilistic models for segmenting and labeling sequence data"
+          },
+          {
+            "ref": "lauritzen1988local",
+            "title": "Local computations with probabilities on graphical structures and their application to expert systems"
+          },
+          {
+            "ref": "lerman2004using",
+            "title": "Using the structure of web sites for automatic segmentation of tables"
+          },
+          {
+            "ref": "lerman2006semantic",
+            "title": "Semantic labeling of online information sources"
+          },
+          {
+            "ref": "liu1989on",
+            "title": "On the limited memory method for large scale optimization"
+          },
+          {
+            "ref": "nadeau2007a",
+            "title": "A survey of named entity recognition and classification"
+          },
+          {
+            "ref": "pearl1988probabilistic",
+            "title": "Probabilistic Reasoning in Intelligent Systems"
+          },
+          {
+            "ref": "pinto2003table",
+            "title": "Table extraction using conditional random fields"
+          },
+          {
+            "ref": "rabiner1989a",
+            "title": "A tutorial on hidden markov models and selected applications in speech recognition"
+          },
+          {
+            "ref": "sha2003shallow",
+            "title": "Shallow parsing with conditional random fields"
+          },
+          {
+            "ref": "sutton2007dynamic",
+            "title": "Dynamic conditional random fields: Factorized probabilistic models for labeling and segmenting sequence data"
+          },
+          {
+            "ref": "tang2006tree-structured",
+            "title": "Tree-structured conditional random fields for semantic annotation"
+          },
+          {
+            "ref": "viterbi1967error",
+            "title": "Error bounds for convolutional codes and an asymptotically optimum decoding algorithm"
+          },
+          {
+            "ref": "zhu20052d",
+            "title": "2d conditional random fields for web information extraction"
+          }
+        ]
     },
     {
         "author": "Knoblock",
