@@ -1267,7 +1267,7 @@ function App() {
       <Route
         path="/"
         element={
-          <div className="min-h-screen bg-gray-900 flex flex-col">
+          <div className="bg-gray-900 flex flex-col">
             <div className="p-4 flex-shrink-0 flex items-center justify-between">
               <div>
                 <Link
@@ -1666,7 +1666,7 @@ function App() {
               </div>
               
               {/* Conference/Journal Filter */}
-              <div className="mb-4 relative" ref={filterRef}>
+              <div className="relative" ref={filterRef}>
                 <span
                   className="text-gray-200 font-semibold mr-2 cursor-pointer select-none"
                   onClick={() => setShowFacetFilter((v) => !v)}
@@ -1706,7 +1706,7 @@ function App() {
             </div>
             
             {/* Data Table */}
-            <div className="overflow-auto flex-1 pb-4">
+            <div className="overflow-auto" style={{ maxHeight: 'calc(100vh - 400px)' }}>
               <table className="w-full table-auto text-xs">
                 <thead className="bg-gray-800 sticky top-0 z-10">
                   {table.getHeaderGroups().map((headerGroup) => (
@@ -1715,7 +1715,7 @@ function App() {
                         <th 
                           key={header.id}
                           colSpan={header.colSpan}
-                          className="px-4 py-2 text-center text-xs font-semibold text-gray-300 border-r border-b border-gray-700"
+                          className="px-4 py-2 text-center text-xs font-semibold text-gray-300 border-r border-b border-gray-700 border-l border-t"
                           onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
                           style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                         >
