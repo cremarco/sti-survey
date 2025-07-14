@@ -1402,7 +1402,45 @@
         "output-format": "Source model (used to generate RDF)",
         "checked-by-author": false,
         "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "knoblock2012semiautomatically",
+  "doi": "https://doi.org/10.1007/978-3-642-30284-8_32",
+  "authors": [
+    "Craig A. Knoblock",
+    "Pedro Szekely",
+    "José Luis Ambite",
+    "Aman Goel",
+    "Shubham Gupta",
+    "Kristina Lerman",
+    "Maria Muslea",
+    "Mohsen Taheriyan",
+    "Parag Mallick"
+  ],
+  "citations": [
+    { "ref": "alexe2011designing", "title": "Designing and refining schema mappings via data examples" },
+    { "ref": "an2007a", "title": "A semantic approach to discovering schema mapping expressions" },
+    { "ref": "arenas2010relational", "title": "Relational and XML Data Exchange" },
+    { "ref": "barrasarodriguez2006upgrading", "title": "Upgrading relational legacy data to the semantic web" },
+    { "ref": "becker2010extending", "title": "Extending smw+ with a linked data integration framework" },
+    { "ref": "bellahsene2011schema", "title": "Schema Matching and Mapping" },
+    { "ref": "bizer2010the", "title": "The R2R Framework: Publishing and Discovering Mappings on the Web" },
+    { "ref": "bizer2006d2r", "title": "D2R Server–publishing relational databases on the semantic web" },
+    { "ref": "das2011r2rml", "title": "R2RML: RDB to RDF Mapping Language" },
+    { "ref": "doan2000learning", "title": "Learning source descriptions for data integration" },
+    { "ref": "fagin2009clio", "title": "Clio: Schema mapping creation and data exchange" },
+    { "ref": "fink2008owl", "title": "Owl as a target for information extraction systems" },
+    { "ref": "friedman1999navigational", "title": "Navigational plans for data integration" },
+    { "ref": "goel2011using", "title": "Using conditional random fields to exploit token structure and labels for accurate semantic annotation" },
+    { "ref": "halevy2001answering", "title": "Answering queries using views: A survey" },
+    { "ref": "jentzsch2009enabling", "title": "Enabling tailored therapeutics with linked data" },
+    { "ref": "kou1981a", "title": "A fast algorithm for steiner trees" },
+    { "ref": "lafferty2001conditional", "title": "Conditional random fields: Probabilistic models for segmenting and labeling sequence data" },
+    { "ref": "lerman2006semantic", "title": "Semantic labeling of online information sources" },
+    { "ref": "massmann2011evolution", "title": "Evolution of the coma match system" },
+    { "ref": "shvaiko2005a", "title": "A Survey of Schema-Based Matching Approaches" },
+    { "ref": "spanos2011bringing", "title": "Bringing relational databases into the semantic web: A survey" },
+    { "ref": "tuchinda2011building", "title": "Building mashups by demonstration" }
+  ]
     },
     {
         "author": "Pimplikar",
@@ -1413,7 +1451,7 @@
         },
         "added": "",
         "conference-journal": "VLDB",
-        "name-of-approach": "",
+        "name-of-approach": "WWT",
         "main-method": {
             "type": "unsup",
             "technique": "Probabilistic Graphical Model"
@@ -1450,20 +1488,111 @@
             "type": "none",
             "description": ""
         },
-        "validation": "",
+        "validation": "25 Million tables",
         "code-availability": "",
         "license": "Not specified",
         "inputs": {
             "type-of-table": "HTML tables",
             "kg": {
                 "triple-store": "",
-                "index": ""
+                "index": "Lucene"
             }
         },
-        "output-format": "",
+        "output-format": "Table + URI",
         "checked-by-author": false,
-        "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "pimplikar2012answering",
+        "doi": "https://doi.org/10.14778/2336664.2336665",
+        "authors": [
+          "Rakesh Pimplikar",
+          "Sunita Sarawagi"
+        ],
+        "citations": [
+          {
+            "ref": "Boykov2001Fast",
+            "title": "Fast approximate energy minimization via graph cuts"
+          },
+          {
+            "ref": "Cafarella2009Data",
+            "title": "Data integration for the relational web"
+          },
+          {
+            "ref": "Cafarella2008Webtables",
+            "title": "Webtables: exploring the power of tables on the web"
+          },
+          {
+            "ref": "Cafarella2008Uncovering",
+            "title": "Uncovering the relational web"
+          },
+          {
+            "ref": "Chakrabarti2010Enhancing",
+            "title": "Enhancing search with structure"
+          },
+          {
+            "ref": "Chekuri2001Approximation",
+            "title": "Approximation algorithms for the metric labeling problem via a new linear programming formulation"
+          },
+          {
+            "ref": "Crestan2011Web-scale",
+            "title": "Web-scale table census and classification"
+          },
+          {
+            "ref": "Doan2005Semantic",
+            "title": "Semantic integration research in the database community: A brief survey"
+          },
+          {
+            "ref": "Gupta2009Answering",
+            "title": "Answering table augmentation queries from unstructured lists on the web"
+          },
+          {
+            "ref": "Koller2009Probabilistic",
+            "title": "Probabilistic graphical models: principles and techniques"
+          },
+          {
+            "ref": "Kolmogorov2006Convergent",
+            "title": "Convergent tree-reweighted message passing for energy minimization"
+          },
+          {
+            "ref": "Pantel2009Web-scale",
+            "title": "Web-scale distributional similarity and entity set expansion"
+          },
+          {
+            "ref": "Papadimitriou1982Combinatorial",
+            "title": "Combinatorial optimization: algorithms and complexity"
+          },
+          {
+            "ref": "Pinto2003Table",
+            "title": "Table extraction using conditional random fields"
+          },
+          {
+            "ref": "Pound2010Expressive",
+            "title": "Expressive and flexible access to web-extracted data: A keyword-based structured query language"
+          },
+          {
+            "ref": "Rahm2001A",
+            "title": "A survey of approaches to automatic schema matching"
+          },
+          {
+            "ref": "Sarkas2010Structured",
+            "title": "Structured annotations of web queries"
+          },
+          {
+            "ref": "Sontag2008Tightening",
+            "title": "Tightening LP relaxations for MAP using message passing"
+          },
+          {
+            "ref": "Szeliski2006A",
+            "title": "A comparative study of energy minimization methods for markov random fields"
+          },
+          {
+            "ref": "Washtell2009A",
+            "title": "A comparison of windowless and window-based computational association measures as predictors of syntagmatic human associations"
+          },
+          {
+            "ref": "Yu2010Keyword",
+            "title": "Keyword search in relational databases: A survey"
+          }
+        ]
     },
     {
         "author": "Wang",
@@ -1511,20 +1640,125 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Custom, 200 wikipedia tables",
+        "validation": "Custom, 200 Wikipedia tables",
         "code-availability": "",
         "license": "Not specified",
         "inputs": {
             "type-of-table": "HTML tables",
             "kg": {
-                "triple-store": "",
+                "triple-store": "Probase",
                 "index": ""
             }
         },
-        "output-format": "",
+        "output-format": "Entity-Attribute-Value statements (one statement per table row)",
         "checked-by-author": false,
-        "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "wang2012understanding",
+        "doi": "https://doi.org/10.1007/978-3-642-34002-4_11",
+        "authors": [
+          "Jingjing Wang",
+          "Haixun Wang",
+          "Zhongyuan Wang",
+          "Kenny Q. Zhu"
+        ],
+        "citations": [
+          {
+            "ref": "wu2012probase",
+            "title": "Probase: A probabilistic taxonomy for text understanding"
+          },
+          {
+            "ref": "lee2011web",
+            "title": "Web scale taxonomy cleansing"
+          },
+          {
+            "ref": "zhang2012a",
+            "title": "A system for extracting top-k lists from the web"
+          },
+          {
+            "ref": "liu2012automatic",
+            "title": "Automatic taxonomy construction from keywords"
+          },
+          {
+            "ref": "singh2002open",
+            "title": "Open Mind Common Sense: Knowledge Acquisition from the General Public"
+          },
+          {
+            "ref": "bollacker2008freebase",
+            "title": "Freebase: a collaboratively created graph database for structuring human knowledge"
+          },
+          {
+            "ref": "hearst1992automatic",
+            "title": "Automatic acquisition of hyponyms from large text corpora"
+          },
+          {
+            "ref": "song2011short",
+            "title": "Short text conceptualization using a probabilistic knowledgebase"
+          },
+          {
+            "ref": "cafarella2008webtables",
+            "title": "Webtables: Exploring the power of tables on the web"
+          },
+          {
+            "ref": "wang2002a",
+            "title": "A machine learning based approach for table detection on the web"
+          },
+          {
+            "ref": "yoshida2001a",
+            "title": "A method to integrate tables of the world wide web"
+          },
+          {
+            "ref": "chen2000mining",
+            "title": "Mining tables from large scale html texts"
+          },
+          {
+            "ref": "cafarella2008uncovering",
+            "title": "Uncovering the relational web"
+          },
+          {
+            "ref": "yakout2012infogather",
+            "title": "Infogather: entity augmentation and attribute discovery by holistic matching with web tables"
+          },
+          {
+            "ref": "syed2010exploiting",
+            "title": "Exploiting a web of semantic data for interpreting tables"
+          },
+          {
+            "ref": "auer2007dbpedia",
+            "title": "DBpedia: A Nucleus for a Web of Open Data"
+          },
+          {
+            "ref": "limaye2010annotating",
+            "title": "Annotating and searching web tables using entities, types and relationships"
+          },
+          {
+            "ref": "venetis2011recovering",
+            "title": "Recovering semantics of tables on the web"
+          },
+          {
+            "ref": "pasca2007organizing",
+            "title": "Organizing and searching the world wide web of facts - step two: Harnessing the wisdom of the crowds"
+          },
+          {
+            "ref": "bellare2007lightlysupervised",
+            "title": "Lightly-supervised attribute extraction"
+          },
+          {
+            "ref": "elmeleegy2009harvesting",
+            "title": "Harvesting relational tables from lists on the web"
+          },
+          {
+            "ref": "he2011seisa",
+            "title": "Seisa: set expansion by iterative similarity aggregation"
+          },
+          {
+            "ref": "pyreddy1997tintin",
+            "title": "Tintin: A system for retrieval in text tables"
+          },
+          {
+            "ref": "pinto2003table",
+            "title": "Table extraction using conditional random fields"
+          }
+        ]
     },
     {
         "author": "Buche",
@@ -1547,26 +1781,26 @@
         "tasks": {
             "cta": true,
             "cpa": true,
-            "cea": false,
-            "cnea": false
+            "cea": true,
+            "cnea": true
         },
         "steps": {
             "data-preparation": {
-                "description": "",
+                "description": "Retrieval of relevant Web documents and filtering by a human expert.",
                 "spell-checker": "",
-                "units-of-measurements": ""
+                "units-of-measurements": "Units identified via Ontological and Terminological Resource (OTR)."
             },
-            "subject-detection": "",
+            "subject-detection": "Semi-automatic extraction of data tables from filtered Web documents.",
             "column-analysis": "Distinction between symbolic and numerical columns",
             "type-annotation": "A score for each column is computed leveraging: 1. The column title; 2. The column content (computed as term similarity between the terms in the column and the terms in the OTR). wrt the concepts that appear in the signature of the relations belonging to the OTR.",
             "predicate-annotation": "Each relation in the OTR is scored, using a proportion of simple concepts in the signature of the relation which are represented by columns in the table.",
             "datatype-annotation": "Symbolic and numerical columns are distinguished, using knowledge in an Ontological and Terminological Resource (OTR) i.e., unit concepts. ",
             "entity-linking": {
                 "description": "",
-                "candidate-generation": "",
-                "entity-disambiguation": ""
+                "candidate-generation": "Term similarity–based generation of concept candidates.",
+                "entity-disambiguation": "Selection of top fuzzy matches for manual validation."
             },
-            "nil-annotation": ""
+            "nil-annotation": "Annotation of unrecognized cells as nil based on threshold."
         },
         "user-revision": {
             "type": "none",
@@ -1578,14 +1812,151 @@
         "inputs": {
             "type-of-table": "Domain specific Web tables",
             "kg": {
-                "triple-store": "",
-                "index": ""
+                "triple-store": "Custom XML/RDF repository",
+                "index": "SPARQL index"
             }
         },
         "output-format": "XML documents representing data tables; RDF annotations",
         "checked-by-author": false,
-        "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "buche2013fuzzy",
+        "doi": "https://doi.org/10.1109/TKDE.2011.245",
+        "authors": [
+          "Patrice Buche",
+          "Juliette Dibie-Barthelemy",
+          "Liliana Ibanescu",
+          "Lydie Soler"
+        ],
+        "citations": [
+          {
+            "ref": "buche2000towards",
+            "title": "Towards a Unified Querying System of Both Structured and Semi-Structured Imprecise Data Using Fuzzy Views"
+          },
+          {
+            "ref": "buche2005fuzzy",
+            "title": "Fuzzy Querying of Incomplete, Imprecise, and Heterogeneously Structured Data in the Relational Model Using Ontologies and Rules"
+          },
+          {
+            "ref": "hignette2007an",
+            "title": "An Ontology-Driven Annotation of Data Tables"
+          },
+          {
+            "ref": "hignette2009fuzzy",
+            "title": "Fuzzy Annotation of Web Data Tables Driven by a Domain Ontology"
+          },
+          {
+            "ref": "buche2009flexible",
+            "title": "Flexible Sparql Querying of Web Data Tables Driven by an Ontology"
+          },
+          {
+            "ref": "cimiano2011lexinfo",
+            "title": "Lexinfo: A Declarative Model for the Lexicon-Ontology Interface"
+          },
+          {
+            "ref": "mccrae2011linking",
+            "title": "Linking Lexical Resources and Ontologies on the Semantic Web with Lemon"
+          },
+          {
+            "ref": "declerck2010towards",
+            "title": "Towards a Standardized Linguistic Annotation of the Textual Content of Labels in Knowledge Representation Systems"
+          },
+          {
+            "ref": "reymonet2007modelling",
+            "title": "Modelling Ontological and Terminological Resources in OWL DL"
+          },
+          {
+            "ref": "roche2009ontoterminology",
+            "title": "Ontoterminology - A New Paradigm for Terminology"
+          },
+          {
+            "ref": "reymonet2009ontology",
+            "title": "Ontology Based Information Retrieval: An Application to Automotive Diagnosis"
+          },
+          {
+            "ref": "noy2012defining",
+            "title": "Defining N-ary Relations on the Semantic Web W3C Working Group Note"
+          },
+          {
+            "ref": "yangarber2002unsupervised",
+            "title": "Unsupervised Learning of Generalized Names"
+          },
+          {
+            "ref": "vanrijsbergen1979information",
+            "title": "Information Retrieval"
+          },
+          {
+            "ref": "platt1999fast",
+            "title": "Fast Training of Support Vector Machines Using Sequential Minimal Optimization"
+          },
+          {
+            "ref": "zadeh1965fuzzy",
+            "title": "Fuzzy Sets"
+          },
+          {
+            "ref": "zadeh1978fuzzy",
+            "title": "Fuzzy Sets as a Basis for a Theory of Possibility"
+          },
+          {
+            "ref": "dubois1997three",
+            "title": "The Three Semantics of Fuzzy Sets"
+          },
+          {
+            "ref": "dubois1988possibility",
+            "title": "Possibility Theory - An Approach to Computerized Processing of Uncertainty"
+          },
+          {
+            "ref": "baziz2006fuzzy",
+            "title": "A Fuzzy Logic Approach to Information Retrieval Using a Ontology-Based Representation of Documents"
+          },
+          {
+            "ref": "liu2007tableseer",
+            "title": "Tableseer: Automatic Table Metadata Extraction and Searching in Digital Libraries"
+          },
+          {
+            "ref": "cafarella2008uncovering",
+            "title": "Uncovering the Relational Web"
+          },
+          {
+            "ref": "cafarella2008webtables",
+            "title": "Webtables: Exploring the Power of Tables on the Web"
+          },
+          {
+            "ref": "vanassem2010converting",
+            "title": "Converting and Annotating Quantitative Data Tables"
+          },
+          {
+            "ref": "tenier2006instantiation",
+            "title": "Instantiation of Relations for Semantic Annotation"
+          },
+          {
+            "ref": "embley2002automatically",
+            "title": "Automatically Extracting Ontologically Specified Data from HTML Tables of Unknown Structure"
+          },
+          {
+            "ref": "campi2006fuzzy",
+            "title": "A Fuzzy Extension for the Xpath Query Language"
+          },
+          {
+            "ref": "hutardo2006relaxed",
+            "title": "A Relaxed Approach to Rdf Querying"
+          },
+          {
+            "ref": "corby2006searching",
+            "title": "Searching the Semantic Web: Approximate Query Processing Based on Ontologies"
+          },
+          {
+            "ref": "pan2008scalable",
+            "title": "Scalable Querying Services over Fuzzy Ontologies"
+          },
+          {
+            "ref": "buche2011flexible",
+            "title": "Flexible Querying of Web Data to Simulate Bacterial Growth in Food"
+          },
+          {
+            "ref": "rijgersberg2011how",
+            "title": "How Semantics Can Improve Engineering Processes: A Case of Units Measure and Quantities"
+          }
+        ]
     },
     {
         "author": "Cruz",
@@ -1596,17 +1967,17 @@
         },
         "added": "",
         "conference-journal": "SIGSPATIAL",
-        "name-of-approach": "Giva",
+        "name-of-approach": "GIVA",
         "main-method": {
             "type": "sup",
             "technique": "AgreementMaker"
         },
         "domain": {
             "domain": "dependent",
-            "type": ""
+            "type": "Geospatial and Temporal Data Integration, Visualization, and Analytics"
         },
         "tasks": {
-            "cta": false,
+            "cta": true,
             "cpa": true,
             "cea": false,
             "cnea": false
@@ -1637,16 +2008,44 @@
         "code-availability": "",
         "license": "Not specified",
         "inputs": {
-            "type-of-table": "GML, KML, Shapefile, MapInfo TAB, HTML table",
+            "type-of-table": "GML, KML, Shapefile, MapInfo TAB, HTML table, CSV, TSV",
             "kg": {
-                "triple-store": "",
+                "triple-store": "OWLIM",
                 "index": ""
             }
         },
-        "output-format": "",
+        "output-format": "RDF",
         "checked-by-author": false,
-        "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "cruz2013giva",
+        "doi": "https://doi.org/10.1145/2525314.2525324",
+        "authors": [
+          "Isabel F. Cruz",
+          "Venkat R. Ganesh",
+          "Claudio Caletti",
+          "Pavan Reddy"
+        ],
+        "citations": [
+          { "ref": "abiteboul1999tools", "title": "Tools for Data Translation and Integration" },
+          { "ref": "cruz2012automatic", "title": "Automatic Configuration Selection Using Ontology Matching Task Profiling" },
+          { "ref": "cruz2009agreementmaker", "title": "AgreementMaker: Efficient Matching for Large Real-World Schemas and Ontologies" },
+          { "ref": "cruz2008structural", "title": "Structural Alignment Methods with Applications to Geospatial Ontologies" },
+          { "ref": "cruz2009ontology", "title": "Ontology Driven Data Integration in Heterogeneous Networks" },
+          { "ref": "dellavalle2010the", "title": "The Experience of Realizing a Semantic Web Urban Computing Application" },
+          { "ref": "gdal2013gdal", "title": "GDAL - Geospatial Data Abstraction Library, Version 1.10.0" },
+          { "ref": "hall2009the", "title": "The WEKA Data Mining Software: An Update" },
+          { "ref": "kennedy2011the", "title": "The Study of Urban Metabolism and its Applications to Urban Planning and Design" },
+          { "ref": "kiryakov2005owlim–a", "title": "OWLIM–A Pragmatic Semantic Repository for OWL" },
+          { "ref": "knoblock2012semiautomatically", "title": "Semi-automatically Mapping Structured Sources into the Semantic Web" },
+          { "ref": "maceachren1997exploratory", "title": "Exploratory Cartographic Visualization: Advancing the Agenda" },
+          { "ref": "mccurley2001geospatial", "title": "Geospatial Mapping and Navigation of the Web" },
+          { "ref": "middel2007a", "title": "A Framework for Visualizing Multivariate Geodata" },
+          { "ref": "pfoser2005indeterminacy", "title": "Indeterminacy and Spatiotemporal Data: Basic Definitions and Case Study" },
+          { "ref": "quinlan1993c4.5", "title": "C4.5: Programs for Machine Learning" },
+          { "ref": "rishe2011geospatial", "title": "Geospatial Data Management with TerraFly" },
+          { "ref": "wiegand2002querying", "title": "Querying Heterogeneous Land Use Data: Problems and Potential" },
+          { "ref": "worboys1998computation", "title": "Computation with Imprecise Geospatial Data" }
+        ]
     },
     {
         "author": "Deng",
@@ -1657,10 +2056,10 @@
         },
         "added": "",
         "conference-journal": "VLDB",
-        "name-of-approach": "lookup",
+        "name-of-approach": "",
         "main-method": {
             "type": "unsup",
-            "technique": ""
+            "technique": "MapReduce-based similarity join"
         },
         "domain": {
             "domain": "independent",
@@ -1674,7 +2073,7 @@
         },
         "steps": {
             "data-preparation": {
-                "description": "",
+                "description": "Compute signatures for entities and cell values using q-grams or prefix signatures in MapReduce",
                 "spell-checker": "",
                 "units-of-measurements": ""
             },
@@ -1684,9 +2083,9 @@
             "predicate-annotation": " ",
             "datatype-annotation": "",
             "entity-linking": {
-                "description": "",
-                "candidate-generation": "",
-                "entity-disambiguation": ""
+                "description": "Perform both exact and fuzzy matching between cell values and knowledge-base entities",
+                "candidate-generation": "Generate candidate entity matches via signature-based similarity (q-grams/prefixes)",
+                "entity-disambiguation": "Compute maximum bipartite matching on (cell value, entity) pairs to disambiguate assignments"
             },
             "nil-annotation": ""
         },
@@ -1700,14 +2099,176 @@
         "inputs": {
             "type-of-table": "Web",
             "kg": {
-                "triple-store": "DBpedia,Freebase,Yago",
-                "index": ""
+                "triple-store": "DBpedia, Freebase, Yago",
+                "index": "Inverted index mapping entities to types"
             }
         },
         "output-format": "",
         "checked-by-author": false,
-        "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "deng2013scalable",
+        "doi": "https://doi.org/10.14778/2536258.2536271",
+        "authors": [
+          "Dong Deng",
+          "Yu Jiang",
+          "Guoliang Li",
+          "Jian Li",
+          "Cong Yu"
+        ],
+        "citations": [
+          {
+            "ref": "abiteboul2012viewing",
+            "title": "Viewing the web as a distributed knowledge base"
+          },
+          {
+            "ref": "arasu2006efficient",
+            "title": "Efficient exact set-similarity joins"
+          },
+          {
+            "ref": "auer2007dbpedia",
+            "title": "Dbpedia: A nucleus for a web of open data"
+          },
+          {
+            "ref": "bloom1970space",
+            "title": "Space/time trade-offs in hash coding with allowable errors"
+          },
+          {
+            "ref": "bollacker2008freebase",
+            "title": "Freebase: a collaboratively created graph database for structuring human knowledge"
+          },
+          {
+            "ref": "cafarella2008webtables",
+            "title": "Webtables: exploring the power of tables on the web"
+          },
+          {
+            "ref": "chaudhuri2003robust",
+            "title": "Robust and efficient fuzzy match for online data cleaning"
+          },
+          {
+            "ref": "dean2004mapreduce",
+            "title": "Mapreduce: Simplified data processing on large clusters"
+          },
+          {
+            "ref": "elmeleegy2009harvesting",
+            "title": "Harvesting relational tables from lists on the web"
+          },
+          {
+            "ref": "google2012introducing",
+            "title": "Introducing knowledge graph"
+          },
+          {
+            "ref": "gravano2001approximate",
+            "title": "Approximate string joins in a database (almost) for free"
+          },
+          {
+            "ref": "guo2011item",
+            "title": "ITEM: Extract and integrate entities from tabular data to RDF knowledge base"
+          },
+          {
+            "ref": "gupta2009answering",
+            "title": "Answering table augmentation queries from unstructured lists on the web"
+          },
+          {
+            "ref": "han2008rdf123",
+            "title": "Rdf123: From spreadsheets to rdf"
+          },
+          {
+            "ref": "hignette2009fuzzy",
+            "title": "Fuzzy annotation of web data tables driven by a domain ontology"
+          },
+          {
+            "ref": "karypis1999multilevel",
+            "title": "Multilevel k-way hypergraph partitioning"
+          },
+          {
+            "ref": "kim2012parallel",
+            "title": "Parallel top-k similarity join algorithms using mapreduce"
+          },
+          {
+            "ref": "li2011pass-join",
+            "title": "Pass-join: A partition-based method for similarity joins"
+          },
+          {
+            "ref": "limaye2010annotating",
+            "title": "Annotating and searching web tables using entities, types and relationships"
+          },
+          {
+            "ref": "ling2013synthesizing",
+            "title": "Synthesizing union tables from the web"
+          },
+          {
+            "ref": "metwally2012v-smart-join",
+            "title": "V-smart-join: A scalable mapreduce framework for all-pair similarity joins of multisets and vectors"
+          },
+          {
+            "ref": "pimplikar2012answering",
+            "title": "Answering table queries on the web using column keywords"
+          },
+          {
+            "ref": "quercini2013entity",
+            "title": "Entity discovery and annotation in tables"
+          },
+          {
+            "ref": "sarawagi2004efficient",
+            "title": "Efficient set joins on similarity predicates"
+          },
+          {
+            "ref": "shanmugasund.2004payload",
+            "title": "Payload attribution via hierarchical bloom filters"
+          },
+          {
+            "ref": "suchanek2007yago",
+            "title": "Yago: a core of semantic knowledge"
+          },
+          {
+            "ref": "vanassem2010converting",
+            "title": "Converting and annotating quantitative data tables"
+          },
+          {
+            "ref": "venetis2011recovering",
+            "title": "Recovering semantics of tables on the web"
+          },
+          {
+            "ref": "vernica2010efficient",
+            "title": "Efficient parallel set-similarity joins using mapreduce"
+          },
+          {
+            "ref": "wang2010trie-join",
+            "title": "Trie-join: Efficient trie-based string similarity joins with edit-distance constraints"
+          },
+          {
+            "ref": "wang2011fast-join",
+            "title": "Fast-join: An efficient method for fuzzy token matching based string similarity join"
+          },
+          {
+            "ref": "wang2012can",
+            "title": "Can we beat the prefix filtering?: an adaptive framework for similarity join and search"
+          },
+          {
+            "ref": "wang2012understanding",
+            "title": "Understanding tables on the web"
+          },
+          {
+            "ref": "wu2012probase",
+            "title": "Probase: a probabilistic taxonomy for text understanding"
+          },
+          {
+            "ref": "xiao2008ed-join",
+            "title": "Ed-join: an efficient algorithm for similarity joins with edit distance constraints"
+          },
+          {
+            "ref": "xiao2008efficient",
+            "title": "Efficient similarity joins for near duplicate detection"
+          },
+          {
+            "ref": "yakout2012infogather",
+            "title": "Infogather: entity augmentation and attribute discovery by holistic matching with web tables"
+          },
+          {
+            "ref": "yu2012towards",
+            "title": "Towards a high quality and web-scalable table search engine"
+          }
+        ]
     },
     {
         "author": "Ermilov",
@@ -1718,9 +2279,9 @@
         },
         "added": "",
         "conference-journal": "I-SEMANTICS",
-        "name-of-approach": "",
+        "name-of-approach": "CSV2RDF",
         "main-method": {
-            "type": "",
+            "type": "unsup",
             "technique": "pattern"
         },
         "domain": {
@@ -1729,7 +2290,7 @@
         },
         "tasks": {
             "cta": false,
-            "cpa": false,
+            "cpa": true,
             "cea": false,
             "cnea": false
         },
@@ -1753,7 +2314,7 @@
         },
         "user-revision": {
             "type": "Semi-automated",
-            "description": "The RDF mapping obtained from Sparqlify-CSV a page is created for each resource on the mappings wiki, which uses the Semantic MediaWiki extension to allow for semantic annotations over the content of such pages. "
+            "description": "The RDF mapping obtained from Sparqlify-CSV. A page is created for each resource on the mappings wiki, which uses the Semantic MediaWiki extension to allow for semantic annotations over the content of such pages."
         },
         "validation": "",
         "code-availability": "",
@@ -1767,8 +2328,60 @@
         },
         "output-format": "RDF",
         "checked-by-author": false,
-        "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "ermilov2013user",
+        "doi": "https://doi.org/10.1145/2506182.2506196",
+        "authors": [
+          "Ivan Ermilov",
+          "Sören Auer",
+          "Claus Stadler"
+        ],
+        "citations": [
+          {
+            "ref": "auer2009triplify",
+            "title": "Triplify: Light-weight linked data publication from relational databases"
+          },
+          {
+            "ref": "bernerslee1998relational",
+            "title": "Relational databases on the semantic web"
+          },
+          {
+            "ref": "ding2009the",
+            "title": "The data-gov wiki: A semantic web portal for linked government data"
+          },
+          {
+            "ref": "ding2011twc",
+            "title": "TWC LOGD: A portal for linked open government data ecosystems"
+          },
+          {
+            "ref": "hurst2000the",
+            "title": "The Interpretation of Tables in Texts"
+          },
+          {
+            "ref": "kroetzsch2007semantic",
+            "title": "Semantic wikipedia"
+          },
+          {
+            "ref": "lebo2010converting",
+            "title": "Converting governmental datasets into linked data"
+          },
+          {
+            "ref": "maali2010enabling",
+            "title": "Enabling interoperability of government data catalogues"
+          },
+          {
+            "ref": "maali2012a",
+            "title": "A publishing pipeline for linked government data"
+          },
+          {
+            "ref": "mulwad2011automatically",
+            "title": "Automatically Generating Government Linked Data from Tables"
+          },
+          {
+            "ref": "pivk2007transforming",
+            "title": "Transforming arbitrary tables into logical form with TARTAR"
+          }
+        ]
     },
     {
         "author": "Mulwad",
