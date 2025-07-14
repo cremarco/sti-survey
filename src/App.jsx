@@ -106,6 +106,7 @@ const REQUIRED_FIELDS = {
   "inputs.kg.triple-store": true,
   "output-format": true,
   "checked-by-author": true,
+  doi: true,
 };
 
 /**
@@ -1043,6 +1044,16 @@ function App() {
         );
       },
       enableSorting: false,
+      meta: { align: 'center' },
+    }),
+    // Numero di citazioni (array citations)
+    columnHelper.accessor(row => Array.isArray(row.citations) ? row.citations.length : 0, {
+      id: "citations-count",
+      header: "# Citations",
+      cell: (info) => (
+        <span className="text-[10px] text-gray-400">{info.getValue()}</span>
+      ),
+      enableSorting: true,
       meta: { align: 'center' },
     }),
   ], []);
