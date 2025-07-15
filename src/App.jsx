@@ -12,6 +12,7 @@ import {
 import * as d3 from "d3";
 import { Routes, Route, Link } from 'react-router-dom';
 import CitationMap from "./CitationMap";
+import Taxonomy from "./Taxonomy";
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -1287,6 +1288,12 @@ function App() {
                 >
                   Citation Map
                 </Link>
+                <Link
+                  to="/taxonomy"
+                  className="text-green-400 hover:text-green-200 underline text-sm"
+                >
+                  Taxonomy
+                </Link>
               </div>
             </div>
             {/* Overall Data Snapshot */}
@@ -1865,6 +1872,7 @@ function App() {
         }
       />
       <Route path="/citation-map" element={<CitationMap />} />
+      <Route path="/taxonomy" element={<Taxonomy />} />
     </Routes>
   );
 }
