@@ -46,6 +46,14 @@ function Navigation() {
             >
               Taxonomy
             </Link>
+            <Link
+              to="/charts"
+              className={`text-neutral-100 hover:text-neutral-200 transition-colors duration-200 text-sm font-medium ${
+                isActive('/charts') ? 'text-slate-300' : ''
+              }`}
+            >
+              Charts
+            </Link>
           </div>
 
           {/* Contact Button */}

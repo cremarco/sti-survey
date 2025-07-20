@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from './Navigation';
+import DataOverview from './DataOverview';
 
 function Home() {
   return (
@@ -8,10 +9,8 @@ function Home() {
       <Navigation />
       
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className="text-neutral-300 text-lg">
-          Welcome to the STI Survey Home Page
-        </div>
+      <div className="flex-1">
+        <DataOverview />
       </div>
     </div>
   );

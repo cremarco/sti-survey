@@ -15,6 +15,7 @@ import CitationMap from "./CitationMap";
 import Taxonomy from "./Taxonomy";
 import Home from "./Home";
 import Navigation from "./Navigation";
+import Charts from "./Charts";
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -1861,6 +1862,7 @@ function App() {
       />
       <Route path="/citation-map" element={<CitationMap />} />
       <Route path="/taxonomy" element={<Taxonomy />} />
+      <Route path="/charts" element={<Charts data={data} summaryStats={summaryStats} />} />
     </Routes>
   );
 }
