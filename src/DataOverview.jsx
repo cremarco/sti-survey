@@ -6,7 +6,39 @@
  * and various data quality indicators.
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import * as d3 from 'd3';
+
+/**
+ * Custom hook for animated counting
+ */
+const useCountUp = (end, start = 0, duration = 1000) => {
+  const [count, setCount] = useState(start);
+  
+  useEffect(() => {
+    // Handle invalid values
+    if (typeof end !== 'number' || isNaN(end)) {
+      setCount(0);
+      return;
+    }
+    
+    let startTime = null;
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const currentCount = Math.floor(start + (end - start) * progress);
+      setCount(currentCount);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    
+    requestAnimationFrame(animate);
+  }, [end, start, duration]);
+  
+  return count;
+};
 
 /**
  * Utility function to check if a value is empty, null, or undefined
@@ -75,6 +107,17 @@ function DataOverview() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showStatistics, setShowStatistics] = useState(false);
+  const [animationStarted, setAnimationStarted] = useState(false);
+  
+  // Refs for charts
+  const chartRefs = useRef({
+    total: null,
+    yearRange: null,
+    cta: null,
+    cpa: null,
+    cea: null,
+    cnea: null
+  });
 
   // Load data on component mount
   useEffect(() => {
@@ -95,6 +138,129 @@ function DataOverview() {
 
     loadData();
   }, []);
+
+  // Start animations when data is loaded
+  useEffect(() => {
+    if (data.length > 0 && !animationStarted) {
+      const timer = setTimeout(() => setAnimationStarted(true), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [data, animationStarted]);
+
+  // Function to render mini line chart with animation
+  const renderMiniChart = (svgRef, chartData, color, width = 80, height = 30) => {
+    if (!svgRef || !chartData || chartData.length === 0) return;
+
+    // Clear previous chart
+    d3.select(svgRef).selectAll("*").remove();
+
+    // Create SVG
+    const svg = d3.select(svgRef)
+      .attr("width", width)
+      .attr("height", height);
+
+    // Prepare data - count approaches by year
+    const yearCounts = {};
+    chartData.forEach(item => {
+      if (item.year && typeof item.year === 'number') {
+        yearCounts[item.year] = (yearCounts[item.year] || 0) + 1;
+      }
+    });
+
+    const processedData = Object.entries(yearCounts)
+      .map(([year, count]) => ({ year: parseInt(year), count }))
+      .sort((a, b) => a.year - b.year);
+
+    if (processedData.length === 0) return;
+
+    // Calculate cumulative counts for growth line
+    let cumulative = 0;
+    const growthData = processedData.map(item => {
+      cumulative += item.count;
+      return { year: item.year, cumulative };
+    });
+
+    // Scales
+    const xScale = d3.scaleLinear()
+      .domain(d3.extent(growthData, d => d.year))
+      .range([0, width]);
+
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(growthData, d => d.cumulative)])
+      .range([height, 0]);
+
+    // Line generator
+    const line = d3.line()
+      .x(d => xScale(d.year))
+      .y(d => yScale(d.cumulative))
+      .curve(d3.curveMonotoneX);
+
+    // Create gradient
+    const gradient = svg.append("defs")
+      .append("linearGradient")
+      .attr("id", `gradient-${color.replace('#', '')}`)
+      .attr("gradientUnits", "userSpaceOnUse")
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "0%")
+      .attr("y2", "100%");
+
+    gradient.append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", color)
+      .attr("stop-opacity", 0.8);
+
+    gradient.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", color)
+      .attr("stop-opacity", 0.1);
+
+    // Add area with animation
+    const area = d3.area()
+      .x(d => xScale(d.year))
+      .y0(height)
+      .y1(d => yScale(d.cumulative))
+      .curve(d3.curveMonotoneX);
+
+    const areaPath = svg.append("path")
+      .datum(growthData)
+      .attr("fill", `url(#gradient-${color.replace('#', '')})`)
+      .attr("d", area)
+      .style("opacity", 0);
+
+    // Add line with animation
+    const linePath = svg.append("path")
+      .datum(growthData)
+      .attr("fill", "none")
+      .attr("stroke", color)
+      .attr("stroke-width", 1.5)
+      .attr("d", line)
+      .style("opacity", 0);
+
+    // Animate both area and line
+    areaPath.transition()
+      .duration(1200)
+      .style("opacity", 1);
+
+    linePath.transition()
+      .duration(1200)
+      .style("opacity", 1);
+  };
+
+  // Effect to render charts when data changes
+  useEffect(() => {
+    if (data.length > 0 && animationStarted) {
+      // Render all charts simultaneously during number animation
+      setTimeout(() => {
+        renderMiniChart(chartRefs.current.total, data, "#64748b");
+        renderMiniChart(chartRefs.current.yearRange, data, "#3b82f6");
+        renderMiniChart(chartRefs.current.cta, data.filter(item => item.tasks?.cta), "#f43f5e");
+        renderMiniChart(chartRefs.current.cpa, data.filter(item => item.tasks?.cpa), "#f97316");
+        renderMiniChart(chartRefs.current.cea, data.filter(item => item.tasks?.cea), "#f59e0b");
+        renderMiniChart(chartRefs.current.cnea, data.filter(item => item.tasks?.cnea), "#eab308");
+      }, 300); // Start charts during counting animation
+    }
+  }, [data, animationStarted]);
 
   // Calculate summary statistics with optimized performance
   const summaryStats = useMemo(() => {
@@ -194,6 +360,13 @@ function DataOverview() {
     };
   }, [data]);
 
+  // Animated counters
+  const animatedTotalEntries = useCountUp(summaryStats.totalEntries || 0, 0, animationStarted ? 1500 : 0);
+  const animatedCta = useCountUp(summaryStats.taskCounts?.cta || 0, 0, animationStarted ? 1500 : 0);
+  const animatedCpa = useCountUp(summaryStats.taskCounts?.cpa || 0, 0, animationStarted ? 1500 : 0);
+  const animatedCea = useCountUp(summaryStats.taskCounts?.cea || 0, 0, animationStarted ? 1500 : 0);
+  const animatedCnea = useCountUp(summaryStats.taskCounts?.cnea || 0, 0, animationStarted ? 1500 : 0);
+
   // Loading state
   if (loading) {
     return (
@@ -229,29 +402,59 @@ function DataOverview() {
           {/* Summary when closed */}
           {!showStatistics && (
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
-              <div className="bg-slate-500/10 p-3">
-                <div className="text-2xl font-bold text-slate-100">{summaryStats.totalEntries}</div>
+              <div className="bg-slate-500/10 p-4 relative min-h-[80px]">
+                <div className="text-2xl font-bold text-slate-100">{animatedTotalEntries}</div>
                 <div className="text-xs text-slate-300">Total Approaches</div>
+                <svg
+                  ref={el => chartRefs.current.total = el}
+                  className="absolute bottom-0 right-0 opacity-70"
+                  style={{ pointerEvents: 'none' }}
+                />
               </div>
-              <div className="bg-blue-500/10 p-3">
+              <div className="bg-blue-500/10 p-4 relative min-h-[80px]">
                 <div className="text-2xl font-bold text-blue-100">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</div>
                 <div className="text-xs text-blue-300">Year Range</div>
+                <svg
+                  ref={el => chartRefs.current.yearRange = el}
+                  className="absolute bottom-0 right-0 opacity-70"
+                  style={{ pointerEvents: 'none' }}
+                />
               </div>
-              <div className="bg-rose-500/10 p-3">
-                <div className="text-2xl font-bold text-rose-100">{summaryStats.taskCounts.cta}</div>
+              <div className="bg-rose-500/10 p-4 relative min-h-[80px]">
+                <div className="text-2xl font-bold text-rose-100">{animatedCta}</div>
                 <div className="text-xs text-rose-300">CTA</div>
+                <svg
+                  ref={el => chartRefs.current.cta = el}
+                  className="absolute bottom-0 right-0 opacity-70"
+                  style={{ pointerEvents: 'none' }}
+                />
               </div>
-              <div className="bg-orange-500/10 p-3">
-                <div className="text-2xl font-bold text-orange-100">{summaryStats.taskCounts.cpa}</div>
+              <div className="bg-orange-500/10 p-4 relative min-h-[80px]">
+                <div className="text-2xl font-bold text-orange-100">{animatedCpa}</div>
                 <div className="text-xs text-orange-300">CPA</div>
+                <svg
+                  ref={el => chartRefs.current.cpa = el}
+                  className="absolute bottom-0 right-0 opacity-70"
+                  style={{ pointerEvents: 'none' }}
+                />
               </div>
-              <div className="bg-amber-500/10 p-3">
-                <div className="text-2xl font-bold text-amber-100">{summaryStats.taskCounts.cea}</div>
+              <div className="bg-amber-500/10 p-4 relative min-h-[80px]">
+                <div className="text-2xl font-bold text-amber-100">{animatedCea}</div>
                 <div className="text-xs text-amber-300">CEA</div>
+                <svg
+                  ref={el => chartRefs.current.cea = el}
+                  className="absolute bottom-0 right-0 opacity-70"
+                  style={{ pointerEvents: 'none' }}
+                />
               </div>
-              <div className="bg-yellow-500/10 p-3">
-                <div className="text-2xl font-bold text-yellow-100">{summaryStats.taskCounts.cnea}</div>
+              <div className="bg-yellow-500/10 p-4 relative min-h-[80px]">
+                <div className="text-2xl font-bold text-yellow-100">{animatedCnea}</div>
                 <div className="text-xs text-yellow-300">CNEA</div>
+                <svg
+                  ref={el => chartRefs.current.cnea = el}
+                  className="absolute bottom-0 right-0 opacity-70"
+                  style={{ pointerEvents: 'none' }}
+                />
               </div>
             </div>
           )}
