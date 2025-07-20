@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import Navigation from './Navigation';
 
 function CitationMap() {
   const chartRef = useRef();
@@ -219,21 +220,23 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
         <span className="text-gray-300 text-lg">Loading data...</span>
       </div>
     );
   }
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
         <span className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">Error: {error}</span>
       </div>
     );
   }
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-gray-800 flex flex-col items-center justify-center py-12 px-1">
-      <div className="w-full max-w-7xl bg-gray-800 rounded-xl shadow-lg p-4 md:p-8 flex flex-col items-center">
+    <div className="min-h-screen bg-neutral-900 flex flex-col">
+      <Navigation />
+      <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
+        <div className="w-full max-w-7xl bg-gray-800 rounded-xl shadow-lg p-4 md:p-8 flex flex-col items-center">
         <div className="w-full border-b border-gray-700 pb-4 mb-8 flex flex-col items-center">
           <h1 className="text-3xl md:text-4xl text-gray-100 font-bold tracking-tight mb-2 text-center">Citation Map</h1>
           <p className="text-gray-400 text-base text-center">Visualization of citations between documents</p>
@@ -250,6 +253,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
         </div>
       </div>
     </div>
+  </div>
   );
 }
 

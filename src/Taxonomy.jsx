@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import Navigation from './Navigation';
 
 // Tailwind palette HEX (v3)
 const CATEGORY_COLORS = {
@@ -112,19 +113,25 @@ function Taxonomy() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">
-          Error: {error}
+      <div className="min-h-screen bg-neutral-900 flex flex-col">
+        <Navigation />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">
+            Error: {error}
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-      <div className="w-full max-w-6xl flex flex-col items-center">
-        <h2 className="text-3xl font-bold text-gray-100 mb-6">STI Approaches Taxonomy</h2>
-        <div ref={chartRef} className="w-full flex justify-center items-center" />
+    <div className="min-h-screen bg-neutral-900 flex flex-col">
+      <Navigation />
+      <div className="flex-1 flex items-center justify-center">
+        <div className="w-full max-w-6xl flex flex-col items-center">
+          <h2 className="text-3xl font-bold text-gray-100 mb-6">STI Approaches Taxonomy</h2>
+          <div ref={chartRef} className="w-full flex justify-center items-center" />
+        </div>
       </div>
     </div>
   );

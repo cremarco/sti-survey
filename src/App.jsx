@@ -13,6 +13,8 @@ import * as d3 from "d3";
 import { Routes, Route, Link } from 'react-router-dom';
 import CitationMap from "./CitationMap";
 import Taxonomy from "./Taxonomy";
+import Home from "./Home";
+import Navigation from "./Navigation";
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -1257,7 +1259,7 @@ function App() {
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
         <div className="text-gray-300 text-lg">Loading data...</div>
       </div>
     );
@@ -1266,7 +1268,7 @@ function App() {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
         <div className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">
           Error: {error}
         </div>
@@ -1276,26 +1278,12 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route
-        path="/"
+        path="/survey"
         element={
-          <div className="bg-gray-900 flex flex-col">
-            <div className="p-4 flex-shrink-0 flex items-center justify-between">
-              <div>
-                <Link
-                  to="/citation-map"
-                  className="text-blue-400 hover:text-blue-200 underline text-sm mr-4"
-                >
-                  Citation Map
-                </Link>
-                <Link
-                  to="/taxonomy"
-                  className="text-green-400 hover:text-green-200 underline text-sm"
-                >
-                  Taxonomy
-                </Link>
-              </div>
-            </div>
+          <div className="bg-neutral-900 flex flex-col">
+            <Navigation />
             {/* Overall Data Snapshot */}
             <div className="p-4 flex-shrink-0">
               {/* Overall Data Snapshot */}
