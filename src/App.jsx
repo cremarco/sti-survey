@@ -24,7 +24,7 @@
  */
 
 import { useState, useEffect } from "react";
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import CitationMap from "./CitationMap";
 import Taxonomy from "./Taxonomy";
 import Navigation from "./Navigation";
@@ -108,6 +108,67 @@ function App() {
               
             </div>
             <DataOverview />
+            
+            {/* Navigation Boxes */}
+            <div className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <Link to="/survey" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-blue-500/20 flex items-center justify-center mr-4">
+                        <span className="material-icons-round text-blue-400 text-xl">table_chart</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-neutral-100">Survey Data</h3>
+                    </div>
+                    <p className="text-neutral-400 text-sm">
+                      Explore the complete dataset with interactive filtering, sorting, and detailed information about each approach.
+                    </p>
+                  </div>
+                </Link>
+
+                <Link to="/citation-map" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-green-500/20 flex items-center justify-center mr-4">
+                        <span className="material-icons-round text-green-400 text-xl">account_tree</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-neutral-100">Citation Map</h3>
+                    </div>
+                    <p className="text-neutral-400 text-sm">
+                      Visualize the relationships between research papers through their citation networks and connections.
+                    </p>
+                  </div>
+                </Link>
+
+                <Link to="/taxonomy" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-purple-500/20 flex items-center justify-center mr-4">
+                        <span className="material-icons-round text-purple-400 text-xl">category</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-neutral-100">Taxonomy</h3>
+                    </div>
+                    <p className="text-neutral-400 text-sm">
+                      Discover the hierarchical classification of methods, techniques, and approaches in semantic table interpretation.
+                    </p>
+                  </div>
+                </Link>
+
+                <Link to="/charts" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-orange-500/20 flex items-center justify-center mr-4">
+                        <span className="material-icons-round text-orange-400 text-xl">bar_chart</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-neutral-100">Analytics</h3>
+                    </div>
+                    <p className="text-neutral-400 text-sm">
+                      View comprehensive charts and analytics showing trends, distributions, and insights from the survey data.
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       } />
