@@ -1,3 +1,28 @@
+/**
+ * STI Survey Data Application
+ * 
+ * This application provides a comprehensive interface for viewing and analyzing
+ * survey data related to semantic table interpretation approaches.
+ * 
+ * Features:
+ * - Interactive data table with sorting and filtering
+ * - Field validation with missing data indicators
+ * - Visual badges for method types, domains, and user revision types
+ * - Responsive design with collapsible navigation
+ * - Integration with external chart components
+ * 
+ * Data Structure:
+ * - Each row represents a research paper/approach
+ * - Fields include authors, methods, domains, tasks, and validation info
+ * - Required fields are validated and highlighted when missing
+ * 
+ * Components:
+ * - Main data table with React Table
+ * - Cell renderers for different data types
+ * - Navigation and routing system
+ * - Statistics calculation and display
+ */
+
 import { useState, useEffect, useRef, useMemo } from "react";
 import {
   createColumnHelper,
@@ -10,7 +35,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import * as d3 from "d3";
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import CitationMap from "./CitationMap";
 import Taxonomy from "./Taxonomy";
 import Home from "./Home";
@@ -21,43 +46,62 @@ import Charts from "./Charts";
 const columnHelper = createColumnHelper();
 
 /**
- * Returns Tailwind CSS classes for a badge based on the method type.
- * @param {string} type - The method type
+ * Utility functions for data validation and formatting
+ */
+
+// Color mapping for method type badges
+const METHOD_TYPE_COLORS = {
+  unsup: "bg-orange-500/20 text-orange-200",
+  sup: "bg-indigo-500/20 text-indigo-200",
+  "semi-automated": "bg-amber-500/20 text-amber-200",
+  "fully-automated": "bg-emerald-500/20 text-emerald-200",
+  hybrid: "bg-violet-500/20 text-violet-200",
+};
+
+// Color mapping for domain type badges
+const DOMAIN_COLORS = {
+  independent: "bg-blue-500/20 text-blue-200",
+  dependent: "bg-red-500/20 text-red-200",
+  specific: "bg-purple-500/20 text-purple-200",
+  general: "bg-teal-500/20 text-teal-200",
+  biomedical: "bg-pink-500/20 text-pink-200",
+  geographic: "bg-yellow-500/20 text-yellow-200",
+  financial: "bg-green-500/20 text-green-200",
+  scientific: "bg-cyan-500/20 text-cyan-200",
+  educational: "bg-lime-500/20 text-lime-200",
+};
+
+// Color mapping for user revision type badges
+const USER_REVISION_COLORS = {
+  manual: "bg-blue-500/20 text-blue-200",
+  "semi-automatic": "bg-orange-500/20 text-orange-200",
+  automatic: "bg-emerald-500/20 text-emerald-200",
+  none: "bg-slate-500/20 text-slate-200",
+};
+
+/**
+ * Returns Tailwind CSS classes for a badge based on the method type
  */
 const getTypeBadgeColor = (type) => {
-  const colorMap = {
-    unsup: "bg-orange-500/20 text-orange-200",
-    sup: "bg-indigo-500/20 text-indigo-200",
-    "semi-automated": "bg-amber-500/20 text-amber-200",
-    "fully-automated": "bg-emerald-500/20 text-emerald-200",
-    hybrid: "bg-violet-500/20 text-violet-200",
-  };
-  return colorMap[type?.toLowerCase()] || "bg-slate-500/20 text-slate-200";
+  return METHOD_TYPE_COLORS[type?.toLowerCase()] || "bg-slate-500/20 text-slate-200";
 };
 
 /**
- * Returns Tailwind CSS classes for a badge based on the domain type.
- * @param {string} domain - The domain type
+ * Returns Tailwind CSS classes for a badge based on the domain type
  */
 const getDomainBadgeColor = (domain) => {
-  const colorMap = {
-    independent: "bg-blue-500/20 text-blue-200",
-    dependent: "bg-red-500/20 text-red-200",
-    specific: "bg-purple-500/20 text-purple-200",
-    general: "bg-teal-500/20 text-teal-200",
-    biomedical: "bg-pink-500/20 text-pink-200",
-    geographic: "bg-yellow-500/20 text-yellow-200",
-    financial: "bg-green-500/20 text-green-200",
-    scientific: "bg-cyan-500/20 text-cyan-200",
-    educational: "bg-lime-500/20 text-lime-200",
-  };
-  return colorMap[domain?.toLowerCase()] || "bg-neutral-500/20 text-neutral-200";
+  return DOMAIN_COLORS[domain?.toLowerCase()] || "bg-neutral-500/20 text-neutral-200";
 };
 
 /**
- * Checks if a value is empty, null, or undefined.
- * @param {any} value
- * @returns {boolean}
+ * Returns Tailwind CSS classes for user revision type badge
+ */
+const getUserRevisionBadgeColor = (type) => {
+  return USER_REVISION_COLORS[type?.toLowerCase()] || "bg-violet-500/20 text-violet-200";
+};
+
+/**
+ * Checks if a value is empty, null, or undefined
  */
 const isEmpty = (value) => {
   if (value === null || value === undefined) return true;
@@ -69,9 +113,7 @@ const isEmpty = (value) => {
 };
 
 /**
- * Formats a date string to DD/MM/YYYY or returns null if invalid.
- * @param {string} dateString
- * @returns {string|null}
+ * Formats a date string to DD/MM/YYYY or returns null if invalid
  */
 const formatDate = (dateString) => {
   if (!dateString || dateString.trim() === "") return null;
@@ -87,8 +129,7 @@ const formatDate = (dateString) => {
 // --- Validation and Cell Rendering Helpers ---
 
 /**
- * Required fields configuration for validation.
- * Add/remove fields as needed for your data model.
+ * Required fields configuration for validation
  */
 const REQUIRED_FIELDS = {
   id: true,
@@ -114,48 +155,38 @@ const REQUIRED_FIELDS = {
 };
 
 /**
- * Checks if a required field is missing from a row.
- * Optimized version with memoized nested value getter.
- * @param {object} row - The data row
- * @param {string} fieldPath - The field path (e.g., 'title.text')
- * @returns {boolean}
+ * Gets nested value from object using dot notation path
+ */
+const getNestedValue = (obj, path) => {
+  const keys = path.split(".");
+  let current = obj;
+  for (const key of keys) {
+    if (current == null) return undefined;
+    current = current[key];
+  }
+  return current;
+};
+
+/**
+ * Checks if a required field is missing from a row
  */
 const isRequiredFieldMissing = (row, fieldPath) => {
   if (!REQUIRED_FIELDS[fieldPath]) return false;
-  
-  // Optimized nested value getter
-  const getNestedValue = (obj, path) => {
-    const keys = path.split(".");
-    let current = obj;
-    for (const key of keys) {
-      if (current == null) return undefined;
-      current = current[key];
-    }
-    return current;
-  };
-  
   const value = getNestedValue(row, fieldPath);
   return isEmpty(value);
 };
 
 /**
- * Renders a cell with a missing field indicator if needed.
- * Optimized with memoization for better performance.
+ * Renders a cell with missing field indicator
  */
-const MissingFieldCell = ({ value, isMissing }) => {
-  const cellContent = value || (isMissing ? "MISSING" : "");
-  const className = isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : "";
-  
-  return (
-    <span className={className}>
-      {cellContent}
-    </span>
-  );
-};
+const MissingFieldCell = ({ value, isMissing }) => (
+  <span className={isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : ""}>
+    {value || (isMissing ? "MISSING" : "")}
+  </span>
+);
 
 /**
- * Renders a task cell with Material Design icons and missing indicator.
- * Optimized with early return and memoized content.
+ * Renders a task cell with Material Design icons
  */
 const TaskCell = ({ value, isMissing }) => {
   if (isMissing) {
@@ -171,8 +202,7 @@ const TaskCell = ({ value, isMissing }) => {
 };
 
 /**
- * Renders a step cell with Material Design icons.
- * Optimized with simplified logic.
+ * Renders a step cell with Material Design icons
  */
 const StepCell = ({ value }) => {
   const hasContent = Boolean(value?.trim());
@@ -185,19 +215,16 @@ const StepCell = ({ value }) => {
 };
 
 /**
- * Renders the main method cell with type badge and technique.
- * Optimized with early returns and memoized calculations.
+ * Renders the main method cell with type badge and technique
  */
 const MainMethodCell = ({ mainMethod, row }) => {
   const { type, tech } = mainMethod || {};
   
-  // Early return if no data
   if (!type && !tech) return "";
   
   const isTypeMissing = isRequiredFieldMissing(row, "main-method.type");
   const isTechMissing = isRequiredFieldMissing(row, "main-method.technique");
   
-  // Memoize badge classes
   const typeBadgeClass = type 
     ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}`
     : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16";
@@ -219,19 +246,16 @@ const MainMethodCell = ({ mainMethod, row }) => {
 };
 
 /**
- * Renders the domain cell with domain badge and type detail.
- * Optimized with early returns and memoized calculations.
+ * Renders the domain cell with domain badge and type detail
  */
 const DomainCell = ({ domain, row }) => {
   const domainValue = domain?.domain || "";
   const typeValue = domain?.type || "";
   
-  // Early return if no data
   if (!domainValue && !typeValue) return "";
   
   const isDomainMissing = isRequiredFieldMissing(row, "domain.domain");
   
-  // Memoize badge classes
   const domainBadgeClass = domainValue 
     ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-20 ${getDomainBadgeColor(domainValue)}`
     : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20";
@@ -243,164 +267,31 @@ const DomainCell = ({ domain, row }) => {
           {domainValue || "MISSING"}
         </span>
       )}
-              {typeValue && <span className="text-[10px] text-neutral-400">{typeValue}</span>}
+      {typeValue && <span className="text-[10px] text-neutral-400">{typeValue}</span>}
     </div>
   );
 };
 
-/**
- * Returns Tailwind CSS classes for user revision type badge.
- */
-const getUserRevisionBadgeColor = (type) => {
-  const colorMap = {
-    manual: "bg-blue-500/20 text-blue-200",
-    "semi-automatic": "bg-orange-500/20 text-orange-200",
-    automatic: "bg-emerald-500/20 text-emerald-200",
-    none: "bg-slate-500/20 text-slate-200",
-  };
-  return colorMap[type?.toLowerCase()] || "bg-violet-500/20 text-violet-200";
-};
+
+
+
 
 /**
- * Stacked Bar Chart Component for Main Method Distribution by Year
- * Optimized version with better performance and code organization
- */
-const MainMethodStackedChart = ({ data }) => {
-  const svgRef = useRef();
-  const wrapperRef = useRef();
-
-  // Constants moved outside component for better performance
-  const METHOD_TYPES = ['unsup', 'sup', 'hybrid'];
-  const COLORS = ['#6366f1', '#818cf8', '#a78bfa']; // Tailwind: indigo-500, indigo-400, violet-400
-  const MARGIN = { top: 24, right: 0, bottom: 36, left: 36 };
-  const AXIS_STYLES = {
-    text: { fill: "#e5e7eb", fontSize: "13px" },
-    stroke: "#e5e7eb" // grigio chiaro, ottimo contrasto su sfondo scuro
-  };
-
-  // Memoized data processing for better performance
-  const processedData = useMemo(() => {
-    if (!data || data.length === 0) return null;
-    
-    const validData = data.filter(d => 
-      d.year && 
-      typeof d.year === 'number' && 
-      d['main-method']?.type
-    );
-    
-    if (validData.length === 0) return null;
-
-    const years = [...new Set(validData.map(d => d.year))].sort();
-    
-    return years.map(year => {
-      const yearData = validData.filter(d => d.year === year);
-      const counts = METHOD_TYPES.reduce((acc, type) => {
-        acc[type] = yearData.filter(d => 
-          d['main-method']?.type?.toLowerCase() === type.toLowerCase()
-        ).length;
-        return acc;
-      }, {});
-      
-      return { year, ...counts };
-    }).filter(d => d.unsup > 0 || d.sup > 0 || d.hybrid > 0);
-  }, [data]);
-
-  useEffect(() => {
-    if (!processedData || processedData.length === 0) return;
-
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-
-    const rect = wrapper.getBoundingClientRect();
-    const { width, height } = rect;
-    
-    if (width === 0 || height === 0) return;
-
-    // Clear previous chart
-    d3.select(svgRef.current).selectAll("*").remove();
-    
-    // Create SVG container
-    const svg = d3.select(svgRef.current)
-      .attr("width", width)
-      .attr("height", height)
-      .attr("viewBox", `0 0 ${width} ${height}`)
-      .append("g")
-      .attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
-
-    const chartWidth = width - MARGIN.left - MARGIN.right;
-    const chartHeight = height - MARGIN.top - MARGIN.bottom;
-
-    // Create scales
-    const xScale = d3.scaleBand()
-      .domain(processedData.map(d => d.year))
-      .range([0, chartWidth])
-      .padding(0.1);
-
-    const maxValue = d3.max(processedData, d => d.unsup + d.sup + d.hybrid);
-    const yScale = d3.scaleLinear()
-      .domain([0, maxValue])
-      .range([chartHeight, 0]);
-
-    const colorScale = d3.scaleOrdinal()
-      .domain(METHOD_TYPES)
-      .range(COLORS);
-
-    // Create stacked data
-    const stack = d3.stack().keys(METHOD_TYPES);
-    const series = stack(processedData);
-
-    // Render bars
-    svg.append("g")
-      .selectAll("g")
-      .data(series)
-      .join("g")
-      .attr("fill", d => colorScale(d.key))
-      .selectAll("rect")
-      .data(d => d)
-      .join("rect")
-      .attr("x", d => xScale(d.data.year))
-      .attr("y", d => yScale(d[1]))
-      .attr("height", d => yScale(d[0]) - yScale(d[1]))
-      .attr("width", xScale.bandwidth())
-      .attr("rx", 2);
-
-    // Render axes with optimized styling
-    const renderAxis = (axis, transform = "") => {
-      const axisGroup = svg.append("g");
-      if (transform) axisGroup.attr("transform", transform);
-      
-      axisGroup.call(axis)
-        .call(g => g.selectAll("text").style("fill", AXIS_STYLES.text.fill).style("font-size", AXIS_STYLES.text.fontSize))
-        .call(g => g.selectAll("path, line").style("stroke", AXIS_STYLES.stroke).style("stroke-width", "2px"));
-    };
-
-    renderAxis(d3.axisBottom(xScale).tickSizeOuter(0), `translate(0,${chartHeight})`);
-    renderAxis(d3.axisLeft(yScale).ticks(5));
-
-  }, [processedData]);
-
-  return (
-    <div ref={wrapperRef} className="w-full h-full flex flex-col justify-end items-center relative">
-      <svg ref={svgRef} width="100%" height="100%" style={{ display: 'block' }} />
-    </div>
-  );
-};
-
-/**
- * Renders the row number with missing fields count and tooltip.
+ * Renders the row number with missing fields count and tooltip
  */
 const RowNumberCell = ({ row, index }) => {
   const missingFields = Object.keys(REQUIRED_FIELDS).filter((field) => isRequiredFieldMissing(row.original, field));
   const hasMissingFields = missingFields.length > 0;
+  
   return (
     <div className="flex flex-col items-center">
       <span>{index + 1}</span>
       {hasMissingFields && (
         <div className="relative group mt-1">
-          <span className="text-[11px] text-red-400 bg-red-900/60 rounded px-2 py-0.5 leading-none cursor-pointer flex items-center gap-1">
+          <span className="text-[11px] text-red-400 bg-red-900/60 rounded px-2 py-0.5 leading-none cursor-pointer">
             {missingFields.length} missing
           </span>
-                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
             <div className="font-semibold mb-1">Missing fields:</div>
             <div className="space-y-1">
               {missingFields.map((field) => (
@@ -415,163 +306,16 @@ const RowNumberCell = ({ row, index }) => {
   );
 };
 
-// Funzione per scaricare l'SVG
-function downloadSVG(svgElement, filename = "chart.svg") {
-  const serializer = new XMLSerializer();
-  let source = serializer.serializeToString(svgElement);
 
-  // Aggiungi l'header XML se non presente
-  if (!source.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
-    source = source.replace(
-      /^<svg/,
-      '<svg xmlns="http://www.w3.org/2000/svg"'
-    );
-  }
-  if (!source.match(/^<svg[^>]+"http:\/\/www\.w3\.org\/1999\/xlink"/)) {
-    source = source.replace(
-      /^<svg/,
-      '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
-    );
-  }
 
-  // Crea il blob e il link per il download
-  const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-// D3 Horizontal Bar Chart for Conference/Journal
-const ConferenceJournalBarChart = ({ data, total, barColor = "#06b6d4", labelColor = "#bae6fd" }) => {
-  const svgRef = useRef();
-  const wrapperRef = useRef();
-
-  // Prepare data: array of { venue, count }
-  const processedData = useMemo(() => {
-    if (!data || Object.keys(data).length === 0) return [];
-    return Object.entries(data)
-      .map(([venue, count]) => ({ venue, count }))
-      .sort((a, b) => b.count - a.count);
-  }, [data]);
-
-  // Calculate max label length for dynamic left margin
-  const maxLabelLength = useMemo(() => {
-    if (!processedData.length) return 0;
-    return Math.max(...processedData.map(d => (d.venue || '').length));
-  }, [processedData]);
-
-  useEffect(() => {
-    if (!processedData.length) return;
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-    // Migliora margini e altezza
-    const width = wrapper.offsetWidth || 600;
-    // Altezza dinamica ma massimo 440px
-    const maxChartHeight = 400;
-    const barHeight = 26;
-    const chartHeight = Math.min(maxChartHeight, processedData.length * barHeight + 20);
-    d3.select(svgRef.current).selectAll("*").remove();
-    const margin = { top: 16, right: 24, bottom: 36, left: 70 + maxLabelLength * 6 };
-    const svgWidth = width;
-    const svgHeight = chartHeight + margin.top + margin.bottom;
-    const innerWidth = svgWidth - margin.left - margin.right;
-    const innerHeight = chartHeight;
-    const svg = d3.select(svgRef.current)
-      .attr("width", svgWidth)
-      .attr("height", svgHeight)
-      .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
-      .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
-    // Y scale (venues)
-    const y = d3.scaleBand()
-      .domain(processedData.map(d => d.venue))
-      .range([0, innerHeight])
-      .padding(0.18);
-    // X scale (counts)
-    const x = d3.scaleLinear()
-      .domain([0, d3.max(processedData, d => d.count) || 1])
-      .range([0, innerWidth]);
-    // Bars
-    svg.append("g")
-      .selectAll("rect")
-      .data(processedData)
-      .join("rect")
-      .attr("y", d => y(d.venue))
-      .attr("x", 0)
-      .attr("height", y.bandwidth())
-      .attr("width", d => x(d.count))
-      .attr("rx", 3)
-      .attr("fill", barColor); // Customizable bar color
-    // Venue labels
-    svg.append("g")
-      .selectAll("text")
-      .data(processedData)
-      .join("text")
-      .attr("x", -8)
-      .attr("y", d => y(d.venue) + y.bandwidth() / 2)
-      .attr("text-anchor", "end")
-      .attr("dominant-baseline", "middle")
-      .attr("fill", labelColor) // Customizable label color
-      .attr("font-size", 12)
-      .text(d => d.venue);
-    // Count labels (sempre visibili: dentro la barra se lunga, fuori se corta)
-    svg.append("g")
-      .selectAll("text.count")
-      .data(processedData)
-      .join("text")
-      .attr("class", "count")
-      .attr("x", d => {
-        const barEnd = x(d.count);
-        // Se la barra è lunga (>80% della larghezza), metti la label dentro
-        return barEnd > innerWidth * 0.8 ? barEnd - 8 : barEnd + 8;
-      })
-      .attr("y", d => y(d.venue) + y.bandwidth() / 2 - 2)
-      .attr("dominant-baseline", "middle")
-      .attr("text-anchor", d => {
-        const barEnd = x(d.count);
-        return barEnd > innerWidth * 0.8 ? "end" : "start";
-      })
-      .attr("fill", d => {
-        const barEnd = x(d.count);
-        // Use white inside, amber-300 outside for licenses, cyan-400 for conference/journal
-        return barEnd > innerWidth * 0.8 ? "#fff" : (barColor === "#f59e42" ? "#fcd34d" : "#22d3ee");
-      })
-      .attr("font-size", 13)
-      .style("font-weight", 500)
-      .text(d => {
-        const percent = total > 0 ? ((d.count/total)*100).toFixed(1) : "0.0";
-        return `${d.count} (${percent}%)`;
-      });
-    // X axis
-    svg.append("g")
-      .attr("transform", `translate(0,${innerHeight})`)
-      .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format("d")))
-      .call(g => g.selectAll("text").style("fill", "#e5e7eb").style("font-size", "13px"))
-      .call(g => g.selectAll("path, line").style("stroke", "#e5e7eb").style("stroke-width", "2px"));
-  }, [processedData, total, barColor, labelColor, maxLabelLength]);
-
-  return (
-    <div ref={wrapperRef} className="w-full h-full flex flex-col justify-end items-center relative overflow-y-auto max-h-[420px]">
-      <svg ref={svgRef} width="100%" height="100%" style={{ display: 'block' }} />
-    </div>
-  );
-};
-
-// =====================
-// COLLAPSIBLE NAVIGATION COMPONENT
-// =====================
+/**
+ * Collapsible navigation component with toggle button
+ */
 const CollapsibleNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      {/* Tab to open navigation */}
       <div className="fixed top-6 left-0 z-30">
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -585,7 +329,6 @@ const CollapsibleNavigation = () => {
         </button>
       </div>
 
-      {/* Original Navigation as overlay */}
       {isOpen && (
         <div className="fixed top-0 left-0 right-0 z-20">
           <Navigation />
@@ -595,22 +338,15 @@ const CollapsibleNavigation = () => {
   );
 };
 
-// =====================
-// MAIN APP COMPONENT
-// =====================
+/**
+ * Main App component with data table and routing
+ */
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
-  const [showFacetFilter, setShowFacetFilter] = useState(false);
-  const [showStatistics, setShowStatistics] = useState(false);
-  const [showMainMethodChart, setShowMainMethodChart] = useState(false);
-  const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false); // nuovo stato
-  const [showLicensesChart, setShowLicensesChart] = useState(false); // nuovo stato per licenses
-  const filterRef = useRef();
-  const chartRef = useRef();
 
   // Load data on component mount
   useEffect(() => {
@@ -630,18 +366,6 @@ function App() {
     };
 
     loadData();
-  }, []);
-
-  // Close facet filter when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (filterRef.current && !filterRef.current.contains(event.target)) {
-        setShowFacetFilter(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   // Column definitions with useMemo for performance
@@ -1122,7 +846,7 @@ function App() {
     onSortingChange: setSorting,
   });
 
-  // Calculate summary statistics with optimized performance
+  // Calculate summary statistics
   const summaryStats = useMemo(() => {
     if (data.length === 0) {
       return {
@@ -1195,19 +919,6 @@ function App() {
       if (row.steps?.['entity-linking']?.description) acc.stepsCoverage['entity-linking']++;
       if (row.steps?.['nil-annotation']) acc.stepsCoverage['nil-annotation']++;
 
-      // Input type distribution
-      const inputType = row.inputs?.['type-of-table'] || 'N/A';
-      acc.inputTypeDistribution[inputType] = (acc.inputTypeDistribution[inputType] || 0) + 1;
-
-      // Knowledge graph usage
-      if (row.inputs?.kg?.['triple-store']) acc.kgUsage.withTripleStore++;
-      if (row.inputs?.kg?.index) acc.kgUsage.withIndex++;
-
-      // Author verification
-      if (row['checked-by-author'] === true) acc.authorVerification.verified++;
-      else if (row['checked-by-author'] === false) acc.authorVerification.notVerified++;
-      else acc.authorVerification.missing++;
-
       // Conference/Journal distribution
       const venue = row['conference-journal'] || 'N/A';
       acc.conferenceJournalDistribution[venue] = (acc.conferenceJournalDistribution[venue] || 0) + 1;
@@ -1234,9 +945,6 @@ function App() {
         'entity-linking': 0,
         'nil-annotation': 0
       },
-      inputTypeDistribution: {},
-      kgUsage: { withTripleStore: 0, withIndex: 0, total: totalEntries },
-      authorVerification: { verified: 0, notVerified: 0, missing: 0 },
       conferenceJournalDistribution: {}
     });
 
@@ -1282,9 +990,6 @@ function App() {
       taskPercentages,
       userRevisionDistribution: stats.userRevisionDistribution,
       stepsCoverage: stats.stepsCoverage,
-      inputTypeDistribution: stats.inputTypeDistribution,
-      kgUsage: stats.kgUsage,
-      authorVerification: stats.authorVerification,
       conferenceJournalDistribution: stats.conferenceJournalDistribution,
     };
   }, [data]);
@@ -1350,7 +1055,6 @@ function App() {
               </thead>
               <tbody className="bg-neutral-900">
                 {table.getRowModel().rows.map((row, index) => {
-                  // Check for missing fields to highlight row
                   const missingFields = Object.keys(REQUIRED_FIELDS)
                     .filter(field => isRequiredFieldMissing(row.original, field));
                   const hasMissingFields = missingFields.length > 0;
