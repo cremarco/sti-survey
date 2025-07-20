@@ -1,14 +1,32 @@
+/**
+ * Citation Map Component
+ * 
+ * This component creates an interactive chord diagram visualization showing
+ * citation relationships between research papers in the STI survey data.
+ * 
+ * Features:
+ * - D3.js chord diagram visualization
+ * - Interactive hover effects
+ * - SVG download functionality
+ * - Responsive design with Tailwind CSS
+ * - Citation relationship analysis
+ */
+
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import Navigation from './Navigation';
 
+/**
+ * Main CitationMap component
+ */
 function CitationMap() {
   const chartRef = useRef();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [svgNode, setSvgNode] = useState(null); // nuovo stato per SVG
+  const [svgNode, setSvgNode] = useState(null);
 
+  // Load citation data on component mount
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/data@3.json`)
       .then((res) => {
@@ -20,13 +38,20 @@ function CitationMap() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Render chord chart when data is loaded
   useEffect(() => {
     if (!data || !chartRef.current) return;
     chartRef.current.innerHTML = '';
     renderChordChart(data, chartRef.current, setSvgNode);
   }, [data]);
 
-  // --- D3 Chord Chart rendering function ---
+  /**
+   * Renders the D3 chord chart visualization
+   * 
+   * @param {Array} data - Citation relationship data
+   * @param {HTMLElement} container - DOM container for the chart
+   * @param {Function} setSvgNode - Function to store SVG node reference
+   */
   function renderChordChart(data, container, setSvgNode) {
     const width = 1180;
     const height = width + 150;
@@ -34,38 +59,40 @@ function CitationMap() {
     const outerRadius = innerRadius + 10;
     const chordPadAngle = 8 / innerRadius;
 
-    // Helper: format year
-    const fd = (str) => {
+    /**
+     * Helper function to format year from date string
+     */
+    const formatYear = (str) => {
       const parsed = Date.parse(str);
       const date = new Date(parsed);
       return date.getFullYear();
     };
 
-    // Compute unique names
+    // Compute unique names for the chord diagram
     const names = d3.sort(
       d3.union(
-        data.map((d) => `${d.source} ${fd(d.source_date)}`).filter((name) => name !== ' NaN'),
-        data.map((d) => `${d.target} ${fd(d.target_date)}`)
+        data.map((d) => `${d.source} ${formatYear(d.source_date)}`).filter((name) => name !== ' NaN'),
+        data.map((d) => `${d.target} ${formatYear(d.target_date)}`)
       )
     );
     const index = new Map(names.map((name, i) => [name, i]));
 
-    // Map for 'evolve' type
-    const dict = new Map();
+    // Map for 'evolve' type relationships
+    const evolveMap = new Map();
     data.forEach((datum) => {
       if (datum.type === 'evolve') {
-        dict.set(index.get(`${datum.target} ${fd(datum.target_date)}`), `${datum.source} ${fd(datum.source_date)}`);
+        evolveMap.set(index.get(`${datum.target} ${formatYear(datum.target_date)}`), `${datum.source} ${formatYear(datum.source_date)}`);
       }
     });
 
-    // Build matrix
+    // Build adjacency matrix for chord diagram
     const matrix = Array.from(index, () => new Array(names.length).fill(0));
     for (const { source, target, source_date, target_date, value } of data) {
       if (source === '') continue;
-      matrix[index.get(`${source} ${fd(source_date)}`)][index.get(`${target} ${fd(target_date)}`)] += value;
+      matrix[index.get(`${source} ${formatYear(source_date)}`)][index.get(`${target} ${formatYear(target_date)}`)] += value;
     }
 
-    // D3 generators
+    // D3 generators for chord diagram
     const chord = d3.chordDirected()
       .padAngle(chordPadAngle)
       .sortSubgroups(d3.descending)
@@ -79,7 +106,7 @@ function CitationMap() {
     const ribbon = d3.ribbon().radius(innerRadius + 1).padAngle(0);
     const colors = d3.quantize(d3.interpolateRainbow, names.length);
 
-    // SVG setup
+    // Create SVG container
     const svg = d3
       .create('svg')
       .attr('width', width)
@@ -89,7 +116,7 @@ function CitationMap() {
 
     const chords = chord(matrix);
 
-    // Groups
+    // Create groups for each node
     const group = svg
       .append('g')
       .selectAll('g')
@@ -97,13 +124,13 @@ function CitationMap() {
       .join('g')
       .attr('class', (d) => `group-${d.index}`);
 
-    // Arcs
+    // Add arcs for each group
     group
       .append('path')
       .attr('fill', (d) => colors[d.index])
       .attr('d', arc);
 
-    // Labels
+    // Add labels for each group
     group
       .append('text')
       .each((d) => (d.angle = (d.startAngle + d.endAngle) / 2))
@@ -120,15 +147,15 @@ function CitationMap() {
         g.append('tspan')
           .attr('font-weight', 'bold')
           .text(names[d.index]);
-        if (dict.get(d.index)) {
+        if (evolveMap.get(d.index)) {
           g.append('tspan')
             .attr('dx', 4)
             .attr('font-weight', 'normal')
-            .text(` ‚â™ ${dict.get(d.index)}`);
+            .text(` ‚â™ ${evolveMap.get(d.index)}`);
         }
       });
 
-    // Interactive area for fade
+    // Add interactive area for hover effects
     group
       .append('path')
       .attr('fill', 'none')
@@ -137,7 +164,7 @@ function CitationMap() {
       .on('mouseover', fade(0))
       .on('mouseout', fade(1));
 
-    // Tooltip
+    // Add tooltips for groups
     group
       .append('title')
       .text(
@@ -146,7 +173,7 @@ ${d3.sum(chords, (c) => (c.source.index === d.index) * c.source.value)} Cited ‚Ü
 ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ‚Üê`
       );
 
-    // Edges
+    // Add chord edges
     const edges = svg
       .append('g')
       .selectAll('path')
@@ -157,14 +184,19 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ‚
       .attr('d', ribbon)
       .attr('fill', (d) => colors[d.source.index]);
 
+    // Add tooltips for edges
     edges
       .append('title')
       .text((d) => `${names[d.source.index]} ‚Üí ${names[d.target.index]} ${d.source.value}`);
 
+    // Append SVG to container
     container.appendChild(svg.node());
     setSvgNode(svg.node());
 
-    // Fade function for hover
+    /**
+     * Fade function for hover effects
+     * @param {number} opacity - Opacity value for fade effect
+     */
     function fade(opacity) {
       return function (event, i) {
         const indexes = [];
@@ -183,22 +215,28 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ‚
     }
   }
 
-  // Funzione per scaricare l'SVG
+  /**
+   * Handles SVG download functionality
+   */
   const handleDownloadSVG = () => {
     if (!svgNode) return;
-    // Trova tutti i testi delle etichette e salva il colore originale
+    
+    // Find all text labels and save original colors
     const texts = svgNode.querySelectorAll('text');
     const originalFills = [];
     texts.forEach((el) => {
       originalFills.push(el.getAttribute('fill'));
       el.setAttribute('fill', '#000');
     });
+    
     const serializer = new XMLSerializer();
     let source = serializer.serializeToString(svgNode);
-    // Aggiungi dichiarazione XML per compatibilit√†
+    
+    // Add XML declaration for compatibility
     if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
       source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
     }
+    
     const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -208,7 +246,8 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ‚
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    // Ripristina i colori originali
+    
+    // Restore original colors
     texts.forEach((el, i) => {
       if (originalFills[i]) {
         el.setAttribute('fill', originalFills[i]);
@@ -218,6 +257,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ‚
     });
   };
 
+  // Loading state
   if (loading) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
@@ -225,6 +265,8 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ‚
       </div>
     );
   }
+  
+  // Error state
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
@@ -232,11 +274,12 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ‚
       </div>
     );
   }
+  
   return (
     <div className="min-h-screen bg-neutral-900 flex flex-col">
       <Navigation />
       <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
-                <div className="w-full max-w-7xl flex flex-col items-center">
+        <div className="w-full max-w-7xl flex flex-col items-center">
           <div className="w-full pb-4 mb-8 flex justify-between items-start">
             <div>
               <h1 className="text-3xl md:text-4xl text-neutral-100 font-bold tracking-tight mb-2">Citation Map</h1>
@@ -253,12 +296,12 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ‚
           </div>
         </div>
         <div className="w-full">
-          <div className="w-full flex justify-center items-center overflow-x-auto" style={{ minHeight: 900 }}>
-          <div ref={chartRef} className="w-full flex justify-center items-center" />
+          <div className="w-full flex justify-center items-center">
+            <div ref={chartRef} className="w-full flex justify-center items-center" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 }
 

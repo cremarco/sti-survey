@@ -1,8 +1,25 @@
+/**
+ * Taxonomy Component
+ * 
+ * This component creates an interactive radial tree visualization showing
+ * the hierarchical classification of STI approaches and methods.
+ * 
+ * Features:
+ * - D3.js radial tree visualization
+ * - Interactive node highlighting
+ * - SVG download functionality
+ * - Responsive design with Tailwind CSS
+ * - Hierarchical data visualization
+ */
+
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import Navigation from './Navigation';
 
-// Tailwind palette HEX (v3)
+/**
+ * Color palette for different taxonomy categories
+ * Uses Tailwind CSS color scheme for consistency
+ */
 const CATEGORY_COLORS = {
   "Task": "#6366f1",                // indigo-500
   "Method": "#a21caf",              // fuchsia-700
@@ -16,30 +33,46 @@ const CATEGORY_COLORS = {
   "Output format": "#fde047"         // yellow-300
 };
 
+/**
+ * Gets the color for a branch based on its category
+ * @param {Object} node - D3 node object
+ * @returns {string} Color hex value
+ */
 function getBranchColor(node) {
   let current = node;
   while (current.depth > 1) current = current.parent;
   return CATEGORY_COLORS[current.data.name] || '#a3a3a3'; // gray-400
 }
 
-// Funzione per la rotazione delle etichette come nell'esempio D3
+/**
+ * Calculates the transform for label positioning
+ * Handles rotation and positioning for both leaf and internal nodes
+ * @param {Object} d - D3 node data
+ * @returns {string} Transform string for SVG
+ */
 function labelTransform(d) {
   const angle = d.x * 180 / Math.PI - 90;
   const r = d.y;
-  // Per i leaf node, posiziona sempre all'esterno e orizzontale
+  
+  // For leaf nodes, position always outside and horizontal
   if (!d.children) {
     return `rotate(${angle}) translate(${r + 20},0) rotate(${-angle})`;
   }
-  // Per i nodi interni, posiziona radialmente ma mantieni le etichette dritte
+  
+  // For internal nodes, position radially but keep labels straight
   return `rotate(${angle}) translate(${r + 15},0) rotate(${-angle})`;
 }
 
+/**
+ * Main Taxonomy component
+ */
 function Taxonomy() {
   const chartRef = useRef();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [svgNode, setSvgNode] = useState(null);
 
+  // Load taxonomy data on component mount
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/taxonomy.json`)
       .then((res) => {
@@ -50,28 +83,37 @@ function Taxonomy() {
       .catch((err) => setError(err.message));
   }, []);
 
+  // Render radial tree when data is loaded
   useEffect(() => {
     if (!data || !chartRef.current) return;
     chartRef.current.innerHTML = '';
     drawRadialTidyTree(data, chartRef.current);
   }, [data]);
 
+  /**
+   * Draws the radial tidy tree visualization using D3.js
+   * @param {Object} data - Taxonomy data structure
+   * @param {HTMLElement} container - DOM container for the chart
+   */
   function drawRadialTidyTree(data, container) {
-    const width = 1200; // Aumentato da 900 a 1200 per più spazio
-    const radius = width / 2 - 80; // Ridotto il margine per sfruttare meglio lo spazio
+    const width = 1200; // Increased from 900 to 1200 for more space
+    const radius = width / 2 - 80; // Reduced margin to better utilize space
     const root = d3.hierarchy(data);
+    
+    // Configure tree layout
     const tree = d3.tree()
       .size([2 * Math.PI, radius])
       .separation((a, b) => (a.parent === b.parent ? 1.5 : 2.5));
     tree(root);
 
+    // Create SVG container
     const svg = d3.create('svg')
       .attr('viewBox', [-width / 2, -width / 2, width, width])
       .attr('width', '100%')
       .attr('height', width)
       .attr('style', 'font: 14px sans-serif; background: none;');
 
-    // Links
+    // Add links between nodes
     svg.append('g')
       .attr('fill', 'none')
       .attr('stroke', '#a3a3a3') // gray-400
@@ -84,7 +126,7 @@ function Taxonomy() {
         .radius(d => d.y)
       );
 
-    // Nodes
+    // Add nodes
     svg.append('g')
       .selectAll('circle')
       .data(root.descendants())
@@ -95,34 +137,40 @@ function Taxonomy() {
       .attr('stroke', d => d.depth === 0 ? '#6366f1' : getBranchColor(d))
       .attr('stroke-width', d => d.depth === 0 ? 3 : 2);
 
-    // Labels
+    // Add labels
     svg.append('g')
       .selectAll('text')
       .data(root.descendants())
       .join('text')
       .attr('transform', labelTransform)
       .attr('dy', '0.32em')
-      .attr('x', 0) // Semplificato il posizionamento orizzontale
-      .attr('text-anchor', 'middle') // Centrato per tutte le etichette
+      .attr('x', 0) // Simplified horizontal positioning
+      .attr('text-anchor', 'middle') // Centered for all labels
       .attr('fill', d => d.depth === 0 ? '#18181b' : getBranchColor(d))
       .attr('font-weight', d => d.depth === 0 ? 'bold' : 'normal')
       .attr('font-size', d => d.depth === 0 ? 20 : d.depth === 1 ? 16 : 13)
-      .attr('pointer-events', 'none') // Evita interazioni con le etichette
+      .attr('pointer-events', 'none') // Avoid interactions with labels
       .text(d => d.data.name);
 
+    // Append SVG to container
     container.appendChild(svg.node());
     setSvgNode(svg.node());
   }
 
-  // Funzione per scaricare l'SVG
+  /**
+   * Handles SVG download functionality
+   */
   const handleDownloadSVG = () => {
     if (!svgNode) return;
+    
     const serializer = new XMLSerializer();
     let source = serializer.serializeToString(svgNode);
-    // Aggiungi dichiarazione XML per compatibilità
+    
+    // Add XML declaration for compatibility
     if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
       source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
     }
+    
     const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -134,6 +182,7 @@ function Taxonomy() {
     URL.revokeObjectURL(url);
   };
 
+  // Error state
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-900 flex flex-col">

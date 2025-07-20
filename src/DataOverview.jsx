@@ -1,6 +1,16 @@
+/**
+ * Data Overview Component
+ * 
+ * Displays comprehensive statistics and overview of the STI survey data.
+ * Shows key metrics including total entries, year range, task distributions,
+ * and various data quality indicators.
+ */
+
 import React, { useState, useEffect, useMemo } from 'react';
 
-// Helper function to check if a value is empty, null, or undefined
+/**
+ * Utility function to check if a value is empty, null, or undefined
+ */
 const isEmpty = (value) => {
   if (value === null || value === undefined) return true;
   if (typeof value === "string") return value.trim() === "";
@@ -10,7 +20,9 @@ const isEmpty = (value) => {
   return false;
 };
 
-// Required fields configuration for validation
+/**
+ * Required fields configuration for validation
+ */
 const REQUIRED_FIELDS = {
   id: true,
   authors: true,
@@ -34,7 +46,9 @@ const REQUIRED_FIELDS = {
   doi: true,
 };
 
-// Checks if a required field is missing from a row
+/**
+ * Checks if a required field is missing from a row
+ */
 const isRequiredFieldMissing = (row, fieldPath) => {
   if (!REQUIRED_FIELDS[fieldPath]) return false;
   
@@ -53,6 +67,9 @@ const isRequiredFieldMissing = (row, fieldPath) => {
   return isEmpty(value);
 };
 
+/**
+ * Main DataOverview component
+ */
 function DataOverview() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -138,37 +155,6 @@ function DataOverview() {
       if (row.tasks?.cea) acc.taskCounts.cea++;
       if (row.tasks?.cnea) acc.taskCounts.cnea++;
 
-      // User revision distribution
-      const userRevisionType = row['user-revision']?.type || 'N/A';
-      acc.userRevisionDistribution[userRevisionType] = (acc.userRevisionDistribution[userRevisionType] || 0) + 1;
-
-      // Steps coverage
-      if (row.steps?.['data-preparation']?.description) acc.stepsCoverage['data-preparation']++;
-      if (row.steps?.['subject-detection']) acc.stepsCoverage['subject-detection']++;
-      if (row.steps?.['column-analysis']) acc.stepsCoverage['column-analysis']++;
-      if (row.steps?.['type-annotation']) acc.stepsCoverage['type-annotation']++;
-      if (row.steps?.['predicate-annotation']) acc.stepsCoverage['predicate-annotation']++;
-      if (row.steps?.['datatype-annotation']) acc.stepsCoverage['datatype-annotation']++;
-      if (row.steps?.['entity-linking']?.description) acc.stepsCoverage['entity-linking']++;
-      if (row.steps?.['nil-annotation']) acc.stepsCoverage['nil-annotation']++;
-
-      // Input type distribution
-      const inputType = row.inputs?.['type-of-table'] || 'N/A';
-      acc.inputTypeDistribution[inputType] = (acc.inputTypeDistribution[inputType] || 0) + 1;
-
-      // Knowledge graph usage
-      if (row.inputs?.kg?.['triple-store']) acc.kgUsage.withTripleStore++;
-      if (row.inputs?.kg?.index) acc.kgUsage.withIndex++;
-
-      // Author verification
-      if (row['checked-by-author'] === true) acc.authorVerification.verified++;
-      else if (row['checked-by-author'] === false) acc.authorVerification.notVerified++;
-      else acc.authorVerification.missing++;
-
-      // Conference/Journal distribution
-      const venue = row['conference-journal'] || 'N/A';
-      acc.conferenceJournalDistribution[venue] = (acc.conferenceJournalDistribution[venue] || 0) + 1;
-
       return acc;
     }, {
       entriesWithMissingFields: 0,
@@ -180,21 +166,6 @@ function DataOverview() {
       approachesWithCode: 0,
       licenseDistribution: {},
       taskCounts: { cta: 0, cpa: 0, cea: 0, cnea: 0 },
-      userRevisionDistribution: {},
-      stepsCoverage: {
-        'data-preparation': 0,
-        'subject-detection': 0,
-        'column-analysis': 0,
-        'type-annotation': 0,
-        'predicate-annotation': 0,
-        'datatype-annotation': 0,
-        'entity-linking': 0,
-        'nil-annotation': 0
-      },
-      inputTypeDistribution: {},
-      kgUsage: { withTripleStore: 0, withIndex: 0, total: totalEntries },
-      authorVerification: { verified: 0, notVerified: 0, missing: 0 },
-      conferenceJournalDistribution: {}
     });
 
     // Calculate most missing field
@@ -207,42 +178,19 @@ function DataOverview() {
       min: stats.years.length > 0 ? Math.min(...stats.years) : 'N/A',
       max: stats.years.length > 0 ? Math.max(...stats.years) : 'N/A',
     };
-
-    // Calculate percentages
-    const calculatePercentages = (distribution) => 
-      Object.fromEntries(
-        Object.entries(distribution).map(([key, value]) => [
-          key,
-          { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
-        ])
-      );
-
-    const taskPercentages = {
-      cta: totalEntries > 0 ? (stats.taskCounts.cta / totalEntries) * 100 : 0,
-      cpa: totalEntries > 0 ? (stats.taskCounts.cpa / totalEntries) * 100 : 0,
-      cea: totalEntries > 0 ? (stats.taskCounts.cea / totalEntries) * 100 : 0,
-      cnea: totalEntries > 0 ? (stats.taskCounts.cnea / totalEntries) * 100 : 0,
-    };
     
     return {
       totalEntries,
       entriesWithMissingFields: stats.entriesWithMissingFields,
       totalMissingFields: stats.totalMissingFields,
       mostMissing,
-      mainMethodTypeDistribution: calculatePercentages(stats.mainMethodTypeDistribution),
-      domainDistribution: calculatePercentages(stats.domainDistribution),
+      mainMethodTypeDistribution: stats.mainMethodTypeDistribution,
+      domainDistribution: stats.domainDistribution,
       yearRange,
       approachesWithCode: stats.approachesWithCode,
       approachesWithCodePercentage: totalEntries > 0 ? (stats.approachesWithCode / totalEntries) * 100 : 0,
-      licenseDistribution: calculatePercentages(stats.licenseDistribution),
+      licenseDistribution: stats.licenseDistribution,
       taskCounts: stats.taskCounts,
-      taskPercentages,
-      userRevisionDistribution: stats.userRevisionDistribution,
-      stepsCoverage: stats.stepsCoverage,
-      inputTypeDistribution: stats.inputTypeDistribution,
-      kgUsage: stats.kgUsage,
-      authorVerification: stats.authorVerification,
-      conferenceJournalDistribution: stats.conferenceJournalDistribution,
     };
   }, [data]);
 
@@ -308,7 +256,6 @@ function DataOverview() {
             </div>
           )}
         </div>
-        
       </div>
     </div>
   );

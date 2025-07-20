@@ -6,6 +6,13 @@
  * - Field validation with missing data indicators
  * - Visual badges for method types, domains, and user revision types
  * - Statistics calculation and display
+ * 
+ * Features:
+ * - Collapsible navigation
+ * - Missing field validation and highlighting
+ * - Interactive tooltips for missing fields
+ * - Sortable columns
+ * - Responsive design
  */
 
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -25,7 +32,7 @@ import Navigation from "./Navigation";
 const columnHelper = createColumnHelper();
 
 /**
- * Utility functions for data validation and formatting
+ * Color mapping configurations for visual badges
  */
 
 // Color mapping for method type badges
@@ -57,6 +64,36 @@ const USER_REVISION_COLORS = {
   automatic: "bg-emerald-500/20 text-emerald-200",
   none: "bg-slate-500/20 text-slate-200",
 };
+
+/**
+ * Required fields configuration for validation
+ */
+const REQUIRED_FIELDS = {
+  id: true,
+  authors: true,
+  author: true,
+  year: true,
+  "title.text": true,
+  "conference-journal": true,
+  "main-method.type": true,
+  "main-method.technique": true,
+  "domain.domain": true,
+  "tasks.cta": true,
+  "tasks.cpa": true,
+  "tasks.cea": true,
+  "tasks.cnea": true,
+  "user-revision.type": true,
+  "license": true,
+  "inputs.type-of-table": true,
+  "inputs.kg.triple-store": true,
+  "output-format": true,
+  "checked-by-author": true,
+  doi: true,
+};
+
+/**
+ * Utility functions for data validation and formatting
+ */
 
 /**
  * Returns Tailwind CSS classes for a badge based on the method type
@@ -105,34 +142,6 @@ const formatDate = (dateString) => {
   });
 };
 
-// --- Validation and Cell Rendering Helpers ---
-
-/**
- * Required fields configuration for validation
- */
-const REQUIRED_FIELDS = {
-  id: true,
-  authors: true,
-  author: true,
-  year: true,
-  "title.text": true,
-  "conference-journal": true,
-  "main-method.type": true,
-  "main-method.technique": true,
-  "domain.domain": true,
-  "tasks.cta": true,
-  "tasks.cpa": true,
-  "tasks.cea": true,
-  "tasks.cnea": true,
-  "user-revision.type": true,
-  "license": true,
-  "inputs.type-of-table": true,
-  "inputs.kg.triple-store": true,
-  "output-format": true,
-  "checked-by-author": true,
-  doi: true,
-};
-
 /**
  * Gets nested value from object using dot notation path
  */
@@ -154,6 +163,10 @@ const isRequiredFieldMissing = (row, fieldPath) => {
   const value = getNestedValue(row, fieldPath);
   return isEmpty(value);
 };
+
+/**
+ * Cell rendering components
+ */
 
 /**
  * Renders a cell with missing field indicator
@@ -790,7 +803,7 @@ function SurveyTable() {
       enableSorting: false,
       meta: { align: 'center' },
     }),
-    // Numero di citazioni (array citations)
+    // Citations count column
     columnHelper.accessor(row => Array.isArray(row.citations) ? row.citations.length : 0, {
       id: "citations-count",
       header: "# Citations",

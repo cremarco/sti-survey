@@ -1,8 +1,29 @@
-import React, { useState, useRef } from 'react';
+/**
+ * Charts Component
+ * 
+ * This component provides interactive data visualizations and analytics for the STI survey data.
+ * Features include:
+ * - D3.js powered charts and visualizations
+ * - Interactive flip cards with statistics and charts
+ * - Download functionality for SVG charts
+ * - Responsive design with Tailwind CSS
+ * - Comprehensive data analysis and statistics
+ */
+
+import React, { useState, useRef, useMemo } from 'react';
 import * as d3 from "d3";
 import Navigation from './Navigation';
 
-// Chart components
+/**
+ * D3 Chart Components
+ */
+
+/**
+ * Main Method Stacked Chart Component
+ * 
+ * Creates a stacked bar chart showing the distribution of main method types over years
+ * using D3.js for data visualization.
+ */
 const MainMethodStackedChart = ({ data }) => {
   const svgRef = useRef();
 
@@ -107,6 +128,12 @@ const MainMethodStackedChart = ({ data }) => {
   return <div ref={svgRef}></div>;
 };
 
+/**
+ * Conference Journal Bar Chart Component
+ * 
+ * Creates a horizontal bar chart showing the distribution of approaches by conference/journal
+ * using D3.js for data visualization.
+ */
 const ConferenceJournalBarChart = ({ data, total, barColor = "#06b6d4", labelColor = "#bae6fd" }) => {
   const svgRef = useRef();
 
@@ -187,6 +214,15 @@ const ConferenceJournalBarChart = ({ data, total, barColor = "#06b6d4", labelCol
   return <div ref={svgRef}></div>;
 };
 
+/**
+ * Utility Functions
+ */
+
+/**
+ * Downloads an SVG element as a file
+ * @param {SVGElement} svgElement - The SVG element to download
+ * @param {string} filename - The filename for the downloaded file
+ */
 function downloadSVG(svgElement, filename = "chart.svg") {
   const serializer = new XMLSerializer();
   const svgString = serializer.serializeToString(svgElement);
@@ -202,7 +238,235 @@ function downloadSVG(svgElement, filename = "chart.svg") {
   URL.revokeObjectURL(svgUrl);
 }
 
-function Charts({ data, summaryStats }) {
+/**
+ * Required fields configuration for validation
+ */
+const REQUIRED_FIELDS = {
+  id: true,
+  authors: true,
+  author: true,
+  year: true,
+  "title.text": true,
+  "conference-journal": true,
+  "main-method.type": true,
+  "main-method.technique": true,
+  "domain.domain": true,
+  "tasks.cta": true,
+  "tasks.cpa": true,
+  "tasks.cea": true,
+  "tasks.cnea": true,
+  "user-revision.type": true,
+  "license": true,
+  "inputs.type-of-table": true,
+  "inputs.kg.triple-store": true,
+  "output-format": true,
+  "checked-by-author": true,
+  doi: true,
+};
+
+/**
+ * Utility function to check if a value is empty, null, or undefined
+ */
+const isEmpty = (value) => {
+  if (value === null || value === undefined) return true;
+  if (typeof value === "string") return value.trim() === "";
+  if (typeof value === "object" && !Array.isArray(value)) {
+    return Object.keys(value).length === 0;
+  }
+  return false;
+};
+
+/**
+ * Gets nested value from object using dot notation path
+ */
+const getNestedValue = (obj, path) => {
+  const keys = path.split(".");
+  let current = obj;
+  for (const key of keys) {
+    if (current == null) return undefined;
+    current = current[key];
+  }
+  return current;
+};
+
+/**
+ * Checks if a required field is missing from a row
+ */
+const isRequiredFieldMissing = (row, fieldPath) => {
+  if (!REQUIRED_FIELDS[fieldPath]) return false;
+  const value = getNestedValue(row, fieldPath);
+  return isEmpty(value);
+};
+
+/**
+ * Calculate summary statistics for the charts
+ * 
+ * Processes the survey data to generate comprehensive statistics including:
+ * - Missing field analysis
+ * - Method type distributions
+ * - Domain distributions
+ * - Task coverage
+ * - License distributions
+ * - Conference/Journal distributions
+ */
+const calculateSummaryStats = (data) => {
+  if (data.length === 0) {
+    return {
+      totalEntries: 0,
+      entriesWithMissingFields: 0,
+      totalMissingFields: 0,
+      mostMissing: 'N/A',
+      mainMethodTypeDistribution: {},
+      domainDistribution: {},
+      yearRange: { min: 'N/A', max: 'N/A' },
+      approachesWithCode: 0,
+      licenseDistribution: {},
+      taskCounts: { cta: 0, cpa: 0, cea: 0, cnea: 0 },
+    };
+  }
+
+  const totalEntries = data.length;
+  
+  // Single pass through data for better performance
+  const stats = data.reduce((acc, row) => {
+    // Missing fields analysis
+    const missingFields = Object.keys(REQUIRED_FIELDS).filter(field => isRequiredFieldMissing(row, field));
+    if (missingFields.length > 0) {
+      acc.entriesWithMissingFields++;
+      acc.totalMissingFields += missingFields.length;
+      missingFields.forEach(field => {
+        acc.fieldCounts[field] = (acc.fieldCounts[field] || 0) + 1;
+      });
+    }
+
+    // Main method distribution
+    const methodType = row['main-method']?.type || 'N/A';
+    acc.mainMethodTypeDistribution[methodType] = (acc.mainMethodTypeDistribution[methodType] || 0) + 1;
+
+    // Domain distribution
+    const domain = row['domain']?.domain || 'N/A';
+    acc.domainDistribution[domain] = (acc.domainDistribution[domain] || 0) + 1;
+
+    // Year range
+    if (typeof row.year === 'number') {
+      acc.years.push(row.year);
+    }
+
+    // Code availability
+    if (row['code-availability'] && row['code-availability'].trim() !== '') {
+      acc.approachesWithCode++;
+    }
+
+    // License distribution
+    const license = row['license'] || 'N/A';
+    acc.licenseDistribution[license] = (acc.licenseDistribution[license] || 0) + 1;
+
+    // Task counts
+    if (row.tasks?.cta) acc.taskCounts.cta++;
+    if (row.tasks?.cpa) acc.taskCounts.cpa++;
+    if (row.tasks?.cea) acc.taskCounts.cea++;
+    if (row.tasks?.cnea) acc.taskCounts.cnea++;
+
+    // User revision distribution
+    const userRevisionType = row['user-revision']?.type || 'N/A';
+    acc.userRevisionDistribution[userRevisionType] = (acc.userRevisionDistribution[userRevisionType] || 0) + 1;
+
+    // Steps coverage
+    if (row.steps?.['data-preparation']?.description) acc.stepsCoverage['data-preparation']++;
+    if (row.steps?.['subject-detection']) acc.stepsCoverage['subject-detection']++;
+    if (row.steps?.['column-analysis']) acc.stepsCoverage['column-analysis']++;
+    if (row.steps?.['type-annotation']) acc.stepsCoverage['type-annotation']++;
+    if (row.steps?.['predicate-annotation']) acc.stepsCoverage['predicate-annotation']++;
+    if (row.steps?.['datatype-annotation']) acc.stepsCoverage['datatype-annotation']++;
+    if (row.steps?.['entity-linking']?.description) acc.stepsCoverage['entity-linking']++;
+    if (row.steps?.['nil-annotation']) acc.stepsCoverage['nil-annotation']++;
+
+    // Conference/Journal distribution
+    const venue = row['conference-journal'] || 'N/A';
+    acc.conferenceJournalDistribution[venue] = (acc.conferenceJournalDistribution[venue] || 0) + 1;
+
+    return acc;
+  }, {
+    entriesWithMissingFields: 0,
+    totalMissingFields: 0,
+    fieldCounts: {},
+    mainMethodTypeDistribution: {},
+    domainDistribution: {},
+    years: [],
+    approachesWithCode: 0,
+    licenseDistribution: {},
+    taskCounts: { cta: 0, cpa: 0, cea: 0, cnea: 0 },
+    userRevisionDistribution: {},
+    stepsCoverage: {
+      'data-preparation': 0,
+      'subject-detection': 0,
+      'column-analysis': 0,
+      'type-annotation': 0,
+      'predicate-annotation': 0,
+      'datatype-annotation': 0,
+      'entity-linking': 0,
+      'nil-annotation': 0
+    },
+    conferenceJournalDistribution: {}
+  });
+
+  // Calculate most missing field
+  const mostMissingEntry = Object.entries(stats.fieldCounts)
+    .sort(([,a], [,b]) => b - a)[0];
+  const mostMissing = mostMissingEntry ? `${mostMissingEntry[0]} (${mostMissingEntry[1]})` : 'None';
+
+  // Calculate year range
+  const yearRange = {
+    min: stats.years.length > 0 ? Math.min(...stats.years) : 'N/A',
+    max: stats.years.length > 0 ? Math.max(...stats.years) : 'N/A',
+  };
+
+  // Calculate percentages
+  const calculatePercentages = (distribution) => 
+    Object.fromEntries(
+      Object.entries(distribution).map(([key, value]) => [
+        key,
+        { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
+      ])
+    );
+
+  const taskPercentages = {
+    cta: totalEntries > 0 ? (stats.taskCounts.cta / totalEntries) * 100 : 0,
+    cpa: totalEntries > 0 ? (stats.taskCounts.cpa / totalEntries) * 100 : 0,
+    cea: totalEntries > 0 ? (stats.taskCounts.cea / totalEntries) * 100 : 0,
+    cnea: totalEntries > 0 ? (stats.taskCounts.cnea / totalEntries) * 100 : 0,
+  };
+  
+  return {
+    totalEntries,
+    entriesWithMissingFields: stats.entriesWithMissingFields,
+    totalMissingFields: stats.totalMissingFields,
+    mostMissing,
+    mainMethodTypeDistribution: calculatePercentages(stats.mainMethodTypeDistribution),
+    domainDistribution: calculatePercentages(stats.domainDistribution),
+    yearRange,
+    approachesWithCode: stats.approachesWithCode,
+    approachesWithCodePercentage: totalEntries > 0 ? (stats.approachesWithCode / totalEntries) * 100 : 0,
+    licenseDistribution: calculatePercentages(stats.licenseDistribution),
+    taskCounts: stats.taskCounts,
+    taskPercentages,
+    userRevisionDistribution: stats.userRevisionDistribution,
+    stepsCoverage: stats.stepsCoverage,
+    conferenceJournalDistribution: stats.conferenceJournalDistribution,
+  };
+};
+
+/**
+ * Main Charts Component
+ * 
+ * Renders the complete charts dashboard with interactive visualizations
+ * and comprehensive data analytics for the STI survey data.
+ */
+function Charts({ data }) {
+  // Calculate summary statistics using the data
+  const summaryStats = useMemo(() => calculateSummaryStats(data), [data]);
+
+  // State for chart visibility toggles
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);
   const [showLicensesChart, setShowLicensesChart] = useState(false);
   const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false);
@@ -303,7 +567,7 @@ function Charts({ data, summaryStats }) {
                       }}
                     >
                       <div className="flex flex-col h-full w-full">
-                        {/* Riga 1: Titolo e icone + Bottone Scarica SVG */}
+                        {/* Row 1: Title and icons + Download SVG Button */}
                         <div className="flex items-center justify-between mb-4 w-full">
                           <span className="text-indigo-300 font-semibold text-lg">Main Method Distribution by Year</span>
                           <div className="flex items-center gap-4">
@@ -316,7 +580,7 @@ function Charts({ data, summaryStats }) {
                                 {showMainMethodChart ? 'analytics' : 'bar_chart'}
                               </span>
                             </button>
-                            {/* Bottone Scarica SVG */}
+                            {/* Download SVG Button */}
                             <button
                               onClick={() => {
                                 if (chartRef?.current?.children[0]?.children[0]) {
@@ -331,7 +595,7 @@ function Charts({ data, summaryStats }) {
                             <span className="material-icons-round text-indigo-400">{showMainMethodChart ? 'bar_chart' : 'category'}</span>
                           </div>
                         </div>
-                        {/* Riga 2: Legenda */}
+                        {/* Row 2: Legend */}
                         <div className="flex flex-row gap-4 mb-2 w-full justify-end">
                           {['unsup', 'sup', 'hybrid'].map(type => (
                             <div key={type} className="flex items-center gap-2">
@@ -340,7 +604,7 @@ function Charts({ data, summaryStats }) {
                             </div>
                           ))}
                         </div>
-                        {/* Riga 3: Grafico */}
+                        {/* Row 3: Chart */}
                         <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full" ref={chartRef}>
                           <MainMethodStackedChart data={data} />
                         </div>
@@ -517,7 +781,7 @@ function Charts({ data, summaryStats }) {
                                 {showLicensesChart ? 'analytics' : 'bar_chart'}
                               </span>
                             </button>
-                            {/* Bottone Scarica SVG */}
+                            {/* Download SVG Button */}
                             <button
                               onClick={() => {
                                 const chartElement = document.querySelector('.licenses-chart svg');
@@ -546,9 +810,9 @@ function Charts({ data, summaryStats }) {
                   </div>
                 </div>
               </div>
-              {/* Nuova riga: Approcci per Conference/Journal */}
+              {/* New row: Approaches per Conference/Journal */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
-                {/* CARD FLIP Approaches per Conference/Journal */}
+                {/* FLIP CARD Approaches per Conference/Journal */}
                 <div className="relative perspective-1000 h-[500px]">
                   <div 
                     className={`bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showConferenceJournalChart ? 'rotate-y-180' : ''}`}
@@ -557,7 +821,7 @@ function Charts({ data, summaryStats }) {
                       transform: showConferenceJournalChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
                     }}
                   >
-                    {/* Fronte: Statistiche testuali */}
+                    {/* Front: Text statistics */}
                     <div className="backface-hidden h-[500px]">
                       <div className="flex items-center justify-between mb-4">
                         <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
@@ -565,7 +829,7 @@ function Charts({ data, summaryStats }) {
                           <button
                             onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
                             className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100 subtle-animated-border"
-                            title={showConferenceJournalChart ? 'Mostra statistiche' : 'Mostra grafico'}
+                            title={showConferenceJournalChart ? 'Show statistics' : 'Show chart'}
                             style={{ boxShadow: 'none', padding: 0, border: 'none' }}
                           >
                             <span className="material-icons-round" style={{ fontSize: '1.5rem', lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%', textAlign: 'center' }}>360</span>
@@ -595,7 +859,7 @@ function Charts({ data, summaryStats }) {
                         )}
                       </div>
                     </div>
-                    {/* Retro: Grafico D3 */}
+                    {/* Back: D3 Chart */}
                     <div 
                       className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 backface-hidden h-[500px]"
                       style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}
@@ -607,13 +871,13 @@ function Charts({ data, summaryStats }) {
                             <button
                               onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
                               className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
-                              title={showConferenceJournalChart ? 'Mostra statistiche' : 'Mostra grafico'}
+                              title={showConferenceJournalChart ? 'Show statistics' : 'Show chart'}
                             >
                               <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showConferenceJournalChart ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                                 {showConferenceJournalChart ? 'analytics' : 'bar_chart'}
                               </span>
                             </button>
-                            {/* Bottone Scarica SVG */}
+                            {/* Download SVG Button */}
                             <button
                               onClick={() => {
                                 const chartElement = document.querySelector('.conference-journal-chart svg');
