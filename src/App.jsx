@@ -10,7 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import * as d3 from "d3";
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import CitationMap from "./CitationMap";
 import Taxonomy from "./Taxonomy";
 import Home from "./Home";
@@ -560,6 +560,38 @@ const ConferenceJournalBarChart = ({ data, total, barColor = "#06b6d4", labelCol
     <div ref={wrapperRef} className="w-full h-full flex flex-col justify-end items-center relative overflow-y-auto max-h-[420px]">
       <svg ref={svgRef} width="100%" height="100%" style={{ display: 'block' }} />
     </div>
+  );
+};
+
+// =====================
+// COLLAPSIBLE NAVIGATION COMPONENT
+// =====================
+const CollapsibleNavigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      {/* Tab to open navigation */}
+      <div className="fixed top-6 left-0 z-30">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="relative bg-neutral-800 hover:bg-neutral-700 text-neutral-300 px-4 py-3 rounded-r-xl shadow-xl transition-all duration-300 border border-neutral-600 border-l-0 hover:shadow-2xl hover:scale-105 group flex items-center justify-center"
+          title={isOpen ? "Hide navigation" : "Show navigation"}
+        >
+          <span className="material-icons-round text-xl transition-transform duration-300 group-hover:rotate-12 relative z-10">
+            {isOpen ? "close" : "menu"}
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-neutral-700/20 rounded-r-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </button>
+      </div>
+
+      {/* Original Navigation as overlay */}
+      {isOpen && (
+        <div className="fixed top-0 left-0 right-0 z-20">
+          <Navigation />
+        </div>
+      )}
+    </>
   );
 };
 
@@ -1283,70 +1315,68 @@ function App() {
       <Route
         path="/survey"
         element={
-          <div className="bg-neutral-900 flex flex-col">
-            <Navigation />
-
+          <div className="bg-neutral-900 h-screen overflow-auto relative">
+            {/* Collapsible Navigation */}
+            <CollapsibleNavigation />
             
             {/* Data Table */}
-            <div className="overflow-auto" style={{ maxHeight: 'calc(100vh - 400px)' }}>
-              <table className="w-full table-auto text-xs">
-                <thead className="bg-neutral-800 sticky top-0 z-10">
-                  {table.getHeaderGroups().map((headerGroup) => (
-                    <tr key={headerGroup.id}>
-                      {headerGroup.headers.map((header) => (
-                        <th 
-                          key={header.id}
-                          colSpan={header.colSpan}
-                          className="px-4 py-2 text-center text-xs font-semibold text-neutral-300 border-r border-b border-neutral-700 border-l border-t"
-                          onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
-                          style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
+            <table className="w-full table-auto text-xs">
+              <thead className="bg-neutral-800 sticky top-0 z-10">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <th 
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        className="px-4 py-2 text-center text-xs font-semibold text-neutral-300 border-r border-b border-neutral-700 border-l border-t"
+                        onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
+                        style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                        {header.column.getCanSort() && (
+                          <span className="ml-2">
+                            {header.column.getIsSorted() === 'asc' ? '▲' : header.column.getIsSorted() === 'desc' ? '▼' : ''}
+                          </span>
+                        )}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody className="bg-neutral-900">
+                {table.getRowModel().rows.map((row, index) => {
+                  // Check for missing fields to highlight row
+                  const missingFields = Object.keys(REQUIRED_FIELDS)
+                    .filter(field => isRequiredFieldMissing(row.original, field));
+                  const hasMissingFields = missingFields.length > 0;
+                  
+                  return (
+                    <tr 
+                      key={row.id}
+                      className={`hover:bg-neutral-700 transition-colors duration-150 ${
+                        index % 2 === 0 ? 'bg-neutral-900' : 'bg-neutral-800'
+                      } ${hasMissingFields ? 'border-l-4 border-l-red-500' : ''}`}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <td 
+                          key={cell.id}
+                          className={`px-4 py-2 text-xs text-neutral-300 border-r border-neutral-700 ${
+                            cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'
+                          }`}
                         >
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                          {header.column.getCanSort() && (
-                            <span className="ml-2">
-                              {header.column.getIsSorted() === 'asc' ? '▲' : header.column.getIsSorted() === 'desc' ? '▼' : ''}
-                            </span>
-                          )}
-                        </th>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
                       ))}
                     </tr>
-                  ))}
-                </thead>
-                                  <tbody className="bg-neutral-900">
-                  {table.getRowModel().rows.map((row, index) => {
-                    // Check for missing fields to highlight row
-                    const missingFields = Object.keys(REQUIRED_FIELDS)
-                      .filter(field => isRequiredFieldMissing(row.original, field));
-                    const hasMissingFields = missingFields.length > 0;
-                    
-                    return (
-                      <tr 
-                        key={row.id}
-                        className={`hover:bg-neutral-700 transition-colors duration-150 ${
-                          index % 2 === 0 ? 'bg-neutral-900' : 'bg-neutral-800'
-                        } ${hasMissingFields ? 'border-l-4 border-l-red-500' : ''}`}
-                      >
-                        {row.getVisibleCells().map((cell) => (
-                          <td 
-                            key={cell.id}
-                            className={`px-4 py-2 text-xs text-neutral-300 border-r border-neutral-700 ${
-                              cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'
-                            }`}
-                          >
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         }
       />
