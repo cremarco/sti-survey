@@ -86,6 +86,27 @@ function App() {
         <div className="min-h-screen bg-neutral-900 flex flex-col">
           <Navigation />
           <div className="flex-1">
+            {/* Main Title */}
+            <div className="p-8 text-left">
+              <h1 className="text-3xl md:text-4xl font-bold text-neutral-100 mb-2">
+                STI Survey Companion
+              </h1>
+              <p className="text-neutral-400 text-lg mb-4">
+                Interactive resources for the <span className="italic">Survey on Semantic Interpretation of Tabular Data: Challenges and Directions</span>
+              </p>
+              
+              {/* Authors */}
+              <div className="text-neutral-300 text-sm mb-2">
+                <p>Marco Cremaschi¹, Blerina Spahiu¹, Matteo Palmonari¹, Ernesto Jimenez-Ruiz²</p>
+              </div>
+              
+              {/* Affiliations */}
+              <div className="text-neutral-400 text-xs mb-4">
+                <p>¹ University of Milano - Bicocca, viale Sarca, 336 - Edificio U14, Milan, 20126, Italy</p>
+                <p>² City, University of London, Northampton Square, London, EC1V 0HB, United Kingdom</p>
+              </div>
+              
+            </div>
             <DataOverview />
           </div>
         </div>
