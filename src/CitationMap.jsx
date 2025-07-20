@@ -221,7 +221,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
   if (loading) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <span className="text-gray-300 text-lg">Loading data...</span>
+        <span className="text-neutral-300 text-lg">Loading data...</span>
       </div>
     );
   }
@@ -236,10 +236,10 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
     <div className="min-h-screen bg-neutral-900 flex flex-col">
       <Navigation />
       <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
-        <div className="w-full max-w-7xl bg-gray-800 rounded-xl shadow-lg p-4 md:p-8 flex flex-col items-center">
-        <div className="w-full border-b border-gray-700 pb-4 mb-8 flex flex-col items-center">
-          <h1 className="text-3xl md:text-4xl text-gray-100 font-bold tracking-tight mb-2 text-center">Citation Map</h1>
-          <p className="text-gray-400 text-base text-center">Visualization of citations between documents</p>
+                <div className="w-full max-w-7xl bg-neutral-800 rounded-xl shadow-lg p-4 md:p-8 flex flex-col items-center">
+          <div className="w-full border-b border-neutral-700 pb-4 mb-8 flex flex-col items-center">
+          <h1 className="text-3xl md:text-4xl text-neutral-100 font-bold tracking-tight mb-2 text-center">Citation Map</h1>
+          <p className="text-neutral-400 text-base text-center">Visualization of citations between documents</p>
         </div>
         <button
           onClick={handleDownloadSVG}

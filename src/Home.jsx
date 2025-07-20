@@ -9,7 +9,7 @@ function Home() {
       
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center">
-        <div className="text-gray-300 text-lg">
+        <div className="text-neutral-300 text-lg">
           Welcome to the STI Survey Home Page
         </div>
       </div>

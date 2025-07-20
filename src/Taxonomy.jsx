@@ -129,7 +129,7 @@ function Taxonomy() {
       <Navigation />
       <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-6xl flex flex-col items-center">
-          <h2 className="text-3xl font-bold text-gray-100 mb-6">STI Approaches Taxonomy</h2>
+          <h2 className="text-3xl font-bold text-neutral-100 mb-6">STI Approaches Taxonomy</h2>
           <div ref={chartRef} className="w-full flex justify-center items-center" />
         </div>
       </div>

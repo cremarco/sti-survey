@@ -50,7 +50,7 @@ const getDomainBadgeColor = (domain) => {
     scientific: "bg-cyan-500/20 text-cyan-200",
     educational: "bg-lime-500/20 text-lime-200",
   };
-  return colorMap[domain?.toLowerCase()] || "bg-gray-500/20 text-gray-200";
+  return colorMap[domain?.toLowerCase()] || "bg-neutral-500/20 text-neutral-200";
 };
 
 /**
@@ -209,7 +209,7 @@ const MainMethodCell = ({ mainMethod, row }) => {
         </span>
       )}
       {(tech || isTechMissing) && (
-        <span className={tech ? "text-[10px] text-gray-400" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]"}>
+        <span className={tech ? "text-[10px] text-neutral-400" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]"}>
           {tech || "MISSING"}
         </span>
       )}
@@ -242,7 +242,7 @@ const DomainCell = ({ domain, row }) => {
           {domainValue || "MISSING"}
         </span>
       )}
-      {typeValue && <span className="text-[10px] text-gray-400">{typeValue}</span>}
+              {typeValue && <span className="text-[10px] text-neutral-400">{typeValue}</span>}
     </div>
   );
 };
@@ -399,11 +399,11 @@ const RowNumberCell = ({ row, index }) => {
           <span className="text-[11px] text-red-400 bg-red-900/60 rounded px-2 py-0.5 leading-none cursor-pointer flex items-center gap-1">
             {missingFields.length} missing
           </span>
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg shadow-lg text-xs text-gray-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
             <div className="font-semibold mb-1">Missing fields:</div>
             <div className="space-y-1">
               {missingFields.map((field) => (
-                <div key={field} className="text-[10px] text-gray-400">• {field}</div>
+                <div key={field} className="text-[10px] text-neutral-400">• {field}</div>
               ))}
             </div>
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
@@ -625,7 +625,7 @@ function App() {
     columnHelper.accessor("id", {
       header: "ID",
       cell: (info) => (
-        <span className="text-[10px] text-gray-400 font-mono">{info.getValue()}</span>
+        <span className="text-[10px] text-neutral-400 font-mono">{info.getValue()}</span>
       ),
       enableSorting: false,
       meta: { align: 'center' }
@@ -641,9 +641,9 @@ function App() {
         if (formattedDate) {
           return (
             <div className="flex flex-col items-center">
-              <span className="text-xs text-gray-200 font-medium">{formattedDate}</span>
+              <span className="text-xs text-neutral-200 font-medium">{formattedDate}</span>
               {addedValue !== formattedDate && (
-                <span className="text-[10px] text-gray-500" title={`Original: ${addedValue}`}>
+                                  <span className="text-[10px] text-neutral-500" title={`Original: ${addedValue}`}>
                   {addedValue}
                 </span>
               )}
@@ -651,7 +651,7 @@ function App() {
           );
         } else {
           return (
-            <span className="text-xs text-gray-500 italic">-</span>
+            <span className="text-xs text-neutral-500 italic">-</span>
           );
         }
       },
@@ -685,10 +685,10 @@ function App() {
       cell: (info) => {
         const authors = info.getValue();
         if (!authors || authors.length === 0) {
-          return <span className="text-gray-500 text-[10px]">No authors listed</span>;
+          return <span className="text-neutral-500 text-[10px]">No authors listed</span>;
         }
         return (
-          <span className="text-[10px] text-gray-400">{authors.join(", ")}</span>
+          <span className="text-[10px] text-neutral-400">{authors.join(", ")}</span>
         );
       },
       enableSorting: false,
@@ -910,7 +910,7 @@ function App() {
                 {value}
                 <span className="material-icons-round ml-1 align-middle leading-none" style={{ fontSize: '16px' }}>info_outline</span>
               </span>
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg shadow-lg text-xs text-gray-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
                 {description}
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
               </div>
@@ -970,7 +970,7 @@ function App() {
       id: "source",
       header: "Licence",
       cell: (info) => (
-        <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-gray-500/20 text-gray-200">
+                        <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-neutral-500/20 text-neutral-200">
           {info.getValue()}
         </span>
       ),
@@ -1065,7 +1065,7 @@ function App() {
       id: "citations-count",
       header: "# Citations",
       cell: (info) => (
-        <span className="text-[10px] text-gray-400">{info.getValue()}</span>
+        <span className="text-[10px] text-neutral-400">{info.getValue()}</span>
       ),
       enableSorting: true,
       meta: { align: 'center' },
@@ -1260,7 +1260,7 @@ function App() {
   if (loading) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <div className="text-gray-300 text-lg">Loading data...</div>
+        <div className="text-neutral-300 text-lg">Loading data...</div>
       </div>
     );
   }
@@ -1287,16 +1287,16 @@ function App() {
             {/* Overall Data Snapshot */}
             <div className="p-4 flex-shrink-0">
               {/* Overall Data Snapshot */}
-              <div className="mb-6 bg-gray-800 border border-gray-700 shadow-lg overflow-hidden">
+              <div className="mb-6 bg-neutral-800 border border-neutral-700 shadow-lg overflow-hidden">
                 <div className="p-6 pb-0">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-gray-100 flex items-center">
+                    <h3 className="text-xl font-bold text-neutral-100 flex items-center">
                       <span className="material-icons-round mr-2 text-blue-400">analytics</span>
                       Data Overview
                     </h3>
                     <button
                       onClick={() => setShowStatistics(!showStatistics)}
-                      className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors duration-200 text-gray-300 hover:text-gray-100"
+                      className="flex items-center justify-center w-8 h-8 rounded-lg bg-neutral-700 hover:bg-neutral-600 transition-colors duration-200 text-neutral-300 hover:text-neutral-100"
                       title={showStatistics ? "Hide statistics" : "Show statistics"}
                     >
                       <span className="material-icons-round text-lg transition-transform duration-200" style={{ transform: showStatistics ? 'rotate(180deg)' : 'rotate(0deg)' }}>
@@ -1692,7 +1692,7 @@ function App() {
                                   <span className="text-cyan-200 text-sm font-medium truncate max-w-[180px]" title={venue}>{venue}</span>
                                   <span className="text-cyan-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
                                 </div>
-                                <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                <div className="h-2 w-full bg-neutral-700 rounded-full overflow-hidden">
                                   <div 
                                     className="h-2 bg-cyan-500 rounded-full transition-all duration-1000 ease-out"
                                     style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
@@ -1759,20 +1759,20 @@ function App() {
               {/* Conference/Journal Filter */}
               <div className="relative" ref={filterRef}>
                 <span
-                  className="text-gray-200 font-semibold mr-2 cursor-pointer select-none"
+                  className="text-neutral-200 font-semibold mr-2 cursor-pointer select-none"
                   onClick={() => setShowFacetFilter((v) => !v)}
                 >
                   Conference/Journal:
                 </span>
                 {showFacetFilter && (
-                  <div className="absolute left-0 mt-2 bg-gray-800 border border-gray-700 rounded shadow-lg z-20 max-h-[250px] overflow-y-auto p-3 min-w-[220px]">
+                  <div className="absolute left-0 mt-2 bg-neutral-800 border border-neutral-700 rounded shadow-lg z-20 max-h-[250px] overflow-y-auto p-3 min-w-[220px]">
                     {Array.from(table.getColumn("conference-journal")?.getFacetedUniqueValues()?.entries() || [])
                       .sort((a, b) => a[0].localeCompare(b[0]))
                       .map(([value, count]) => (
-                        <label key={value} className="flex items-center mb-2 text-gray-300 text-sm">
+                        <label key={value} className="flex items-center mb-2 text-neutral-300 text-sm">
                           <input
                             type="checkbox"
-                            className="form-checkbox bg-gray-800 border-gray-600 text-blue-500 focus:ring-blue-400 mr-2"
+                            className="form-checkbox bg-neutral-800 border-neutral-600 text-blue-500 focus:ring-blue-400 mr-2"
                             checked={
                               (Array.isArray(table.getColumn("conference-journal")?.getFilterValue()) &&
                                 table.getColumn("conference-journal")?.getFilterValue().includes(value)) || false
@@ -1788,7 +1788,7 @@ function App() {
                               }
                             }}
                           />
-                          <span>{value} <span className="text-gray-500">({count})</span></span>
+                          <span>{value} <span className="text-neutral-500">({count})</span></span>
                         </label>
                       ))}
                   </div>
@@ -1799,14 +1799,14 @@ function App() {
             {/* Data Table */}
             <div className="overflow-auto" style={{ maxHeight: 'calc(100vh - 400px)' }}>
               <table className="w-full table-auto text-xs">
-                <thead className="bg-gray-800 sticky top-0 z-10">
+                <thead className="bg-neutral-800 sticky top-0 z-10">
                   {table.getHeaderGroups().map((headerGroup) => (
                     <tr key={headerGroup.id}>
                       {headerGroup.headers.map((header) => (
                         <th 
                           key={header.id}
                           colSpan={header.colSpan}
-                          className="px-4 py-2 text-center text-xs font-semibold text-gray-300 border-r border-b border-gray-700 border-l border-t"
+                          className="px-4 py-2 text-center text-xs font-semibold text-neutral-300 border-r border-b border-neutral-700 border-l border-t"
                           onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
                           style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                         >
@@ -1826,7 +1826,7 @@ function App() {
                     </tr>
                   ))}
                 </thead>
-                <tbody className="bg-gray-900">
+                                  <tbody className="bg-neutral-900">
                   {table.getRowModel().rows.map((row, index) => {
                     // Check for missing fields to highlight row
                     const missingFields = Object.keys(REQUIRED_FIELDS)
@@ -1836,14 +1836,14 @@ function App() {
                     return (
                       <tr 
                         key={row.id}
-                        className={`hover:bg-gray-700 transition-colors duration-150 ${
-                          index % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'
+                        className={`hover:bg-neutral-700 transition-colors duration-150 ${
+                          index % 2 === 0 ? 'bg-neutral-900' : 'bg-neutral-800'
                         } ${hasMissingFields ? 'border-l-4 border-l-red-500' : ''}`}
                       >
                         {row.getVisibleCells().map((cell) => (
                           <td 
                             key={cell.id}
-                            className={`px-4 py-2 text-xs text-gray-300 border-r border-gray-700 ${
+                            className={`px-4 py-2 text-xs text-neutral-300 border-r border-neutral-700 ${
                               cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'
                             }`}
                           >
