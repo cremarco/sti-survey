@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import * as d3 from "d3";
+import Navigation from './Navigation';
 
 // Chart components
 const MainMethodStackedChart = ({ data }) => {
@@ -202,7 +203,6 @@ function downloadSVG(svgElement, filename = "chart.svg") {
 }
 
 function Charts({ data, summaryStats }) {
-  const [showStatistics, setShowStatistics] = useState(false);
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);
   const [showLicensesChart, setShowLicensesChart] = useState(false);
   const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false);
@@ -217,28 +217,16 @@ function Charts({ data, summaryStats }) {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-900 text-neutral-100">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-neutral-900 flex flex-col">
+      <Navigation />
+      <div className="flex-1 container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-neutral-100 mb-2">Data Analytics & Charts</h1>
           <p className="text-neutral-400">Interactive visualizations and statistics from the STI survey data</p>
         </div>
 
-        {/* Toggle Statistics Button */}
-        <div className="mb-6">
-          <button
-            onClick={() => setShowStatistics(!showStatistics)}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition-colors duration-200 flex items-center gap-2"
-          >
-            <span className="material-icons-round">
-              {showStatistics ? 'visibility_off' : 'visibility'}
-            </span>
-            {showStatistics ? 'Hide' : 'Show'} Statistics & Charts
-          </button>
-        </div>
-
         {/* Charts Content */}
-        <div className={`transition-all duration-300 ease-in-out ${showStatistics ? 'max-h-[3000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="transition-all duration-300 ease-in-out max-h-[3000px] opacity-100">
           <div className="px-6 pb-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
               {/* Main Method Types */}
