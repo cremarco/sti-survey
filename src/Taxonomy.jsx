@@ -38,6 +38,7 @@ function Taxonomy() {
   const chartRef = useRef();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [svgNode, setSvgNode] = useState(null);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/taxonomy.json`)
@@ -109,7 +110,28 @@ function Taxonomy() {
       .text(d => d.data.name);
 
     container.appendChild(svg.node());
+    setSvgNode(svg.node());
   }
+
+  // Funzione per scaricare l'SVG
+  const handleDownloadSVG = () => {
+    if (!svgNode) return;
+    const serializer = new XMLSerializer();
+    let source = serializer.serializeToString(svgNode);
+    // Aggiungi dichiarazione XML per compatibilità
+    if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+      source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
+    const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'taxonomy.svg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   if (error) {
     return (
@@ -127,10 +149,27 @@ function Taxonomy() {
   return (
     <div className="min-h-screen bg-neutral-900 flex flex-col">
       <Navigation />
-      <div className="flex-1 flex items-center justify-center">
-        <div className="w-full max-w-6xl flex flex-col items-center">
-          <h2 className="text-3xl font-bold text-neutral-100 mb-6">STI Approaches Taxonomy</h2>
-          <div ref={chartRef} className="w-full flex justify-center items-center" />
+      <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
+        <div className="w-full max-w-7xl flex flex-col items-center">
+          <div className="w-full pb-4 mb-8 flex justify-between items-start">
+            <div>
+              <h1 className="text-3xl md:text-4xl text-neutral-100 font-bold tracking-tight mb-2">STI Approaches Taxonomy</h1>
+              <p className="text-neutral-400 text-base">Hierarchical classification of STI approaches and methods</p>
+            </div>
+            <button
+              onClick={handleDownloadSVG}
+              className="flex items-center justify-center w-10 h-10 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-indigo-100 border border-indigo-500/30 hover:border-indigo-500/50 transition-all duration-200 shadow-lg"
+              disabled={!svgNode}
+              title="Download SVG"
+            >
+              <span className="material-icons-round text-lg">download</span>
+            </button>
+          </div>
+        </div>
+        <div className="w-full">
+          <div className="w-full flex justify-center items-center">
+            <div ref={chartRef} className="w-full flex justify-center items-center" />
+          </div>
         </div>
       </div>
     </div>

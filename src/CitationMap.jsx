@@ -236,19 +236,24 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
     <div className="min-h-screen bg-neutral-900 flex flex-col">
       <Navigation />
       <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
-                <div className="w-full max-w-7xl bg-neutral-800 rounded-xl shadow-lg p-4 md:p-8 flex flex-col items-center">
-          <div className="w-full border-b border-neutral-700 pb-4 mb-8 flex flex-col items-center">
-          <h1 className="text-3xl md:text-4xl text-neutral-100 font-bold tracking-tight mb-2 text-center">Citation Map</h1>
-          <p className="text-neutral-400 text-base text-center">Visualization of citations between documents</p>
+                <div className="w-full max-w-7xl flex flex-col items-center">
+          <div className="w-full pb-4 mb-8 flex justify-between items-start">
+            <div>
+              <h1 className="text-3xl md:text-4xl text-neutral-100 font-bold tracking-tight mb-2">Citation Map</h1>
+              <p className="text-neutral-400 text-base">Visualization of citations between documents</p>
+            </div>
+            <button
+              onClick={handleDownloadSVG}
+              className="flex items-center justify-center w-10 h-10 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-indigo-100 border border-indigo-500/30 hover:border-indigo-500/50 transition-all duration-200 shadow-lg"
+              disabled={!svgNode}
+              title="Download SVG"
+            >
+              <span className="material-icons-round text-lg">download</span>
+            </button>
+          </div>
         </div>
-        <button
-          onClick={handleDownloadSVG}
-          className="mb-6 px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow transition-colors duration-150 self-end"
-          disabled={!svgNode}
-        >
-          Download SVG
-        </button>
-        <div className="w-full flex justify-center items-center overflow-x-auto" style={{ minHeight: 900 }}>
+        <div className="w-full">
+          <div className="w-full flex justify-center items-center overflow-x-auto" style={{ minHeight: 900 }}>
           <div ref={chartRef} className="w-full flex justify-center items-center" />
         </div>
       </div>
