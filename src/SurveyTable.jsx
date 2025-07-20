@@ -279,7 +279,7 @@ const RowNumberCell = ({ row, index }) => {
           <span className="text-[11px] text-red-400 bg-red-900/60 rounded px-2 py-0.5 leading-none cursor-pointer">
             {missingFields.length} missing
           </span>
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
             <div className="font-semibold mb-1">Missing fields:</div>
             <div className="space-y-1">
               {missingFields.map((field) => (
@@ -305,7 +305,7 @@ const CollapsibleNavigation = () => {
       <div className="fixed top-6 left-0 z-30">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative bg-neutral-800 hover:bg-neutral-700 text-neutral-300 px-4 py-3 rounded-r-xl shadow-xl transition-all duration-300 border border-neutral-600 border-l-0 hover:shadow-2xl hover:scale-105 group flex items-center justify-center"
+          className="relative bg-neutral-800 hover:bg-neutral-700 text-neutral-300 px-4 py-3 rounded-r-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 group flex items-center justify-center"
           title={isOpen ? "Hide navigation" : "Show navigation"}
         >
           <span className="material-icons-round text-xl transition-transform duration-300 group-hover:rotate-12 relative z-10">
@@ -653,7 +653,7 @@ function SurveyTable() {
                 {value}
                 <span className="material-icons-round ml-1 align-middle leading-none" style={{ fontSize: '16px' }}>info_outline</span>
               </span>
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
                 {description}
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
               </div>
@@ -845,7 +845,7 @@ function SurveyTable() {
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <div className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">
+        <div className="text-red-400 bg-red-900/20 rounded-lg p-6 text-lg">
           Error: {error}
         </div>
       </div>
@@ -866,7 +866,7 @@ function SurveyTable() {
                 <th 
                   key={header.id}
                   colSpan={header.colSpan}
-                  className="px-4 py-2 text-center text-xs font-semibold text-neutral-300 border-r border-b border-neutral-700 border-l border-t"
+                  className="px-4 py-2 text-center text-xs font-semibold text-neutral-300"
                   onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
                   style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                 >
@@ -902,7 +902,7 @@ function SurveyTable() {
                 {row.getVisibleCells().map((cell) => (
                   <td 
                     key={cell.id}
-                    className={`px-4 py-2 text-xs text-neutral-300 border-r border-neutral-700 ${
+                    className={`px-4 py-2 text-xs text-neutral-300 ${
                       cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'
                     }`}
                   >

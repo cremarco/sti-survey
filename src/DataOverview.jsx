@@ -207,7 +207,7 @@ function DataOverview() {
   if (error) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">
+        <div className="text-red-400 bg-red-900/20 rounded-lg p-6 text-lg">
           Error: {error}
         </div>
       </div>
@@ -217,7 +217,7 @@ function DataOverview() {
   return (
     <div className="p-4 flex-shrink-0">
       {/* Overall Data Snapshot */}
-      <div className="mb-6 bg-neutral-800 border border-neutral-700 shadow-lg overflow-hidden">
+      <div className="mb-6 bg-neutral-800 shadow-lg overflow-hidden">
         <div className="p-6 pb-0">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-bold text-neutral-100 flex items-center">
@@ -229,27 +229,27 @@ function DataOverview() {
           {/* Summary when closed */}
           {!showStatistics && (
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
-              <div className="bg-slate-500/10 p-3 border border-slate-500/20">
+              <div className="bg-slate-500/10 p-3">
                 <div className="text-2xl font-bold text-slate-100">{summaryStats.totalEntries}</div>
                 <div className="text-xs text-slate-300">Total Approaches</div>
               </div>
-              <div className="bg-blue-500/10 p-3 border border-blue-500/20">
+              <div className="bg-blue-500/10 p-3">
                 <div className="text-2xl font-bold text-blue-100">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</div>
                 <div className="text-xs text-blue-300">Year Range</div>
               </div>
-              <div className="bg-rose-500/10 p-3 border border-rose-500/20">
+              <div className="bg-rose-500/10 p-3">
                 <div className="text-2xl font-bold text-rose-100">{summaryStats.taskCounts.cta}</div>
                 <div className="text-xs text-rose-300">CTA</div>
               </div>
-              <div className="bg-orange-500/10 p-3 border border-orange-500/20">
+              <div className="bg-orange-500/10 p-3">
                 <div className="text-2xl font-bold text-orange-100">{summaryStats.taskCounts.cpa}</div>
                 <div className="text-xs text-orange-300">CPA</div>
               </div>
-              <div className="bg-amber-500/10 p-3 border border-amber-500/20">
+              <div className="bg-amber-500/10 p-3">
                 <div className="text-2xl font-bold text-amber-100">{summaryStats.taskCounts.cea}</div>
                 <div className="text-xs text-amber-300">CEA</div>
               </div>
-              <div className="bg-yellow-500/10 p-3 border border-yellow-500/20">
+              <div className="bg-yellow-500/10 p-3">
                 <div className="text-2xl font-bold text-yellow-100">{summaryStats.taskCounts.cnea}</div>
                 <div className="text-xs text-yellow-300">CNEA</div>
               </div>

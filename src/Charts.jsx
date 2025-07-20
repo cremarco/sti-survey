@@ -497,7 +497,7 @@ function Charts({ data }) {
                 {/* Main Method Types */}
                 <div className="relative perspective-1000 h-[500px]">
                   <div 
-                    className={`bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showMainMethodChart ? 'rotate-y-180' : ''}`}
+                    className={`bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showMainMethodChart ? 'rotate-y-180' : ''}`}
                     style={{ 
                       transformStyle: 'preserve-3d',
                       transform: showMainMethodChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
@@ -560,7 +560,7 @@ function Charts({ data }) {
                     
                     {/* Back side - Chart */}
                     <div 
-                      className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 border border-indigo-500/20 backface-hidden h-[500px]"
+                      className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 backface-hidden h-[500px]"
                       style={{ 
                         transform: 'rotateY(180deg)',
                         backfaceVisibility: 'hidden'
@@ -614,7 +614,7 @@ function Charts({ data }) {
                 </div>
 
                 {/* Domains */}
-                <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 border border-purple-500/20 h-[500px]">
+                <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 p-4 h-[500px]">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-purple-300 font-semibold text-lg">Domains</span>
                     <span className="material-icons-round text-purple-400">public</span>
@@ -640,7 +640,7 @@ function Charts({ data }) {
                 </div>
 
                 {/* Tasks Addressed */}
-                <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 border border-rose-500/20 h-[500px]">
+                <div className="bg-gradient-to-r from-rose-500/10 to-rose-600/10 p-4 h-[500px]">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-rose-300 font-semibold text-lg">Tasks Addressed</span>
                     <span className="material-icons-round text-rose-400">assignment</span>
@@ -664,7 +664,7 @@ function Charts({ data }) {
                 </div>
 
                 {/* Steps Coverage */}
-                <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 border border-green-500/20 h-[500px]">
+                <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 h-[500px]">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-green-300 font-semibold text-lg">Steps Coverage</span>
                     <span className="material-icons-round text-green-400">layers</span>
@@ -690,7 +690,7 @@ function Charts({ data }) {
                 </div>
 
                 {/* User Revision */}
-                <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 border border-teal-500/20 h-[500px]">
+                <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 h-[500px]">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-teal-300 font-semibold text-lg">User Revision</span>
                     <span className="material-icons-round text-teal-400">edit</span>
@@ -718,7 +718,7 @@ function Charts({ data }) {
                 {/* Licenses */}
                 <div className="relative perspective-1000 h-[500px]">
                   <div 
-                    className={`bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showLicensesChart ? 'rotate-y-180' : ''}`}
+                    className={`bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showLicensesChart ? 'rotate-y-180' : ''}`}
                     style={{ 
                       transformStyle: 'preserve-3d',
                       transform: showLicensesChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
@@ -762,7 +762,7 @@ function Charts({ data }) {
                     
                     {/* Back side - Chart */}
                     <div 
-                      className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 border border-amber-500/20 backface-hidden h-[500px]"
+                      className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-amber-600/10 p-4 backface-hidden h-[500px]"
                       style={{ 
                         transform: 'rotateY(180deg)',
                         backfaceVisibility: 'hidden'
@@ -815,7 +815,7 @@ function Charts({ data }) {
                 {/* FLIP CARD Approaches per Conference/Journal */}
                 <div className="relative perspective-1000 h-[500px]">
                   <div 
-                    className={`bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showConferenceJournalChart ? 'rotate-y-180' : ''}`}
+                    className={`bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showConferenceJournalChart ? 'rotate-y-180' : ''}`}
                     style={{ 
                       transformStyle: 'preserve-3d',
                       transform: showConferenceJournalChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
@@ -861,7 +861,7 @@ function Charts({ data }) {
                     </div>
                     {/* Back: D3 Chart */}
                     <div 
-                      className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 border border-cyan-500/20 backface-hidden h-[500px]"
+                      className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 backface-hidden h-[500px]"
                       style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}
                     >
                       <div className="flex flex-col h-full w-full">
