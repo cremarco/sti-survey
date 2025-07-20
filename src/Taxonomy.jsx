@@ -28,10 +28,10 @@ function labelTransform(d) {
   const r = d.y;
   // Per i leaf node, posiziona sempre all'esterno e orizzontale
   if (!d.children) {
-    return `rotate(${angle}) translate(${r + 8},0) rotate(${-angle})`;
+    return `rotate(${angle}) translate(${r + 20},0) rotate(${-angle})`;
   }
-  // Per i nodi interni, posiziona radialmente
-  return `rotate(${angle}) translate(${r},0)`;
+  // Per i nodi interni, posiziona radialmente ma mantieni le etichette dritte
+  return `rotate(${angle}) translate(${r + 15},0) rotate(${-angle})`;
 }
 
 function Taxonomy() {
@@ -57,8 +57,8 @@ function Taxonomy() {
   }, [data]);
 
   function drawRadialTidyTree(data, container) {
-    const width = 900;
-    const radius = width / 2 - 40;
+    const width = 1200; // Aumentato da 900 a 1200 per più spazio
+    const radius = width / 2 - 80; // Ridotto il margine per sfruttare meglio lo spazio
     const root = d3.hierarchy(data);
     const tree = d3.tree()
       .size([2 * Math.PI, radius])
@@ -102,11 +102,12 @@ function Taxonomy() {
       .join('text')
       .attr('transform', labelTransform)
       .attr('dy', '0.32em')
-      .attr('x', d => !d.children ? 0 : (d.x < Math.PI === !d.children ? 10 : -10))
-      .attr('text-anchor', d => !d.children ? 'middle' : (d.x < Math.PI === !d.children ? 'start' : 'end'))
+      .attr('x', 0) // Semplificato il posizionamento orizzontale
+      .attr('text-anchor', 'middle') // Centrato per tutte le etichette
       .attr('fill', d => d.depth === 0 ? '#18181b' : getBranchColor(d))
       .attr('font-weight', d => d.depth === 0 ? 'bold' : 'normal')
       .attr('font-size', d => d.depth === 0 ? 20 : d.depth === 1 ? 16 : 13)
+      .attr('pointer-events', 'none') // Evita interazioni con le etichette
       .text(d => d.data.name);
 
     container.appendChild(svg.node());
