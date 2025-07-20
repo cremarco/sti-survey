@@ -415,170 +415,172 @@ function App() {
       <Route path="/" element={
         <div className="min-h-screen bg-neutral-900 flex flex-col">
           <Navigation />
-          <div className="flex-1">
-            {/* Main Title */}
-            <div className="p-8 text-left">
-              <h1 className="text-3xl md:text-4xl font-bold text-neutral-100 mb-2">
-                STI Survey Companion
-              </h1>
-              <p className="text-neutral-400 text-lg mb-4">
-                Interactive resources for the <span className="italic">Survey on Semantic Interpretation of Tabular Data: Challenges and Directions</span>
-              </p>
-              
-              {/* Authors */}
-              <div className="text-neutral-300 text-sm mb-2">
-                <p>Marco Cremaschi¹, Blerina Spahiu¹, Matteo Palmonari¹, Ernesto Jimenez-Ruiz²</p>
-              </div>
-              
-              {/* Affiliations */}
-              <div className="text-neutral-400 text-xs mb-4">
-                <p>¹ University of Milano - Bicocca, viale Sarca, 336 - Edificio U14, Milan, 20126, Italy</p>
-                <p>² City, University of London, Northampton Square, London, EC1V 0HB, United Kingdom</p>
-              </div>
-              
-            </div>
-            {/* Data Overview Section */}
-            <div className="p-4 flex-shrink-0">
-              {/* Overall Data Snapshot */}
-              <div className="mb-6 bg-neutral-800 shadow-lg overflow-hidden">
-                <div className="p-6 pb-0">
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-neutral-100 flex items-center">
-                      <span className="material-icons-round mr-2 text-blue-400">analytics</span>
-                      Data Overview
-                    </h3>
-                  </div>
-                  
-                  {/* Summary when closed */}
-                  {!showStatistics && (
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
-                      <div className="bg-slate-500/10 p-4 relative min-h-[80px]">
-                        <div className="text-2xl font-bold text-slate-100">{animatedTotalEntries}</div>
-                        <div className="text-xs text-slate-300">Total Approaches</div>
-                        <svg
-                          ref={el => chartRefs.current.total = el}
-                          className="absolute bottom-0 right-0 opacity-70"
-                          style={{ pointerEvents: 'none' }}
-                        />
-                      </div>
-                      <div className="bg-blue-500/10 p-4 relative min-h-[80px]">
-                        <div className="text-2xl font-bold text-blue-100">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</div>
-                        <div className="text-xs text-blue-300">Year Range</div>
-                        <svg
-                          ref={el => chartRefs.current.yearRange = el}
-                          className="absolute bottom-0 right-0 opacity-70"
-                          style={{ pointerEvents: 'none' }}
-                        />
-                      </div>
-                      <div className="bg-rose-500/10 p-4 relative min-h-[80px]">
-                        <div className="text-2xl font-bold text-rose-100">{animatedCta}</div>
-                        <div className="text-xs text-rose-300">CTA</div>
-                        <svg
-                          ref={el => chartRefs.current.cta = el}
-                          className="absolute bottom-0 right-0 opacity-70"
-                          style={{ pointerEvents: 'none' }}
-                        />
-                      </div>
-                      <div className="bg-orange-500/10 p-4 relative min-h-[80px]">
-                        <div className="text-2xl font-bold text-orange-100">{animatedCpa}</div>
-                        <div className="text-xs text-orange-300">CPA</div>
-                        <svg
-                          ref={el => chartRefs.current.cpa = el}
-                          className="absolute bottom-0 right-0 opacity-70"
-                          style={{ pointerEvents: 'none' }}
-                        />
-                      </div>
-                      <div className="bg-amber-500/10 p-4 relative min-h-[80px]">
-                        <div className="text-2xl font-bold text-amber-100">{animatedCea}</div>
-                        <div className="text-xs text-amber-300">CEA</div>
-                        <svg
-                          ref={el => chartRefs.current.cea = el}
-                          className="absolute bottom-0 right-0 opacity-70"
-                          style={{ pointerEvents: 'none' }}
-                        />
-                      </div>
-                      <div className="bg-yellow-500/10 p-4 relative min-h-[80px]">
-                        <div className="text-2xl font-bold text-yellow-100">{animatedCnea}</div>
-                        <div className="text-xs text-yellow-300">CNEA</div>
-                        <svg
-                          ref={el => chartRefs.current.cnea = el}
-                          className="absolute bottom-0 right-0 opacity-70"
-                          style={{ pointerEvents: 'none' }}
-                        />
-                      </div>
-                    </div>
-                  )}
+          <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
+            <div className="w-full max-w-7xl flex flex-col items-center">
+              {/* Main Title */}
+              <div className="w-full pb-4 mb-8">
+                <h1 className="text-3xl md:text-4xl font-bold text-neutral-100 mb-2">
+                  STI Survey Companion
+                </h1>
+                <p className="text-neutral-400 text-lg mb-4">
+                  Interactive resources for the <span className="italic">Survey on Semantic Interpretation of Tabular Data: Challenges and Directions</span>
+                </p>
+                
+                {/* Authors */}
+                <div className="text-neutral-300 text-sm mb-2">
+                  <p>Marco Cremaschi¹, Blerina Spahiu¹, Matteo Palmonari¹, Ernesto Jimenez-Ruiz²</p>
+                </div>
+                
+                {/* Affiliations */}
+                <div className="text-neutral-400 text-xs mb-4">
+                  <p>¹ University of Milano - Bicocca, viale Sarca, 336 - Edificio U14, Milan, 20126, Italy</p>
+                  <p>² City, University of London, Northampton Square, London, EC1V 0HB, United Kingdom</p>
                 </div>
               </div>
-            </div>
-            
-            {/* Navigation Boxes */}
-            <div className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <Link to="/survey" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-blue-500/20 flex items-center justify-center mr-4">
-                        <span className="material-icons-round text-blue-400 text-xl">table_chart</span>
-                      </div>
-                      <h3 className="text-lg font-bold text-neutral-100">Survey Data</h3>
+              
+              {/* Data Overview Section */}
+              <div className="w-full mb-8">
+                {/* Overall Data Snapshot */}
+                <div className="bg-neutral-800 shadow-lg overflow-hidden">
+                  <div className="p-6 pb-0">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-xl font-bold text-neutral-100 flex items-center">
+                        <span className="material-icons-round mr-2 text-blue-400">analytics</span>
+                        Data Overview
+                      </h3>
                     </div>
-                    <p className="text-neutral-400 text-sm">
-                      Explore the complete dataset with interactive filtering, sorting, and detailed information about each approach.
-                    </p>
-                  </div>
-                </Link>
-
-                <Link to="/citation-map" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-green-500/20 flex items-center justify-center mr-4">
-                        <span className="material-icons-round text-green-400 text-xl">account_tree</span>
+                    
+                    {/* Summary when closed */}
+                    {!showStatistics && (
+                      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
+                        <div className="bg-slate-500/10 p-4 relative min-h-[80px]">
+                          <div className="text-2xl font-bold text-slate-100">{animatedTotalEntries}</div>
+                          <div className="text-xs text-slate-300">Total Approaches</div>
+                          <svg
+                            ref={el => chartRefs.current.total = el}
+                            className="absolute bottom-0 right-0 opacity-70"
+                            style={{ pointerEvents: 'none' }}
+                          />
+                        </div>
+                        <div className="bg-blue-500/10 p-4 relative min-h-[80px]">
+                          <div className="text-2xl font-bold text-blue-100">{summaryStats.yearRange.min} - {summaryStats.yearRange.max}</div>
+                          <div className="text-xs text-blue-300">Year Range</div>
+                          <svg
+                            ref={el => chartRefs.current.yearRange = el}
+                            className="absolute bottom-0 right-0 opacity-70"
+                            style={{ pointerEvents: 'none' }}
+                          />
+                        </div>
+                        <div className="bg-rose-500/10 p-4 relative min-h-[80px]">
+                          <div className="text-2xl font-bold text-rose-100">{animatedCta}</div>
+                          <div className="text-xs text-rose-300">CTA</div>
+                          <svg
+                            ref={el => chartRefs.current.cta = el}
+                            className="absolute bottom-0 right-0 opacity-70"
+                            style={{ pointerEvents: 'none' }}
+                          />
+                        </div>
+                        <div className="bg-orange-500/10 p-4 relative min-h-[80px]">
+                          <div className="text-2xl font-bold text-orange-100">{animatedCpa}</div>
+                          <div className="text-xs text-orange-300">CPA</div>
+                          <svg
+                            ref={el => chartRefs.current.cpa = el}
+                            className="absolute bottom-0 right-0 opacity-70"
+                            style={{ pointerEvents: 'none' }}
+                          />
+                        </div>
+                        <div className="bg-amber-500/10 p-4 relative min-h-[80px]">
+                          <div className="text-2xl font-bold text-amber-100">{animatedCea}</div>
+                          <div className="text-xs text-amber-300">CEA</div>
+                          <svg
+                            ref={el => chartRefs.current.cea = el}
+                            className="absolute bottom-0 right-0 opacity-70"
+                            style={{ pointerEvents: 'none' }}
+                          />
+                        </div>
+                        <div className="bg-yellow-500/10 p-4 relative min-h-[80px]">
+                          <div className="text-2xl font-bold text-yellow-100">{animatedCnea}</div>
+                          <div className="text-xs text-yellow-300">CNEA</div>
+                          <svg
+                            ref={el => chartRefs.current.cnea = el}
+                            className="absolute bottom-0 right-0 opacity-70"
+                            style={{ pointerEvents: 'none' }}
+                          />
+                        </div>
                       </div>
-                      <h3 className="text-lg font-bold text-neutral-100">Citation Map</h3>
-                    </div>
-                    <p className="text-neutral-400 text-sm">
-                      Visualize the relationships between research papers through their citation networks and connections.
-                    </p>
+                    )}
                   </div>
-                </Link>
-
-                <Link to="/taxonomy" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-purple-500/20 flex items-center justify-center mr-4">
-                        <span className="material-icons-round text-purple-400 text-xl">category</span>
-                      </div>
-                      <h3 className="text-lg font-bold text-neutral-100">Taxonomy</h3>
-                    </div>
-                    <p className="text-neutral-400 text-sm">
-                      Discover the hierarchical classification of methods, techniques, and approaches in semantic table interpretation.
-                    </p>
-                  </div>
-                </Link>
-
-                <Link to="/charts" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-orange-500/20 flex items-center justify-center mr-4">
-                        <span className="material-icons-round text-orange-400 text-xl">bar_chart</span>
-                      </div>
-                      <h3 className="text-lg font-bold text-neutral-100">Analytics</h3>
-                    </div>
-                    <p className="text-neutral-400 text-sm">
-                      View comprehensive charts and analytics showing trends, distributions, and insights from the survey data.
-                    </p>
-                  </div>
-                </Link>
+                </div>
               </div>
-            </div>
-            
-            {/* Footer */}
-            <footer className="mt-auto p-6 bg-neutral-800">
-              <div className="text-center text-neutral-400 text-sm">
-                <p>© 2025 DatAI lab. All rights reserved.</p>
+              
+              {/* Navigation Boxes */}
+              <div className="w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                  <Link to="/survey" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
+                    <div className="p-6">
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 bg-blue-500/20 flex items-center justify-center mr-4">
+                          <span className="material-icons-round text-blue-400 text-xl">table_chart</span>
+                        </div>
+                        <h3 className="text-lg font-bold text-neutral-100">Survey Data</h3>
+                      </div>
+                      <p className="text-neutral-400 text-sm">
+                        Explore the complete dataset with interactive filtering, sorting, and detailed information about each approach.
+                      </p>
+                    </div>
+                  </Link>
+
+                  <Link to="/citation-map" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
+                    <div className="p-6">
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 bg-green-500/20 flex items-center justify-center mr-4">
+                          <span className="material-icons-round text-green-400 text-xl">account_tree</span>
+                        </div>
+                        <h3 className="text-lg font-bold text-neutral-100">Citation Map</h3>
+                      </div>
+                      <p className="text-neutral-400 text-sm">
+                        Visualize the relationships between research papers through their citation networks and connections.
+                      </p>
+                    </div>
+                  </Link>
+
+                  <Link to="/taxonomy" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
+                    <div className="p-6">
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 bg-purple-500/20 flex items-center justify-center mr-4">
+                          <span className="material-icons-round text-purple-400 text-xl">category</span>
+                        </div>
+                        <h3 className="text-lg font-bold text-neutral-100">Taxonomy</h3>
+                      </div>
+                      <p className="text-neutral-400 text-sm">
+                        Discover the hierarchical classification of methods, techniques, and approaches in semantic table interpretation.
+                      </p>
+                    </div>
+                  </Link>
+
+                  <Link to="/charts" className="bg-neutral-800 shadow-lg overflow-hidden hover:bg-neutral-700 transition-all duration-300 group">
+                    <div className="p-6">
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 bg-orange-500/20 flex items-center justify-center mr-4">
+                          <span className="material-icons-round text-orange-400 text-xl">bar_chart</span>
+                        </div>
+                        <h3 className="text-lg font-bold text-neutral-100">Analytics</h3>
+                      </div>
+                      <p className="text-neutral-400 text-sm">
+                        View comprehensive charts and analytics showing trends, distributions, and insights from the survey data.
+                      </p>
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </footer>
+              
+              {/* Footer */}
+              <footer className="w-full mt-8 p-6 bg-neutral-800">
+                <div className="text-center text-neutral-400 text-sm">
+                  <p>© 2025 DatAI lab. All rights reserved.</p>
+                </div>
+              </footer>
+            </div>
           </div>
         </div>
       } />

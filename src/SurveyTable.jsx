@@ -305,7 +305,7 @@ const CollapsibleNavigation = () => {
       <div className="fixed top-6 left-0 z-30">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative bg-neutral-800 hover:bg-neutral-700 text-neutral-300 px-4 py-3 rounded-r-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 group flex items-center justify-center"
+          className="relative bg-neutral-900 hover:bg-neutral-800 text-neutral-300 px-4 py-3 rounded-r-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 group flex items-center justify-center"
           title={isOpen ? "Hide navigation" : "Show navigation"}
         >
           <span className="material-icons-round text-xl transition-transform duration-300 group-hover:rotate-12 relative z-10">

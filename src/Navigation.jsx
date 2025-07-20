@@ -32,7 +32,7 @@ function Navigation() {
 
   return (
     <div className="px-8 py-4">
-      <nav className="bg-neutral-800 px-6 py-2 rounded-xl shadow-lg max-w-4xl mx-auto">
+      <nav className="bg-neutral-900 px-6 py-2 rounded-xl shadow-lg max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
           {/* Navigation Links */}
           <div className="flex items-center space-x-6">
