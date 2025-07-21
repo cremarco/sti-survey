@@ -45,10 +45,13 @@ const useCountUp = (end, start = 0, duration = 1000) => {
       return;
     }
     
+    // Ensure duration is positive
+    const safeDuration = Math.max(duration, 1);
+    
     let startTime = null;
     const animate = (currentTime) => {
       if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const progress = Math.min((currentTime - startTime) / safeDuration, 1);
       const currentCount = Math.floor(start + (end - start) * progress);
       setCount(currentCount);
       
@@ -384,11 +387,11 @@ function App() {
   }, [data]);
 
   // Animated counters
-  const animatedTotalEntries = useCountUp(summaryStats.totalEntries || 0, 0, animationStarted ? 1500 : 0);
-  const animatedCta = useCountUp(summaryStats.taskCounts?.cta || 0, 0, animationStarted ? 1500 : 0);
-  const animatedCpa = useCountUp(summaryStats.taskCounts?.cpa || 0, 0, animationStarted ? 1500 : 0);
-  const animatedCea = useCountUp(summaryStats.taskCounts?.cea || 0, 0, animationStarted ? 1500 : 0);
-  const animatedCnea = useCountUp(summaryStats.taskCounts?.cnea || 0, 0, animationStarted ? 1500 : 0);
+  const animatedTotalEntries = useCountUp(summaryStats.totalEntries || 0, 0, animationStarted ? 1500 : 1);
+  const animatedCta = useCountUp(summaryStats.taskCounts?.cta || 0, 0, animationStarted ? 1500 : 1);
+  const animatedCpa = useCountUp(summaryStats.taskCounts?.cpa || 0, 0, animationStarted ? 1500 : 1);
+  const animatedCea = useCountUp(summaryStats.taskCounts?.cea || 0, 0, animationStarted ? 1500 : 1);
+  const animatedCnea = useCountUp(summaryStats.taskCounts?.cnea || 0, 0, animationStarted ? 1500 : 1);
 
   // Loading state
   if (loading) {
