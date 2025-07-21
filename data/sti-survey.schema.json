@@ -1,0 +1,205 @@
+{
+    "type": "object",
+    "properties": {
+        "author": {
+            "type": "string"
+        },
+        "year": {
+            "type": "integer"
+        },
+        "title": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "text"
+            ]
+        },
+        "conference-journal": {
+            "type": "string"
+        },
+        "name-of-approach": {
+            "type": "string"
+        },
+        "main-method": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "technique": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "technique"
+            ]
+        },
+        "domain": {
+            "type": "object",
+            "properties": {
+                "domain": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "independent",
+                "dependent"
+            ]
+        },
+        "tasks": {
+            "type": "object",
+            "properties": {
+                "cta": {
+                    "type": "boolean"
+                },
+                "cpa": {
+                    "type": "boolean"
+                },
+                "cea": {
+                    "type": "boolean"
+                },
+                "cnea": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "cta",
+                "cpa",
+                "cea",
+                "cnea"
+            ]
+        },
+        "steps": {
+            "type": "object",
+            "properties": {
+                "data-preparation": {
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "type": "string"
+                        },
+                        "spell-checker": {
+                            "type": "string"
+                        },
+                        "units-of-measurements": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "subject-detection": {
+                    "type": "string"
+                },
+                "column-analysis": {
+                    "type": "string"
+                },
+                "type-annotation": {
+                    "type": "string"
+                },
+                "predicate-annotation": {
+                    "type": "string"
+                },
+                "datatype-annotation": {
+                    "type": "string"
+                },
+                "entity-linking": {
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "type": "string"
+                        },
+                        "candidate-generation": {
+                            "type": "string"
+                        },
+                        "entity-disambiguation": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "nil-annotation": {
+                    "type": "string"
+                }
+            }
+        },
+        "user-revision": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "validation": {
+            "type": "string"
+        },
+        "code-availability": {
+            "type": "string"
+        },
+        "license": {
+            "type": "string"
+        },
+        "inputs": {
+            "type": "object",
+            "properties": {
+                "type-of-table": {
+                    "type": "string"
+                },
+                "kg": {
+                    "type": "object",
+                    "properties": {
+                        "triple-store": {
+                            "type": "string"
+                        },
+                        "index": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "triple-store",
+                        "index"
+                    ]
+                }
+            },
+            "required": [
+                "type-of-table",
+                "kg"
+            ]
+        },
+        "output-format": {
+            "type": "string"
+        },
+        "checked-by-author": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "author",
+        "year",
+        "title",
+        "conference-journal",
+        "main-method",
+        "domain",
+        "tasks",
+        "steps",
+        "user-revision",
+        "license",
+        "inputs",
+        "checked-by-author"
+    ]
+}

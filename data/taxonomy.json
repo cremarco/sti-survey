@@ -1,0 +1,88 @@
+{
+  "children": [
+    {
+      "name": "Task",
+      "children": [
+        { "name": "CEA" },
+        { "name": "CTA" },
+        { "name": "CPA" },
+        { "name": "CNEA" },
+        {
+          "name": "Subtask",
+          "children": [
+            { "name": "Subject detection" },
+            { "name": "Datatype annotation" },
+            { "name": "Predicate annotation" },
+            { "name": "Type annotation" },
+            { "name": "Column classification" },
+            { "name": "Entity linking" },
+            { "name": "NIL annotation" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Method",
+      "children": [
+        { "name": "Hybrid" },
+        { "name": "Supervised" },
+        { "name": "Unsupervised" }
+      ]
+    },
+    {
+      "name": "Revision",
+      "children": [
+        { "name": "Fully automated" },
+        { "name": "Semi-automated" }
+      ]
+    },
+    {
+      "name": "Domain",
+      "children": [
+        { "name": "Dependent" },
+        { "name": "Independent" }
+      ]
+    },
+    {
+      "name": "Application/Resource",
+      "children": [
+        { "name": "General" },
+        { "name": "Specific" },
+        { "name": "Biomedical" },
+        { "name": "Geographic" },
+        { "name": "Financial" },
+        { "name": "Scientific" },
+        { "name": "Educational" }
+      ]
+    },
+    {
+      "name": "Validation"
+    },
+    {
+      "name": "Code availability"
+    },
+    {
+      "name": "User Interface/Tool"
+    },
+    {
+      "name": "Input",
+      "children": [
+        { "name": "Source",
+          "children": [
+            { "name": "Table" },
+            { "name": "KG" },
+            { "name": "Index" },
+            { "name": "Triple store" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Output format",
+      "children": [
+        { "name": "Feature" },
+        { "name": "Annotation" }
+      ]
+    }
+  ]
+} 
