@@ -3258,20 +3258,49 @@
             "type": "none",
             "description": ""
         },
-        "validation": "Subset of Limaye",
+        "validation": "50 Wikipedia tables",
         "code-availability": "",
         "license": "Not specified",
         "inputs": {
             "type-of-table": "DBpedia",
             "kg": {
-                "triple-store": "",
+                "triple-store": "DBpedia",
                 "index": ""
             }
         },
         "output-format": "",
         "checked-by-author": false,
-        "authors": [],
-        "checked-by-ai": false
+        "checked-by-ai": true,
+        "id": "zwicklbauer2013towards",
+        "doi": "https://doi.org/10.5555/2874399.2874451",
+        "authors": [
+          "Stefan Zwicklbauer",
+          "Christoph Einsiedler",
+          "Michael Granitzer",
+          "Christin Seifert"
+        ],
+        "citations": [
+          {
+            "ref": "gonzalez2010google",
+            "title": "Google fusion tables: web-centered data management and collaboration"
+          },
+          {
+            "ref": "limaye2010annotating",
+            "title": "Annotating and searching web tables using entities, types and relationships"
+          },
+          {
+            "ref": "quercini2013entity",
+            "title": "Entity discovery and annotation in tables"
+          },
+          {
+            "ref": "venetis2011recovering",
+            "title": "Recovering semantics of tables on the web"
+          },
+          {
+            "ref": "zwicklbauer2013do",
+            "title": "Do we need entity-centric knowledge bases for entity disambiguation?"
+          }
+        ]
     },
     {
         "author": "Sekhavat",
