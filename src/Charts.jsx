@@ -154,10 +154,19 @@ const ConferenceJournalBarChart = ({ data, total, barColor = "#06b6d4", labelCol
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Sort data by count
-    const sortedData = Object.entries(data)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 10); // Show top 10
+    // Sort data by count and filter venues with count >= 2
+    const entries = Object.entries(data);
+    const venuesWithAtLeast2 = entries.filter(([, count]) => count >= 2);
+    const venuesWith1 = entries.filter(([, count]) => count === 1);
+    const sortedData = venuesWithAtLeast2.sort(([, a], [, b]) => b - a);
+
+    // Add 'other' column if there are venues with count 1
+    if (venuesWith1.length > 0) {
+      sortedData.push([
+        `other (${venuesWith1.length})`,
+        1 // The bar value is 1, since each of those venues has value 1
+      ]);
+    }
 
     const x = d3.scaleBand()
       .domain(sortedData.map(d => d[0]))
@@ -789,7 +798,13 @@ function Charts({ data }) {
                     {/* Front: Text statistics */}
                     <div className="backface-hidden h-[500px]">
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
+                        <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
+                          Approaches per Conference/Journal
+                          {/* Unique venues count label */}
+                          <span className="ml-2 px-2 py-0.5 rounded bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
+                            {Object.keys(summaryStats.conferenceJournalDistribution).length}
+                          </span>
+                        </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
@@ -829,7 +844,13 @@ function Charts({ data }) {
                     >
                       <div className="flex flex-col h-full w-full">
                         <div className="flex items-center justify-between mb-4 w-full">
-                          <span className="text-cyan-300 font-semibold text-lg">Approaches per Conference/Journal</span>
+                          <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
+                            Approaches per Conference/Journal
+                            {/* Unique venues count label (back side) */}
+                            <span className="ml-2 px-2 py-0.5 rounded bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
+                              {Object.keys(summaryStats.conferenceJournalDistribution).length}
+                            </span>
+                          </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}

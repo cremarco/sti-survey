@@ -11,10 +11,10 @@
           "name": "Subtask",
           "children": [
             { "name": "Subject detection" },
-            { "name": "Datatype annotation" },
-            { "name": "Predicate annotation" },
             { "name": "Type annotation" },
+            { "name": "Datatype annotation" },
             { "name": "Column classification" },
+            { "name": "Predicate annotation" },
             { "name": "Entity linking" },
             { "name": "NIL annotation" }
           ]
@@ -33,7 +33,7 @@
       "name": "Revision",
       "children": [
         { "name": "Fully automated" },
-        { "name": "Semi-automated" }
+        { "name": "Semi automated" }
       ]
     },
     {
@@ -44,16 +44,7 @@
       ]
     },
     {
-      "name": "Application/Resource",
-      "children": [
-        { "name": "General" },
-        { "name": "Specific" },
-        { "name": "Biomedical" },
-        { "name": "Geographic" },
-        { "name": "Financial" },
-        { "name": "Scientific" },
-        { "name": "Educational" }
-      ]
+      "name": "Application/Purpose"
     },
     {
       "name": "Validation"
@@ -69,20 +60,21 @@
       "children": [
         { "name": "Source",
           "children": [
-            { "name": "Table" },
-            { "name": "KG" },
-            { "name": "Index" },
-            { "name": "Triple store" }
+            { "name": "Feature" },
+            { "name": "Annotation" },
+            { "name": "Table" }
+          ]
+        },
+        { "name": "KG",
+          "children": [
+            { "name": "Triple store" },
+            { "name": "Index" }
           ]
         }
       ]
     },
     {
-      "name": "Output format",
-      "children": [
-        { "name": "Feature" },
-        { "name": "Annotation" }
-      ]
+      "name": "Output format"
     }
   ]
 } 
