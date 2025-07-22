@@ -88,9 +88,51 @@ const REQUIRED_FIELDS = {
 };
 
 // Utility functions (outside component)
-const getTypeBadgeColor = (type) => METHOD_TYPE_COLORS[type?.toLowerCase()] || "bg-slate-500/20 text-slate-200";
-const getDomainBadgeColor = (domain) => DOMAIN_COLORS[domain?.toLowerCase()] || "bg-neutral-500/20 text-neutral-200";
-const getUserRevisionBadgeColor = (type) => USER_REVISION_COLORS[type?.toLowerCase()] || "bg-violet-500/20 text-violet-200";
+const getTypeBadgeColor = (type) => {
+  // Usa lo stesso stile delle altre label ma con il colore dal meta schema per supervised/unsupervised
+  const lower = type?.toLowerCase();
+  const baseColor = schema._uiMeta?.mainMethod?.color || '#6366f1';
+  if (lower === 'unsup' || lower === 'unsupervised' || lower === 'sup' || lower === 'supervised') {
+    // Usa uno sfondo opaco chiaro e testo leggibile, come le altre label
+    return {
+      backgroundColor: baseColor + '20', // 20 = ~12% opacity in hex
+      color: baseColor
+    };
+  }
+  return `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${METHOD_TYPE_COLORS[lower] || "bg-slate-500/20 text-slate-200"}`;
+};
+const getDomainBadgeColor = (domain) => {
+  // Usa lo stesso stile delle altre label ma con il colore dal meta schema per domain
+  const lower = domain?.toLowerCase();
+  const baseColor = schema._uiMeta?.domain?.color || '#14b8a6';
+  if (lower === 'none') {
+    // Stile precedente: bg-slate-500/20 text-slate-200
+    return {
+      backgroundColor: 'rgba(100,116,139,0.12)', // slate-500/20
+      color: '#e5e7eb' // slate-200
+    };
+  }
+  return {
+    backgroundColor: baseColor + '20', // 20 = ~12% opacity in hex
+    color: baseColor
+  };
+};
+const getUserRevisionBadgeColor = (type) => {
+  // Usa lo stesso stile delle altre label ma con il colore dal meta schema per revision
+  const lower = type?.toLowerCase();
+  const baseColor = schema._uiMeta?.revision?.color || '#06b6d4';
+  if (lower === 'none') {
+    // Stile precedente: bg-slate-500/20 text-slate-200
+    return {
+      backgroundColor: 'rgba(100,116,139,0.12)', // slate-500/20
+      color: '#e5e7eb' // slate-200
+    };
+  }
+  return {
+    backgroundColor: baseColor + '20', // 20 = ~12% opacity in hex
+    color: baseColor
+  };
+};
 const isEmpty = (value) => {
   if (value === null || value === undefined) return true;
   if (typeof value === "string") return value.trim() === "";
@@ -118,6 +160,41 @@ const isRequiredFieldMissing = (row, fieldPath) => {
   return isEmpty(value);
 };
 
+// Funzioni per manipolare il colore hex
+function lighten(hex, percent) {
+  // Schiarisce un colore hex di una percentuale (0-100)
+  let num = parseInt(hex.replace('#', ''), 16);
+  let r = (num >> 16) + Math.round(255 * percent / 100);
+  let g = ((num >> 8) & 0x00FF) + Math.round(255 * percent / 100);
+  let b = (num & 0x0000FF) + Math.round(255 * percent / 100);
+  r = r > 255 ? 255 : r;
+  g = g > 255 ? 255 : g;
+  b = b > 255 ? 255 : b;
+  return `rgb(${r},${g},${b})`;
+}
+function darken(hex, percent) {
+  // Scuroidce un colore hex di una percentuale (0-100)
+  let num = parseInt(hex.replace('#', ''), 16);
+  let r = (num >> 16) - Math.round((num >> 16) * percent / 100);
+  let g = ((num >> 8) & 0x00FF) - Math.round(((num >> 8) & 0x00FF) * percent / 100);
+  let b = (num & 0x0000FF) - Math.round((num & 0x0000FF) * percent / 100);
+  r = r < 0 ? 0 : r;
+  g = g < 0 ? 0 : g;
+  b = b < 0 ? 0 : b;
+  return `rgb(${r},${g},${b})`;
+}
+
+// Funzione per convertire hex in rgba con opacità
+function hexToRgba(hex, alpha) {
+  let c = hex.replace('#', '');
+  if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+  const num = parseInt(c, 16);
+  const r = (num >> 16) & 255;
+  const g = (num >> 8) & 255;
+  const b = num & 255;
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
 // Cell rendering components
 const MissingFieldCell = ({ value, isMissing }) => (
   <span className={isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : ""}>
@@ -137,15 +214,35 @@ const StepCell = ({ value }) => {
   return <span className={iconClass}>{iconName}</span>;
 };
 const MainMethodCell = ({ mainMethod, row }) => {
-  const { type, tech } = mainMethod || {};
+  let { type, tech } = mainMethod || {};
+  // Migliora la label
+  let badgeStyle = undefined;
+  let typeBadgeClass = undefined;
+  const baseColor = schema._uiMeta?.mainMethod?.color || '#6366f1';
+  if (type?.toLowerCase() === 'unsup' || type?.toLowerCase() === 'unsupervised') {
+    type = 'Unsupervised';
+    typeBadgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
+    badgeStyle = {
+      backgroundColor: baseColor + '20',
+      color: baseColor
+    };
+  } else if (type?.toLowerCase() === 'sup' || type?.toLowerCase() === 'supervised') {
+    type = 'Supervised';
+    typeBadgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
+    badgeStyle = {
+      backgroundColor: baseColor + '20',
+      color: baseColor
+    };
+  } else {
+    typeBadgeClass = getTypeBadgeColor(type);
+  }
   if (!type && !tech) return "";
   const isTypeMissing = isRequiredFieldMissing(row, "mainMethod.type");
   const isTechMissing = isRequiredFieldMissing(row, "mainMethod.technique");
-  const typeBadgeClass = type ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}` : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16";
   return (
     <div className="flex items-center gap-2">
       {(type || isTypeMissing) && (
-        <span className={typeBadgeClass}>{type || "MISSING"}</span>
+        <span className={typeBadgeClass} style={badgeStyle}>{type || "MISSING"}</span>
       )}
       {(tech || isTechMissing) && (
         <span className={tech ? "text-[10px] text-neutral-400" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]"}>{tech || "MISSING"}</span>
@@ -158,11 +255,12 @@ const DomainCell = ({ domain, row }) => {
   const typeValue = domain?.type || "";
   if (!domainValue && !typeValue) return "";
   const isDomainMissing = isRequiredFieldMissing(row, "domain.domain");
-  const domainBadgeClass = domainValue ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-20 ${getDomainBadgeColor(domainValue)}` : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20";
+  const badgeStyle = getDomainBadgeColor(domainValue);
+  const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
   return (
     <div className="flex items-center gap-2">
       {(domainValue || isDomainMissing) && (
-        <span className={domainBadgeClass}>{domainValue || "MISSING"}</span>
+        <span className={badgeClass} style={badgeStyle}>{domainValue || "MISSING"}</span>
       )}
       {typeValue && <span className="text-[10px] text-neutral-400">{typeValue}</span>}
     </div>
@@ -218,6 +316,22 @@ const CollapsibleNavigation = () => {
       )}
     </>
   );
+};
+
+// Funzione per colorare le label della colonna License
+const getLicenseBadgeColor = (license) => {
+  // Usa colore dinamico dal meta schema per license, tranne 'Not specified' che è neutro
+  const baseColor = schema._uiMeta?.license?.color || '#facc15';
+  if (!license || license.trim().toLowerCase() === 'not specified') {
+    return {
+      backgroundColor: 'rgba(100,116,139,0.12)', // slate-500/20
+      color: '#e5e7eb' // slate-200
+    };
+  }
+  return {
+    backgroundColor: baseColor + '20',
+    color: baseColor
+  };
 };
 
 function SurveyTable() {
@@ -464,16 +578,18 @@ function SurveyTable() {
     // Type (Revision) column - before Domain
     columnHelper.accessor(row => row.revision?.type || "", {
       id: "revision",
-      header: () => <span style={{ color: headerColors.revision }}>{headerTaxonomy.revision ? headerTaxonomy.revision + ' - ' : ''}Type</span>,
+      header: () => <span style={{ color: headerColors.revision }}>{headerTaxonomy.revision ? headerTaxonomy.revision + ' - ' : ''}Revision</span>,
       cell: (info) => {
         const value = info.getValue();
         const isMissing = isRequiredFieldMissing(info.row.original, 'revision.type');
         const description = info.row.original.revision?.description;
+        const badgeStyle = getUserRevisionBadgeColor(value);
+        const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
         if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
         if (description && description.trim() !== "") {
           return (
             <div className="relative group inline-flex items-center">
-              <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${getUserRevisionBadgeColor(value)} cursor-pointer`} style={{ textTransform: 'lowercase' }}>
+              <span className={badgeClass} style={badgeStyle}>
                 {value}
                 <span className="material-icons-round ml-1 align-middle leading-none" style={{ fontSize: '16px' }}>info_outline</span>
               </span>
@@ -485,7 +601,7 @@ function SurveyTable() {
           );
         }
         return (
-          <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${getUserRevisionBadgeColor(value)}`} style={{ textTransform: 'lowercase' }}>{value}</span>
+          <span className={badgeClass} style={badgeStyle}>{value}</span>
         );
       },
       enableSorting: false,
@@ -508,11 +624,17 @@ function SurveyTable() {
       header: () => <span style={{ color: headerColors.codeAvailability }}>{headerTaxonomy.codeAvailability ? headerTaxonomy.codeAvailability + ' - ' : ''}Code Availability</span>,
       cell: (info) => {
         const value = info.getValue();
-        if (!value || value.trim() === "") return <span className="material-icons-round text-red-500 text-lg">clear</span>;
+        if (!value || value.trim() === "") {
+          return <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-slate-500/20 text-slate-200">No</span>;
+        }
         return (
-          <a href={value} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-blue-400 hover:text-blue-200" title="Open code link">
-            <span className="material-icons-round">launch</span>
-          </a>
+          <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-emerald-500/20 text-emerald-200">
+            <a href={value} target="_blank" rel="noopener noreferrer"
+               className="flex items-center justify-center h-full w-full"
+               title="Open code link">
+              <span className="material-icons-round align-middle leading-none" style={{ fontSize: '16px' }}>launch</span>
+            </a>
+          </span>
         );
       },
       enableSorting: false,
@@ -521,7 +643,12 @@ function SurveyTable() {
     columnHelper.accessor(row => row.license || "", {
       id: "license",
       header: () => <span style={{ color: headerColors.license }}>{headerTaxonomy.license ? headerTaxonomy.license + ' - ' : ''}License</span>,
-      cell: (info) => <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-neutral-500/20 text-neutral-200">{info.getValue()}</span>,
+      cell: (info) => {
+        const value = info.getValue();
+        const badgeStyle = getLicenseBadgeColor(value);
+        const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
+        return <span className={badgeClass} style={badgeStyle}>{value || 'Not specified'}</span>;
+      },
       enableSorting: false,
       meta: { align: 'center' },
     }),

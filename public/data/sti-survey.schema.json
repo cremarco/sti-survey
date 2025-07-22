@@ -91,7 +91,7 @@
       "type": "object",
       "label": "Revision",
       "properties": {
-        "type": { "type": "string", "enum": ["Fully automated", "Semi automated", "None"], "label": "Type" },
+        "type": { "type": "string", "enum": ["Fully automated", "Semi automated"], "label": "Type" },
         "description": { "type": "string", "label": "Description" }
       },
       "required": ["type"],
@@ -107,8 +107,26 @@
       "additionalProperties": false
     },
     "validation": { "type": "string", "label": "Validation" },
-    "codeAvailability": { "type": "string", "label": "Code Availability" },
-    "license": { "type": "string", "label": "License" },
+    "codeAvailability": {
+      "type": "object",
+      "label": "Code Availability",
+      "properties": {
+        "yes": { "type": "boolean", "label": "Yes" },
+        "no": { "type": "boolean", "label": "No" }
+      },
+      "required": ["yes", "no"],
+      "additionalProperties": false
+    },
+    "license": {
+      "type": "object",
+      "label": "License",
+      "properties": {
+        "openSource": { "type": "boolean", "label": "Open source" },
+        "closedSource": { "type": "boolean", "label": "Closed source" }
+      },
+      "required": ["openSource", "closedSource"],
+      "additionalProperties": false
+    },
     "inputs": {
       "type": "object",
       "label": "Inputs",

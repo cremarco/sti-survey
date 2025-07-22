@@ -120,7 +120,7 @@ function Taxonomy() {
 
   // Memoized draw function to avoid unnecessary re-creation
   const drawRadialTidyTree = useCallback((data, container, labelStroke, disableAnimation = false, colorMap = {}) => {
-    const width = 1200;
+    const width = 1000;
     const radius = width / 2 - 80;
     const root = d3.hierarchy(data);
     d3.tree().size([2 * Math.PI, radius]).separation((a, b) => (a.parent === b.parent ? 1.5 : 2.5))(root);
@@ -177,8 +177,8 @@ function Taxonomy() {
       .attr('stroke', labelStroke)
       .attr('fill', d => {
         if (d.depth === 0) {
-          // Root label: white in normal view, black in download mode
-          return isDownloading ? '#18181b' : '#fff';
+          // Root label: black in download mode, white in normal view
+          return isDownloading ? '#000' : '#fff';
         }
         return getBranchColor(d, colorMap);
       })
@@ -194,7 +194,7 @@ function Taxonomy() {
 
     container.appendChild(svg.node());
     setSvgNode(svg.node());
-  }, []);
+  }, [isDownloading]);
 
   // Render radial tree when data or labelStroke changes
   useEffect(() => {
@@ -208,7 +208,12 @@ function Taxonomy() {
     if (!svgNode) return;
     setIsDownloading(true);
     setLabelStroke('white');
-    // Wait for the next render cycle to ensure the SVG is fully rendered without animation
+  }, [svgNode]);
+
+  // Effect to handle SVG download after re-render
+  useEffect(() => {
+    if (!isDownloading || !svgNode) return;
+    // Wait for the SVG to be updated in the DOM
     setTimeout(() => {
       const serializer = new XMLSerializer();
       let source = serializer.serializeToString(chartRef.current.querySelector('svg'));
@@ -228,7 +233,7 @@ function Taxonomy() {
       setLabelStroke('black');
       setIsDownloading(false);
     }, 0);
-  }, [svgNode]);
+  }, [isDownloading, svgNode]);
 
   if (error) {
     return (
