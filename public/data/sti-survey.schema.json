@@ -1,205 +1,155 @@
 {
-    "type": "object",
-    "properties": {
-        "author": {
-            "type": "string"
-        },
-        "year": {
-            "type": "integer"
-        },
-        "title": {
-            "type": "object",
-            "properties": {
-                "text": {
-                    "type": "string"
-                },
-                "link": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "text"
-            ]
-        },
-        "conference-journal": {
-            "type": "string"
-        },
-        "name-of-approach": {
-            "type": "string"
-        },
-        "main-method": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "technique": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type",
-                "technique"
-            ]
-        },
-        "domain": {
-            "type": "object",
-            "properties": {
-                "domain": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "independent",
-                "dependent"
-            ]
-        },
-        "tasks": {
-            "type": "object",
-            "properties": {
-                "cta": {
-                    "type": "boolean"
-                },
-                "cpa": {
-                    "type": "boolean"
-                },
-                "cea": {
-                    "type": "boolean"
-                },
-                "cnea": {
-                    "type": "boolean"
-                }
-            },
-            "required": [
-                "cta",
-                "cpa",
-                "cea",
-                "cnea"
-            ]
-        },
-        "steps": {
-            "type": "object",
-            "properties": {
-                "data-preparation": {
-                    "type": "object",
-                    "properties": {
-                        "description": {
-                            "type": "string"
-                        },
-                        "spell-checker": {
-                            "type": "string"
-                        },
-                        "units-of-measurements": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "subject-detection": {
-                    "type": "string"
-                },
-                "column-analysis": {
-                    "type": "string"
-                },
-                "type-annotation": {
-                    "type": "string"
-                },
-                "predicate-annotation": {
-                    "type": "string"
-                },
-                "datatype-annotation": {
-                    "type": "string"
-                },
-                "entity-linking": {
-                    "type": "object",
-                    "properties": {
-                        "description": {
-                            "type": "string"
-                        },
-                        "candidate-generation": {
-                            "type": "string"
-                        },
-                        "entity-disambiguation": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "nil-annotation": {
-                    "type": "string"
-                }
-            }
-        },
-        "user-revision": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type"
-            ]
-        },
-        "validation": {
-            "type": "string"
-        },
-        "code-availability": {
-            "type": "string"
-        },
-        "license": {
-            "type": "string"
-        },
-        "inputs": {
-            "type": "object",
-            "properties": {
-                "type-of-table": {
-                    "type": "string"
-                },
-                "kg": {
-                    "type": "object",
-                    "properties": {
-                        "triple-store": {
-                            "type": "string"
-                        },
-                        "index": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "triple-store",
-                        "index"
-                    ]
-                }
-            },
-            "required": [
-                "type-of-table",
-                "kg"
-            ]
-        },
-        "output-format": {
-            "type": "string"
-        },
-        "checked-by-author": {
-            "type": "boolean"
-        }
+  "_uiMeta": {
+    "coreTasks": { "taxonomy": "1", "color": "#6366f1" },
+    "supportTasks": { "taxonomy": "2", "color": "#0ea5e9" },
+    "mainMethod": { "taxonomy": "3", "color": "#a21caf" },
+    "revision": { "taxonomy": "4", "color": "#f59e42" },
+    "domain": { "taxonomy": "5", "color": "#ef4444" },
+    "validation": { "taxonomy": "6", "color": "#f43f5e" },
+    "codeAvailability": { "taxonomy": "7", "color": "#10b981" },
+    "license": { "taxonomy": "8", "color": "#22d3ee" },
+    "inputs": { "taxonomy": "9", "color": "#14b8a6" },
+    "output": { "taxonomy": "10", "color": "#facc15" },
+    "applicationPurpose": { "taxonomy": "11", "color": "#fbbf24" },
+    "userInterfaceTool": { "taxonomy": "12", "color": "#38bdf8" }
+  },
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "label": "ID" },
+    "added": { "type": "string", "format": "date", "label": "Added" },
+    "year": { "type": "integer", "label": "Year" },
+    "firstAuthor": { "type": "string", "label": "First Author" },
+    "authors": { "type": "array", "items": { "type": "string" }, "label": "Authors" },
+    "title": {
+      "type": "object",
+      "label": "Title",
+      "properties": {
+        "text": { "type": "string", "label": "Text" },
+        "link": { "type": "string", "label": "Link" }
+      },
+      "required": ["text"],
+      "additionalProperties": false
     },
-    "required": [
-        "author",
-        "year",
-        "title",
-        "conference-journal",
-        "main-method",
-        "domain",
-        "tasks",
-        "steps",
-        "user-revision",
-        "license",
-        "inputs",
-        "checked-by-author"
-    ]
+    "conferenceJournal": { "type": "string", "label": "Conference/Journal" },
+    "nameOfApproach": { "type": "string", "label": "Name of Approach" },
+    "coreTasks": {
+      "type": "object",
+      "label": "Core Tasks",
+      "properties": {
+        "cta": { "type": "boolean", "label": "CTA" },
+        "cpa": { "type": "boolean", "label": "CPA" },
+        "cea": { "type": "boolean", "label": "CEA" },
+        "cnea": { "type": "boolean", "label": "CNEA" }
+      },
+      "required": ["cta", "cpa", "cea", "cnea"],
+      "additionalProperties": false
+    },
+    "supportTasks": {
+      "type": "object",
+      "label": "Support Tasks",
+      "properties": {
+        "dataPreparation": {
+          "type": "object",
+          "label": "Data Preparation",
+          "properties": {
+            "description": { "type": "string", "label": "Description" },
+            "spellChecker": { "type": "string", "label": "Spell Checker" },
+            "unitsOfMeasurements": { "type": "string", "label": "Units of Measurements" }
+          },
+          "additionalProperties": false
+        },
+        "columnClassification": { "type": "string", "label": "Column Classification" },
+        "subjectDetection": { "type": "string", "label": "Subject Detection" },
+        "datatypeAnnotation": { "type": "string", "label": "Datatype Annotation" },
+        "entityLinking": {
+          "type": "object",
+          "label": "Entity Linking",
+          "properties": {
+            "description": { "type": "string", "label": "Description" },
+            "candidateGeneration": { "type": "string", "label": "Candidate Generation" },
+            "entityDisambiguation": { "type": "string", "label": "Entity Disambiguation" }
+          },
+          "additionalProperties": false
+        },
+        "typeAnnotation": { "type": "string", "label": "Type Annotation" },
+        "predicateAnnotation": { "type": "string", "label": "Predicate Annotation" },
+        "nilAnnotation": { "type": "string", "label": "Nil Annotation" }
+      },
+      "additionalProperties": false
+    },
+    "mainMethod": {
+      "type": "object",
+      "label": "Main Method",
+      "properties": {
+        "type": { "type": "string", "enum": ["Hybrid", "Supervised", "Unsupervised"], "label": "Type" },
+        "technique": { "type": "string", "label": "Technique" }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "revision": {
+      "type": "object",
+      "label": "Revision",
+      "properties": {
+        "type": { "type": "string", "enum": ["Fully automated", "Semi automated", "None"], "label": "Type" },
+        "description": { "type": "string", "label": "Description" }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "domain": {
+      "type": "object",
+      "label": "Domain",
+      "properties": {
+        "domain": { "type": "string", "enum": ["Dependent", "Independent"], "label": "Domain" },
+        "type": { "type": "string", "label": "Type" }
+      },
+      "additionalProperties": false
+    },
+    "validation": { "type": "string", "label": "Validation" },
+    "codeAvailability": { "type": "string", "label": "Code Availability" },
+    "license": { "type": "string", "label": "License" },
+    "inputs": {
+      "type": "object",
+      "label": "Inputs",
+      "properties": {
+        "typeOfTable": { "type": "string", "label": "Type of Table" },
+        "kg": {
+          "type": "object",
+          "label": "KG",
+          "properties": {
+            "tripleStore": { "type": "string", "label": "Triple Store" },
+            "index": { "type": "string", "label": "Index" }
+          },
+          "required": ["tripleStore", "index"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["typeOfTable", "kg"],
+      "additionalProperties": false
+    },
+    "output": { "type": "string", "label": "Output" },
+    "checkedByAuthor": { "type": "boolean", "label": "Checked by Author" },
+    "checkedByAi": { "type": "boolean", "label": "Checked by AI" },
+    "doi": { "type": "string", "label": "DOI" },
+    "citations": {
+      "type": "array",
+      "label": "Citations",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": { "type": "string", "label": "Reference" },
+          "title": { "type": "string", "label": "Title" }
+        },
+        "required": ["ref", "title"],
+        "additionalProperties": false
+      }
+    },
+    "applicationPurpose": { "type": "string", "label": "Application/Purpose" },
+    "userInterfaceTool": { "type": "string", "label": "User Interface/Tool" }
+  },
+  "required": [
+    "id", "added", "year", "firstAuthor", "authors", "title", "conferenceJournal", "nameOfApproach", "coreTasks", "supportTasks", "mainMethod", "domain", "revision", "validation", "codeAvailability", "license", "inputs", "output", "checkedByAuthor", "checkedByAi", "doi", "citations", "applicationPurpose", "userInterfaceTool"
+  ],
+  "additionalProperties": false
 }

@@ -12,48 +12,20 @@
  * - Hierarchical data visualization
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as d3 from 'd3';
 import Navigation from './Navigation';
 
-/**
- * Color palette for different taxonomy categories
- * Uses Tailwind CSS color scheme for consistency
- */
-// Updated color palette for new taxonomy structure (see taxonomy.json)
-const CATEGORY_COLORS = {
-  "Core task": "#6366f1",            // indigo-500
-  "Supported task": "#0ea5e9",       // sky-500
-  "Method": "#a21caf",               // fuchsia-700
-  "Revision": "#f59e42",             // amber-500
-  "Domain": "#ef4444",               // red-500
-  "Application/Purpose": "#fbbf24",  // yellow-400
-  "Validation": "#f43f5e",           // rose-500
-  "Code availability": "#10b981",    // emerald-500
-  "User Interface/Tool": "#22d3ee",  // cyan-400
-  "Input": "#14b8a6",                // teal-500
-  "Output format": "#facc15"         // yellow-500
-};
+// Colors are now loaded from taxonomy.json
 
-/**
- * Gets the color for a branch based on its top-level taxonomy category
- * @param {Object} node - D3 node object
- * @returns {string} Color hex value
- */
-function getBranchColor(node) {
+// Get the color for a branch based on its top-level taxonomy category
+function getBranchColor(node, colorMap) {
   let current = node;
-  // Traverse up to the top-level (depth 1) node
   while (current.depth > 1) current = current.parent;
-  // Use the color for the top-level category, or gray if not found
-  return CATEGORY_COLORS[current.data.name] || '#a3a3a3'; // gray-400
+  return colorMap[current.data.name] || '#a3a3a3';
 }
 
-/**
- * Calculates the transform for label positioning
- * Handles rotation and positioning for both leaf and internal nodes
- * @param {Object} d - D3 node data
- * @returns {string} Transform string for SVG
- */
+// Calculates the transform for label positioning
 function labelTransform(d) {
   const angle = d.x * 180 / Math.PI - 90;
   const r = d.y;
@@ -65,82 +37,121 @@ function labelTransform(d) {
   return `rotate(${angle}) translate(${r},0)`;
 }
 
-/**
- * Main Taxonomy component
- */
+// Main Taxonomy component
 function Taxonomy() {
   const chartRef = useRef();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [svgNode, setSvgNode] = useState(null);
-  const [labelStroke, setLabelStroke] = useState('black'); // Track label stroke color
+  const [labelStroke, setLabelStroke] = useState('black');
+  const [isDownloading, setIsDownloading] = useState(false); // Track download mode
+  const [colorMap, setColorMap] = useState({});
 
-  // Load taxonomy data on component mount
+  // Load taxonomy data from sti-survey.schema.json (_uiMeta)
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/taxonomy.json`)
+    fetch(`${import.meta.env.BASE_URL}data/sti-survey.schema.json`)
       .then((res) => {
-        if (!res.ok) throw new Error('Error loading taxonomy data');
+        if (!res.ok) throw new Error('Error loading schema data');
         return res.json();
       })
-      .then(setData)
+      .then((json) => {
+        const uiMeta = json._uiMeta || {};
+        const schemaProps = json.properties || {};
+        // Build color map
+        const map = {};
+        Object.entries(uiMeta).forEach(([name, meta]) => {
+          // Use label from schema if available, otherwise fallback to name
+          const prop = schemaProps[name];
+          const label = prop && prop.label ? prop.label : (meta.taxonomy ? `${meta.taxonomy} ${name.toUpperCase()}` : name.toUpperCase());
+          if (meta.color) map[label] = meta.color;
+        });
+        setColorMap(map);
+        // Build tree with subclasses
+        const children = Object.entries(uiMeta).map(([name, meta]) => {
+          const prop = schemaProps[name];
+          let subChildren = [];
+          // If enum, add values as children
+          if (prop && prop.properties && prop.properties.type && prop.properties.type.enum) {
+            subChildren = prop.properties.type.enum.map(val => ({ name: val }));
+          }
+          // If enum on a nested property (e.g., domain.domain)
+          else if (prop && prop.properties) {
+            Object.entries(prop.properties).forEach(([subName, subProp]) => {
+              if (subProp.enum) {
+                subChildren = subProp.enum.map(val => ({ name: val }));
+              }
+            });
+          }
+          // If object with child properties (e.g., coreTasks, supportTasks)
+          if (subChildren.length === 0 && prop && prop.properties) {
+            subChildren = Object.entries(prop.properties).map(([val, subProp]) => ({
+              name: subProp.label || val
+            }));
+          }
+          // Use label from schema if available, otherwise fallback to name
+          const label = prop && prop.label ? prop.label : (meta.taxonomy ? `${meta.taxonomy} ${name.toUpperCase()}` : name.toUpperCase());
+          return {
+            name: label,
+            taxonomy: meta.taxonomy,
+            color: meta.color,
+            children: subChildren.length > 0 ? subChildren : undefined
+          };
+        });
+        const treeData = {
+          name: 'Taxonomy',
+          children
+        };
+        setData(treeData);
+      })
       .catch((err) => setError(err.message));
   }, []);
 
-  // Render radial tree when data is loaded
-  useEffect(() => {
-    if (!data || !chartRef.current) return;
-    chartRef.current.innerHTML = '';
-    drawRadialTidyTree(data, chartRef.current, labelStroke);
-  }, [data, labelStroke]);
-
-  /**
-   * Draws the radial tidy tree visualization using D3.js
-   * @param {Object} data - Taxonomy data structure
-   * @param {HTMLElement} container - DOM container for the chart
-   * @param {string} labelStroke - Stroke color for label text
-   */
-  function drawRadialTidyTree(data, container, labelStroke) {
-    const width = 1200; // Increased from 900 to 1200 for more space
-    const radius = width / 2 - 80; // Reduced margin to better utilize space
+  // Memoized draw function to avoid unnecessary re-creation
+  const drawRadialTidyTree = useCallback((data, container, labelStroke, disableAnimation = false, colorMap = {}) => {
+    const width = 1200;
+    const radius = width / 2 - 80;
     const root = d3.hierarchy(data);
-    
-    // Configure tree layout
-    const tree = d3.tree()
-      .size([2 * Math.PI, radius])
-      .separation((a, b) => (a.parent === b.parent ? 1.5 : 2.5));
-    tree(root);
+    d3.tree().size([2 * Math.PI, radius]).separation((a, b) => (a.parent === b.parent ? 1.5 : 2.5))(root);
 
-    // Create SVG container
     const svg = d3.create('svg')
       .attr('viewBox', [-width / 2, -width / 2, width, width])
       .attr('width', '100%')
       .attr('height', width)
       .attr('style', 'font: 10px sans-serif; background: none;');
 
-    // Add links between nodes
-    svg.append('g')
+    // Animated or static links
+    const link = svg.append('g')
       .attr('fill', 'none')
-      .attr('stroke', '#a3a3a3') // gray-400
+      .attr('stroke', '#a3a3a3')
       .attr('stroke-width', 1.5)
       .selectAll('path')
       .data(root.links())
       .join('path')
-      .attr('d', d3.linkRadial()
-        .angle(d => d.x)
-        .radius(d => d.y)
-      );
+      .attr('d', d3.linkRadial().angle(d => d.x).radius(d => d.y));
+    if (!disableAnimation) {
+      link
+        .attr('stroke-dasharray', function() { return this.getTotalLength(); })
+        .attr('stroke-dashoffset', function() { return this.getTotalLength(); })
+        .transition().duration(1200).attr('stroke-dashoffset', 0);
+    }
 
-    // All nodes: same color and radius
-    svg.append('g')
+    // Animated or static nodes
+    const node = svg.append('g')
       .selectAll('circle')
       .data(root.descendants())
       .join('circle')
-      .attr('transform', d => `rotate(${(d.x * 180 / Math.PI - 90)}) translate(${d.y},0)`)
-      .attr('r', 2.5)
-      .attr('fill', '#999');
+      .attr('transform', d => `rotate(${(d.x * 180 / Math.PI - 90)}) translate(${d.y},0)`);
+    if (!disableAnimation) {
+      node
+        .attr('r', 0)
+        .attr('fill', '#999')
+        .transition().delay((d, i) => i * 10).duration(600).attr('r', 2.5);
+    } else {
+      node.attr('r', 2.5).attr('fill', '#999');
+    }
 
-    // Labels (match D3 example)
-    svg.append('g')
+    // Animated or static labels
+    const label = svg.append('g')
       .attr('stroke-linejoin', 'round')
       .attr('stroke-width', 3)
       .selectAll('text')
@@ -152,35 +163,40 @@ function Taxonomy() {
       .attr('text-anchor', d => (d.x < Math.PI === !d.children ? 'start' : 'end'))
       .attr('paint-order', 'stroke')
       .attr('stroke', labelStroke)
-      .attr('fill', d => d.depth === 0 ? '#18181b' : getBranchColor(d))
-      .attr('font-size', 10)
+      .attr('fill', d => d.depth === 0 ? '#18181b' : getBranchColor(d, colorMap))
+      .attr('font-size', 13)
       .attr('font-weight', 'bold')
       .text(d => d.data.name);
+    if (!disableAnimation) {
+      label.style('opacity', 0)
+        .transition().delay((d, i) => 300 + i * 5).duration(600).style('opacity', 1);
+    } else {
+      label.style('opacity', 1);
+    }
 
-    // Remove the background rectangle code entirely
-
-    // Append SVG to container
     container.appendChild(svg.node());
     setSvgNode(svg.node());
-  }
+  }, []);
 
-  /**
-   * Handles SVG download functionality
-   */
-  const handleDownloadSVG = () => {
+  // Render radial tree when data or labelStroke changes
+  useEffect(() => {
+    if (!data || !chartRef.current) return;
+    chartRef.current.innerHTML = '';
+    drawRadialTidyTree(data, chartRef.current, labelStroke, isDownloading, colorMap);
+  }, [data, labelStroke, drawRadialTidyTree, isDownloading, colorMap]);
+
+  // SVG download handler
+  const handleDownloadSVG = useCallback(() => {
     if (!svgNode) return;
-    
-    // Set label stroke to white, re-render, then download, then revert to black
+    setIsDownloading(true);
     setLabelStroke('white');
+    // Wait for the next render cycle to ensure the SVG is fully rendered without animation
     setTimeout(() => {
       const serializer = new XMLSerializer();
       let source = serializer.serializeToString(chartRef.current.querySelector('svg'));
-      
-      // Add XML declaration for compatibility
       if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
         source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
       }
-      
       const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -190,12 +206,12 @@ function Taxonomy() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      // Revert label stroke to black
+      // Restore state after download
       setLabelStroke('black');
-    }, 50);
-  };
+      setIsDownloading(false);
+    }, 0);
+  }, [svgNode]);
 
-  // Error state
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-900 flex flex-col">
