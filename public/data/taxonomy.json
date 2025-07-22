@@ -1,24 +1,24 @@
 {
   "children": [
     {
-      "name": "Task",
+      "name": "Core task",
       "children": [
         { "name": "CEA" },
         { "name": "CTA" },
         { "name": "CPA" },
-        { "name": "CNEA" },
-        {
-          "name": "Subtask",
-          "children": [
-            { "name": "Subject detection" },
-            { "name": "Type annotation" },
-            { "name": "Datatype annotation" },
-            { "name": "Column classification" },
-            { "name": "Predicate annotation" },
-            { "name": "Entity linking" },
-            { "name": "NIL annotation" }
-          ]
-        }
+        { "name": "CNEA" }
+      ]
+    },
+    {
+      "name": "Supported task",
+      "children": [
+        { "name": "Subject detection" },
+        { "name": "Type annotation" },
+        { "name": "Datatype annotation" },
+        { "name": "Column classification" },
+        { "name": "Predicate annotation" },
+        { "name": "Entity linking" },
+        { "name": "NIL annotation" }
       ]
     },
     {

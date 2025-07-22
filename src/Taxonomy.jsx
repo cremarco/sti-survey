@@ -20,27 +20,31 @@ import Navigation from './Navigation';
  * Color palette for different taxonomy categories
  * Uses Tailwind CSS color scheme for consistency
  */
+// Updated color palette for new taxonomy structure (see taxonomy.json)
 const CATEGORY_COLORS = {
-  "Task": "#6366f1",                // indigo-500
-  "Method": "#a21caf",              // fuchsia-700
-  "Revision": "#f59e42",            // amber-500
-  "Domain": "#ef4444",              // red-500
-  "Application/Resource": "#fbbf24",// yellow-400
-  "Validation": "#f43f5e",          // rose-500
-  "Code availability": "#10b981",   // emerald-500
-  "User Interface/Tool": "#0ea5e9", // sky-500
-  "Input": "#22d3ee",               // cyan-400
-  "Output format": "#fde047"         // yellow-300
+  "Core task": "#6366f1",            // indigo-500
+  "Supported task": "#0ea5e9",       // sky-500
+  "Method": "#a21caf",               // fuchsia-700
+  "Revision": "#f59e42",             // amber-500
+  "Domain": "#ef4444",               // red-500
+  "Application/Purpose": "#fbbf24",  // yellow-400
+  "Validation": "#f43f5e",           // rose-500
+  "Code availability": "#10b981",    // emerald-500
+  "User Interface/Tool": "#22d3ee",  // cyan-400
+  "Input": "#14b8a6",                // teal-500
+  "Output format": "#facc15"         // yellow-500
 };
 
 /**
- * Gets the color for a branch based on its category
+ * Gets the color for a branch based on its top-level taxonomy category
  * @param {Object} node - D3 node object
  * @returns {string} Color hex value
  */
 function getBranchColor(node) {
   let current = node;
+  // Traverse up to the top-level (depth 1) node
   while (current.depth > 1) current = current.parent;
+  // Use the color for the top-level category, or gray if not found
   return CATEGORY_COLORS[current.data.name] || '#a3a3a3'; // gray-400
 }
 
@@ -133,24 +137,50 @@ function Taxonomy() {
       .join('circle')
       .attr('transform', d => `rotate(${(d.x * 180 / Math.PI - 90)}) translate(${d.y},0)`)
       .attr('r', d => d.depth === 0 ? 8 : 5)
-      .attr('fill', d => d.depth === 0 ? '#fff' : getBranchColor(d))
-      .attr('stroke', d => d.depth === 0 ? '#6366f1' : getBranchColor(d))
+      .attr('fill', '#a3a3a3') // All nodes gray
+      .attr('stroke', '#a3a3a3') // All nodes gray
       .attr('stroke-width', d => d.depth === 0 ? 3 : 2);
 
-    // Add labels
-    svg.append('g')
-      .selectAll('text')
+    // Add label groups at the correct position
+    const labelGroup = svg.append('g')
+      .selectAll('g')
       .data(root.descendants())
-      .join('text')
-      .attr('transform', labelTransform)
+      .join('g')
+      .attr('transform', labelTransform);
+
+    // Append text first
+    labelGroup.append('text')
       .attr('dy', '0.32em')
-      .attr('x', 0) // Simplified horizontal positioning
-      .attr('text-anchor', 'middle') // Centered for all labels
+      .attr('x', 0)
+      .attr('text-anchor', 'middle')
       .attr('fill', d => d.depth === 0 ? '#18181b' : getBranchColor(d))
       .attr('font-weight', d => d.depth === 0 ? 'bold' : 'normal')
       .attr('font-size', d => d.depth === 0 ? 20 : d.depth === 1 ? 16 : 13)
-      .attr('pointer-events', 'none') // Avoid interactions with labels
+      .attr('pointer-events', 'none')
       .text(d => d.data.name);
+
+    // Wait for the browser to render the text, then add the rect
+    setTimeout(() => {
+      labelGroup.each(function(d, i) {
+        const text = d3.select(this).select('text');
+        const node = text.node();
+        if (node) {
+          const bbox = node.getBBox();
+          const padX = 10;
+          const padY = 4;
+          // Insert rect as first child of the group
+          d3.select(this).insert('rect', 'text')
+            .attr('x', bbox.x - padX)
+            .attr('y', bbox.y - padY)
+            .attr('width', bbox.width + 2 * padX)
+            .attr('height', bbox.height + 2 * padY)
+            .attr('rx', 4) // Less rounded corners
+            .attr('ry', 4)
+            .attr('fill', 'white')
+            .attr('opacity', 0.4); // More transparent
+        }
+      });
+    }, 0);
 
     // Append SVG to container
     container.appendChild(svg.node());
