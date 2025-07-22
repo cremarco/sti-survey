@@ -57,14 +57,12 @@ function getBranchColor(node) {
 function labelTransform(d) {
   const angle = d.x * 180 / Math.PI - 90;
   const r = d.y;
-  
-  // For leaf nodes, position always outside and horizontal
+  // For leaf nodes, rotate group by 180° if on the left, so text is always upright
   if (!d.children) {
-    return `rotate(${angle}) translate(${r + 20},0) rotate(${-angle})`;
+    return `rotate(${angle}) translate(${r},0)${angle >= 180 ? ' rotate(180)' : ''}`;
   }
-  
-  // For internal nodes, position radially but keep labels straight
-  return `rotate(${angle}) translate(${r + 15},0) rotate(${-angle})`;
+  // For internal nodes, rotate text radially
+  return `rotate(${angle}) translate(${r},0)`;
 }
 
 /**
@@ -75,6 +73,7 @@ function Taxonomy() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [svgNode, setSvgNode] = useState(null);
+  const [labelStroke, setLabelStroke] = useState('black'); // Track label stroke color
 
   // Load taxonomy data on component mount
   useEffect(() => {
@@ -91,15 +90,16 @@ function Taxonomy() {
   useEffect(() => {
     if (!data || !chartRef.current) return;
     chartRef.current.innerHTML = '';
-    drawRadialTidyTree(data, chartRef.current);
-  }, [data]);
+    drawRadialTidyTree(data, chartRef.current, labelStroke);
+  }, [data, labelStroke]);
 
   /**
    * Draws the radial tidy tree visualization using D3.js
    * @param {Object} data - Taxonomy data structure
    * @param {HTMLElement} container - DOM container for the chart
+   * @param {string} labelStroke - Stroke color for label text
    */
-  function drawRadialTidyTree(data, container) {
+  function drawRadialTidyTree(data, container, labelStroke) {
     const width = 1200; // Increased from 900 to 1200 for more space
     const radius = width / 2 - 80; // Reduced margin to better utilize space
     const root = d3.hierarchy(data);
@@ -115,7 +115,7 @@ function Taxonomy() {
       .attr('viewBox', [-width / 2, -width / 2, width, width])
       .attr('width', '100%')
       .attr('height', width)
-      .attr('style', 'font: 14px sans-serif; background: none;');
+      .attr('style', 'font: 10px sans-serif; background: none;');
 
     // Add links between nodes
     svg.append('g')
@@ -130,57 +130,34 @@ function Taxonomy() {
         .radius(d => d.y)
       );
 
-    // Add nodes
+    // All nodes: same color and radius
     svg.append('g')
       .selectAll('circle')
       .data(root.descendants())
       .join('circle')
       .attr('transform', d => `rotate(${(d.x * 180 / Math.PI - 90)}) translate(${d.y},0)`)
-      .attr('r', d => d.depth === 0 ? 8 : 5)
-      .attr('fill', '#a3a3a3') // All nodes gray
-      .attr('stroke', '#a3a3a3') // All nodes gray
-      .attr('stroke-width', d => d.depth === 0 ? 3 : 2);
+      .attr('r', 2.5)
+      .attr('fill', '#999');
 
-    // Add label groups at the correct position
-    const labelGroup = svg.append('g')
-      .selectAll('g')
+    // Labels (match D3 example)
+    svg.append('g')
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-width', 3)
+      .selectAll('text')
       .data(root.descendants())
-      .join('g')
-      .attr('transform', labelTransform);
-
-    // Append text first
-    labelGroup.append('text')
-      .attr('dy', '0.32em')
-      .attr('x', 0)
-      .attr('text-anchor', 'middle')
+      .join('text')
+      .attr('transform', d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y},0) rotate(${d.x >= Math.PI ? 180 : 0})`)
+      .attr('dy', '0.31em')
+      .attr('x', d => (d.x < Math.PI === !d.children ? 6 : -6))
+      .attr('text-anchor', d => (d.x < Math.PI === !d.children ? 'start' : 'end'))
+      .attr('paint-order', 'stroke')
+      .attr('stroke', labelStroke)
       .attr('fill', d => d.depth === 0 ? '#18181b' : getBranchColor(d))
-      .attr('font-weight', d => d.depth === 0 ? 'bold' : 'normal')
-      .attr('font-size', d => d.depth === 0 ? 20 : d.depth === 1 ? 16 : 13)
-      .attr('pointer-events', 'none')
+      .attr('font-size', 10)
+      .attr('font-weight', 'bold')
       .text(d => d.data.name);
 
-    // Wait for the browser to render the text, then add the rect
-    setTimeout(() => {
-      labelGroup.each(function(d, i) {
-        const text = d3.select(this).select('text');
-        const node = text.node();
-        if (node) {
-          const bbox = node.getBBox();
-          const padX = 10;
-          const padY = 4;
-          // Insert rect as first child of the group
-          d3.select(this).insert('rect', 'text')
-            .attr('x', bbox.x - padX)
-            .attr('y', bbox.y - padY)
-            .attr('width', bbox.width + 2 * padX)
-            .attr('height', bbox.height + 2 * padY)
-            .attr('rx', 4) // Less rounded corners
-            .attr('ry', 4)
-            .attr('fill', 'white')
-            .attr('opacity', 0.4); // More transparent
-        }
-      });
-    }, 0);
+    // Remove the background rectangle code entirely
 
     // Append SVG to container
     container.appendChild(svg.node());
@@ -193,23 +170,29 @@ function Taxonomy() {
   const handleDownloadSVG = () => {
     if (!svgNode) return;
     
-    const serializer = new XMLSerializer();
-    let source = serializer.serializeToString(svgNode);
-    
-    // Add XML declaration for compatibility
-    if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
-      source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
-    }
-    
-    const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'taxonomy.svg';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    // Set label stroke to white, re-render, then download, then revert to black
+    setLabelStroke('white');
+    setTimeout(() => {
+      const serializer = new XMLSerializer();
+      let source = serializer.serializeToString(chartRef.current.querySelector('svg'));
+      
+      // Add XML declaration for compatibility
+      if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+        source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+      }
+      
+      const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'taxonomy.svg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      // Revert label stroke to black
+      setLabelStroke('black');
+    }, 50);
   };
 
   // Error state
