@@ -15,6 +15,7 @@
  * - Responsive design
  */
 
+// Grouped imports
 import { useState, useEffect, useRef, useMemo } from "react";
 import {
   createColumnHelper,
@@ -31,10 +32,6 @@ import schema from '../public/data/sti-survey.schema.json';
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
-
-/**
- * Color mapping configurations for visual badges
- */
 
 // Color mapping for method type badges
 const METHOD_TYPE_COLORS = {
@@ -66,27 +63,7 @@ const USER_REVISION_COLORS = {
   none: "bg-slate-500/20 text-slate-200",
 };
 
-/**
- * Color mapping for schema fields/groups from _uiMeta
- */
-const HEADER_COLORS = {
-  coreTasks: "#6366f1",
-  supportTasks: "#0ea5e9",
-  mainMethod: "#a21caf",
-  revision: "#f59e42",
-  domain: "#ef4444",
-  validation: "#f43f5e",
-  codeAvailability: "#10b981",
-  license: "#22d3ee",
-  inputs: "#14b8a6",
-  output: "#facc15",
-  applicationPurpose: "#fbbf24",
-  userInterfaceTool: "#38bdf8"
-};
-
-/**
- * Required fields configuration for validation
- */
+// Required fields configuration for validation
 const REQUIRED_FIELDS = {
   id: true,
   authors: true,
@@ -110,60 +87,22 @@ const REQUIRED_FIELDS = {
   doi: true,
 };
 
-/**
- * Utility functions for data validation and formatting
- */
-
-/**
- * Returns Tailwind CSS classes for a badge based on the method type
- */
-const getTypeBadgeColor = (type) => {
-  return METHOD_TYPE_COLORS[type?.toLowerCase()] || "bg-slate-500/20 text-slate-200";
-};
-
-/**
- * Returns Tailwind CSS classes for a badge based on the domain type
- */
-const getDomainBadgeColor = (domain) => {
-  return DOMAIN_COLORS[domain?.toLowerCase()] || "bg-neutral-500/20 text-neutral-200";
-};
-
-/**
- * Returns Tailwind CSS classes for user revision type badge
- */
-const getUserRevisionBadgeColor = (type) => {
-  return USER_REVISION_COLORS[type?.toLowerCase()] || "bg-violet-500/20 text-violet-200";
-};
-
-/**
- * Checks if a value is empty, null, or undefined
- */
+// Utility functions (outside component)
+const getTypeBadgeColor = (type) => METHOD_TYPE_COLORS[type?.toLowerCase()] || "bg-slate-500/20 text-slate-200";
+const getDomainBadgeColor = (domain) => DOMAIN_COLORS[domain?.toLowerCase()] || "bg-neutral-500/20 text-neutral-200";
+const getUserRevisionBadgeColor = (type) => USER_REVISION_COLORS[type?.toLowerCase()] || "bg-violet-500/20 text-violet-200";
 const isEmpty = (value) => {
   if (value === null || value === undefined) return true;
   if (typeof value === "string") return value.trim() === "";
-  if (typeof value === "object" && !Array.isArray(value)) {
-    return Object.keys(value).length === 0;
-  }
+  if (typeof value === "object" && !Array.isArray(value)) return Object.keys(value).length === 0;
   return false;
 };
-
-/**
- * Formats a date string to DD/MM/YYYY or returns null if invalid
- */
 const formatDate = (dateString) => {
   if (!dateString || dateString.trim() === "") return null;
   const date = new Date(dateString);
   if (isNaN(date.getTime())) return dateString;
-  return date.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
+  return date.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
 };
-
-/**
- * Gets nested value from object using dot notation path
- */
 const getNestedValue = (obj, path) => {
   const keys = path.split(".");
   let current = obj;
@@ -173,123 +112,65 @@ const getNestedValue = (obj, path) => {
   }
   return current;
 };
-
-/**
- * Checks if a required field is missing from a row
- */
 const isRequiredFieldMissing = (row, fieldPath) => {
   if (!REQUIRED_FIELDS[fieldPath]) return false;
   const value = getNestedValue(row, fieldPath);
   return isEmpty(value);
 };
 
-/**
- * Cell rendering components
- */
-
-/**
- * Renders a cell with missing field indicator
- */
+// Cell rendering components
 const MissingFieldCell = ({ value, isMissing }) => (
   <span className={isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : ""}>
     {value || (isMissing ? "MISSING" : "")}
   </span>
 );
-
-/**
- * Renders a task cell with Material Design icons
- */
 const TaskCell = ({ value, isMissing }) => {
-  if (isMissing) {
-    return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
-  }
-  
-  const iconClass = value 
-    ? "material-icons-round text-green-500 text-lg" 
-    : "material-icons-round text-red-500 text-lg";
+  if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+  const iconClass = value ? "material-icons-round text-green-500 text-lg" : "material-icons-round text-red-500 text-lg";
   const iconName = value ? "done" : "clear";
-  
   return <span className={iconClass}>{iconName}</span>;
 };
-
-/**
- * Renders a step cell with Material Design icons
- */
 const StepCell = ({ value }) => {
   const hasContent = Boolean(value?.trim());
-  const iconClass = hasContent 
-    ? "material-icons-round text-green-500 text-lg" 
-    : "material-icons-round text-red-500 text-lg";
+  const iconClass = hasContent ? "material-icons-round text-green-500 text-lg" : "material-icons-round text-red-500 text-lg";
   const iconName = hasContent ? "done" : "clear";
-  
   return <span className={iconClass}>{iconName}</span>;
 };
-
-/**
- * Renders the main method cell with type badge and technique
- */
 const MainMethodCell = ({ mainMethod, row }) => {
   const { type, tech } = mainMethod || {};
-  
   if (!type && !tech) return "";
-  
   const isTypeMissing = isRequiredFieldMissing(row, "mainMethod.type");
   const isTechMissing = isRequiredFieldMissing(row, "mainMethod.technique");
-  
-  const typeBadgeClass = type 
-    ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}`
-    : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16";
-  
+  const typeBadgeClass = type ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}` : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-16";
   return (
     <div className="flex items-center gap-2">
       {(type || isTypeMissing) && (
-        <span className={typeBadgeClass}>
-          {type || "MISSING"}
-        </span>
+        <span className={typeBadgeClass}>{type || "MISSING"}</span>
       )}
       {(tech || isTechMissing) && (
-        <span className={tech ? "text-[10px] text-neutral-400" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]"}>
-          {tech || "MISSING"}
-        </span>
+        <span className={tech ? "text-[10px] text-neutral-400" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]"}>{tech || "MISSING"}</span>
       )}
     </div>
   );
 };
-
-/**
- * Renders the domain cell with domain badge and type detail
- */
 const DomainCell = ({ domain, row }) => {
   const domainValue = domain?.domain || "";
   const typeValue = domain?.type || "";
-  
   if (!domainValue && !typeValue) return "";
-  
   const isDomainMissing = isRequiredFieldMissing(row, "domain.domain");
-  
-  const domainBadgeClass = domainValue 
-    ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-20 ${getDomainBadgeColor(domainValue)}`
-    : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20";
-  
+  const domainBadgeClass = domainValue ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-20 ${getDomainBadgeColor(domainValue)}` : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] font-medium w-20";
   return (
     <div className="flex items-center gap-2">
       {(domainValue || isDomainMissing) && (
-        <span className={domainBadgeClass}>
-          {domainValue || "MISSING"}
-        </span>
+        <span className={domainBadgeClass}>{domainValue || "MISSING"}</span>
       )}
       {typeValue && <span className="text-[10px] text-neutral-400">{typeValue}</span>}
     </div>
   );
 };
-
-/**
- * Renders the row number with missing fields count and tooltip
- */
 const RowNumberCell = ({ row, index }) => {
   const missingFields = Object.keys(REQUIRED_FIELDS).filter((field) => isRequiredFieldMissing(row.original, field));
   const hasMissingFields = missingFields.length > 0;
-  
   return (
     <div className="flex flex-col items-center">
       <span>{index + 1}</span>
@@ -313,12 +194,9 @@ const RowNumberCell = ({ row, index }) => {
   );
 };
 
-/**
- * Collapsible navigation component with toggle button
- */
+// Collapsible navigation component
 const CollapsibleNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
       <div className="fixed top-6 left-0 z-30">
@@ -333,7 +211,6 @@ const CollapsibleNavigation = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-neutral-700/20 rounded-r-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
       </div>
-
       {isOpen && (
         <div className="fixed top-0 left-0 right-0 z-20">
           <Navigation />
@@ -343,46 +220,37 @@ const CollapsibleNavigation = () => {
   );
 };
 
-/**
- * Main SurveyTable component
- */
 function SurveyTable() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
-  // Dynamically extract color mapping from schema _uiMeta
+
+  // Extract color mapping and taxonomy from schema _uiMeta
   const headerColors = useMemo(() => {
     const meta = schema._uiMeta || {};
     const colors = {};
     for (const key in meta) {
-      if (meta[key].color) {
-        colors[key] = meta[key].color;
-      }
+      if (meta[key].color) colors[key] = meta[key].color;
     }
     return colors;
-  }, []);
-  // Extract taxonomy mapping from schema _uiMeta
+  }, [schema]);
   const headerTaxonomy = useMemo(() => {
     const meta = schema._uiMeta || {};
     const taxonomy = {};
     for (const key in meta) {
-      if (meta[key].taxonomy) {
-        taxonomy[key] = meta[key].taxonomy;
-      }
+      if (meta[key].taxonomy) taxonomy[key] = meta[key].taxonomy;
     }
     return taxonomy;
-  }, []);
+  }, [schema]);
 
   // Load data on component mount
   useEffect(() => {
     const loadData = async () => {
       try {
         const response = await fetch(import.meta.env.BASE_URL + 'data/sti-survey.json');
-        if (!response.ok) {
-          throw new Error('Failed to load data');
-        }
+        if (!response.ok) throw new Error('Failed to load data');
         const jsonData = await response.json();
         setData(jsonData);
       } catch (err) {
@@ -391,13 +259,11 @@ function SurveyTable() {
         setLoading(false);
       }
     };
-
     loadData();
   }, []);
 
-  // Column definitions with useMemo for performance
+  // Column definitions
   const columns = useMemo(() => [
-    // Row number with missing fields indicator
     columnHelper.display({
       id: "rowNumber",
       header: "#",
@@ -405,101 +271,64 @@ function SurveyTable() {
       enableSorting: false,
       meta: { align: 'center' }
     }),
-    // ID column
     columnHelper.accessor("id", {
       header: () => <span>ID</span>,
-      cell: (info) => (
-        <span className="text-[10px] text-neutral-400 font-mono">{info.getValue()}</span>
-      ),
+      cell: (info) => <span className="text-[10px] text-neutral-400 font-mono">{info.getValue()}</span>,
       enableSorting: false,
       meta: { align: 'center' }
     }),
-    
-    // Added column
     columnHelper.accessor("added", {
       header: () => <span>Added</span>,
       cell: (info) => {
         const addedValue = info.getValue();
         const formattedDate = formatDate(addedValue);
-        
         if (formattedDate) {
           return (
             <div className="flex flex-col items-center">
               <span className="text-xs text-neutral-200 font-medium">{formattedDate}</span>
               {addedValue !== formattedDate && (
-                <span className="text-[10px] text-neutral-500" title={`Original: ${addedValue}`}>
-                  {addedValue}
-                </span>
+                <span className="text-[10px] text-neutral-500" title={`Original: ${addedValue}`}>{addedValue}</span>
               )}
             </div>
           );
         } else {
-          return (
-            <span className="text-xs text-neutral-500 italic">-</span>
-          );
+          return <span className="text-xs text-neutral-500 italic">-</span>;
         }
       },
       enableSorting: true,
       meta: { align: 'center' }
     }),
-    
-    // Year column
     columnHelper.accessor("year", {
       header: () => <span>Year</span>,
       cell: (info) => info.getValue(),
       enableSorting: true,
       meta: { align: 'center' }
     }),
-    
-    // First author column
     columnHelper.accessor("firstAuthor", {
       header: () => <span>First Author</span>,
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'firstAuthor')} 
-        />
-      ),
+      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'firstAuthor')} />,
       enableSorting: false,
     }),
-    
-    // Authors column
     columnHelper.accessor("authors", {
       header: () => <span>Authors</span>,
       cell: (info) => {
         const authors = info.getValue();
-        if (!authors || authors.length === 0) {
-          return <span className="text-neutral-500 text-[10px]">No authors listed</span>;
-        }
-        return (
-          <span className="text-[10px] text-neutral-400">{authors.join(", ")}</span>
-        );
+        if (!authors || authors.length === 0) return <span className="text-neutral-500 text-[10px]">No authors listed</span>;
+        return <span className="text-[10px] text-neutral-400">{authors.join(", ")}</span>;
       },
       enableSorting: false,
     }),
-    
-    // Title column
     columnHelper.accessor("title.text", {
       header: () => <span>Text</span>,
       cell: (info) => {
         const titleText = info.getValue();
         const link = info.row.original.title?.link;
         const isMissing = isRequiredFieldMissing(info.row.original, 'title.text');
-        
         return (
           <div className="flex items-center gap-2">
-            <MissingFieldCell 
-              value={titleText} 
-              isMissing={isMissing} 
-            />
+            <MissingFieldCell value={titleText} isMissing={isMissing} />
             {link && link.trim() !== '' && (
-              <a 
-                href={link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-blue-400 hover:text-blue-300 transition-colors"
-                title="Open link"
-              >
+              <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors" title="Open link">
                 <span className="material-icons-round text-sm">launch</span>
               </a>
             )}
@@ -508,16 +337,9 @@ function SurveyTable() {
       },
       enableSorting: false,
     }),
-    
-    // Conference/Journal column
     columnHelper.accessor("conferenceJournal", {
       header: () => <span>Conference/Journal</span>,
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'conferenceJournal')} 
-        />
-      ),
+      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'conferenceJournal')} />,
       enableColumnFilter: true,
       enableFacetedUniqueValues: true,
       enableSorting: false,
@@ -526,14 +348,11 @@ function SurveyTable() {
         return filterValue.includes(row.getValue(columnId));
       },
     }),
-    
-    // Name of approach column
     columnHelper.accessor("nameOfApproach", {
       header: () => <span>Name of Approach</span>,
       cell: (info) => info.getValue(),
       enableSorting: false,
     }),
-    
     // Core Tasks group
     {
       id: "coreTasks",
@@ -542,54 +361,33 @@ function SurveyTable() {
         columnHelper.accessor(row => row.coreTasks?.cta, {
           id: "cta",
           header: () => <span>CTA</span>,
-          cell: (info) => (
-            <TaskCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cta')} 
-            />
-          ),
+          cell: (info) => <TaskCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cta')} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.coreTasks?.cpa, {
           id: "cpa",
           header: () => <span>CPA</span>,
-          cell: (info) => (
-            <TaskCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cpa')} 
-            />
-          ),
+          cell: (info) => <TaskCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cpa')} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.coreTasks?.cea, {
           id: "cea",
           header: () => <span>CEA</span>,
-          cell: (info) => (
-            <TaskCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cea')} 
-            />
-          ),
+          cell: (info) => <TaskCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cea')} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.coreTasks?.cnea, {
           id: "cnea",
           header: () => <span>CNEA</span>,
-          cell: (info) => (
-            <TaskCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cnea')} 
-            />
-          ),
+          cell: (info) => <TaskCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cnea')} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
       ],
     },
-    
     // Support Tasks group
     {
       id: "supportTasks",
@@ -653,8 +451,6 @@ function SurveyTable() {
         }),
       ],
     },
-    
-    // Main Method column
     columnHelper.accessor(row => {
       const type = row.mainMethod?.type || "";
       const tech = row.mainMethod?.technique || "";
@@ -665,7 +461,7 @@ function SurveyTable() {
       cell: (info) => <MainMethodCell mainMethod={info.getValue()} row={info.row.original} />,
       enableSorting: false,
     }),
-    // Type (Revision) column - moved before Domain
+    // Type (Revision) column - before Domain
     columnHelper.accessor(row => row.revision?.type || "", {
       id: "revision",
       header: () => <span style={{ color: headerColors.revision }}>{headerTaxonomy.revision ? headerTaxonomy.revision + ' - ' : ''}Type</span>,
@@ -673,16 +469,11 @@ function SurveyTable() {
         const value = info.getValue();
         const isMissing = isRequiredFieldMissing(info.row.original, 'revision.type');
         const description = info.row.original.revision?.description;
-        if (isMissing) {
-          return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
-        }
+        if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
         if (description && description.trim() !== "") {
           return (
             <div className="relative group inline-flex items-center">
-              <span
-                className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${getUserRevisionBadgeColor(value)} cursor-pointer`}
-                style={{ textTransform: 'lowercase' }}
-              >
+              <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${getUserRevisionBadgeColor(value)} cursor-pointer`} style={{ textTransform: 'lowercase' }}>
                 {value}
                 <span className="material-icons-round ml-1 align-middle leading-none" style={{ fontSize: '16px' }}>info_outline</span>
               </span>
@@ -694,52 +485,32 @@ function SurveyTable() {
           );
         }
         return (
-          <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${getUserRevisionBadgeColor(value)}`}
-            style={{ textTransform: 'lowercase' }}>
-            {value}
-          </span>
+          <span className={`inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${getUserRevisionBadgeColor(value)}`} style={{ textTransform: 'lowercase' }}>{value}</span>
         );
       },
       enableSorting: false,
     }),
-    // Domain column - moved after Type
+    // Domain column - after Type
     columnHelper.accessor(row => row.domain, {
       id: "domain",
       header: () => <span style={{ color: headerColors.domain }}>{headerTaxonomy.domain ? headerTaxonomy.domain + ' - ' : ''}Domain</span>,
       cell: (info) => <DomainCell domain={info.getValue()} row={info.row.original} />,
       enableSorting: false,
     }),
-    
-    // Validation column
     columnHelper.accessor(row => row.validation || "", {
       id: "validation",
       header: () => <span style={{ color: headerColors.validation }}>{headerTaxonomy.validation ? headerTaxonomy.validation + ' - ' : ''}Validation</span>,
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'validation')} 
-        />
-      ),
+      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'validation')} />,
       enableSorting: false,
     }),
-    
-    // Code availability column
     columnHelper.accessor(row => row.codeAvailability || "", {
       id: "codeAvailability",
       header: () => <span style={{ color: headerColors.codeAvailability }}>{headerTaxonomy.codeAvailability ? headerTaxonomy.codeAvailability + ' - ' : ''}Code Availability</span>,
       cell: (info) => {
         const value = info.getValue();
-        if (!value || value.trim() === "") {
-          return <span className="material-icons-round text-red-500 text-lg">clear</span>;
-        }
+        if (!value || value.trim() === "") return <span className="material-icons-round text-red-500 text-lg">clear</span>;
         return (
-          <a
-            href={value}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center text-blue-400 hover:text-blue-200"
-            title="Open code link"
-          >
+          <a href={value} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center text-blue-400 hover:text-blue-200" title="Open code link">
             <span className="material-icons-round">launch</span>
           </a>
         );
@@ -747,20 +518,13 @@ function SurveyTable() {
       enableSorting: false,
       meta: { align: 'center' },
     }),
-    
-    // License column
     columnHelper.accessor(row => row.license || "", {
       id: "license",
       header: () => <span style={{ color: headerColors.license }}>{headerTaxonomy.license ? headerTaxonomy.license + ' - ' : ''}License</span>,
-      cell: (info) => (
-        <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-neutral-500/20 text-neutral-200">
-          {info.getValue()}
-        </span>
-      ),
+      cell: (info) => <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-neutral-500/20 text-neutral-200">{info.getValue()}</span>,
       enableSorting: false,
       meta: { align: 'center' },
     }),
-    
     // Inputs group
     {
       id: "inputs",
@@ -769,23 +533,13 @@ function SurveyTable() {
         columnHelper.accessor(row => row.inputs?.typeOfTable || "", {
           id: "typeOfTable",
           header: () => <span>Type of Table</span>,
-          cell: (info) => (
-            <MissingFieldCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.typeOfTable')} 
-            />
-          ),
+          cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'inputs.typeOfTable')} />,
           enableSorting: false,
         }),
         columnHelper.accessor(row => row.inputs?.kg?.tripleStore || "", {
           id: "tripleStore",
           header: () => <span>Triple Store</span>,
-          cell: (info) => (
-            <MissingFieldCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.kg.tripleStore')} 
-            />
-          ),
+          cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'inputs.kg.tripleStore')} />,
           enableSorting: false,
         }),
         columnHelper.accessor(row => row.inputs?.kg?.index || "", {
@@ -796,107 +550,69 @@ function SurveyTable() {
         }),
       ],
     },
-    
-    // Output column
     columnHelper.accessor(row => row.output || "", {
       id: "output",
       header: () => <span style={{ color: headerColors.output }}>{headerTaxonomy.output ? headerTaxonomy.output + ' - ' : ''}Output</span>,
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'output')} 
-        />
-      ),
+      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'output')} />,
       enableSorting: false,
     }),
-    
-    // Application Purpose column
     columnHelper.accessor(row => row.applicationPurpose, {
       id: "applicationPurpose",
       header: () => <span style={{ color: headerColors.applicationPurpose }}>{headerTaxonomy.applicationPurpose ? headerTaxonomy.applicationPurpose + ' - ' : ''}Application Purpose</span>,
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'applicationPurpose')} 
-        />
-      ),
+      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'applicationPurpose')} />,
       enableSorting: false,
     }),
-    // User Interface Tool column
     columnHelper.accessor(row => row.userInterfaceTool, {
       id: "userInterfaceTool",
       header: () => <span style={{ color: headerColors.userInterfaceTool }}>{headerTaxonomy.userInterfaceTool ? headerTaxonomy.userInterfaceTool + ' - ' : ''}User Interface Tool</span>,
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'userInterfaceTool')} 
-        />
-      ),
+      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'userInterfaceTool')} />,
       enableSorting: false,
     }),
-    // Checked by author column
     columnHelper.accessor(row => row.checkedByAuthor, {
       id: "checkedByAuthor",
       header: "Checked by Author",
       cell: (info) => {
         const value = info.getValue();
         const isMissing = isRequiredFieldMissing(info.row.original, 'checkedByAuthor');
-        if (isMissing) {
-          return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
-        }
-        return value ? (
-          <span className="material-icons-round text-green-500 text-lg">done</span>
-        ) : (
-          <span className="material-icons-round text-red-500 text-lg">clear</span>
-        );
+        if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+        return value ? <span className="material-icons-round text-green-500 text-lg">done</span> : <span className="material-icons-round text-red-500 text-lg">clear</span>;
       },
       enableSorting: false,
     }),
-    // Checked by AI column
     columnHelper.accessor(row => row.checkedByAi, {
       id: "checkedByAi",
       header: "Checked by AI",
       cell: (info) => {
         const value = info.getValue();
-        return value ? (
-          <span className="material-icons-round text-green-500 text-lg">done</span>
-        ) : (
-          <span className="material-icons-round text-red-500 text-lg">clear</span>
-        );
+        return value ? <span className="material-icons-round text-green-500 text-lg">done</span> : <span className="material-icons-round text-red-500 text-lg">clear</span>;
       },
       enableSorting: false,
       meta: { align: 'center' },
     }),
-    // DOI column
     columnHelper.accessor(row => row.doi, {
       id: "doi",
       header: "DOI",
-      cell: (info) => (
-        <MissingFieldCell 
-          value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'doi')} 
-        />
-      ),
+      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'doi')} />,
       enableSorting: false,
     }),
-    // Citations column
     columnHelper.accessor(row => row.citations, {
       id: "citations",
       header: "Citations",
       cell: (info) => {
         const value = info.getValue();
-        if (Array.isArray(value)) {
-          return <span className="text-[10px] text-neutral-400">{value.length}</span>;
-        }
+        if (Array.isArray(value)) return <span className="text-[10px] text-neutral-400">{value.length}</span>;
         return <span className="text-[10px] text-neutral-400">-</span>;
       },
       enableSorting: false,
     }),
-    // Citations count column (always last)
-    columnHelper.accessor(row => Array.isArray(row.citations) ? row.citations.length : 0, { id: "citationsCount", header: "Citations", cell: (info) => (
-        <span className="text-[10px] text-neutral-400">{info.getValue()}</span>
-      ), enableSorting: true, meta: { align: 'center' } }),
-  ], []);
+    columnHelper.accessor(row => Array.isArray(row.citations) ? row.citations.length : 0, {
+      id: "citationsCount",
+      header: "Citations",
+      cell: (info) => <span className="text-[10px] text-neutral-400">{info.getValue()}</span>,
+      enableSorting: true,
+      meta: { align: 'center' }
+    }),
+  ], [headerColors, headerTaxonomy]);
 
   // React Table instance
   const table = useReactTable({
@@ -907,15 +623,11 @@ function SurveyTable() {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      columnFilters,
-      sorting,
-    },
+    state: { columnFilters, sorting },
     onColumnFiltersChange: setColumnFilters,
     onSortingChange: setSorting,
   });
 
-  // Loading state
   if (loading) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
@@ -923,42 +635,29 @@ function SurveyTable() {
       </div>
     );
   }
-
-  // Error state
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <div className="text-red-400 bg-red-900/20 rounded-lg p-6 text-lg">
-          Error: {error}
-        </div>
+        <div className="text-red-400 bg-red-900/20 rounded-lg p-6 text-lg">Error: {error}</div>
       </div>
     );
   }
-
   return (
     <div className="bg-neutral-900 h-screen overflow-auto relative">
-      {/* Collapsible Navigation */}
       <CollapsibleNavigation />
-      
-      {/* Data Table */}
       <table className="w-full table-auto text-xs">
         <thead className="bg-neutral-800 sticky top-0 z-10">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th 
+                <th
                   key={header.id}
                   colSpan={header.colSpan}
                   className="px-4 py-2 text-center text-xs font-semibold text-neutral-300"
                   onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
                   style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                 >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   {header.column.getCanSort() && (
                     <span className="ml-2">
                       {header.column.getIsSorted() === 'asc' ? '▲' : header.column.getIsSorted() === 'desc' ? '▼' : ''}
@@ -971,23 +670,17 @@ function SurveyTable() {
         </thead>
         <tbody className="bg-neutral-900">
           {table.getRowModel().rows.map((row, index) => {
-            const missingFields = Object.keys(REQUIRED_FIELDS)
-              .filter(field => isRequiredFieldMissing(row.original, field));
+            const missingFields = Object.keys(REQUIRED_FIELDS).filter(field => isRequiredFieldMissing(row.original, field));
             const hasMissingFields = missingFields.length > 0;
-            
             return (
-              <tr 
+              <tr
                 key={row.id}
-                className={`hover:bg-neutral-700 transition-colors duration-150 ${
-                  index % 2 === 0 ? 'bg-neutral-900' : 'bg-neutral-800'
-                } ${hasMissingFields ? 'border-l-4 border-l-red-500' : ''}`}
+                className={`hover:bg-neutral-700 transition-colors duration-150 ${index % 2 === 0 ? 'bg-neutral-900' : 'bg-neutral-800'} ${hasMissingFields ? 'border-l-4 border-l-red-500' : ''}`}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <td 
+                  <td
                     key={cell.id}
-                    className={`px-4 py-2 text-xs text-neutral-300 ${
-                      cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'
-                    }`}
+                    className={`px-4 py-2 text-xs text-neutral-300 ${cell.column.columnDef.meta?.align === 'center' ? 'text-center' : 'text-left'}`}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
