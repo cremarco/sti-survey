@@ -1,17 +1,17 @@
 {
   "_uiMeta": {
     "coreTasks": { "taxonomy": "1", "color": "#6366f1" },
-    "supportTasks": { "taxonomy": "2", "color": "#0ea5e9" },
-    "mainMethod": { "taxonomy": "3", "color": "#a21caf" },
-    "revision": { "taxonomy": "4", "color": "#f59e42" },
-    "domain": { "taxonomy": "5", "color": "#ef4444" },
-    "validation": { "taxonomy": "6", "color": "#f43f5e" },
-    "codeAvailability": { "taxonomy": "7", "color": "#10b981" },
-    "license": { "taxonomy": "8", "color": "#22d3ee" },
-    "inputs": { "taxonomy": "9", "color": "#14b8a6" },
-    "output": { "taxonomy": "10", "color": "#facc15" },
-    "applicationPurpose": { "taxonomy": "11", "color": "#fbbf24" },
-    "userInterfaceTool": { "taxonomy": "12", "color": "#38bdf8" }
+    "supportTasks": { "taxonomy": "2", "color": "#3b82f6" },
+    "mainMethod": { "taxonomy": "3", "color": "#0ea5e9" },
+    "revision": { "taxonomy": "4", "color": "#06b6d4" },
+    "domain": { "taxonomy": "5", "color": "#14b8a6" },
+    "validation": { "taxonomy": "6", "color": "#22c55e" },
+    "codeAvailability": { "taxonomy": "7", "color": "#84cc16" },
+    "license": { "taxonomy": "8", "color": "#facc15" },
+    "inputs": { "taxonomy": "9", "color": "#fbbf24" },
+    "output": { "taxonomy": "10", "color": "#f59e42" },
+    "applicationPurpose": { "taxonomy": "11", "color": "#ef4444" },
+    "userInterfaceTool": { "taxonomy": "12", "color": "#f43f5e" }
   },
   "type": "object",
   "properties": {
@@ -129,6 +129,8 @@
       "additionalProperties": false
     },
     "output": { "type": "string", "label": "Output" },
+    "applicationPurpose": { "type": "string", "label": "Application/Purpose" },
+    "userInterfaceTool": { "type": "string", "label": "User Interface/Tool" },
     "checkedByAuthor": { "type": "boolean", "label": "Checked by Author" },
     "checkedByAi": { "type": "boolean", "label": "Checked by AI" },
     "doi": { "type": "string", "label": "DOI" },
@@ -144,9 +146,7 @@
         "required": ["ref", "title"],
         "additionalProperties": false
       }
-    },
-    "applicationPurpose": { "type": "string", "label": "Application/Purpose" },
-    "userInterfaceTool": { "type": "string", "label": "User Interface/Tool" }
+    }
   },
   "required": [
     "id", "added", "year", "firstAuthor", "authors", "title", "conferenceJournal", "nameOfApproach", "coreTasks", "supportTasks", "mainMethod", "domain", "revision", "validation", "codeAvailability", "license", "inputs", "output", "checkedByAuthor", "checkedByAi", "doi", "citations", "applicationPurpose", "userInterfaceTool"

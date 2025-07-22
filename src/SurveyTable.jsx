@@ -27,6 +27,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Navigation from "./Navigation";
+import schema from '../public/data/sti-survey.schema.json';
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -66,28 +67,46 @@ const USER_REVISION_COLORS = {
 };
 
 /**
+ * Color mapping for schema fields/groups from _uiMeta
+ */
+const HEADER_COLORS = {
+  coreTasks: "#6366f1",
+  supportTasks: "#0ea5e9",
+  mainMethod: "#a21caf",
+  revision: "#f59e42",
+  domain: "#ef4444",
+  validation: "#f43f5e",
+  codeAvailability: "#10b981",
+  license: "#22d3ee",
+  inputs: "#14b8a6",
+  output: "#facc15",
+  applicationPurpose: "#fbbf24",
+  userInterfaceTool: "#38bdf8"
+};
+
+/**
  * Required fields configuration for validation
  */
 const REQUIRED_FIELDS = {
   id: true,
   authors: true,
-  author: true,
+  firstAuthor: true,
   year: true,
   "title.text": true,
-  "conference-journal": true,
-  "main-method.type": true,
-  "main-method.technique": true,
+  conferenceJournal: true,
+  "mainMethod.type": true,
+  "mainMethod.technique": true,
   "domain.domain": true,
-  "tasks.cta": true,
-  "tasks.cpa": true,
-  "tasks.cea": true,
-  "tasks.cnea": true,
-  "user-revision.type": true,
-  "license": true,
-  "inputs.type-of-table": true,
-  "inputs.kg.triple-store": true,
-  "output-format": true,
-  "checked-by-author": true,
+  "coreTasks.cta": true,
+  "coreTasks.cpa": true,
+  "coreTasks.cea": true,
+  "coreTasks.cnea": true,
+  "revision.type": true,
+  license: true,
+  "inputs.typeOfTable": true,
+  "inputs.kg.tripleStore": true,
+  output: true,
+  checkedByAuthor: true,
   doi: true,
 };
 
@@ -214,8 +233,8 @@ const MainMethodCell = ({ mainMethod, row }) => {
   
   if (!type && !tech) return "";
   
-  const isTypeMissing = isRequiredFieldMissing(row, "main-method.type");
-  const isTechMissing = isRequiredFieldMissing(row, "main-method.technique");
+  const isTypeMissing = isRequiredFieldMissing(row, "mainMethod.type");
+  const isTechMissing = isRequiredFieldMissing(row, "mainMethod.technique");
   
   const typeBadgeClass = type 
     ? `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium w-16 ${getTypeBadgeColor(type)}`
@@ -333,6 +352,28 @@ function SurveyTable() {
   const [error, setError] = useState(null);
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
+  // Dynamically extract color mapping from schema _uiMeta
+  const headerColors = useMemo(() => {
+    const meta = schema._uiMeta || {};
+    const colors = {};
+    for (const key in meta) {
+      if (meta[key].color) {
+        colors[key] = meta[key].color;
+      }
+    }
+    return colors;
+  }, []);
+  // Extract taxonomy mapping from schema _uiMeta
+  const headerTaxonomy = useMemo(() => {
+    const meta = schema._uiMeta || {};
+    const taxonomy = {};
+    for (const key in meta) {
+      if (meta[key].taxonomy) {
+        taxonomy[key] = meta[key].taxonomy;
+      }
+    }
+    return taxonomy;
+  }, []);
 
   // Load data on component mount
   useEffect(() => {
@@ -360,13 +401,13 @@ function SurveyTable() {
     columnHelper.display({
       id: "rowNumber",
       header: "#",
-      cell: (info) => <RowNumberCell row={info.row} index={info.row.index} />,
+      cell: (info) => <RowNumberCell row={info.row} index={info.row.index} />, // Always first
       enableSorting: false,
       meta: { align: 'center' }
     }),
     // ID column
     columnHelper.accessor("id", {
-      header: "ID",
+      header: () => <span>ID</span>,
       cell: (info) => (
         <span className="text-[10px] text-neutral-400 font-mono">{info.getValue()}</span>
       ),
@@ -376,7 +417,7 @@ function SurveyTable() {
     
     // Added column
     columnHelper.accessor("added", {
-      header: "Added",
+      header: () => <span>Added</span>,
       cell: (info) => {
         const addedValue = info.getValue();
         const formattedDate = formatDate(addedValue);
@@ -404,19 +445,19 @@ function SurveyTable() {
     
     // Year column
     columnHelper.accessor("year", {
-      header: "Year",
+      header: () => <span>Year</span>,
       cell: (info) => info.getValue(),
       enableSorting: true,
       meta: { align: 'center' }
     }),
     
-    // Author column
-    columnHelper.accessor("author", {
-      header: "First author",
+    // First author column
+    columnHelper.accessor("firstAuthor", {
+      header: () => <span>First Author</span>,
       cell: (info) => (
         <MissingFieldCell 
           value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'author')} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'firstAuthor')} 
         />
       ),
       enableSorting: false,
@@ -424,7 +465,7 @@ function SurveyTable() {
     
     // Authors column
     columnHelper.accessor("authors", {
-      header: "All authors",
+      header: () => <span>Authors</span>,
       cell: (info) => {
         const authors = info.getValue();
         if (!authors || authors.length === 0) {
@@ -439,7 +480,7 @@ function SurveyTable() {
     
     // Title column
     columnHelper.accessor("title.text", {
-      header: "Title",
+      header: () => <span>Text</span>,
       cell: (info) => {
         const titleText = info.getValue();
         const link = info.row.original.title?.link;
@@ -468,14 +509,13 @@ function SurveyTable() {
       enableSorting: false,
     }),
     
-    // Conference/Journal column with filtering
-    columnHelper.accessor(row => row["conference-journal"], {
-      id: "conference-journal",
-      header: "Conf. / Journal",
+    // Conference/Journal column
+    columnHelper.accessor("conferenceJournal", {
+      header: () => <span>Conference/Journal</span>,
       cell: (info) => (
         <MissingFieldCell 
           value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'conference-journal')} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'conferenceJournal')} 
         />
       ),
       enableColumnFilter: true,
@@ -488,158 +528,151 @@ function SurveyTable() {
     }),
     
     // Name of approach column
-    columnHelper.accessor("name-of-approach", {
-      header: "Name of approach",
+    columnHelper.accessor("nameOfApproach", {
+      header: () => <span>Name of Approach</span>,
       cell: (info) => info.getValue(),
       enableSorting: false,
     }),
     
-    // Main method column
+    // Core Tasks group
+    {
+      id: "coreTasks",
+      header: () => <span style={{ color: headerColors.coreTasks }}>{headerTaxonomy.coreTasks ? headerTaxonomy.coreTasks + ' - ' : ''}Core Tasks</span>,
+      columns: [
+        columnHelper.accessor(row => row.coreTasks?.cta, {
+          id: "cta",
+          header: () => <span>CTA</span>,
+          cell: (info) => (
+            <TaskCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cta')} 
+            />
+          ),
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.coreTasks?.cpa, {
+          id: "cpa",
+          header: () => <span>CPA</span>,
+          cell: (info) => (
+            <TaskCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cpa')} 
+            />
+          ),
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.coreTasks?.cea, {
+          id: "cea",
+          header: () => <span>CEA</span>,
+          cell: (info) => (
+            <TaskCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cea')} 
+            />
+          ),
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.coreTasks?.cnea, {
+          id: "cnea",
+          header: () => <span>CNEA</span>,
+          cell: (info) => (
+            <TaskCell 
+              value={info.getValue()} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'coreTasks.cnea')} 
+            />
+          ),
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+      ],
+    },
+    
+    // Support Tasks group
+    {
+      id: "supportTasks",
+      header: () => <span style={{ color: headerColors.supportTasks }}>{headerTaxonomy.supportTasks ? headerTaxonomy.supportTasks + ' - ' : ''}Support Tasks</span>,
+      columns: [
+        columnHelper.accessor(row => row.supportTasks?.dataPreparation?.description || "", {
+          id: "dataPreparation",
+          header: () => <span>Data Preparation</span>,
+          cell: (info) => <StepCell value={info.getValue()} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.subjectDetection || "", {
+          id: "subjectDetection",
+          header: () => <span>Subject Detection</span>,
+          cell: (info) => <StepCell value={info.getValue()} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.columnClassification || "", {
+          id: "columnClassification",
+          header: () => <span>Column Classification</span>,
+          cell: (info) => <StepCell value={info.getValue()} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.typeAnnotation || "", {
+          id: "typeAnnotation",
+          header: () => <span>Type Annotation</span>,
+          cell: (info) => <StepCell value={info.getValue()} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.predicateAnnotation || "", {
+          id: "predicateAnnotation",
+          header: () => <span>Predicate Annotation</span>,
+          cell: (info) => <StepCell value={info.getValue()} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.datatypeAnnotation || "", {
+          id: "datatypeAnnotation",
+          header: () => <span>Datatype Annotation</span>,
+          cell: (info) => <StepCell value={info.getValue()} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.entityLinking?.description || "", {
+          id: "entityLinking",
+          header: () => <span>Entity Linking</span>,
+          cell: (info) => <StepCell value={info.getValue()} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.nilAnnotation || "", {
+          id: "nilAnnotation",
+          header: () => <span>Nil Annotation</span>,
+          cell: (info) => <StepCell value={info.getValue()} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+      ],
+    },
+    
+    // Main Method column
     columnHelper.accessor(row => {
-      const type = row["main-method"]?.type || "";
-      const tech = row["main-method"]?.technique || "";
+      const type = row.mainMethod?.type || "";
+      const tech = row.mainMethod?.technique || "";
       return { type, tech };
     }, {
-      id: "main-method",
-      header: "Main Method",
+      id: "mainMethod",
+      header: () => <span style={{ color: headerColors.mainMethod }}>{headerTaxonomy.mainMethod ? headerTaxonomy.mainMethod + ' - ' : ''}Main Method</span>,
       cell: (info) => <MainMethodCell mainMethod={info.getValue()} row={info.row.original} />,
       enableSorting: false,
     }),
-    
-    // Domain column
-    columnHelper.accessor(row => row["domain"], {
-      id: "domain",
-      header: "Domain",
-      cell: (info) => <DomainCell domain={info.getValue()} row={info.row.original} />,
-      enableSorting: false,
-    }),
-    
-    // Task group columns
-    {
-      header: "Task",
-      columns: [
-        columnHelper.accessor(row => row.tasks?.cta, {
-          id: "cta",
-          header: "CTA",
-          cell: (info) => (
-            <TaskCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'tasks.cta')} 
-            />
-          ),
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.tasks?.cpa, {
-          id: "cpa",
-          header: "CPA",
-          cell: (info) => (
-            <TaskCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'tasks.cpa')} 
-            />
-          ),
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.tasks?.cea, {
-          id: "cea",
-          header: "CEA",
-          cell: (info) => (
-            <TaskCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'tasks.cea')} 
-            />
-          ),
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.tasks?.cnea, {
-          id: "cnea",
-          header: "CNEA",
-          cell: (info) => (
-            <TaskCell 
-              value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'tasks.cnea')} 
-            />
-          ),
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-      ],
-    },
-    
-    // Steps group columns
-    {
-      header: "Steps",
-      columns: [
-        columnHelper.accessor(row => row.steps?.["data-preparation"]?.description || "", {
-          id: "data-preparation",
-          header: "Data Preparation",
-          cell: (info) => <StepCell value={info.getValue()} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.steps?.["subject-detection"] || "", {
-          id: "subject-detection",
-          header: "Subject Detection",
-          cell: (info) => <StepCell value={info.getValue()} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.steps?.["column-analysis"] || "", {
-          id: "column-analysis",
-          header: "Column Analysis",
-          cell: (info) => <StepCell value={info.getValue()} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.steps?.["type-annotation"] || "", {
-          id: "type-annotation",
-          header: "Type Annotation",
-          cell: (info) => <StepCell value={info.getValue()} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.steps?.["predicate-annotation"] || "", {
-          id: "predicate-annotation",
-          header: "Predicate Annotation",
-          cell: (info) => <StepCell value={info.getValue()} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.steps?.["datatype-annotation"] || "", {
-          id: "datatype-annotation",
-          header: "Datatype Annotation",
-          cell: (info) => <StepCell value={info.getValue()} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.steps?.["entity-linking"]?.description || "", {
-          id: "entity-linking",
-          header: "Entity Linking",
-          cell: (info) => <StepCell value={info.getValue()} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.steps?.["nil-annotation"] || "", {
-          id: "nil-annotation",
-          header: "NIL Annotation",
-          cell: (info) => <StepCell value={info.getValue()} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-      ],
-    },
-    
-    // User revision column
-    columnHelper.accessor(row => row["user-revision"]?.type || "", {
-      id: "user-revision",
-      header: "User Revision",
+    // Type (Revision) column - moved before Domain
+    columnHelper.accessor(row => row.revision?.type || "", {
+      id: "revision",
+      header: () => <span style={{ color: headerColors.revision }}>{headerTaxonomy.revision ? headerTaxonomy.revision + ' - ' : ''}Type</span>,
       cell: (info) => {
         const value = info.getValue();
-        const isMissing = isRequiredFieldMissing(info.row.original, 'user-revision.type');
-        const description = info.row.original["user-revision"]?.description;
+        const isMissing = isRequiredFieldMissing(info.row.original, 'revision.type');
+        const description = info.row.original.revision?.description;
         if (isMissing) {
           return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
         }
@@ -669,11 +702,18 @@ function SurveyTable() {
       },
       enableSorting: false,
     }),
+    // Domain column - moved after Type
+    columnHelper.accessor(row => row.domain, {
+      id: "domain",
+      header: () => <span style={{ color: headerColors.domain }}>{headerTaxonomy.domain ? headerTaxonomy.domain + ' - ' : ''}Domain</span>,
+      cell: (info) => <DomainCell domain={info.getValue()} row={info.row.original} />,
+      enableSorting: false,
+    }),
     
     // Validation column
-    columnHelper.accessor(row => row["validation"] || "", {
+    columnHelper.accessor(row => row.validation || "", {
       id: "validation",
-      header: "Validation",
+      header: () => <span style={{ color: headerColors.validation }}>{headerTaxonomy.validation ? headerTaxonomy.validation + ' - ' : ''}Validation</span>,
       cell: (info) => (
         <MissingFieldCell 
           value={info.getValue()} 
@@ -684,9 +724,9 @@ function SurveyTable() {
     }),
     
     // Code availability column
-    columnHelper.accessor(row => row["code-availability"] || "", {
-      id: "code-availability",
-      header: "Code Availability",
+    columnHelper.accessor(row => row.codeAvailability || "", {
+      id: "codeAvailability",
+      header: () => <span style={{ color: headerColors.codeAvailability }}>{headerTaxonomy.codeAvailability ? headerTaxonomy.codeAvailability + ' - ' : ''}Code Availability</span>,
       cell: (info) => {
         const value = info.getValue();
         if (!value || value.trim() === "") {
@@ -709,9 +749,9 @@ function SurveyTable() {
     }),
     
     // License column
-    columnHelper.accessor(row => row["license"] || "", {
-      id: "source",
-      header: "Licence",
+    columnHelper.accessor(row => row.license || "", {
+      id: "license",
+      header: () => <span style={{ color: headerColors.license }}>{headerTaxonomy.license ? headerTaxonomy.license + ' - ' : ''}License</span>,
       cell: (info) => (
         <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-neutral-500/20 text-neutral-200">
           {info.getValue()}
@@ -721,61 +761,86 @@ function SurveyTable() {
       meta: { align: 'center' },
     }),
     
-    // Inputs group columns
+    // Inputs group
     {
-      header: "Inputs",
+      id: "inputs",
+      header: () => <span style={{ color: headerColors.inputs }}>{headerTaxonomy.inputs ? headerTaxonomy.inputs + ' - ' : ''}Inputs</span>,
       columns: [
-        columnHelper.accessor(row => row.inputs?.["type-of-table"] || "", {
-          id: "type-of-table",
-          header: "Type of table",
+        columnHelper.accessor(row => row.inputs?.typeOfTable || "", {
+          id: "typeOfTable",
+          header: () => <span>Type of Table</span>,
           cell: (info) => (
             <MissingFieldCell 
               value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.type-of-table')} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.typeOfTable')} 
             />
           ),
           enableSorting: false,
         }),
-        columnHelper.accessor(row => row.inputs?.kg?.["triple-store"] || "", {
-          id: "knowledge-graph",
-          header: "Knowledge Graph",
+        columnHelper.accessor(row => row.inputs?.kg?.tripleStore || "", {
+          id: "tripleStore",
+          header: () => <span>Triple Store</span>,
           cell: (info) => (
             <MissingFieldCell 
               value={info.getValue()} 
-              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.kg.triple-store')} 
+              isMissing={isRequiredFieldMissing(info.row.original, 'inputs.kg.tripleStore')} 
             />
           ),
           enableSorting: false,
         }),
         columnHelper.accessor(row => row.inputs?.kg?.index || "", {
-          id: "kg-index",
-          header: "KG Index",
+          id: "kgIndex",
+          header: () => <span>Index</span>,
           cell: (info) => info.getValue(),
           enableSorting: false,
         }),
       ],
     },
     
-    // Output format column
-    columnHelper.accessor(row => row["output-format"] || "", {
-      id: "output-format",
-      header: "Output Format",
+    // Output column
+    columnHelper.accessor(row => row.output || "", {
+      id: "output",
+      header: () => <span style={{ color: headerColors.output }}>{headerTaxonomy.output ? headerTaxonomy.output + ' - ' : ''}Output</span>,
       cell: (info) => (
         <MissingFieldCell 
           value={info.getValue()} 
-          isMissing={isRequiredFieldMissing(info.row.original, 'output-format')} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'output')} 
         />
       ),
       enableSorting: false,
     }),
     
+    // Application Purpose column
+    columnHelper.accessor(row => row.applicationPurpose, {
+      id: "applicationPurpose",
+      header: () => <span style={{ color: headerColors.applicationPurpose }}>{headerTaxonomy.applicationPurpose ? headerTaxonomy.applicationPurpose + ' - ' : ''}Application Purpose</span>,
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'applicationPurpose')} 
+        />
+      ),
+      enableSorting: false,
+    }),
+    // User Interface Tool column
+    columnHelper.accessor(row => row.userInterfaceTool, {
+      id: "userInterfaceTool",
+      header: () => <span style={{ color: headerColors.userInterfaceTool }}>{headerTaxonomy.userInterfaceTool ? headerTaxonomy.userInterfaceTool + ' - ' : ''}User Interface Tool</span>,
+      cell: (info) => (
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'userInterfaceTool')} 
+        />
+      ),
+      enableSorting: false,
+    }),
     // Checked by author column
-    columnHelper.accessor(row => row["checked-by-author"], {
-      id: "checked-by-author",
-      header: "Checked by author",
+    columnHelper.accessor(row => row.checkedByAuthor, {
+      id: "checkedByAuthor",
+      header: "Checked by Author",
       cell: (info) => {
         const value = info.getValue();
-        const isMissing = isRequiredFieldMissing(info.row.original, 'checked-by-author');
+        const isMissing = isRequiredFieldMissing(info.row.original, 'checkedByAuthor');
         if (isMissing) {
           return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
         }
@@ -787,10 +852,9 @@ function SurveyTable() {
       },
       enableSorting: false,
     }),
-    
     // Checked by AI column
-    columnHelper.accessor(row => row["checked-by-ai"], {
-      id: "checked-by-ai",
+    columnHelper.accessor(row => row.checkedByAi, {
+      id: "checkedByAi",
       header: "Checked by AI",
       cell: (info) => {
         const value = info.getValue();
@@ -803,16 +867,35 @@ function SurveyTable() {
       enableSorting: false,
       meta: { align: 'center' },
     }),
-    // Citations count column
-    columnHelper.accessor(row => Array.isArray(row.citations) ? row.citations.length : 0, {
-      id: "citations-count",
-      header: "# Citations",
+    // DOI column
+    columnHelper.accessor(row => row.doi, {
+      id: "doi",
+      header: "DOI",
       cell: (info) => (
-        <span className="text-[10px] text-neutral-400">{info.getValue()}</span>
+        <MissingFieldCell 
+          value={info.getValue()} 
+          isMissing={isRequiredFieldMissing(info.row.original, 'doi')} 
+        />
       ),
-      enableSorting: true,
-      meta: { align: 'center' },
+      enableSorting: false,
     }),
+    // Citations column
+    columnHelper.accessor(row => row.citations, {
+      id: "citations",
+      header: "Citations",
+      cell: (info) => {
+        const value = info.getValue();
+        if (Array.isArray(value)) {
+          return <span className="text-[10px] text-neutral-400">{value.length}</span>;
+        }
+        return <span className="text-[10px] text-neutral-400">-</span>;
+      },
+      enableSorting: false,
+    }),
+    // Citations count column (always last)
+    columnHelper.accessor(row => Array.isArray(row.citations) ? row.citations.length : 0, { id: "citationsCount", header: "Citations", cell: (info) => (
+        <span className="text-[10px] text-neutral-400">{info.getValue()}</span>
+      ), enableSorting: true, meta: { align: 'center' } }),
   ], []);
 
   // React Table instance
