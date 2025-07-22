@@ -37,6 +37,19 @@ function labelTransform(d) {
   return `rotate(${angle}) translate(${r},0)`;
 }
 
+// Helper to get the top-level label (taxonomy number + label if available)
+function getTopLevelLabel(meta, prop, fallback) {
+  if (meta.taxonomy && prop && prop.label) {
+    return `${meta.taxonomy} ${prop.label}`;
+  }
+  return (prop && prop.label) ? prop.label : fallback;
+}
+
+// Helper to get child label (just the label or property name)
+function getChildLabel(subProp, val) {
+  return subProp.label || val;
+}
+
 // Main Taxonomy component
 function Taxonomy() {
   const chartRef = useRef();
@@ -57,12 +70,11 @@ function Taxonomy() {
       .then((json) => {
         const uiMeta = json._uiMeta || {};
         const schemaProps = json.properties || {};
-        // Build color map
+        // Build color map using only top-level labels (with taxonomy number)
         const map = {};
         Object.entries(uiMeta).forEach(([name, meta]) => {
-          // Use label from schema if available, otherwise fallback to name
           const prop = schemaProps[name];
-          const label = prop && prop.label ? prop.label : (meta.taxonomy ? `${meta.taxonomy} ${name.toUpperCase()}` : name.toUpperCase());
+          const label = getTopLevelLabel(meta, prop, name);
           if (meta.color) map[label] = meta.color;
         });
         setColorMap(map);
@@ -85,11 +97,11 @@ function Taxonomy() {
           // If object with child properties (e.g., coreTasks, supportTasks)
           if (subChildren.length === 0 && prop && prop.properties) {
             subChildren = Object.entries(prop.properties).map(([val, subProp]) => ({
-              name: subProp.label || val
+              name: getChildLabel(subProp, val)
             }));
           }
-          // Use label from schema if available, otherwise fallback to name
-          const label = prop && prop.label ? prop.label : (meta.taxonomy ? `${meta.taxonomy} ${name.toUpperCase()}` : name.toUpperCase());
+          // Top-level label: taxonomy number + label if available, else fallback
+          const label = getTopLevelLabel(meta, prop, name);
           return {
             name: label,
             taxonomy: meta.taxonomy,
@@ -163,7 +175,13 @@ function Taxonomy() {
       .attr('text-anchor', d => (d.x < Math.PI === !d.children ? 'start' : 'end'))
       .attr('paint-order', 'stroke')
       .attr('stroke', labelStroke)
-      .attr('fill', d => d.depth === 0 ? '#18181b' : getBranchColor(d, colorMap))
+      .attr('fill', d => {
+        if (d.depth === 0) {
+          // Root label: white in normal view, black in download mode
+          return isDownloading ? '#18181b' : '#fff';
+        }
+        return getBranchColor(d, colorMap);
+      })
       .attr('font-size', 13)
       .attr('font-weight', 'bold')
       .text(d => d.data.name);
