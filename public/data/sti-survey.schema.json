@@ -131,7 +131,7 @@
       "type": "object",
       "label": "Inputs",
       "properties": {
-        "typeOfTable": { "type": "string", "label": "Type of Table" },
+        "source": { "type": "string", "label": "Source" },
         "kg": {
           "type": "object",
           "label": "KG",
@@ -143,7 +143,7 @@
           "additionalProperties": false
         }
       },
-      "required": ["typeOfTable", "kg"],
+      "required": ["source", "kg"],
       "additionalProperties": false
     },
     "output": { "type": "string", "label": "Output" },
