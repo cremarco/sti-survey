@@ -3337,7 +3337,7 @@
       "predicateAnnotation": "patty patterns",
       "datatypeAnnotation": "",
       "entityLinking": {
-        "description": "",
+        "description": "Assumed pre-linked entities; exact string matching used for experiments",
         "candidateGeneration": "",
         "entityDisambiguation": ""
       },
@@ -3347,20 +3347,47 @@
       "type": "None",
       "description": ""
     },
-    "validation": "ClueWeb09 dataset",
+    "validation": "Ground truth from YAGO facts cross-checked with NELL triples extracted from ClueWeb09",
     "codeAvailability": "",
     "license": "Not specified",
     "inputs": {
       "typeOfTable": "",
       "kg": {
-        "tripleStore": "",
-        "index": "Yago"
+        "tripleStore": "YAGO",
+        "index": "PATTY pattern index"
       }
     },
-    "output": "",
+    "output": "Predicted relation instances <entity1, relation, entity2> (triples) – format not explicitly serialized",
     "checkedByAuthor": true,
-    "authors": [],
-    "checkedByAi": false
+    "checkedByAi": true,
+    "id": "sekhavat2014knowledge",
+  "doi": "",
+  "authors": [
+    "Yoones A. Sekhavat",
+    "Francesco di Paolo",
+    "Denilson Barbosa",
+    "Paolo Merialdo"
+  ],
+  "citations": [
+    { "ref": "adelfio2013schema", "title": "Schema extraction for tabular data on the web" },
+    { "ref": "bizer2009linked", "title": "Linked data-the story so far" },
+    { "ref": "bollacker2008freebase", "title": "Freebase: A collaboratively created graph database for structuring human knowledge" },
+    { "ref": "cafarella2008webtables", "title": "Webtables: Exploring the power of tables on the web" },
+    { "ref": "chen2013automatic", "title": "Automatic web spreadsheet data extraction" },
+    { "ref": "ding2010data", "title": "Data-gov wiki: Towards linking government data" },
+    { "ref": "fagin2003comparing", "title": "Comparing top k lists" },
+    { "ref": "limaye2010annotating", "title": "Annotating and searching web tables using entities, types and relationships" },
+    { "ref": "mintz2009distant", "title": "Distant supervision for relation extraction without labeled data" },
+    { "ref": "mulwad2013semantic", "title": "Semantic Message Passing for Generating Linked Data from Tables" },
+    { "ref": "munoz2013triplifying", "title": "Triplifying wikipedia’s tables" },
+    { "ref": "nakashole2012patty", "title": "Patty: A taxonomy of relational patterns with semantic types" },
+    { "ref": "shinyama2006preemptive", "title": "Preemptive information extraction using unrestricted relation discovery" },
+    { "ref": "suchanek2007yago", "title": "Yago: A core of semantic knowledge" },
+    { "ref": "talukdar2012acquiring", "title": "Acquiring temporal constraints between relations" },
+    { "ref": "venetis2011recovering", "title": "Recovering semantics of tables on the web" },
+    { "ref": "yosef2011aida", "title": "Aida: An online tool for accurate disambiguation of named entities in text and tables" },
+    { "ref": "zhou2007tree", "title": "Tree Kernel-Based relation extraction with Context-Sensitive structured parse tree information" }
+  ]
   },
   {
     "firstAuthor": "Taheriyan",
@@ -3373,8 +3400,8 @@
     "conferenceJournal": "IEEE",
     "nameOfApproach": "",
     "mainMethod": {
-      "type": "Unsupervised",
-      "technique": "features"
+      "type": "Supervised",
+      "technique": "CRF-based semantic labelling + weighted-graph search/ranking"
     },
     "domain": {
       "domain": "Independent",
@@ -3418,10 +3445,40 @@
         "index": ""
       }
     },
-    "output": "",
-    "checkedByAuthor": false,
-    "authors": [],
-    "checkedByAi": false
+    "output": "Ranked semantic models (graphs) exported/publishable as RDF",
+    "checkedByAuthor": true,
+    "checkedByAi": true,
+      "id": "taheriyan2014scalable",
+      "doi": "https://doi.org/10.1109/ICSC.2014.13",
+      "authors": [
+        "Mohsen Taheriyan",
+        "Craig A. Knoblock",
+        "Pedro Szekely",
+        "José Luis Ambite"
+      ],
+      "citations": [
+        { "ref": "doan2012principles", "title": "Principles of Data Integration" },
+        { "ref": "mulwad2013semantic", "title": "Semantic Message Passing for Generating Linked Data from Tables" },
+        { "ref": "venetis2011recovering", "title": "Recovering Semantics of Tables on the Web" },
+        { "ref": "limaye2010annotating", "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships" },
+        { "ref": "sheth2008semantics", "title": "Semantics Enhanced Services: METEOR-S, SAWSDL and SA-REST" },
+        { "ref": "saquicela2011lightweight", "title": "Lightweight Semantic Annotation of Geospatial RESTful Services" },
+        { "ref": "knoblock2012semi", "title": "Semi-Automatically Mapping Structured Sources into the Semantic Web" },
+        { "ref": "taheriyan2013graph", "title": "A Graph-based Approach to Learn Semantic Descriptions of Data Sources" },
+        { "ref": "goel2012exploiting", "title": "Exploiting Structure within Data for Accurate Labeling Using Conditional Random Fields" },
+        { "ref": "szekely2013connecting", "title": "Connecting the Smithsonian American Art Museum to the Linked Data Cloud" },
+        { "ref": "lafferty2001conditional", "title": "Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data" },
+        { "ref": "winter1987steiner", "title": "Steiner Problem in Networks – A Survey" },
+        { "ref": "kou1981fast", "title": "A Fast Algorithm for Steiner Trees" },
+        { "ref": "rahm2001survey", "title": "A Survey of Approaches to Automatic Schema Matching" },
+        { "ref": "dhamankar2004imap", "title": "iMAP: Discovering Complex Semantic Matches between Database Schemas" },
+        { "ref": "bellahsene2011schema", "title": "Schema Matching and Mapping" },
+        { "ref": "fagin2009clio", "title": "Clio: Schema Mapping Creation and Data Exchange" },
+        { "ref": "alexe2011designing", "title": "Designing and Refining Schema Mappings via Data Examples" },
+        { "ref": "an2007semantic", "title": "A Semantic Approach to Discovering Schema Mapping Expressions" },
+        { "ref": "carman2007learning", "title": "Learning Semantic Definitions of Online Information Sources" },
+        { "ref": "taheriyan2012rapidly", "title": "Rapidly Integrating Services into the Linked Data Cloud" }
+      ]
   },
   {
     "firstAuthor": "Bhagavatula",
@@ -3469,20 +3526,68 @@
       "type": "None",
       "description": ""
     },
-    "validation": "TabEL",
+    "validation": "WEB_MANUAL, WEB_MANUAL_FIXED, WIKI_LINKS, WIKI_LINKS_RANDOM, TABEL_35K",
     "codeAvailability": "http://websail-fe.cs.northwestern.edu/TabEL/ ",
     "license": "CCA 4.0",
     "inputs": {
-      "typeOfTable": "Web table (XML)",
+      "typeOfTable": "HTML Web tables from the open Web and Wikipedia",
       "kg": {
         "tripleStore": "Yago",
         "index": ""
       }
     },
-    "output": "",
-    "checkedByAuthor": false,
-    "authors": [],
-    "checkedByAi": false
+    "output": "Cell-level links to YAGO entities (URI) for each table mention",
+    "checkedByAuthor": true,
+    "checkedByAi": true,
+    "id": "bhagavatula2015tabel",
+  "doi": "https://doi.org/10.1007/978-3-319-25007-6_25",
+  "authors": [
+    "Chandra Sekhar Bhagavatula",
+    "Thanapon Noraset",
+    "Doug Downey"
+  ],
+  "citations": [
+    { "ref": "cafarella2008webtables", "title": "Webtables: exploring the power of tables on the web" },
+    { "ref": "buche2013fuzzy", "title": "Fuzzy web data tables integration guided by an ontological and terminological resource" },
+    { "ref": "hignette2009fuzzy", "title": "Fuzzy annotation of web data tables driven by a domain ontology" },
+    { "ref": "limaye2010annotating", "title": "Annotating and searching web tables using entities, types and relationships" },
+    { "ref": "munoz2013triplifying", "title": "Triplifying wikipedia’s tables" },
+    { "ref": "mulwad2011automatically", "title": "Automatically generating government linked data from tables" },
+    { "ref": "mulwad2013semantic", "title": "Semantic message passing for generating linked data from tables" },
+    { "ref": "mulwad2010t2ld", "title": "T2ld: Interpreting and representing tables as linked data" },
+    { "ref": "syed2010exploiting", "title": "Exploiting a web of semantic data for interpreting tables" },
+    { "ref": "venetis2011recovering", "title": "Recovering semantics of tables on the web" },
+    { "ref": "wang2012understanding", "title": "Understanding tables on the web" },
+    { "ref": "zhang2014start", "title": "Start small, build complete: Effective and efficient semantic table interpretation using tableminer" },
+    { "ref": "suchanek2007yago", "title": "Yago: A core of semantic knowledge" },
+    { "ref": "lu2003link", "title": "Link-based classification" },
+    { "ref": "hoffart2011robust", "title": "Robust disambiguation of named entities in text" },
+    { "ref": "hecht2012explanatory", "title": "Explanatory semantic relatedness and explicit spatialization for exploratory search" },
+    { "ref": "witten2008effective", "title": "An effective, low-cost measure of semantic relatedness obtained from wikipedia links" },
+    { "ref": "church1995one", "title": "One term or two?" },
+    { "ref": "dohrn2011design", "title": "Design and implementation of the sweble wikitext parser" },
+    { "ref": "spitkovsky2012cross", "title": "A cross-lingual dictionary for English Wikipedia concepts" },
+    { "ref": "gupta2009answering", "title": "Answering table augmentation queries from unstructured lists on the web" },
+    { "ref": "bunescu2006using", "title": "Using encyclopedic knowledge for named entity disambiguation" },
+    { "ref": "cheng2013relational", "title": "Relational inference for wikification" },
+    { "ref": "moro2014entity", "title": "Entity linking meets word sense disambiguation: A unified approach" },
+    { "ref": "ling2014context", "title": "Context representation for named entity linking" },
+    { "ref": "noraset2014websail", "title": "WebSail wikifier at ERD 2014" },
+    { "ref": "cucerzan2007large", "title": "Large-scale named entity disambiguation based on Wikipedia data" },
+    { "ref": "mendes2011dbpedia", "title": "DBpedia Spotlight: shedding light on the web of documents" },
+    { "ref": "usbeck2014agdistis", "title": "AGDISTIS – graph-based disambiguation of named entities using linked data" },
+    { "ref": "moro2014multilingual", "title": "Multilingual word sense disambiguation and entity linking for everybody" },
+    { "ref": "steinmetz2013semantic", "title": "Semantic multimedia information retrieval based on contextual descriptions" },
+    { "ref": "vanerp2013learning", "title": "Learning with the web: spotting named entities on the intersection of NERD and machine learning" },
+    { "ref": "ferragina2010fast", "title": "Fast and accurate annotation of short texts with Wikipedia pages" },
+    { "ref": "usbeck2015gerbil", "title": "GERBIL – general entity annotation benchmark framework" },
+    { "ref": "munoz2014using", "title": "Using linked data to mine RDF from Wikipedia’s tables" },
+    { "ref": "sekhavat2014knowledge", "title": "Knowledge base augmentation using tabular data" },
+    { "ref": "syed2008wikitology", "title": "Wikitology: Using Wikipedia as an ontology" },
+    { "ref": "dassarma2012finding", "title": "Finding related tables" },
+    { "ref": "fan2014hybrid", "title": "A hybrid machine-crowdsourcing system for matching web tables" },
+    { "ref": "bhagavatula2013methods", "title": "Methods for exploring and mining tables on Wikipedia" }
+  ]
   },
   {
     "firstAuthor": "Ramnandan",
@@ -3496,7 +3601,7 @@
     "nameOfApproach": "SemanticTyper",
     "mainMethod": {
       "type": "Supervised",
-      "technique": "CRF"
+      "technique": "TF-IDF cosine similarity (text) + Kolmogorov–Smirnov test (numeric)"
     },
     "domain": {
       "domain": "Independent",
@@ -3518,7 +3623,7 @@
       "columnClassification": "For textual data, the authors use the TF-IDFbased approach and for numeric data, they use the Kolmogorov-Smirnov (KS) statistical hypothesis test. In order to resolve column heterogeneity the authors adopted the rule that in the training data, if for a semantic label the fraction of pure numeric data values is below 60%, it is trained as textual data (and hence indexed as document). If the fraction of numeric values is above 80%, it is trained as purely numeric data (its distribution is extracted to be used in KS test) after discarding textual data values. In the other case (if the fraction is between 60% and 80%), the data is trained as both textual and numeric data (it is both indexed as a document and its ",
       "typeAnnotation": "TF-IDF",
       "predicateAnnotation": " ",
-      "datatypeAnnotation": "Welch's t-test",
+      "datatypeAnnotation": "Kolmogorov–Smirnov test",
       "entityLinking": {
         "description": "",
         "candidateGeneration": "",
@@ -3530,20 +3635,44 @@
       "type": "Semi automated",
       "description": ""
     },
-    "validation": "we used data from the museum domain consisting of 29 data sources in diverse formats from various art museums in the U.S. Semantic labels",
+    "validation": "Evaluated on 29 museum sources (textual), 30 DBpedia city properties (numeric), and mixed weather / phone-book / flight-status datasets",
     "codeAvailability": "https://github.com/usc-isi-i2/eswc-2015-semantic-typing",
     "license": "Apache 2.0",
     "inputs": {
-      "typeOfTable": "CSV",
+      "typeOfTable": "Tables (e.g., CSV/spreadsheet) and hierarchical files (XML, JSON)",
       "kg": {
         "tripleStore": "",
-        "index": "training data with Lucene, not KG data"
+        "index": "None (labels indexed locally with Lucene)"
       }
     },
-    "output": "",
-    "checkedByAuthor": false,
-    "authors": [],
-    "checkedByAi": false
+    "output": "Top-k semantic labels with confidence scores for each attribute",
+    "checkedByAuthor": true,
+    "checkedByAi": true,
+    "id": "ramnandan2015assigning",
+    "doi": "https://doi.org/10.1007/978-3-319-18818-8_25",
+    "authors": [
+      "S.K. Ramnandan",
+      "Amol Mittal",
+      "Craig A. Knoblock",
+      "Pedro Szekely"
+    ],
+    "citations": [
+      { "ref": "ambite2009automatically",   "title": "Automatically Constructing Semantic Web Services from Online Sources" },
+      { "ref": "cafarella2008webtables",    "title": "Webtables: Exploring the power of tables on the web" },
+      { "ref": "craswell2009mean",          "title": "Mean reciprocal rank" },
+      { "ref": "doan2003learning",          "title": "Learning to match schemas of data sources: a multistrategy approach" },
+      { "ref": "goel2012exploiting",        "title": "Exploiting structure within data for accurate labeling using conditional random fields" },
+      { "ref": "lehmann2005testing",        "title": "Testing Statistical Hypotheses" },
+      { "ref": "li1994semantic",            "title": "Semantic integration in heterogeneous databases using neural networks" },
+      { "ref": "limaye2010annotating",      "title": "Annotating and searching web tables using entities, types and relationships" },
+      { "ref": "mulwad2013semantic",        "title": "Semantic message passing for generating linked data from tables" },
+      { "ref": "noy2004semantic",           "title": "Semantic integration: a survey of ontology-based approaches" },
+      { "ref": "sequeda2012on",             "title": "On directly mapping relational databases to RDF and OWL" },
+      { "ref": "stonebraker2013data",       "title": "Data curation at scale: the data tamer system" },
+      { "ref": "syed2010exploiting",        "title": "Exploiting a web of semantic data for interpreting tables" },
+      { "ref": "taheriyan2014a",            "title": "A Scalable Approach to Learn Semantic Models of Structured Sources" },
+      { "ref": "venetis2011recovering",     "title": "Recovering semantics of tables on the web" }
+    ]
   },
   {
     "firstAuthor": "Ritze",
@@ -3557,7 +3686,7 @@
     "nameOfApproach": "T2K Match",
     "mainMethod": {
       "type": "Unsupervised",
-      "technique": "feature"
+      "technique": "Iterative instance + schema matching (duplicate-based voting; Jaccard, Levenshtein, date & numeric similarities) with GA-tuned parameters"
     },
     "domain": {
       "domain": "Independent",
@@ -3591,7 +3720,7 @@
       "type": "None",
       "description": ""
     },
-    "validation": "T2D",
+    "validation": "T2D gold-standard (1 748 tables / 26 124 row links)",
     "codeAvailability": "https://github.com/olehmberg/T2KMatch",
     "license": "Apache 2.0",
     "inputs": {
@@ -3601,10 +3730,40 @@
         "index": ""
       }
     },
-    "output": "",
-    "checkedByAuthor": false,
-    "authors": [],
-    "checkedByAi": false
+    "output": "Correspondences: table→class, column→property, row→entity (links to DBpedia URIs)",
+    "checkedByAuthor": true,
+    "checkedByAi": true,
+    "id": "ritze2015matching",
+    "doi": "https://doi.org/10.1145/2797115.2797118",
+    "authors": [
+      "Dominique Ritze",
+      "Oliver Lehmberg",
+      "Christian Bizer"
+    ],
+    "citations": [
+      { "ref": "bryl2014learning",         "title": "Learning conflict resolution strategies for cross-language Wikipedia data fusion" },
+      { "ref": "cafarella2008webtables",   "title": "WebTables: Exploring the Power of Tables on the Web" },
+      { "ref": "dassarma2012finding",      "title": "Finding Related Tables" },
+      { "ref": "dong2014knowledge",        "title": "Knowledge Vault: A Web-scale Approach to Probabilistic Knowledge Fusion" },
+      { "ref": "duan2012instance",        "title": "Instance-based matching of large ontologies using locality-sensitive hashing" },
+      { "ref": "fan2014hybrid",           "title": "A Hybrid Machine-Crowdsourcing System for Matching Web Tables" },
+      { "ref": "gupta2014biperpedia",      "title": "Biperpedia: An Ontology for Search Applications" },
+      { "ref": "lehmann2014dbpedia",       "title": "Dbpedia - a large-scale, multilingual knowledge base extracted from Wikipedia" },
+      { "ref": "limaye2010annotating",     "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships" },
+      { "ref": "mulwad2010using",          "title": "Using linked data to interpret tables" },
+      { "ref": "rinser2013cross",          "title": "Cross-Lingual Entity Matching and Infobox Alignment in Wikipedia" },
+      { "ref": "sekhavat2014knowledge",    "title": "Knowledge Base Augmentation using Tabular Data" },
+      { "ref": "singhal2012introducing",   "title": "Introducing the knowledge graph: Things, not string" },
+      { "ref": "suchanek2011paris",        "title": "Paris: Probabilistic alignment of Relations, Instances, and Schema" },
+      { "ref": "suchanek2007yago",         "title": "Yago: A Core of Semantic Knowledge" },
+      { "ref": "venetis2011recovering",    "title": "Recovering Semantics of Tables on the Web" },
+      { "ref": "wang2012understanding",    "title": "Understanding Tables on the Web" },
+      { "ref": "wang2002detecting",        "title": "Detecting Tables in HTML Documents" },
+      { "ref": "weikum2010from",           "title": "From Information to Knowledge: Harvesting Entities and Relationships from Web Sources" },
+      { "ref": "yakout2012infogather",     "title": "InfoGather: Entity Augmentation and Attribute Discovery by Holistic Matching with Web Tables" },
+      { "ref": "zhang2014start",           "title": "Start small, build complete: Effective and efficient semantic table interpretation using tableminer" },
+      { "ref": "zhang2014towards",         "title": "Towards efficient and effective semantic table interpretation" }
+    ]
   },
   {
     "firstAuthor": "Ermilov",
@@ -3617,8 +3776,8 @@
     "conferenceJournal": "EKAW",
     "nameOfApproach": "TAIPAN",
     "mainMethod": {
-      "type": "Unsupervised",
-      "technique": "pattern"
+      "type": "Supervised",
+      "technique": "Decision-tree (or SVM) classifier on support + connectivity features + probabilistic property ranking"
     },
     "domain": {
       "domain": "Independent",
@@ -3652,20 +3811,54 @@
       "type": "None",
       "description": ""
     },
-    "validation": "Improved T2D",
+    "validation": "T2D* (manually curated) and DBpedia Table Dataset (DBD)",
     "codeAvailability": "https://github.com/dice-group/TAIPAN",
     "license": "GPL 3.0",
     "inputs": {
-      "typeOfTable": "Not specified, they mention only tables. DBpedia Table Dataset (DBD)",
+      "typeOfTable": "HTML Web tables (T2D*) and synthetic tables generated from DBpedia (DBD)",
       "kg": {
         "tripleStore": "DBpedia",
         "index": ""
       }
     },
-    "output": "",
-    "checkedByAuthor": false,
-    "authors": [],
-    "checkedByAi": false
+    "output": "Mappings: subject-column, column→DBpedia property pairs (ready to emit RDF triples)",
+    "checkedByAuthor": true,
+    "checkedByAi": true,
+    "id": "ermilov2016taipan",
+    "doi": "https://doi.org/10.1007/978-3-319-49004-5_11",
+    "authors": [
+      "Ivan Ermilov",
+      "Axel-Cyrille Ngonga Ngomo"
+    ],
+    "citations": [
+      { "ref": "balakrishnan2016applying",  "title": "Applying WebTables in practice" },
+      { "ref": "carmel2014erd",            "title": "ERD'14: Entity Recognition and Disambiguation Challenge" },
+      { "ref": "ermilov2013csv2rdf",       "title": "CSV2RDF: User-driven CSV to RDF Mass Conversion Framework" },
+      { "ref": "ermilov2013user",          "title": "User-driven Semantic Mapping of Tabular Data" },
+      { "ref": "etzioni2005unsupervised",  "title": "Unsupervised Named-Entity Extraction from the Web: An Experimental Study" },
+      { "ref": "gerber2012extracting",     "title": "Extracting Multilingual Natural-Language Patterns for RDF Predicates" },
+      { "ref": "hripcsak2005agreement",    "title": "Agreement, the F-measure, and Reliability in Information Retrieval" },
+      { "ref": "knoblock2012semi",         "title": "Semi-Automatically Mapping Structured Sources into the Semantic Web" },
+      { "ref": "landis1977measurement",    "title": "The Measurement of Observer Agreement for Categorical Data" },
+      { "ref": "lehmberg2015mannheim",     "title": "The Mannheim Search Join Engine" },
+      { "ref": "limaye2010annotating",     "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships" },
+      { "ref": "mintz2009distant",         "title": "Distant Supervision for Relation Extraction without Labeled Data" },
+      { "ref": "mulwad2010using",          "title": "Using Linked Data to Interpret Tables" },
+      { "ref": "nadeau2007survey",         "title": "A Survey of Named Entity Recognition and Classification" },
+      { "ref": "nakashole2012patty",       "title": "Patty: A Taxonomy of Relational Patterns with Semantic Types" },
+      { "ref": "ritze2015matching",        "title": "Matching HTML Tables to DBpedia" },
+      { "ref": "ritze2016profiling",       "title": "Profiling the Potential of Web Tables for Augmenting Cross-Domain Knowledge Bases" },
+      { "ref": "snow2004learning",         "title": "Learning Syntactic Patterns for Automatic Hypernym Discovery" },
+      { "ref": "speck2014ensemble",        "title": "Ensemble Learning for Named Entity Recognition" },
+      { "ref": "suchanek2011paris",        "title": "PARIS: Probabilistic Alignment of Relations, Instances, and Schema" },
+      { "ref": "usbeck2014agdistis",       "title": "AGDISTIS – Graph-Based Disambiguation of Named Entities Using Linked Data" },
+      { "ref": "usbeck2015gerbil",         "title": "GERBIL – General Entity Annotator Benchmark Framework" },
+      { "ref": "venetis2010table",         "title": "Table Search Using Recovered Semantics" },
+      { "ref": "venetis2011recovering",    "title": "Recovering Semantics of Tables on the Web" },
+      { "ref": "wang2015concept",          "title": "Concept Expansion Using Web Tables" },
+      { "ref": "wang2012understanding",    "title": "Understanding Tables on the Web" },
+      { "ref": "zhang2014towards",         "title": "Towards Efficient and Effective Semantic Table Interpretation" }
+    ]
   },
   {
     "firstAuthor": "Neumaier",
@@ -3678,15 +3871,15 @@
     "conferenceJournal": "ISWC",
     "nameOfApproach": "",
     "mainMethod": {
-      "type": "Supervised",
-      "technique": "hierarchical clustering (bkg)"
+      "type": "Unsupervised",
+      "technique": "Hierarchical clustering + k-nearest-neighbour (KS / Euclidean distance)"
     },
     "domain": {
       "domain": "Independent",
       "type": ""
     },
     "coreTasks": {
-      "cta": false,
+      "cta": true,
       "cpa": false,
       "cea": false,
       "cnea": false
@@ -3698,7 +3891,7 @@
         "unitsOfMeasurements": ""
       },
       "subjectDetection": "",
-      "columnClassification": " ",
+      "columnClassification": "k-NN ranking of property + context for each numerical column",
       "typeAnnotation": "",
       "predicateAnnotation": " ",
       "datatypeAnnotation": "Only numerical values.",
@@ -3713,20 +3906,53 @@
       "type": "None",
       "description": ""
     },
-    "validation": "by splitting the DBpedia data into a test and training dataset.",
+    "validation": "10-fold cross-validation on 50 numeric properties (33,657 test nodes) plus an experiment on 1,343 CSV files from Open Data portals.",
     "codeAvailability": "https://github.com/sebneu/number_labelling",
     "license": "Apache 2.0",
     "inputs": {
-      "typeOfTable": "CSV",
+      "typeOfTable": "Numerical columns (bags of values) from DBpedia and Open-Data CSV tables",
       "kg": {
         "tripleStore": "DBpedia",
         "index": ""
       }
     },
-    "output": "",
+    "output": "Ranked list of (property, context) candidates with distance scores",
     "checkedByAuthor": true,
-    "authors": [],
-    "checkedByAi": false
+    "checkedByAi": true,
+    "id": "neumaier2016multilevel",
+    "doi": "https://doi.org/10.1007/978-3-319-46523-4_26",
+    "authors": [
+      "Sebastian Neumaier",
+      "Jürgen Umbrich",
+      "Josiane Xavier Parreira",
+      "Axel Polleres"
+    ],
+    "citations": [
+      { "ref": "adelfio2013schema", "title": "Schema extraction for tabular data on the web" },
+      { "ref": "arenas2012a", "title": "A Direct Mapping of Relational Data to RDF" },
+      { "ref": "cruz2013semantic", "title": "Semantic extraction of geographic data from web tables for big data integration" },
+      { "ref": "dassarma2012finding", "title": "Finding related tables" },
+      { "ref": "ermilov2013user", "title": "User-driven semantic mapping of tabular data" },
+      { "ref": "fleischhacker2014detecting", "title": "Detecting errors in numerical linked data using cross-checked outlier detection" },
+      { "ref": "gal2016from", "title": "From diversity-based prediction to better ontology & schema matching" },
+      { "ref": "halevy2016discovering", "title": "Discovering structure in the universe of attribute names" },
+      { "ref": "lopez2012queriocity", "title": "Queriocity: A linked data platform for urban information management" },
+      { "ref": "navigli2012babelnet", "title": "BabelNet: The automatic construction, evaluation and application of a wide-coverage multilingual semantic network" },
+      { "ref": "ramnandan2015assigning", "title": "Assigning semantic labels to data sources" },
+      { "ref": "rastan2013towards", "title": "Towards generic framework for tabular data extraction and management in documents" },
+      { "ref": "ritze2015matching", "title": "Matching HTML tables to DBpedia" },
+      { "ref": "ritze2016profiling", "title": "Profiling the potential of web tables for augmenting cross-domain knowledge bases" },
+      { "ref": "rong2012amachine", "title": "A machine learning approach for instance matching based on similarity metrics" },
+      { "ref": "syed2010exploiting", "title": "Exploiting a Web of Semantic Data for Interpreting Tables" },
+      { "ref": "taheriyan2014ascalable", "title": "A Scalable Approach to Learn Semantic Models of Structured Sources" },
+      { "ref": "tandy2015generating", "title": "Generating RDF from tabular data on the web" },
+      { "ref": "umbrich2015quality", "title": "Quality assessment & evolution of open data portals" },
+      { "ref": "venetis2011recovering", "title": "Recovering semantics of tables on the web" },
+      { "ref": "wang2012understanding", "title": "Understanding tables on the web" },
+      { "ref": "wienand2014detecting", "title": "Detecting incorrect numerical data in DBpedia" },
+      { "ref": "zhang2013infogather+", "title": "Infogather+: Semantic matching and annotation of numeric and time-varying attributes in web tables" },
+      { "ref": "zhang2014towards", "title": "Towards efficient and effective semantic table interpretation" }
+    ]
   },
   {
     "firstAuthor": "Pham",
@@ -3774,11 +4000,11 @@
       "type": "None",
       "description": ""
     },
-    "validation": "T2D",
+    "validation": "Datasets: museum (29 sources), city (10), soccer (12), weather (4) + T2D Gold Standard",
     "codeAvailability": "https://github.com/minhptx/iswc-2016-semantic-labeling",
     "license": "Apache 2.0",
     "inputs": {
-      "typeOfTable": "The input of our system is an unlabeled attribute and a set of labeled attributes as domain data.",
+      "typeOfTable": "Structured sources (CSV files, relational tables, spreadsheets, web tables)",
       "kg": {
         "tripleStore": "",
         "index": ""
@@ -3786,8 +4012,32 @@
     },
     "output": "The output is a set of top-k semantic types corresponding to the unlabeled attribute.",
     "checkedByAuthor": true,
-    "authors": [],
-    "checkedByAi": false
+    "checkedByAi": true,
+    "id": "pham2016semantic",
+    "doi": "https://doi.org/10.1007/978-3-319-46523-4_27",
+    "authors": [
+      "Minh Pham",
+      "Suresh Alse",
+      "Craig A. Knoblock",
+      "Pedro Szekely"
+    ],
+    "citations": [
+      { "ref": "ambite2009automatically", "title": "Automatically Constructing Semantic Web Services from Online Sources" },
+      { "ref": "breiman2001random", "title": "Random Forests" },
+      { "ref": "craswell2009mean", "title": "Mean reciprocal rank" },
+      { "ref": "goel2012exploiting", "title": "Exploiting structure within data for accurate labeling using conditional random fields" },
+      { "ref": "gunaratna2016gleaning", "title": "Gleaning Types for Literals in RDF Triples with Application to Entity Summarization" },
+      { "ref": "lehmann2005testing", "title": "Testing Statistical Hypotheses" },
+      { "ref": "limaye2010annotating", "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships" },
+      { "ref": "manning2008introduction", "title": "Introduction to Information Retrieval" },
+      { "ref": "mulwad2013semantic", "title": "Semantic message passing for generating linked data from tables" },
+      { "ref": "mulwad2015tabel", "title": "TABEL - A Domain Independent and Extensible Framework for Inferring the Semantics of Tables" },
+      { "ref": "ramnandan2015assigning", "title": "Assigning Semantic Labels to Data Sources" },
+      { "ref": "ritze2015matching", "title": "Matching HTML Tables to DBpedia" },
+      { "ref": "syed2010exploiting", "title": "Exploiting a web of semantic data for interpreting tables" },
+      { "ref": "taheriyan2016learning", "title": "Learning the semantics of structured data sources" },
+      { "ref": "venetis2011recovering", "title": "Recovering semantics of tables on the web" }
+    ]
   },
   {
     "firstAuthor": "Taheriyan",
@@ -3800,8 +4050,8 @@
     "conferenceJournal": "JOWS",
     "nameOfApproach": "Karma",
     "mainMethod": {
-      "type": "Supervised",
-      "technique": "Cosine Similarity, statistical hypothesis"
+      "type": "Hybrid – supervised (semantic-labeling) + unsupervised/graph search (relation inference)",
+      "technique": "TF-IDF cosine similarity & KS-test (labeling) + weighted-graph construction & top-k Steiner-tree search (BANKS algorithm)"
     },
     "domain": {
       "domain": "Dependent",
@@ -3832,23 +4082,84 @@
       "nilAnnotation": "Not only entities. When adding a new node or link, we tag it with a unique identifier (e.g., si, name of the source) indicating that the node/link exist in sm(si)."
     },
     "revision": {
-      "type": "Fully automated",
+      "type": "Semi automated",
       "description": "Users then interact with the system to adjust the automatically generated model. During this process, users can transform the data as needed to normalize data expressed in different formats and to restructure it."
     },
-    "validation": "Museum data, eventhough they say that the use some tables of museum data from the gold standard it does not mention which GS they use. The link to the datasets https://github.com/taheriyan/jws-knowledge-graphs-2015",
+    "validation": "29 museum sources (CSV, XML, JSON); 10-fold cross-validation on datasets dsedm & dscrm. The link to the datasets https://github.com/taheriyan/jws-knowledge-graphs-2015",
     "codeAvailability": "https://github.com/usc-isi-i2/Web-Karma",
     "license": "Apache 2.0",
     "inputs": {
-      "typeOfTable": "XML files and JSON files. They can also import the domain ontologies they want to use for modeling the data. The system then automatically suggests a semantic model for the loaded source.",
+      "typeOfTable": "Relational DBs, spreadsheets, XML, JSON and Web-API outputs.",
       "kg": {
-        "tripleStore": "CIDOC-CRM,EDM",
-        "index": ""
+        "tripleStore": "",
+        "index": "CIDOC-CRM, EDM"
       }
     },
-    "output": "RDF",
-    "checkedByAuthor": false,
-    "authors": [],
-    "checkedByAi": false
+    "output": "Semantic model (graph) + optional RDF/R2RML export",
+    "checkedByAuthor": true,
+    "checkedByAi": true,
+    "id": "taheriyan2016learning",
+    "doi": "https://doi.org/10.1016/j.websem.2015.12.003",
+    "authors": [
+      "Mohsen Taheriyan",
+      "Craig A. Knoblock",
+      "Pedro Szekely",
+      "José Luis Ambite"
+    ],
+    "citations": [
+      { "ref": "doan2012principles", "title": "Principles of Data Integration" },
+      { "ref": "han2008rdf123", "title": "RDF123: From Spreadsheets to RDF" },
+      { "ref": "sheth2008semantics", "title": "Semantics Enhanced Services: METEOR-S, SAWSDL and SA-REST" },
+      { "ref": "langegger2009xlwrap", "title": "XLWrap — Querying and Integrating Arbitrary Spreadsheets with SPARQL" },
+      { "ref": "sahoo2009survey", "title": "A Survey of Current Approaches for Mapping of Relational Databases to RDF" },
+      { "ref": "polfliet2010automated", "title": "Automated Mapping Generation for Converting Databases into Linked Data" },
+      { "ref": "limaye2010annotating", "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships" },
+      { "ref": "vavliakis2010rdote", "title": "RDOTE — Transforming Relational Databases into Semantic Web Data" },
+      { "ref": "ding2010twcdatagov", "title": "TWC Data-gov Corpus: Incrementally Generating Linked Government Data from data.gov" },
+      { "ref": "saquicela2011lightweight", "title": "Lightweight Semantic Annotation of Geospatial RESTful Services" },
+      { "ref": "venetis2011recovering", "title": "Recovering Semantics of Tables on the Web" },
+      { "ref": "wang2012understanding", "title": "Understanding Tables on the Web" },
+      { "ref": "mulwad2013semantic", "title": "Semantic Message Passing for Generating Linked Data from Tables" },
+      { "ref": "krishnamurthy2015assigning", "title": "Assigning Semantic Labels to Data Sources" },
+      { "ref": "taheriyan2014scalable", "title": "A Scalable Approach to Learn Semantic Models of Structured Sources" },
+      { "ref": "taheriyan2013graph", "title": "A Graph-based Approach to Learn Semantic Descriptions of Data Sources" },
+      { "ref": "hennicke2011datamodel", "title": "A Data Model for Cross-domain Data Representation: The Europeana Data Model in the Case of Archival and Museum Data" },
+      { "ref": "doerr2003cidoc", "title": "The CIDOC Conceptual Reference Module: An Ontological Approach to Semantic Interoperability of Metadata" },
+      { "ref": "das2012r2rml", "title": "R2RML: RDB to RDF Mapping Language" },
+      { "ref": "knoblock2012semiautomatically", "title": "Semi-automatically Mapping Structured Sources into the Semantic Web" },
+      { "ref": "szekely2013connecting", "title": "Connecting the Smithsonian American Art Museum to the Linked Data Cloud" },
+      { "ref": "szekely2011exploiting", "title": "Exploiting Semantics of Web Services for Geospatial Data Fusion" },
+      { "ref": "taheriyan2012webapis", "title": "Semi-Automatically Modeling Web APIs to Create Linked APIs" },
+      { "ref": "taheriyan2012rapidly", "title": "Rapidly Integrating Services into the Linked Data Cloud" },
+      { "ref": "lehmann2005testing", "title": "Testing Statistical Hypotheses" },
+      { "ref": "winter1987steiner", "title": "Steiner Problem in Networks — A Survey" },
+      { "ref": "takahashi1980approximate", "title": "An Approximate Solution for the Steiner Problem in Graphs" },
+      { "ref": "kou1981fast", "title": "A Fast Algorithm for Steiner Trees" },
+      { "ref": "mehlhorn1988faster", "title": "A Faster Approximation Algorithm for the Steiner Problem in Graphs" },
+      { "ref": "bhalotia2002keyword", "title": "Keyword Searching and Browsing in Databases Using BANKS" },
+      { "ref": "craswell2009mean", "title": "Mean Reciprocal Rank" },
+      { "ref": "arenas2010exchange", "title": "Relational and XML Data Exchange" },
+      { "ref": "bellahsene2011schema", "title": "Schema Matching and Mapping" },
+      { "ref": "rahm2001survey", "title": "A Survey of Approaches to Automatic Schema Matching" },
+      { "ref": "dhamankar2004imap", "title": "iMAP: Discovering Complex Semantic Matches Between Database Schemas" },
+      { "ref": "fagin2009schema", "title": "Schema mapping creation and data exchange" },
+      { "ref": "fagin2005data", "title": "Data Exchange: Semantics and Query Answering" },
+      { "ref": "marnette2011spicy", "title": "++Spicy: An Open-source Tool for Second-generation Schema Mapping and Data Exchange" },
+      { "ref": "alexe2011designing", "title": "Designing and Refining Schema Mappings via Data Examples" },
+      { "ref": "an2007semantic", "title": "A Semantic Approach to Discovering Schema Mapping Expressions" },
+      { "ref": "bizer2003d2rmap", "title": "D2R MAP — A Database to RDF Mapping Language" },
+      { "ref": "bizer2006d2rserver", "title": "D2R Server — Publishing Relational Databases on the Semantic Web" },
+      { "ref": "bizer2004d2rq", "title": "D2RQ — Treating Non-RDF Databases as Virtual RDF Graphs" },
+      { "ref": "munoz2013triplifying", "title": "Triplifying wikipedia’s tables" },   
+      { "ref": "auer2007dbpedia", "title": "DBpedia: A nucleus for a web of open data" },      
+      { "ref": "syed2011hybrid", "title": "Creating and Exploiting a Hybrid Knowledge Base for Linked Data" },
+      { "ref": "bollacker2008freebase", "title": "Freebase: A Collaboratively Created Graph Database for Structuring Human Knowledge" },
+      { "ref": "parundekar2012disco", "title": "Discovering Concept Coverings in Ontologies of Linked Data Sources" },
+      { "ref": "carman2007learning", "title": "Learning Semantic Definitions of Online Information Sources" },
+      { "ref": "kalfoglou2003ontology", "title": "Ontology Mapping: The State of the Art" },
+      { "ref": "pavel2013ontology", "title": "Ontology Matching: State of the Art and Future Challenges" },
+      { "ref": "taheriyan2015leveraging", "title": "Leveraging Linked Data to Infer Semantic Relations Within Structured Sources" }
+    ]
   },
   {
     "firstAuthor": "Taheriyan",
@@ -3861,8 +4172,8 @@
     "conferenceJournal": "ISWC",
     "nameOfApproach": "Karma",
     "mainMethod": {
-      "type": "Supervised",
-      "technique": "pattern"
+      "type": "Unsupervised",
+      "technique": "Graph-pattern mining + BANKS top-k minimum-cost tree search"
     },
     "domain": {
       "domain": "Independent",
@@ -3896,20 +4207,47 @@
       "type": "Fully automated",
       "description": "GUI usage"
     },
-    "validation": "",
+    "validation": "Four datasets (29 museum sources, Smithsonian LOD, same 29 sources with EDM, 15 weapon-ads sources)",
     "codeAvailability": "https://github.com/usc-isi-i2/Web-Karma",
     "license": "Apache 2.0",
     "inputs": {
-      "typeOfTable": "CSV, XML and JSON",
+      "typeOfTable": "Structured sources (CSV, XML, JSON, relational spreadsheets)",
       "kg": {
-        "tripleStore": "CIDOC-CRM",
+        "tripleStore": "Virtuoso repository (triples encoded with CIDOC-CRM)",
         "index": ""
       }
     },
-    "output": "a semantic model expressing how the assigned labels are connected",
-    "checkedByAuthor": false,
-    "authors": [],
-    "checkedByAi": false
+    "output": "A semantic model expressing how the assigned labels are connected",
+    "checkedByAuthor": true,
+    "checkedByAi": true,
+    "id": "taheriyan2016leveraging",
+    "doi": "https://doi.org/10.1007/978-3-319-46523-4_33",
+    "authors": [
+      "Mohsen Taheriyan",
+      "Craig A. Knoblock",
+      "Pedro Szekely",
+      "José Luis Ambite"
+    ],
+    "citations": [
+      { "ref": "bhalotia2002keyword", "title": "Keyword Searching and Browsing in Databases Using BANKS" },
+      { "ref": "carman2007learning", "title": "Learning Semantic Definitions of Online Information Sources" },
+      { "ref": "ding2010twcdatagov", "title": "TWC Data-gov Corpus: Incrementally Generating Linked Government Data from data.gov" },
+      { "ref": "han2008rdf123", "title": "RDF123: From Spreadsheets to RDF" },
+      { "ref": "knoblock2012semiautomatically", "title": "Semi-Automatically Mapping Structured Sources into the Semantic Web" },
+      { "ref": "krishnamurthy2015assigning", "title": "Assigning Semantic Labels to Data Sources" },
+      { "ref": "limaye2010annotating", "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships" },
+      { "ref": "mulwad2013semantic", "title": "Semantic Message Passing for Generating Linked Data from Tables" },
+      { "ref": "pham2016semantic", "title": "Semantic Labeling: A Domain-independent Approach" },
+      { "ref": "polfliet2010automated", "title": "Automated Mapping Generation for Converting Databases into Linked Data" },
+      { "ref": "sahoo2009survey", "title": "A Survey of Current Approaches for Mapping of Relational Databases to RDF" },
+      { "ref": "saquicela2011lightweight", "title": "Lightweight Semantic Annotation of Geospatial RESTful Services" },
+      { "ref": "schaible2016termpicker", "title": "TermPicker: Enabling the Reuse of Vocabulary Terms by Exploiting Data from the Linked Open Data Cloud" },
+      { "ref": "syed2011creating", "title": "Creating and Exploiting a Hybrid Knowledge Base for Linked Data" },
+      { "ref": "taheriyan2016learning", "title": "Learning the Semantics of Structured Data Sources" },
+      { "ref": "taheriyan2015leveraging", "title": "Leveraging Linked Data to Infer Semantic Relations within Structured Sources" },
+      { "ref": "venetis2011recovering", "title": "Recovering Semantics of Tables on the Web" },
+      { "ref": "wang2012understanding", "title": "Understanding Tables on the Web" }
+    ]
   },
   {
     "firstAuthor": "Efthymiou",
