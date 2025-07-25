@@ -131,8 +131,8 @@ function Taxonomy() {
       .attr('height', width)
       .attr('style', 'font: 10px sans-serif; background: none;');
 
-    // Animated or static links
-    const link = svg.append('g')
+    // Static links (no animation)
+    svg.append('g')
       .attr('fill', 'none')
       .attr('stroke', '#a3a3a3')
       .attr('stroke-width', 1.5)
@@ -140,30 +140,18 @@ function Taxonomy() {
       .data(root.links())
       .join('path')
       .attr('d', d3.linkRadial().angle(d => d.x).radius(d => d.y));
-    if (!disableAnimation) {
-      link
-        .attr('stroke-dasharray', function() { return this.getTotalLength(); })
-        .attr('stroke-dashoffset', function() { return this.getTotalLength(); })
-        .transition().duration(1200).attr('stroke-dashoffset', 0);
-    }
 
-    // Animated or static nodes
-    const node = svg.append('g')
+    // Static nodes (no animation)
+    svg.append('g')
       .selectAll('circle')
       .data(root.descendants())
       .join('circle')
-      .attr('transform', d => `rotate(${(d.x * 180 / Math.PI - 90)}) translate(${d.y},0)`);
-    if (!disableAnimation) {
-      node
-        .attr('r', 0)
-        .attr('fill', '#999')
-        .transition().delay((d, i) => i * 10).duration(600).attr('r', 2.5);
-    } else {
-      node.attr('r', 2.5).attr('fill', '#999');
-    }
+      .attr('transform', d => `rotate(${(d.x * 180 / Math.PI - 90)}) translate(${d.y},0)`)
+      .attr('r', 2.5)
+      .attr('fill', '#999');
 
-    // Animated or static labels
-    const label = svg.append('g')
+    // Static labels (no animation)
+    svg.append('g')
       .attr('stroke-linejoin', 'round')
       .attr('stroke-width', 3)
       .selectAll('text')
@@ -184,16 +172,213 @@ function Taxonomy() {
       })
       .attr('font-size', 13)
       .attr('font-weight', 'bold')
+      .style('opacity', 1)
       .text(d => d.data.name);
-    if (!disableAnimation) {
-      label.style('opacity', 0)
-        .transition().delay((d, i) => 300 + i * 5).duration(600).style('opacity', 1);
-    } else {
-      label.style('opacity', 1);
-    }
 
     container.appendChild(svg.node());
     setSvgNode(svg.node());
+
+    // --- Custom dashed curved lines between 'Data Preparation' and core tasks ---
+    // Find nodes by label
+    const descendants = root.descendants();
+    const dataPrepNode = descendants.find(d => d.data.name === 'Data Preparation');
+    // Core tasks are children of '1 Core Tasks'
+    const coreTasksNode = descendants.find(d => d.data.name === '1 Core Tasks');
+    let coreTaskChildren = [];
+    if (coreTasksNode && coreTasksNode.children) {
+      coreTaskChildren = coreTasksNode.children.filter(d => ['CTA', 'CPA', 'CEA', 'CNEA'].includes(d.data.name));
+    }
+    // Draw a dashed curved line from Data Preparation to each core task
+    if (dataPrepNode && coreTaskChildren.length > 0) {
+      const customLinksGroup = d3.select(svg.node()).append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4');
+      coreTaskChildren.forEach((targetNode, i) => {
+        // Use a quadratic Bezier curve for a smooth connection
+        const sx = Math.cos(dataPrepNode.x - Math.PI / 2) * dataPrepNode.y;
+        const sy = Math.sin(dataPrepNode.x - Math.PI / 2) * dataPrepNode.y;
+        const tx = Math.cos(targetNode.x - Math.PI / 2) * targetNode.y;
+        const ty = Math.sin(targetNode.x - Math.PI / 2) * targetNode.y;
+        // Control point: halfway between, pulled toward the center
+        const cx = (sx + tx) / 2 * 0.7;
+        const cy = (sy + ty) / 2 * 0.7;
+        const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+        customLinksGroup.append('path')
+          .attr('d', pathData)
+          .attr('stroke-dasharray', '6,4')
+          .attr('stroke-dashoffset', 0);
+      });
+    }
+
+    // --- Custom dashed curved lines between 'Column Classification' and core tasks ---
+    const columnClassificationNode = descendants.find(d => d.data.name === 'Column Classification');
+    if (columnClassificationNode && coreTaskChildren.length > 0) {
+      const customLinksGroup2 = d3.select(svg.node()).append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4');
+      coreTaskChildren.forEach((targetNode, i) => {
+        // Use a quadratic Bezier curve for a smooth connection
+        const sx = Math.cos(columnClassificationNode.x - Math.PI / 2) * columnClassificationNode.y;
+        const sy = Math.sin(columnClassificationNode.x - Math.PI / 2) * columnClassificationNode.y;
+        const tx = Math.cos(targetNode.x - Math.PI / 2) * targetNode.y;
+        const ty = Math.sin(targetNode.x - Math.PI / 2) * targetNode.y;
+        // Control point: halfway between, pulled toward the center
+        const cx = (sx + tx) / 2 * 0.7;
+        const cy = (sy + ty) / 2 * 0.7;
+        const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+        customLinksGroup2.append('path')
+          .attr('d', pathData)
+          .attr('stroke-dasharray', '6,4')
+          .attr('stroke-dashoffset', 0);
+      });
+    }
+
+    // --- Custom dashed curved lines between 'Subject Detection' and CPA ---
+    const subjectDetectionNode = descendants.find(d => d.data.name === 'Subject Detection');
+    const cpaNode = coreTaskChildren.find(d => d.data.name === 'CPA');
+    if (subjectDetectionNode && cpaNode) {
+      const customLinksGroup3 = d3.select(svg.node()).append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4');
+      // Use a quadratic Bezier curve for a smooth connection
+      const sx = Math.cos(subjectDetectionNode.x - Math.PI / 2) * subjectDetectionNode.y;
+      const sy = Math.sin(subjectDetectionNode.x - Math.PI / 2) * subjectDetectionNode.y;
+      const tx = Math.cos(cpaNode.x - Math.PI / 2) * cpaNode.y;
+      const ty = Math.sin(cpaNode.x - Math.PI / 2) * cpaNode.y;
+      // Control point: halfway between, pulled toward the center
+      const cx = (sx + tx) / 2 * 0.7;
+      const cy = (sy + ty) / 2 * 0.7;
+      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+      customLinksGroup3.append('path')
+        .attr('d', pathData)
+        .attr('stroke-dasharray', '6,4')
+        .attr('stroke-dashoffset', 0);
+    }
+
+    // --- Custom dashed curved lines between 'Datatype Annotation' and CPA ---
+    const datatypeAnnotationNode = descendants.find(d => d.data.name === 'Datatype Annotation');
+    if (datatypeAnnotationNode && cpaNode) {
+      const customLinksGroup4 = d3.select(svg.node()).append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4');
+      // Use a quadratic Bezier curve for a smooth connection
+      const sx = Math.cos(datatypeAnnotationNode.x - Math.PI / 2) * datatypeAnnotationNode.y;
+      const sy = Math.sin(datatypeAnnotationNode.x - Math.PI / 2) * datatypeAnnotationNode.y;
+      const tx = Math.cos(cpaNode.x - Math.PI / 2) * cpaNode.y;
+      const ty = Math.sin(cpaNode.x - Math.PI / 2) * cpaNode.y;
+      // Control point: halfway between, pulled toward the center
+      const cx = (sx + tx) / 2 * 0.7;
+      const cy = (sy + ty) / 2 * 0.7;
+      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+      customLinksGroup4.append('path')
+        .attr('d', pathData)
+        .attr('stroke-dasharray', '6,4')
+        .attr('stroke-dashoffset', 0);
+    }
+
+    // --- Custom dashed curved lines between 'Entity Linking' and CTA/CEA ---
+    const entityLinkingNode = descendants.find(d => d.data.name === 'Entity Linking');
+    const ctaNode = coreTaskChildren.find(d => d.data.name === 'CTA');
+    const ceaNode = coreTaskChildren.find(d => d.data.name === 'CEA');
+    if (entityLinkingNode && (ctaNode || ceaNode)) {
+      const customLinksGroup5 = d3.select(svg.node()).append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4');
+      [ctaNode, ceaNode].forEach(targetNode => {
+        if (!targetNode) return;
+        // Use a quadratic Bezier curve for a smooth connection
+        const sx = Math.cos(entityLinkingNode.x - Math.PI / 2) * entityLinkingNode.y;
+        const sy = Math.sin(entityLinkingNode.x - Math.PI / 2) * entityLinkingNode.y;
+        const tx = Math.cos(targetNode.x - Math.PI / 2) * targetNode.y;
+        const ty = Math.sin(targetNode.x - Math.PI / 2) * targetNode.y;
+        // Control point: halfway between, pulled toward the center
+        const cx = (sx + tx) / 2 * 0.7;
+        const cy = (sy + ty) / 2 * 0.7;
+        const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+        customLinksGroup5.append('path')
+          .attr('d', pathData)
+          .attr('stroke-dasharray', '6,4')
+          .attr('stroke-dashoffset', 0);
+      });
+    }
+
+    // --- Custom dashed curved line between 'Type Annotation' and CTA ---
+    const typeAnnotationNode = descendants.find(d => d.data.name === 'Type Annotation');
+    if (typeAnnotationNode && ctaNode) {
+      const customLinksGroup6 = d3.select(svg.node()).append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4');
+      // Use a quadratic Bezier curve for a smooth connection
+      const sx = Math.cos(typeAnnotationNode.x - Math.PI / 2) * typeAnnotationNode.y;
+      const sy = Math.sin(typeAnnotationNode.x - Math.PI / 2) * typeAnnotationNode.y;
+      const tx = Math.cos(ctaNode.x - Math.PI / 2) * ctaNode.y;
+      const ty = Math.sin(ctaNode.x - Math.PI / 2) * ctaNode.y;
+      // Control point: halfway between, pulled toward the center
+      const cx = (sx + tx) / 2 * 0.7;
+      const cy = (sy + ty) / 2 * 0.7;
+      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+      customLinksGroup6.append('path')
+        .attr('d', pathData)
+        .attr('stroke-dasharray', '6,4')
+        .attr('stroke-dashoffset', 0);
+    }
+    // --- Custom dashed curved line between 'Predicate Annotation' and CPA ---
+    const predicateAnnotationNode = descendants.find(d => d.data.name === 'Predicate Annotation');
+    if (predicateAnnotationNode && cpaNode) {
+      const customLinksGroup7 = d3.select(svg.node()).append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4');
+      // Use a quadratic Bezier curve for a smooth connection
+      const sx = Math.cos(predicateAnnotationNode.x - Math.PI / 2) * predicateAnnotationNode.y;
+      const sy = Math.sin(predicateAnnotationNode.x - Math.PI / 2) * predicateAnnotationNode.y;
+      const tx = Math.cos(cpaNode.x - Math.PI / 2) * cpaNode.y;
+      const ty = Math.sin(cpaNode.x - Math.PI / 2) * cpaNode.y;
+      // Control point: halfway between, pulled toward the center
+      const cx = (sx + tx) / 2 * 0.7;
+      const cy = (sy + ty) / 2 * 0.7;
+      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+      customLinksGroup7.append('path')
+        .attr('d', pathData)
+        .attr('stroke-dasharray', '6,4')
+        .attr('stroke-dashoffset', 0);
+    }
+    // --- Custom dashed curved line between 'Nil Annotation' and CNEA ---
+    const nilAnnotationNode = descendants.find(d => d.data.name === 'Nil Annotation');
+    const cneaNode = coreTaskChildren.find(d => d.data.name === 'CNEA');
+    if (nilAnnotationNode && cneaNode) {
+      const customLinksGroup8 = d3.select(svg.node()).append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4');
+      // Use a quadratic Bezier curve for a smooth connection
+      const sx = Math.cos(nilAnnotationNode.x - Math.PI / 2) * nilAnnotationNode.y;
+      const sy = Math.sin(nilAnnotationNode.x - Math.PI / 2) * nilAnnotationNode.y;
+      const tx = Math.cos(cneaNode.x - Math.PI / 2) * cneaNode.y;
+      const ty = Math.sin(cneaNode.x - Math.PI / 2) * cneaNode.y;
+      // Control point: halfway between, pulled toward the center
+      const cx = (sx + tx) / 2 * 0.7;
+      const cy = (sy + ty) / 2 * 0.7;
+      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+      customLinksGroup8.append('path')
+        .attr('d', pathData)
+        .attr('stroke-dasharray', '6,4')
+        .attr('stroke-dashoffset', 0);
+    }
   }, [isDownloading]);
 
   // Render radial tree when data or labelStroke changes
