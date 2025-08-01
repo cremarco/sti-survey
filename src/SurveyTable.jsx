@@ -101,6 +101,35 @@ const getTypeBadgeColor = (type) => {
   }
   return `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${METHOD_TYPE_COLORS[lower] || "bg-slate-500/20 text-slate-200"}`;
 };
+
+// Function to count approaches with data preparation
+const countDataPreparationApproaches = (data) => {
+  return data.filter(row => {
+    const dataPrep = row.supportTasks?.dataPreparation?.description;
+    return dataPrep && dataPrep.trim() !== "";
+  }).length;
+};
+
+// Generic function to count approaches for any support task
+const countSupportTaskApproaches = (data, taskPath) => {
+  return data.filter(row => {
+    let value;
+    if (taskPath.includes('.')) {
+      // For nested properties like entityLinking.description
+      const parts = taskPath.split('.');
+      let current = row.supportTasks;
+      for (const part of parts) {
+        if (!current) break;
+        current = current[part];
+      }
+      value = current;
+    } else {
+      // For direct properties
+      value = row.supportTasks?.[taskPath];
+    }
+    return value && value.trim() !== "";
+  }).length;
+};
 const getDomainBadgeColor = (domain) => {
   // Usa lo stesso stile delle altre label ma con il colore dal meta schema per domain
   const lower = domain?.toLowerCase();
@@ -509,56 +538,136 @@ function SurveyTable() {
       columns: [
         columnHelper.accessor(row => row.supportTasks?.dataPreparation?.description || "", {
           id: "dataPreparation",
-          header: () => <span>Data Preparation</span>,
+          header: () => {
+            const dataPrepCount = countDataPreparationApproaches(data);
+            return (
+              <div className="flex items-center gap-2">
+                <span>Data Preparation</span>
+                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                  {dataPrepCount}
+                </span>
+              </div>
+            );
+          },
           cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.supportTasks?.subjectDetection || "", {
           id: "subjectDetection",
-          header: () => <span>Subject Detection</span>,
+          header: () => {
+            const count = countSupportTaskApproaches(data, 'subjectDetection');
+            return (
+              <div className="flex items-center gap-2">
+                <span>Subject Detection</span>
+                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                  {count}
+                </span>
+              </div>
+            );
+          },
           cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.supportTasks?.columnClassification || "", {
           id: "columnClassification",
-          header: () => <span>Column Classification</span>,
+          header: () => {
+            const count = countSupportTaskApproaches(data, 'columnClassification');
+            return (
+              <div className="flex items-center gap-2">
+                <span>Column Classification</span>
+                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                  {count}
+                </span>
+              </div>
+            );
+          },
           cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.supportTasks?.typeAnnotation || "", {
           id: "typeAnnotation",
-          header: () => <span>Type Annotation</span>,
+          header: () => {
+            const count = countSupportTaskApproaches(data, 'typeAnnotation');
+            return (
+              <div className="flex items-center gap-2">
+                <span>Type Annotation</span>
+                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                  {count}
+                </span>
+              </div>
+            );
+          },
           cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.supportTasks?.predicateAnnotation || "", {
           id: "predicateAnnotation",
-          header: () => <span>Predicate Annotation</span>,
+          header: () => {
+            const count = countSupportTaskApproaches(data, 'predicateAnnotation');
+            return (
+              <div className="flex items-center gap-2">
+                <span>Predicate Annotation</span>
+                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                  {count}
+                </span>
+              </div>
+            );
+          },
           cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.supportTasks?.datatypeAnnotation || "", {
           id: "datatypeAnnotation",
-          header: () => <span>Datatype Annotation</span>,
+          header: () => {
+            const count = countSupportTaskApproaches(data, 'datatypeAnnotation');
+            return (
+              <div className="flex items-center gap-2">
+                <span>Datatype Annotation</span>
+                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                  {count}
+                </span>
+              </div>
+            );
+          },
           cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.supportTasks?.entityLinking?.description || "", {
           id: "entityLinking",
-          header: () => <span>Entity Linking</span>,
+          header: () => {
+            const count = countSupportTaskApproaches(data, 'entityLinking.description');
+            return (
+              <div className="flex items-center gap-2">
+                <span>Entity Linking</span>
+                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                  {count}
+                </span>
+              </div>
+            );
+          },
           cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
         columnHelper.accessor(row => row.supportTasks?.nilAnnotation || "", {
           id: "nilAnnotation",
-          header: () => <span>Nil Annotation</span>,
+          header: () => {
+            const count = countSupportTaskApproaches(data, 'nilAnnotation');
+            return (
+              <div className="flex items-center gap-2">
+                <span>Nil Annotation</span>
+                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                  {count}
+                </span>
+              </div>
+            );
+          },
           cell: (info) => <StepCell value={info.getValue()} />,
           enableSorting: false,
           meta: { align: 'center' }
