@@ -84,23 +84,23 @@ const isEmpty = (value) => {
 const REQUIRED_FIELDS = {
   id: true,
   authors: true,
-  author: true,
+  // author: true, // Field doesn't exist in current data structure
   year: true,
-  "title.text": true,
-  "conference-journal": true,
-  "main-method.type": true,
-  "main-method.technique": true,
+  "title": true,
+  "venue.acronym": true,
+  "mainMethod.type": true,
+  "mainMethod.technique": true,
   "domain.domain": true,
-  "tasks.cta": true,
-  "tasks.cpa": true,
-  "tasks.cea": true,
-  "tasks.cnea": true,
-  "user-revision.type": true,
+  "coreTasks.cta": true,
+  "coreTasks.cpa": true,
+  "coreTasks.cea": true,
+  "coreTasks.cnea": true,
+  "revision.type": true,
   "license": true,
-  "inputs.type-of-table": true,
-  "inputs.kg.triple-store": true,
-  "output-format": true,
-  "checked-by-author": true,
+  "inputs.typeOfTable": true,
+  "kg.tripleStore": true,
+  "output": true,
+  "checkedByAuthor": true,
   doi: true,
 };
 
@@ -320,7 +320,7 @@ function App() {
       }
 
       // Main method distribution
-      const methodType = row['main-method']?.type || 'N/A';
+      const methodType = row['mainMethod']?.type || 'N/A';
       acc.mainMethodTypeDistribution[methodType] = (acc.mainMethodTypeDistribution[methodType] || 0) + 1;
 
       // Domain distribution
@@ -333,7 +333,7 @@ function App() {
       }
 
       // Code availability
-      if (row['code-availability'] && row['code-availability'].trim() !== '') {
+      if (row.code && row.code.trim() !== '') {
         acc.approachesWithCode++;
       }
 
@@ -342,10 +342,10 @@ function App() {
       acc.licenseDistribution[license] = (acc.licenseDistribution[license] || 0) + 1;
 
       // Task counts
-      if (row.tasks?.cta) acc.taskCounts.cta++;
-      if (row.tasks?.cpa) acc.taskCounts.cpa++;
-      if (row.tasks?.cea) acc.taskCounts.cea++;
-      if (row.tasks?.cnea) acc.taskCounts.cnea++;
+      if (row.coreTasks?.cta) acc.taskCounts.cta++;
+      if (row.coreTasks?.cpa) acc.taskCounts.cpa++;
+      if (row.coreTasks?.cea) acc.taskCounts.cea++;
+      if (row.coreTasks?.cnea) acc.taskCounts.cnea++;
 
       return acc;
     }, {

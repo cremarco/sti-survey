@@ -69,8 +69,8 @@ const REQUIRED_FIELDS = {
   authors: true,
   firstAuthor: true,
   year: true,
-  "title.text": true,
-  conferenceJournal: true,
+  "title": true,
+  "venue.acronym": true,
   "mainMethod.type": true,
   "mainMethod.technique": true,
   "domain.domain": true,
@@ -81,7 +81,7 @@ const REQUIRED_FIELDS = {
   "revision.type": true,
   license: true,
   "inputs.typeOfTable": true,
-  "inputs.kg.tripleStore": true,
+  "kg.tripleStore": true,
   output: true,
   checkedByAuthor: true,
   doi: true,
@@ -225,11 +225,24 @@ function hexToRgba(hex, alpha) {
 }
 
 // Cell rendering components
-const MissingFieldCell = ({ value, isMissing }) => (
-  <span className={isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : ""}>
-    {value || (isMissing ? "MISSING" : "")}
-  </span>
-);
+const MissingFieldCell = ({ value, isMissing }) => {
+  // Handle different value types
+  let displayValue = value;
+  
+  if (value && typeof value === 'object') {
+    if (Array.isArray(value)) {
+      displayValue = value.join(', ');
+    } else {
+      displayValue = JSON.stringify(value);
+    }
+  }
+  
+  return (
+    <span className={isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : ""}>
+      {displayValue || (isMissing ? "MISSING" : "")}
+    </span>
+  );
+};
 const TaskCell = ({ value, isMissing }) => {
   if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
   const iconClass = value ? "material-icons-round text-green-500 text-lg" : "material-icons-round text-red-500 text-lg";
@@ -295,6 +308,33 @@ const DomainCell = ({ domain, row }) => {
     </div>
   );
 };
+
+const ValidationCell = ({ value, isMissing }) => {
+  if (isMissing) {
+    return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+  }
+  
+  if (!value || typeof value !== 'object') {
+    return <span className="text-neutral-400">No validation data</span>;
+  }
+  
+  const { goldStandard, metrics } = value;
+  
+  return (
+    <div className="text-xs space-y-1">
+      {goldStandard && (
+        <div className="text-neutral-300">
+          <span className="font-medium">GS:</span> {goldStandard}
+        </div>
+      )}
+      {metrics && Array.isArray(metrics) && metrics.length > 0 && (
+        <div className="text-neutral-400">
+          <span className="font-medium">Metrics:</span> {metrics.join(', ')}
+        </div>
+      )}
+    </div>
+  );
+};
 const RowNumberCell = ({ row, index }) => {
   const missingFields = Object.keys(REQUIRED_FIELDS).filter((field) => isRequiredFieldMissing(row.original, field));
   const hasMissingFields = missingFields.length > 0;
@@ -303,10 +343,10 @@ const RowNumberCell = ({ row, index }) => {
       <span>{index + 1}</span>
       {hasMissingFields && (
         <div className="relative group mt-1">
-          <span className="text-[11px] text-red-400 bg-red-900/60 rounded px-2 py-0.5 leading-none cursor-pointer">
+          <span className="text-[11px] text-red-400 bg-red-900/60 rounded px-2 py-0.5 leading-none cursor-pointer whitespace-nowrap">
             {missingFields.length} missing
           </span>
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 rounded-lg shadow-lg text-xs text-neutral-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
             <div className="font-semibold mb-1">Missing fields:</div>
             <div className="space-y-1">
               {missingFields.map((field) => (
@@ -461,28 +501,22 @@ function SurveyTable() {
       },
       enableSorting: false,
     }),
-    columnHelper.accessor("title.text", {
-      header: () => <span>Text</span>,
+    columnHelper.accessor("title", {
+      header: () => <span>Title</span>,
       cell: (info) => {
         const titleText = info.getValue();
-        const link = info.row.original.title?.link;
-        const isMissing = isRequiredFieldMissing(info.row.original, 'title.text');
+        const isMissing = isRequiredFieldMissing(info.row.original, 'title');
         return (
           <div className="flex items-center gap-2">
             <MissingFieldCell value={titleText} isMissing={isMissing} />
-            {link && link.trim() !== '' && (
-              <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors" title="Open link">
-                <span className="material-icons-round text-sm">launch</span>
-              </a>
-            )}
           </div>
         );
       },
       enableSorting: false,
     }),
-    columnHelper.accessor("conferenceJournal", {
+    columnHelper.accessor("venue.acronym", {
       header: () => <span>Conference/Journal</span>,
-      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'conferenceJournal')} />,
+      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'venue.acronym')} />,
       enableColumnFilter: true,
       enableFacetedUniqueValues: true,
       enableSorting: false,
@@ -725,7 +759,7 @@ function SurveyTable() {
     columnHelper.accessor(row => row.validation || "", {
       id: "validation",
       header: () => <span style={{ color: headerColors.validation }}>{headerTaxonomy.validation ? headerTaxonomy.validation + ' - ' : ''}Validation</span>,
-      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'validation')} />,
+      cell: (info) => <ValidationCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'validation')} />,
       enableSorting: false,
     }),
     columnHelper.accessor(row => row.codeAvailability || "", {
@@ -775,7 +809,7 @@ function SurveyTable() {
         columnHelper.accessor(row => row.inputs?.kg?.tripleStore || "", {
           id: "tripleStore",
           header: () => <span>Triple Store</span>,
-          cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'inputs.kg.tripleStore')} />,
+          cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'kg.tripleStore')} />,
           enableSorting: false,
         }),
         columnHelper.accessor(row => row.inputs?.kg?.index || "", {
@@ -829,16 +863,6 @@ function SurveyTable() {
       id: "doi",
       header: "DOI",
       cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'doi')} />,
-      enableSorting: false,
-    }),
-    columnHelper.accessor(row => row.citations, {
-      id: "citations",
-      header: "Citations",
-      cell: (info) => {
-        const value = info.getValue();
-        if (Array.isArray(value)) return <span className="text-[10px] text-neutral-400">{value.length}</span>;
-        return <span className="text-[10px] text-neutral-400">-</span>;
-      },
       enableSorting: false,
     }),
     columnHelper.accessor(row => Array.isArray(row.citations) ? row.citations.length : 0, {

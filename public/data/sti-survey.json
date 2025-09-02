@@ -1,0 +1,537 @@
+[
+    {
+        "id": "hignette2007an",
+        "added": "",
+        "year": 2007,
+        "firstAuthor": "Hignette",
+        "authors": [
+            "Gaëlle Hignette",
+            "Patrice Buche",
+            "Juliette Dibie-Barthélemy",
+            "Ollivier Haemmerlé"
+        ],
+        "title": "An Ontology-Driven Annotation of Data Tables",
+        "venue": {
+            "type": "workshop",
+            "acronym": "WISE"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Uses a domain ontology with stopwords, units, value ranges and a list of 'no-result' indicators to normalise and interpret table content.",
+                "spellChecker": "",
+                "unitsOfMeasurements": "Ontology units for numeric types (e.g., \u00b0C, \u00b0F)."
+            },
+            "columnClassification": "Rule-based detection of numeric vs symbolic columns using numbers, units and 'no-result' indicators.",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Assigns numeric/symbolic ontology types to columns by combining title similarity with units/ranges (numeric) and taxonomy term similarity (symbolic).",
+            "predicateAnnotation": "Identifies n-ary relations from the ontology by combining table title similarity with recognised column types.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Fully automatic scoring with thresholds for column typing and relation selection; no manual post-editing is required."
+        },
+        "domain": {
+            "domain": "dependent",
+            "type": "food microbiology"
+        },
+        "validation": {
+            "goldStandard": "60 tables (349 columns) from scientific publications in food microbiology; 16 relations annotated.",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "web",
+                "scientific"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Domain ontology for food microbiology (numeric/symbolic types and relations)",
+            "index": ""
+        },
+        "output": "XML",
+        "applicationPurpose": "Ontology-driven annotation of scientific web tables to integrate and query data in an XML warehouse.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "buche2005fuzzy",
+                "title": "Fuzzy querying of incomplete, imprecise, and heterogeneously structured data in the relational model using ontologies and rules"
+            },
+            {
+                "ref": "zanibbi2004a",
+                "title": "A survey of table recognition: Models, observations, transformations, and inferences"
+            },
+            {
+                "ref": "pivk2004from",
+                "title": "From tables to frames"
+            },
+            {
+                "ref": "tenier2006instantiation",
+                "title": "Instantiation of relations for semantic annotation"
+            },
+            {
+                "ref": "embley2002automatically",
+                "title": "Automatically extracting ontologically specified data from html tables of unknown structure"
+            },
+            {
+                "ref": "freitag2000boosted",
+                "title": "Boosted wrapper induction"
+            },
+            {
+                "ref": "baumgartner2001visual",
+                "title": "Visual web information extraction with Lixto"
+            },
+            {
+                "ref": "gagliardi2005an",
+                "title": "An automatic ontology-based approach to enrich tables semantically"
+            },
+            {
+                "ref": "lin1998an",
+                "title": "An information-theoretic definition of similarity"
+            },
+            {
+                "ref": "hignette2006fuzzy",
+                "title": "Fuzzy semantic approach for data integration applied to risk in food: an example about the cold chain"
+            },
+            {
+                "ref": "vanrijsbergen1979information",
+                "title": "Information Retrieval, 2nd edition"
+            },
+            {
+                "ref": "yangarber2002unsupervised",
+                "title": "Unsupervised learning of generalized names"
+            },
+            {
+                "ref": "platt1999fast",
+                "title": "Fast training of support vector machines using sequential minimal optimization"
+            },
+            {
+                "ref": "zadeh1965fuzzy",
+                "title": "Fuzzy sets"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "DOI is not stated in the paper text; external lookup would be required. "
+            },
+            {
+                "field": "venue.acronym",
+                "reason": "The publication appears in 'WISE 2007 Workshops (LNCS 4832)'; using 'WISE' may conflate workshop vs conference branding. "
+            },
+            {
+                "field": "output",
+                "reason": "XML is inferred from the stated goal of building an XML data warehouse; the annotation export format is not formally specified. "
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "A domain ontology is used but no specific KG/triplestore name is given; represented generically. "
+            }
+        ]
+    },
+    {
+        "id": "cafarella2009data",
+        "added": "",
+        "year": 2009,
+        "firstAuthor": "Cafarella",
+        "authors": [
+            "Michael J. Cafarella",
+            "Alon Halevy",
+            "Nodira Khoussainova"
+        ],
+        "title": "Data Integration for the Relational Web",
+        "venue": {
+            "type": "conference",
+            "acronym": "VLDB"
+        },
+        "nameOfApproach": "Octopus",
+        "techniqueTags": [
+            "clustering"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "clustering"
+        },
+        "revision": {
+            "type": "semi automated",
+            "description": "System executes best-effort operators and lets the user review, correct errors, and adjust tables (e.g., select/union/split/rename) during integration."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic web data"
+        },
+        "validation": {
+            "goldStandard": "52-query workload gathered via Amazon Mechanical Turk; relevance judged by two independent annotators",
+            "metrics": [
+        "Hits@k",
+                "Top-k Accuracy"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables and HTML lists",
+            "tableSources": [
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "Interactive creation and integration of structured Web data sources into new datasets.",
+        "userInterfaceTool": "Web UI",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "bernstein2003applying",
+                "title": "Applying Model Management to Classical Meta Data Problems"
+            },
+            {
+                "ref": "bloom1970space/time",
+                "title": "Space/Time Trade-offs in Hash Coding with Allowable Errors"
+            },
+            {
+                "ref": "cafarella2008uncovering",
+                "title": "Uncovering the Relational Web"
+            },
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: Exploring the Power of Tables on the Web"
+            },
+            {
+                "ref": "dasilva1999a",
+                "title": "A Local Maxima Method and a Fair Dispersion Normalization for Extracting Multi-Word Units from Corpora"
+            },
+            {
+                "ref": "derose2007building",
+                "title": "Building Structured Web Community Portals: A Top-Down, Compositional, and Incremental Approach"
+            },
+            {
+                "ref": "doan2001reconciling",
+                "title": "Reconciling Schemas of Disparate Data Sources: A Machine-Learning Approach"
+            },
+            {
+                "ref": "dong2005reference",
+                "title": "Reference Reconciliation in Complex Information Spaces"
+            },
+            {
+                "ref": "elmeleegy2009harvesting",
+                "title": "Harvesting Relational Tables from Lists on the Web"
+            },
+            {
+                "ref": "etzioni2004web-scale",
+                "title": "Web-scale Information Extraction in KnowItAll: (Preliminary Results)"
+            },
+            {
+                "ref": "friedman1999navigational",
+                "title": "Navigational Plans for Data Integration"
+            },
+            {
+                "ref": "galhardas2001declarative",
+                "title": "Declarative Data Cleaning: Language, Model, and Algorithms"
+            },
+            {
+                "ref": "kok2008extracting",
+                "title": "Extracting Semantic Networks from Text Via Relational Clustering"
+            },
+            {
+                "ref": "",
+                "title": "Microsoft Popfly"
+            },
+            {
+                "ref": "rahm2001a",
+                "title": "A Survey of Approaches to Automatic Schema Matching"
+            },
+            {
+                "ref": "raman2001potter’s",
+                "title": "Potter’s Wheel: An Interactive Data Cleaning System"
+            },
+            {
+                "ref": "sarawagi2004semi-markov",
+                "title": "Semi-Markov Conditional Random Fields for Information Extraction"
+            },
+            {
+                "ref": "tuchinda2007building",
+                "title": "Building Data Integration Queries by Demonstration"
+            },
+            {
+                "ref": "turney2002mining",
+                "title": "Mining the Web for Synonyms: PMI-IR versus LSA on TOEFL"
+            },
+            {
+                "ref": "wong2007making",
+                "title": "Making Mashups with Marmite: Towards End-User Programming for the Web"
+            },
+            {
+                "ref": "",
+                "title": "Yahoo Pipes"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "A DOI is not visible in the provided PDF; one may exist in digital libraries."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "The system does not rely on a knowledge graph; no triple store is mentioned."
+            },
+            {
+                "field": "output",
+                "reason": "The paper does not specify a serialisation format for outputs (e.g., CSV, RDF)."
+            },
+            {
+                "field": "validation.metrics",
+                "reason": "Reported results are percentages of relevant tables in top-k; mapped to Hits@k/Top-k Accuracy."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "Screenshots suggest an interactive interface; the exact tool type/name is not formally specified."
+            }
+        ]
+    },
+    {
+        "id": "hignette2009fuzzy",
+        "added": "",
+        "year": 2009,
+        "firstAuthor": "Hignette",
+        "authors": [
+        "Gaëlle Hignette",
+        "Patrice Buche",
+        "Juliette Dibie-Barthélemy",
+        "Ollivier Haemmerlé"
+        ],
+        "title": "Fuzzy Annotation of Web Data Tables Driven by a Domain Ontology",
+        "venue": {
+        "type": "conference",
+        "acronym": "ESWC"
+        },
+        "nameOfApproach": "@Web",
+        "techniqueTags": [
+        "rule-based",
+        "ontology-driven"
+        ],
+        "coreTasks": {
+        "cta": true,
+        "cpa": true,
+        "cea": true,
+        "cnea": false
+        },
+        "supportTasks": {
+        "dataPreparation": {
+        "description": "Tables are extracted from the Web, stored in a common XML model, and lemmatised/normalised; numeric vs symbolic columns are segregated and units detected before annotation.",
+        "spellChecker": "",
+        "unitsOfMeasurements": "Ontology defines allowed units and numeric ranges (e.g., °C/°F for Temperature) used to filter and score numeric columns."
+        },
+        "columnClassification": "Distinguishes numeric vs symbolic columns using ontology units; classifies symbolic columns to ontology symbolic types via cosine similarity over titles and cell contents.",
+        "subjectDetection": "",
+        "datatypeAnnotation": "Assigns numeric columns to ontology numeric types using units and value-range constraints; builds fuzzy sets (e.g., intervals, mean±SE).",
+        "typeAnnotation": "Assigns symbolic columns to ontology symbolic types by combining title/content similarity and taxonomy matches.",
+        "predicateAnnotation": "Recognises relations by comparing the table's typed-column signature to n-ary relation signatures in the ontology and combining with title similarity.",
+        "nilAnnotation": "",
+        "entityLinking": {
+        "description": "Links cells to ontology taxonomy terms using cosine similarity and proportional-advantage thresholds; keeps fuzzy membership over multiple candidates.",
+        "candidateGeneration": "Lookup against all terms in the relevant type's taxonomy derived from the ontology.",
+        "entityDisambiguation": "Selects best type per cell if advantage over second-best exceeds a threshold; retains a fuzzy set of candidates with membership scores."
+        }
+        },
+        "mainMethod": {
+        "type": "unsupervised",
+        "technique": "rule-based"
+        },
+        "revision": {
+        "type": "fully automated",
+        "description": "Annotation pipeline runs automatically; fuzzy memberships enable optional later human validation without changing the core outputs."
+        },
+        "domain": {
+        "domain": "dependent",
+        "type": "food microbiology; chemical risk in food; aeronautics"
+        },
+        "validation": {
+        "goldStandard": "Manually annotated scientific tables (e.g., 60 tables with 123 relations; additional corpora and column-level evaluations).",
+        "metrics": [
+        "Precision",
+        "Recall"
+        ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+        "typeOfTable": "Web tables",
+        "tableSources": [
+        "web",
+        "pdf",
+        "scientific"
+        ]
+        },
+        "kg": {
+        "tripleStore": "",
+        "index": ""
+        },
+        "output": "RDF",
+        "applicationPurpose": "Data enrichment and integration into the MIEL querying ecosystem.",
+        "userInterfaceTool": "@Web",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+        {
+        "ref": "rahm2001a",
+        "title": "A survey of approaches to automatic schema matching"
+        },
+        {
+        "ref": "buche2008flexible",
+        "title": "Flexible querying of fuzzy rdf annotations using fuzzy conceptual graphs"
+        },
+        {
+        "ref": "doan2003learning",
+        "title": "Learning to match the schemas of data sources: A multistrategy approach"
+        },
+        {
+        "ref": "liu2007tableseer",
+        "title": "Tableseer: automatic table metadata extraction and searching in digital libraries"
+        },
+        {
+        "ref": "cafarella2008uncovering",
+        "title": "Uncovering the relational web"
+        },
+        {
+        "ref": "cafarella2008webtables",
+        "title": "Webtables: exploring the power of tables on the web"
+        },
+        {
+        "ref": "pivk2004from",
+        "title": "From tables to frames"
+        },
+        {
+        "ref": "tenier2006instantiation",
+        "title": "Instantiation of relations for semantic annotation"
+        },
+        {
+        "ref": "embley2002automatically",
+        "title": "Automatically extracting ontologically specified data from HTML tables of unknown structure"
+        },
+        {
+        "ref": "noy2006defining",
+        "title": "Defining n-ary relations on the semantic web"
+        },
+        {
+        "ref": "hignette2007an",
+        "title": "An ontology-driven annotation of data tables"
+        },
+        {
+        "ref": "vanrijsbergen1979information",
+        "title": "Information Retrieval (2nd ed.)"
+        },
+        {
+        "ref": "platt1999fast",
+        "title": "Fast training of support vector machines using sequential minimal optimization"
+        },
+        {
+        "ref": "gagliardi2005an",
+        "title": "An automatic ontology-based approach to enrich tables semantically"
+        },
+        {
+        "ref": "zadeh1965fuzzy",
+        "title": "Fuzzy sets"
+        },
+        {
+        "ref": "zadeh1978fuzzy",
+        "title": "Fuzzy sets as a basis for a theory of possibility"
+        },
+        {
+        "ref": "dubois1997the",
+        "title": "The three semantics of fuzzy sets"
+        },
+        {
+        "ref": "cliver2004foodborne",
+        "title": "Foodborne infections and intoxications"
+        }
+        ],
+        "uncertainFields": [
+        {
+        "field": "nameOfApproach",
+        "reason": "The annotation component is implemented within the @Web software, while MIEL is the querying system; the paper does not brand the annotator separately."
+        },
+        {
+        "field": "coreTasks.cea",
+        "reason": "Cell-level linking is to ontology taxonomy terms rather than to a public KG; mapping to CEA is inferred from description rather than explicit task naming."
+        },
+        {
+        "field": "inputs.tableSources[1]",
+        "reason": "Tables are said to come from publications and the Web; PDFs are likely but not always explicitly stated for every corpus."
+        },
+        {
+        "field": "kg.tripleStore",
+        "reason": "An OWL domain ontology is used, but no specific triple store or public KG (e.g., DBpedia) is named."
+        },
+        {
+        "field": "userInterfaceTool",
+        "reason": "@Web is a software platform; the existence of a dedicated end-user GUI for annotation is implied but not detailed."
+        },
+        {
+        "field": "doi",
+        "reason": "The DOI is not provided in the paper text available; leaving it empty to avoid inventing information."
+        }
+        ]
+        }
+]

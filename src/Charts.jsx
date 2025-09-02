@@ -52,7 +52,7 @@ const MainMethodStackedChart = ({ data }) => {
       const yearData = data.filter(d => d.year === year);
       const result = { year };
       methodTypes.forEach(type => {
-        result[type] = yearData.filter(d => d['main-method']?.type === type).length;
+        result[type] = yearData.filter(d => d['mainMethod']?.type === type).length;
       });
       return result;
     });
@@ -253,23 +253,23 @@ function downloadSVG(svgElement, filename = "chart.svg") {
 const REQUIRED_FIELDS = {
   id: true,
   authors: true,
-  author: true,
+  // author: true, // Field doesn't exist in current data structure
   year: true,
-  "title.text": true,
-  "conference-journal": true,
-  "main-method.type": true,
-  "main-method.technique": true,
+  "title": true,
+  "venue.acronym": true,
+  "mainMethod.type": true,
+  "mainMethod.technique": true,
   "domain.domain": true,
-  "tasks.cta": true,
-  "tasks.cpa": true,
-  "tasks.cea": true,
-  "tasks.cnea": true,
-  "user-revision.type": true,
+  "coreTasks.cta": true,
+  "coreTasks.cpa": true,
+  "coreTasks.cea": true,
+  "coreTasks.cnea": true,
+  "revision.type": true,
   "license": true,
-  "inputs.type-of-table": true,
-  "inputs.kg.triple-store": true,
-  "output-format": true,
-  "checked-by-author": true,
+  "inputs.typeOfTable": true,
+  "kg.tripleStore": true,
+  "output": true,
+  "checkedByAuthor": true,
   doi: true,
 };
 
@@ -349,7 +349,7 @@ const calculateSummaryStats = (data) => {
     }
 
     // Main method distribution
-    const methodType = row['main-method']?.type || 'N/A';
+    const methodType = row['mainMethod']?.type || 'N/A';
     acc.mainMethodTypeDistribution[methodType] = (acc.mainMethodTypeDistribution[methodType] || 0) + 1;
 
     // Domain distribution
