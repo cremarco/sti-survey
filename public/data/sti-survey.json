@@ -8402,5 +8402,326 @@
                 "reason": "Only key references are listed; the paper contains many more citations."
             }
         ]
+    },
+    {
+        "id": "2020_abdelmageed_jentab",
+        "added": "",
+        "year": 2020,
+        "firstAuthor": "Abdelmageed",
+        "authors": [
+            "Nora Abdelmageed",
+            "Sirko Schindler"
+        ],
+        "title": "JenTab: Matching Tabular Data to Knowledge Graphs",
+        "venue": {
+            "type": "workshop",
+            "acronym": "SemTab"
+        },
+        "nameOfApproach": "JenTab",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Preprocessing fixes encodings, tokenises/sanitises text, and applies an off-the-shelf spell checker; columns are typed as OBJECT/DATE/STRING/NUMBER.",
+                "spellChecker": "autocorrect used after ftfy and regex-based cleaning",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Columns are typed into OBJECT, DATE, STRING, NUMBER during preprocessing to steer later steps.",
+            "subjectDetection": "Assumes a single subject column and uses it to drive property discovery across rows.",
+            "datatypeAnnotation": "Literal columns (DATE/STRING/NUMBER) are recognised to enable datatype-aware matching for CPA (date parsing, string overlap, numeric tolerance).",
+            "typeAnnotation": "Types are derived from CEA candidates via P31, P279, and P31/P279 and filtered/selected with support and LCS strategies.",
+            "predicateAnnotation": "Properties between column pairs are generated from subject candidates and matched to target cells (majority vote at column level).",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Generates CEA candidates via label lookup and string similarity, then filters by context (properties/columns) and selects by similarity/popularity.",
+                "candidateGeneration": "Wikidata Lookup API with strategies (full/cleaned/autocorrected values, token permutations) plus Jaro-Winkler/Levenshtein-based retrieval.",
+                "entityDisambiguation": "Filters by unmatched/property support and string distance; final selection by Levenshtein similarity with popularity as tie-breaker."
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Create–Filter–Select pipeline executes automatically; no explicit user validation stage."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "SemTab 2020 rounds (R1–R4) and Tough Tables (2T) subsets",
+            "metrics": [
+                "F1",
+                "Precision"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "CSV",
+            "tableSources": []
+        },
+        "kg": {
+            "tripleStore": "Wikidata",
+            "index": "Wikidata Lookup API and SPARQL endpoint"
+        },
+        "output": "",
+        "applicationPurpose": "Semantic table annotation to link tabular data to Wikidata",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "2020_cutrona_tough",
+                "title": "Tough Tables: Carefully Evaluating Entity Linking for Tabular Data"
+            },
+            {
+                "ref": "2020_hassanzadeh_semtab",
+                "title": "SemTab 2020: Semantic Web Challenge on Tabular Data to Knowledge Graph Matching Data Sets"
+            },
+            {
+                "ref": "2019_keil_efficient",
+                "title": "Efficient bounded Jaro-Winkler Similarity based search"
+            },
+            {
+                "ref": "1965_levenshtein_binary",
+                "title": "Binary codes capable of correcting deletions, insertions and reversals"
+            },
+            {
+                "ref": "2014_vrandecic_wikidata",
+                "title": "Wikidata: a free collaborative knowledgebase"
+            },
+            {
+                "ref": "1990_winkler_string",
+                "title": "String comparator metrics and enhanced decision rules in the fellegi-sunter model of record linkage"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "Paper appears in the SemTab 2020 challenge/workshop proceedings; exact official acronym of the venue is not explicitly stated."
+            },
+            {
+                "field": "validation.goldStandard",
+                "reason": "Text reports evaluations on SemTab 2020 rounds and 2T, but the precise GS names/versions are not formalised in the paper."
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Sources of the input tables (web/wiki/spreadsheet, etc.) are not explicitly specified for this paper."
+            },
+            {
+                "field": "output",
+                "reason": "Export/serialisation format of the annotations (e.g., RDF/CSV) is not described."
+            },
+            {
+                "field": "code",
+                "reason": "No repository or download link for the implementation is provided."
+            },
+            {
+                "field": "license",
+                "reason": "Paper license (CC BY 4.0) is stated, but code/approach licence is not specified."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "The presence of a CLI or Web UI is not discussed."
+            },
+            {
+                "field": "kg.index",
+                "reason": "System relies on Wikidata Lookup/SPARQL; no separate indexing layer is detailed."
+            },
+            {
+                "field": "doi",
+                "reason": "Workshop paper likely has no DOI; none is provided in the document."
+            },
+            {
+                "field": "mainMethod.type",
+                "reason": "Classified as unsupervised because no training data is used; authors do not explicitly frame it under this taxonomy."
+            }
+        ]
+    },
+    {
+        "id": "2020_azzi_amalgam",
+        "added": "",
+        "year": 2020,
+        "firstAuthor": "Azzi",
+        "authors": [
+            "Rabia Azzi",
+            "Gayo Diallo"
+        ],
+        "title": "AMALGAM: making tabular dataset explicit with knowledge graph",
+        "venue": {
+            "type": "workshop",
+            "acronym": "SemTab"
+        },
+        "nameOfApproach": "AMALGAM",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Pre-processing tables (encoding/delimiters) with Pandas; integrate spell checking to correct noisy items.",
+                "spellChecker": "Gurunudi and Wikipedia API with fuzzy string matching (threshold 90%).",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Assigns column types by Wikidata lookup of P31/P279/P361 statements and selects the most frequent candidate.",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Generates candidates via Wikidata lookups and uses column concept plus row context to select target entities.",
+                "candidateGeneration": "Wikidata wbsearchentities/parse API and claims of the first-row entity; fall back after spell correction.",
+                "entityDisambiguation": "Use CTA-derived column concept and context matching; validate with fuzzy matching and choose the most consistent candidate."
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Automatic pipeline combining lookups, filtering and spell checking; no manual review during evaluation."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "SemTab 2020 (Rounds 1–4) and Tough Tables (2T)",
+            "metrics": [
+                "F1",
+                "Precision"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "CSV",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Wikidata",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "Fast annotation of tabular data with KG entities and types (CTA/CEA) for table-to-KG matching.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "2016_wilkinson_the",
+                "title": "The FAIR Guiding Principles for scientific data management and stewardship."
+            },
+            {
+                "ref": "2011_diallo_efficient",
+                "title": "Efficient Building of Local Repository of Distributed Ontologies."
+            },
+            {
+                "ref": "2020_ji_a",
+                "title": "A survey on knowledge graphs: Representation, acquisition and applications."
+            },
+            {
+                "ref": "2018_subramanian_semantic",
+                "title": "Semantic Interpretation and Integration of Open Data Tables."
+            },
+            {
+                "ref": "2016_taheriyan_learning",
+                "title": "Learning the semantics of structured data sources."
+            },
+            {
+                "ref": "2019_zhang_a",
+                "title": "A semi-structured information semantic annotation method for Web pages."
+            },
+            {
+                "ref": "2017_efthymiou_matching",
+                "title": "Matching Web Tables with Knowledge Base Entities: From Entity Lookups to Entity Embeddings."
+            },
+            {
+                "ref": "2020_eslahi_annotating",
+                "title": "Annotating Web Tables through Knowledge Bases: A Context-Based Approach."
+            },
+            {
+                "ref": "2019_hassanzadeh_semtab2019",
+                "title": "SemTab2019: Semantic Web Challenge on Tabular Data to Knowledge Graph Matching - 2019 Data Sets (Version 2019)."
+            },
+            {
+                "ref": "2020_hassanzadeh_semtab2020",
+                "title": "SemTab2020: Semantic Web Challenge on Tabular Data to Knowledge Graph Matching - 2020 Data Sets."
+            },
+            {
+                "ref": "2019_shashank_systematic",
+                "title": "Systematic review of spell-checkers for highly inflectional languages."
+            },
+            {
+                "ref": "2020_cutrona_tough",
+                "title": "Tough Tables: Carefully Evaluating Entity Linking for Tabular Data."
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "Paper is in the SemTab 2020 challenge context; exact workshop label/acronym vs. hosting venue not explicitly stated."
+            },
+            {
+                "field": "code",
+                "reason": "No repository or download link mentioned."
+            },
+            {
+                "field": "license",
+                "reason": "Publication license (CC BY 4.0) appears, but software licence of the approach is not specified."
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "SemTab tables derive from web/wiki sources, but the paper does not explicitly enumerate table origins."
+            },
+            {
+                "field": "output",
+                "reason": "Submission/output format (e.g., CSV/RDF) not explicitly described."
+            },
+            {
+                "field": "kg.index",
+                "reason": "Uses Wikidata API; an explicit indexing component is not described."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No UI or tool name is described."
+            },
+            {
+                "field": "doi",
+                "reason": "No DOI is provided for the paper."
+            },
+            {
+                "field": "supportTasks.subjectDetection",
+                "reason": "Row context is discussed, but a dedicated subject column detection procedure is not clearly defined."
+            },
+            {
+                "field": "supportTasks.columnClassification",
+                "reason": "The paper does not describe a specific column literal/NE classification step."
+            }
+        ]
     }
 ]

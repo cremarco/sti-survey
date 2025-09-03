@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 """
 Comprehensive script to rename all PDF files in the approaches folder.
-Handles all possible filename formats and extracts information directly from PDF content.
 Final format: YYYY_surname_first-word-of-title.pdf
+
+Improvements:
+- Adds --dry-run to preview changes without renaming files
+- Adds --only-nonstandard to process only files not matching the pattern
+- Improves author and year extraction using PDF metadata and better text heuristics
+- Clearer summary with reasoned skips
 """
 
 import os
 import json
 import re
+import argparse
 from pathlib import Path
+from typing import Optional, Tuple
 import PyPDF2
 
 def extract_title_from_text(text, max_lines=20):
@@ -43,6 +50,16 @@ def extract_title_from_text(text, max_lines=20):
     
     return "Title not found"
 
+def extract_title_from_metadata(reader: PyPDF2.PdfReader) -> Optional[str]:
+    meta = getattr(reader, 'metadata', None)
+    if not meta:
+        return None
+    title = meta.get('/Title') if isinstance(meta, dict) else getattr(meta, 'title', None)
+    if title:
+        # Normalize whitespace
+        return re.sub(r"\s+", " ", str(title)).strip()
+    return None
+
 def get_first_word_of_title(title):
     """
     Extract the first meaningful word from the title.
@@ -75,6 +92,22 @@ def extract_year_from_text(text):
         year = int(year_match.group(0))
         if 1900 <= year <= 2030:  # Reasonable year range
             return year
+    return None
+
+def extract_year_from_metadata(reader: PyPDF2.PdfReader) -> Optional[int]:
+    meta = getattr(reader, 'metadata', None)
+    if not meta:
+        return None
+    # Common keys: /CreationDate, /ModDate in format D:YYYYMMDD...
+    for key in ('/CreationDate', '/ModDate'):
+        raw = meta.get(key) if isinstance(meta, dict) else getattr(meta, key.replace('/', '').lower(), None)
+        if not raw:
+            continue
+        m = re.search(r"(19|20)\d{2}", str(raw))
+        if m:
+            year = int(m.group(0))
+            if 1900 <= year <= 2030:
+                return year
     return None
 
 def _extract_surname(name_str: str):
@@ -113,49 +146,81 @@ def _extract_surname(name_str: str):
 
 def extract_author_from_text(text, max_lines=40):
     """
-    Extract first author's surname from PDF text content.
+    Extract first author's surname from PDF text content using heuristics.
+    Prioritize cues like ORCID brackets and typical author line patterns.
     """
     lines = text.split('\n')
-    
+
+    def looks_like_author_line(s: str) -> bool:
+        s_low = s.lower()
+        if not s or len(s.split()) < 2:
+            return False
+        bad = ['abstract', 'introduction', 'keywords', 'university', 'department',
+               'email', '@', 'www.', 'http', 'doi:', 'arxiv:', 'proceedings',
+               'conference', 'workshop', 'journal']
+        if any(b in s_low for b in bad):
+            return False
+        return True
+
+    banned_tokens = {
+        'table', 'tables', 'web', 'semantic', 'annotation', 'annotations', 'knowledge', 'csv',
+        'labels', 'queries', 'seman', 'websemantics', 'futuregenerationcomputersystems', 'station',
+        'adog', 'facts', 'archetype', 'tcn', 'gbmt', 'infogather', 'mantistable', 'colnet',
+        'columns', 'citation', 'reca', 'tabel', 'entitymatching', 'dagobah', 'torchictab', 'santos',
+        'keplerasi', 'tablellama', 'startransformers', 'semtex', 'lexma', 'linkingpark', 'mtab',
+        'jentab', 'turl', 'magic'
+    }
+
+    # 1) ORCID-style pattern (names followed by [0000-....])
+    # Allow optional numeric footnote between name and bracket (e.g., Korini1[0000-...])
+    orcid_name_pat = re.compile(r"([A-Z][a-zA-Z\-']+\s+[A-Z][a-zA-Z\-']+)\s*\d{0,2}\s*\[\d{4}[\d\-−–]+\]")
     for i, line in enumerate(lines[:max_lines]):
         line = line.strip()
-        if not line:
+        if not looks_like_author_line(line):
             continue
-        
-        # Skip lines that are clearly not author lines
-        if any(skip in line.lower() for skip in [
-            'abstract', 'introduction', 'keywords', 'university',
-            'department', 'email', '@', 'www.', 'http', 'doi:', 'arxiv:',
-            'proceedings', 'conference', 'workshop', 'journal'
-        ]):
-            continue
-        
-        # Normalize ALL CAPS name lines to Title Case for matching
-        candidate_line = line.title() if line.isupper() else line
+        m = orcid_name_pat.search(line)
+        if m:
+            surname = _extract_surname(m.group(1))
+            if surname and surname.lower() not in banned_tokens:
+                return surname
 
-        # Pattern: explicit names at line start
-        author_match = re.search(r'^([A-Z][a-zA-Z\-\']+(?:\s+[A-Z][a-zA-Z\-\']+)*)', candidate_line)
+    # 2) Lines with multiple names separated by 'and' or commas
+    sep_pat = re.compile(r"\band\b|,\s+")
+    # Allow optional trailing footnote digits on tokens
+    name_pat = re.compile(r"([A-Z][a-zA-Z\-']+\d?\s+[A-Z][a-zA-Z\-']+\d?)")
+    for i, line in enumerate(lines[:max_lines]):
+        line = line.strip()
+        if not looks_like_author_line(line):
+            continue
+        parts = [p.strip() for p in sep_pat.split(line) if p.strip()]
+        for p in parts:
+            nm = name_pat.search(p)
+            if nm:
+                surname = _extract_surname(nm.group(1))
+                if surname and surname.lower() not in banned_tokens:
+                    return surname
+
+    # 3) Fallback: first capitalized sequence at start of line
+    for i, line in enumerate(lines[:max_lines]):
+        line = line.strip()
+        if not looks_like_author_line(line):
+            continue
+        candidate_line = line.title() if line.isupper() else line
+        author_match = re.search(r"^([A-Z][a-zA-Z\-']+(?:\s+[A-Z][a-zA-Z\-']+)*)", candidate_line)
         if author_match:
             surname = _extract_surname(author_match.group(1).strip())
-            if surname and len(surname) > 1:
+            if surname and len(surname) > 1 and surname.lower() not in banned_tokens:
                 return surname
 
-        # Pattern: contains "et al." which often indicates author list
-        if 'et al.' in candidate_line.lower():
-            before_et_al = re.split(r'et al\.', candidate_line, flags=re.I)[0].strip()
-            surname = _extract_surname(before_et_al)
-            if surname:
+    # 4) 'et al.' indicator
+    for i, line in enumerate(lines[:max_lines]):
+        line = line.strip()
+        if 'et al.' in line.lower():
+            before = re.split(r"et al\.", line, flags=re.I)[0].strip()
+            surname = _extract_surname(before)
+            if surname and surname.lower() not in banned_tokens:
                 return surname
 
-        # Pattern: lines with email addresses (often contain author names)
-        if '@' in candidate_line and '.' in candidate_line:
-            # Try the part before the email
-            m = re.search(r'^([A-Z][a-zA-Z\-\']+(?:\s+[A-Z][a-zA-Z\-\']+)*)', candidate_line)
-            if m:
-                surname = _extract_surname(m.group(1).strip())
-                if surname:
-                    return surname
-    
     return "unknown"
 
 def parse_year_from_filename(filename: str):
@@ -199,6 +264,23 @@ def is_already_renamed(filename):
     pattern = r'^\d{4}_[a-zA-Z0-9_-]+_.*\.pdf$'
     return re.match(pattern, filename) is not None
 
+def extract_author_from_metadata(reader: PyPDF2.PdfReader) -> Optional[str]:
+    meta = getattr(reader, 'metadata', None)
+    if not meta:
+        return None
+    val = meta.get('/Author') if isinstance(meta, dict) else getattr(meta, 'author', None)
+    if not val:
+        return None
+    # Sometimes metadata contains multiple authors; take the first token pair
+    s = str(val).strip()
+    # Remove emails and brackets
+    s = re.sub(r"\(.+?\)", " ", s)
+    s = re.sub(r"<.+?>", " ", s)
+    s = re.sub(r"\S+@\S+", " ", s)
+    tokens = s.split(',')[0].strip()
+    surname = _extract_surname(tokens)
+    return surname
+
 def clean_author_name(author):
     """
     Clean and validate author name for filename.
@@ -217,7 +299,7 @@ def clean_author_name(author):
     
     return "unknown"
 
-def create_new_filename(year, author, first_word, approaches_dir):
+def create_new_filename(year, author, first_word, approaches_dir, current_name: Optional[str] = None):
     """
     Create a new filename and handle duplicates.
     """
@@ -227,10 +309,17 @@ def create_new_filename(year, author, first_word, approaches_dir):
     new_filename = f"{year}_{clean_author}_{first_word}.pdf"
     new_filename = re.sub(r'[^\w\-\.]', '_', new_filename)
     new_path = approaches_dir / new_filename
+
+    # If the computed name is exactly the current one, do not force suffixes
+    if current_name and new_filename == current_name:
+        return new_filename
     
     if new_path.exists():
         counter = 1
         while new_path.exists():
+            # If the existing path is the same file as current, no change needed
+            if current_name and new_path.name == current_name:
+                break
             new_filename = f"{year}_{clean_author}_{first_word}_{counter}.pdf"
             new_filename = re.sub(r'[^\w\-\.]', '_', new_filename)
             new_path = approaches_dir / new_filename
@@ -238,7 +327,44 @@ def create_new_filename(year, author, first_word, approaches_dir):
     
     return new_filename
 
-def force_rename_all_papers():
+def _determine_year_author_title(filename: str, reader: PyPDF2.PdfReader, first_page_text: str) -> Tuple[Optional[int], Optional[str], Optional[str]]:
+    """
+    Decide on year, author, and title using multiple strategies.
+    """
+    # Title from text (first) then metadata
+    title = extract_title_from_text(first_page_text) or None
+    if not title or title == 'Title not found':
+        meta_title = extract_title_from_metadata(reader)
+        if meta_title:
+            title = meta_title
+
+    # Year: filename [YYYY], filename prefix, metadata, then text
+    year, author_from_std = parse_standard_filename(filename)
+    if not year:
+        year = parse_year_from_filename(filename)
+    if not year:
+        year = extract_year_from_metadata(reader)
+    if not year:
+        # Try more pages to find a year
+        combined = first_page_text
+        try:
+            for i in range(1, min(3, len(reader.pages))):
+                t = reader.pages[i].extract_text() or ''
+                combined += "\n" + t
+        except Exception:
+            pass
+        year = extract_year_from_text(combined)
+
+    # Author: standard name from filename, then metadata, then text
+    author = author_from_std
+    if not author:
+        author = extract_author_from_metadata(reader)
+    if not author:
+        author = extract_author_from_text(first_page_text)
+
+    return year, author, title
+
+def force_rename_all_papers(dry_run: bool = False, only_nonstandard: bool = False):
     """
     Force rename ALL PDF files to standard format, even if already renamed.
     This ensures consistent naming across all PDFs.
@@ -263,10 +389,18 @@ def force_rename_all_papers():
     successful_renames = []
     errors = []
     skipped = []
+    skip_reasons = {}
     
     for i, pdf_file in enumerate(all_pdfs, 1):
         filename = pdf_file.name
         print(f"Processing {i}/{len(all_pdfs)}: {filename}")
+
+        if only_nonstandard and is_already_renamed(filename):
+            skipped.append(filename)
+            skip_reasons.setdefault('already_standard', 0)
+            skip_reasons['already_standard'] += 1
+            print(f"  Skipping {filename}: already in standard format")
+            continue
         
         # Force rename ALL files, even if they appear to be in standard format
         # This ensures consistent naming across all PDFs
@@ -285,47 +419,36 @@ def force_rename_all_papers():
                 # Extract text from first page
                 first_page = pdf_reader.pages[0]
                 text = first_page.extract_text() or ""
-                
-                # Extract title
-                title = extract_title_from_text(text)
-                
-                # Try to extract year and author
-                year = None
-                author = None
-                
-                # First, try to parse from filename if it's in standard format
-                if filename.startswith('['):
-                    year, author = parse_standard_filename(filename)
-                
-                # If not found in filename, fallback to year in filename prefix
-                if not year:
-                    year = parse_year_from_filename(filename)
-                # If still not found, extract from PDF content
-                if not year:
-                    year = extract_year_from_text(text)
-                
-                if not author:
-                    author = extract_author_from_text(text)
+
+                # Determine fields using combined strategies
+                year, author, title = _determine_year_author_title(filename, pdf_reader, text)
                 
                 # Check if we have all required information
                 if not year:
                     print(f"  Skipping {filename}: cannot extract year")
                     skipped.append(filename)
+                    skip_reasons.setdefault('missing_year', 0)
+                    skip_reasons['missing_year'] += 1
                     continue
                 
                 if not author or author == "unknown":
                     print(f"  Skipping {filename}: cannot extract author")
                     skipped.append(filename)
+                    skip_reasons.setdefault('missing_author', 0)
+                    skip_reasons['missing_author'] += 1
                     continue
                 
                 # Get first word of title
                 first_word = get_first_word_of_title(title)
                 
                 # Create new filename
-                new_filename = create_new_filename(year, author, first_word, approaches_dir)
-                
-                # Rename the file
-                pdf_file.rename(approaches_dir / new_filename)
+                new_filename = create_new_filename(year, author, first_word, approaches_dir, current_name=filename)
+
+                if dry_run:
+                    print(f"  DRY-RUN ✓ {filename} → {new_filename}")
+                else:
+                    # Rename the file
+                    pdf_file.rename(approaches_dir / new_filename)
                 
                 successful_renames.append({
                     "old": filename,
@@ -336,7 +459,8 @@ def force_rename_all_papers():
                     "first_word": first_word
                 })
                 
-                print(f"  ✓ {filename} → {new_filename}")
+                if not dry_run:
+                    print(f"  ✓ {filename} → {new_filename}")
                 
         except Exception as e:
             error_msg = f"Error processing {filename}: {e}"
@@ -348,9 +472,14 @@ def force_rename_all_papers():
     print(f"FORCE RENAMING SUMMARY")
     print(f"{'='*80}")
     print(f"Total PDFs found: {len(all_pdfs)}")
-    print(f"Successfully renamed: {len(successful_renames)}")
-    print(f"Skipped (already in standard format): {len(skipped)}")
+    action_word = "Would rename" if dry_run else "Successfully renamed"
+    print(f"{action_word}: {len(successful_renames)}")
+    print(f"Skipped: {len(skipped)}")
     print(f"Errors: {len(errors)}")
+    if skip_reasons:
+        print("Skip reasons:")
+        for k, v in skip_reasons.items():
+            print(f"  - {k}: {v}")
     
     if successful_renames:
         print(f"\nRenames completed:")
@@ -372,7 +501,7 @@ def force_rename_all_papers():
             print(f"• {error}")
     
     # Save comprehensive log
-    log_file = approaches_dir / "comprehensive_rename_log.json"
+    log_file = approaches_dir / ("comprehensive_rename_log.dry.json" if dry_run else "comprehensive_rename_log.json")
     log_data = {
         "total_pdfs": len(all_pdfs),
         "successful_renames": len(successful_renames),
@@ -380,7 +509,10 @@ def force_rename_all_papers():
         "errors": len(errors),
         "renames": successful_renames,
         "skipped_files": skipped,
-        "error_details": errors
+        "error_details": errors,
+        "dry_run": dry_run,
+        "only_nonstandard": only_nonstandard,
+        "skip_reasons": skip_reasons
     }
     
     with open(log_file, 'w', encoding='utf-8') as f:
@@ -422,5 +554,13 @@ def force_rename_all_papers():
         print("⚠️  Some PDFs may not follow the exact naming pattern")
         print("Consider running the script again to ensure consistency")
 
+def main():
+    parser = argparse.ArgumentParser(description="Rename PDFs to YYYY_surname_firstword.pdf")
+    parser.add_argument('--dry-run', action='store_true', help='Preview changes without renaming files')
+    parser.add_argument('--only-nonstandard', action='store_true', help='Process only files not already matching the pattern')
+    args = parser.parse_args()
+
+    force_rename_all_papers(dry_run=args.dry_run, only_nonstandard=args.only_nonstandard)
+
 if __name__ == "__main__":
-    force_rename_all_papers()
+    main()

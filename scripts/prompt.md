@@ -13,7 +13,7 @@ Output **only valid JSON** (no prose, no markdown, no code fences, no trailing c
 * **authors**: array of strings, required. Full names (given name + surname) in byline order. Must start with `firstAuthor`.
 * **title**: string. Paper title.
 * **venue**: object, required.
-  * **type**: enum `"conference"` | `"journal"` | `"workshop"`.
+  * **type**: enum `"conference"` | `"journal"` | `"workshop"`| `"challenge"`.
   * **acronym**: string. Venue acronym (no year).
 * **nameOfApproach**: string. Proper name of the method/system, if present.
 * **techniqueTags**: array of strings. Allowed values only: `"rule-based"`, `"SVM"`, `"CRF"`, `"clustering"`, `"embeddings"`, `"ontology-driven"`, `"transformer"`. Choose multiple if appropriate.
