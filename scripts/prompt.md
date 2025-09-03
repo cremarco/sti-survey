@@ -6,7 +6,7 @@ Output **only valid JSON** (no prose, no markdown, no code fences, no trailing c
 
 # SCHEMA (only these fields; any order; keys must match exactly)
 
-* **id**: string, required. Lowercase slug `surnameYYYYfirst-word-of-title` (e.g., `"hignette2009fuzzy"`).
+* **id**: string, required. Lowercase slug `YYYY_surname_first-word-of-title` (e.g., `"2009_hignette_fuzzy"`).
 * **added**: empty string.
 * **year**: integer, required. Publication year.
 * **firstAuthor**: string, required. Surname of the first author (e.g., `"Hignette"`).
@@ -59,7 +59,7 @@ Output **only valid JSON** (no prose, no markdown, no code fences, no trailing c
 * **checkedByAi**: boolean. Always `true`.
 * **doi**: string, required. Canonical URL `https://doi.org/...`.
 * **citations**: array of objects, required. Each:
-  * **ref**: string slug `surnameYYYYfirst-word-of-title` (or `""` if not deducible).
+  * **ref**: string slug `YYYY_surname_first-word-of-title` (or `""` if not deducible).
   * **title**: string, citation title.
 * **uncertainFields**: array, required (may be empty). Each element:
   * **field**: string. Dot path to the doubtful field (e.g., "venue.acronym", "kg.tripleStore", "citations[3].ref").
@@ -114,12 +114,13 @@ Output **only valid JSON** (no prose, no markdown, no code fences, no trailing c
 
 # INPUT
 
-I will upload the paper.
+I upload the paper.
 
 ---
 
 # QUALITY CHECKS (must perform before output)
 * Validate enums, dependencies, DOI normalisation, KG/task coherence, and that every uncertainFields[*].field points to a valid key in this schema.
+* The citations must be complete and accurate. Check the number of citations inside the paper.
 
 ---
 
