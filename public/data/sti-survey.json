@@ -82,7 +82,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1007/978-3-540-77010-7_4",
         "citations": [
             {
                 "ref": "buche2005fuzzy",
@@ -239,7 +239,7 @@
         "userInterfaceTool": "Web UI",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.14778/1687627.1687750",
         "citations": [
             {
                 "ref": "bernstein2003applying",
@@ -432,7 +432,7 @@
         "userInterfaceTool": "@Web",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1007/978-3-642-02121-3_47",
         "citations": [
             {
                 "ref": "rahm2001a",
@@ -1128,7 +1128,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1145/1935826.1935904",
         "citations": [],
         "uncertainFields": [
             {
@@ -1610,7 +1610,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.14778/2002938.2002939",
         "citations": [
             {
                 "ref": "banko2007open",
@@ -2128,7 +2128,7 @@
         "userInterfaceTool": "Web UI (Karma)",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.14778/2336664.2336665",
         "citations": [
             {
                 "ref": "bizer2010the",
@@ -2256,7 +2256,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.14778/2336664.2336665",
+        "doi": "https://doi.org/10.1007/978-3-642-34002-4_11",
         "citations": [
             {
                 "ref": "cafarella2009data",
@@ -2541,7 +2541,8 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.14778/2536336.2536343", "citations": [
+        "doi": "https://doi.org/10.14778/2536336.2536343",
+        "citations": [
             {
                 "ref": "venetis2011recovering",
                 "title": "Recovering semantics of tables on the web"
@@ -2672,7 +2673,8 @@
         "userInterfaceTool": "Web UI (MIEL++ GUI; @Web)",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1109/TKDE.2011.245","citations": [
+        "doi": "https://doi.org/10.1109/TKDE.2011.245",
+        "citations": [
             {
                 "ref": "liu2007tableseer",
                 "title": "TableSeer: Automatic Table Metadata Extraction and Searching in Digital Libraries"
@@ -2791,7 +2793,8 @@
         "userInterfaceTool": "Web UI",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1145/2525314.2525324","citations": [
+        "doi": "https://doi.org/10.1145/2525314.2525324",
+        "citations": [
             {
                 "ref": "abiteboul1999tools",
                 "title": "Tools for Data Translation and Integration"
@@ -2893,6 +2896,3464 @@
             {
                 "field": "supportTasks.dataPreparation.description",
                 "reason": "Description generalised from multiple sections; exact scope may differ."
+            }
+        ]
+    },
+    {
+        "id": "deng2013scalable",
+        "added": "",
+        "year": 2013,
+        "firstAuthor": "Deng",
+        "authors": [
+            "Dong Deng",
+            "Yu Jiang",
+            "Guoliang Li",
+            "Jian Li",
+            "Cong Yu"
+        ],
+        "title": "Scalable Column Concept Determination for Web Tables Using Large Knowledge Bases",
+        "venue": {
+            "type": "journal",
+            "acronym": "PVLDB"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Generates string signatures (e.g., q-grams) to enable fuzzy matching and uses MapReduce-based similarity joins for scalability.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Selects top-k KG types per column by aggregating fuzzy matches between cell values and KG entities and ranking via set-similarity functions.",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Batch, MapReduce-based pipeline; no human-in-the-loop post-editing is described."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "WWT (Wikipedia Web Tables) and WEX (Wikipedia Extraction) datasets with manual ground truth for evaluation; KG sources Freebase and YAGO.",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Freebase; Yago",
+            "index": "Signature-based indexing with bloom filter hierarchy for partition identification"
+        },
+        "output": "Top-k KG types per column",
+        "applicationPurpose": "Web-scale table understanding to support search and integration.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.14778/2536258.2536271",
+        "citations": [
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the web"
+            },
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: exploring the power of tables on the Web"
+            },
+            {
+                "ref": "auer2007dbpedia",
+                "title": "DBpedia: A nucleus for a web of open data"
+            },
+            {
+                "ref": "suchanek2007yago",
+                "title": "YAGO: a core of semantic knowledge"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "The paper processes Web/Wikipedia tables rendered in HTML; the exact label expected by the schema could also be 'Web tables'."
+            },
+            {
+                "field": "kg.index",
+                "reason": "The description summarises mechanisms (signatures, bloom filter hierarchy) used in the pipeline rather than a conventional KG index component."
+            },
+            {
+                "field": "output",
+                "reason": "No explicit serialisation format is provided; the outcome is a ranked list of concepts per column."
+            },
+            {
+                "field": "mainMethod.technique",
+                "reason": "The method is algorithmic (similarity-join with heuristics) and not a classic 'rule-based' system; 'rule-based' is used as the closest allowed label."
+            },
+            {
+                "field": "validation.goldStandard",
+                "reason": "Named datasets WWT and WEX are used; the schema requests a GS name but the paper mixes manual ground truth and extracted tables."
+            }
+        ]
+    },
+    {
+        "id": "ermilov2013user-driven",
+        "added": "",
+        "year": 2013,
+        "firstAuthor": "Ermilov",
+        "authors": [
+            "Ivan Ermilov",
+            "Sören Auer",
+            "Claus Stadler"
+        ],
+        "title": "User-driven semantic mapping of tabular data",
+        "venue": {
+            "type": "conference",
+            "acronym": "I-SEMANTICS"
+        },
+        "nameOfApproach": "CSV2RDF",
+        "techniqueTags": [
+            "rule-based"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Resources are crawled and cleaned; headers are extracted; default mappings are auto-generated for CSV files.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "semi automated",
+            "description": "Default mappings are created automatically and can be revised by users via a Semantic MediaWiki; data can be re-transformed after edits."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "",
+            "metrics": []
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "CSV",
+            "tableSources": [
+                "gov-open-data",
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "",
+            "index": ""
+        },
+        "output": "RDF",
+        "applicationPurpose": "Crowd-sourced mapping and mass conversion of tabular data from open data portals into RDF.",
+        "userInterfaceTool": "Web UI (Semantic MediaWiki), CLI (Sparqlify-CSV)",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1145/2506182.2506196",
+        "citations": [
+            {
+                "ref": "auer2009triplify",
+                "title": "Triplify: Light-weight linked data publication from relational databases"
+            },
+            {
+                "ref": "berners-lee1998relational",
+                "title": "Relational databases on the semantic web"
+            },
+            {
+                "ref": "ding2009the",
+                "title": "The data-gov wiki: A semantic web portal for linked government data"
+            },
+            {
+                "ref": "lebo2010converting",
+                "title": "Converting governmental datasets into linked data"
+            },
+            {
+                "ref": "pivk2007transforming",
+                "title": "Transforming arbitrary tables into logical form with TARTAR"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "Proceedings refer to I-SEMANTICS '13; acronym formatting varies between sources."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "The approach focuses on CSV-to-RDF conversion without specifying a target KG or triple store."
+            },
+            {
+                "field": "license",
+                "reason": "No explicit licence for the system or code is stated in the paper."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "Described as a Semantic MediaWiki-based mapping wiki plus Sparqlify-CSV CLI; exact tool naming is not standardised."
+            },
+            {
+                "field": "applicationPurpose",
+                "reason": "Purpose summarised from the abstract rather than an explicit 'Application/Purpose' section."
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Derived from the use of PublicData.eu and web data portals; not listed as a controlled set by the authors."
+            },
+            {
+                "field": "nameOfApproach",
+                "reason": "Preprint emphasises 'CSV2RDF' while ACM record lists the generic paper title; using CSV2RDF as the system name."
+            }
+        ]
+    },
+    {
+        "id": "mulwad2013semantic",
+        "added": "",
+        "year": 2013,
+        "firstAuthor": "Mulwad",
+        "authors": [
+            "Varish Mulwad",
+            "Tim Finin",
+            "Anupam Joshi"
+        ],
+        "title": "Semantic Message Passing for Generating Linked Data from Tables",
+        "venue": {
+            "type": "conference",
+            "acronym": "ISWC"
+        },
+        "nameOfApproach": "Semantic Message Passing",
+        "techniqueTags": [
+            "ontology-driven",
+            "rule-based"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": true,
+            "cnea": true
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Preprocessing includes row sampling, acronym expansion and recognising stylised literals (e.g., phone numbers); literals are detected via regular expressions.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Detect columns with only literal values and map them to no-annotation.",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Assign DBpedia/Yago classes to column headers via majority voting over cell-entity classes and a granularity tie-break.",
+            "predicateAnnotation": "Generate candidate relations between column pairs from DBpedia/Yago links and select via majority voting with thresholds.",
+            "nilAnnotation": "Cells with absent/low-confidence candidates are assigned no-annotation (NIL).",
+            "entityLinking": {
+                "description": "Link cell strings to entities using candidates from Wikitology/LOD with contextual cues and an entity ranker.",
+                "candidateGeneration": "Query Wikitology using the cell string plus header and row context; aggregate candidates' classes from DBpedia and Yago.",
+                "entityDisambiguation": "Re-rank candidates using similarity/popularity features (Naive Bayes classifier) and joint inference constraints."
+            }
+        },
+        "mainMethod": {
+            "type": "hybrid",
+            "technique": "Probabilistic graphical model with semantic message passing combined with knowledge-driven heuristics"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Joint inference runs automatically; future user-in-the-loop feedback is suggested but not part of the implementation."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "Tables from Web/Wikipedia (Web Manual, Wiki Manual, Web Relation, Wiki Links), with additional manual GS for CTA/CPA.",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1",
+                "Accuracy"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia; Yago; Wikitology",
+            "index": "Wikitology and class/property alignments (e.g., PARIS)"
+        },
+        "output": "RDF",
+        "applicationPurpose": "Convert tables into linked data to improve search, interoperability and integration.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1007/978-3-642-41335-3_23",
+        "citations": [
+            {
+                "ref": "bizer2009dbpedia",
+                "title": "DBpedia - A Crystallization Point for the Web of Data"
+            },
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: Exploring the Power of Tables on the Web"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering Semantics of Tables on the Web"
+            },
+            {
+                "ref": "suchanek2011paris",
+                "title": "PARIS: Probabilistic Alignment of Relations, Instances, and Schema"
+            },
+            {
+                "ref": "mulwad2010using",
+                "title": "Using Linked Data to Interpret Tables"
+            },
+            {
+                "ref": "han2008rdf123",
+                "title": "RDF123: From Spreadsheets to RDF"
+            },
+            {
+                "ref": "syed2011creating",
+                "title": "Creating and Exploiting a Hybrid Knowledge Base for Linked Data"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "kg.tripleStore",
+                "reason": "The system simultaneously uses multiple LOD sources; the field expects a single value."
+            },
+            {
+                "field": "kg.index",
+                "reason": "Wikitology functions as a hybrid KB/index; precise indexing infrastructure is not fully specified."
+            },
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "Evaluation mentions Web and Wikipedia tables; \"HTML tables\" vs \"Web tables\" terminology varies."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No UI/tool is described; future user feedback is only proposed."
+            },
+            {
+                "field": "license",
+                "reason": "The paper does not specify a software licence; assumed as not specified."
+            },
+            {
+                "field": "supportTasks.subjectDetection",
+                "reason": "Primary/subject column identification is discussed conceptually but not clearly implemented."
+            },
+            {
+                "field": "supportTasks.datatypeAnnotation",
+                "reason": "Literal columns are detected, but explicit mapping to KG datatypes is not described."
+            }
+        ]
+    },
+    {
+        "id": "munoz2013triplifying",
+        "added": "",
+        "year": 2013,
+        "firstAuthor": "Muñoz",
+        "authors": [
+            "Emir Muñoz",
+            "Aidan Hogan",
+            "Alessandra Mileo"
+        ],
+        "title": "Triplifying Wikipedia's Tables",
+        "venue": {
+            "type": "workshop",
+            "acronym": "LD4IE"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": true,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Normalises Wikitables into matrices, handling headers, colspans/rowspans, and HTML cleaning; filters links and repairs jagged tables.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "Discovers DBpedia predicates between entities within rows and between row entities and the article protagonist.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Maps internal Wikipedia links in cells to DBpedia entities after filtering and redirect resolution.",
+                "candidateGeneration": "Uses internal wiki-links present in cells as candidates.",
+                "entityDisambiguation": "Follows redirects and filters categories/list pages to resolve entities."
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Extraction runs automatically without user-in-the-loop; manual labelling was used only for evaluation."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "Wikipedia tables"
+        },
+        "validation": {
+            "goldStandard": "Random sample of 250 extracted triples manually judged by three annotators; moderate agreement and ~52% correct triples.",
+            "metrics": [
+                "Precision"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "wiki",
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": "Local DBpedia on-disk indexes with caching for lookups."
+        },
+        "output": "RDF",
+        "applicationPurpose": "KG extension and enrichment from Wikipedia tables.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "bizer2009dbpedia",
+                "title": "DBpedia – a crystallization point for the Web of Data"
+            },
+            {
+                "ref": "hoffart2013yago2",
+                "title": "YAGO2: A spatially and temporally enhanced knowledge base from Wikipedia"
+            },
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: exploring the power of tables on the Web"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the Web"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "pivk2007transforming",
+                "title": "Transforming arbitrary tables into logical form with TARTAR"
+            },
+            {
+                "ref": "crestan2011web-scale",
+                "title": "Web-scale table census and classification"
+            },
+            {
+                "ref": "syed2010exploiting",
+                "title": "Exploiting a Web of Semantic Data for Interpreting Tables"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "Assumed from file name; the PDF excerpt did not explicitly show the venue acronym."
+            },
+            {
+                "field": "doi",
+                "reason": "No DOI was visible; CEUR-WS workshop papers often lack DOIs."
+            },
+            {
+                "field": "coreTasks.cea",
+                "reason": "Entity linking relies on existing wiki-links; inclusion as CEA assumes mapping links to KG entities counts as CEA."
+            },
+            {
+                "field": "validation.metrics[0]",
+                "reason": "They report an estimated ~52% correctness; treated as Precision though the paper does not present full metric details."
+            },
+            {
+                "field": "domain.type",
+                "reason": "Marked independent but restricted to Wikipedia tables; classification could be interpreted differently."
+            },
+            {
+                "field": "supportTasks.predicateAnnotation",
+                "reason": "Predicate discovery is approximate and partly illustrative; extent of implementation may be limited."
+            }
+        ]
+    },
+    {
+        "id": "munoz2013triplifying",
+        "added": "",
+        "year": 2013,
+        "firstAuthor": "Muñoz",
+        "authors": [
+            "Emir Muñoz",
+            "Aidan Hogan",
+            "Alessandra Mileo"
+        ],
+        "title": "Triplifying Wikipedia's Tables",
+        "venue": {
+            "type": "workshop",
+            "acronym": "LD4IE"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Normalises Wikitables into matrices by handling headers, captions, row/col spans, and repairs jagged tables after HTML parsing and cleaning. Extracts internal wiki-links and maps them to DBpedia entities.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "ontology-driven"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Extraction of candidate triples is automatic; authors discuss future ML-based post-filtering to improve precision."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "250 randomly selected triples manually labelled by three judges (moderate agreement; ≈52% correct).",
+            "metrics": [
+                "Precision"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": "Local indexes/SPARQL lookups over DBpedia; two on-disk lookups per entity pair with LRU caching."
+        },
+        "output": "RDF",
+        "applicationPurpose": "Extract RDF triples from Wikipedia tables to enrich knowledge bases and the Web of Data.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "bizer2009dbpedia",
+                "title": "DBpedia – a crystallization point for the Web of Data"
+            },
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: exploring the power of tables on the Web"
+            },
+            {
+                "ref": "hoffart2013yago2",
+                "title": "YAGO2: A spatially and temporally enhanced knowledge base from Wikipedia"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "das2012r2rml",
+                "title": "R2RML: RDB to RDF Mapping Language"
+            },
+            {
+                "ref": "mendes2011dbpedia",
+                "title": "DBpedia Spotlight: shedding light on the web of documents"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the Web"
+            },
+            {
+                "ref": "crestan2011web-scale",
+                "title": "Web-scale table census and classification"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "Inferred as LD4IE from workshop context; acronym not explicitly printed in the provided excerpt."
+            },
+            {
+                "field": "techniqueTags[0]",
+                "reason": "Classified as ontology-driven since DBpedia guides extraction; alternative labels like rule-based could also apply."
+            },
+            {
+                "field": "mainMethod.technique",
+                "reason": "Described generally; no single named algorithm beyond KB lookups."
+            },
+            {
+                "field": "validation.goldStandard",
+                "reason": "Summary phrasing condensed; exact wording and scope of the gold standard may vary in the full text."
+            },
+            {
+                "field": "coreTasks.cea",
+                "reason": "Entities are mapped via wiki-links, but the paper does not explicitly frame this as the CEA task."
+            },
+            {
+                "field": "coreTasks.cpa",
+                "reason": "Relations are mined between table entities, but the paper does not explicitly define this as CPA."
+            },
+            {
+                "field": "doi",
+                "reason": "Workshop/CEUR papers often lack a DOI; none was stated in the provided material."
+            }
+        ]
+    },
+    {
+        "id": "quercini2013entity",
+        "added": "",
+        "year": 2013,
+        "firstAuthor": "Quercini",
+        "authors": [
+            "Gianluca Quercini",
+            "Chantal Reynaud"
+        ],
+        "title": "Entity Discovery and Annotation in Tables",
+        "venue": {
+            "type": "conference",
+            "acronym": "EDBT"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "SVM",
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Filters cells via regex/patterns and column types; augments queries with spatial clues and geocoding to reduce ambiguity.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Applies a column-coherence scoring to identify the column most likely to contain entity names of the target type.",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "supervised",
+            "technique": "SVM",
+            "supervision": {
+                "type": "supervised"
+            }
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Post-processing removes spurious annotations using column-coherence scores; no human-in-the-loop validation is required."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "Manually annotated 40 GFT tables; Wiki Manual dataset (36 tables).",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables (Google Fusion Tables)",
+            "tableSources": [
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "Discover and annotate previously unseen entities in tables (e.g., POIs) to support data extraction and enrichment for faceted browsing.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1145/2452376.2452457",
+        "citations": [
+            {
+                "ref": "bizer2009dbpedia",
+                "title": "DBpedia - A Crystallization Point for the Web of Data."
+            },
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: Exploring the Power of Tables on the Web."
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships."
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering Semantics of Tables on the Web."
+            },
+            {
+                "ref": "suchanek2007yago",
+                "title": "Yago: a Core of Semantic Knowledge."
+            },
+            {
+                "ref": "wu2012probase",
+                "title": "Probase: a Probabilistic Taxonomy for Text Understanding."
+            },
+            {
+                "ref": "gonzalez2010google",
+                "title": "Google Fusion Tables: Web-centered Data Management and Collaboration."
+            },
+            {
+                "ref": "hignette2009fuzzy",
+                "title": "Fuzzy Annotation of Web Data Tables Driven by a Domain Ontology."
+            },
+            {
+                "ref": "han2008rdf123",
+                "title": "RDF123: From Spreadsheets to RDF."
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "The event is jointly branded EDBT/ICDT; the appropriate acronym could be either \"EDBT\" or \"EDBT/ICDT\"."
+            },
+            {
+                "field": "coreTasks.cea",
+                "reason": "The work detects cells that are entity names and types but does not explicitly link them to KG identifiers as required by CEA."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "DBpedia is used to build training data rather than as a target KG for output annotations."
+            },
+            {
+                "field": "applicationPurpose",
+                "reason": "The algorithm was implemented within a faceted browser project for digital cities, but its primary stated purpose is general entity discovery in tables."
+            }
+        ]
+    },
+    {
+        "id": "quercini2013entity",
+        "added": "",
+        "year": 2013,
+        "firstAuthor": "Quercini",
+        "authors": [
+            "Gianluca Quercini",
+            "Chantal Reynaud"
+        ],
+        "title": "Entity Discovery and Annotation in Tables",
+        "venue": {
+            "type": "conference",
+            "acronym": "EDBT"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "SVM",
+            "ontology-driven",
+            "rule-based"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Pre-processing filters out non-entity cells using regex patterns and GFT column types; post-processing enforces column coherence.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Not explicitly formalised; leverages GFT column types and column-level scoring to isolate the entity-name column.",
+            "subjectDetection": "Identifies rows containing entities of target types and pinpoints the entity-name column via aggregated cell scores.",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "supervised",
+            "technique": "SVM",
+            "supervision": {
+                "type": "supervised"
+            }
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "No user-in-the-loop; post-processing removes spurious annotations based on column coherence."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "40 GFT tables (manual GS) and the Wiki Manual dataset (36 Wikipedia tables).",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "KG extension and data enrichment for points of interest; supports faceted browsing.",
+        "userInterfaceTool": "Web UI (faceted browser)",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "bizer2009dbpedia",
+                "title": "DBpedia - A Crystallization Point for the Web of Data"
+            },
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: Exploring the Power of Tables on the Web"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering Semantics of Tables on the Web"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "The DOI is not visible in the provided text."
+            },
+            {
+                "field": "output",
+                "reason": "The paper does not specify a serialisation format for the annotations."
+            },
+            {
+                "field": "venue.acronym",
+                "reason": "The proceedings are branded EDBT/ICDT; we used 'EDBT' but the joint acronym could also be considered."
+            },
+            {
+                "field": "domain.domain",
+                "reason": "Method is applied to POIs but claimed general; classified as independent with some ambiguity."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "The faceted browser is part of a broader application; unsure if it is packaged as a tool for this approach."
+            },
+            {
+                "field": "techniqueTags",
+                "reason": "Included 'rule-based' for pre/post-processing heuristics; the main contribution is SVM-based supervision."
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Included 'wiki' due to evaluation on Wikipedia tables; primary source is GFT on the web."
+            }
+        ]
+    },
+    {
+        "id": "zhang2013infogather",
+        "added": "",
+        "year": 2013,
+        "firstAuthor": "Zhang",
+        "authors": [
+            "Meihui Zhang",
+            "Kaushik Chakrabarti"
+        ],
+        "title": "InfoGather+: Semantic Matching and Annotation of Numeric and Time-Varying Attributes in Web Tables",
+        "venue": {
+            "type": "conference",
+            "acronym": "SIGMOD"
+        },
+        "nameOfApproach": "InfoGather+",
+        "techniqueTags": [
+            "rule-based"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Extract relational HTML tables from web crawl, split to entity–attribute binaries, and build indexes for entities, labels, and graph edges. Hard-coded unit/scale conversion rules and year tokens support matching and conversions. ",
+                "spellChecker": "",
+                "unitsOfMeasurements": "Pre-defined conversion rules (e.g., USD↔Euro; bil↔mil) and synonyms for units/scales. "
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "Probabilistic graphical model (Markov random field) with label propagation and rule-based conversions"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Joint inference over labels and edges produces results automatically; no user-in-the-loop editing is described. "
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "Forbes Global 2000 (2011), Wikipedia list of countries by area, Tax Foundation corporate tax rates, City Mayors 2011 cities. ",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "Accuracy"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "web"
+            ]
+        },
+        "output": "",
+        "applicationPurpose": "Entity augmentation for numeric and time-varying attributes using a semantic graph.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1145/2463676.2465276",
+        "citations": [
+            {
+                "ref": "yakout2012infogather",
+                "title": "InfoGather: entity augmentation and attribute discovery by holistic matching with web tables"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "pimplikar2012answering",
+                "title": "Answering table queries on the web using column keywords"
+            },
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: exploring the power of tables on the web"
+            },
+            {
+                "ref": "cafarella2009data",
+                "title": "Data integration for the relational web"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the web"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "output",
+                "reason": "The paper reports augmented table results but does not specify an export format (e.g., CSV/RDF). "
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "An API is described conceptually, but no concrete UI/tool name is provided. "
+            },
+            {
+                "field": "code",
+                "reason": "No repository or downloadable implementation is referenced."
+            },
+            {
+                "field": "mainMethod.type",
+                "reason": "Treated as unsupervised since no labelled training data are used; if heuristics are considered supervision, one might argue 'hybrid'. "
+            },
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "They refer to 'web/HTML tables'; we selected 'HTML tables' to match the schema wording. "
+            },
+            {
+                "field": "validation.metrics",
+                "reason": "Paper explicitly discusses precision/recall and accuracy for components; other metrics like F1 are not clearly reported. "
+            },
+            {
+                "field": "doi",
+                "reason": "DOI confirmed via ACM Digital Library."
+            }
+        ]
+    },
+    {
+        "id": "sekhavat2014knowledge",
+        "added": "",
+        "year": 2014,
+        "firstAuthor": "Sekhavat",
+        "authors": [
+            "Yoones A. Sekhavat",
+            "Francesco di Paolo",
+            "Denilson Barbosa",
+            "Paolo Merialdo"
+        ],
+        "title": "Knowledge Base Augmentation using Tabular Data",
+        "venue": {
+            "type": "workshop",
+            "acronym": "LDOW"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Link table entities to a text corpus via exact string matching, then extract and match inter-entity text spans to known relational patterns; patterns are indexed for efficiency.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "Assign a KB relation to the pair of columns using a probabilistic model over textual patterns (rank aggregation vs global ranking) and apply a confidence threshold.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Pipeline computes posterior probabilities for relations from observed patterns and selects the most probable relation without manual review."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "Ground truth built from YAGO facts matched in the NELL corpus; 25 entity pairs per relation over 23–24 relations; evaluation reports the rank position of the correct relation.",
+            "metrics": []
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables and spreadsheets",
+            "tableSources": [
+                "web",
+                "spreadsheet",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "YAGO",
+            "index": "Patterns indexed with an in-memory suffix tree; uses the intersection of PATTY patterns and NELL triples (4,357 patterns; 108,699,400 triples)."
+        },
+        "output": "triples",
+        "applicationPurpose": "Augment an existing knowledge base with new facts inferred from tabular data.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: Exploring the power of tables on the web"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the web"
+            },
+            {
+                "ref": "nakashole2012patty",
+                "title": "Patty: A taxonomy of relational patterns with semantic types"
+            },
+            {
+                "ref": "suchanek2007yago",
+                "title": "YAGO: A core of semantic knowledge"
+            },
+            {
+                "ref": "mintz2009distant",
+                "title": "Distant supervision for relation extraction without labeled data"
+            },
+            {
+                "ref": "mulwad2013semantic",
+                "title": "Semantic Message Passing for Generating Linked Data from Tables"
+            },
+            {
+                "ref": "munoz2013triplifying",
+                "title": "Triplifying Wikipedia's tables"
+            },
+            {
+                "ref": "yosef2011aida",
+                "title": "AIDA: An online tool for accurate disambiguation of named entities in text and tables"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "output",
+                "reason": "The paper extracts relational triples but does not specify an output serialisation such as RDF."
+            },
+            {
+                "field": "doi",
+                "reason": "A DOI is not provided in the paper; LDOW workshop papers often lack DOIs."
+            },
+            {
+                "field": "code",
+                "reason": "A link to data is provided, but no code repository is mentioned."
+            },
+            {
+                "field": "techniqueTags[1]",
+                "reason": "Tagged as ontology-driven because relations come from YAGO; this could be debated as the core method is pattern-based."
+            }
+        ]
+    },
+    {
+        "id": "taheriyan2014a",
+        "added": "",
+        "year": 2014,
+        "firstAuthor": "Taheriyan",
+        "authors": [
+            "Mohsen Taheriyan",
+            "Craig A. Knoblock",
+            "Pedro Szekely",
+            "Jose Luis Ambite"
+        ],
+        "title": "A Scalable Approach to Learn Semantic Models of Structured Sources",
+        "venue": {
+            "type": "conference",
+            "acronym": "ICSC"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "CRF",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "Literal attributes are mapped to ontology data properties during semantic typing.",
+            "typeAnnotation": "Semantic types for attributes are learned with a CRF over attribute names and sample values.",
+            "predicateAnnotation": "Relationships are inferred by building a weighted graph from known models and ontologies and extracting a minimal Steiner tree.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "hybrid",
+            "technique": "CRF for semantic typing + Steiner-tree-based graph search using domain ontologies and known models"
+        },
+        "revision": {
+            "type": "semi automated",
+            "description": "Produces ranked candidate semantic models automatically; minimal user input may select or correct the final model."
+        },
+        "domain": {
+            "domain": "dependent",
+            "type": "cultural heritage / museums"
+        },
+        "validation": {
+            "goldStandard": "Manually created semantic models for 29 museum sources",
+            "metrics": [
+                "Precision",
+                "Recall"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Relational databases, spreadsheets, XML/JSON sources and Web APIs",
+            "tableSources": [
+                "relational",
+                "spreadsheet",
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "EDM, AAC, SKOS, Dublin Core, FOAF, ORE, ElementsGr2 (domain ontologies)",
+            "index": ""
+        },
+        "output": "RDF",
+        "applicationPurpose": "Learn semantic source models for data integration and RDF publishing.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1109/ICSC.2014.13",
+        "citations": [
+            {
+                "ref": "doan2012principles",
+                "title": "Principles of Data Integration"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering Semantics of Tables on the Web"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            },
+            {
+                "ref": "szekely2013connecting",
+                "title": "Connecting the Smithsonian American Art Museum to the Linked Data Cloud"
+            },
+            {
+                "ref": "lafferty2001conditional",
+                "title": "Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data"
+            },
+            {
+                "ref": "kou1981a",
+                "title": "A Fast Algorithm for Steiner Trees"
+            },
+            {
+                "ref": "winter1987steiner",
+                "title": "Steiner Problem in Networks - A survey"
+            },
+            {
+                "ref": "taheriyan2013a",
+                "title": "A Graph-based Approach to Learn Semantic Descriptions of Data Sources"
+            },
+            {
+                "ref": "knoblock2012semi-automatically",
+                "title": "Semi-Automatically Mapping Structured Sources into the Semantic Web"
+            },
+            {
+                "ref": "carman2007learning",
+                "title": "Learning Semantic Definitions of Online Information Sources"
+            },
+            {
+                "ref": "dhamankar2004imap",
+                "title": "iMAP: Discovering Complex Semantic Matches between Database Schemas"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "nameOfApproach",
+                "reason": "The paper presents an approach but does not introduce a specific system name."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No concrete UI/tool is presented for this method; Karma is cited only in related work."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "They use several domain ontologies rather than a single public KG or triplestore."
+            },
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "Covers heterogeneous structured sources beyond classic tabular formats; phrasing may be broader than typical table labels."
+            },
+            {
+                "field": "code",
+                "reason": "No repository link is provided in the paper; related software may exist elsewhere."
+            },
+            {
+                "field": "validation.goldStandard",
+                "reason": "Described as manual models by experts; no specific GS name is given."
+            },
+            {
+                "field": "revision.type",
+                "reason": "The text mentions minimal user input but does not formalise an interaction protocol."
+            }
+        ]
+    },
+    {
+        "id": "taheriyan2014a",
+        "added": "",
+        "year": 2014,
+        "firstAuthor": "Taheriyan",
+        "authors": [
+            "Mohsen Taheriyan",
+            "Craig A. Knoblock",
+            "Pedro Szekely",
+            "José Luis Ambite"
+        ],
+        "title": "A Scalable Approach to Learn Semantic Models of Structured Sources",
+        "venue": {
+            "type": "conference",
+            "acronym": "ICSC"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "CRF",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Assigns semantic types to source attributes using a CRF-based classifier with features from attribute names and sample data.",
+            "predicateAnnotation": "Infers relationships between typed attributes by building a weighted graph from known models and ontologies and extracting minimal connecting trees (Steiner tree).",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "hybrid",
+            "technique": "CRF for semantic typing combined with ontology-driven graph search and Steiner tree approximation"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Generates and ranks candidate semantic models automatically; minimal user input is implied but not required by the core method."
+        },
+        "domain": {
+            "domain": "dependent",
+            "type": "cultural heritage / museums"
+        },
+        "validation": {
+            "goldStandard": "Manually created semantic models for 29 museum data sources using EDM, AAC, SKOS, Dublin Core, FOAF, ORE, and ElementsGr2 ontologies",
+            "metrics": [
+                "Precision",
+                "Recall"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Structured sources (relational databases, spreadsheets, XML, JSON, Web APIs)",
+            "tableSources": [
+                "relational",
+                "spreadsheet",
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "EDM, AAC, SKOS, Dublin Core, FOAF, ORE, ElementsGr2",
+            "index": ""
+        },
+        "output": "RDF",
+        "applicationPurpose": "Learning semantic source models to support integration and RDF publishing",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1109/ICSC.2014.13",
+        "citations": [
+            {
+                "ref": "doan2012principles",
+                "title": "Principles of Data Integration"
+            },
+            {
+                "ref": "lafferty2001conditional",
+                "title": "Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data"
+            },
+            {
+                "ref": "kou1981a",
+                "title": "A Fast Algorithm for Steiner Trees"
+            },
+            {
+                "ref": "goel2012exploiting",
+                "title": "Exploiting Structure within Data for Accurate Labeling Using Conditional Random Fields"
+            },
+            {
+                "ref": "taheriyan2013a",
+                "title": "A Graph-based Approach to Learn Semantic Descriptions of Data Sources"
+            },
+            {
+                "ref": "szekely2013connecting",
+                "title": "Connecting the Smithsonian American Art Museum to the Linked Data Cloud"
+            },
+            {
+                "ref": "knoblock2012semi-automatically",
+                "title": "Semi-Automatically Mapping Structured Sources into the Semantic Web"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering Semantics of Tables on the Web"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "nameOfApproach",
+                "reason": "The paper does not present a specific proper name for the proposed method beyond describing it as a scalable approach."
+            },
+            {
+                "field": "revision.type",
+                "reason": "The text emphasises automation with minimal user input, but does not explicitly specify a post-processing review step."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No dedicated UI/tool is introduced for this paper; prior work references Karma, but its direct use here is not stated."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "The work uses multiple domain ontologies rather than a single concrete KG instance like DBpedia or Wikidata."
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "‘Web’ is included to reflect Web APIs mentioned generally; exact source mix for the evaluated dataset is not exhaustively enumerated."
+            },
+            {
+                "field": "applicationPurpose",
+                "reason": "Purpose is inferred from the introduction and example (integration and RDF publishing) rather than stated as a formal application label."
+            }
+        ]
+    },
+    {
+        "id": "bhagavatula2015tabel",
+        "added": "",
+        "year": 2015,
+        "firstAuthor": "Bhagavatula",
+        "authors": [
+            "Chandra Sekhar Bhagavatula",
+            "Thanapon Noraset",
+            "Doug Downey"
+        ],
+        "title": "TabEL: Entity Linking in Web Tables",
+        "venue": {
+            "type": "conference",
+            "acronym": "ISWC"
+        },
+        "nameOfApproach": "TabEL",
+        "techniqueTags": [],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Wikipedia and Web tables are normalised to r×c matrices; mentions are identified and priors P(e|s) are estimated from hyperlinks to build features.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Entity linking over table cells using collective coherence across rows and columns.",
+                "candidateGeneration": "For each surface s, candidates are all KB entities with non-zero P(e|s) estimated from Web and Wikipedia hyperlinks.",
+                "entityDisambiguation": "Graphical model over row/column cliques with Iterative Classification Algorithm (ICA); a trained logistic-regression ranker selects entities using prior, semantic relatedness and context features."
+            }
+        },
+        "mainMethod": {
+            "type": "supervised",
+            "technique": "Logistic regression ranking with collective inference (ICA)",
+            "supervision": {
+                "type": "supervised"
+            }
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Disambiguation is performed automatically without human validation in the loop."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "WEB MANUAL, WEB MANUAL-FIXED, WIKI LINKS, WIKI LINKS-RANDOM, TABEL 35K",
+            "metrics": [
+                "Accuracy",
+                "Macro-Precision",
+                "Macro-Recall",
+                "Macro-F1"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "YAGO",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "Entity linking in Web tables to support semantic table interpretation and downstream KG augmentation.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: Exploring the Power of Tables on the Web"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            },
+            {
+                "ref": "mulwad2013semantic",
+                "title": "Semantic Message Passing for Generating Linked Data from Tables"
+            },
+            {
+                "ref": "suchanek2007yago",
+                "title": "YAGO: A Core of Semantic Knowledge"
+            },
+            {
+                "ref": "hecht2012explanatory",
+                "title": "Explanatory semantic relatedness and explicit spatialization for exploratory search"
+            },
+            {
+                "ref": "witten2008an",
+                "title": "An effective, low-cost measure of semantic relatedness obtained from Wikipedia links"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "The DOI is not stated in the text available."
+            },
+            {
+                "field": "code",
+                "reason": "Authors mention releasing resources, but no code URL is provided."
+            },
+            {
+                "field": "output",
+                "reason": "The paper reports entity annotations but no explicit output serialisation format."
+            },
+            {
+                "field": "kg.index",
+                "reason": "No specific indexing structure for the KB is described."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No UI or tool front-end is mentioned."
+            },
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "They target both Wikipedia and general Web (HTML) tables; 'Web tables' is used generically."
+            },
+            {
+                "field": "techniqueTags",
+                "reason": "The approach uses logistic regression and collective inference, which do not map to the allowed tags."
+            }
+        ]
+    },
+    {
+        "id": "ramnandan2015assigning",
+        "added": "",
+        "year": 2015,
+        "firstAuthor": "Ramnandan",
+        "authors": [
+            "S.K. Ramnandan",
+            "Amol Mittal",
+            "Craig A. Knoblock",
+            "Pedro Szekely"
+        ],
+        "title": "Assigning Semantic Labels to Data Sources",
+        "venue": {
+            "type": "conference",
+            "acronym": "ESWC"
+        },
+        "nameOfApproach": "SemanticTyper",
+        "techniqueTags": [],
+        "coreTasks": {
+            "cta": true,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Tokenisation and normalisation of values; stemming and stop-word removal for text; handling of numeric/text mixtures.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Heuristic detection of numeric vs textual columns based on fraction of numeric values.",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Assigns class/property labels using TF-IDF cosine similarity for text and KS test for numeric columns.",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "supervised",
+            "technique": "TF-IDF cosine similarity for textual columns combined with Kolmogorov–Smirnov two-sample test for numeric columns",
+            "supervision": {
+                "type": "supervised"
+            }
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Produces top-k candidate labels with confidence scores; no user validation stage described."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "Europeana Data Model (museum), DBpedia City properties, and weather/phone/flight datasets",
+            "metrics": [
+                "MRR"
+            ]
+        },
+        "code": "https://github.com/usc-isi-i2/eswc-2015-semantic-typing",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables and heterogeneous sources (tables, XML, JSON)",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia; Europeana Data Model",
+            "index": "Apache Lucene used to index textual label documents"
+        },
+        "output": "",
+        "applicationPurpose": "Automated semantic labelling of data source attributes to support data integration.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1007/978-3-319-18818-8_25",
+        "citations": [
+            {
+                "ref": "goel2012exploiting",
+                "title": "Exploiting structure within data for accurate labeling using conditional random fields"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the web"
+            },
+            {
+                "ref": "stonebraker2013data",
+                "title": "Data curation at scale: the Data Tamer system"
+            },
+            {
+                "ref": "ambite2009automatically",
+                "title": "Automatically Constructing Semantic Web Services from Online Sources"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "techniqueTags",
+                "reason": "The paper does not use any of the allowed tag categories (e.g., SVM/CRF/transformer/rule-based) as core techniques."
+            },
+            {
+                "field": "output",
+                "reason": "No serialisation format (e.g., RDF/JSON-LD) is specified; the system outputs label predictions only."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "DBpedia is used; Europeana Data Model is an ontology rather than a triple store, but both are cited as resources."
+            },
+            {
+                "field": "kg.index",
+                "reason": "Lucene indexes training ‘documents’ of label values, not a KG index; mapping this to the KG 'index' field may be approximate."
+            },
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "They consider generic data sources (tables, XML, JSON); phrasing may not match a single specific table type."
+            },
+            {
+                "field": "license",
+                "reason": "The paper shares a GitHub repo but the licence is not specified in the paper text."
+            },
+            {
+                "field": "applicationPurpose",
+                "reason": "Purpose is inferred from motivation; no explicit application label is given."
+            }
+        ]
+    },
+    {
+        "id": "ritze2015matching",
+        "added": "",
+        "year": 2015,
+        "firstAuthor": "Ritze",
+        "authors": [
+            "Dominique Ritze",
+            "Oliver Lehmberg",
+            "Christian Bizer"
+        ],
+        "title": "Matching HTML Tables to DBpedia",
+        "venue": {
+            "type": "conference",
+            "acronym": "WIMS"
+        },
+        "nameOfApproach": "T2K Match",
+        "techniqueTags": [
+            "ontology-driven",
+            "rule-based"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Clean HTML, split value lists, lower-case and normalise values; detect headers, entity-label column, and data types.",
+                "spellChecker": "",
+                "unitsOfMeasurements": "Normalisation of units via ~200 handcrafted conversion rules (e.g., 8mi2 → 20.72 million m2)."
+            },
+            "columnClassification": "",
+            "subjectDetection": "Heuristic to detect the entity-label attribute: string column with most unique values (tie → left-most).",
+            "datatypeAnnotation": "Detect column data types (string, numeric, timestamp, coordinate) using ~100 regexes to select similarity measures.",
+            "typeAnnotation": "Aggregate property scores to select table-to-class correspondences.",
+            "predicateAnnotation": "Duplicate-based schema matching aggregates value similarities to map attributes to DBpedia properties.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Iterative instance–schema matching to select a DBpedia resource per row with thresholding.",
+                "candidateGeneration": "Search DBpedia labels (Lucene), keep top-k, refine with class constraints; handle surface forms and redirects.",
+                "entityDisambiguation": "Iteratively weight value similarities with property/class scores and pick the top candidate."
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based iterative schema/instance matching"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Outputs are produced automatically without user interaction; evaluation is performed against a gold standard."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "cross-domain web tables"
+        },
+        "validation": {
+            "goldStandard": "T2D Gold Standard (1,748 tables schema-level; 233 tables entity-level; 26,124 row-to-entity; 7,983 column-to-property).",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "http://dws.informatik.uni-mannheim.de/en/research/T2K",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": "Lucene"
+        },
+        "output": "",
+        "applicationPurpose": "Knowledge base extension (slot filling).",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1145/2797115.2797118",
+        "citations": [
+            {
+                "ref": "cafarella2008webtables",
+                "title": "WebTables: Exploring the Power of Tables on the Web"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering Semantics of Tables on the Web"
+            },
+            {
+                "ref": "dong2014knowledge",
+                "title": "Knowledge Vault: A Web-scale Approach to Probabilistic Knowledge Fusion"
+            },
+            {
+                "ref": "suchanek2011paris",
+                "title": "Paris: Probabilistic alignment of Relations, Instances, and Schema"
+            },
+            {
+                "ref": "wang2012understanding",
+                "title": "Understanding Tables on the Web"
+            },
+            {
+                "ref": "zhang2014towards",
+                "title": "Towards efficient and effective semantic table interpretation"
+            },
+            {
+                "ref": "gupta2014biperpedia",
+                "title": "Biperpedia: An Ontology for Search Applications"
+            },
+            {
+                "ref": "yakout2012infogather",
+                "title": "InfoGather: Entity Augmentation and Attribute Discovery by Holistic Matching with Web Tables"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "code",
+                "reason": "The paper references a project page with downloads; explicit source code availability is not clearly stated."
+            },
+            {
+                "field": "output",
+                "reason": "The output format of correspondences is not specified (e.g., RDF/CSV), only that correspondences are produced."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No UI or tool front-end is described; likely a research prototype without a public UI."
+            },
+            {
+                "field": "coreTasks.cnea",
+                "reason": "The gold standard marks some rows as not matchable, but the approach does not explicitly perform NIL prediction."
+            },
+            {
+                "field": "techniqueTags",
+                "reason": "Classed as ontology-driven and rule-based based on KB-driven, heuristic matching; no explicit ML model is reported."
+            }
+        ]
+    },
+    {
+        "id": "ermilov2016taipan",
+        "added": "",
+        "year": 2016,
+        "firstAuthor": "Ermilov",
+        "authors": [
+            "Ivan Ermilov",
+            "Axel-Cyrille Ngonga Ngomo"
+        ],
+        "title": "TAIPAN: Automatic Property Mapping for Tabular Data",
+        "venue": {
+            "type": "conference",
+            "acronym": "EKAW"
+        },
+        "nameOfApproach": "Taipan",
+        "techniqueTags": [
+            "rule-based",
+            "SVM",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "Identifies the subject column using support (entity disambiguation via AGDISTIS) and connectivity features, then classifies columns with learned models. ",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "Maps binary relations from the subject column to DBpedia predicates using triple-pattern queries and LOV-derived seed properties with probabilistic ranking. ",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "hybrid",
+            "technique": "SVM + rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Automatic scoring and selection of subject columns and properties; no interactive correction is required. "
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "cross-domain"
+        },
+        "validation": {
+            "goldStandard": "T2D* (manually curated from T2D) and DBD (DBpedia Table Dataset). ",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "https://github.com/aksw/taipan",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": "LOV reverse index over rdfs:label and rdfs:comment with score threshold. "
+        },
+        "output": "RDF",
+        "applicationPurpose": "Table expansion and knowledge base augmentation. ",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1007/978-3-319-49004-5_11",
+        "citations": [
+            {
+                "ref": "ritze2015matching",
+                "title": "Matching HTML tables to DBpedia"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the web"
+            },
+            {
+                "ref": "usbeck2014agdistis",
+                "title": "AGDISTIS - graph-based disambiguation of named entities using linked data"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "mainMethod.technique",
+                "reason": "The paper evaluates several classifiers (e.g., SVM, decision tree) for subject detection and uses rule-based scoring for property mapping; summarised here as 'SVM + rule-based'. "
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Includes 'wiki' because one evaluation dataset is generated from DBpedia; the main corpus is web tables. "
+            },
+            {
+                "field": "kg.index",
+                "reason": "Described as LOV reverse index with a score threshold; exact indexing details are brief. "
+            },
+            {
+                "field": "license",
+                "reason": "License is not stated in the paper; repository license not verified in the text. "
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No UI for Taipan is mentioned; only annotation interfaces for gold-standard curation are referenced. "
+            },
+            {
+                "field": "output",
+                "reason": "Approach outputs RDF triples conceptually, but no explicit serialisation format is specified. "
+            }
+        ]
+    },
+    {
+        "id": "neumaier2016multi-level",
+        "added": "",
+        "year": 2016,
+        "firstAuthor": "Neumaier",
+        "authors": [
+            "Sebastian Neumaier",
+            "Jürgen Umbrich",
+            "Josiane Xavier Parreira",
+            "Axel Polleres"
+        ],
+        "title": "Multi-level semantic labelling of numerical values",
+        "venue": {
+            "type": "conference",
+            "acronym": "ISWC"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "clustering",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Constructs a background knowledge graph from DBpedia, grouping numerical properties by subjects and contexts, and computes descriptive statistics/KS distances.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "k-nearest neighbours over a hierarchically clustered background graph using Kolmogorov–Smirnov distance and descriptive statistics"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Predictions are produced automatically by nearest neighbour ranking without user intervention."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "DBpedia 3.9 dump with 50 frequent numerical properties; large-scale test nodes derived from held-out subjects",
+            "metrics": [
+                "Accuracy",
+                "Top-1 Accuracy",
+                "Top-k Accuracy"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "CSV tables",
+            "tableSources": [
+                "wiki",
+                "gov-open-data"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "Semantic labelling of numerical columns and their contexts in tabular data",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "adelfio2013schema",
+                "title": "Schema extraction for tabular data on the web"
+            },
+            {
+                "ref": "ramnandan2015assigning",
+                "title": "Assigning semantic labels to data sources"
+            },
+            {
+                "ref": "tandy2015generating",
+                "title": "Generating RDF from tabular data on the web"
+            },
+            {
+                "ref": "fleischhacker2014detecting",
+                "title": "Detecting errors in numerical linked data using cross-checked outlier detection"
+            },
+            {
+                "ref": "wienand2014detecting",
+                "title": "Detecting incorrect numerical data in DBpedia"
+            },
+            {
+                "ref": "zhang2014towards",
+                "title": "Towards efficient and effective semantic table interpretation"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "The DOI is not stated in the available text."
+            },
+            {
+                "field": "output",
+                "reason": "No explicit output serialisation or format is described."
+            },
+            {
+                "field": "coreTasks.cta",
+                "reason": "The paper labels numeric columns with properties and contexts but does not explicitly frame this as CTA."
+            },
+            {
+                "field": "coreTasks.cpa",
+                "reason": "Although properties are predicted, the paper does not present this as CPA in the STI sense."
+            },
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "The approach is demonstrated on CSV-like Open Data and DBpedia-derived values; exact table type wording is inferred."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "A prototype is mentioned but no UI/tool is specified."
+            },
+            {
+                "field": "kg.index",
+                "reason": "Indexing details are not provided."
+            },
+            {
+                "field": "license",
+                "reason": "No license information is specified."
+            },
+            {
+                "field": "validation.goldStandard",
+                "reason": "Summarised from the description; no formal GS name is given."
+            },
+            {
+                "field": "mainMethod.technique",
+                "reason": "Technique phrasing paraphrases the described method."
+            }
+        ]
+    },
+    {
+        "id": "pham2016semantic",
+        "added": "",
+        "year": 2016,
+        "firstAuthor": "Pham",
+        "authors": [
+            "Minh Pham",
+            "Suresh Alse",
+            "Craig A. Knoblock",
+            "Pedro Szekely"
+        ],
+        "title": "Semantic labeling: A domain-independent approach",
+        "venue": {
+            "type": "conference",
+            "acronym": "ISWC"
+        },
+        "nameOfApproach": "DSL (Domain-independent Semantic Labeler) ",
+        "techniqueTags": [],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Computes similarity features over attribute names and values (e.g., Jaccard, TF-IDF cosine, numeric Jaccard, KS test, Mann–Whitney histogram) with adjustments for text/number mixes. ",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Assigns each column a KG class as part of a <class, property> semantic type. ",
+            "predicateAnnotation": "Matches columns to KG properties (property matching) using learned similarity-based ranking. ",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "supervised",
+            "technique": "Logistic Regression over similarity metrics",
+            "supervision": {
+                "type": "supervised"
+            }
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Fully automatic ranking of top-k semantic types using classifier probabilities; no user-in-the-loop editing. "
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "Evaluated on city, museum, soccer, and weather datasets; additionally on the T2D Gold Standard for property matching. ",
+            "metrics": [
+                "MRR",
+                "F1"
+            ]
+        },
+        "code": "https://github.com/minhptx/iswc-2016-semantic-labeling.git",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables, spreadsheets, and relational tables",
+            "tableSources": [
+                "web",
+                "spreadsheet",
+                "relational"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "Automatic semantic labelling of table attributes for heterogeneous data integration. ",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1007/978-3-319-46523-4_27",
+        "citations": [
+            {
+                "ref": "ramnandan2015assigning",
+                "title": "Assigning Semantic Labels to Data Sources"
+            },
+            {
+                "ref": "ritze2015matching",
+                "title": "Matching HTML Tables to DBpedia"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            },
+            {
+                "ref": "mulwad2013semantic",
+                "title": "Semantic message passing for generating linked data from tables"
+            },
+            {
+                "ref": "craswell2009mean",
+                "title": "Mean reciprocal rank"
+            },
+            {
+                "ref": "breiman2001random",
+                "title": "Random Forests"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "coreTasks.cpa",
+                "reason": "The paper performs property matching for columns but does not explicitly model inter-column relations as in some CPA definitions; marked true due to property matching focus. "
+            },
+            {
+                "field": "output",
+                "reason": "No explicit serialisation format (e.g., RDF/CSV) is specified for outputs; system reports ranked labels. "
+            },
+            {
+                "field": "license",
+                "reason": "The paper does not state a licence; the repository’s licence was not confirmed here. "
+            },
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "Examples include relational databases, web tables and spreadsheets; exact supported formats may extend beyond those explicitly described. "
+            },
+            {
+                "field": "kg.index",
+                "reason": "Indexing mechanism is not specified; only the use of DBpedia is clearly mentioned. "
+            }
+        ]
+    },
+    {
+        "id": "taheriyan2016leveraging",
+        "added": "",
+        "year": 2016,
+        "firstAuthor": "Taheriyan",
+        "authors": [
+            "Mohsen Taheriyan",
+            "Craig A. Knoblock",
+            "Pedro Szekely",
+            "José Luis Ambite"
+        ],
+        "title": "Leveraging Linked Data to Discover Semantic Relations Within Data Sources",
+        "venue": {
+            "type": "conference",
+            "acronym": "ISWC"
+        },
+        "nameOfApproach": "Karma",
+        "techniqueTags": [
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Assumes columns are already assigned semantic labels; no specific preprocessing described.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "Infers relations between columns using LOD graph-pattern mining combined with ontology paths.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "Ontology-driven graph pattern mining over Linked Open Data"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Automatically generates and ranks candidate semantic models; can be refined by users in Karma if desired."
+        },
+        "domain": {
+            "domain": "dependent",
+            "type": "Cultural heritage (CIDOC-CRM/EDM) and schema.org extension (weapons ads)"
+        },
+        "validation": {
+            "goldStandard": "Gold-standard semantic models for 29 museum sources (CIDOC-CRM/EDM) and 15 weapons-ad tables; leave-one-out evaluation; datasets on GitHub.",
+            "metrics": [
+                "Precision",
+                "Recall"
+            ]
+        },
+        "code": "https://github.com/usc-isi-i2/Web-Karma",
+        "license": "Apache 2.0",
+        "inputs": {
+            "typeOfTable": "CSV, XML, JSON",
+            "tableSources": [
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "CIDOC-CRM; EDM; schema.org",
+            "index": "Patterns mined from Linked Open Data stored in Virtuoso; ontology paths used for graph expansion."
+        },
+        "output": "RDF",
+        "applicationPurpose": "Automatically infer relations between columns to build complete semantic models.",
+        "userInterfaceTool": "Karma (Web UI)",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1007/978-3-319-46523-4_33",
+        "citations": [
+            {
+                "ref": "schaible2016termpicker",
+                "title": "TermPicker: Enabling the Reuse of Vocabulary Terms by Exploiting Data from the Linked Open Data Cloud"
+            },
+            {
+                "ref": "mulwad2013semantic",
+                "title": "Semantic Message Passing for Generating Linked Data from Tables"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering Semantics of Tables on the Web"
+            },
+            {
+                "ref": "pham2016semantic",
+                "title": "Semantic Labeling: A Domain-independent Approach"
+            },
+            {
+                "ref": "knoblock2012semi-automatically",
+                "title": "Semi-Automatically Mapping Structured Sources into the Semantic Web"
+            },
+            {
+                "ref": "taheriyan2015leveraging",
+                "title": "Leveraging Linked Data to Infer Semantic Relations within Structured Sources"
+            },
+            {
+                "ref": "taheriyan2016learning",
+                "title": "Learning the Semantics of Structured Data Sources"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "nameOfApproach",
+                "reason": "The paper presents a method integrated into the Karma system but does not brand the method with a unique name; using the tool name may be debatable."
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Sources are described as CSV/XML/JSON from museums; assumed to be web-hosted, but exact provenance is not exhaustively specified."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "They rely on domain ontologies (CIDOC-CRM/EDM) and a schema.org extension plus Smithsonian LOD; representing these as a single 'tripleStore' is approximate."
+            },
+            {
+                "field": "output",
+                "reason": "The method outputs semantic models; RDF is typical via Karma but not stated as a direct serialized output of the algorithm."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "The algorithm is implemented within Karma; whether a specific UI was used for this paper's experiments is implied rather than explicitly detailed."
+            }
+        ]
+    },
+    {
+        "id": "taheriyan2016learning",
+        "added": "",
+        "year": 2016,
+        "firstAuthor": "Taheriyan",
+        "authors": [
+            "Mohsen Taheriyan",
+            "Craig A. Knoblock",
+            "Pedro Szekely",
+            "José Luis Ambite"
+        ],
+        "title": "Learning the semantics of structured data sources",
+        "venue": {
+            "type": "journal",
+            "acronym": "Web Semantics"
+        },
+        "nameOfApproach": "Karma",
+        "techniqueTags": [
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Uses sample data from the new source and merges known semantic models and ontology paths; no specific normalisation steps are detailed.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "Attributes with literal values are typed using pairs ⟨class, data property⟩ inferred during semantic labelling.",
+            "typeAnnotation": "Semantic labelling assigns candidate semantic types (classes or class/property pairs) to source attributes.",
+            "predicateAnnotation": "Relationships between attributes are inferred via a weighted graph built from known models and ontology paths, selecting minimum-cost (Steiner) trees.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "hybrid",
+            "technique": "Semantic labelling (supervised) + ontology-driven graph search with top-k Steiner trees"
+        },
+        "revision": {
+            "type": "semi automated",
+            "description": "System suggests ranked semantic models; users can refine/correct them in the Karma UI to improve future predictions."
+        },
+        "domain": {
+            "domain": "dependent",
+            "type": "cultural heritage / museum"
+        },
+        "validation": {
+            "goldStandard": "29 museum sources with expert-crafted gold-standard models using EDM and CIDOC-CRM",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "MRR"
+            ]
+        },
+        "code": "https://github.com/usc-isi-i2/Web-Karma",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "CSV, XML, JSON, relational tables",
+            "tableSources": [
+                "web",
+                "spreadsheet",
+                "relational"
+            ]
+        },
+        "kg": {
+            "tripleStore": "EDM; CIDOC-CRM; FOAF; DBpedia; SKOS; DCMI Terms; FRBR; ORE; ElementsGr2",
+            "index": ""
+        },
+        "output": "RDF",
+        "applicationPurpose": "Automatic publication of structured sources as RDF into knowledge graphs; supports source discovery, information integration, and service composition.",
+        "userInterfaceTool": "Karma (Web UI)",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1016/j.websem.2015.12.003",
+        "citations": [
+            {
+                "ref": "krishnamurthy2015assigning",
+                "title": "Assigning semantic labels to data sources"
+            },
+            {
+                "ref": "das2012r2rml",
+                "title": "R2RML: RDB to RDF Mapping Language"
+            },
+            {
+                "ref": "szekely2013connecting",
+                "title": "Connecting the Smithsonian American art museum to the linked data cloud"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "The journal’s full name is given as “Web Semantics: Science, Services and Agents on the World Wide Web”; the common short form/acronym isn’t explicitly stated, so “Web Semantics” is used. "
+            },
+            {
+                "field": "coreTasks.cta",
+                "reason": "The paper does not use the CTA label; we mapped their ‘semantic labelling’ of attributes to CTA by analogy. "
+            },
+            {
+                "field": "coreTasks.cpa",
+                "reason": "They infer relationships between attributes via ontology paths and Steiner trees, which aligns with CPA though the term isn’t used. "
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "They model against multiple domain ontologies (EDM, CIDOC-CRM, SKOS, DCMI Terms, FOAF, FRBR, ORE, ElementsGr2) and show an example with DBpedia/FOAF; no single KG/triple store is prescribed. "
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Sources include relational databases, spreadsheets, XML/JSON and Web APIs; we mapped these to the closest allowed categories (web, spreadsheet, relational). "
+            },
+            {
+                "field": "nameOfApproach",
+                "reason": "The approach is implemented within the Karma framework; no separate unique method name is introduced, so we used “Karma”. "
+            },
+            {
+                "field": "license",
+                "reason": "No explicit software licence name is stated in the paper; thus set to “Not Specified”. "
+            },
+            {
+                "field": "code",
+                "reason": "The paper states the approach is integrated into the open-source Karma project; the linked repository is assumed to host the relevant code. "
+            }
+        ]
+    },
+    {
+        "id": "efthymiou2017matching",
+        "added": "",
+        "year": 2017,
+        "firstAuthor": "Efthymiou",
+        "authors": [
+            "Vasilis Efthymiou",
+            "Oktie Hassanzadeh",
+            "Mariano Rodriguez-Muro",
+            "Vassilis Christophides"
+        ],
+        "title": "Matching Web Tables with Knowledge Base Entities: From Entity Lookups to Entity Embeddings",
+        "venue": {
+            "type": "conference",
+            "acronym": "ISWC"
+        },
+        "nameOfApproach": "FactBase lookup",
+        "techniqueTags": [
+            "rule-based",
+            "embeddings",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Heuristic label/column detection and refined/loose lookups with edit-distance tolerance and frequent description tokens.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Detect label and reference columns heuristically; mark potential reference (entity) columns via sampling lookups.",
+            "subjectDetection": "Identify the label column as the leftmost column with maximum distinct non-numeric values.",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Unsupervised entity linking via lookup refinement, relation-aware constraints, and global disambiguation with entity embeddings.",
+                "candidateGeneration": "DBpedia Lookup and a generic KB index (FactBase) over Wikidata labels/descriptions.",
+                "entityDisambiguation": "Weighted PageRank over embedding-similarity graphs; relation-constrained refined lookups when applicable."
+            }
+        },
+        "mainMethod": {
+            "type": "hybrid",
+            "technique": "rule-based + embeddings"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "No human-in-the-loop; methods run end-to-end (MapReduce-based experiments and automatic evaluation). "
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "general web tables"
+        },
+        "validation": {
+            "goldStandard": "Evaluated on T2D, Limaye, and a new large Wikipedia tables gold standard; metrics reported as micro-averaged. ",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "http://ibm.biz/webtables",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables (HTML tables)",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia; Wikidata",
+            "index": "FactBase generic index; DBpedia Lookup"
+        },
+        "output": "",
+        "applicationPurpose": "Unsupervised annotation of web tables and empirical benchmarking of methods for KB augmentation/search. ",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1007/978-3-319-68288-4_16",
+        "citations": [
+            {
+                "ref": "ritze2015matching",
+                "title": "Matching HTML tables to DBpedia"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "bhagavatula2015tabel",
+                "title": "TabEL: entity linking in web tables"
+            },
+            {
+                "ref": "zwicklbauer2016doser",
+                "title": "DoSeR - a knowledge-base-agnostic framework for entity disambiguation using semantic embeddings"
+            },
+            {
+                "ref": "jimenez-ruiz2011logmap",
+                "title": "LogMap: logic-based and scalable ontology matching"
+            },
+            {
+                "ref": "suchanek2011paris",
+                "title": "PARIS: probabilistic alignment of relations, instances, and schema"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "nameOfApproach",
+                "reason": "Paper evaluates multiple methods (lookup, embeddings, ontology matching) and two hybrids; selecting only “FactBase lookup” may not represent the whole contribution."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "Both DBpedia and Wikidata are used; the exact primary KB per experiment varies."
+            },
+            {
+                "field": "code",
+                "reason": "The provided URL hosts datasets/implementation details; it may not be a traditional source-code repository."
+            },
+            {
+                "field": "output",
+                "reason": "No explicit serialisation format (e.g., RDF/JSON-LD) is stated; the work reports annotations and metrics rather than an exported file format."
+            },
+            {
+                "field": "license",
+                "reason": "No explicit software licence is stated for the implementations."
+            },
+            {
+                "field": "supportTasks.columnClassification",
+                "reason": "Their heuristics target label/reference column detection rather than a full NE vs LIT column classifier."
+            }
+        ]
+    },
+    {
+        "id": "ell2017towards",
+        "added": "",
+        "year": 2017,
+        "firstAuthor": "Ell",
+        "authors": [
+            "Basil Ell",
+            "Sherzod Hakimov",
+            "Philipp Braukmann",
+            "Lorenzo Cazzoli",
+            "Fabian Kaupmann",
+            "Amerigo Mancino",
+            "Junaid Altaf Memon",
+            "Kai Rother",
+            "Abhishek Saini",
+            "Philipp Cimiano"
+        ],
+        "title": "Towards a Large Corpus of Richly Annotated Web Tables for Knowledge Base Population",
+        "venue": {
+            "type": "conference",
+            "acronym": "ISWC"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Language detection and table normalisation (dates, numbers, and units) producing JSON hypotheses for cells. Plain hypotheses are always created to preserve original strings.",
+                "spellChecker": "",
+                "unitsOfMeasurements": "Values converted to base units (e.g., kg, km)."
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Links plain cell strings to DBpedia resources and records top candidates with confidences.",
+                "candidateGeneration": "Per-language indices of DBpedia entity, class, and property labels; retrieve top-N by frequency.",
+                "entityDisambiguation": "Rank candidates by normalised frequency; no supervised disambiguation."
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "A scheduled pipeline applies tasks sequentially; no manual review during processing."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "1,000,000 tables from the WDC Web Table Corpus 2015 (WTC).",
+            "metrics": []
+        },
+        "code": "https://github.com/isywtu/code",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": "Per-language string indices over DBpedia labels for entities, classes, and properties with frequency counts."
+        },
+        "output": "JSON",
+        "applicationPurpose": "Enable knowledge base population and support higher-level table understanding on web tables.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "wang2012understanding",
+                "title": "Understanding Tables on the Web"
+            },
+            {
+                "ref": "bhagavatula2015tabel",
+                "title": "TabEL: Entity Linking in Web Tables"
+            },
+            {
+                "ref": "ritze2015matching",
+                "title": "Matching HTML Tables to DBpedia"
+            },
+            {
+                "ref": "pivk2007transforming",
+                "title": "Transforming Arbitrary Tables into F-Logic Frames with TARTAR"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "Assumed from the filename; not explicitly stated in the paper header."
+            },
+            {
+                "field": "doi",
+                "reason": "A DOI for the paper was not found in the provided text; only a dataset DOI was mentioned."
+            },
+            {
+                "field": "techniqueTags[1]",
+                "reason": "Classified as ontology-driven because the approach relies on DBpedia; the paper does not use this exact label."
+            },
+            {
+                "field": "kg.index",
+                "reason": "High-level description inferred; precise indexing implementation details are not fully specified."
+            }
+        ]
+    },
+    {
+        "id": "lehmberg2017stitching",
+        "added": "",
+        "year": 2017,
+        "firstAuthor": "Lehmberg",
+        "authors": [
+            "Oliver Lehmberg",
+            "Christian Bizer"
+        ],
+        "title": "Stitching Web Tables for Improving Matching Quality",
+        "venue": {
+            "type": "journal",
+            "acronym": "PVLDB"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [],
+        "coreTasks": {
+            "cta": false,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "De-duplicate tables, recognise entities via DBpedia label matching, and create per-host union and stitched tables with holistic correspondence refinement.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Heuristic identification of the entity label column to guide schema matching.",
+            "subjectDetection": "Detects a key/subject column (entity label column) within tables from the same host.",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "Schema matching from web-table columns to DBpedia properties using T2K Match/COMA with holistic refinement.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "hybrid",
+            "technique": "Hybrid schema matching combining label-, value-, and duplicate-based matchers with holistic correspondence refinement"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Fully automated stitching (union and holistic stitching) followed by automated schema matching without user intervention."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "Random sample of 1,000 WDC 2015 web tables with 427 manually created column-to-DBpedia-property correspondences; per-host evaluations.",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "https://github.com/olehmberg/WebTableStitching",
+        "license": "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "Knowledge base augmentation and improved schema matching on small web tables",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.14778/3137628.3137657",
+        "citations": [
+            {
+                "ref": "ritze2017matching",
+                "title": "Matching Web Tables To DBpedia - A Feature Utility Study"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            },
+            {
+                "ref": "ling2013synthesizing",
+                "title": "Synthesizing union tables from the web"
+            },
+            {
+                "ref": "aumueller2005schema",
+                "title": "Schema and ontology matching with COMA++"
+            },
+            {
+                "ref": "lehmann2015dbpedia",
+                "title": "DBpedia - A Large-scale, Multilingual Knowledge Base Extracted from Wikipedia"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "nameOfApproach",
+                "reason": "The paper does not introduce a branded system name; it presents a stitching procedure and evaluation."
+            },
+            {
+                "field": "techniqueTags",
+                "reason": "None of the allowed technique tags precisely fit classical schema matching and stitching; left empty to avoid misclassification."
+            },
+            {
+                "field": "supportTasks.columnClassification",
+                "reason": "Entity label/key column detection is implied in the procedure but not formalised as a distinct module."
+            },
+            {
+                "field": "supportTasks.subjectDetection",
+                "reason": "Subject/key column identification is heuristic and not explicitly labelled as 'subject detection' in the paper."
+            },
+            {
+                "field": "kg.index",
+                "reason": "Specific KG indexing structures are not described beyond label lookups; details are unclear."
+            },
+            {
+                "field": "output",
+                "reason": "The exported result format is not specified; results are reported as correspondences and metrics."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No UI is described; usage may rely on libraries/tools (e.g., WInte.r) but a specific UI is not stated."
+            },
+            {
+                "field": "validation.goldStandard",
+                "reason": "The description summarises the sampling and manual mapping; no official GS name is given for this new sample."
+            },
+            {
+                "field": "mainMethod.type",
+                "reason": "Classified as 'hybrid' due to combining several matchers and holistic refinement; some readers might label it 'unsupervised'."
+            }
+        ]
+    },
+    {
+        "id": "zhang2017effective",
+        "added": "",
+        "year": 2017,
+        "firstAuthor": "Zhang",
+        "authors": [
+            "Ziqi Zhang"
+        ],
+        "title": "Effective and Efficient Semantic Table Interpretation using TableMiner+",
+        "venue": {
+            "type": "journal",
+            "acronym": "SWJ"
+        },
+        "nameOfApproach": "TableMiner+",
+        "techniqueTags": [
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Normalises content and collects in-table/out-of-table context (titles, captions, Microdata) and caches KB lookups to reduce latency. ",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Identifies NE vs literal columns and classifies columns using KB-derived evidence. ",
+            "subjectDetection": "Detects a subject (reference) column used to anchor relations to other columns. ",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Assigns KG concepts to NE-columns via bootstrapped inference and message passing with KB features. ",
+            "predicateAnnotation": "Enumerates relations between the subject column and other columns (binary CPA). ",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Links cell mentions to KB entities using Freebase candidates and contextual features from table and page. ",
+                "candidateGeneration": "Retrieves candidates via Freebase Search/MQL APIs, with local caching. ",
+                "entityDisambiguation": "Scores candidates with in-table and out-of-table context; refines via iterative message passing. "
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "Incremental bootstrapping with semantic message passing over KB features"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "System performs iterative inference without human-in-the-loop; annotations are refined via message passing. "
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "Limaye200 (200 tables), LimayeAll (6,310 tables; 227,046 NE cells), IMDB (7,416 tables), MusicBrainz (1,406 tables). ",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "https://github.com/ziqizhang/sti",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables (HTML)",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Freebase",
+            "index": "Freebase Search/MQL APIs; local cache; later DBpedia interface noted. "
+        },
+        "output": "RDF",
+        "applicationPurpose": "Semantic indexing/search of tables and creation of Linked Open Data/KB population. ",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.3233/SW-160242",
+        "citations": [
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the Web"
+            },
+            {
+                "ref": "mulwad2013semantic",
+                "title": "Semantic message passing for generating linked data from tables"
+            },
+            {
+                "ref": "munoz2014using",
+                "title": "Using linked data to mine RDF from Wikipedia’s tables"
+            },
+            {
+                "ref": "wang2012understanding",
+                "title": "Understanding tables on the Web"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.acronym",
+                "reason": "Used the common 'SWJ' acronym for Semantic Web Journal; some datasets use 'Semantic Web'."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "Primary experiments use Freebase, but the paper notes an interface/migration to DBpedia/Google KG; Freebase chosen to reflect evaluation. "
+            },
+            {
+                "field": "output",
+                "reason": "The paper states enabling LOD creation but does not explicitly specify an export format; 'RDF' inferred. "
+            },
+            {
+                "field": "supportTasks.datatypeAnnotation",
+                "reason": "Approach handles literal columns for CPA, but explicit mapping to datatype vocabularies is not clearly described."
+            },
+            {
+                "field": "techniqueTags[0]",
+                "reason": "Tagged as ontology-driven due to heavy KB use; other tags (e.g., rule-based/clustering) do not neatly apply."
+            },
+            {
+                "field": "citations[2].ref",
+                "reason": "Slug for the ISWC 2013 'Semantic message passing' paper may vary in exact first word; format approximated."
+            }
+        ]
+    },
+    {
+        "id": "kacprzak2018making",
+        "added": "",
+        "year": 2018,
+        "firstAuthor": "Kacprzak",
+        "authors": [
+            "Emilia Kacprzak",
+            "José M. Giménez-García",
+            "Alessandro Piscopo",
+            "Laura Koesten",
+            "Luis-Daniel Ibáñez",
+            "Jeni Tennison",
+            "Elena Simperl"
+        ],
+        "title": "Making Sense of Numerical Data - Semantic Labelling of Web Tables",
+        "venue": {
+            "type": "conference",
+            "acronym": "EKAW"
+        },
+        "nameOfApproach": "NUMER",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Partition columns into numerical vs textual, identify a subject column, disambiguate its cells to KB entities, and strip units/non-numeric characters from numeric cells.",
+                "spellChecker": "",
+                "unitsOfMeasurements": "Units (e.g., Km, %) are removed during preprocessing to keep only numeric values."
+            },
+            "columnClassification": "Classify columns as numerical or textual to focus annotation.",
+            "subjectDetection": "Identify the subject column (textual NE-column) using support/connectivity heuristics from prior work.",
+            "datatypeAnnotation": "Consider owl:DatatypeProperty candidates linked to subject-entity types for numeric columns.",
+            "typeAnnotation": "",
+            "predicateAnnotation": "Rank KB datatype properties (e.g., dbo:populationTotal) for each numeric column via KS-test distribution matching and row-wise relative difference.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "Produces a ranked list of KB properties per numeric column without manual post-editing."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": ""
+        },
+        "validation": {
+            "goldStandard": "NumDB (synthetic tables from DBpedia; multiple sizes and error deviations)",
+            "metrics": [
+                "Top-1 Accuracy",
+                "Top-k Accuracy"
+            ]
+        },
+        "code": "https://github.com/chabrowa/semantification",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "Assign semantic labels to numerical columns to aid data discovery and KB integration.",
+        "userInterfaceTool": "",
+        "usesLLM": null,
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "neumaier2016multi-level",
+                "title": "Multi-level semantic labelling of numerical values"
+            },
+            {
+                "ref": "venetis2011recovering",
+                "title": "Recovering semantics of tables on the web"
+            },
+            {
+                "ref": "ramnandan2015assigning",
+                "title": "Assigning semantic labels to data sources"
+            },
+            {
+                "ref": "ermilov2016taipan",
+                "title": "TAIPAN: Automatic Property Mapping for Tabular Data"
+            },
+            {
+                "ref": "piscopo2018numdb",
+                "title": "NumDB"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "The DOI of the paper is not stated in the provided text excerpt."
+            },
+            {
+                "field": "output",
+                "reason": "The paper reports ranked predictions but does not specify an export serialisation (e.g., RDF/CSV)."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No UI or tool front-end is described; unclear if a CLI/Web UI exists."
+            },
+            {
+                "field": "techniqueTags",
+                "reason": "Mapped to 'rule-based' and 'ontology-driven' based on KB-driven matching and heuristics; no explicit ML/embeddings mentioned."
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Benchmark tables are derived from DBpedia (wiki); applicability to other sources is discussed but not validated."
+            }
+        ]
+    },
+    {
+        "id": "luo2018cross-lingual",
+        "added": "",
+        "year": 2018,
+        "firstAuthor": "Luo",
+        "authors": [
+            "Xusheng Luo",
+            "Kangqi Luo",
+            "Xianyang Chen",
+            "Kenny Q. Zhu"
+        ],
+        "title": "Cross-Lingual Entity Linking for Web Tables",
+        "venue": {
+            "type": "conference",
+            "acronym": "AAAI"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "embeddings"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Stop-word removal on translations/anchors and simple text normalisation used during candidate generation.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Joint neural model links all table mentions simultaneously with mention, context, and column-coherence features.",
+                "candidateGeneration": "Translate mentions via multiple MT services; generate candidates by exact/anchor/fuzzy matches with heuristics (e.g., Jaccard/edit distance).",
+                "entityDisambiguation": "Pairwise ranking (RankNet) with bilingual embedding transformation and local-search descent to select globally coherent entities."
+            }
+        },
+        "mainMethod": {
+            "type": "supervised",
+            "technique": "neural network ranking (joint model with RankNet)",
+            "supervision": {
+                "type": "supervised"
+            }
+        },
+        "revision": {
+            "type": "fully automated",
+            "description": "System automatically scores and selects entities using a learned model and local search; no human-in-the-loop post-editing."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic web tables"
+        },
+        "validation": {
+            "goldStandard": "Cross-lingual table linking dataset (150 tables, 2883 linkable cells; Chinese→English Wikipedia).",
+            "metrics": [
+                "Accuracy"
+            ]
+        },
+        "code": "",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "web",
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Wikipedia",
+            "index": ""
+        },
+        "output": "",
+        "applicationPurpose": "KB enrichment and fact discovery from non-English web tables.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1609/aaai.v32i1.11252",
+        "citations": [
+            {
+                "ref": "bhagavatula2015tabel",
+                "title": "Tabel: Entity Linking in Web Tables"
+            },
+            {
+                "ref": "wu2016entity",
+                "title": "Entity Linking in Web Tables with Multiple Linked Knowledge Bases"
+            },
+            {
+                "ref": "limaye2010annotating",
+                "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships"
+            },
+            {
+                "ref": "mcnamee2011cross",
+                "title": "Cross-Language Entity Linking"
+            },
+            {
+                "ref": "tsai2016cross-lingual",
+                "title": "Cross-lingual Wikification Using Multilingual Embeddings"
+            },
+            {
+                "ref": "zhang2013cross",
+                "title": "Cross Lingual Entity Linking with Bilingual Topic Model"
+            },
+            {
+                "ref": "socher2013reasoning",
+                "title": "Reasoning with Neural Tensor Networks for Knowledge Base Completion"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "nameOfApproach",
+                "reason": "No specific system name or acronym is stated; described as a joint neural model."
+            },
+            {
+                "field": "kg.tripleStore",
+                "reason": "They use Wikipedia articles as the KB rather than a conventional triple store like DBpedia or Wikidata."
+            },
+            {
+                "field": "validation.goldStandard",
+                "reason": "Dataset is described but not given a formal GS name."
+            },
+            {
+                "field": "output",
+                "reason": "The paper does not specify an exported output format for annotations."
+            },
+            {
+                "field": "userInterfaceTool",
+                "reason": "No UI or tool front-end is mentioned."
+            },
+            {
+                "field": "code",
+                "reason": "No repository or code link is provided in the paper."
             }
         ]
     }
