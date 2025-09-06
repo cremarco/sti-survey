@@ -20,18 +20,19 @@
     "year": { "type": "integer", "label": "Year" },
     "firstAuthor": { "type": "string", "label": "First Author" },
     "authors": { "type": "array", "items": { "type": "string" }, "label": "Authors" },
-    "title": {
+    "title": { "type": "string", "label": "Title" },
+    "venue": {
       "type": "object",
-      "label": "Title",
+      "label": "Venue",
       "properties": {
-        "text": { "type": "string", "label": "Text" },
-        "link": { "type": "string", "label": "Link" }
+        "type": { "type": "string", "label": "Type" },
+        "acronym": { "type": "string", "label": "Acronym" }
       },
-      "required": ["text"],
+      "required": ["acronym"],
       "additionalProperties": false
     },
-    "conferenceJournal": { "type": "string", "label": "Conference/Journal" },
     "nameOfApproach": { "type": "string", "label": "Name of Approach" },
+    "techniqueTags": { "type": "array", "items": { "type": "string" }, "label": "Technique Tags" },
     "coreTasks": {
       "type": "object",
       "label": "Core Tasks",
@@ -131,19 +132,20 @@
       "type": "object",
       "label": "Inputs",
       "properties": {
-        "source": { "type": "string", "label": "Source" },
-        "kg": {
-          "type": "object",
-          "label": "KG",
-          "properties": {
-            "tripleStore": { "type": "string", "label": "Triple Store" },
-            "index": { "type": "string", "label": "Index" }
-          },
-          "required": ["tripleStore", "index"],
-          "additionalProperties": false
-        }
+        "typeOfTable": { "type": "string", "label": "Type of Table" },
+        "tableSources": { "type": "array", "items": { "type": "string" }, "label": "Table Sources" }
       },
-      "required": ["source", "kg"],
+      "required": ["typeOfTable"],
+      "additionalProperties": false
+    },
+    "kg": {
+      "type": "object",
+      "label": "KG",
+      "properties": {
+        "tripleStore": { "type": "string", "label": "Triple Store" },
+        "index": { "type": "string", "label": "Index" }
+      },
+      "required": ["tripleStore"],
       "additionalProperties": false
     },
     "output": { "type": "string", "label": "Output" },
@@ -167,7 +169,7 @@
     }
   },
   "required": [
-    "id", "added", "year", "firstAuthor", "authors", "title", "conferenceJournal", "nameOfApproach", "coreTasks", "supportTasks", "mainMethod", "domain", "revision", "validation", "codeAvailability", "license", "inputs", "output", "checkedByAuthor", "checkedByAi", "doi", "citations", "applicationPurpose", "userInterfaceTool"
+    "id", "added", "year", "firstAuthor", "authors", "title", "venue", "nameOfApproach", "techniqueTags", "coreTasks", "supportTasks", "mainMethod", "domain", "revision", "validation", "codeAvailability", "license", "inputs", "kg", "output", "checkedByAuthor", "checkedByAi", "doi", "citations", "applicationPurpose", "userInterfaceTool"
   ],
   "additionalProperties": false
 }

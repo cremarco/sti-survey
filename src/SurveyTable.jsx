@@ -514,20 +514,57 @@ function SurveyTable() {
       },
       enableSorting: false,
     }),
-    columnHelper.accessor("venue.acronym", {
+    columnHelper.accessor(row => row.venue, {
+      id: "venue",
       header: () => <span>Conference/Journal</span>,
-      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'venue.acronym')} />,
+      cell: (info) => {
+        const venue = info.getValue();
+        const isMissing = isRequiredFieldMissing(info.row.original, 'venue.acronym');
+        
+        if (!venue) {
+          return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+        }
+        
+        return (
+          <div className="flex flex-col gap-1">
+            <span className={isMissing ? "bg-red-500/20 text-red-200 px-2 py-1 rounded" : "text-neutral-200"}>
+              {venue.acronym || "MISSING"}
+            </span>
+            {venue.type && (
+              <span className="text-[10px] text-neutral-400 italic">{venue.type}</span>
+            )}
+          </div>
+        );
+      },
       enableColumnFilter: true,
       enableFacetedUniqueValues: true,
       enableSorting: false,
       filterFn: (row, columnId, filterValue) => {
         if (!Array.isArray(filterValue) || filterValue.length === 0) return true;
-        return filterValue.includes(row.getValue(columnId));
+        const venue = row.getValue(columnId);
+        return filterValue.includes(venue?.acronym);
       },
     }),
     columnHelper.accessor("nameOfApproach", {
       header: () => <span>Name of Approach</span>,
       cell: (info) => info.getValue(),
+      enableSorting: false,
+    }),
+    columnHelper.accessor("techniqueTags", {
+      header: () => <span>Technique Tags</span>,
+      cell: (info) => {
+        const tags = info.getValue();
+        if (!tags || tags.length === 0) return <span className="text-neutral-500 text-[10px]">-</span>;
+        return (
+          <div className="flex flex-wrap gap-1">
+            {tags.map((tag, index) => (
+              <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: 'rgba(100, 116, 139, 0.12)', color: 'rgb(229, 231, 235)' }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        );
+      },
       enableSorting: false,
     }),
     // Core Tasks group
@@ -806,13 +843,31 @@ function SurveyTable() {
           cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'inputs.typeOfTable')} />,
           enableSorting: false,
         }),
-        columnHelper.accessor(row => row.inputs?.kg?.tripleStore || "", {
+        columnHelper.accessor(row => row.inputs?.tableSources || [], {
+          id: "tableSources",
+          header: () => <span>Table Sources</span>,
+          cell: (info) => {
+            const sources = info.getValue();
+            if (!sources || sources.length === 0) return <span className="text-neutral-500 text-[10px]">-</span>;
+            return (
+              <div className="flex flex-wrap gap-1">
+                {sources.map((source, index) => (
+                  <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: 'rgba(100, 116, 139, 0.12)', color: 'rgb(229, 231, 235)' }}>
+                    {source}
+                  </span>
+                ))}
+              </div>
+            );
+          },
+          enableSorting: false,
+        }),
+        columnHelper.accessor(row => row.kg?.tripleStore || "", {
           id: "tripleStore",
           header: () => <span>Triple Store</span>,
           cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'kg.tripleStore')} />,
           enableSorting: false,
         }),
-        columnHelper.accessor(row => row.inputs?.kg?.index || "", {
+        columnHelper.accessor(row => row.kg?.index || "", {
           id: "kgIndex",
           header: () => <span>Index</span>,
           cell: (info) => info.getValue(),
