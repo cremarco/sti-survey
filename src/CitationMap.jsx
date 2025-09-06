@@ -291,7 +291,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
               disabled={!svgNode}
               title="Download SVG"
             >
-              <span className="material-icons-round text-lg">download</span>
+              <Icon name="download" className="text-lg" />
             </button>
           </div>
         </div>
@@ -306,3 +306,4 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
 }
 
 export default CitationMap; 
+import Icon from './Icon';

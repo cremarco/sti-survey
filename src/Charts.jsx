@@ -524,7 +524,7 @@ function Charts({ data }) {
                             className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
                             title={showMainMethodChart ? 'Show statistics' : 'Show chart'}
                           >
-                            <span className="material-icons-round text-lg">360</span>
+                            <Icon name="360" className="text-lg" />
                           </button>
                         </div>
                       </div>
@@ -566,7 +566,7 @@ function Charts({ data }) {
                               className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
                               title={showMainMethodChart ? "Show statistics" : "Show chart"}
                             >
-                              <span className="material-icons-round text-lg">360</span>
+                              <Icon name="360" className="text-lg" />
                             </button>
                             <button
                               onClick={() => {
@@ -577,7 +577,7 @@ function Charts({ data }) {
                               className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 transition-colors duration-200 text-indigo-300 hover:text-indigo-100"
                               title="Download SVG"
                             >
-                              <span className="material-icons-round text-lg">download</span>
+                              <Icon name="download" className="text-lg" />
                             </button>
                           </div>
                         </div>
@@ -714,7 +714,7 @@ function Charts({ data }) {
                             className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 transition-colors duration-200 text-amber-300 hover:text-amber-100"
                             title={showLicensesChart ? 'Show statistics' : 'Show chart'}
                           >
-                            <span className="material-icons-round text-lg">360</span>
+                            <Icon name="360" className="text-lg" />
                           </button>
                         </div>
                       </div>
@@ -755,7 +755,7 @@ function Charts({ data }) {
                               className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 transition-colors duration-200 text-amber-300 hover:text-amber-100"
                               title={showLicensesChart ? 'Show statistics' : 'Show chart'}
                             >
-                              <span className="material-icons-round text-lg">360</span>
+                              <Icon name="360" className="text-lg" />
                             </button>
                             <button
                               onClick={() => {
@@ -767,7 +767,7 @@ function Charts({ data }) {
                               className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 transition-colors duration-200 text-amber-300 hover:text-amber-100"
                               title="Download SVG"
                             >
-                              <span className="material-icons-round text-lg">download</span>
+                              <Icon name="download" className="text-lg" />
                             </button>
                           </div>
                         </div>
@@ -811,7 +811,7 @@ function Charts({ data }) {
                             className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
                             title={showConferenceJournalChart ? 'Show statistics' : 'Show chart'}
                           >
-                            <span className="material-icons-round text-lg">360</span>
+                            <Icon name="360" className="text-lg" />
                           </button>
                         </div>
                       </div>
@@ -857,7 +857,7 @@ function Charts({ data }) {
                               className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
                               title={showConferenceJournalChart ? 'Show statistics' : 'Show chart'}
                             >
-                              <span className="material-icons-round text-lg">360</span>
+                              <Icon name="360" className="text-lg" />
                             </button>
                             <button
                               onClick={() => {
@@ -869,7 +869,7 @@ function Charts({ data }) {
                               className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
                               title="Download SVG"
                             >
-                              <span className="material-icons-round text-lg">download</span>
+                              <Icon name="download" className="text-lg" />
                             </button>
                           </div>
                         </div>
@@ -895,3 +895,4 @@ function Charts({ data }) {
 }
 
 export default Charts;
+import Icon from './Icon';

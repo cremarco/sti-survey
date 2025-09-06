@@ -449,7 +449,7 @@ function Taxonomy() {
               disabled={!svgNode}
               title="Download SVG"
             >
-              <span className="material-icons-round text-lg">download</span>
+              <Icon name="download" className="text-lg" />
             </button>
           </div>
         </div>
@@ -464,3 +464,4 @@ function Taxonomy() {
 }
 
 export default Taxonomy; 
+import Icon from './Icon';

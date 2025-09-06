@@ -28,6 +28,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Navigation from "./Navigation";
+import Icon from "./Icon";
 import schema from '../public/data/sti-survey.schema.json';
 
 // Column helper for type-safe column definitions
@@ -245,15 +246,13 @@ const MissingFieldCell = ({ value, isMissing }) => {
 };
 const TaskCell = ({ value, isMissing }) => {
   if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
-  const iconClass = value ? "material-icons-round text-green-500 text-lg" : "material-icons-round text-red-500 text-lg";
-  const iconName = value ? "done" : "clear";
-  return <span className={iconClass}>{iconName}</span>;
+  const iconClass = value ? "text-green-500 text-lg" : "text-red-500 text-lg";
+  return <Icon name={value ? 'done' : 'clear'} className={iconClass} />;
 };
 const StepCell = ({ value }) => {
   const hasContent = Boolean(value?.trim());
-  const iconClass = hasContent ? "material-icons-round text-green-500 text-lg" : "material-icons-round text-red-500 text-lg";
-  const iconName = hasContent ? "done" : "clear";
-  return <span className={iconClass}>{iconName}</span>;
+  const iconClass = hasContent ? "text-green-500 text-lg" : "text-red-500 text-lg";
+  return <Icon name={hasContent ? 'done' : 'clear'} className={iconClass} />;
 };
 const MainMethodCell = ({ mainMethod, row }) => {
   let { type, tech } = mainMethod || {};
@@ -372,9 +371,11 @@ const CollapsibleNavigation = () => {
           className="relative bg-neutral-900 hover:bg-neutral-800 text-neutral-300 px-4 py-3 rounded-r-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 group flex items-center justify-center"
           title={isOpen ? "Hide navigation" : "Show navigation"}
         >
-          <span className="material-icons-round text-xl transition-transform duration-300 group-hover:rotate-12 relative z-10">
-            {isOpen ? "close" : "menu"}
-          </span>
+          {isOpen ? (
+            <Icon name="close" className="text-xl transition-transform duration-300 group-hover:rotate-12 relative z-10" />
+          ) : (
+            <Icon name="menu" className="text-xl transition-transform duration-300 group-hover:rotate-12 relative z-10" />
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-neutral-700/20 rounded-r-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
       </div>
@@ -771,7 +772,7 @@ function SurveyTable() {
             <div className="relative group inline-flex items-center">
               <span className={badgeClass} style={badgeStyle}>
                 {value}
-                <span className="material-icons-round ml-1 align-middle leading-none" style={{ fontSize: '16px' }}>info_outline</span>
+                <Icon name="info_outline" className="ml-1 align-middle leading-none text-[16px]" />
               </span>
               <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
                 {description}
@@ -812,7 +813,7 @@ function SurveyTable() {
             <a href={value} target="_blank" rel="noopener noreferrer"
                className="flex items-center justify-center h-full w-full"
                title="Open code link">
-              <span className="material-icons-round align-middle leading-none" style={{ fontSize: '16px' }}>launch</span>
+              <Icon name="launch" className="align-middle leading-none text-[16px]" />
             </a>
           </span>
         );
@@ -900,7 +901,7 @@ function SurveyTable() {
         const value = info.getValue();
         const isMissing = isRequiredFieldMissing(info.row.original, 'checkedByAuthor');
         if (isMissing) return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
-        return value ? <span className="material-icons-round text-green-500 text-lg">done</span> : <span className="material-icons-round text-red-500 text-lg">clear</span>;
+        return value ? <Icon name="done" className="text-green-500 text-lg" /> : <Icon name="clear" className="text-red-500 text-lg" />;
       },
       enableSorting: false,
     }),
@@ -909,7 +910,7 @@ function SurveyTable() {
       header: "Checked by AI",
       cell: (info) => {
         const value = info.getValue();
-        return value ? <span className="material-icons-round text-green-500 text-lg">done</span> : <span className="material-icons-round text-red-500 text-lg">clear</span>;
+        return value ? <Icon name="done" className="text-green-500 text-lg" /> : <Icon name="clear" className="text-red-500 text-lg" />;
       },
       enableSorting: false,
       meta: { align: 'center' },

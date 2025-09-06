@@ -31,6 +31,7 @@ import Taxonomy from "./Taxonomy";
 import Navigation from "./Navigation";
 import Charts from "./Charts";
 import SurveyTable from "./SurveyTable";
+import Icon from "./Icon";
 
 /**
  * Custom hook for animated counting
@@ -448,7 +449,7 @@ function App() {
                   <div className="p-6 pb-0">
                     <div className="flex items-center justify-between mb-6">
                       <h3 className="text-xl font-bold text-neutral-100 flex items-center">
-                        <span className="material-icons-round mr-2 text-blue-400">analytics</span>
+                        <Icon name="analytics" className="mr-2 text-blue-400" />
                         Data Overview
                       </h3>
                     </div>
@@ -523,7 +524,7 @@ function App() {
                     <div className="p-6">
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 bg-blue-500/20 flex items-center justify-center mr-4">
-                          <span className="material-icons-round text-blue-400 text-xl">table_chart</span>
+                          <Icon name="table_chart" className="text-blue-400 text-xl" />
                         </div>
                         <h3 className="text-lg font-bold text-neutral-100">Survey Data</h3>
                       </div>
@@ -537,7 +538,7 @@ function App() {
                     <div className="p-6">
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 bg-green-500/20 flex items-center justify-center mr-4">
-                          <span className="material-icons-round text-green-400 text-xl">account_tree</span>
+                          <Icon name="account_tree" className="text-green-400 text-xl" />
                         </div>
                         <h3 className="text-lg font-bold text-neutral-100">Citation Map</h3>
                       </div>
@@ -551,7 +552,7 @@ function App() {
                     <div className="p-6">
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 bg-purple-500/20 flex items-center justify-center mr-4">
-                          <span className="material-icons-round text-purple-400 text-xl">category</span>
+                          <Icon name="category" className="text-purple-400 text-xl" />
                         </div>
                         <h3 className="text-lg font-bold text-neutral-100">Taxonomy</h3>
                       </div>
@@ -565,7 +566,7 @@ function App() {
                     <div className="p-6">
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 bg-orange-500/20 flex items-center justify-center mr-4">
-                          <span className="material-icons-round text-orange-400 text-xl">bar_chart</span>
+                          <Icon name="bar_chart" className="text-orange-400 text-xl" />
                         </div>
                         <h3 className="text-lg font-bold text-neutral-100">Analytics</h3>
                       </div>
