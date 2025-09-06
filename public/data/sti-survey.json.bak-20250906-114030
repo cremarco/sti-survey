@@ -1128,7 +1128,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1145/1935826.1935904",
         "citations": [],
         "uncertainFields": [
             {
@@ -1234,7 +1234,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1145/1935826.1935904",
+        "doi": "",
         "citations": [
             {
                 "ref": "2008_cafarella_webtables",
@@ -1948,7 +1948,7 @@
         "userInterfaceTool": "Web UI (Karma)",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-642-30284-8_32",
+        "doi": "https://doi.org/10.14778/2336664.2336665",
         "citations": [
             {
                 "ref": "2010_bizer_the",
@@ -2076,7 +2076,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.14778/2336664.2336665",
+        "doi": "https://doi.org/10.1007/978-3-642-34002-4_11",
         "citations": [
             {
                 "ref": "2009_cafarella_data",
@@ -2613,7 +2613,7 @@
         "userInterfaceTool": "Web UI",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1145/2525314.2525324",
         "citations": [
             {
                 "ref": "1999_abiteboul_tools",
@@ -3205,7 +3205,7 @@
         "output": "RDF",
         "applicationPurpose": "Extract RDF triples from Wikipedia tables to enrich knowledge bases and the Web of Data.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -3490,7 +3490,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1145/2463676.2465276",
         "citations": [
             {
                 "ref": "2012_yakout_infogather",
@@ -3626,7 +3626,7 @@
         "output": "triples",
         "applicationPurpose": "Augment an existing knowledge base with new facts inferred from tabular data.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -3767,7 +3767,7 @@
         "output": "RDF",
         "applicationPurpose": "Learn semantic source models for data integration and RDF publishing.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1109/ICSC.2014.13",
         "citations": [
@@ -3928,9 +3928,9 @@
         "output": "",
         "applicationPurpose": "Entity linking in Web tables to support semantic table interpretation and downstream KG augmentation.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-319-25007-6_25",
+        "doi": "",
         "citations": [
             {
                 "ref": "2008_cafarella_webtables",
@@ -4067,7 +4067,7 @@
         "output": "",
         "applicationPurpose": "Automated semantic labelling of data source attributes to support data integration.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1007/978-3-319-18818-8_25",
         "citations": [
@@ -4202,7 +4202,7 @@
         "output": "",
         "applicationPurpose": "Knowledge base extension (slot filling).",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/2797115.2797118",
         "citations": [
@@ -4346,7 +4346,7 @@
         "output": "RDF",
         "applicationPurpose": "Table expansion and knowledge base augmentation. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1007/978-3-319-49004-5_11",
         "citations": [
@@ -4475,9 +4475,9 @@
         "output": "",
         "applicationPurpose": "Semantic labelling of numerical columns and their contexts in tabular data",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-319-46523-4_26",
+        "doi": "",
         "citations": [
             {
                 "ref": "2013_adelfio_schema",
@@ -4628,7 +4628,7 @@
         "output": "",
         "applicationPurpose": "Automatic semantic labelling of table attributes for heterogeneous data integration. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1007/978-3-319-46523-4_27",
         "citations": [
@@ -4758,7 +4758,7 @@
         "output": "RDF",
         "applicationPurpose": "Automatically infer relations between columns to build complete semantic models.",
         "userInterfaceTool": "Karma (Web UI)",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1007/978-3-319-46523-4_33",
         "citations": [
@@ -4899,7 +4899,7 @@
         "output": "RDF",
         "applicationPurpose": "Automatic publication of structured sources as RDF into knowledge graphs; supports source discovery, information integration, and service composition.",
         "userInterfaceTool": "Karma (Web UI)",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1016/j.websem.2015.12.003",
         "citations": [
@@ -5033,7 +5033,7 @@
         "output": "",
         "applicationPurpose": "Unsupervised annotation of web tables and empirical benchmarking of methods for KB augmentation/search. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1007/978-3-319-68288-4_16",
         "citations": [
@@ -5171,7 +5171,7 @@
         "output": "JSON",
         "applicationPurpose": "Enable knowledge base population and support higher-level table understanding on web tables.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -5286,7 +5286,7 @@
         "output": "",
         "applicationPurpose": "Knowledge base augmentation and improved schema matching on small web tables",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.14778/3137628.3137657",
         "citations": [
@@ -5427,7 +5427,7 @@
         "output": "RDF",
         "applicationPurpose": "Semantic indexing/search of tables and creation of Linked Open Data/KB population. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.3233/SW-160242",
         "citations": [
@@ -5562,9 +5562,9 @@
         "applicationPurpose": "Assign semantic labels to numerical columns to aid data discovery and KB integration.",
         "userInterfaceTool": "",
         "usesLLM": null,
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-030-03667-6_11",
+        "doi": "",
         "citations": [
             {
                 "ref": "2016_neumaier_multi-level",
@@ -5691,7 +5691,7 @@
         "output": "",
         "applicationPurpose": "KB enrichment and fact discovery from non-English web tables.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1609/aaai.v32i1.11252",
         "citations": [
@@ -5832,7 +5832,7 @@
         "output": "",
         "applicationPurpose": "Ad hoc table retrieval / table search. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/3178876.3186067",
         "citations": [
@@ -5987,7 +5987,7 @@
         "output": "RDF",
         "applicationPurpose": "Annotate tables to enrich/extend knowledge graphs and support dataset search.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -6134,7 +6134,7 @@
         "output": "",
         "applicationPurpose": "Column type prediction for web tables using DBpedia.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.24963/ijcai.2019/289",
         "citations": [
@@ -6283,7 +6283,7 @@
         "output": "column-to-class annotations",
         "applicationPurpose": "Accurate column type prediction for web tables; supports KB population and table understanding.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1609/aaai.v33i01.330129",
         "citations": [
@@ -6415,9 +6415,9 @@
         "output": "JSON",
         "applicationPurpose": "End-to-end STI to make table semantics accessible for search, querying and KG enrichment.",
         "userInterfaceTool": "Web UI",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1016/j.future.2020.05.019",
+        "doi": "",
         "citations": [
             {
                 "ref": "2013_deng_scalable",
@@ -6588,7 +6588,7 @@
         "userInterfaceTool": "Python library",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1145/3292500.3330993",
         "citations": [
             {
                 "ref": "2008_cafarella_webtables",
@@ -7287,7 +7287,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-030-62327-2_37",
+        "doi": "",
         "citations": [
             {
                 "ref": "2007_auer_dbpedia",
@@ -7442,9 +7442,9 @@
         "output": "Column-level semantic labels",
         "applicationPurpose": "Improve search, joining, and semantic operations on tables by unifying ambiguous column semantics. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1609/aaai.v33i01.3301281",
+        "doi": "",
         "citations": [
             {
                 "ref": "2010_limaye_annotating",
@@ -7594,7 +7594,7 @@
         "output": "",
         "applicationPurpose": "Linking tabular data to knowledge graphs (CEA/CTA/CPA) for the SemTab challenge.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -7729,7 +7729,7 @@
         "applicationPurpose": "Semantic typing of table columns to support data cleaning, schema matching, and data discovery.",
         "userInterfaceTool": "Web UI (demo)",
         "usesLLM": null,
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.48550/arXiv.1911.06311",
         "citations": [
@@ -7872,9 +7872,9 @@
         "output": "",
         "applicationPurpose": "Semantic table annotation to link tabular data to Wikidata",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-030-62327-2_37",
+        "doi": "",
         "citations": [
             {
                 "ref": "2020_cutrona_tough",
@@ -8022,9 +8022,9 @@
         "output": "",
         "applicationPurpose": "Fast annotation of tabular data with KG entities and types (CTA/CEA) for table-to-KG matching.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-030-72651-5_8",
+        "doi": "",
         "citations": [
             {
                 "ref": "2016_wilkinson_the",
@@ -8194,7 +8194,7 @@
         "output": "",
         "applicationPurpose": "Participation in SemTab 2020 CTA task.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -8375,7 +8375,7 @@
         "output": "CSV",
         "applicationPurpose": "Challenge system for semantic table interpretation on SemTab 2020.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -8516,7 +8516,7 @@
         "output": "RDF, JSON-LD",
         "applicationPurpose": "End-to-end semantic table interpretation and KG matching for CTA/CEA/CPA tasks.",
         "userInterfaceTool": "Web UI (Django-based application)",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1016/j.future.2020.05.019",
         "citations": [
@@ -8669,9 +8669,9 @@
         "output": "",
         "applicationPurpose": "Enable web table annotation to support knowledge base augmentation, search, and downstream applications.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1109/sds49233.2020.00013",
+        "doi": "",
         "citations": [
             {
                 "ref": "2010_limaye_annotating",
@@ -8811,7 +8811,7 @@
         "output": "",
         "applicationPurpose": "Improve column type detection for table interpretation by modelling single-column semantics and inter-column dependencies. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1007/978-3-030-60029-7_37",
         "citations": [
@@ -9004,7 +9004,7 @@
         "output": "",
         "applicationPurpose": "Automatic semantic table interpretation for entity, type and relation annotation aligned to Wikidata; competitive SemTab system.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -9165,7 +9165,7 @@
         "output": "",
         "applicationPurpose": "Knowledge graph matching for semantic table annotation",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -9295,7 +9295,7 @@
         "output": "",
         "applicationPurpose": "Automatic semantic annotation of table cells, columns and column relations against Wikidata for SemTab 2020.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -9464,7 +9464,7 @@
         "output": "CSV",
         "applicationPurpose": "Semantic annotation of CSV tables against Wikidata (CPA, CTA, CEA) using meta-lookup and contextual matching.",
         "userInterfaceTool": "CLI; Streamlit GUI",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -9614,7 +9614,7 @@
         "output": "",
         "applicationPurpose": "CPA in the SemTab challenge using deterministic SPARQL-based matching. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -9760,7 +9760,7 @@
         "output": "CSV",
         "applicationPurpose": "Automatic annotation of tables with KG entities and classes for SemTab 2020 participation.",
         "userInterfaceTool": "Google Colab notebooks; CLI scripts",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -9920,7 +9920,7 @@
         "output": "",
         "applicationPurpose": "Knowledge base population and extension",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/3366423.3380205",
         "citations": [
@@ -10180,7 +10180,7 @@
         "applicationPurpose": "Semantic table annotation for SemTab 2021 (CEA/CTA/CPA).",
         "userInterfaceTool": "",
         "usesLLM": {},
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -10356,7 +10356,7 @@
         "output": "",
         "applicationPurpose": "Table-to-KG matching for the SemTab 2021 challenge (annotation of tabular data against Wikidata/DBpedia).",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -10613,9 +10613,9 @@
         "output": "",
         "applicationPurpose": "Universal pre-trained model for table understanding and augmentation with minimal task-specific engineering.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.14778/3430915.3430921",
         "citations": [
             {
                 "ref": "2015_bhagavatula_tabel",
@@ -10809,7 +10809,7 @@
         "output": "RDF",
         "applicationPurpose": "Knowledge graph extension with novel entities and assertions",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/3442381.3449836",
         "citations": [
@@ -11077,7 +11077,7 @@
         "output": "",
         "applicationPurpose": "Automatic STI for dataset indexing/recommendation and KG refinement; industrial deployment via TableAnnotation API and DAGOBAH UI.",
         "userInterfaceTool": "TableAnnotation REST API; DAGOBAH UI",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -11241,7 +11241,7 @@
         "output": "CSV (match/no-match labels)",
         "applicationPurpose": "Entity resolution / duplicate detection across heterogeneous tables",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.14778/3421424.3421431",
         "citations": [
@@ -11402,7 +11402,7 @@
         "output": "",
         "applicationPurpose": "General-purpose tabular data annotation with knowledge graphs, emphasising usability and performance.",
         "userInterfaceTool": "Web UI and public APIs",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -11569,7 +11569,7 @@
         "title": "DAGOBAH UI: A New Hope For Semantic Table Interpretation",
         "venue": {
             "type": "conference",
-            "acronym": "ESWC"
+            "acronym": ""
         },
         "nameOfApproach": "DAGOBAH UI",
         "techniqueTags": [
@@ -11635,9 +11635,9 @@
         "output": "",
         "applicationPurpose": "Table enrichment and knowledge graph enrichment through annotation-driven completion and expansion.",
         "userInterfaceTool": "Web UI",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-031-11609-4_20",
+        "doi": "",
         "citations": [
             {
                 "ref": "2021_chabot_a",
@@ -11787,7 +11787,7 @@
         "output": "",
         "applicationPurpose": "Data enrichment and augmentation of tables via KGs.",
         "userInterfaceTool": "GUI",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -11976,7 +11976,7 @@
         "output": "",
         "applicationPurpose": "Web table interpretation (column typing and relation prediction) for knowledge base augmentation.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/3442381.3450090",
         "citations": [
@@ -12139,7 +12139,7 @@
         "output": "",
         "applicationPurpose": "Participation in SemTab 2021 to interpret tables and match them to KG entities and types.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -12304,7 +12304,7 @@
         "output": "",
         "applicationPurpose": "Improve column concept type detection (CTA) in tabular data to support search, information extraction and question answering.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/3459637.3482197",
         "citations": [
@@ -12505,7 +12505,7 @@
         "output": "CSV",
         "applicationPurpose": "Analyse how CTA strategies and preprocessing affect overall STA performance in SemTab 2022.",
         "userInterfaceTool": "CLI",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -12706,7 +12706,7 @@
         "output": "",
         "applicationPurpose": "Table annotation, semantic flash fill, table fact checking",
         "userInterfaceTool": "RESTful API; Excel Add-in",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1016/j.websem.2022.100733",
         "citations": [
@@ -12871,9 +12871,9 @@
         "output": "",
         "applicationPurpose": "Universal pre-trained model for table interpretation (CEA/CTA/CPA) and augmentation (row population, cell filling, schema augmentation).",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.14778/3430915.3430921",
         "citations": [
             {
                 "ref": "2020_deng_turl",
@@ -13066,7 +13066,7 @@
         "output": "RDF",
         "applicationPurpose": "Transform tabular data into semantic data graphs for data analytics workflows.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.3233/SW-222993",
         "citations": [
@@ -13197,7 +13197,7 @@
         "output": "",
         "applicationPurpose": "SemTab participation: annotate tables with entities, types and properties using Wikidata. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -13324,7 +13324,7 @@
         "output": "",
         "applicationPurpose": "Semantic interpretation of tables for CEA/CTA/CPA, with enrichment of tables and knowledge graphs; SemTab 2022 participation.",
         "userInterfaceTool": "Web UI (DAGOBAH UI) and API",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -13516,7 +13516,7 @@
         "output": "",
         "applicationPurpose": "Unified column annotation (types and relations) for table understanding and downstream data-management tasks. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/3514221.3517906",
         "citations": [
@@ -13657,7 +13657,7 @@
         "output": "",
         "applicationPurpose": "Participation in SemTab 2023 to annotate tabular data with KG semantics.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -13824,7 +13824,7 @@
         "output": "",
         "applicationPurpose": "Semantic annotation of tables for CEA/CTA/CPA across diverse datasets",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -14006,7 +14006,7 @@
         "output": "Ranked list of unionable tables",
         "applicationPurpose": "Discovery of unionable tables in data lakes using column and relationship semantics",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/3588689",
         "citations": [
@@ -14148,7 +14148,7 @@
         "output": "",
         "applicationPurpose": "Improve machine-to-machine interoperability by semantically annotating tables (columns, properties, qualifiers).",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -14324,7 +14324,7 @@
         "output": "",
         "applicationPurpose": "Table matching (CTA/CPA) for data integration and knowledge discovery. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -14484,7 +14484,7 @@
         "output": "",
         "applicationPurpose": "Improve column semantic type annotation for schema matching, data cleaning, and data integration.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.14778/3583140.3583149",
         "citations": [
@@ -14619,7 +14619,7 @@
             "modelName": "LLaMA-7B; T5; UL2; GPT-3.5; GPT-4",
             "prompting": "zero-shot"
         },
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.14778/3665844.3665857",
         "citations": [
@@ -14782,9 +14782,9 @@
         "output": "",
         "applicationPurpose": "Column type annotation for data integration, cleaning, search, and feature engineering/model building. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1145/3459637.3482295",
+        "doi": "",
         "citations": [
             {
                 "ref": "2019_chen_colnet",
@@ -14893,8 +14893,8 @@
         ],
         "title": "MantisTable V: a novel and efficient approach to Semantic Table Interpretation",
         "venue": {
-            "type": "conference",
-            "acronym": "SemTab"
+            "type": "workshop",
+            "acronym": ""
         },
         "nameOfApproach": "MantisTable V",
         "techniqueTags": [
@@ -14959,7 +14959,7 @@
         "output": "CSV; JSON-LD; RDF/XML; RDF/N-Triples; R2RML. ",
         "applicationPurpose": "Complete STI pipeline (CTA, CPA, CEA) with efficient KG querying via LamAPI and a Web UI to manage and review annotations.",
         "userInterfaceTool": "tUI (Web UI). ",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -15092,7 +15092,7 @@
         "output": "",
         "applicationPurpose": "Efficient STI pipeline and tooling (LamAPI) to annotate tables and support SemTab evaluation.",
         "userInterfaceTool": "Web UI (Django) with Docker/Celery and MongoDB backend",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -15224,7 +15224,7 @@
         "output": "JSON",
         "applicationPurpose": "Data enrichment and KG construction from tabular data",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -15386,7 +15386,7 @@
         "usesLLM": {
             "modelName": "Llama 2 7B (LongLoRA)"
         },
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.48550/arXiv.2311.09206",
         "citations": [
@@ -15589,9 +15589,9 @@
         "output": "",
         "applicationPurpose": "Semantic annotation of tabular data with DBpedia; reproducible benchmarking resources and public services (APIs/UI). ",
         "userInterfaceTool": "Web UI and REST APIs (mtab4d.kgraph.jp). ",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.3233/SW-223098",
         "citations": [
             {
                 "ref": "2010_limaye_annotating",
@@ -15668,8 +15668,8 @@
         ],
         "title": "Column Property Annotation using Large Language Models",
         "venue": {
-            "type": "conference",
-            "acronym": "ESWC"
+            "type": "workshop",
+            "acronym": ""
         },
         "nameOfApproach": "",
         "techniqueTags": [
@@ -15737,9 +15737,9 @@
             "modelName": "GPT-3.5; GPT-4; SOLAR-70B",
             "prompting": "few-shot"
         },
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-031-78952-6_6",
+        "doi": "",
         "citations": [
             {
                 "ref": "2007_auer_dbpedia",
@@ -15946,7 +15946,7 @@
         "output": "CSV",
         "applicationPurpose": "Knowledge-graph-driven table matching and annotation (CEA/CTA) for SemTab 2024 datasets, focusing on accuracy and scalability. ",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -16127,7 +16127,7 @@
             "modelName": "Mixtral 8x7B Instruct",
             "prompting": "few-shot"
         },
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1145/3719206",
         "citations": [],
@@ -16243,7 +16243,7 @@
         "output": "RDF",
         "applicationPurpose": "Knowledge graph construction, population, and augmentation from tables via semantic annotation.",
         "userInterfaceTool": "Web UI (TabbyLD2-Client), REST API, CLI",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.3390/computation11090175",
         "citations": [
@@ -16398,7 +16398,7 @@
         "output": "",
         "applicationPurpose": "Table-to-KG matching for CTA, CEA, CPA and TTD in SemTab 2023.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -16564,7 +16564,7 @@
         "output": "",
         "applicationPurpose": "Disambiguate ambiguous cell–entity annotations and improve STI accuracy.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.1007/978-3-031-19433-7_29",
         "citations": [
@@ -16689,8 +16689,8 @@
         ],
         "title": "Towards Disambiguating Web Tables",
         "venue": {
-            "type": "conference",
-            "acronym": "ISWC"
+            "type": "workshop",
+            "acronym": ""
         },
         "nameOfApproach": "",
         "techniqueTags": [
@@ -16756,7 +16756,7 @@
         "output": "",
         "applicationPurpose": "Annotate table headers with semantic types to support web table disambiguation.",
         "userInterfaceTool": "",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "",
         "citations": [
@@ -16887,7 +16887,7 @@
         "output": "CSV",
         "applicationPurpose": "Toolkit to annotate large table corpora to a KG for entity, type, and property linking and to benchmark STA strategies.",
         "userInterfaceTool": "Web UI (Manager dashboard) and distributed runners",
-        "checkedByAuthor": false,
+        "checkedByAuthor": "",
         "checkedByAi": true,
         "doi": "https://doi.org/10.5281/zenodo.4730314",
         "citations": [

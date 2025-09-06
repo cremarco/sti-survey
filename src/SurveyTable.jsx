@@ -862,7 +862,33 @@ function SurveyTable() {
     columnHelper.accessor(row => row.doi, {
       id: "doi",
       header: "DOI",
-      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'doi')} />,
+      cell: (info) => {
+        const doiValue = info.getValue();
+        const isMissing = isRequiredFieldMissing(info.row.original, 'doi');
+        
+        if (isMissing) {
+          return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
+        }
+        
+        if (!doiValue || doiValue.trim() === "") {
+          return <span className="text-neutral-500 text-[10px]">-</span>;
+        }
+        
+        // Ensure DOI has proper protocol
+        const doiUrl = doiValue.startsWith('http') ? doiValue : `https://doi.org/${doiValue}`;
+        
+        return (
+          <a 
+            href={doiUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 underline text-[10px] break-all"
+            title="Open DOI link"
+          >
+            {doiValue}
+          </a>
+        );
+      },
       enableSorting: false,
     }),
     columnHelper.accessor(row => Array.isArray(row.citations) ? row.citations.length : 0, {
