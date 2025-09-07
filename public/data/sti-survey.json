@@ -1,7 +1,7 @@
 [
     {
         "id": "2007_hignette_an",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2007,
         "firstAuthor": "Hignette",
         "authors": [
@@ -45,15 +45,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Fully automatic scoring with thresholds for column typing and relation selection; no manual post-editing is required."
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "food microbiology"
         },
         "validation": {
@@ -162,7 +162,7 @@
     },
     {
         "id": "2009_cafarella_data",
-        "added": "",
+        "added": "2025-07-02",
         "year": 2009,
         "firstAuthor": "Cafarella",
         "authors": [
@@ -204,15 +204,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "clustering"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "System executes best-effort operators and lets the user review, correct errors, and adjust tables (e.g., select/union/split/rename) during integration."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic web data"
         },
         "validation": {
@@ -351,7 +351,7 @@
     },
     {
         "id": "2009_hignette_fuzzy",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2009,
         "firstAuthor": "Hignette",
         "authors": [
@@ -395,15 +395,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Annotation pipeline runs automatically; fuzzy memberships enable optional later human validation without changing the core outputs."
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "food microbiology; chemical risk in food; aeronautics"
         },
         "validation": {
@@ -536,7 +536,7 @@
     },
     {
         "id": "2009_tao_automatic",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2009,
         "firstAuthor": "Tao",
         "authors": [
@@ -578,15 +578,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Fully automatic pipeline with dynamic pattern adjustment when encountering structural variations; no user-in-the-loop. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -728,7 +728,7 @@
     },
     {
         "id": "2010_limaye_annotating",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2010,
         "firstAuthor": "Limaye",
         "authors": [
@@ -771,18 +771,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "SVM",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Annotations are produced automatically by the trained model without manual post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -903,7 +903,7 @@
     },
     {
         "id": "2010_mulwad_t2ld",
-        "added": "",
+        "added": "2025-06-20",
         "year": 2010,
         "firstAuthor": "Mulwad",
         "authors": [
@@ -947,18 +947,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "SVM",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Annotations are produced automatically; human judgements are used only for offline evaluation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -1051,7 +1051,7 @@
     },
     {
         "id": "2010_syed_exploiting",
-        "added": "",
+        "added": "2025-09-05",
         "year": 2010,
         "firstAuthor": "Syed",
         "authors": [
@@ -1094,15 +1094,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "ontology-driven"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Prototype runs automatically without human-in-the-loop validation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -1159,7 +1159,7 @@
     },
     {
         "id": "2011_crestan_web-scale",
-        "added": "",
+        "added": "2025-07-09",
         "year": 2011,
         "firstAuthor": "Crestan",
         "authors": [
@@ -1198,18 +1198,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Gradient Boosted Decision Trees (GBDT)",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Classification is fully automatic with evaluation on manually annotated samples; no user post-editing described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -1330,7 +1330,7 @@
     },
     {
         "id": "2011_mulwad_automatically",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2011,
         "firstAuthor": "Mulwad",
         "authors": [
@@ -1373,18 +1373,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "SVM",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic pipeline; a human-in-the-loop is proposed as a potential enhancement but not required."
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "open government data"
         },
         "validation": {
@@ -1530,7 +1530,7 @@
     },
     {
         "id": "2011_venetis_recovering",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2011,
         "firstAuthor": "Venetis",
         "authors": [
@@ -1579,15 +1579,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "rule-based + CRF + SVM"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic labelling based on probabilistic evidence thresholds; no human-in-the-loop correction."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general"
         },
         "validation": {
@@ -1686,7 +1686,7 @@
     },
     {
         "id": "2012_goel_exploiting",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2012,
         "firstAuthor": "Goel",
         "authors": [
@@ -1728,18 +1728,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "CRF",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "After training, labels are produced automatically by CRF inference with no manual post-editing described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -1866,7 +1866,7 @@
     },
     {
         "id": "2012_knoblock_semi-automatically",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2012,
         "firstAuthor": "Knoblock",
         "authors": [
@@ -1915,15 +1915,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "CRF-based semantic typing combined with ontology-driven graph construction (Steiner tree) and interactive constraints"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "A GUI lets users correct semantic types, force relationships, and split class instances after the automatic proposal."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -2004,7 +2004,7 @@
     },
     {
         "id": "2012_pimplikar_answering",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2012,
         "firstAuthor": "Pimplikar",
         "authors": [
@@ -2043,18 +2043,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Graphical model with bipartite matching and constrained graph cuts",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automated column mapping and consolidation; no manual post-editing described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -2152,7 +2152,7 @@
     },
     {
         "id": "2012_wang_understanding",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2012,
         "firstAuthor": "Wang",
         "authors": [
@@ -2196,15 +2196,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Outputs are produced automatically without user curation; results are used for semantic search and to expand Probase. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -2284,7 +2284,7 @@
     },
     {
         "id": "2013_adelfio_schema",
-        "added": "",
+        "added": "2025-07-12",
         "year": 2013,
         "firstAuthor": "Adelfio",
         "authors": [
@@ -2325,18 +2325,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "CRF",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Outputs are produced automatically by a trained CRF-based classifier without user post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -2413,7 +2413,7 @@
     },
     {
         "id": "2013_buche_fuzzy",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Buche",
         "authors": [
@@ -2457,15 +2457,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "Human experts review and validate fuzzy RDF annotations before loading into the XML/RDF warehouse."
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "food safety (microbial risk)"
         },
         "validation": {
@@ -2537,7 +2537,7 @@
     },
     {
         "id": "2013_cruz_giva",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Cruz",
         "authors": [
@@ -2580,15 +2580,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "ontology-driven"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "Users can optionally review the extracted ontology; other components (matching, translation, storage) run automatically."
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "geospatial/environmental"
         },
         "validation": {
@@ -2721,7 +2721,7 @@
     },
     {
         "id": "2013_deng_scalable",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Deng",
         "authors": [
@@ -2766,15 +2766,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Batch, MapReduce-based pipeline; no human-in-the-loop post-editing is described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -2851,7 +2851,7 @@
     },
     {
         "id": "2013_ermilov_user-driven",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Ermilov",
         "authors": [
@@ -2893,15 +2893,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "Default mappings are created automatically and can be revised by users via a Semantic MediaWiki; data can be re-transformed after edits."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -2982,7 +2982,7 @@
     },
     {
         "id": "2013_mulwad_semantic",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Mulwad",
         "authors": [
@@ -3025,15 +3025,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Probabilistic graphical model with semantic message passing combined with knowledge-driven heuristics"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Joint inference runs automatically; future user-in-the-loop feedback is suggested but not part of the implementation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -3131,7 +3131,7 @@
     },
     {
         "id": "2013_munoz_triplifying",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Muñoz",
         "authors": [
@@ -3173,15 +3173,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "ontology-driven"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Extraction of candidate triples is automatic; authors discuss future ML-based post-filtering to improve precision."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -3275,7 +3275,7 @@
     },
     {
         "id": "2013_quercini_entity",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Quercini",
         "authors": [
@@ -3318,18 +3318,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "SVM",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Post-processing removes spurious annotations using column-coherence scores; no human-in-the-loop validation is required."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -3417,7 +3417,7 @@
     },
     {
         "id": "2013_zhang_infogather",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Zhang",
         "authors": [
@@ -3458,15 +3458,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "Probabilistic graphical model (Markov random field) with label propagation and rule-based conversions"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Joint inference over labels and edges produces results automatically; no user-in-the-loop editing is described. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -3550,7 +3550,7 @@
     },
     {
         "id": "2014_sekhavat_knowledge",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2014,
         "firstAuthor": "Sekhavat",
         "authors": [
@@ -3594,15 +3594,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pipeline computes posterior probabilities for relations from observed patterns and selects the most probable relation without manual review."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -3688,7 +3688,7 @@
     },
     {
         "id": "2014_taheriyan_a",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2014,
         "firstAuthor": "Taheriyan",
         "authors": [
@@ -3732,15 +3732,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "CRF for semantic typing + Steiner-tree-based graph search using domain ontologies and known models"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "Produces ranked candidate semantic models automatically; minimal user input may select or correct the final model."
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "cultural heritage / museums"
         },
         "validation": {
@@ -3849,7 +3849,7 @@
     },
     {
         "id": "2015_bhagavatula_tabel",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2015,
         "firstAuthor": "Bhagavatula",
         "authors": [
@@ -3889,18 +3889,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Logistic regression ranking with collective inference (ICA)",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Disambiguation is performed automatically without human validation in the loop."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -3990,7 +3990,7 @@
     },
     {
         "id": "2015_ramnandan_assigning",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2015,
         "firstAuthor": "Ramnandan",
         "authors": [
@@ -4031,18 +4031,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "TF-IDF cosine similarity for textual columns combined with Kolmogorov–Smirnov two-sample test for numeric columns",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Produces top-k candidate labels with confidence scores; no user validation stage described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -4125,7 +4125,7 @@
     },
     {
         "id": "2015_ritze_matching",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2015,
         "firstAuthor": "Ritze",
         "authors": [
@@ -4168,15 +4168,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based iterative schema/instance matching"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Outputs are produced automatically without user interaction; evaluation is performed against a gold standard."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "cross-domain web tables"
         },
         "validation": {
@@ -4268,7 +4268,7 @@
     },
     {
         "id": "2016_ermilov_taipan",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2016,
         "firstAuthor": "Ermilov",
         "authors": [
@@ -4311,15 +4311,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "SVM + rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic scoring and selection of subject columns and properties; no interactive correction is required. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "cross-domain"
         },
         "validation": {
@@ -4396,7 +4396,7 @@
     },
     {
         "id": "2016_neumaier_multi-level",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2016,
         "firstAuthor": "Neumaier",
         "authors": [
@@ -4440,15 +4440,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "k-nearest neighbours over a hierarchically clustered background graph using Kolmogorov–Smirnov distance and descriptive statistics"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Predictions are produced automatically by nearest neighbour ranking without user intervention."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -4549,7 +4549,7 @@
     },
     {
         "id": "2016_pham_semantic",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2016,
         "firstAuthor": "Pham",
         "authors": [
@@ -4590,18 +4590,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Logistic Regression over similarity metrics",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Fully automatic ranking of top-k semantic types using classifier probabilities; no user-in-the-loop editing. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -4682,7 +4682,7 @@
     },
     {
         "id": "2016_taheriyan_leveraging",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2016,
         "firstAuthor": "Taheriyan",
         "authors": [
@@ -4725,15 +4725,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "Ontology-driven graph pattern mining over Linked Open Data"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatically generates and ranks candidate semantic models; can be refined by users in Karma if desired."
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "Cultural heritage (CIDOC-CRM/EDM) and schema.org extension (weapons ads)"
         },
         "validation": {
@@ -4820,7 +4820,7 @@
     },
     {
         "id": "2016_taheriyan_learning",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2016,
         "firstAuthor": "Taheriyan",
         "authors": [
@@ -4863,15 +4863,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Semantic labelling (supervised) + ontology-driven graph search with top-k Steiner trees"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "System suggests ranked semantic models; users can refine/correct them in the Karma UI to improve future predictions."
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "cultural heritage / museum"
         },
         "validation": {
@@ -4953,7 +4953,7 @@
     },
     {
         "id": "2017_efthymiou_matching",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2017,
         "firstAuthor": "Efthymiou",
         "authors": [
@@ -4998,15 +4998,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "rule-based + embeddings"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "No human-in-the-loop; methods run end-to-end (MapReduce-based experiments and automatic evaluation). "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general web tables"
         },
         "validation": {
@@ -5091,7 +5091,7 @@
     },
     {
         "id": "2017_ell_towards",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2017,
         "firstAuthor": "Ell",
         "authors": [
@@ -5141,15 +5141,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "A scheduled pipeline applies tasks sequentially; no manual review during processing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -5213,7 +5213,7 @@
     },
     {
         "id": "2017_lehmberg_stitching",
-        "added": "",
+        "added": "2025-05-08",
         "year": 2017,
         "firstAuthor": "Lehmberg",
         "authors": [
@@ -5252,15 +5252,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Hybrid schema matching combining label-, value-, and duplicate-based matchers with holistic correspondence refinement"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Fully automated stitching (union and holistic stitching) followed by automated schema matching without user intervention."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -5352,7 +5352,7 @@
     },
     {
         "id": "2017_zhang_effective",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2017,
         "firstAuthor": "Zhang",
         "authors": [
@@ -5392,15 +5392,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "Incremental bootstrapping with semantic message passing over KB features"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "System performs iterative inference without human-in-the-loop; annotations are refined via message passing. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -5481,7 +5481,7 @@
     },
     {
         "id": "2018_kacprzak_making",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2018,
         "firstAuthor": "Kacprzak",
         "authors": [
@@ -5528,15 +5528,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Produces a ranked list of KB properties per numeric column without manual post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -5612,7 +5612,7 @@
     },
     {
         "id": "2018_luo_cross-lingual",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2018,
         "firstAuthor": "Luo",
         "authors": [
@@ -5655,18 +5655,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "neural network ranking (joint model with RankNet)",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "System automatically scores and selects entities using a learned model and local search; no human-in-the-loop post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic web tables"
         },
         "validation": {
@@ -5753,7 +5753,7 @@
     },
     {
         "id": "2018_zhang_ad",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2018,
         "firstAuthor": "Zhang",
         "authors": [
@@ -5794,18 +5794,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Learning-to-rank (Random Forest) with semantic similarity features",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Produces a ranked list of tables automatically; no user editing phase is described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general (web tables)"
         },
         "validation": {
@@ -5910,7 +5910,7 @@
     },
     {
         "id": "2019_chabot_dagobah",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Chabot",
         "authors": [
@@ -5956,15 +5956,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "rule-based and clustering"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic pipeline for CEA/CTA/CPA with no interactive user validation described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -6057,7 +6057,7 @@
     },
     {
         "id": "2019_chen_learning",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Chen",
         "authors": [
@@ -6101,15 +6101,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Hybrid Neural Network (Att-BiRNN + CNN) combined with KB lookup and query answering (P2Vec)"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "System produces predictions automatically; no manual post-editing is required."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general web"
         },
         "validation": {
@@ -6204,7 +6204,7 @@
     },
     {
         "id": "2019_chen_colnet",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Chen",
         "authors": [
@@ -6248,15 +6248,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "CNN-based supervised learning with KB lookup/ensemble"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic pipeline of lookup, prediction and ensemble; no manual validation stage reported."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic web tables"
         },
         "validation": {
@@ -6341,7 +6341,7 @@
     },
     {
         "id": "2019_cremaschi_mantistable",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Cremaschi",
         "authors": [
@@ -6384,15 +6384,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "All STI steps execute without user intervention; a Web UI offers guidance but outputs are computed automatically."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -6417,7 +6417,7 @@
         "userInterfaceTool": "Web UI",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1016/j.future.2020.05.019",
+        "doi": "",
         "citations": [
             {
                 "ref": "2013_deng_scalable",
@@ -6501,7 +6501,7 @@
     },
     {
         "id": "2019_hulsebos_sherlock",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Hulsebos",
         "authors": [
@@ -6548,18 +6548,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "multi-input deep neural network",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Predictions are produced automatically; authors discuss using confidence-based rejection to hand-review low-confidence cases."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -6652,7 +6652,7 @@
     },
     {
         "id": "2019_kruit_extracting",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Kruit",
         "authors": [
@@ -6694,15 +6694,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "Probabilistic graphical model with Loopy Belief Propagation for table interpretation; KG embeddings (TransE) for slot-filling re-ranking"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end automated inference and extraction with thresholding to tune precision–recall; no user edits required after the core run."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "open-domain"
         },
         "validation": {
@@ -6793,7 +6793,7 @@
     },
     {
         "id": "2019_morikawa_semantic",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Morikawa",
         "authors": [
@@ -6834,15 +6834,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end pipeline produces CTA/CEA/CPA without manual intervention."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -6934,7 +6934,7 @@
     },
     {
         "id": "2019_nguyen_mtab",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Nguyen",
         "authors": [
@@ -6977,15 +6977,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Probabilistic aggregation with embedding-based numerical column labelling (EmbNum) and heuristic similarity measures"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Outputs are selected by automated re-estimation and majority voting without user intervention."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -7081,7 +7081,7 @@
     },
     {
         "id": "2019_oliveira_adog",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Oliveira",
         "authors": [
@@ -7123,15 +7123,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Annotations are computed automatically using graph-based scoring with no user post-editing described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -7209,7 +7209,7 @@
     },
     {
         "id": "2019_steenwinckel_csv2kg",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Steenwinckel",
         "authors": [
@@ -7253,15 +7253,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Six-phase pipeline executes automatically without manual intervention during inference."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -7287,7 +7287,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-030-62327-2_37",
+        "doi": "",
         "citations": [
             {
                 "ref": "2007_auer_dbpedia",
@@ -7363,7 +7363,7 @@
     },
     {
         "id": "2019_takeoka_meimei",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Takeoka",
         "authors": [
@@ -7406,18 +7406,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Multi-label classification with Markov random field potentials (column–content, column–column, title–column) and KG embeddings.",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Fully automated inference (Gibbs sampling) to maximise potentials; no human-in-the-loop revision described. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -7512,7 +7512,7 @@
     },
     {
         "id": "2019_thawani_entity",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2019,
         "firstAuthor": "Thawani",
         "authors": [
@@ -7561,15 +7561,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Heuristic scoring (TF-IDF + string similarity) combined with a neural network ranking model"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic pipeline with no manual post-editing reported."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -7648,7 +7648,7 @@
     },
     {
         "id": "2020_zhang_sato",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Zhang",
         "authors": [
@@ -7695,15 +7695,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Neural network with LDA topic features and linear-chain CRF"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Predictions are produced automatically by the model without human intervention."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -7799,7 +7799,7 @@
     },
     {
         "id": "2020_abdelmageed_jentab",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Abdelmageed",
         "authors": [
@@ -7841,15 +7841,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Create–Filter–Select pipeline executes automatically; no explicit user validation stage."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -7874,7 +7874,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-030-62327-2_37",
+        "doi": "",
         "citations": [
             {
                 "ref": "2020_cutrona_tough",
@@ -7946,7 +7946,7 @@
     },
     {
         "id": "2020_azzi_amalgam",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Azzi",
         "authors": [
@@ -7988,15 +7988,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic pipeline combining lookups, filtering and spell checking; no manual review during evaluation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -8120,7 +8120,7 @@
     },
     {
         "id": "2020_baazouzi_kepler-asi",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Baazouzi",
         "authors": [
@@ -8163,15 +8163,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end automatic pipeline; no interactive user validation described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -8292,7 +8292,7 @@
     },
     {
         "id": "2020_chen_linkingpark",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Chen",
         "authors": [
@@ -8342,15 +8342,15 @@
             "entityLinkingNote": ""
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic end-to-end pipeline; no human-in-the-loop during SemTab runs."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -8437,7 +8437,7 @@
     },
     {
         "id": "2020_cremaschi_a",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Cremaschi",
         "authors": [
@@ -8481,15 +8481,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "Pipeline runs fully automatically; the Web UI allows users to inspect and optionally edit annotations post-hoc."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general"
         },
         "validation": {
@@ -8590,7 +8590,7 @@
     },
     {
         "id": "2020_eslahi_annotating",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Eslahi",
         "authors": [
@@ -8635,15 +8635,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "embeddings"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Annotations are produced automatically without user validation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "web tables"
         },
         "validation": {
@@ -8727,7 +8727,7 @@
     },
     {
         "id": "2020_guo_web",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Guo",
         "authors": [
@@ -8771,18 +8771,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "CRF with BiGRU-Attention",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end automatic pipeline; no manual post-editing described. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic web tables"
         },
         "validation": {
@@ -8921,7 +8921,7 @@
     },
     {
         "id": "2020_huynh_dagobah",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Huynh",
         "authors": [
@@ -8969,15 +8969,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based scoring and clustering"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end automatic pipeline; no manual post-editing described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -9090,7 +9090,7 @@
     },
     {
         "id": "2020_kim_generating",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Kim",
         "authors": [
@@ -9134,15 +9134,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pipeline executes SPARQL-based extraction, candidate selection, crawling, and inference without human-in-the-loop validation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -9219,7 +9219,7 @@
     },
     {
         "id": "2020_nguyen_mtab4wikidata",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Nguyen",
         "authors": [
@@ -9263,15 +9263,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Post-processing performs value matching and majority voting without user intervention."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -9385,7 +9385,7 @@
     },
     {
         "id": "2020_shigapov_bbw",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Shigapov",
         "authors": [
@@ -9431,15 +9431,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Selects most frequent annotations and for CTA resolves to the first common superclass; filters to annotations present in target files."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic tabular data to Wikidata"
         },
         "validation": {
@@ -9542,7 +9542,7 @@
     },
     {
         "id": "2020_yumusak_knowledge",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Yumusak",
         "authors": [
@@ -9582,15 +9582,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Outputs were produced automatically with no manual corrections or adaptations. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -9684,7 +9684,7 @@
     },
     {
         "id": "2020_tyagi_lexma",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Tyagi",
         "authors": [
@@ -9725,15 +9725,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pipeline executes automatically without manual post-editing; results are produced and submitted as-is."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -9838,7 +9838,7 @@
     },
     {
         "id": "2020_zhang_novel",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Zhang",
         "authors": [
@@ -9881,18 +9881,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Feature-based classification (Random Forest) with lexical and embedding similarities",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pipeline runs automatically without user-in-the-loop post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -10102,7 +10102,7 @@
     },
     {
         "id": "2021_abdelmageed_jentab-1",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Abdelmageed",
         "authors": [
@@ -10144,15 +10144,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic multi-phase pipeline; no human-in-the-loop editing reported."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -10282,7 +10282,7 @@
     },
     {
         "id": "2021_baazouzi_kepler-asi",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Baazouzi",
         "authors": [
@@ -10325,15 +10325,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic pipeline for SemTab submissions; later re-runs adjusted filters but no interactive user validation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -10530,7 +10530,7 @@
     },
     {
         "id": "2021_deng_turl",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Deng",
         "authors": [
@@ -10575,15 +10575,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "transformer"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pre-training and fine-tuning run automatically without human-in-the-loop validation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "web tables (Wikipedia and general web)"
         },
         "validation": {
@@ -10735,7 +10735,7 @@
     },
     {
         "id": "2021_heist_information",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Heist",
         "authors": [
@@ -10776,15 +10776,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Descriptive rules are mined and applied automatically; assertions are filtered automatically via tag-based thresholds."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -10999,7 +10999,7 @@
     },
     {
         "id": "2021_huynh_dagobah",
-        "added": "",
+        "added": "2025-05-16",
         "year": 2021,
         "firstAuthor": "Huynh",
         "authors": [
@@ -11046,15 +11046,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based scoring over KG contexts"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pipeline runs automatically; results can be inspected via a REST API and a web UI but no user-in-the-loop correction is described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -11159,7 +11159,7 @@
     },
     {
         "id": "2021_li_deep",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Li",
         "authors": [
@@ -11204,18 +11204,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Fine-tuned pre-trained Transformer encoder (BERT/RoBERTa/DistilBERT)",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic binary classification; no post-hoc user validation stage described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -11327,7 +11327,7 @@
     },
     {
         "id": "2021_nguyen_semtab",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Nguyen",
         "authors": [
@@ -11372,15 +11372,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Produces annotations automatically; interfaces/API expose results without a manual correction step."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -11552,7 +11552,7 @@
     },
     {
         "id": "2021_sarthou-camy_dagobah",
-        "added": "",
+        "added": "2025-07-03",
         "year": 2021,
         "firstAuthor": "Sarthou-Camy",
         "authors": [
@@ -11601,15 +11601,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "Users visualise and validate annotations via a Web UI; the underlying STI process runs automatically."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -11713,7 +11713,7 @@
     },
     {
         "id": "2021_steenwinckel_magic",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Steenwinckel",
         "authors": [
@@ -11755,15 +11755,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "embedding-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pipeline automatically generates candidates, builds INK embeddings, and outputs CTA/CPA/CEA; a GUI exists for augmentation but no manual validation is required."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -11897,7 +11897,7 @@
     },
     {
         "id": "2021_wang_tcn",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Wang",
         "authors": [
@@ -11942,15 +11942,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "graph neural network with attention and multi-task learning"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Model produces annotations automatically without human post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general web tables"
         },
         "validation": {
@@ -12062,7 +12062,7 @@
     },
     {
         "id": "2021_yang_gbmtab",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Yang",
         "authors": [
@@ -12106,15 +12106,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "Probabilistic graphical model with iterative probability propagation and embedding-based scoring"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic pipeline evaluated in the SemTab 2021 challenge with no manual post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -12221,7 +12221,7 @@
     },
     {
         "id": "2021_zhou_tabular",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Zhou",
         "authors": [
@@ -12264,18 +12264,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "transformer",
             "supervision": {
                 "type": "distant"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Predictions are produced automatically by the trained model without user intervention."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "open-domain"
         },
         "validation": {
@@ -12426,7 +12426,7 @@
     },
     {
         "id": "2022_abdelmageed_jentab",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2022,
         "firstAuthor": "Abdelmageed",
         "authors": [
@@ -12469,15 +12469,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Automatic CFS pipeline; no human-in-the-loop post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -12623,7 +12623,7 @@
     },
     {
         "id": "2022_chen_linkingpark",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2022,
         "firstAuthor": "Chen",
         "authors": [
@@ -12671,15 +12671,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end automatic pipeline; an Excel Add-in and RESTful API expose results to users but no manual post-correction is required."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -12788,7 +12788,7 @@
     },
     {
         "id": "2022_deng_turl",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2022,
         "firstAuthor": "Deng",
         "authors": [
@@ -12833,15 +12833,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Transformer with self-supervised pre-training and task-specific fine-tuning"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Outputs are produced automatically after pre-training and fine-tuning; an optional score reweighting with lookup popularity was explored."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -12989,7 +12989,7 @@
     },
     {
         "id": "2022_gottschalk_tab2kg",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2022,
         "firstAuthor": "Gottschalk",
         "authors": [
@@ -13030,18 +13030,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Siamese neural network (one-shot learning) over profile features",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end automatic mapping and data graph materialisation; no user interaction in the loop."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -13120,7 +13120,7 @@
     },
     {
         "id": "2023_henriksen_semtex",
-        "added": "",
+        "added": "2025-06-04",
         "year": 2023,
         "firstAuthor": "Henriksen",
         "authors": [
@@ -13165,15 +13165,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "ontology-driven + gradient boosting (CatBoost)"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pipeline runs without user intervention; a low-confidence review phase is suggested only as future work. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -13247,7 +13247,7 @@
     },
     {
         "id": "2022_huynh_from",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2022,
         "firstAuthor": "Huynh",
         "authors": [
@@ -13293,15 +13293,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Heuristics + transformer cross-encoder + knowledge graph embeddings"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end automatic annotation; a Web UI can be used to visualise results and optionally enrich tables/KGs."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -13430,7 +13430,7 @@
     },
     {
         "id": "2022_suhara_annotating",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2022,
         "firstAuthor": "Suhara",
         "authors": [
@@ -13476,18 +13476,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "transformer",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end multi-task fine-tuning of a pre-trained Transformer; predictions are produced without user intervention. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -13582,7 +13582,7 @@
     },
     {
         "id": "2023_baazouzi_kepler-asi",
-        "added": "",
+        "added": "2025-06-09",
         "year": 2023,
         "firstAuthor": "Baazouzi",
         "authors": [
@@ -13625,15 +13625,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Annotations are produced automatically via SPARQL queries and deterministic filters; no user-in-the-loop editing during evaluation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -13743,7 +13743,7 @@
     },
     {
         "id": "2023_dasoulas_torchictab",
-        "added": "",
+        "added": "2025-05-10",
         "year": 2023,
         "firstAuthor": "Dasoulas",
         "authors": [
@@ -13787,15 +13787,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Heuristic rule-based RDF graph analysis plus transformer fine-tuning (DODUO) for CTA/CPA classification"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Annotations are produced automatically using heuristic scoring and majority voting without human-in-the-loop post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -13808,7 +13808,7 @@
                 "Micro-F1"
             ]
         },
-        "code": "",
+        "code": "https://github.com/bennokr/semtab2023-CQA/",
         "license": "Not Specified",
         "inputs": {
             "typeOfTable": "CSV",
@@ -13926,7 +13926,7 @@
     },
     {
         "id": "2023_khatiwada_santos",
-        "added": "",
+        "added": "2025-07-19",
         "year": 2023,
         "firstAuthor": "Khatiwada",
         "authors": [
@@ -13972,15 +13972,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "ontology-driven graph matching"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Unionability scoring and top-k search are computed automatically using a KB and a synthesized KB; no user-in-the-loop is required."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic/open data lakes"
         },
         "validation": {
@@ -14072,7 +14072,7 @@
     },
     {
         "id": "2023_mehryar_semantic",
-        "added": "",
+        "added": "2025-06-13",
         "year": 2023,
         "firstAuthor": "Mehryar",
         "authors": [
@@ -14115,15 +14115,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "neuro-symbolic (ontology-driven queries + embeddings + transformer encoders)"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Outputs are produced automatically without user-in-the-loop validation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -14246,7 +14246,7 @@
     },
     {
         "id": "2023_parmar_dreifluss",
-        "added": "",
+        "added": "2025-08-10",
         "year": 2023,
         "firstAuthor": "Parmar",
         "authors": [
@@ -14287,18 +14287,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "logistic regression",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end predictions are produced automatically for CTA/CPA with no manual post-editing. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -14410,7 +14410,7 @@
     },
     {
         "id": "2023_sun_reca",
-        "added": "",
+        "added": "2025-05-24",
         "year": 2023,
         "firstAuthor": "Sun",
         "authors": [
@@ -14452,18 +14452,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "transformer",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Fully automated learning-based annotation; no manual post-editing is reported."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "web tables"
         },
         "validation": {
@@ -14534,7 +14534,7 @@
     },
     {
         "id": "2024_feuer_archetype",
-        "added": "",
+        "added": "2025-08-19",
         "year": 2024,
         "firstAuthor": "Feuer",
         "authors": [
@@ -14579,15 +14579,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Transformer-based LLMs with rule-based and embedding-based label remapping"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Outputs are post-processed automatically via label remapping (e.g., CONTAINS+RESAMPLE and simple rules); no user-in-the-loop editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -14705,7 +14705,7 @@
     },
     {
         "id": "2020_khurana_semantic",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Khurana",
         "authors": [
@@ -14747,15 +14747,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "Maximum likelihood estimation with ensembles across heterogeneous sources. "
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Fully automatic estimation and ranking with programmatic tuple validation and belief sharing; no user-in-the-loop. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general"
         },
         "validation": {
@@ -14884,7 +14884,7 @@
     },
     {
         "id": "2021_avogadro_mantistable",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Avogadro",
         "authors": [
@@ -14926,15 +14926,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "Automated revision re-ranks candidates for global consistency; optional user edits and exports supported via tUI Web UI. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -15017,7 +15017,7 @@
     },
     {
         "id": "2020_cremaschi_mantistable",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2020,
         "firstAuthor": "Cremaschi",
         "authors": [
@@ -15061,15 +15061,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "ontology-driven"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Final reordering ensures coherence between selected entities, predicates, and concepts across columns; no user edits required."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -15150,7 +15150,7 @@
     },
     {
         "id": "2022_cremaschi_s-elbat",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2022,
         "firstAuthor": "Cremaschi",
         "authors": [
@@ -15193,15 +15193,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Re-runs low-confidence mentions with constraints on types/predicates; thresholding (e.g., 0.4) minimises inner error while improving precision."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general-purpose"
         },
         "validation": {
@@ -15302,7 +15302,7 @@
     },
     {
         "id": "2024_zhang_tablellama",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2024,
         "firstAuthor": "Zhang",
         "authors": [
@@ -15345,18 +15345,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "transformer",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Model outputs are produced end-to-end by an instruction-tuned LLM without post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general"
         },
         "validation": {
@@ -15508,7 +15508,7 @@
     },
     {
         "id": "2024_nguyen_mtab4d",
-        "added": "",
+        "added": "2025-05-26",
         "year": 2024,
         "firstAuthor": "Nguyen",
         "authors": [
@@ -15553,15 +15553,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "Rule-based aggregation with ontology constraints and embedding-based numerical matching (EmbNum+)."
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Annotations are produced automatically by the pipeline; no post-hoc user editing is required. "
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -15659,7 +15659,7 @@
     },
     {
         "id": "2024_korini_column",
-        "added": "",
+        "added": "2025-07-14",
         "year": 2024,
         "firstAuthor": "Korini",
         "authors": [
@@ -15701,15 +15701,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "transformer"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Predictions are generated automatically by LLMs; no user-in-the-loop correction is described."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -15871,7 +15871,7 @@
     },
     {
         "id": "2024_parmar_wikidata-driven",
-        "added": "",
+        "added": "2025-07-31",
         "year": 2024,
         "firstAuthor": "Parmar",
         "authors": [
@@ -15912,15 +15912,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "ontology-driven"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "No manual post-editing reported; the pipeline runs automatically with API-based annotation and heuristic aggregation. "
         },
         "domain": {
-            "domain": "dependent",
+            "domain": "Dependent",
             "type": "life sciences (biodiversity, biomedicine). "
         },
         "validation": {
@@ -16044,7 +16044,7 @@
     },
     {
         "id": "2025_cremaschi_steellm",
-        "added": "",
+        "added": "2025-07-09",
         "year": 2025,
         "firstAuthor": "Cremaschi",
         "authors": [
@@ -16086,18 +16086,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "fine-tuned transformer (Mixtral 8x7B)",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "System produces annotations automatically; outputs are parsed programmatically without manual post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -16160,7 +16160,7 @@
     },
     {
         "id": "2023_dorodnykh_knowledge",
-        "added": "",
+        "added": "2025-07-08",
         "year": 2023,
         "firstAuthor": "Dorodnykh",
         "authors": [
@@ -16204,15 +16204,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Heuristics combined with knowledge-graph embeddings (RDF2Vec), CNNs (ColNet), and a BERT-based model (Doduo) for table understanding."
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "Automatic pipeline with optional user refinement via a GUI client; annotations can be inspected and adjusted before RDF generation."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -16321,7 +16321,7 @@
     },
     {
         "id": "2023_foko_exploring",
-        "added": "",
+        "added": "2025-08-31",
         "year": 2023,
         "firstAuthor": "Foko",
         "authors": [
@@ -16363,18 +16363,18 @@
             }
         },
         "mainMethod": {
-            "type": "supervised",
+            "type": "Supervised",
             "technique": "Naive Bayes",
             "supervision": {
-                "type": "supervised"
+                "type": "Supervised"
             }
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Predictions are produced automatically by trained classifiers without user post-editing."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -16488,7 +16488,7 @@
     },
     {
         "id": "2022_liu_radar",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2022,
         "firstAuthor": "Liu",
         "authors": [
@@ -16531,15 +16531,15 @@
             }
         },
         "mainMethod": {
-            "type": "hybrid",
+            "type": "Hybrid",
             "technique": "Embedding-based disambiguation combined with heuristic candidate scores"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "No user-in-the-loop; final labels are computed automatically by combining base scores with embedding signals."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -16678,7 +16678,7 @@
     },
     {
         "id": "2013_zwicklbauer_towards",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2013,
         "firstAuthor": "Zwicklbauer",
         "authors": [
@@ -16722,15 +16722,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "Pipeline runs automatically without manual review."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": ""
         },
         "validation": {
@@ -16810,7 +16810,7 @@
     },
     {
         "id": "2021_abdelmageed_jentab-2",
-        "added": "",
+        "added": "2024-11-01",
         "year": 2021,
         "firstAuthor": "Abdelmageed",
         "authors": [
@@ -16853,15 +16853,15 @@
             }
         },
         "mainMethod": {
-            "type": "unsupervised",
+            "type": "Unsupervised",
             "technique": "rule-based"
         },
         "revision": {
-            "type": "fully automated",
+            "type": "Fully automated",
             "description": "End-to-end automated pipeline; final annotations selected by built-in selection modules without user edits."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
