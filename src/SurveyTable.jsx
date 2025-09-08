@@ -1194,74 +1194,20 @@ function SurveyTable() {
       columns: [
         columnHelper.accessor(row => Array.isArray(row.citations?.references) ? row.citations.references.length : 0, {
           id: "referencesCount",
-          header: () => <span>References</span>,
+          header: () => <span></span>,
           cell: (info) => {
             const referencesCount = info.getValue();
-            const citationsCount = info.row.original.citations?.count || 0;
-            const isMismatch = referencesCount !== citationsCount;
             const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
             
             return (
               <div className={alignClass}>
-                <span className={`text-[10px] ${isMismatch ? 'bg-red-500/20 text-red-200 px-2 py-1 rounded' : 'text-neutral-400'}`}>
+                <span className="text-[10px] text-neutral-400">
                   {referencesCount}
                 </span>
               </div>
             );
           },
           enableSorting: true,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.citations?.count || 0, {
-          id: "citationsCount",
-          header: () => <span>Count</span>,
-          cell: (info) => {
-            const citationsCount = info.getValue();
-            const referencesCount = Array.isArray(info.row.original.citations?.references) ? info.row.original.citations.references.length : 0;
-            const isMismatch = referencesCount !== citationsCount;
-            const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-            
-            return (
-              <div className={alignClass}>
-                <span className={`text-[10px] ${isMismatch ? 'bg-red-500/20 text-red-200 px-2 py-1 rounded' : 'text-neutral-400'}`}>
-                  {citationsCount}
-                </span>
-              </div>
-            );
-          },
-          enableSorting: true,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.citations?.note || "", {
-          id: "citationsNote",
-          header: () => <span>Notes</span>,
-          cell: (info) => {
-            const note = info.getValue();
-            if (!note || note.trim() === "") {
-              const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-              return (
-                <div className={alignClass}>
-                  <span className="text-neutral-500 text-[10px]">-</span>
-                </div>
-              );
-            }
-            const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-            
-            return (
-              <div className={alignClass}>
-                <div className="relative group">
-                  <span className="text-[10px] text-neutral-300 cursor-pointer underline decoration-dotted">
-                    View note
-                  </span>
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
-                    {note}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
-                  </div>
-                </div>
-              </div>
-            );
-          },
-          enableSorting: false,
           meta: { align: 'center' }
         }),
       ],
