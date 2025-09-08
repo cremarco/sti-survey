@@ -109,14 +109,9 @@
     },
     "validation": { "type": "string", "label": "Validation" },
     "codeAvailability": {
-      "type": "object",
+      "type": "string",
       "label": "Code Availability",
-      "properties": {
-        "yes": { "type": "boolean", "label": "Yes" },
-        "no": { "type": "boolean", "label": "No" }
-      },
-      "required": ["yes", "no"],
-      "additionalProperties": false
+      "format": "uri"
     },
     "license": {
       "type": "object",
@@ -173,4 +168,3 @@
   ],
   "additionalProperties": false
 }
-    "extractedCitationsCount": { "type": "integer", "label": "Extracted Citations Count" },
