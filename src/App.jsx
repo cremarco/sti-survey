@@ -281,10 +281,10 @@ function App() {
       setTimeout(() => {
         renderMiniChart(chartRefs.current.total, data, "#64748b");
         renderMiniChart(chartRefs.current.yearRange, data, "#3b82f6");
-        renderMiniChart(chartRefs.current.cta, data.filter(item => item.tasks?.cta), "#f43f5e");
-        renderMiniChart(chartRefs.current.cpa, data.filter(item => item.tasks?.cpa), "#f97316");
-        renderMiniChart(chartRefs.current.cea, data.filter(item => item.tasks?.cea), "#f59e0b");
-        renderMiniChart(chartRefs.current.cnea, data.filter(item => item.tasks?.cnea), "#eab308");
+        renderMiniChart(chartRefs.current.cta, data.filter(item => item.coreTasks?.cta), "#f43f5e");
+        renderMiniChart(chartRefs.current.cpa, data.filter(item => item.coreTasks?.cpa), "#f97316");
+        renderMiniChart(chartRefs.current.cea, data.filter(item => item.coreTasks?.cea), "#f59e0b");
+        renderMiniChart(chartRefs.current.cnea, data.filter(item => item.coreTasks?.cnea), "#eab308");
       }, 300); // Start charts during counting animation
     }
   }, [data, animationStarted]);
