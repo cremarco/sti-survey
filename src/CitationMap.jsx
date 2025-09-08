@@ -69,12 +69,22 @@ function CitationMap() {
     };
 
     // Compute unique names for the chord diagram
-    const names = d3.sort(
-      d3.union(
-        data.map((d) => `${d.source} ${formatYear(d.source_date)}`).filter((name) => name !== ' NaN'),
-        data.map((d) => `${d.target} ${formatYear(d.target_date)}`)
-      )
+    // Build unique names and sort by year ascending (then by label)
+    const allNames = d3.union(
+      data.map((d) => `${d.source} ${formatYear(d.source_date)}`).filter((name) => name && name.trim() !== 'NaN' && name.trim() !== ''),
+      data.map((d) => `${d.target} ${formatYear(d.target_date)}`)
     );
+    const getYearFromLabel = (name) => {
+      const lastSpace = name.lastIndexOf(' ');
+      const y = Number(name.slice(lastSpace + 1));
+      return Number.isFinite(y) ? y : Number.POSITIVE_INFINITY;
+    };
+    const names = Array.from(allNames).sort((a, b) => {
+      const ya = getYearFromLabel(a);
+      const yb = getYearFromLabel(b);
+      if (ya !== yb) return ya - yb;
+      return a.localeCompare(b);
+    });
     const index = new Map(names.map((name, i) => [name, i]));
 
     // Map for 'evolve' type relationships
