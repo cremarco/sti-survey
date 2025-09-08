@@ -141,7 +141,7 @@ function CitationMap() {
       .attr('d', arc);
 
     // Add labels for each group
-    group
+    const labels = group
       .append('text')
       .each((d) => (d.angle = (d.startAngle + d.endAngle) / 2))
       .attr('dy', '0.35em')
@@ -164,6 +164,31 @@ function CitationMap() {
             .text(` ≪ ${evolveMap.get(d.index)}`);
         }
       });
+
+    // Highlight the first article (Hignette 2007) by adding a red bullet at the end of its label
+    {
+      const highlightTarget = 'hignette 2007';
+      const highlightName = names.find((n) => n.toLowerCase() === highlightTarget);
+      if (highlightName !== undefined) {
+        const hi = index.get(highlightName);
+        if (hi !== undefined) {
+          labels
+            .filter((d) => d.index === hi)
+            .each(function() {
+              d3.select(this)
+                .append('tspan')
+                .attr('dx', 6)
+                .attr('dy', '-0.2em')
+                .attr('fill', '#ef4444')
+                .attr('font-size', 20)
+                .attr('font-weight', 'bold')
+                .attr('alignment-baseline', 'middle')
+                .attr('dominant-baseline', 'middle')
+                .text(' •');
+            });
+        }
+      }
+    }
 
     // Add interactive area for hover effects
     group
