@@ -85,7 +85,8 @@ const MainMethodStackedChart = ({ data }) => {
       .attr("x", d => x(d.data.year))
       .attr("y", d => y(d[1]))
       .attr("height", d => y(d[0]) - y(d[1]))
-      .attr("width", x.bandwidth());
+      .attr("width", x.bandwidth())
+      .attr("rx", 2);
 
     // Add axes
     const xAxis = d3.axisBottom(x);
@@ -516,8 +517,13 @@ function Charts({ data }) {
                   >
                     {/* Front side - Statistics */}
                     <div className="backface-hidden h-[500px]">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-sky-300 font-semibold text-lg">Main Method Types</span>
+                      <div className="flex items-center justify-between mb-4 w-full">
+                        <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
+                          Main Method Types
+                          <span className="ml-2 px-2 py-0.5 rounded bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
+                            {Object.keys(summaryStats.mainMethodTypeDistribution).length}
+                          </span>
+                        </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowMainMethodChart(!showMainMethodChart)}
@@ -559,7 +565,12 @@ function Charts({ data }) {
                     >
                       <div className="flex flex-col h-full w-full">
                         <div className="flex items-center justify-between mb-4 w-full">
-                          <span className="text-sky-300 font-semibold text-lg">Main Method Distribution by Year</span>
+                          <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
+                            Main Method Distribution by Year
+                            <span className="ml-2 px-2 py-0.5 rounded bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
+                              {Object.keys(summaryStats.mainMethodTypeDistribution).length}
+                            </span>
+                          </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowMainMethodChart(!showMainMethodChart)}
@@ -594,8 +605,13 @@ function Charts({ data }) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 {/* Domains */}
                 <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 h-[500px]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-teal-300 font-semibold text-lg">Domains</span>
+                  <div className="flex items-center justify-between mb-4 w-full">
+                    <span className="text-teal-300 font-semibold text-lg flex items-center gap-2">
+                      Domains
+                      <span className="ml-2 px-2 py-0.5 rounded bg-teal-700/40 text-teal-200 text-xs font-mono align-middle">
+                        {Object.keys(summaryStats.domainDistribution).length}
+                      </span>
+                    </span>
                   </div>
                   <div className="space-y-3">
                     {Object.entries(summaryStats.domainDistribution)
@@ -619,8 +635,13 @@ function Charts({ data }) {
 
                 {/* Tasks Addressed */}
                 <div className="bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 h-[500px]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-indigo-300 font-semibold text-lg">Tasks Addressed</span>
+                  <div className="flex items-center justify-between mb-4 w-full">
+                    <span className="text-indigo-300 font-semibold text-lg flex items-center gap-2">
+                      Tasks Addressed
+                      <span className="ml-2 px-2 py-0.5 rounded bg-indigo-700/40 text-indigo-200 text-xs font-mono align-middle">
+                        {Object.keys(summaryStats.taskCounts).length}
+                      </span>
+                    </span>
                   </div>
                   <div className="space-y-3">
                     {Object.entries(summaryStats.taskPercentages).map(([task, percentage], index) => (
@@ -645,8 +666,13 @@ function Charts({ data }) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 {/* Steps Coverage */}
                 <div className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 p-4 h-[500px]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-blue-300 font-semibold text-lg">Steps Coverage</span>
+                  <div className="flex items-center justify-between mb-4 w-full">
+                    <span className="text-blue-300 font-semibold text-lg flex items-center gap-2">
+                      Steps Coverage
+                      <span className="ml-2 px-2 py-0.5 rounded bg-blue-700/40 text-blue-200 text-xs font-mono align-middle">
+                        {Object.keys(summaryStats.stepsCoverage).length}
+                      </span>
+                    </span>
                   </div>
                   <div className="space-y-3">
                     {Object.entries(summaryStats.stepsCoverage)
@@ -670,8 +696,13 @@ function Charts({ data }) {
 
                 {/* User Revision */}
                 <div className="bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 h-[500px]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-cyan-300 font-semibold text-lg">User Revision</span>
+                  <div className="flex items-center justify-between mb-4 w-full">
+                    <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
+                      User Revision
+                      <span className="ml-2 px-2 py-0.5 rounded bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
+                        {Object.keys(summaryStats.userRevisionDistribution).length}
+                      </span>
+                    </span>
                   </div>
                   <div className="space-y-3">
                     {Object.entries(summaryStats.userRevisionDistribution)
@@ -706,8 +737,13 @@ function Charts({ data }) {
                   >
                     {/* Front side - Statistics */}
                     <div className="backface-hidden h-[500px]">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-yellow-300 font-semibold text-lg">Licenses</span>
+                      <div className="flex items-center justify-between mb-4 w-full">
+                        <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
+                          Licenses
+                          <span className="ml-2 px-2 py-0.5 rounded bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
+                            {Object.keys(summaryStats.licenseDistribution).length}
+                          </span>
+                        </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowLicensesChart(!showLicensesChart)}
@@ -748,7 +784,12 @@ function Charts({ data }) {
                     >
                       <div className="flex flex-col h-full w-full">
                         <div className="flex items-center justify-between mb-4 w-full">
-                          <span className="text-yellow-300 font-semibold text-lg">License Distribution</span>
+                          <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
+                            License Distribution
+                            <span className="ml-2 px-2 py-0.5 rounded bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
+                              {Object.keys(summaryStats.licenseDistribution).length}
+                            </span>
+                          </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowLicensesChart(!showLicensesChart)}
@@ -797,7 +838,7 @@ function Charts({ data }) {
                   >
                     {/* Front: Text statistics */}
                     <div className="backface-hidden h-[500px]">
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center justify-between mb-4 w-full">
                         <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
                           Approaches per Conference/Journal
                           {/* Unique venues count label */}
@@ -815,7 +856,7 @@ function Charts({ data }) {
                           </button>
                         </div>
                       </div>
-                      <div className="space-y-3 overflow-y-scroll max-h-[420px] pr-2">
+                      <div className="space-y-3 overflow-y-scroll h-[400px]">
                         {Object.entries(summaryStats.conferenceJournalDistribution)
                           .sort(([, a], [, b]) => b - a)
                           .map(([venue, count], index) => (
@@ -846,7 +887,6 @@ function Charts({ data }) {
                         <div className="flex items-center justify-between mb-4 w-full">
                           <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
                             Approaches per Conference/Journal
-                            {/* Unique venues count label (back side) */}
                             <span className="ml-2 px-2 py-0.5 rounded bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
                               {Object.keys(summaryStats.conferenceJournalDistribution).length}
                             </span>
