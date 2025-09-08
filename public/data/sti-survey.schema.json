@@ -173,3 +173,4 @@
   ],
   "additionalProperties": false
 }
+    "extractedCitationsCount": { "type": "integer", "label": "Extracted Citations Count" },

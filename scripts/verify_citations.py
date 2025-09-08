@@ -18,10 +18,7 @@ Funzionamento in sintesi
   ricerca per titolo) come ulteriore riscontro.
 - Confronta `len(citations)` del JSON con il conteggio migliore disponibile
   (priorità: PDF → online) e scrive nel report solo i mismatch/irrisolti.
-- Con `--update-json` annota ogni entry con `citationCountVerified` e, in caso
-  di anomalia sull'ID, con `idValidation`. Con `--sync-citations` può anche
-  aggiungere placeholder per portare `citations` alla cardinalità attesa (e con
-  `--truncate` consentire tagli).
+  Puoi facoltativamente usare lookup online Crossref per confrontare il conteggio.
 
 Formato ID
 - Regex: ^\d{4}_[a-z][a-z0-9]+_[a-z0-9][a-z0-9-]+$
@@ -35,26 +32,38 @@ Opzioni principali (CLI)
 - `--extractor {tutti,auto,pypdf,pdfminer,pdftotext}` (default: tutti):
   seleziona l’estrattore testo. "tutti/auto" prova in cascata i disponibili
   (PyPDF → pdfminer → pdftotext).
-- `--only-id ID` (ripetibile) e/o `--ids-file file.txt`: limita l’analisi a
-  specifici articoli. Il file deve contenere un ID per riga; righe vuote o che
-  iniziano con `#` sono ignorate.
-- `--ensure-pdf-filenames {symlink,rename}`: per i PDF trovati con fuzzy‑match,
-  crea un link simbolico o rinomina il file in `approaches/<id>.pdf` per
-  uniformare ai medesimi ID presenti in `sti-survey.json`.
+- `--only-id ID` (ripetibile): limita l’analisi a specifici articoli.
+- Le citazioni estratte vengono sempre salvate in `reports/extracted_citations.json`,
+  mappate per ID dell’articolo senza modificare `sti-survey.json`.
 - `--online [--crossref-mailto EMAIL]`: abilita lookup Crossref.
-- `--update-json`: annota il JSON con i conteggi verificati.
-- `--sync-citations` [+ `--truncate`]: allinea la lunghezza di `citations`.
-- `--only-id ID`: limita l’analisi a specifici articoli (ripetibile).
+ 
 
 Esempi
 - Report su tutti i paper, strategia automatica:
   python3 scripts/verify_citations.py
-- Solo un articolo, scansione completa e annotazione JSON:
-  python3 scripts/verify_citations.py --only-id 2025_cremaschi_steellm --scan-mode full --update-json
 - Uso di Crossref con email di contatto:
   python3 scripts/verify_citations.py --online --crossref-mailto nome@dominio.it
-- Da file con molti ID:
-  python3 scripts/verify_citations.py --ids-file ids.txt --scan-mode full
+- Più ID specifici:
+  python3 scripts/verify_citations.py --only-id 2025_cremaschi_steellm --only-id 2024_zhang_tablellama
+- Le citazioni estratte sono salvate automaticamente in
+  `reports/extracted_citations.json` (per gli ID selezionati o tutti se non
+  filtrati).
+
+Formato delle citazioni nel JSON
+- Ogni elemento di `citations` è un oggetto `{ "ref": string, "title": string }`.
+- `ref`: contiene l’ID del paper se presente in `sti-survey.json` o come PDF in
+  `approaches/` (mappato per DOI/titolo/filename). Se non mappabile, resta "".
+- `title`: contiene solo il titolo del lavoro, preso dal JSON quando `ref` è
+  noto, altrimenti estratto dal PDF con heuristics che rimuovono autori/venue.
+  Il file `reports/extracted_citations.json` è un oggetto con chiavi gli ID e
+  valori la lista di citazioni nel formato sopra. In questo file, `title`
+  contiene l’intera citazione così come estratta dal PDF; `ref` è valorizzato
+  solo quando il mapping trova un ID noto.
+
+Aggiornamento contatore in sti-survey
+- Lo script aggiorna anche `public/data/sti-survey.json` inserendo/aggiornando
+  il campo opzionale `extractedCitationsCount` per ciascun articolo processato,
+  impostandolo al numero di citazioni estratte.
 
 Dipendenze
 - Obbligatorie: PyPDF2 (o pypdf)
@@ -76,6 +85,7 @@ import re
 import sys
 from dataclasses import dataclass
 from typing import Optional, Dict, Any, List, Tuple
+import difflib
 from functools import lru_cache
 
 try:
@@ -189,28 +199,7 @@ def pdf_path_for_id(approaches_dir: str, paper_id: str, entry: Dict[str, Any]) -
     return None, "not_found"
 
 
-def ensure_pdf_filename(approaches_dir: str, paper_id: str, current_path: str, mode: Optional[str]) -> Optional[str]:
-    """Ensure the PDF filename matches <id>.pdf by creating a symlink or renaming.
-    Returns a note string or None if no action.
-    """
-    if not mode:
-        return None
-    target = os.path.join(approaches_dir, f"{paper_id}.pdf")
-    try:
-        if os.path.abspath(current_path) == os.path.abspath(target):
-            return None
-        if os.path.exists(target):
-            return f"ensure:target_exists:{os.path.basename(target)}"
-        if mode == "symlink":
-            rel = os.path.relpath(current_path, approaches_dir)
-            os.symlink(rel, target)
-            return f"ensure:symlink:{os.path.basename(target)}->${{rel}}"
-        if mode == "rename":
-            os.rename(current_path, target)
-            return f"ensure:renamed:{os.path.basename(target)}"
-    except Exception as e:
-        return f"ensure:error:{e}"
-    return None
+# Removed: ensure_pdf_filename utility (no longer renaming/symlinking PDFs)
 
 
 def _normalize_text(text: str) -> str:
@@ -288,6 +277,30 @@ def _find_references_block(text: str) -> Tuple[str, bool]:
         return blk[:tail_pos], True
     # If no explicit heading, just take the last ~20k chars (heuristic)
     return text[-30000:], False
+
+
+# Global helpers to segment a references block into individual entries
+def _anchor_iter_global(block_text: str):
+    anchor_re = re.compile(r"(^|\n)\s*(\[(?P<b>\d{1,3})\]|(?P<n>\d{1,3})[\.)])\s+", flags=re.MULTILINE)
+    for m in anchor_re.finditer(block_text):
+        num = m.group('b') or m.group('n')
+        try:
+            n = int(num)
+        except Exception:
+            n = -1
+        yield (m.start(), m.group(2), n)
+
+
+def _segment_references(block_text: str) -> List[Tuple[int, int, str, int]]:
+    anchors = list(_anchor_iter_global(block_text))
+    segs: List[Tuple[int, int, str, int]] = []
+    if not anchors:
+        return segs
+    for i, (pos, label, num) in enumerate(anchors):
+        end = anchors[i + 1][0] if i + 1 < len(anchors) else len(block_text)
+        txt = block_text[pos:end]
+        segs.append((pos, end, txt.strip(), num))
+    return segs
 
 
 def _count_entries_in_block(block: str) -> Tuple[int, str]:
@@ -707,42 +720,126 @@ def _extract_reference_segments(text: str) -> List[str]:
 
 
 def _parse_reference(seg: str) -> Dict[str, Any]:
+    # Clean leading list markers
+    seg_clean = re.sub(r"^\s*(?:\[\s*\d{1,3}\s*\]|\d{1,3}[\.)])\s*", "", seg.strip())
     # Try DOI first
-    mdoi = re.search(r"10\.[0-9]{4,9}/[^\s)\]};,]+", seg, flags=re.IGNORECASE)
+    mdoi = re.search(r"10\.[0-9]{4,9}/[^\s)\]};,]+", seg_clean, flags=re.IGNORECASE)
     doi = mdoi.group(0) if mdoi else None
     # Year
-    myear = re.search(r"(19|20)\d{2}[a-z]?", seg)
+    myear = re.search(r"(19|20)\d{2}[a-z]?", seg_clean)
     year = None
+    year_pos = None
     if myear:
         try:
             year = int(myear.group(0)[:4])
         except Exception:
             year = None
-    # Title heuristic: after year and a dot, up to next dot
-    title = None
-    mtitle = re.search(r"(19|20)\d{2}[a-z]?\.?\s*(.+?)\.", seg)
-    if mtitle:
-        cand = mtitle.group(2)
-        # Filter out generic starters
-        if not re.match(r"^(Proceedings|In\s|arXiv|ACM|IEEE|Springer|Journal|Volume|Vol\.|No\.|pp\.|https?://)", cand, flags=re.IGNORECASE):
-            title = cand.strip()
-    # First author surname heuristic: before first comma
+        year_pos = myear.start()
+    # First author surname heuristic: look before year
     first_author = None
-    mauth = re.match(r"\s*([A-Z][A-Za-z'’-]+)", seg)
-    if mauth:
-        first_author = mauth.group(1)
+    head = seg_clean[:year_pos] if year_pos is not None else seg_clean[:120]
+    # Patterns: "Lastname, F." or "Firstname Lastname,"
+    m1 = re.search(r"([A-Z][A-Za-z'’-]+)\s*,\s*[A-Z]", head)
+    if m1:
+        first_author = m1.group(1)
+    else:
+        m2 = re.search(r"(?:^|\s)([A-Z][A-Za-z'’-]+)\s*,", head)
+        if m2:
+            first_author = m2.group(1)
+        else:
+            m3 = re.match(r"\s*(?:[A-Z][A-Za-z'’-]+\s+)*(?P<s>[A-Z][A-Za-z'’-]+)\s*[,\.]", head)
+            if m3:
+                first_author = m3.group('s')
+    # Title heuristic: choose the best sentence after year not starting with venue markers
+    title = None
+    tail = seg_clean[myear.end():] if myear else seg_clean
+    parts = [p.strip() for p in tail.split('.') if p.strip()]
+    venue_markers = re.compile(r"^(Proceedings|In\s|arXiv|ACM|IEEE|Springer|Journal|Volume|Vol\.|No\.|pp\.|https?://)", re.IGNORECASE)
+    for p in parts:
+        if len(p) < 6:
+            continue
+        if venue_markers.search(p):
+            continue
+        title = p
+        break
     return {"raw": seg, "doi": doi, "year": year, "title": title, "firstAuthor": first_author}
+
+
+def _title_only_from_segment(seg: str) -> str:
+    # Keep only the likely title portion after the year and before venue markers
+    s = re.sub(r"\s+", " ", seg.strip())
+    # Drop leading list numbering like [12] or 12. or 12)
+    s = re.sub(r"^\s*(?:\[\s*\d{1,3}\s*\]|\d{1,3}[\.)])\s*", "", s)
+    # Drop leading year fragments like 2022. or 022.
+    s = re.sub(r"^\s*(?:\d{3,4}[a-z]?\.)\s*", "", s)
+    # Try colon-based title (e.g., "Jentab: Matching tabular data ...")
+    mcolon = re.search(r"([A-Z][A-Za-z0-9'’\- ]{3,100}:\s+[^\.]{5,200})", s)
+    if mcolon:
+        cand = mcolon.group(1)
+        cand = re.sub(r"\s+", " ", cand).strip()
+        return cand.strip(" \t\n\r\f\v\"'()[]{}.;:")
+    # remove leading authors up to year.
+    m = re.search(r"(19|20)\d{2}[a-z]?\.?\s*", s)
+    s2 = s[m.end():] if m else s
+    # cut at venue/marker tokens
+    stops = [
+        r"\bIn\b",
+        r"\bProceedings\b",
+        r"\bProc\.?\b",
+        r"\bJournal\b",
+        r"\bACM\b",
+        r"\bIEEE\b",
+        r"\bSpringer\b",
+        r"\bElsevier\b",
+        r"\barXiv\b",
+        r"https?://",
+        r"\bdoi\b",
+        r"\bvol\.?\b",
+        r"\bno\.?\b",
+        r"\bpp\.?\b",
+    ]
+    cut = None
+    for p in stops:
+        m2 = re.search(p, s2, flags=re.IGNORECASE)
+        if m2:
+            cut = m2.start() if cut is None else min(cut, m2.start())
+    if cut is not None:
+        s2 = s2[:cut]
+    # split at the first full stop if it remains very long
+    if len(s2) > 200 and "." in s2:
+        s2 = s2.split(".", 1)[0]
+    # Trim trailing numeric/venue artifacts
+    s2 = re.sub(r"\s*,?\s*\d{1,4}(?:\s*,\s*\d{1,4})*$", "", s2)
+    s2 = s2.strip(" \t\n\r\f\v\"'()[]{}.;:")
+    return s2
+
+
+def _tokenize_title(s: str) -> List[str]:
+    s = _normalize_title(s)
+    toks = [t for t in s.split() if len(t) >= 4]
+    return toks
 
 
 def _build_catalog(entries: List[Dict[str, Any]], approaches_dir: str) -> Dict[str, Any]:
     by_doi: Dict[str, str] = {}
     by_title: Dict[str, str] = {}
+    title_by_id: Dict[str, str] = {}
+    by_year_titles: Dict[int, List[Tuple[str, List[str]]]] = {}
     ids_set = set()
     for e in entries:
         pid = e.get("id")
         if not pid:
             continue
         ids_set.add(pid)
+        if isinstance(e.get("title"), str):
+            title_by_id[pid] = e["title"]
+            try:
+                y = int(e.get("year")) if e.get("year") is not None else None
+            except Exception:
+                y = None
+            toks = _tokenize_title(e["title"])
+            if isinstance(y, int):
+                by_year_titles.setdefault(y, []).append((pid, toks))
         doi = e.get("doi") or ""
         if doi:
             by_doi[normalize_doi(doi)] = pid
@@ -756,7 +853,7 @@ def _build_catalog(entries: List[Dict[str, Any]], approaches_dir: str) -> Dict[s
                 ids_set.add(f[:-4])
     except Exception:
         pass
-    return {"by_doi": by_doi, "by_title": by_title, "ids": ids_set}
+    return {"by_doi": by_doi, "by_title": by_title, "ids": ids_set, "title_by_id": title_by_id, "by_year_titles": by_year_titles}
 
 
 def _guess_id_from_approaches(ref: Dict[str, Any], approaches_dir: str) -> Optional[str]:
@@ -798,9 +895,44 @@ def _map_ref_to_id(ref: Dict[str, Any], catalog: Dict[str, Any], approaches_dir:
             return pid
     title = ref.get("title")
     if title:
-        pid = catalog["by_title"].get(_normalize_title(title))
+        norm = _normalize_title(title)
+        pid = catalog["by_title"].get(norm)
         if pid:
             return pid
+        # Fuzzy by year-restricted token Jaccard
+        toks_ref = set(_tokenize_title(title))
+        year = ref.get("year")
+        candidates = []
+        if isinstance(year, int) and year in catalog.get("by_year_titles", {}):
+            candidates = catalog["by_year_titles"][year]
+        else:
+            # fall back to all titles
+            candidates = [(pid2, _tokenize_title(t)) for pid2, t in catalog.get("title_by_id", {}).items()]
+        best_id = None
+        best_score = 0.0
+        for cid, toks in candidates:
+            s = set(toks)
+            if not s or not toks_ref:
+                continue
+            inter = len(s & toks_ref)
+            union = len(s | toks_ref)
+            jac = inter / union if union else 0.0
+            # require minimum overlap
+            if inter >= 3 and jac > best_score:
+                best_score = jac
+                best_id = cid
+        if best_id and best_score >= 0.4:
+            return best_id
+        # Secondary: difflib ratio on normalized strings
+        best = None
+        best_r = 0.0
+        for cid, t in catalog.get("title_by_id", {}).items():
+            r = difflib.SequenceMatcher(a=norm, b=_normalize_title(t)).ratio()
+            if r > best_r:
+                best = cid
+                best_r = r
+        if best and best_r >= 0.72:
+            return best
     # Guess from approaches filenames if not found via JSON
     gid = _guess_id_from_approaches(ref, approaches_dir)
     if gid:
@@ -808,7 +940,7 @@ def _map_ref_to_id(ref: Dict[str, Any], catalog: Dict[str, Any], approaches_dir:
     return None
 
 
-def extract_and_map_citations_for_entry(entry: Dict[str, Any], approaches_dir: str, last_pages: int, scan_mode: str, extractor: str, catalog: Dict[str, Any]) -> List[Dict[str, Any]]:
+def extract_and_map_citations_for_entry(entry: Dict[str, Any], approaches_dir: str, last_pages: int, scan_mode: str, extractor: str, catalog: Dict[str, Any], content_mode: str = "full") -> List[Dict[str, Any]]:
     paper_id = entry.get("id")
     pdf_path, _how = pdf_path_for_id(approaches_dir, paper_id, entry)
     if not pdf_path:
@@ -842,7 +974,15 @@ def extract_and_map_citations_for_entry(entry: Dict[str, Any], approaches_dir: s
     for seg in segs:
         info = _parse_reference(seg)
         pid = _map_ref_to_id(info, catalog, approaches_dir)
-        title = info.get("title") or info.get("raw")[:180]
+        # Choose content: either full citation string or title-only
+        if content_mode == "full":
+            title = re.sub(r"\s+", " ", (seg or "").strip())
+        else:
+            # title-only mode: prefer canonical JSON title when ID is known
+            if pid and pid in catalog.get("title_by_id", {}):
+                title = catalog["title_by_id"][pid]
+            else:
+                title = info.get("title") or _title_only_from_segment(info.get("raw", ""))
         results.append({
             "ref": pid or "",
             "title": title,
@@ -850,7 +990,7 @@ def extract_and_map_citations_for_entry(entry: Dict[str, Any], approaches_dir: s
     return results
 
 
-def compare_counts(entry: Dict[str, Any], approaches_dir: str, last_pages: int, online: bool, crossref_mailto: Optional[str], scan_mode: str = "auto", extractor: str = "auto", ensure_mode: Optional[str] = None) -> Counts:
+def compare_counts(entry: Dict[str, Any], approaches_dir: str, last_pages: int, online: bool, crossref_mailto: Optional[str], scan_mode: str = "auto", extractor: str = "auto") -> Counts:
     paper_id = entry.get("id", "")
     json_citations = entry.get("citations", [])
     json_count = len(json_citations) if isinstance(json_citations, list) else None
@@ -865,15 +1005,6 @@ def compare_counts(entry: Dict[str, Any], approaches_dir: str, last_pages: int, 
 
     pdf_path, how = pdf_path_for_id(approaches_dir, paper_id, entry)
     if pdf_path:
-        # Optionally align PDF filename to <id>.pdf
-        if how.startswith("fuzzy:") and ensure_mode:
-            note_fix = ensure_pdf_filename(approaches_dir, paper_id, pdf_path, ensure_mode)
-            if note_fix:
-                notes.append(note_fix)
-            # If renamed, recompute path
-            std = os.path.join(approaches_dir, f"{paper_id}.pdf")
-            if os.path.exists(std):
-                pdf_path = std
         pdf_count, note = ref_count_from_pdf(pdf_path, last_pages=last_pages, scan_mode=scan_mode, extractor=extractor)
         if note:
             notes.append(f"pdf:{how}:{note}")
@@ -891,7 +1022,7 @@ def compare_counts(entry: Dict[str, Any], approaches_dir: str, last_pages: int, 
     return Counts(json=json_count, pdf=pdf_count, online=online_count, note="; ".join(notes))
 
 
-def build_report(entries: List[Dict[str, Any]], approaches_dir: str, last_pages: int, online: bool, crossref_mailto: Optional[str], scan_mode: str = "auto", extractor: str = "auto", ensure_mode: Optional[str] = None) -> Tuple[str, int, int, int, int]:
+def build_report(entries: List[Dict[str, Any]], approaches_dir: str, last_pages: int, online: bool, crossref_mailto: Optional[str], scan_mode: str = "auto", extractor: str = "auto") -> Tuple[str, int, int, int, int]:
     lines: List[str] = []
     lines.append("Citation count mismatches (JSON vs PDF/Online)\n")
     lines.append("Only mismatches or unresolved entries are listed.\n")
@@ -904,7 +1035,7 @@ def build_report(entries: List[Dict[str, Any]], approaches_dir: str, last_pages:
 
     for entry in entries:
         processed += 1
-        counts = compare_counts(entry, approaches_dir, last_pages, online, crossref_mailto, scan_mode=scan_mode, extractor=extractor, ensure_mode=ensure_mode)
+        counts = compare_counts(entry, approaches_dir, last_pages, online, crossref_mailto, scan_mode=scan_mode, extractor=extractor)
         paper_id = entry.get("id", "?")
         title = entry.get("title", "?")
 
@@ -946,13 +1077,13 @@ def build_report(entries: List[Dict[str, Any]], approaches_dir: str, last_pages:
     return "\n".join(lines) + "\n", processed, mismatches, missing_pdf, parse_fail
 
 
-def annotate_json(entries: List[Dict[str, Any]], approaches_dir: str, last_pages: int, online: bool, crossref_mailto: Optional[str], scan_mode: str = "auto", extractor: str = "auto", ensure_mode: Optional[str] = None) -> Tuple[List[Dict[str, Any]], int, int]:
+def annotate_json(entries: List[Dict[str, Any]], approaches_dir: str, last_pages: int, online: bool, crossref_mailto: Optional[str], scan_mode: str = "auto", extractor: str = "auto") -> Tuple[List[Dict[str, Any]], int, int]:
     """Returns modified entries plus counts of annotated and mismatched items."""
     modified = 0
     mismatches = 0
     new_entries: List[Dict[str, Any]] = []
     for entry in entries:
-        counts = compare_counts(entry, approaches_dir, last_pages, online, crossref_mailto, scan_mode=scan_mode, extractor=extractor, ensure_mode=ensure_mode)
+        counts = compare_counts(entry, approaches_dir, last_pages, online, crossref_mailto, scan_mode=scan_mode, extractor=extractor)
         paper_id = entry.get("id", "")
 
         # Build annotation object
@@ -993,48 +1124,7 @@ def annotate_json(entries: List[Dict[str, Any]], approaches_dir: str, last_pages
     return new_entries, modified, mismatches
 
 
-def sync_citations(entries: List[Dict[str, Any]], prefer: str = "pdf") -> Tuple[List[Dict[str, Any]], int, int, int]:
-    """
-    Adjust the citations array length to match citationCountVerified.best.
-    Only adds placeholder entries if there are fewer; truncation is opt-in via prefer='truncate'.
-    Returns (entries, added, removed, unchanged).
-    """
-    added = removed = unchanged = 0
-    out: List[Dict[str, Any]] = []
-    for e in entries:
-        ann = e.get("citationCountVerified") or {}
-        best = ann.get("best")
-        citations = e.get("citations")
-        if not isinstance(best, int) or not isinstance(citations, list):
-            out.append(e)
-            unchanged += 1
-            continue
-        delta = best - len(citations)
-        if delta == 0:
-            out.append(e)
-            unchanged += 1
-            continue
-        e2 = dict(e)
-        # Grow by adding placeholders
-        if delta > 0:
-            phs = [
-                {
-                    "ref": f"{e.get('id','unknown')}__auto_{i+1}",
-                    "title": "PLACEHOLDER: reference not yet curated",
-                }
-                for i in range(delta)
-            ]
-            e2["citations"] = citations + phs
-            added += delta
-        else:
-            # Only truncate if explicitly requested via prefer='truncate'
-            if prefer == "truncate":
-                e2["citations"] = citations[:best]
-                removed += (len(citations) - best)
-            else:
-                unchanged += 1
-        out.append(e2)
-    return out, added, removed, unchanged
+# Removed: sync_citations support (no automatic resizing of citations arrays)
 
 
 def main() -> int:
@@ -1045,15 +1135,11 @@ def main() -> int:
     ap.add_argument("--last-pages", dest="last_pages", type=int, default=8, help="Number of last PDF pages to scan for references")
     ap.add_argument("--online", dest="online", action="store_true", help="Use Crossref online lookup as fallback")
     ap.add_argument("--crossref-mailto", dest="crossref_mailto", default=None, help="Contact email for Crossref queries (recommended)")
-    ap.add_argument("--update-json", dest="update_json", action="store_true", help="Annotate JSON with computed citation counts under 'citationCountVerified'")
-    ap.add_argument("--sync-citations", dest="sync_citations", action="store_true", help="Adjust citations array length to match computed best count (adds placeholders; no truncation by default)")
-    ap.add_argument("--truncate", dest="truncate", action="store_true", help="When used with --sync-citations, allow truncation if JSON has more citations than computed best")
-    ap.add_argument("--extract-citations", dest="extract_citations", action="store_true", help="Extract citations from PDF and rebuild the JSON 'citations' list using mapped IDs when available")
+    # Removed option: --update-json, --extract-citations (script no longer modifies sti-survey.json)
     ap.add_argument("--scan-mode", dest="scan_mode", choices=["auto", "tail", "full"], default="full", help="PDF scanning strategy: auto (tail then full fallback), tail (only last pages), full (entire PDF)")
     ap.add_argument("--extractor", dest="extractor", choices=["tutti", "auto", "pypdf", "pdfminer", "pdftotext"], default="tutti", help="PDF text extractor to use: 'tutti/auto' tries PyPDF then pdfminer/pdftotext; specify to force one")
     ap.add_argument("--only-id", dest="only_id", action="append", help="Process only entries with the given id (can be repeated)")
-    ap.add_argument("--ids-file", dest="ids_file", action="append", help="Path to a file with one id per line (can be repeated)")
-    ap.add_argument("--ensure-pdf-filenames", dest="ensure_pdf_filenames", choices=["symlink", "rename"], help="If a PDF was matched fuzzily, create a symlink or rename it to approaches/<id>.pdf")
+    # Removed options: --sync-citations/--truncate, --ensure-pdf-filenames, --extracted-json, --extracted-known-only
 
     args = ap.parse_args()
 
@@ -1063,25 +1149,11 @@ def main() -> int:
         print(f"Failed to read JSON: {e}", file=sys.stderr)
         return 2
 
-    # Filter by IDs if requested (via --only-id and/or --ids-file)
-    wanted: set = set(args.only_id or [])
-    def _read_ids_file(p: str) -> List[str]:
-        buf: List[str] = []
-        with open(p, 'r', encoding='utf-8') as f:
-            for line in f:
-                s = line.strip()
-                if not s or s.startswith('#'):
-                    continue
-                buf.append(s)
-        return buf
+    # Keep a copy of all entries for global catalogs/mapping
+    all_entries = list(entries)
 
-    if args.ids_file:
-        for path in args.ids_file:
-            try:
-                wanted.update(_read_ids_file(path))
-            except Exception as e:
-                print(f"Failed to read ids file '{path}': {e}", file=sys.stderr)
-                return 2
+    # Filter by IDs if requested (via --only-id)
+    wanted: set = set(args.only_id or [])
 
     if wanted:
         entries = [e for e in entries if e.get("id") in wanted]
@@ -1102,7 +1174,6 @@ def main() -> int:
         crossref_mailto=args.crossref_mailto,
         scan_mode=args.scan_mode,
         extractor=effective_extractor,
-        ensure_mode=args.ensure_pdf_filenames,
     )
 
     with open(args.report_path, "w", encoding="utf-8") as f:
@@ -1111,61 +1182,61 @@ def main() -> int:
     print(f"Wrote report to {args.report_path}")
     print(f"Processed={processed} mismatches={mismatches} missing_pdfs={missing_pdf} parse_failures={parse_fail}")
 
-    # Optionally update JSON
-    if args.update_json or args.sync_citations:
-        annotated, ann_count, ann_mismatches = annotate_json(
-            entries=entries,
-            approaches_dir=args.approaches_dir,
+    # Always save extracted citations into reports/extracted_citations.json
+    catalog = _build_catalog(all_entries, args.approaches_dir)
+    extracted: Dict[str, List[Dict[str, Any]]] = {}
+    saved = 0
+    for e in entries:
+        pid = e.get("id")
+        if not pid:
+            continue
+        cits = extract_and_map_citations_for_entry(
+            e,
+            args.approaches_dir,
             last_pages=args.last_pages,
-            online=args.online,
-            crossref_mailto=args.crossref_mailto,
             scan_mode=args.scan_mode,
             extractor=effective_extractor,
-            ensure_mode=args.ensure_pdf_filenames,
+            catalog=catalog,
+            content_mode="full",
         )
-        final_entries = annotated
-        add_count = rem_count = unchg = 0
-        # Optionally rebuild citations by extracting and mapping to existing IDs
-        if args.extract_citations:
-            catalog = _build_catalog(annotated, args.approaches_dir)
-            rebuilt: List[Dict[str, Any]] = []
-            rebuilt_count = 0
-            for e in final_entries:
-                cits = extract_and_map_citations_for_entry(
-                    e,
-                    args.approaches_dir,
-                    last_pages=args.last_pages,
-                    scan_mode=args.scan_mode,
-                    extractor=effective_extractor,
-                    catalog=catalog,
-                )
-                if cits:
-                    e2 = dict(e)
-                    e2["citations"] = cits
-                    rebuilt.append(e2)
-                    rebuilt_count += 1
-                else:
-                    rebuilt.append(e)
-            final_entries = rebuilt
-            print(f"Rebuilt citations for {rebuilt_count} entries using extracted references and mapped IDs")
-        if args.sync_citations:
-            prefer = "truncate" if args.truncate else "pdf"
-            final_entries, add_count, rem_count, unchg = sync_citations(annotated, prefer=prefer)
+        extracted[pid] = cits or []
+        if cits:
+            saved += 1
+    try:
+        out_path = os.path.join("reports", "extracted_citations.json")
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(extracted, f, ensure_ascii=False, indent=4)
+        print(f"Wrote extracted citations for {saved}/{len(entries)} entries to {out_path}")
+    except Exception as e:
+        print(f"Failed to write extracted JSON: {e}", file=sys.stderr)
+        return 3
 
-        # Write back JSON only if changed
-        try:
-            if final_entries != entries:
-                with open(args.json_path, "w", encoding="utf-8") as f:
-                    json.dump(final_entries, f, ensure_ascii=False, indent=4)
-                print(
-                    "Updated JSON: annotations=%d, mismatches=%d, placeholders_added=%d, removed=%d, unchanged=%d"
-                    % (ann_count, ann_mismatches, add_count, rem_count, unchg)
-                )
-            else:
-                print("JSON unchanged; no write performed")
-        except Exception as e:
-            print(f"Failed to write JSON: {e}", file=sys.stderr)
-            return 3
+    # Update sti-survey.json with extractedCitationsCount for processed entries
+    try:
+        counts_by_id = {pid: len(cits) for pid, cits in extracted.items()}
+        original = load_json(args.json_path)
+        updated = []
+        updated_count = 0
+        for obj in original:
+            pid = obj.get("id")
+            if pid in counts_by_id:
+                if obj.get("extractedCitationsCount") != counts_by_id[pid]:
+                    obj = dict(obj)
+                    obj["extractedCitationsCount"] = counts_by_id[pid]
+                    updated_count += 1
+            updated.append(obj)
+        if updated != original:
+            with open(args.json_path, "w", encoding="utf-8") as f:
+                json.dump(updated, f, ensure_ascii=False, indent=4)
+            print(f"Updated extractedCitationsCount for {updated_count} entries in {args.json_path}")
+        else:
+            print("No changes to extractedCitationsCount needed")
+    except Exception as e:
+        print(f"Failed to update extractedCitationsCount: {e}", file=sys.stderr)
+        return 3
+
+    # No modifications to sti-survey.json; only extracted citations are written
 
     return 0
 

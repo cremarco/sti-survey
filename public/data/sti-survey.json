@@ -16156,7 +16156,8 @@
                 "field": "citations",
                 "reason": "Full bibliography not extracted in this pass; leaving the list empty avoids introducing potentially incorrect references."
             }
-        ]
+        ],
+        "extractedCitationsCount": 123
     },
     {
         "id": "2023_dorodnykh_knowledge",
