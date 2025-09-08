@@ -65,7 +65,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -227,7 +227,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables and HTML lists",
             "tableSources": [
@@ -422,7 +422,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -610,7 +610,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -910,7 +910,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -1110,7 +1110,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -1256,7 +1256,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -1459,7 +1459,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -1637,7 +1637,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -1843,7 +1843,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -2074,7 +2074,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Structured fields/tuples from web pages and databases",
             "tableSources": [
@@ -2260,7 +2260,7 @@
             "metrics": []
         },
         "codeAvailability": "https://github.com/InformationIntegrationGroup/Web-Karma-Public",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Structured sources (databases, spreadsheets, CSV, XML)",
             "tableSources": [
@@ -2453,7 +2453,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -2652,7 +2652,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -2865,7 +2865,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables and spreadsheets",
             "tableSources": [
@@ -3077,7 +3077,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables (extracted from Web documents; represented as XML)",
             "tableSources": [
@@ -3301,7 +3301,7 @@
             "metrics": []
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables and GIS formats (CSV, GML, KML, SHP)",
             "tableSources": [
@@ -3515,7 +3515,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -3770,7 +3770,7 @@
             "metrics": []
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -3927,7 +3927,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -4116,7 +4116,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -4314,7 +4314,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables (Google Fusion Tables)",
             "tableSources": [
@@ -4515,7 +4515,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -4691,7 +4691,7 @@
             "metrics": []
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables and spreadsheets",
             "tableSources": [
@@ -4872,7 +4872,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Relational databases, spreadsheets, XML/JSON sources and Web APIs",
             "tableSources": [
@@ -5066,7 +5066,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -5345,7 +5345,7 @@
             ]
         },
         "codeAvailability": "https://github.com/usc-isi-i2/eswc-2015-semantic-typing",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables and heterogeneous sources (tables, XML, JSON)",
             "tableSources": [
@@ -5517,7 +5517,7 @@
             ]
         },
         "codeAvailability": "http://dws.informatik.uni-mannheim.de/en/research/T2K",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -5712,7 +5712,7 @@
             ]
         },
         "codeAvailability": "https://github.com/aksw/taipan",
-        "license": "GNU Affero General Public License v3.0",
+        "license": "AGPL-3.0",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -5937,7 +5937,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV tables",
             "tableSources": [
@@ -6157,7 +6157,7 @@
             ]
         },
         "codeAvailability": "https://github.com/minhptx/iswc-2016-semantic-labeling.git",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables, spreadsheets, and relational tables",
             "tableSources": [
@@ -6313,7 +6313,7 @@
             ]
         },
         "codeAvailability": "https://github.com/usc-isi-i2/Web-Karma",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "CSV, XML, JSON",
             "tableSources": [
@@ -6496,7 +6496,7 @@
             ]
         },
         "codeAvailability": "https://github.com/usc-isi-i2/Web-Karma",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "CSV, XML, JSON, relational tables",
             "tableSources": [
@@ -6831,7 +6831,7 @@
             ]
         },
         "codeAvailability": "http://ibm.biz/webtables",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables (HTML tables)",
             "tableSources": [
@@ -7086,7 +7086,7 @@
             "metrics": []
         },
         "codeAvailability": "https://github.com/isywtu/code",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -7265,7 +7265,7 @@
             ]
         },
         "codeAvailability": "https://github.com/olehmberg/WebTableStitching",
-        "license": "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International",
+        "license": "CC-BY-NC-ND-4.0",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -7529,7 +7529,7 @@
             ]
         },
         "codeAvailability": "https://github.com/ziqizhang/sti",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables (HTML)",
             "tableSources": [
@@ -7812,7 +7812,7 @@
             ]
         },
         "codeAvailability": "https://github.com/chabrowa/semantification",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -8013,7 +8013,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -8259,7 +8259,7 @@
             ]
         },
         "codeAvailability": "https://github.com/iai-group/www2018-table",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -8584,7 +8584,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": []
@@ -8732,7 +8732,7 @@
             ]
         },
         "codeAvailability": "https://github.com/alan-turing-institute/SemAIDA",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -8957,7 +8957,7 @@
             ]
         },
         "codeAvailability": "https://github.com/alan-turing-institute/SemAIDA",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -9176,7 +9176,7 @@
             ]
         },
         "codeAvailability": "https://bitbucket.org/disco_unimib/mantistable-tool.py",
-        "license": "CC BY 4.0",
+        "license": "CC-BY-4.0",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": []
@@ -9348,7 +9348,7 @@
             ]
         },
         "codeAvailability": "https://sherlock.media.mit.edu",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -9573,7 +9573,7 @@
             ]
         },
         "codeAvailability": "https://github.com/karmaresearch/takco",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -9818,7 +9818,7 @@
             ]
         },
         "codeAvailability": "https://github.com/lod4all/semanticTableInterpretation",
-        "license": "CC BY 4.0",
+        "license": "CC-BY-4.0",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -9964,7 +9964,7 @@
             ]
         },
         "codeAvailability": "https://github.com/phucty/MTab",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "Vertical relational tables",
             "tableSources": []
@@ -10116,7 +10116,7 @@
             ]
         },
         "codeAvailability": "https://github.com/danielapoliveira/iswc-annotation-challenge",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "structured and semi-structured tables",
             "tableSources": []
@@ -10409,7 +10409,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Tabular data (UCI tables)",
             "tableSources": [
@@ -10597,7 +10597,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -10735,7 +10735,7 @@
             ]
         },
         "codeAvailability": "https://github.com/megagonlabs/sato",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -11029,7 +11029,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": []
@@ -11180,7 +11180,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -11359,7 +11359,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": []
@@ -11542,7 +11542,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -11686,7 +11686,7 @@
             ]
         },
         "codeAvailability": "https://bitbucket.org/disco_unimib/mantistable-tool.py/",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -11956,7 +11956,7 @@
             ]
         },
         "codeAvailability": "https://github.com/eXascaleInfolab/sds2020_web_table_annotation",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -12142,7 +12142,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -12337,7 +12337,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Relational tables (CSV/HTML)",
             "tableSources": [
@@ -12566,7 +12566,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "CC BY 4.0",
+        "license": "CC-BY-4.0",
         "inputs": {
             "typeOfTable": "Tabular data",
             "tableSources": []
@@ -12700,7 +12700,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "CC BY 4.0",
+        "license": "CC-BY-4.0",
         "inputs": {
             "typeOfTable": "tabular data",
             "tableSources": []
@@ -12873,7 +12873,7 @@
             ]
         },
         "codeAvailability": "http://github.com/UB-Mannheim/bbw",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": []
@@ -13025,7 +13025,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -13175,7 +13175,7 @@
             ]
         },
         "codeAvailability": "https://github.com/shaliniktyagi/TabularData_to_Knowledge_graph",
-        "license": "CC BY 4.0",
+        "license": "CC-BY-4.0",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -13338,7 +13338,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "CC-BY 4.0",
+        "license": "CC-BY-4.0",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -13600,7 +13600,7 @@
             ]
         },
         "codeAvailability": "https://github.com/fusion-jena/JenTab",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -13785,7 +13785,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": []
@@ -14034,7 +14034,7 @@
             ]
         },
         "codeAvailability": "https://github.com/nheist/CaLiGraph",
-        "license": "GNU General Public License v3.0",
+        "license": "GPL-3.0",
         "inputs": {
             "typeOfTable": "Wikipedia listings (tables and lists)",
             "tableSources": [
@@ -14309,7 +14309,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Relational tables",
             "tableSources": []
@@ -14473,7 +14473,7 @@
             ]
         },
         "codeAvailability": "https://github.com/megagonlabs/ditto",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Relational tables and web product offers",
             "tableSources": [
@@ -14830,7 +14830,7 @@
             ]
         },
         "codeAvailability": "https://github.com/phucty/mtab_tool",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "CSV, TSV, Excel, markdown tables, pasted text",
             "tableSources": []
@@ -15063,7 +15063,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV, spreadsheets, HTML tables",
             "tableSources": [
@@ -15413,7 +15413,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -15749,7 +15749,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -15917,7 +15917,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
@@ -16121,7 +16121,7 @@
             ]
         },
         "codeAvailability": "https://github.com/fusion-jena/JenTab",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -16327,7 +16327,7 @@
             ]
         },
         "codeAvailability": "https://aka.ms/XLKG",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "relational tables",
             "tableSources": [
@@ -16680,7 +16680,7 @@
             ]
         },
         "codeAvailability": "https://github.com/sunlab-osu/TURL",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables (relational tables)",
             "tableSources": [
@@ -16935,7 +16935,7 @@
             ]
         },
         "codeAvailability": "https://github.com/sgottsch/Tab2KG",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -17259,7 +17259,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -17392,7 +17392,7 @@
             ]
         },
         "codeAvailability": "https://developer.orange.com/apis/table-annotation",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables and CSV",
             "tableSources": []
@@ -17641,7 +17641,7 @@
             ]
         },
         "codeAvailability": "https://github.com/megagonlabs/doduo",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -17997,7 +17997,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": []
@@ -18165,7 +18165,7 @@
             ]
         },
         "codeAvailability": "https://github.com/bennokr/semtab2023-CQA/",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -18448,7 +18448,7 @@
             ]
         },
         "codeAvailability": "https://github.com/northeastern-datalab/santos",
-        "license": "BSD 3-Clause \"New\" or \"Revised\" License",
+        "license": "BSD-3-Clause",
         "inputs": {
             "typeOfTable": "data lake tables (CSV/open data)",
             "tableSources": [
@@ -18766,7 +18766,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Tabular data (SemTab 2023 tables)",
             "tableSources": [
@@ -18954,7 +18954,7 @@
             ]
         },
         "codeAvailability": "https://github.com/vishvapalsinh/cta-cpa-schemaorg-dbpedia",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -19122,7 +19122,7 @@
             ]
         },
         "codeAvailability": "https://github.com/ysunbp/RECA-paper",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -19355,7 +19355,7 @@
             ]
         },
         "codeAvailability": "https://github.com/penfever/ArcheType",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "Relational tables",
             "tableSources": [
@@ -19663,7 +19663,7 @@
             ]
         },
         "codeAvailability": "",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables and CSV",
             "tableSources": [
@@ -19901,7 +19901,7 @@
             ]
         },
         "codeAvailability": "https://bitbucket.org/disco_unimib/mantistable-v/",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -20048,7 +20048,7 @@
             ]
         },
         "codeAvailability": "https://bitbucket.org/disco_unimib/mantistable-4",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "well-formed relational tables",
             "tableSources": []
@@ -20364,7 +20364,7 @@
             ]
         },
         "codeAvailability": "https://osu-nlp-group.github.io/TableLlama/",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables and spreadsheets",
             "tableSources": [
@@ -20697,7 +20697,7 @@
             ]
         },
         "codeAvailability": "https://github.com/phucty/mtab4dbpedia",
-        "license": "CC BY 4.0",
+        "license": "CC-BY-4.0",
         "inputs": {
             "typeOfTable": "Excel, CSV, TSV, Markdown tables",
             "tableSources": [
@@ -20907,7 +20907,7 @@
             ]
         },
         "codeAvailability": "https://github.com/wbsg-uni-mannheim/TabAnnGPT",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "Web tables",
             "tableSources": [
@@ -21123,7 +21123,7 @@
             ]
         },
         "codeAvailability": "https://github.com/DKEPassau/CEACTA24",
-        "license": "MIT License",
+        "license": "MIT",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -21305,7 +21305,7 @@
             ]
         },
         "codeAvailability": "https://github.com/unimib-datAI/steellm/",
-        "license": "GNU Affero General Public License v3.0",
+        "license": "AGPL-3.0",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [
@@ -21882,7 +21882,7 @@
             ]
         },
         "codeAvailability": "https://github.com/tabbydoc/tabbyld2",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "CSV, XLSX, JSON relational tables",
             "tableSources": [
@@ -22074,7 +22074,7 @@
             "metrics": []
         },
         "codeAvailability": "https://github.com/fokobrice3/STProbClass/tree/main/MNB_2023",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "CSV and JSON",
             "tableSources": [
@@ -22245,7 +22245,7 @@
             ]
         },
         "codeAvailability": "https://github.com/Orange-OpenSource/radar-station",
-        "license": "BSD 3-Clause License",
+        "license": "BSD-3-Clause",
         "inputs": {
             "typeOfTable": "Web tables (relational)",
             "tableSources": [
@@ -22510,7 +22510,7 @@
             ]
         },
         "codeAvailability": "https://github.com/quhfus/table-disambiguation",
-        "license": "Not Specified",
+        "license": "Ns",
         "inputs": {
             "typeOfTable": "HTML tables (Wikipedia)",
             "tableSources": [
@@ -22645,7 +22645,7 @@
             ]
         },
         "codeAvailability": "https://github.com/fusion-jena/JenTab",
-        "license": "Apache License 2.0",
+        "license": "Apache-2.0",
         "inputs": {
             "typeOfTable": "CSV",
             "tableSources": [

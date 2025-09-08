@@ -408,7 +408,7 @@ const UnifiedMainMethodCell = ({ mainMethod, row, align = 'center' }) => {
   
   return (
     <div className={alignClass}>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col items-center gap-1">
         {(type || isTypeMissing) && (
           <span className={badgeClass} style={badgeStyle}>
             {type || "MISSING"}
@@ -416,7 +416,7 @@ const UnifiedMainMethodCell = ({ mainMethod, row, align = 'center' }) => {
         )}
         {(tech || isTechMissing) && (
           <span 
-            className={tech ? "text-[10px]" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px]"}
+            className={tech ? "text-[10px] text-center" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] text-center"}
             style={{ color: tech ? UNIFIED_COLORS.secondaryText : undefined }}
           >
             {tech || "MISSING"}
@@ -449,14 +449,14 @@ const UnifiedDomainCell = ({ domain, row, align = 'center' }) => {
   
   return (
     <div className={alignClass}>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col items-center gap-1">
         {(domainValue || isDomainMissing) && (
           <span className={badgeClass} style={badgeStyle}>
             {domainValue || "MISSING"}
           </span>
         )}
         {typeValue && (
-          <span className="text-[10px]" style={{ color: UNIFIED_COLORS.secondaryText }}>
+          <span className="text-[10px] text-center" style={{ color: UNIFIED_COLORS.secondaryText }}>
             {typeValue}
           </span>
         )}
@@ -553,7 +553,7 @@ const CollapsibleNavigation = () => {
 // Unified license badge color function
 const getLicenseBadgeColor = (license) => {
   const baseColor = schema._uiMeta?.license?.color || '#facc15';
-  const isNone = !license || license.trim().toLowerCase() === 'not specified';
+  const isNone = !license || license.trim().toLowerCase() === 'not specified' || license.trim() === 'Ns';
   return getUnifiedBadgeColor(baseColor, isNone);
 };
 
@@ -692,9 +692,9 @@ function SurveyTable() {
         
         return (
           <div className={alignClass}>
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap justify-center gap-1">
               {tags.map((tag, index) => (
-                <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: 'rgba(100, 116, 139, 0.12)', color: 'rgb(229, 231, 235)' }}>
+                <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium text-center" style={{ backgroundColor: 'rgba(100, 116, 139, 0.12)', color: 'rgb(229, 231, 235)' }}>
                   {tag}
                 </span>
               ))}
@@ -998,6 +998,7 @@ function SurveyTable() {
       cell: (info) => {
         const value = info.getValue();
         const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
+        const headerColor = headerColors.codeAvailability || '#10b981';
         
         if (!value || value.trim() === "") {
           return (
@@ -1008,11 +1009,11 @@ function SurveyTable() {
         }
         return (
           <div className={alignClass}>
-            <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-emerald-500/20 text-emerald-200">
+            <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: headerColor + '20', color: headerColor }}>
               <a href={value} target="_blank" rel="noopener noreferrer"
                  className="flex items-center justify-center h-full w-full"
                  title="Open code link">
-                <Icon name="launch" className="align-middle leading-none text-[16px]" />
+                <Icon name="launch" className="align-middle leading-none text-[16px]" style={{ color: headerColor }} />
               </a>
             </span>
           </div>
@@ -1056,6 +1057,7 @@ function SurveyTable() {
           header: () => <span>Table Sources</span>,
           cell: (info) => {
             const sources = info.getValue();
+            const headerColor = headerColors.inputs || '#6366f1';
             if (!sources || sources.length === 0) {
               const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
               return (
@@ -1068,9 +1070,9 @@ function SurveyTable() {
             
             return (
               <div className={alignClass}>
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap justify-center gap-1">
                   {sources.map((source, index) => (
-                    <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: 'rgba(100, 116, 139, 0.12)', color: 'rgb(229, 231, 235)' }}>
+                    <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: headerColor + '20', color: headerColor }}>
                       {source}
                     </span>
                   ))}
