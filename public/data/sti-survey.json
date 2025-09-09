@@ -21904,75 +21904,276 @@
         "checkedByAi": true,
         "doi": "https://doi.org/10.3390/computation11090175",
         "citations": {
-"references": [
-{"ref": "2021_hogan_knowledge", "title": "Knowledge Graphs."},
-{"ref": "2021_ji_a", "title": "A Survey on Knowledge Graphs: Representation, Acquisition and Applications."},
-{"ref": "2017_peroni_one", "title": "One Year of the OpenCitations Corpus—Releasing RDF-Based Scholarly Citation Data into the Public Domain."},
-{"ref": "2019_iana_building", "title": "Building a Conference Recommender System Based on SciGraph and WikiCFP."},
-{"ref": "2019_farber_the", "title": "The Microsoft Academic Knowledge Graph: A Linked Data Source with 8 Billion Triples of Scholarly Data."},
-{"ref": "2012_stadler_linkedgeodata", "title": "LinkedGeoData: A core for a web of spatial open data."},
-{"ref": "2013_callahan_bio2rdf", "title": "Bio2RDF Release 2: Improved Coverage, Interoperability and Provenance of Life Science Linked Data."},
-{"ref": "2014_raimond_the", "title": "The BBC World Service Archive prototype."},
-{"ref": "2021_tiwari_recent", "title": "Recent trends in knowledge graphs: Theory and practice."},
-{"ref": "2019_xiaoxue_review", "title": "Review and trend analysis of knowledge graphs for crop pest and diseases."},
-{"ref": "2016_lehmberg_a", "title": "A large public corpus of web tables containing time and context metadata."},
-{"ref": "2020_burdick_table", "title": "Table extraction and understanding for scientific and enterprise applications."},
-{"ref": "2020_martinez-rodriguez_information", "title": "Information Extraction meets the Semantic Web: A Survey."},
-{"ref": "2016_ehrlinger_towards", "title": "Towards a Definition of Knowledge Graphs."},
-{"ref": "1993_gruber_a", "title": "A Translation Approach to Portable Ontology Specifications."},
-{"ref": "2017_villazon-terrazas_construction", "title": "Construction of Enterprise Knowledge Graphs (I)."},
-{"ref": "2014_re_feature", "title": "Feature engineering for knowledge base construction."},
-{"ref": "2018_balog_populating", "title": "Populating knowledge bases."},
-{"ref": "2020_zhang_web", "title": "Web table extraction, retrieval, and augmentation: a survey."},
-{"ref": "2021_bonfitto_table", "title": "Table understanding approaches for extracting knowledge from heterogeneous tables."},
-{"ref": "2022_shigarov_table", "title": "Table understanding: Problem overview."},
-{"ref": "2023_liu_from", "title": "From tabular data to knowledge graphs: A survey of semantic table interpretation tasks and methods."},
-{"ref": "2010_limaye_annotating", "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships."},
-{"ref": "2010_mulwad_using", "title": "Using linked data to interpret tables."},
-{"ref": "2011_venetis_recovering", "title": "Recovering Semantics of Tables on the Web."},
-{"ref": "2017_efthymiou_matching", "title": "Matching web tables with knowledge base entities: From entity lookups to entity embeddings."},
-{"ref": "2015_bhagavatula_tabel", "title": "TabEL: Entity Linking in Web Tables."},
-{"ref": "2017_ritze_matching", "title": "Matching Web Tables To Dbpedia—A Feature Utility Study."},
-{"ref": "2016_ermilov_taipan", "title": "TAIPAN: Automatic Property Mapping for Tabular Data."},
-{"ref": "2017_zhang_effective", "title": "Effective and Efficient Semantic Table Interpretation using TableMiner+."},
-{"ref": "2019_kruit_extracting", "title": "Extracting novel facts from tables for knowledge graph completion."},
-{"ref": "2020_cremaschi_a", "title": "A fully automated approach to a complete Semantic Table Interpretation."},
-{"ref": "2019_nguyen_mtab", "title": "MTab: Matching Tabular Data to Knowledge Graph using Probability Models."},
-{"ref": "2021_steenwinckel_magic", "title": "MAGIC: Mining an Augmented Graph using INK, starting from a CSV."},
-{"ref": "2021_baazouzi_kepler-asi", "title": "Kepler-aSI at SemTab."},
-{"ref": "2021_abdelmageed_jentab", "title": "JenTab Meets SemTab 2021′s New Challenges."},
-{"ref": "2021_huynh_dagobah", "title": "DAGOBAH: Table and Graph Contexts For Efficient Semantic Annotation Of Tabular Data."},
-{"ref": "2020_xie_joint", "title": "Joint Entity Linking for Web Tables with Hybrid Semantic Matching."},
-{"ref": "2019_chen_colnet", "title": "ColNet: Embedding the semantics of web tables for column type prediction."},
-{"ref": "2019_hulsebos_sherlock", "title": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection."},
-{"ref": "2020_zhang_sato", "title": "Sato: Contextual Semantic Type Detection in Tables."},
-{"ref": "2019_devlin_bert", "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding."},
-{"ref": "2022_suhara_annotating", "title": "Annotating Columns with Pre-trained Language Models."},
-{"ref": "2020_deng_turl", "title": "TURL: Table Understanding through Representation Learning."},
-{"ref": "2021_trabelsi_selab", "title": "SeLaB: Semantic Labeling with BERT."},
-{"ref": "2020_yin_tabert", "title": "TaBERT: Pretraining for Joint Understanding of Textual and Tabular Data."},
-{"ref": "2020_herzig_tapas", "title": "TAPAS: Weakly Supervised Table Parsing via Pre-training."},
-{"ref": "2021_iida_tabbie", "title": "TABBIE: Pretrained Representations of Tabular Data."},
-{"ref": "2021_wang_tuta", "title": "TUTA: Tree-based Trans-formers for Generally Structured Table Pre-training."},
-{"ref": "2013_maguire_ontomaton", "title": "OntoMaton: A Bioportal powered ontology widget for Google Spreadsheets."},
-{"ref": "2014_gonzalez-beltran_linkedisa", "title": "linkedISA: Semantic representation of ISA-Tab experimental metadata."},
-{"ref": "2021_vu_a", "title": "A Graph-Based Approach for Inferring Semantic Descriptions of Wikipedia Tables."},
-{"ref": "2017_devos_combining", "title": "Combining information on structure and content to automatically annotate natural science spreadsheets."},
-{"ref": "2016_wu_entity", "title": "Entity Linking in Web Tables with Multiple Linked Knowledge Bases."},
-{"ref": "2009_bizer_dbpedia", "title": "Dbpedia—A Crystallization Point for the Web of Data."},
-{"ref": "2019_guan_knowledge", "title": "Knowledge graph embedding with concepts."},
-{"ref": "2019_ristoski_rdf2vec", "title": "RDF2Vec: RDF graph embeddings and their applications."},
-{"ref": "2020_portisch_kgvec2go", "title": "KGvec2go—Knowledge Graph Embeddings as a Service."},
-{"ref": "2014_le_distributed", "title": "Distributed Representations of Sentences and Documents."},
-{"ref": "2019_hu_viznet", "title": "VizNet: Towards A Large-Scale Visualization Learning and Benchmarking Repository."},
-{"ref": "2021_dorodnykh_tabbyld", "title": "TabbyLD: A Tool for Semantic Interpretation of Spreadsheets Data."},
-{"ref": "2020_cutrona_tough", "title": "Tough tables: Carefully evaluating entity linking for tabular data."},
-{"ref": "2011_jimenez-ruiz_logmap", "title": "LogMap: Logic-based and scalable ontology matching."},
-{"ref": "2012_suchanek_paris", "title": "PARIS: Probabilistic alignment of relations, instances, and schema."},
-{"ref": "2020_dorodnykh_towards", "title": "Towards a universal approach for semantic interpretation of spreadsheets data."},
-{"ref": "2015_berman_support", "title": "Support of Decision-Making Based on a Production Approach in the Performance of an Industrial Safety Review."},
-{"ref": "2021_yurin_semi-automated", "title": "Semi-Automated Formalization and Representation of the Engineering Knowledge Extracted From Spreadsheet Data."}
-],
+            "references": [
+                {
+                    "ref": "2021_hogan_knowledge",
+                    "title": "Knowledge Graphs."
+                },
+                {
+                    "ref": "2021_ji_a",
+                    "title": "A Survey on Knowledge Graphs: Representation, Acquisition and Applications."
+                },
+                {
+                    "ref": "2017_peroni_one",
+                    "title": "One Year of the OpenCitations Corpus—Releasing RDF-Based Scholarly Citation Data into the Public Domain."
+                },
+                {
+                    "ref": "2019_iana_building",
+                    "title": "Building a Conference Recommender System Based on SciGraph and WikiCFP."
+                },
+                {
+                    "ref": "2019_farber_the",
+                    "title": "The Microsoft Academic Knowledge Graph: A Linked Data Source with 8 Billion Triples of Scholarly Data."
+                },
+                {
+                    "ref": "2012_stadler_linkedgeodata",
+                    "title": "LinkedGeoData: A core for a web of spatial open data."
+                },
+                {
+                    "ref": "2013_callahan_bio2rdf",
+                    "title": "Bio2RDF Release 2: Improved Coverage, Interoperability and Provenance of Life Science Linked Data."
+                },
+                {
+                    "ref": "2014_raimond_the",
+                    "title": "The BBC World Service Archive prototype."
+                },
+                {
+                    "ref": "2021_tiwari_recent",
+                    "title": "Recent trends in knowledge graphs: Theory and practice."
+                },
+                {
+                    "ref": "2019_xiaoxue_review",
+                    "title": "Review and trend analysis of knowledge graphs for crop pest and diseases."
+                },
+                {
+                    "ref": "2016_lehmberg_a",
+                    "title": "A large public corpus of web tables containing time and context metadata."
+                },
+                {
+                    "ref": "2020_burdick_table",
+                    "title": "Table extraction and understanding for scientific and enterprise applications."
+                },
+                {
+                    "ref": "2020_martinez-rodriguez_information",
+                    "title": "Information Extraction meets the Semantic Web: A Survey."
+                },
+                {
+                    "ref": "2016_ehrlinger_towards",
+                    "title": "Towards a Definition of Knowledge Graphs."
+                },
+                {
+                    "ref": "1993_gruber_a",
+                    "title": "A Translation Approach to Portable Ontology Specifications."
+                },
+                {
+                    "ref": "2017_villazon-terrazas_construction",
+                    "title": "Construction of Enterprise Knowledge Graphs (I)."
+                },
+                {
+                    "ref": "2014_re_feature",
+                    "title": "Feature engineering for knowledge base construction."
+                },
+                {
+                    "ref": "2018_balog_populating",
+                    "title": "Populating knowledge bases."
+                },
+                {
+                    "ref": "2020_zhang_web",
+                    "title": "Web table extraction, retrieval, and augmentation: a survey."
+                },
+                {
+                    "ref": "2021_bonfitto_table",
+                    "title": "Table understanding approaches for extracting knowledge from heterogeneous tables."
+                },
+                {
+                    "ref": "2022_shigarov_table",
+                    "title": "Table understanding: Problem overview."
+                },
+                {
+                    "ref": "2023_liu_from",
+                    "title": "From tabular data to knowledge graphs: A survey of semantic table interpretation tasks and methods."
+                },
+                {
+                    "ref": "2010_limaye_annotating",
+                    "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships."
+                },
+                {
+                    "ref": "2010_mulwad_using",
+                    "title": "Using linked data to interpret tables."
+                },
+                {
+                    "ref": "2011_venetis_recovering",
+                    "title": "Recovering Semantics of Tables on the Web."
+                },
+                {
+                    "ref": "2017_efthymiou_matching",
+                    "title": "Matching web tables with knowledge base entities: From entity lookups to entity embeddings."
+                },
+                {
+                    "ref": "2015_bhagavatula_tabel",
+                    "title": "TabEL: Entity Linking in Web Tables."
+                },
+                {
+                    "ref": "2017_ritze_matching",
+                    "title": "Matching Web Tables To Dbpedia—A Feature Utility Study."
+                },
+                {
+                    "ref": "2016_ermilov_taipan",
+                    "title": "TAIPAN: Automatic Property Mapping for Tabular Data."
+                },
+                {
+                    "ref": "2017_zhang_effective",
+                    "title": "Effective and Efficient Semantic Table Interpretation using TableMiner+."
+                },
+                {
+                    "ref": "2019_kruit_extracting",
+                    "title": "Extracting novel facts from tables for knowledge graph completion."
+                },
+                {
+                    "ref": "2020_cremaschi_a",
+                    "title": "A fully automated approach to a complete Semantic Table Interpretation."
+                },
+                {
+                    "ref": "2019_nguyen_mtab",
+                    "title": "MTab: Matching Tabular Data to Knowledge Graph using Probability Models."
+                },
+                {
+                    "ref": "2021_steenwinckel_magic",
+                    "title": "MAGIC: Mining an Augmented Graph using INK, starting from a CSV."
+                },
+                {
+                    "ref": "2021_baazouzi_kepler-asi",
+                    "title": "Kepler-aSI at SemTab."
+                },
+                {
+                    "ref": "2021_abdelmageed_jentab",
+                    "title": "JenTab Meets SemTab 2021′s New Challenges."
+                },
+                {
+                    "ref": "2021_huynh_dagobah",
+                    "title": "DAGOBAH: Table and Graph Contexts For Efficient Semantic Annotation Of Tabular Data."
+                },
+                {
+                    "ref": "2020_xie_joint",
+                    "title": "Joint Entity Linking for Web Tables with Hybrid Semantic Matching."
+                },
+                {
+                    "ref": "2019_chen_colnet",
+                    "title": "ColNet: Embedding the semantics of web tables for column type prediction."
+                },
+                {
+                    "ref": "2019_hulsebos_sherlock",
+                    "title": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection."
+                },
+                {
+                    "ref": "2020_zhang_sato",
+                    "title": "Sato: Contextual Semantic Type Detection in Tables."
+                },
+                {
+                    "ref": "2019_devlin_bert",
+                    "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding."
+                },
+                {
+                    "ref": "2022_suhara_annotating",
+                    "title": "Annotating Columns with Pre-trained Language Models."
+                },
+                {
+                    "ref": "2020_deng_turl",
+                    "title": "TURL: Table Understanding through Representation Learning."
+                },
+                {
+                    "ref": "2021_trabelsi_selab",
+                    "title": "SeLaB: Semantic Labeling with BERT."
+                },
+                {
+                    "ref": "2020_yin_tabert",
+                    "title": "TaBERT: Pretraining for Joint Understanding of Textual and Tabular Data."
+                },
+                {
+                    "ref": "2020_herzig_tapas",
+                    "title": "TAPAS: Weakly Supervised Table Parsing via Pre-training."
+                },
+                {
+                    "ref": "2021_iida_tabbie",
+                    "title": "TABBIE: Pretrained Representations of Tabular Data."
+                },
+                {
+                    "ref": "2021_wang_tuta",
+                    "title": "TUTA: Tree-based Trans-formers for Generally Structured Table Pre-training."
+                },
+                {
+                    "ref": "2013_maguire_ontomaton",
+                    "title": "OntoMaton: A Bioportal powered ontology widget for Google Spreadsheets."
+                },
+                {
+                    "ref": "2014_gonzalez-beltran_linkedisa",
+                    "title": "linkedISA: Semantic representation of ISA-Tab experimental metadata."
+                },
+                {
+                    "ref": "2021_vu_a",
+                    "title": "A Graph-Based Approach for Inferring Semantic Descriptions of Wikipedia Tables."
+                },
+                {
+                    "ref": "2017_devos_combining",
+                    "title": "Combining information on structure and content to automatically annotate natural science spreadsheets."
+                },
+                {
+                    "ref": "2016_wu_entity",
+                    "title": "Entity Linking in Web Tables with Multiple Linked Knowledge Bases."
+                },
+                {
+                    "ref": "2009_bizer_dbpedia",
+                    "title": "Dbpedia—A Crystallization Point for the Web of Data."
+                },
+                {
+                    "ref": "2019_guan_knowledge",
+                    "title": "Knowledge graph embedding with concepts."
+                },
+                {
+                    "ref": "2019_ristoski_rdf2vec",
+                    "title": "RDF2Vec: RDF graph embeddings and their applications."
+                },
+                {
+                    "ref": "2020_portisch_kgvec2go",
+                    "title": "KGvec2go—Knowledge Graph Embeddings as a Service."
+                },
+                {
+                    "ref": "2014_le_distributed",
+                    "title": "Distributed Representations of Sentences and Documents."
+                },
+                {
+                    "ref": "2019_hu_viznet",
+                    "title": "VizNet: Towards A Large-Scale Visualization Learning and Benchmarking Repository."
+                },
+                {
+                    "ref": "2021_dorodnykh_tabbyld",
+                    "title": "TabbyLD: A Tool for Semantic Interpretation of Spreadsheets Data."
+                },
+                {
+                    "ref": "2020_cutrona_tough",
+                    "title": "Tough tables: Carefully evaluating entity linking for tabular data."
+                },
+                {
+                    "ref": "2011_jimenez-ruiz_logmap",
+                    "title": "LogMap: Logic-based and scalable ontology matching."
+                },
+                {
+                    "ref": "2012_suchanek_paris",
+                    "title": "PARIS: Probabilistic alignment of relations, instances, and schema."
+                },
+                {
+                    "ref": "2020_dorodnykh_towards",
+                    "title": "Towards a universal approach for semantic interpretation of spreadsheets data."
+                },
+                {
+                    "ref": "2015_berman_support",
+                    "title": "Support of Decision-Making Based on a Production Approach in the Performance of an Industrial Safety Review."
+                },
+                {
+                    "ref": "2021_yurin_semi-automated",
+                    "title": "Semi-Automated Formalization and Representation of the Engineering Knowledge Extracted From Spreadsheet Data."
+                }
+            ],
             "count": 97,
             "note": "processed"
         },
