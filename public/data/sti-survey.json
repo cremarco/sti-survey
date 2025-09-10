@@ -8459,7 +8459,7 @@
                     "title": "Neural Enquirer: Learning to Query Tables in Natural Language."
                 },
                 {
-                    "ref": "2013_zhang_infogather+",
+                    "ref": "2013_zhang_infogather",
                     "title": "InfoGather+: Semantic Matching and Annotation of Numeric and Time-varying Attributes in Web Tables."
                 },
                 {
@@ -9666,7 +9666,7 @@
                     "title": "Using linked data to mine RDF from Wikipedia’s tables"
                 },
                 {
-                    "ref": "2016_neumaier_multilevel",
+                    "ref": "2016_neumaier_multi-level",
                     "title": "Multi-level semantic labelling of numerical values"
                 },
                 {
@@ -10493,7 +10493,7 @@
                     "title": "Verbs semantics and lexical selection."
                 },
                 {
-                    "ref": "2013_zhang_infogather+",
+                    "ref": "2013_zhang_infogather",
                     "title": "Infogather+: Semantic matching and annotation of numeric and time-varying attributes in web tables."
                 },
                 {
@@ -21341,7 +21341,7 @@
                     "title": "Jentab: Matching tabular data to knowledge graphs"
                 },
                 {
-                    "ref": "2021_abdelmageed_jentab",
+                    "ref": "2021_abdelmageed_jentab-1",
                     "title": "Jentab meets semtab 2021’s new challenges"
                 },
                 {
@@ -21940,7 +21940,7 @@
 {"ref": "2019_nguyen_mtab", "title": "MTab: Matching Tabular Data to Knowledge Graph using Probability Models."},
 {"ref": "2021_steenwinckel_magic", "title": "MAGIC: Mining an Augmented Graph using INK, starting from a CSV."},
 {"ref": "2021_baazouzi_kepler-asi", "title": "Kepler-aSI at SemTab."},
-{"ref": "2021_abdelmageed_jentab", "title": "JenTab Meets SemTab 2021′s New Challenges."},
+{"ref": "2021_abdelmageed_jentab-1", "title": "JenTab Meets SemTab 2021′s New Challenges."},
 {"ref": "2021_huynh_dagobah", "title": "DAGOBAH: Table and Graph Contexts For Efficient Semantic Annotation Of Tabular Data."},
 {"ref": "2020_xie_joint", "title": "Joint Entity Linking for Web Tables with Hybrid Semantic Matching."},
 {"ref": "2019_chen_colnet", "title": "ColNet: Embedding the semantics of web tables for column type prediction."},
