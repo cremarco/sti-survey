@@ -133,7 +133,7 @@ function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showStatistics, setShowStatistics] = useState(false);
+  const [showStatistics] = useState(false);
   const [animationStarted, setAnimationStarted] = useState(false);
   
   // Refs for charts

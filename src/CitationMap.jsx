@@ -268,7 +268,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
     let source = serializer.serializeToString(svgNode);
     
     // Add XML declaration for compatibility
-    if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+    if (!source.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
       source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
     }
     

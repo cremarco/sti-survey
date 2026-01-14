@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-@theme {
-  --radius-*: 0px;
-}
+@theme {}
 
 /* Global styles for dark mode */
 html {

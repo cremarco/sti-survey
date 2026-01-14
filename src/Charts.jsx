@@ -12,7 +12,6 @@
 
 
 import React, { useState, useRef, useMemo } from 'react';
-import * as d3 from "d3";
 import Navigation from './Navigation';
 import Icon from './Icon';
 import MainMethodStackedChart from './components/charts/MainMethodStackedChart';

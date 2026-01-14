@@ -26,16 +26,7 @@ function getBranchColor(node, colorMap) {
 }
 
 // Calculates the transform for label positioning
-function labelTransform(d) {
-  const angle = d.x * 180 / Math.PI - 90;
-  const r = d.y;
-  // For leaf nodes, rotate group by 180° if on the left, so text is always upright
-  if (!d.children) {
-    return `rotate(${angle}) translate(${r},0)${angle >= 180 ? ' rotate(180)' : ''}`;
-  }
-  // For internal nodes, rotate text radially
-  return `rotate(${angle}) translate(${r},0)`;
-}
+
 
 // Helper to get the top-level label (taxonomy number + label if available)
 function getTopLevelLabel(meta, prop, fallback) {
@@ -88,7 +79,7 @@ function Taxonomy() {
           }
           // If enum on a nested property (e.g., domain.domain)
           else if (prop && prop.properties) {
-            Object.entries(prop.properties).forEach(([subName, subProp]) => {
+            Object.entries(prop.properties).forEach(([, subProp]) => {
               if (subProp.enum) {
                 subChildren = subProp.enum.map(val => ({ name: val }));
               }
@@ -119,7 +110,7 @@ function Taxonomy() {
   }, []);
 
   // Memoized draw function to avoid unnecessary re-creation
-  const drawRadialTidyTree = useCallback((data, container, labelStroke, disableAnimation = false, colorMap = {}) => {
+  const drawRadialTidyTree = useCallback((data, container, labelStroke, colorMap = {}) => {
     const width = 1000;
     const radius = width / 2 - 80;
     const root = d3.hierarchy(data);
@@ -195,7 +186,7 @@ function Taxonomy() {
         .attr('stroke', '#a3a3a3')
         .attr('stroke-width', 1.5)
         .attr('stroke-dasharray', '6,4');
-      coreTaskChildren.forEach((targetNode, i) => {
+      coreTaskChildren.forEach((targetNode) => {
         // Use a quadratic Bezier curve for a smooth connection
         const sx = Math.cos(dataPrepNode.x - Math.PI / 2) * dataPrepNode.y;
         const sy = Math.sin(dataPrepNode.x - Math.PI / 2) * dataPrepNode.y;
@@ -220,7 +211,7 @@ function Taxonomy() {
         .attr('stroke', '#a3a3a3')
         .attr('stroke-width', 1.5)
         .attr('stroke-dasharray', '6,4');
-      coreTaskChildren.forEach((targetNode, i) => {
+      coreTaskChildren.forEach((targetNode) => {
         // Use a quadratic Bezier curve for a smooth connection
         const sx = Math.cos(columnClassificationNode.x - Math.PI / 2) * columnClassificationNode.y;
         const sy = Math.sin(columnClassificationNode.x - Math.PI / 2) * columnClassificationNode.y;
@@ -385,8 +376,8 @@ function Taxonomy() {
   useEffect(() => {
     if (!data || !chartRef.current) return;
     chartRef.current.innerHTML = '';
-    drawRadialTidyTree(data, chartRef.current, labelStroke, isDownloading, colorMap);
-  }, [data, labelStroke, drawRadialTidyTree, isDownloading, colorMap]);
+    drawRadialTidyTree(data, chartRef.current, labelStroke, colorMap);
+  }, [data, labelStroke, drawRadialTidyTree, colorMap]);
 
   // SVG download handler
   const handleDownloadSVG = useCallback(() => {
@@ -402,7 +393,7 @@ function Taxonomy() {
     setTimeout(() => {
       const serializer = new XMLSerializer();
       let source = serializer.serializeToString(chartRef.current.querySelector('svg'));
-      if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+      if (!source.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
         source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
       }
       const blob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' });

@@ -16,7 +16,7 @@
  */
 
 // Grouped imports
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   createColumnHelper,
   flexRender,
@@ -104,18 +104,7 @@ const REQUIRED_FIELDS = {
 };
 
 // Utility functions (outside component)
-const getTypeBadgeColor = (type) => {
-  // Legacy function - kept for backward compatibility
-  const lower = type?.toLowerCase();
-  const baseColor = schema._uiMeta?.mainMethod?.color || '#6366f1';
-  if (lower === 'unsup' || lower === 'unsupervised' || lower === 'sup' || lower === 'supervised') {
-    return {
-      backgroundColor: baseColor + '20',
-      color: baseColor
-    };
-  }
-  return `inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium ${METHOD_TYPE_COLORS[lower] || "bg-slate-500/20 text-slate-200"}`;
-};
+
 
 // Function to count approaches with data preparation
 const countDataPreparationApproaches = (data) => {
@@ -167,11 +156,7 @@ const getUnifiedBadgeColor = (baseColor, isNone = false) => {
 };
 
 // Legacy functions for backward compatibility
-const getDomainBadgeColor = (domain) => {
-  const lower = domain?.toLowerCase();
-  const baseColor = schema._uiMeta?.domain?.color || '#14b8a6';
-  return getUnifiedBadgeColor(baseColor, lower === 'none');
-};
+
 
 const getUserRevisionBadgeColor = (type) => {
   const lower = type?.toLowerCase();
@@ -206,39 +191,7 @@ const isRequiredFieldMissing = (row, fieldPath) => {
 };
 
 // Color utility functions (kept for potential future use)
-const colorUtils = {
-  lighten: (hex, percent) => {
-    let num = parseInt(hex.replace('#', ''), 16);
-    let r = (num >> 16) + Math.round(255 * percent / 100);
-    let g = ((num >> 8) & 0x00FF) + Math.round(255 * percent / 100);
-    let b = (num & 0x0000FF) + Math.round(255 * percent / 100);
-    r = r > 255 ? 255 : r;
-    g = g > 255 ? 255 : g;
-    b = b > 255 ? 255 : b;
-    return `rgb(${r},${g},${b})`;
-  },
-  
-  darken: (hex, percent) => {
-    let num = parseInt(hex.replace('#', ''), 16);
-    let r = (num >> 16) - Math.round((num >> 16) * percent / 100);
-    let g = ((num >> 8) & 0x00FF) - Math.round(((num >> 8) & 0x00FF) * percent / 100);
-    let b = (num & 0x0000FF) - Math.round((num & 0x0000FF) * percent / 100);
-    r = r < 0 ? 0 : r;
-    g = g < 0 ? 0 : g;
-    b = b < 0 ? 0 : b;
-    return `rgb(${r},${g},${b})`;
-  },
-  
-  hexToRgba: (hex, alpha) => {
-    let c = hex.replace('#', '');
-    if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
-    const num = parseInt(c, 16);
-    const r = (num >> 16) & 255;
-    const g = (num >> 8) & 255;
-    const b = num & 255;
-    return `rgba(${r},${g},${b},${alpha})`;
-  }
-};
+
 
 // Unified cell rendering components
 const UnifiedTextCell = ({ value, isMissing, align = 'left', size = 'text-xs' }) => {
@@ -572,7 +525,7 @@ function SurveyTable() {
       if (meta[key].color) colors[key] = meta[key].color;
     }
     return colors;
-  }, [schema]);
+  }, []);
   const headerTaxonomy = useMemo(() => {
     const meta = schema._uiMeta || {};
     const taxonomy = {};
@@ -580,7 +533,7 @@ function SurveyTable() {
       if (meta[key].taxonomy) taxonomy[key] = meta[key].taxonomy;
     }
     return taxonomy;
-  }, [schema]);
+  }, []);
 
   // Load data on component mount
   useEffect(() => {
