@@ -114,7 +114,7 @@ const getTypeBadgeColor = (type) => {
       color: baseColor
     };
   }
-  return `inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium ${METHOD_TYPE_COLORS[lower] || "bg-slate-500/20 text-slate-200"}`;
+  return `inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium ${METHOD_TYPE_COLORS[lower] || "bg-slate-500/20 text-slate-200"}`;
 };
 
 // Function to count approaches with data preparation
@@ -248,7 +248,7 @@ const UnifiedTextCell = ({ value, isMissing, align = 'left', size = 'text-xs' })
   return (
     <div className={alignClass}>
       <span 
-        className={`${size} ${isMissing ? 'bg-red-500/20 text-red-200 px-2 py-1 rounded' : ''}`}
+        className={`${size} ${isMissing ? 'bg-red-500/20 text-red-200 px-2 py-1' : ''}`}
         style={{ color: isMissing ? undefined : textColor }}
       >
         {value || (isMissing ? "MISSING" : "")}
@@ -264,7 +264,7 @@ const UnifiedDateCell = ({ value, isMissing, align = 'center' }) => {
   if (isMissing) {
     return (
       <div className={alignClass}>
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-xs">MISSING</span>
+    return <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>;
       </div>
     );
   }
@@ -299,7 +299,7 @@ const UnifiedAuthorsCell = ({ authors, isMissing, align = 'left' }) => {
   if (isMissing) {
     return (
       <div className={alignClass}>
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-xs">MISSING</span>
+    return <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>;
       </div>
     );
   }
@@ -327,7 +327,7 @@ const UnifiedVenueCell = ({ venue, isMissing, align = 'center' }) => {
   if (isMissing || !venue) {
     return (
       <div className={alignClass}>
-        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded text-xs">MISSING</span>
+    return <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>;
       </div>
     );
   }
@@ -386,7 +386,7 @@ const StepCell = ({ value, align = 'left' }) => {
 const UnifiedMainMethodCell = ({ mainMethod, row, align = 'center' }) => {
   let { type, tech } = mainMethod || {};
   const baseColor = schema._uiMeta?.mainMethod?.color || '#6366f1';
-  const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
+  const badgeClass = 'inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium';
   
   // Normalize type labels
   if (type?.toLowerCase() === 'unsup' || type?.toLowerCase() === 'unsupervised') {
@@ -416,7 +416,7 @@ const UnifiedMainMethodCell = ({ mainMethod, row, align = 'center' }) => {
         )}
         {(tech || isTechMissing) && (
           <span 
-            className={tech ? "text-[10px] text-center" : "bg-red-500/20 text-red-200 px-2 py-1 rounded text-[10px] text-center"}
+            className={tech ? "text-[10px] text-center" : "bg-red-500/20 text-red-200 px-2 py-1 text-[10px] text-center"}
             style={{ color: tech ? UNIFIED_COLORS.secondaryText : undefined }}
           >
             {tech || "MISSING"}
@@ -504,10 +504,10 @@ const RowNumberCell = ({ row, index }) => {
       <span>{index + 1}</span>
       {hasMissingFields && (
         <div className="relative group mt-1">
-          <span className="text-[11px] text-red-400 bg-red-900/60 rounded px-2 py-0.5 leading-none cursor-pointer whitespace-nowrap">
+          <span className="text-[11px] text-red-400 bg-red-900/60 px-2 py-0.5 leading-none cursor-pointer whitespace-nowrap">
             {missingFields.length} missing
           </span>
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 rounded-lg shadow-lg text-xs text-neutral-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 shadow-lg text-xs text-neutral-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
             <div className="font-semibold mb-1">Missing fields:</div>
             <div className="space-y-1">
               {missingFields.map((field) => (
@@ -530,7 +530,7 @@ const CollapsibleNavigation = () => {
       <div className="fixed top-6 left-0 z-30">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative bg-neutral-900 hover:bg-neutral-800 text-neutral-300 px-4 py-3 rounded-r-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 group flex items-center justify-center"
+          className="relative bg-neutral-900 hover:bg-neutral-800 text-neutral-300 px-4 py-3 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 group flex items-center justify-center"
           title={isOpen ? "Hide navigation" : "Show navigation"}
         >
           {isOpen ? (
@@ -538,12 +538,12 @@ const CollapsibleNavigation = () => {
           ) : (
             <Icon name="menu" className="text-xl transition-transform duration-300 group-hover:rotate-12 relative z-10" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-neutral-700/20 rounded-r-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-neutral-700/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
       </div>
       {isOpen && (
         <div className="fixed top-0 left-0 right-0 z-20">
-          <Navigation />
+          <Navigation defaultOpen={true} />
         </div>
       )}
     </>
@@ -694,7 +694,7 @@ function SurveyTable() {
           <div className={alignClass}>
             <div className="flex flex-wrap justify-center gap-1">
               {tags.map((tag, index) => (
-                <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium text-center" style={{ backgroundColor: 'rgba(100, 116, 139, 0.12)', color: 'rgb(229, 231, 235)' }}>
+                <span key={index} className="inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium text-center" style={{ backgroundColor: 'rgba(100, 116, 139, 0.12)', color: 'rgb(229, 231, 235)' }}>
                   {tag}
                 </span>
               ))}
@@ -717,7 +717,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>CTA</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -734,7 +734,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>CPA</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -751,7 +751,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>CEA</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -768,7 +768,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>CNEA</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -792,7 +792,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>Data Preparation</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {dataPrepCount}
                 </span>
               </div>
@@ -809,7 +809,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>Subject Detection</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -826,7 +826,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>Column Classification</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -843,7 +843,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>Type Annotation</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -860,7 +860,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>Predicate Annotation</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -877,7 +877,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>Datatype Annotation</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -894,7 +894,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>Entity Linking</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -911,7 +911,7 @@ function SurveyTable() {
             return (
               <div className="flex items-center gap-2">
                 <span>Nil Annotation</span>
-                <span className="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
                   {count}
                 </span>
               </div>
@@ -961,7 +961,7 @@ function SurveyTable() {
                   {value}
                   <Icon name="info_outline" className="ml-1 align-middle leading-none text-[16px]" />
                 </span>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 rounded-lg shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
                   {description}
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
                 </div>
@@ -1003,13 +1003,13 @@ function SurveyTable() {
         if (!value || value.trim() === "") {
           return (
             <div className={alignClass}>
-              <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium bg-slate-500/20 text-slate-200">No</span>
+              <span className="inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium bg-slate-500/20 text-slate-200">No</span>
             </div>
           );
         }
         return (
           <div className={alignClass}>
-            <span className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: headerColor + '20', color: headerColor }}>
+            <span className="inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: headerColor + '20', color: headerColor }}>
               <a href={value} target="_blank" rel="noopener noreferrer"
                  className="flex items-center justify-center h-full w-full"
                  title="Open code link">
@@ -1240,7 +1240,7 @@ function SurveyTable() {
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <div className="text-red-400 bg-red-900/20 rounded-lg p-6 text-lg">Error: {error}</div>
+        <div className="text-red-400 bg-red-900/20 p-6 text-lg">Error: {error}</div>
       </div>
     );
   }

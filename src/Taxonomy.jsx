@@ -425,7 +425,7 @@ function Taxonomy() {
       <div className="min-h-screen bg-neutral-900 flex flex-col">
         <Navigation />
         <div className="flex-1 flex items-center justify-center">
-          <div className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">
+          <div className="text-red-400 bg-red-900/20 border border-red-800 p-6 text-lg">
             Error: {error}
           </div>
         </div>
@@ -445,7 +445,7 @@ function Taxonomy() {
             </div>
             <button
               onClick={handleDownloadSVG}
-              className="flex items-center justify-center w-10 h-10 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-indigo-100 border border-indigo-500/30 hover:border-indigo-500/50 transition-all duration-200 shadow-lg"
+              className="flex items-center justify-center w-10 h-10 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-indigo-100 border border-indigo-500/30 hover:border-indigo-500/50 transition-all duration-200 shadow-lg"
               disabled={!svgNode}
               title="Download SVG"
             >
