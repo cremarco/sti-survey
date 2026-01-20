@@ -34,7 +34,7 @@ const TechniqueTrendsChart = ({ data }) => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const margin = { top: 20, right: 120, left: 40, bottom: 40 };
+    const margin = { top: 30, right: 120, left: 40, bottom: 40 }; // Increased top margin
     const width = 700 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
@@ -48,6 +48,15 @@ const TechniqueTrendsChart = ({ data }) => {
     const years = [...new Set(data.map(d => d.year))].sort((a, b) => a - b);
     const selectedTags = ['ontology-driven', 'rule-based', 'embeddings', 'transformer', 'CRF'];
     
+    // Milestones
+    const milestones = [
+      { year: 2010, label: "STI Pioneers" },
+      { year: 2013, label: "Word2Vec" },
+      { year: 2017, label: "Transformers" },
+      { year: 2019, label: "SemTab" },
+      { year: 2022, label: "ChatGPT" }
+    ];
+
     const trendsData = years.map(year => {
       const yearData = data.filter(d => d.year === year);
       const result = { year };
@@ -89,6 +98,31 @@ const TechniqueTrendsChart = ({ data }) => {
       .selectAll("text")
       .style("fill", "#9ca3af")
       .style("font-size", "12px");
+
+    // Add milestones lines and labels
+    milestones.forEach((m, i) => {
+      if (m.year >= d3.min(years) && m.year <= d3.max(years)) {
+        // Line
+        chartSvg.append("line")
+          .attr("x1", x(m.year))
+          .attr("x2", x(m.year))
+          .attr("y1", -20)
+          .attr("y2", height)
+          .attr("stroke", "#9ca3af")
+          .attr("stroke-width", 1)
+          .attr("stroke-dasharray", "4,4")
+          .attr("opacity", 0.5);
+
+        // Label
+        chartSvg.append("text")
+          .attr("x", x(m.year) + 5)
+          .attr("y", -10 + (i % 2) * 12) // Stagger labels slightly
+          .text(m.label)
+          .style("fill", "#9ca3af")
+          .style("font-size", "10px")
+          .style("font-style", "italic");
+      }
+    });
 
     // Add lines and dots
     selectedTags.forEach(tag => {
