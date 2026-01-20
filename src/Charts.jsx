@@ -130,6 +130,148 @@ const MainMethodStackedChart = ({ data }) => {
 };
 
 /**
+ * Technique Trends Chart Component
+ * 
+ * Creates a multi-line chart showing the evolution of specific technique tags over time
+ * using D3.js for data visualization.
+ */
+const TechniqueTrendsChart = ({ data }) => {
+  const svgRef = useRef();
+
+  React.useEffect(() => {
+    if (!data || data.length === 0) return;
+
+    const svg = d3.select(svgRef.current);
+    svg.selectAll("*").remove();
+
+    const margin = { top: 20, right: 120, left: 40, bottom: 40 };
+    const width = 700 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    const chartSvg = svg
+      .append("svg")
+      .attr("width", 800)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const years = [...new Set(data.map(d => d.year))].sort((a, b) => a - b);
+    const selectedTags = ['ontology-driven', 'rule-based', 'embeddings', 'transformer', 'CRF'];
+    
+    const trendsData = years.map(year => {
+      const yearData = data.filter(d => d.year === year);
+      const result = { year };
+      selectedTags.forEach(tag => {
+        result[tag] = yearData.filter(d => d.techniqueTags?.includes(tag)).length;
+      });
+      return result;
+    });
+
+    const x = d3.scaleLinear()
+      .domain(d3.extent(years))
+      .range([0, width]);
+
+    const maxValue = d3.max(trendsData, d => Math.max(...selectedTags.map(tag => d[tag])));
+    const y = d3.scaleLinear()
+      .domain([0, maxValue + 1]) // Add some headroom
+      .range([height, 0]);
+
+    const color = d3.scaleOrdinal()
+      .domain(selectedTags)
+      .range(['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6']);
+
+    const line = d3.line()
+      .x(d => x(d.year))
+      .y(d => y(d.count))
+      .curve(d3.curveMonotoneX);
+
+    // Add X axis
+    chartSvg.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickFormat(d3.format("d")))
+      .selectAll("text")
+      .style("fill", "#9ca3af")
+      .style("font-size", "12px");
+
+    // Add Y axis
+    chartSvg.append("g")
+      .call(d3.axisLeft(y).ticks(5))
+      .selectAll("text")
+      .style("fill", "#9ca3af")
+      .style("font-size", "12px");
+
+    // Add lines and dots
+    selectedTags.forEach(tag => {
+      const lineData = trendsData.map(d => ({ year: d.year, count: d[tag] }));
+      
+      // Line
+      chartSvg.append("path")
+        .datum(lineData)
+        .attr("fill", "none")
+        .attr("stroke", color(tag))
+        .attr("stroke-width", 2)
+        .attr("d", line);
+      
+      // Dots
+      chartSvg.selectAll(`.dot-${tag}`)
+        .data(lineData)
+        .join("circle")
+        .attr("cx", d => x(d.year))
+        .attr("cy", d => y(d.count))
+        .attr("r", 4)
+        .attr("fill", color(tag))
+        .append("title")
+        .text(d => `${tag} (${d.year}): ${d.count}`);
+    });
+
+    // Legend
+    const legend = chartSvg.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
+      .attr("text-anchor", "start")
+      .selectAll("g")
+      .data(selectedTags)
+      .join("g")
+      .attr("transform", (d, i) => `translate(${width + 20},${i * 20})`);
+
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("width", 15)
+      .attr("height", 15)
+      .attr("fill", color);
+
+    legend.append("text")
+      .attr("x", 20)
+      .attr("y", 9.5)
+      .attr("dy", "0.32em")
+      .style("fill", "#9ca3af")
+      .text(d => d);
+      
+    // Add Labels
+    chartSvg.append("text")
+      .attr("x", width / 2)
+      .attr("y", height + margin.bottom - 5)
+      .style("text-anchor", "middle")
+      .style("fill", "#9ca3af")
+      .style("font-size", "14px")
+      .text("Year");
+
+    chartSvg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .style("fill", "#9ca3af")
+      .style("font-size", "14px")
+      .text("Count");
+
+  }, [data]);
+
+  return <div ref={svgRef} className="flex justify-center items-center w-full"></div>;
+};
+
+/**
  * Conference Journal Bar Chart Component
  * 
  * Creates a horizontal bar chart showing the distribution of approaches by conference/journal
@@ -371,6 +513,16 @@ const calculateSummaryStats = (data) => {
     const license = row['license'] || 'N/A';
     acc.licenseDistribution[license] = (acc.licenseDistribution[license] || 0) + 1;
 
+    // Technique Tags stats (for selected tags)
+    const selectedTags = ['ontology-driven', 'rule-based', 'embeddings', 'transformer', 'CRF'];
+    if (row.techniqueTags && Array.isArray(row.techniqueTags)) {
+      row.techniqueTags.forEach(tag => {
+        if (selectedTags.includes(tag)) {
+          acc.techniqueTagCounts[tag] = (acc.techniqueTagCounts[tag] || 0) + 1;
+        }
+      });
+    }
+
     // Task counts
     if (row.coreTasks?.cta) acc.taskCounts.cta++;
     if (row.coreTasks?.cpa) acc.taskCounts.cpa++;
@@ -405,6 +557,7 @@ const calculateSummaryStats = (data) => {
     years: [],
     approachesWithCode: 0,
     licenseDistribution: {},
+    techniqueTagCounts: {},
     taskCounts: { cta: 0, cpa: 0, cea: 0, cnea: 0 },
     userRevisionDistribution: {},
     stepsCoverage: {
@@ -458,6 +611,7 @@ const calculateSummaryStats = (data) => {
     approachesWithCode: stats.approachesWithCode,
     approachesWithCodePercentage: totalEntries > 0 ? (stats.approachesWithCode / totalEntries) * 100 : 0,
     licenseDistribution: calculatePercentages(stats.licenseDistribution),
+    techniqueTagDistribution: calculatePercentages(stats.techniqueTagCounts),
     taskCounts: stats.taskCounts,
     taskPercentages,
     userRevisionDistribution: stats.userRevisionDistribution,
@@ -478,6 +632,7 @@ function Charts({ data }) {
 
   // State for chart visibility toggles
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);
+  const [showTechniqueChart, setShowTechniqueChart] = useState(false);
   const [showLicensesChart, setShowLicensesChart] = useState(false);
   const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false);
   const chartRef = useRef();
@@ -721,6 +876,98 @@ function Charts({ data }) {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Row 3.5: Technique Trends (Full Width - Flip Box) */}
+              <div className="grid grid-cols-1 gap-6 mb-6">
+                <div className="relative perspective-1000 h-[500px]">
+                  <div 
+                    className={`bg-gradient-to-r from-violet-500/10 to-violet-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showTechniqueChart ? 'rotate-y-180' : ''}`}
+                    style={{ 
+                      transformStyle: 'preserve-3d',
+                      transform: showTechniqueChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                    }}
+                  >
+                    {/* Front side - Statistics */}
+                    <div className="backface-hidden h-[500px]">
+                      <div className="flex items-center justify-between mb-4 w-full">
+                        <span className="text-violet-300 font-semibold text-lg flex items-center gap-2">
+                          Technique Evolution
+                          <span className="ml-2 px-2 py-0.5 rounded bg-violet-700/40 text-violet-200 text-xs font-mono align-middle">
+                            {Object.keys(summaryStats.techniqueTagDistribution).length}
+                          </span>
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => setShowTechniqueChart(!showTechniqueChart)}
+                            className="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-600/30 hover:bg-violet-600/50 transition-colors duration-200 text-violet-300 hover:text-violet-100"
+                            title={showTechniqueChart ? 'Show statistics' : 'Show chart'}
+                          >
+                            <Icon name="360" className="text-lg" />
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        {Object.entries(summaryStats.techniqueTagDistribution)
+                          .sort(([, a], [, b]) => b.count - a.count)
+                          .map(([tag, data], index) => (
+                          <div key={tag} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                            <div className="flex justify-between items-center mb-1">
+                              <span className="text-violet-200 text-sm font-medium">{tag}</span>
+                              <span className="text-violet-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                            </div>
+                            <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                              <div 
+                                className="h-2 bg-violet-500 rounded-full transition-all duration-1000 ease-out"
+                                style={{ width: `${data.percentage}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Back side - Chart */}
+                    <div 
+                      className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-violet-600/10 p-4 backface-hidden h-[500px]"
+                      style={{ 
+                        transform: 'rotateY(180deg)',
+                        backfaceVisibility: 'hidden'
+                      }}
+                    >
+                      <div className="flex flex-col h-full w-full">
+                        <div className="flex items-center justify-between mb-4 w-full">
+                          <span className="text-violet-300 font-semibold text-lg flex items-center gap-2">
+                            Technique Trends over Time
+                          </span>
+                          <div className="flex items-center gap-4">
+                            <button
+                              onClick={() => setShowTechniqueChart(!showTechniqueChart)}
+                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-600/30 hover:bg-violet-600/50 transition-colors duration-200 text-violet-300 hover:text-violet-100"
+                              title={showTechniqueChart ? "Show statistics" : "Show chart"}
+                            >
+                              <Icon name="360" className="text-lg" />
+                            </button>
+                            <button
+                              onClick={() => {
+                                const chart = document.querySelector('.technique-chart svg');
+                                if (chart) downloadSVG(chart, "technique-trends.svg");
+                              }}
+                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-600/30 hover:bg-violet-600/50 transition-colors duration-200 text-violet-300 hover:text-violet-100"
+                              title="Download SVG"
+                            >
+                              <Icon name="download" className="text-lg" />
+                            </button>
+                          </div>
+                        </div>
+                        <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full technique-chart">
+                          <TechniqueTrendsChart data={data} />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
