@@ -133,7 +133,7 @@ function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showStatistics, setShowStatistics] = useState(false);
+  const [showStatistics] = useState(false);
   const [animationStarted, setAnimationStarted] = useState(false);
   const location = useLocation();
   
@@ -413,7 +413,7 @@ function App() {
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <div className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">
+        <div className="text-red-400 bg-red-900/20 border border-red-800 p-6 text-lg">
           Error: {error}
         </div>
       </div>
@@ -425,7 +425,7 @@ function App() {
       <Route path="/" element={
         <div className="min-h-screen bg-neutral-900 flex flex-col">
           <Navigation />
-          <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
+          <div className="flex-1 flex flex-col items-center justify-center py-12 px-4">
             <div className="w-full max-w-7xl flex flex-col items-center">
               {/* Main Title */}
               <div className="w-full pb-4 mb-8">

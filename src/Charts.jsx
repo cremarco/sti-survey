@@ -10,9 +10,10 @@
  * - Comprehensive data analysis and statistics
  */
 
+
 import React, { useState, useRef, useMemo } from 'react';
-import * as d3 from "d3";
 import Navigation from './Navigation';
+<<<<<<< HEAD
 
 /**
  * D3 Chart Components
@@ -365,10 +366,17 @@ const ConferenceJournalBarChart = ({ data, total, barColor = "#06b6d4", labelCol
 
   return <div ref={svgRef} className="flex justify-center items-center w-full"></div>;
 };
+=======
+import Icon from './Icon';
+import MainMethodStackedChart from './components/charts/MainMethodStackedChart';
+import ConferenceJournalBarChart from './components/charts/ConferenceJournalBarChart';
+import YearWiseCoreTasksChart from './components/charts/YearWiseCoreTasksChart';
+>>>>>>> 81bf337ec5ac7c43e97bbd42c14bdc2b57112b91
 
 /**
  * Utility Functions
  */
+
 
 /**
  * Downloads an SVG element as a file
@@ -648,7 +656,7 @@ function Charts({ data }) {
   return (
     <div className="min-h-screen bg-neutral-900 flex flex-col">
       <Navigation />
-      <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
+      <div className="flex-1 flex flex-col items-center justify-center py-12 px-4">
         <div className="w-full max-w-7xl flex flex-col items-center">
           <div className="w-full pb-4 mb-8">
             <h1 className="text-3xl md:text-4xl text-neutral-100 font-bold tracking-tight mb-2">Data Analytics & Charts</h1>
@@ -675,14 +683,14 @@ function Charts({ data }) {
                       <div className="flex items-center justify-between mb-4 w-full">
                         <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
                           Main Method Types
-                          <span className="ml-2 px-2 py-0.5 rounded bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
+                          <span className="ml-2 px-2 py-0.5 bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
                             {Object.keys(summaryStats.mainMethodTypeDistribution).length}
                           </span>
                         </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowMainMethodChart(!showMainMethodChart)}
-                            className="flex items-center justify-center w-8 h-8 rounded-lg bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                            className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
                             title={showMainMethodChart ? 'Show statistics' : 'Show chart'}
                           >
                             <Icon name="360" className="text-lg" />
@@ -699,9 +707,9 @@ function Charts({ data }) {
                               <span className="text-sky-200 text-sm font-medium">{type}</span>
                               <span className="text-sky-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                             </div>
-                            <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div className="h-2 w-full bg-gray-700 overflow-hidden">
                               <div 
-                                className="h-2 bg-sky-500 rounded-full transition-all duration-1000 ease-out"
+                                className="h-2 bg-sky-500 transition-all duration-1000 ease-out"
                                 style={{ width: `${data.percentage}%` }}
                               ></div>
                             </div>
@@ -722,14 +730,14 @@ function Charts({ data }) {
                         <div className="flex items-center justify-between mb-4 w-full">
                           <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
                             Main Method Distribution by Year
-                            <span className="ml-2 px-2 py-0.5 rounded bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
+                            <span className="ml-2 px-2 py-0.5 bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
                               {Object.keys(summaryStats.mainMethodTypeDistribution).length}
                             </span>
                           </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowMainMethodChart(!showMainMethodChart)}
-                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                              className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
                               title={showMainMethodChart ? "Show statistics" : "Show chart"}
                             >
                               <Icon name="360" className="text-lg" />
@@ -740,7 +748,7 @@ function Charts({ data }) {
                                   downloadSVG(chartRef.current.children[0].children[0], "main-method-chart.svg");
                                 }
                               }}
-                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                              className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
                               title="Download SVG"
                             >
                               <Icon name="download" className="text-lg" />
@@ -763,7 +771,7 @@ function Charts({ data }) {
                   <div className="flex items-center justify-between mb-4 w-full">
                     <span className="text-teal-300 font-semibold text-lg flex items-center gap-2">
                       Domains
-                      <span className="ml-2 px-2 py-0.5 rounded bg-teal-700/40 text-teal-200 text-xs font-mono align-middle">
+                      <span className="ml-2 px-2 py-0.5 bg-teal-700/40 text-teal-200 text-xs font-mono align-middle">
                         {Object.keys(summaryStats.domainDistribution).length}
                       </span>
                     </span>
@@ -777,9 +785,9 @@ function Charts({ data }) {
                           <span className="text-teal-200 text-sm font-medium">{domain}</span>
                           <span className="text-teal-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                         </div>
-                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                        <div className="h-2 w-full bg-gray-700 overflow-hidden">
                           <div 
-                            className="h-2 bg-teal-500 rounded-full transition-all duration-1000 ease-out"
+                            className="h-2 bg-teal-500 transition-all duration-1000 ease-out"
                             style={{ width: `${data.percentage}%` }}
                           ></div>
                         </div>
@@ -793,7 +801,7 @@ function Charts({ data }) {
                   <div className="flex items-center justify-between mb-4 w-full">
                     <span className="text-indigo-300 font-semibold text-lg flex items-center gap-2">
                       Tasks Addressed
-                      <span className="ml-2 px-2 py-0.5 rounded bg-indigo-700/40 text-indigo-200 text-xs font-mono align-middle">
+                      <span className="ml-2 px-2 py-0.5 bg-indigo-700/40 text-indigo-200 text-xs font-mono align-middle">
                         {Object.keys(summaryStats.taskCounts).length}
                       </span>
                     </span>
@@ -805,9 +813,9 @@ function Charts({ data }) {
                           <span className="text-indigo-200 text-sm font-medium">{task.toUpperCase()}</span>
                           <span className="text-indigo-300 text-sm">{summaryStats.taskCounts[task]} ({percentage.toFixed(1)}%)</span>
                         </div>
-                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                        <div className="h-2 w-full bg-gray-700 overflow-hidden">
                           <div 
-                            className="h-2 bg-indigo-500 rounded-full transition-all duration-1000 ease-out"
+                            className="h-2 bg-indigo-500 transition-all duration-1000 ease-out"
                             style={{ width: `${percentage}%` }}
                           ></div>
                         </div>
@@ -824,7 +832,7 @@ function Charts({ data }) {
                   <div className="flex items-center justify-between mb-4 w-full">
                     <span className="text-blue-300 font-semibold text-lg flex items-center gap-2">
                       Steps Coverage
-                      <span className="ml-2 px-2 py-0.5 rounded bg-blue-700/40 text-blue-200 text-xs font-mono align-middle">
+                      <span className="ml-2 px-2 py-0.5 bg-blue-700/40 text-blue-200 text-xs font-mono align-middle">
                         {Object.keys(summaryStats.stepsCoverage).length}
                       </span>
                     </span>
@@ -838,9 +846,9 @@ function Charts({ data }) {
                           <span className="text-blue-200 text-sm font-medium">{step.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
                           <span className="text-blue-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
                         </div>
-                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                        <div className="h-2 w-full bg-gray-700 overflow-hidden">
                           <div 
-                            className="h-2 bg-blue-500 rounded-full transition-all duration-1000 ease-out"
+                            className="h-2 bg-blue-500 transition-all duration-1000 ease-out"
                             style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
                           ></div>
                         </div>
@@ -854,7 +862,7 @@ function Charts({ data }) {
                   <div className="flex items-center justify-between mb-4 w-full">
                     <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
                       User Revision
-                      <span className="ml-2 px-2 py-0.5 rounded bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
+                      <span className="ml-2 px-2 py-0.5 bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
                         {Object.keys(summaryStats.userRevisionDistribution).length}
                       </span>
                     </span>
@@ -868,9 +876,9 @@ function Charts({ data }) {
                           <span className="text-cyan-200 text-sm font-medium">{type}</span>
                           <span className="text-cyan-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
                         </div>
-                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                        <div className="h-2 w-full bg-gray-700 overflow-hidden">
                           <div 
-                            className="h-2 bg-cyan-500 rounded-full transition-all duration-1000 ease-out"
+                            className="h-2 bg-cyan-500 transition-all duration-1000 ease-out"
                             style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
                           ></div>
                         </div>
@@ -987,14 +995,14 @@ function Charts({ data }) {
                       <div className="flex items-center justify-between mb-4 w-full">
                         <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
                           Licenses
-                          <span className="ml-2 px-2 py-0.5 rounded bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
+                          <span className="ml-2 px-2 py-0.5 bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
                             {Object.keys(summaryStats.licenseDistribution).length}
                           </span>
                         </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowLicensesChart(!showLicensesChart)}
-                            className="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
+                            className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                             title={showLicensesChart ? 'Show statistics' : 'Show chart'}
                           >
                             <Icon name="360" className="text-lg" />
@@ -1010,9 +1018,9 @@ function Charts({ data }) {
                           <span className="text-yellow-200 text-sm font-medium">{license}</span>
                           <span className="text-yellow-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                             </div>
-                            <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                            <div className="h-2 w-full bg-gray-700 overflow-hidden">
                               <div 
-                                className="h-2 bg-yellow-500 rounded-full transition-all duration-1000 ease-out"
+                                className="h-2 bg-yellow-500 transition-all duration-1000 ease-out"
                                 style={{ width: `${data.percentage}%` }}
                               ></div>
                             </div>
@@ -1033,14 +1041,14 @@ function Charts({ data }) {
                         <div className="flex items-center justify-between mb-4 w-full">
                           <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
                             License Distribution
-                            <span className="ml-2 px-2 py-0.5 rounded bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
+                            <span className="ml-2 px-2 py-0.5 bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
                               {Object.keys(summaryStats.licenseDistribution).length}
                             </span>
                           </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowLicensesChart(!showLicensesChart)}
-                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
+                              className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                               title={showLicensesChart ? 'Show statistics' : 'Show chart'}
                             >
                               <Icon name="360" className="text-lg" />
@@ -1052,7 +1060,7 @@ function Charts({ data }) {
                                   downloadSVG(chartElement, "licenses-chart.svg");
                                 }
                               }}
-                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
+                              className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                               title="Download SVG"
                             >
                               <Icon name="download" className="text-lg" />
@@ -1089,14 +1097,14 @@ function Charts({ data }) {
                         <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
                           Approaches per Conference/Journal
                           {/* Unique venues count label */}
-                          <span className="ml-2 px-2 py-0.5 rounded bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
+                          <span className="ml-2 px-2 py-0.5 bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
                             {Object.keys(summaryStats.conferenceJournalDistribution).length}
                           </span>
                         </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
-                            className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
+                            className="flex items-center justify-center w-8 h-8 bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
                             title={showConferenceJournalChart ? 'Show statistics' : 'Show chart'}
                           >
                             <Icon name="360" className="text-lg" />
@@ -1112,9 +1120,9 @@ function Charts({ data }) {
                                 <span className="text-cyan-200 text-sm font-medium truncate max-w-[180px]" title={venue}>{venue}</span>
                                 <span className="text-cyan-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
                               </div>
-                              <div className="h-2 w-full bg-neutral-700 rounded-full overflow-hidden">
+                              <div className="h-2 w-full bg-neutral-700 overflow-hidden">
                                 <div 
-                                  className="h-2 bg-cyan-500 rounded-full transition-all duration-1000 ease-out"
+                                  className="h-2 bg-cyan-500 transition-all duration-1000 ease-out"
                                   style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
                                 ></div>
                               </div>
@@ -1134,14 +1142,14 @@ function Charts({ data }) {
                         <div className="flex items-center justify-between mb-4 w-full">
                           <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
                             Approaches per Conference/Journal
-                            <span className="ml-2 px-2 py-0.5 rounded bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
+                            <span className="ml-2 px-2 py-0.5 bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
                               {Object.keys(summaryStats.conferenceJournalDistribution).length}
                             </span>
                           </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowConferenceJournalChart(!showConferenceJournalChart)}
-                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
+                              className="flex items-center justify-center w-8 h-8 bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
                               title={showConferenceJournalChart ? 'Show statistics' : 'Show chart'}
                             >
                               <Icon name="360" className="text-lg" />
@@ -1153,7 +1161,7 @@ function Charts({ data }) {
                                   downloadSVG(chartElement, "conference-journal-chart.svg");
                                 }
                               }}
-                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
+                              className="flex items-center justify-center w-8 h-8 bg-cyan-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-cyan-300 hover:text-cyan-100"
                               title="Download SVG"
                             >
                               <Icon name="download" className="text-lg" />
@@ -1173,6 +1181,18 @@ function Charts({ data }) {
                   </div>
                 </div>
               </div>
+
+              {/* Row 6: Year-wise Core Tasks (Full Width) */}
+              <div className="grid grid-cols-1 gap-6 mb-6 mt-6">
+                <div className="bg-gradient-to-r from-red-500/10 to-red-600/10 p-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-red-300 font-semibold text-lg">Year-wise Trends of Core Tasks</span>
+                  </div>
+                  <div className="h-[400px]">
+                    <YearWiseCoreTasksChart data={data} />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1182,4 +1202,4 @@ function Charts({ data }) {
 }
 
 export default Charts;
-import Icon from './Icon';
+

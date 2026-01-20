@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@theme {}
+
 /* Global styles for dark mode */
 html {
   @apply bg-neutral-900 text-neutral-100;
@@ -12,4 +14,9 @@ body {
 /* Ensure proper dark mode */
 :root {
   color-scheme: dark;
+}
+
+/* Remove rounded corners from everything */
+*, ::before, ::after {
+  border-radius: 0 !important;
 }

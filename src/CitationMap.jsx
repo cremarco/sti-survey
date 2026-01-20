@@ -268,7 +268,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
     let source = serializer.serializeToString(svgNode);
     
     // Add XML declaration for compatibility
-    if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+    if (!source.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
       source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
     }
     
@@ -305,7 +305,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
   if (error) {
     return (
       <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <span className="text-red-400 bg-red-900/20 border border-red-800 rounded-lg p-6 text-lg">Error: {error}</span>
+        <span className="text-red-400 bg-red-900/20 border border-red-800 p-6 text-lg">Error: {error}</span>
       </div>
     );
   }
@@ -322,7 +322,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing â
             </div>
             <button
               onClick={handleDownloadSVG}
-              className="flex items-center justify-center w-10 h-10 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-indigo-100 border border-indigo-500/30 hover:border-indigo-500/50 transition-all duration-200 shadow-lg"
+              className="flex items-center justify-center w-10 h-10 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-indigo-100 border border-indigo-500/30 hover:border-indigo-500/50 transition-all duration-200 shadow-lg"
               disabled={!svgNode}
               title="Download SVG"
             >

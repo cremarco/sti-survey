@@ -9,8 +9,8 @@ const Svg = ({ children, className, viewBox = '0 0 24 24', stroke = 'currentColo
     fill={fill}
     stroke={stroke}
     strokeWidth={2}
-    strokeLinecap="round"
-    strokeLinejoin="round"
+    strokeLinecap="butt"
+    strokeLinejoin="miter"
     aria-hidden="true"
     className={className}
     focusable="false"
@@ -87,7 +87,7 @@ const paths = {
   // Table chart / grid
   table_chart: (className) => (
     <Svg className={className}>
-      <rect x="3" y="7" width="18" height="12" rx="1" />
+      <rect x="3" y="7" width="18" height="12" />
       <path d="M3 11h18" />
       <path d="M9 7v12" />
       <path d="M15 7v12" />
@@ -96,10 +96,10 @@ const paths = {
   // Category: four tiles
   category: (className) => (
     <Svg className={className}>
-      <rect x="4" y="4" width="7" height="7" rx="1" />
-      <rect x="13" y="4" width="7" height="7" rx="1" />
-      <rect x="4" y="13" width="7" height="7" rx="1" />
-      <rect x="13" y="13" width="7" height="7" rx="1" />
+      <rect x="4" y="4" width="7" height="7" />
+      <rect x="13" y="4" width="7" height="7" />
+      <rect x="4" y="13" width="7" height="7" />
+      <rect x="13" y="13" width="7" height="7" />
     </Svg>
   ),
   // Account tree: nodes connected
@@ -127,7 +127,7 @@ export default function Icon({ name, className = '' }) {
   // Fallback: a simple square if icon name not found
   return (
     <Svg className={className}>
-      <rect x="5" y="5" width="14" height="14" rx="2" />
+      <rect x="5" y="5" width="14" height="14" />
     </Svg>
   );
 }
