@@ -24,7 +24,7 @@
  */
 
 import { useState, useEffect, useMemo, useRef } from "react";
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import * as d3 from 'd3';
 import CitationMap from "./CitationMap";
 import Taxonomy from "./Taxonomy";
@@ -135,6 +135,7 @@ function App() {
   const [error, setError] = useState(null);
   const [showStatistics] = useState(false);
   const [animationStarted, setAnimationStarted] = useState(false);
+  const location = useLocation();
   
   // Refs for charts
   const chartRefs = useRef({
@@ -166,13 +167,18 @@ function App() {
     loadData();
   }, []);
 
-  // Start animations when data is loaded
+  // Start animations when data is loaded and on home page
   useEffect(() => {
-    if (data.length > 0 && !animationStarted) {
-      const timer = setTimeout(() => setAnimationStarted(true), 500);
-      return () => clearTimeout(timer);
+    if (data.length > 0 && location.pathname === '/') {
+      if (!animationStarted) {
+        const timer = setTimeout(() => setAnimationStarted(true), 500);
+        return () => clearTimeout(timer);
+      }
+    } else if (location.pathname !== '/') {
+      // Reset animation state when leaving home page
+      setAnimationStarted(false);
     }
-  }, [data, animationStarted]);
+  }, [data, animationStarted, location.pathname]);
 
   // Function to render mini line chart with animation
   const renderMiniChart = (svgRef, chartData, color, width = 80, height = 30) => {
@@ -274,9 +280,9 @@ function App() {
       .style("opacity", 1);
   };
 
-  // Effect to render charts when data changes
+  // Effect to render charts when data changes and on home page
   useEffect(() => {
-    if (data.length > 0 && animationStarted) {
+    if (data.length > 0 && animationStarted && location.pathname === '/') {
       // Render all charts simultaneously during number animation
       setTimeout(() => {
         renderMiniChart(chartRefs.current.total, data, "#64748b");
@@ -287,7 +293,7 @@ function App() {
         renderMiniChart(chartRefs.current.cnea, data.filter(item => item.coreTasks?.cnea), "#eab308");
       }, 300); // Start charts during counting animation
     }
-  }, [data, animationStarted]);
+  }, [data, animationStarted, location.pathname]);
 
   // Calculate summary statistics with optimized performance
   const summaryStats = useMemo(() => {

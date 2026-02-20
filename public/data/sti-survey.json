@@ -8459,7 +8459,7 @@
                     "title": "Neural Enquirer: Learning to Query Tables in Natural Language."
                 },
                 {
-                    "ref": "2013_zhang_infogather",
+                    "ref": "2013_zhang_infogather+",
                     "title": "InfoGather+: Semantic Matching and Annotation of Numeric and Time-varying Attributes in Web Tables."
                 },
                 {
@@ -9666,7 +9666,7 @@
                     "title": "Using linked data to mine RDF from Wikipedia’s tables"
                 },
                 {
-                    "ref": "2016_neumaier_multi-level",
+                    "ref": "2016_neumaier_multilevel",
                     "title": "Multi-level semantic labelling of numerical values"
                 },
                 {
@@ -10493,7 +10493,7 @@
                     "title": "Verbs semantics and lexical selection."
                 },
                 {
-                    "ref": "2013_zhang_infogather",
+                    "ref": "2013_zhang_infogather+",
                     "title": "Infogather+: Semantic matching and annotation of numeric and time-varying attributes in web tables."
                 },
                 {
@@ -21341,7 +21341,7 @@
                     "title": "Jentab: Matching tabular data to knowledge graphs"
                 },
                 {
-                    "ref": "2021_abdelmageed_jentab-1",
+                    "ref": "2021_abdelmageed_jentab",
                     "title": "Jentab meets semtab 2021’s new challenges"
                 },
                 {
@@ -21904,75 +21904,276 @@
         "checkedByAi": true,
         "doi": "https://doi.org/10.3390/computation11090175",
         "citations": {
-"references": [
-{"ref": "2021_hogan_knowledge", "title": "Knowledge Graphs."},
-{"ref": "2021_ji_a", "title": "A Survey on Knowledge Graphs: Representation, Acquisition and Applications."},
-{"ref": "2017_peroni_one", "title": "One Year of the OpenCitations Corpus—Releasing RDF-Based Scholarly Citation Data into the Public Domain."},
-{"ref": "2019_iana_building", "title": "Building a Conference Recommender System Based on SciGraph and WikiCFP."},
-{"ref": "2019_farber_the", "title": "The Microsoft Academic Knowledge Graph: A Linked Data Source with 8 Billion Triples of Scholarly Data."},
-{"ref": "2012_stadler_linkedgeodata", "title": "LinkedGeoData: A core for a web of spatial open data."},
-{"ref": "2013_callahan_bio2rdf", "title": "Bio2RDF Release 2: Improved Coverage, Interoperability and Provenance of Life Science Linked Data."},
-{"ref": "2014_raimond_the", "title": "The BBC World Service Archive prototype."},
-{"ref": "2021_tiwari_recent", "title": "Recent trends in knowledge graphs: Theory and practice."},
-{"ref": "2019_xiaoxue_review", "title": "Review and trend analysis of knowledge graphs for crop pest and diseases."},
-{"ref": "2016_lehmberg_a", "title": "A large public corpus of web tables containing time and context metadata."},
-{"ref": "2020_burdick_table", "title": "Table extraction and understanding for scientific and enterprise applications."},
-{"ref": "2020_martinez-rodriguez_information", "title": "Information Extraction meets the Semantic Web: A Survey."},
-{"ref": "2016_ehrlinger_towards", "title": "Towards a Definition of Knowledge Graphs."},
-{"ref": "1993_gruber_a", "title": "A Translation Approach to Portable Ontology Specifications."},
-{"ref": "2017_villazon-terrazas_construction", "title": "Construction of Enterprise Knowledge Graphs (I)."},
-{"ref": "2014_re_feature", "title": "Feature engineering for knowledge base construction."},
-{"ref": "2018_balog_populating", "title": "Populating knowledge bases."},
-{"ref": "2020_zhang_web", "title": "Web table extraction, retrieval, and augmentation: a survey."},
-{"ref": "2021_bonfitto_table", "title": "Table understanding approaches for extracting knowledge from heterogeneous tables."},
-{"ref": "2022_shigarov_table", "title": "Table understanding: Problem overview."},
-{"ref": "2023_liu_from", "title": "From tabular data to knowledge graphs: A survey of semantic table interpretation tasks and methods."},
-{"ref": "2010_limaye_annotating", "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships."},
-{"ref": "2010_mulwad_using", "title": "Using linked data to interpret tables."},
-{"ref": "2011_venetis_recovering", "title": "Recovering Semantics of Tables on the Web."},
-{"ref": "2017_efthymiou_matching", "title": "Matching web tables with knowledge base entities: From entity lookups to entity embeddings."},
-{"ref": "2015_bhagavatula_tabel", "title": "TabEL: Entity Linking in Web Tables."},
-{"ref": "2017_ritze_matching", "title": "Matching Web Tables To Dbpedia—A Feature Utility Study."},
-{"ref": "2016_ermilov_taipan", "title": "TAIPAN: Automatic Property Mapping for Tabular Data."},
-{"ref": "2017_zhang_effective", "title": "Effective and Efficient Semantic Table Interpretation using TableMiner+."},
-{"ref": "2019_kruit_extracting", "title": "Extracting novel facts from tables for knowledge graph completion."},
-{"ref": "2020_cremaschi_a", "title": "A fully automated approach to a complete Semantic Table Interpretation."},
-{"ref": "2019_nguyen_mtab", "title": "MTab: Matching Tabular Data to Knowledge Graph using Probability Models."},
-{"ref": "2021_steenwinckel_magic", "title": "MAGIC: Mining an Augmented Graph using INK, starting from a CSV."},
-{"ref": "2021_baazouzi_kepler-asi", "title": "Kepler-aSI at SemTab."},
-{"ref": "2021_abdelmageed_jentab-1", "title": "JenTab Meets SemTab 2021′s New Challenges."},
-{"ref": "2021_huynh_dagobah", "title": "DAGOBAH: Table and Graph Contexts For Efficient Semantic Annotation Of Tabular Data."},
-{"ref": "2020_xie_joint", "title": "Joint Entity Linking for Web Tables with Hybrid Semantic Matching."},
-{"ref": "2019_chen_colnet", "title": "ColNet: Embedding the semantics of web tables for column type prediction."},
-{"ref": "2019_hulsebos_sherlock", "title": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection."},
-{"ref": "2020_zhang_sato", "title": "Sato: Contextual Semantic Type Detection in Tables."},
-{"ref": "2019_devlin_bert", "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding."},
-{"ref": "2022_suhara_annotating", "title": "Annotating Columns with Pre-trained Language Models."},
-{"ref": "2020_deng_turl", "title": "TURL: Table Understanding through Representation Learning."},
-{"ref": "2021_trabelsi_selab", "title": "SeLaB: Semantic Labeling with BERT."},
-{"ref": "2020_yin_tabert", "title": "TaBERT: Pretraining for Joint Understanding of Textual and Tabular Data."},
-{"ref": "2020_herzig_tapas", "title": "TAPAS: Weakly Supervised Table Parsing via Pre-training."},
-{"ref": "2021_iida_tabbie", "title": "TABBIE: Pretrained Representations of Tabular Data."},
-{"ref": "2021_wang_tuta", "title": "TUTA: Tree-based Trans-formers for Generally Structured Table Pre-training."},
-{"ref": "2013_maguire_ontomaton", "title": "OntoMaton: A Bioportal powered ontology widget for Google Spreadsheets."},
-{"ref": "2014_gonzalez-beltran_linkedisa", "title": "linkedISA: Semantic representation of ISA-Tab experimental metadata."},
-{"ref": "2021_vu_a", "title": "A Graph-Based Approach for Inferring Semantic Descriptions of Wikipedia Tables."},
-{"ref": "2017_devos_combining", "title": "Combining information on structure and content to automatically annotate natural science spreadsheets."},
-{"ref": "2016_wu_entity", "title": "Entity Linking in Web Tables with Multiple Linked Knowledge Bases."},
-{"ref": "2009_bizer_dbpedia", "title": "Dbpedia—A Crystallization Point for the Web of Data."},
-{"ref": "2019_guan_knowledge", "title": "Knowledge graph embedding with concepts."},
-{"ref": "2019_ristoski_rdf2vec", "title": "RDF2Vec: RDF graph embeddings and their applications."},
-{"ref": "2020_portisch_kgvec2go", "title": "KGvec2go—Knowledge Graph Embeddings as a Service."},
-{"ref": "2014_le_distributed", "title": "Distributed Representations of Sentences and Documents."},
-{"ref": "2019_hu_viznet", "title": "VizNet: Towards A Large-Scale Visualization Learning and Benchmarking Repository."},
-{"ref": "2021_dorodnykh_tabbyld", "title": "TabbyLD: A Tool for Semantic Interpretation of Spreadsheets Data."},
-{"ref": "2020_cutrona_tough", "title": "Tough tables: Carefully evaluating entity linking for tabular data."},
-{"ref": "2011_jimenez-ruiz_logmap", "title": "LogMap: Logic-based and scalable ontology matching."},
-{"ref": "2012_suchanek_paris", "title": "PARIS: Probabilistic alignment of relations, instances, and schema."},
-{"ref": "2020_dorodnykh_towards", "title": "Towards a universal approach for semantic interpretation of spreadsheets data."},
-{"ref": "2015_berman_support", "title": "Support of Decision-Making Based on a Production Approach in the Performance of an Industrial Safety Review."},
-{"ref": "2021_yurin_semi-automated", "title": "Semi-Automated Formalization and Representation of the Engineering Knowledge Extracted From Spreadsheet Data."}
-],
+            "references": [
+                {
+                    "ref": "2021_hogan_knowledge",
+                    "title": "Knowledge Graphs."
+                },
+                {
+                    "ref": "2021_ji_a",
+                    "title": "A Survey on Knowledge Graphs: Representation, Acquisition and Applications."
+                },
+                {
+                    "ref": "2017_peroni_one",
+                    "title": "One Year of the OpenCitations Corpus—Releasing RDF-Based Scholarly Citation Data into the Public Domain."
+                },
+                {
+                    "ref": "2019_iana_building",
+                    "title": "Building a Conference Recommender System Based on SciGraph and WikiCFP."
+                },
+                {
+                    "ref": "2019_farber_the",
+                    "title": "The Microsoft Academic Knowledge Graph: A Linked Data Source with 8 Billion Triples of Scholarly Data."
+                },
+                {
+                    "ref": "2012_stadler_linkedgeodata",
+                    "title": "LinkedGeoData: A core for a web of spatial open data."
+                },
+                {
+                    "ref": "2013_callahan_bio2rdf",
+                    "title": "Bio2RDF Release 2: Improved Coverage, Interoperability and Provenance of Life Science Linked Data."
+                },
+                {
+                    "ref": "2014_raimond_the",
+                    "title": "The BBC World Service Archive prototype."
+                },
+                {
+                    "ref": "2021_tiwari_recent",
+                    "title": "Recent trends in knowledge graphs: Theory and practice."
+                },
+                {
+                    "ref": "2019_xiaoxue_review",
+                    "title": "Review and trend analysis of knowledge graphs for crop pest and diseases."
+                },
+                {
+                    "ref": "2016_lehmberg_a",
+                    "title": "A large public corpus of web tables containing time and context metadata."
+                },
+                {
+                    "ref": "2020_burdick_table",
+                    "title": "Table extraction and understanding for scientific and enterprise applications."
+                },
+                {
+                    "ref": "2020_martinez-rodriguez_information",
+                    "title": "Information Extraction meets the Semantic Web: A Survey."
+                },
+                {
+                    "ref": "2016_ehrlinger_towards",
+                    "title": "Towards a Definition of Knowledge Graphs."
+                },
+                {
+                    "ref": "1993_gruber_a",
+                    "title": "A Translation Approach to Portable Ontology Specifications."
+                },
+                {
+                    "ref": "2017_villazon-terrazas_construction",
+                    "title": "Construction of Enterprise Knowledge Graphs (I)."
+                },
+                {
+                    "ref": "2014_re_feature",
+                    "title": "Feature engineering for knowledge base construction."
+                },
+                {
+                    "ref": "2018_balog_populating",
+                    "title": "Populating knowledge bases."
+                },
+                {
+                    "ref": "2020_zhang_web",
+                    "title": "Web table extraction, retrieval, and augmentation: a survey."
+                },
+                {
+                    "ref": "2021_bonfitto_table",
+                    "title": "Table understanding approaches for extracting knowledge from heterogeneous tables."
+                },
+                {
+                    "ref": "2022_shigarov_table",
+                    "title": "Table understanding: Problem overview."
+                },
+                {
+                    "ref": "2023_liu_from",
+                    "title": "From tabular data to knowledge graphs: A survey of semantic table interpretation tasks and methods."
+                },
+                {
+                    "ref": "2010_limaye_annotating",
+                    "title": "Annotating and Searching Web Tables Using Entities, Types and Relationships."
+                },
+                {
+                    "ref": "2010_mulwad_using",
+                    "title": "Using linked data to interpret tables."
+                },
+                {
+                    "ref": "2011_venetis_recovering",
+                    "title": "Recovering Semantics of Tables on the Web."
+                },
+                {
+                    "ref": "2017_efthymiou_matching",
+                    "title": "Matching web tables with knowledge base entities: From entity lookups to entity embeddings."
+                },
+                {
+                    "ref": "2015_bhagavatula_tabel",
+                    "title": "TabEL: Entity Linking in Web Tables."
+                },
+                {
+                    "ref": "2017_ritze_matching",
+                    "title": "Matching Web Tables To Dbpedia—A Feature Utility Study."
+                },
+                {
+                    "ref": "2016_ermilov_taipan",
+                    "title": "TAIPAN: Automatic Property Mapping for Tabular Data."
+                },
+                {
+                    "ref": "2017_zhang_effective",
+                    "title": "Effective and Efficient Semantic Table Interpretation using TableMiner+."
+                },
+                {
+                    "ref": "2019_kruit_extracting",
+                    "title": "Extracting novel facts from tables for knowledge graph completion."
+                },
+                {
+                    "ref": "2020_cremaschi_a",
+                    "title": "A fully automated approach to a complete Semantic Table Interpretation."
+                },
+                {
+                    "ref": "2019_nguyen_mtab",
+                    "title": "MTab: Matching Tabular Data to Knowledge Graph using Probability Models."
+                },
+                {
+                    "ref": "2021_steenwinckel_magic",
+                    "title": "MAGIC: Mining an Augmented Graph using INK, starting from a CSV."
+                },
+                {
+                    "ref": "2021_baazouzi_kepler-asi",
+                    "title": "Kepler-aSI at SemTab."
+                },
+                {
+                    "ref": "2021_abdelmageed_jentab",
+                    "title": "JenTab Meets SemTab 2021′s New Challenges."
+                },
+                {
+                    "ref": "2021_huynh_dagobah",
+                    "title": "DAGOBAH: Table and Graph Contexts For Efficient Semantic Annotation Of Tabular Data."
+                },
+                {
+                    "ref": "2020_xie_joint",
+                    "title": "Joint Entity Linking for Web Tables with Hybrid Semantic Matching."
+                },
+                {
+                    "ref": "2019_chen_colnet",
+                    "title": "ColNet: Embedding the semantics of web tables for column type prediction."
+                },
+                {
+                    "ref": "2019_hulsebos_sherlock",
+                    "title": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection."
+                },
+                {
+                    "ref": "2020_zhang_sato",
+                    "title": "Sato: Contextual Semantic Type Detection in Tables."
+                },
+                {
+                    "ref": "2019_devlin_bert",
+                    "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding."
+                },
+                {
+                    "ref": "2022_suhara_annotating",
+                    "title": "Annotating Columns with Pre-trained Language Models."
+                },
+                {
+                    "ref": "2020_deng_turl",
+                    "title": "TURL: Table Understanding through Representation Learning."
+                },
+                {
+                    "ref": "2021_trabelsi_selab",
+                    "title": "SeLaB: Semantic Labeling with BERT."
+                },
+                {
+                    "ref": "2020_yin_tabert",
+                    "title": "TaBERT: Pretraining for Joint Understanding of Textual and Tabular Data."
+                },
+                {
+                    "ref": "2020_herzig_tapas",
+                    "title": "TAPAS: Weakly Supervised Table Parsing via Pre-training."
+                },
+                {
+                    "ref": "2021_iida_tabbie",
+                    "title": "TABBIE: Pretrained Representations of Tabular Data."
+                },
+                {
+                    "ref": "2021_wang_tuta",
+                    "title": "TUTA: Tree-based Trans-formers for Generally Structured Table Pre-training."
+                },
+                {
+                    "ref": "2013_maguire_ontomaton",
+                    "title": "OntoMaton: A Bioportal powered ontology widget for Google Spreadsheets."
+                },
+                {
+                    "ref": "2014_gonzalez-beltran_linkedisa",
+                    "title": "linkedISA: Semantic representation of ISA-Tab experimental metadata."
+                },
+                {
+                    "ref": "2021_vu_a",
+                    "title": "A Graph-Based Approach for Inferring Semantic Descriptions of Wikipedia Tables."
+                },
+                {
+                    "ref": "2017_devos_combining",
+                    "title": "Combining information on structure and content to automatically annotate natural science spreadsheets."
+                },
+                {
+                    "ref": "2016_wu_entity",
+                    "title": "Entity Linking in Web Tables with Multiple Linked Knowledge Bases."
+                },
+                {
+                    "ref": "2009_bizer_dbpedia",
+                    "title": "Dbpedia—A Crystallization Point for the Web of Data."
+                },
+                {
+                    "ref": "2019_guan_knowledge",
+                    "title": "Knowledge graph embedding with concepts."
+                },
+                {
+                    "ref": "2019_ristoski_rdf2vec",
+                    "title": "RDF2Vec: RDF graph embeddings and their applications."
+                },
+                {
+                    "ref": "2020_portisch_kgvec2go",
+                    "title": "KGvec2go—Knowledge Graph Embeddings as a Service."
+                },
+                {
+                    "ref": "2014_le_distributed",
+                    "title": "Distributed Representations of Sentences and Documents."
+                },
+                {
+                    "ref": "2019_hu_viznet",
+                    "title": "VizNet: Towards A Large-Scale Visualization Learning and Benchmarking Repository."
+                },
+                {
+                    "ref": "2021_dorodnykh_tabbyld",
+                    "title": "TabbyLD: A Tool for Semantic Interpretation of Spreadsheets Data."
+                },
+                {
+                    "ref": "2020_cutrona_tough",
+                    "title": "Tough tables: Carefully evaluating entity linking for tabular data."
+                },
+                {
+                    "ref": "2011_jimenez-ruiz_logmap",
+                    "title": "LogMap: Logic-based and scalable ontology matching."
+                },
+                {
+                    "ref": "2012_suchanek_paris",
+                    "title": "PARIS: Probabilistic alignment of relations, instances, and schema."
+                },
+                {
+                    "ref": "2020_dorodnykh_towards",
+                    "title": "Towards a universal approach for semantic interpretation of spreadsheets data."
+                },
+                {
+                    "ref": "2015_berman_support",
+                    "title": "Support of Decision-Making Based on a Production Approach in the Performance of an Industrial Safety Review."
+                },
+                {
+                    "ref": "2021_yurin_semi-automated",
+                    "title": "Semi-Automated Formalization and Representation of the Engineering Knowledge Extracted From Spreadsheet Data."
+                }
+            ],
             "count": 97,
             "note": "processed"
         },
@@ -22778,5 +22979,651 @@
                 "reason": "Only a subset of references included; full bibliography not exhaustively extracted from the PDF."
             }
         ]
+    },
+    {
+        "id": "2019_cremaschi_semantic",
+        "added": "",
+        "year": 2019,
+        "firstAuthor": "Cremaschi",
+        "authors": [
+            "Marco Cremaschi",
+            "Anisa Rula",
+            "Alessandra Siano",
+            "Flavio De Paoli"
+        ],
+        "title": "Semantic Table Interpretation using MantisTable",
+        "venue": {
+            "type": "workshop",
+            "acronym": ""
+        },
+        "nameOfApproach": "MantisTable",
+        "techniqueTags": [
+            "rule-based",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Cleans and normalises table values; resolves acronyms/abbreviations using regular expressions.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Marks columns as NE or Literal using 16 regex types and a frequency threshold.",
+            "subjectDetection": "Identifies the subject (S-) column among NE-columns using statistical features (e.g., uniqueness).",
+            "datatypeAnnotation": "Assigns datatypes to L-columns via regex type detection.",
+            "typeAnnotation": "Maps headers/columns to KG concepts by analysing linked entities and concept frequencies in abstracts.",
+            "predicateAnnotation": "Finds predicates between subject and object columns by searching the KG for relationships.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Links cell contents to KG entities.",
+                "candidateGeneration": "Queries the KG with cell text to retrieve candidate entities.",
+                "entityDisambiguation": "Applies DICE similarity to select the winning entity."
+            }
+        },
+        "mainMethod": {
+            "type": "Unsupervised",
+            "technique": "rule-based"
+        },
+        "revision": {
+            "type": "semi automated",
+            "description": "All STI steps run automatically, and a GUI allows users to inspect and edit results."
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "general-purpose"
+        },
+        "validation": {
+            "goldStandard": "",
+            "metrics": []
+        },
+        "code": "http://mantistable.disco.unimib.it",
+        "license": "Not Specified",
+        "inputs": {
+            "typeOfTable": "HTML tables",
+            "tableSources": [
+                "web"
+            ],
+            "kg": {
+                "tripleStore": "DBpedia",
+                "index": ""
+            },
+            "output": "",
+            "applicationPurpose": "Automatically annotates, manages, and makes table semantics accessible to humans and machines.",
+            "userInterfaceTool": "Web UI"
+        },
+        "usesLLM": {},
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "",
+        "citations": [
+            {
+                "ref": "2019_cremaschi_mantistable",
+                "title": "MantisTable: a Tool for Creating Semantic Annotations on Tabular Data"
+            },
+            {
+                "ref": "2016_pham_semantic",
+                "title": "Semantic labeling: a domain-independent approach"
+            },
+            {
+                "ref": "2015_ritze_matching",
+                "title": "Matching HTML Tables to DBpedia"
+            },
+            {
+                "ref": "2017_zhang_effective",
+                "title": "Effective and efficient semantic table interpretation using tableminer+"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "venue.type",
+                "reason": "The poster text does not state the venue; 'workshop' is inferred from the file name."
+            },
+            {
+                "field": "venue.acronym",
+                "reason": "No acronym is shown on the poster."
+            },
+            {
+                "field": "doi",
+                "reason": "A DOI is not displayed; many workshop posters lack DOIs."
+            },
+            {
+                "field": "inputs.output",
+                "reason": "The export/serialisation format of the annotations is not specified."
+            },
+            {
+                "field": "inputs.typeOfTable",
+                "reason": "HTML/Web tables are implied, but supported input formats are not explicitly enumerated."
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Only generic Web tables are mentioned; specific source categories are not detailed."
+            },
+            {
+                "field": "mainMethod.type",
+                "reason": "No training data are described; 'unsupervised' is inferred from rule-based heuristics."
+            },
+            {
+                "field": "license",
+                "reason": "The software licence of the tool is not stated despite calling it open source."
+            },
+            {
+                "field": "validation.goldStandard",
+                "reason": "No evaluation dataset or GS is mentioned."
+            },
+            {
+                "field": "inputs.kg.index",
+                "reason": "An index is not described; only a DBpedia connector is referenced."
+            },
+            {
+                "field": "code",
+                "reason": "The URL points to a project site; a repository link is not provided in the poster."
+            }
+        ]
+    },
+    {
+        "id": "2024_avogadro_featurevector",
+        "added": "",
+        "year": 2024,
+        "firstAuthor": "Avogadro",
+        "authors": [
+            "Roberto Avogadro",
+            "Fabio D’Adda",
+            "Marco Cremaschi"
+        ],
+        "title": "Feature/vector entity retrieval and disambiguation techniques to create a supervised and unsupervised semantic table interpretation approach",
+        "venue": {
+            "type": "journal",
+            "acronym": "KBS"
+        },
+        "type": "journal",
+        "acronym": "KBS",
+        "nameOfApproach": "LamAPI and s-elBat",
+        "techniqueTags": [
+            "rule-based",
+            "embeddings",
+            "ontology-driven"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Lowercasing and cleaning strings; literal/type detection via regex patterns and spaCy; normalisation to improve retrieval. Uses LamAPI Literal Recogniser for dates/numbers/other patterns. ",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Classifies columns as literal (L) vs named-entity (NE) using LamAPI Literal Recogniser plus spaCy. ",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Aggregates candidate entity types to select column KG classes (CTA). ",
+            "predicateAnnotation": "For each column pair, ranks properties linking row-level candidates; selects most frequent property (CPA). ",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Entity Retrieval via LamAPI (IR with type filters) and Entity Disambiguation via s-elBat using heuristic features and supervised re-ranking. ",
+                "candidateGeneration": "LamAPI lookup with configurable limit (default 100), fuzzy matching, 3-gram option, and hard/soft type filters over DBpedia/Wikidata. ",
+                "entityDisambiguation": "Feature-vector scoring (edit/Jaccard/object/relation/literal) plus a neural network re-ranker using contextual and IR scores; final revision enforces CTA/CPA consistency. "
+            }
+        },
+        "mainMethod": {
+            "type": "Hybrid",
+            "technique": "Heuristic rules + neural network re-ranking with FastText embeddings and table-context features",
+            "revision": {
+                "type": "semi automated",
+                "description": "Automated revision reorders candidates to be consistent with CTA/CPA; SemTUI UI enables inspection and optional user adjustments. "
+            }
+        },
+        "domain": {
+            "domain": "independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "T2Dv2; SemTab 2019 R3/R4; Tough Tables (SemTab 2020 R4); HardTable-2021 R2/R3; SemTab 2022–2023 datasets. ",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "code": "https://github.com/unimib-datAI/lamAPI; https: //github.com/unimib-datAI/s-elbat",
+        "license": "CC BY 4.0 ",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "web",
+                "wiki",
+                "relational"
+            ],
+            "kg": {
+                "tripleStore": "Wikidata; DBpedia",
+                "index": "Custom Elasticsearch index over DBpedia/Wikidata with MongoDB storage for triples. "
+            },
+            "output": "CSV"
+        },
+        "applicationPurpose": "Semantic table interpretation for data enrichment and KG construction/extension. ",
+        "userInterfaceTool": "SemTUI (Web UI). ",
+        "checkedByAuthor": "",
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1016/j.knosys.2024.112447",
+        "citations": [
+            {
+                "ref": "2017_ritze_matching-web-tables-to-dbpedia",
+                "title": "Matching web tables to DBpedia - a feature utility study"
+            },
+            {
+                "ref": "2019_chen_colnet",
+                "title": "ColNet: Embedding the semantics of web tables for column type prediction"
+            },
+            {
+                "ref": "2010_limaye_annotating-and-searching-web-tables",
+                "title": "Annotating and searching web tables using entities, types and relationships"
+            },
+            {
+                "ref": "2021_nguyen_semtab-2021-tabular-data-annotation-with-mtab-tool",
+                "title": "SemTab 2021: Tabular data annotation with mtab tool"
+            },
+            {
+                "ref": "2022_deng_turl",
+                "title": "TURL: Table understanding through representation learning"
+            },
+            {
+                "ref": "2023_zhang_tablellama",
+                "title": "TableLlama: Towards open large generalist models for tables"
+            },
+            {
+                "ref": "2020_huynh_dagobah-enhanced-scoring",
+                "title": "DAGOBAH: Enhanced scoring algorithms for scalable annotations of tabular data"
+            },
+            {
+                "ref": "2022_cremaschi_s-elbat",
+                "title": "S-elBat: a semantic interpretation approach for messy table-s"
+            }
+        ],
+        "uncertainFields": [
+            {
+                "field": "inputs.output",
+                "reason": "The UI shows downloads in multiple formats, but the exact exported format(s) are not explicitly fixed; CSV is inferred from SemTab conventions. "
+            },
+            {
+                "field": "supportTasks.subjectDetection",
+                "reason": "Subject column detection is discussed as a sub-task in the survey context, but this paper’s pipeline does not clearly state an explicit subject-detection step. "
+            },
+            {
+                "field": "inputs.tableSources",
+                "reason": "Web/Wikipedia tables and well-formed relational tables are referenced, but the full breadth of sources used across datasets is not exhaustively enumerated. "
+            },
+            {
+                "field": "techniqueTags",
+                "reason": "The approach mixes heuristic rules, embeddings, and KG-type/property reasoning; mapping this to the restricted tag set may be debatable."
+            }
+        ]
+    },
+    {
+        "id": "2025_abdelmageed_kg2tables",
+        "added": "2026-01-19",
+        "year": 2025,
+        "firstAuthor": "Abdelmageed",
+        "authors": [
+            "Nora Abdelmageed",
+            "Ernesto Jiménez-Ruiz",
+            "Oktie Hassanzadeh",
+            "Birgitta König-Ries"
+        ],
+        "title": "KG2Tables: A Domain-Specific Tabular Data Generator to Evaluate Semantic Table Interpretation Systems",
+        "venue": {
+            "type": "journal",
+            "acronym": "TGDK"
+        },
+        "nameOfApproach": "KG2Tables",
+        "techniqueTags": [
+            "knowledge-graph",
+            "benchmark-generation"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Constructs domain-specific large-scale benchmarks from a Knowledge Graph by leveraging the internal hierarchy of concepts.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Generates domain-specific benchmarks for evaluating CTA systems.",
+            "predicateAnnotation": "Generates domain-specific benchmarks for evaluating CPA systems.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "Other",
+            "technique": "benchmark generation"
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "Fully automated generation of tabular data benchmarks from KGs."
+        },
+        "domain": {
+            "domain": "Dependent",
+            "type": "food, biodiversity, biomedical"
+        },
+        "validation": {
+            "goldStandard": "tFood, tBiodiv, tBiomed benchmarks generated from Wikidata",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "codeAvailability": "https://github.com/fusion-jena/KG2Tables",
+        "license": "CC-BY 4.0",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "synthetic"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Wikidata",
+            "index": ""
+        },
+        "output": "CSV",
+        "applicationPurpose": "Benchmarking STI systems with domain-specific data.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.4230/TGDK.3.1.1",
+        "citations": {
+            "references": [],
+            "count": 0,
+            "note": null
+        },
+        "uncertainFields": []
+    },
+    {
+        "id": "2025_baazouzi_kepler-asi",
+        "added": "2026-01-19",
+        "year": 2025,
+        "firstAuthor": "Baazouzi",
+        "authors": [
+            "Wiem Baazouzi",
+            "Marouen Kachroudi",
+            "Sami Faiz"
+        ],
+        "title": "Kepler-aSI.v2: a blended heuristic framework for comprehensive semantic table interpretation",
+        "venue": {
+            "type": "journal",
+            "acronym": "The Journal of Supercomputing"
+        },
+        "nameOfApproach": "Kepler-aSI.v2",
+        "techniqueTags": [
+            "heuristic",
+            "iterative"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Integrates filtering mechanisms and text pre-processing strategies.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Uses a heuristic approach (majority voting) but provides no annotation if multiple candidate types exist.",
+            "predicateAnnotation": "Uses heuristic / pattern matching strategies.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Resolves potential semantic inconsistencies between tabular data and a Knowledge Graph.",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "Unsupervised",
+            "technique": "heuristic"
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "Fully automated annotation methodology."
+        },
+        "domain": {
+            "domain": "Independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "SemTab challenge (2021-2024)",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "codeAvailability": "",
+        "license": "Ns",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "web",
+                "scientific"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Wikidata, DBpedia",
+            "index": ""
+        },
+        "output": "RDF",
+        "applicationPurpose": "Semantic Table Interpretation",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1007/s11227-025-07951-y",
+        "citations": {
+            "references": [],
+            "count": 0,
+            "note": null
+        },
+        "uncertainFields": []
+    },
+    {
+        "id": "2025_tobola_colem",
+        "added": "2026-01-19",
+        "year": 2025,
+        "firstAuthor": "Tobola",
+        "authors": [
+            "Kirill V. Tobola",
+            "Nikita O. Dorodnykh"
+        ],
+        "title": "CoLeM: A framework for semantic interpretation of Russian-language tables based on contrastive learning",
+        "venue": {
+            "type": "conference",
+            "acronym": "ACL"
+        },
+        "nameOfApproach": "CoLeM",
+        "techniqueTags": [
+            "contrastive-learning",
+            "multilingual-bert",
+            "neural-network"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Data augmentation with cell deletion and rearrangement. Filtering extraneous content.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Classifies each column by its semantic type.",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Uses contrastive learning with multilingual BERT to classify columns into semantic types.",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "Supervised",
+            "technique": "contrastive learning"
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "Minimizes reliance on manual labeling."
+        },
+        "domain": {
+            "domain": "Dependent",
+            "type": "Russian-language tables"
+        },
+        "validation": {
+            "goldStandard": "RWT-RuTaBERT dataset (115,000 columns)",
+            "metrics": [
+                "Micro F1",
+                "Macro F1",
+                "Weighted F1"
+            ]
+        },
+        "codeAvailability": "https://github.com/YRL-AIDA/CoLeM",
+        "license": "Ns",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "wikipedia"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": ""
+        },
+        "output": "Label",
+        "applicationPurpose": "Column Type Annotation for Russian tables.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "",
+        "citations": {
+            "references": [],
+            "count": 0,
+            "note": null
+        },
+        "uncertainFields": []
+    },
+    {
+        "id": "2025_vu_a",
+        "added": "2026-01-19",
+        "year": 2025,
+        "firstAuthor": "Vu",
+        "authors": [
+            "Binh Vu",
+            "Craig A. Knoblock",
+            "Fandel Lin"
+        ],
+        "title": "A Domain-Independent Approach for Semantic Table Interpretation",
+        "venue": {
+            "type": "conference",
+            "acronym": "ISWC"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "neural-network",
+            "distant-supervision",
+            "steiner-tree",
+            "triplet-loss"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": true,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "Identify entity columns.",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Uses a neural network with distant supervision to predict column types.",
+            "predicateAnnotation": "Applies the same neural network approach to predict relations between columns.",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "Supervised",
+            "technique": "neural network"
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "Does not require overlapping data or labeled tables from the domain."
+        },
+        "domain": {
+            "domain": "Independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "250WT and T2Dv2",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "codeAvailability": "https://github.com/binh-vu/iswc25",
+        "license": "Ns",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "wikipedia",
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Wikidata, DBpedia",
+            "index": ""
+        },
+        "output": "Semantic Description",
+        "applicationPurpose": "Semantic modeling in domains with limited background knowledge and no labeled tables.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1007/978-3-032-09527-5_13",
+        "citations": {
+            "references": [],
+            "count": 0,
+            "note": null
+        },
+        "uncertainFields": []
     }
 ]
