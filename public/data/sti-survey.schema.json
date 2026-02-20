@@ -1,113 +1,306 @@
 {
   "_uiMeta": {
-    "coreTasks": { "taxonomy": "1", "color": "#6366f1" },
-    "supportTasks": { "taxonomy": "2", "color": "#3b82f6" },
-    "mainMethod": { "taxonomy": "3", "color": "#0ea5e9" },
-    "revision": { "taxonomy": "4", "color": "#06b6d4" },
-    "domain": { "taxonomy": "5", "color": "#14b8a6" },
-    "validation": { "taxonomy": "6", "color": "#22c55e" },
-    "codeAvailability": { "taxonomy": "7", "color": "#84cc16" },
-    "license": { "taxonomy": "8", "color": "#facc15" },
-    "inputs": { "taxonomy": "9", "color": "#fbbf24" },
-    "output": { "taxonomy": "10", "color": "#f59e42" },
-    "applicationPurpose": { "taxonomy": "11", "color": "#ef4444" },
-    "userInterfaceTool": { "taxonomy": "12", "color": "#f43f5e" }
+    "coreTasks": {
+      "taxonomy": "1",
+      "color": "#6366f1"
+    },
+    "supportTasks": {
+      "taxonomy": "2",
+      "color": "#3b82f6"
+    },
+    "mainMethod": {
+      "taxonomy": "3",
+      "color": "#0ea5e9"
+    },
+    "revision": {
+      "taxonomy": "3",
+      "color": "#06b6d4"
+    },
+    "domain": {
+      "taxonomy": "3",
+      "color": "#14b8a6"
+    },
+    "codeAvailability": {
+      "taxonomy": "7",
+      "color": "#84cc16"
+    },
+    "license": {
+      "taxonomy": "8",
+      "color": "#facc15"
+    },
+    "inputs": {
+      "taxonomy": "9",
+      "color": "#fbbf24"
+    },
+    "output": {
+      "taxonomy": "10",
+      "color": "#f59e42"
+    },
+    "applicationPurpose": {
+      "taxonomy": "11",
+      "color": "#ef4444"
+    },
+    "userInterfaceTool": {
+      "taxonomy": "12",
+      "color": "#f43f5e"
+    }
+  },
+  "_uiGroups": {
+    "systemLevel": [
+      "mainMethod",
+      "revision",
+      "domain"
+    ],
+    "resourcheImplementation": [
+      "codeAvailability",
+      "license",
+      "userInterfaceTool"
+    ],
+    "dataInterface": [
+      "inputs",
+      "output"
+    ]
+  },
+  "_uiTaxonomyChildren": {
+    "codeAvailability": [
+      "yes",
+      "no"
+    ],
+    "license": [
+      "open",
+      "closed",
+      "not-specified"
+    ],
+    "inputs": [
+      "table",
+      "kg"
+    ],
+    "userInterfaceTool": [
+      "yes",
+      "no"
+    ]
   },
   "type": "object",
   "properties": {
-    "id": { "type": "string", "label": "ID" },
-    "added": { "type": "string", "format": "date", "label": "Added" },
-    "year": { "type": "integer", "label": "Year" },
-    "firstAuthor": { "type": "string", "label": "First Author" },
-    "authors": { "type": "array", "items": { "type": "string" }, "label": "Authors" },
-    "title": { "type": "string", "label": "Title" },
+    "id": {
+      "type": "string",
+      "label": "ID"
+    },
+    "added": {
+      "type": "string",
+      "format": "date",
+      "label": "Added"
+    },
+    "year": {
+      "type": "integer",
+      "label": "Year"
+    },
+    "firstAuthor": {
+      "type": "string",
+      "label": "First Author"
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "label": "Authors"
+    },
+    "title": {
+      "type": "string",
+      "label": "Title"
+    },
     "venue": {
       "type": "object",
       "label": "Venue",
       "properties": {
-        "type": { "type": "string", "label": "Type" },
-        "acronym": { "type": "string", "label": "Acronym" }
+        "type": {
+          "type": "string",
+          "label": "Type"
+        },
+        "acronym": {
+          "type": "string",
+          "label": "Acronym"
+        }
       },
-      "required": ["acronym"],
+      "required": [
+        "acronym"
+      ],
       "additionalProperties": false
     },
-    "nameOfApproach": { "type": "string", "label": "Name of Approach" },
-    "techniqueTags": { "type": "array", "items": { "type": "string" }, "label": "Technique Tags" },
+    "nameOfApproach": {
+      "type": "string",
+      "label": "Name of Approach"
+    },
+    "techniqueTags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "label": "Technique Tags"
+    },
     "coreTasks": {
       "type": "object",
-      "label": "Core Tasks",
+      "label": "Tasks",
       "properties": {
-        "cta": { "type": "boolean", "label": "CTA" },
-        "cpa": { "type": "boolean", "label": "CPA" },
-        "cea": { "type": "boolean", "label": "CEA" },
-        "cnea": { "type": "boolean", "label": "CNEA" }
+        "cta": {
+          "type": "boolean",
+          "label": "CTA"
+        },
+        "cpa": {
+          "type": "boolean",
+          "label": "CPA"
+        },
+        "cea": {
+          "type": "boolean",
+          "label": "CEA"
+        },
+        "cnea": {
+          "type": "boolean",
+          "label": "CNEA"
+        }
       },
-      "required": ["cta", "cpa", "cea", "cnea"],
+      "required": [
+        "cta",
+        "cpa",
+        "cea",
+        "cnea"
+      ],
       "additionalProperties": false
     },
     "supportTasks": {
       "type": "object",
-      "label": "Support Tasks",
+      "label": "Functional",
       "properties": {
         "dataPreparation": {
           "type": "object",
           "label": "Data Preparation",
           "properties": {
-            "description": { "type": "string", "label": "Description" },
-            "spellChecker": { "type": "string", "label": "Spell Checker" },
-            "unitsOfMeasurements": { "type": "string", "label": "Units of Measurements" }
+            "description": {
+              "type": "string",
+              "label": "Description"
+            },
+            "spellChecker": {
+              "type": "string",
+              "label": "Spell Checker"
+            },
+            "unitsOfMeasurements": {
+              "type": "string",
+              "label": "Units of Measurements"
+            }
           },
           "additionalProperties": false
         },
-        "columnClassification": { "type": "string", "label": "Column Classification" },
-        "subjectDetection": { "type": "string", "label": "Subject Detection" },
-        "datatypeAnnotation": { "type": "string", "label": "Datatype Annotation" },
+        "columnClassification": {
+          "type": "string",
+          "label": "Column Classification"
+        },
+        "subjectDetection": {
+          "type": "string",
+          "label": "Subject Detection"
+        },
+        "datatypeAnnotation": {
+          "type": "string",
+          "label": "Datatype Annotation"
+        },
         "entityLinking": {
           "type": "object",
           "label": "Entity Linking",
           "properties": {
-            "description": { "type": "string", "label": "Description" },
-            "candidateGeneration": { "type": "string", "label": "Candidate Generation" },
-            "entityDisambiguation": { "type": "string", "label": "Entity Disambiguation" }
+            "description": {
+              "type": "string",
+              "label": "Description"
+            },
+            "candidateGeneration": {
+              "type": "string",
+              "label": "Candidate Generation"
+            },
+            "entityDisambiguation": {
+              "type": "string",
+              "label": "Entity Disambiguation"
+            }
           },
           "additionalProperties": false
         },
-        "typeAnnotation": { "type": "string", "label": "Type Annotation" },
-        "predicateAnnotation": { "type": "string", "label": "Predicate Annotation" },
-        "nilAnnotation": { "type": "string", "label": "Nil Annotation" }
+        "typeAnnotation": {
+          "type": "string",
+          "label": "Type Annotation"
+        },
+        "predicateAnnotation": {
+          "type": "string",
+          "label": "Predicate Annotation"
+        },
+        "nilAnnotation": {
+          "type": "string",
+          "label": "Nil Annotation"
+        }
       },
       "additionalProperties": false
     },
     "mainMethod": {
       "type": "object",
-      "label": "Main Method",
+      "label": "Methodological",
       "properties": {
-        "type": { "type": "string", "enum": ["Hybrid", "Supervised", "Unsupervised"], "label": "Type" },
-        "technique": { "type": "string", "label": "Technique" }
+        "type": {
+          "type": "string",
+          "enum": [
+            "Hybrid",
+            "Supervised",
+            "Unsupervised"
+          ],
+          "label": "Type"
+        },
+        "technique": {
+          "type": "string",
+          "label": "Technique"
+        }
       },
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "additionalProperties": false
     },
     "revision": {
       "type": "object",
-      "label": "Revision",
+      "label": "Automation",
       "properties": {
-        "type": { "type": "string", "enum": ["Fully automated", "Semi automated"], "label": "Type" },
-        "description": { "type": "string", "label": "Description" }
+        "type": {
+          "type": "string",
+          "enum": [
+            "Fully automated",
+            "Semi automated"
+          ],
+          "label": "Type"
+        },
+        "description": {
+          "type": "string",
+          "label": "Description"
+        }
       },
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "additionalProperties": false
     },
     "domain": {
       "type": "object",
       "label": "Domain",
       "properties": {
-        "domain": { "type": "string", "enum": ["Dependent", "Independent"], "label": "Domain" },
-        "type": { "type": "string", "label": "Type" }
+        "domain": {
+          "type": "string",
+          "enum": [
+            "Dependent",
+            "Independent"
+          ],
+          "label": "Domain"
+        },
+        "type": {
+          "type": "string",
+          "label": "Type"
+        }
       },
       "additionalProperties": false
     },
-    "validation": { "type": "string", "label": "Validation" },
     "codeAvailability": {
       "type": "string",
       "label": "Code Availability",
@@ -117,54 +310,133 @@
       "type": "object",
       "label": "License",
       "properties": {
-        "openSource": { "type": "boolean", "label": "Open source" },
-        "closedSource": { "type": "boolean", "label": "Closed source" }
+        "openSource": {
+          "type": "boolean",
+          "label": "Open source"
+        },
+        "closedSource": {
+          "type": "boolean",
+          "label": "Closed source"
+        }
       },
-      "required": ["openSource", "closedSource"],
+      "required": [
+        "openSource",
+        "closedSource"
+      ],
       "additionalProperties": false
     },
     "inputs": {
       "type": "object",
       "label": "Inputs",
       "properties": {
-        "typeOfTable": { "type": "string", "label": "Type of Table" },
-        "tableSources": { "type": "array", "items": { "type": "string" }, "label": "Table Sources" }
+        "typeOfTable": {
+          "type": "string",
+          "label": "Type of Table"
+        },
+        "tableSources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "label": "Table Sources"
+        }
       },
-      "required": ["typeOfTable"],
+      "required": [
+        "typeOfTable"
+      ],
       "additionalProperties": false
     },
     "kg": {
       "type": "object",
       "label": "KG",
       "properties": {
-        "tripleStore": { "type": "string", "label": "Triple Store" },
-        "index": { "type": "string", "label": "Index" }
+        "tripleStore": {
+          "type": "string",
+          "label": "Triple Store"
+        },
+        "index": {
+          "type": "string",
+          "label": "Index"
+        }
       },
-      "required": ["tripleStore"],
+      "required": [
+        "tripleStore"
+      ],
       "additionalProperties": false
     },
-    "output": { "type": "string", "label": "Output" },
-    "applicationPurpose": { "type": "string", "label": "Application/Purpose" },
-    "userInterfaceTool": { "type": "string", "label": "User Interface/Tool" },
-    "checkedByAuthor": { "type": "boolean", "label": "Checked by Author" },
-    "checkedByAi": { "type": "boolean", "label": "Checked by AI" },
-    "doi": { "type": "string", "label": "DOI" },
+    "output": {
+      "type": "string",
+      "label": "Output"
+    },
+    "applicationPurpose": {
+      "type": "string",
+      "label": "Application/Purpose"
+    },
+    "userInterfaceTool": {
+      "type": "string",
+      "label": "User Interface/Tool"
+    },
+    "checkedByAuthor": {
+      "type": "boolean",
+      "label": "Checked by Author"
+    },
+    "checkedByAi": {
+      "type": "boolean",
+      "label": "Checked by AI"
+    },
+    "doi": {
+      "type": "string",
+      "label": "DOI"
+    },
     "citations": {
       "type": "array",
       "label": "Citations",
       "items": {
         "type": "object",
         "properties": {
-          "ref": { "type": "string", "label": "Reference" },
-          "title": { "type": "string", "label": "Title" }
+          "ref": {
+            "type": "string",
+            "label": "Reference"
+          },
+          "title": {
+            "type": "string",
+            "label": "Title"
+          }
         },
-        "required": ["ref", "title"],
+        "required": [
+          "ref",
+          "title"
+        ],
         "additionalProperties": false
       }
     }
   },
   "required": [
-    "id", "added", "year", "firstAuthor", "authors", "title", "venue", "nameOfApproach", "techniqueTags", "coreTasks", "supportTasks", "mainMethod", "domain", "revision", "validation", "codeAvailability", "license", "inputs", "kg", "output", "checkedByAuthor", "checkedByAi", "doi", "citations", "applicationPurpose", "userInterfaceTool"
+    "id",
+    "added",
+    "year",
+    "firstAuthor",
+    "authors",
+    "title",
+    "venue",
+    "nameOfApproach",
+    "techniqueTags",
+    "coreTasks",
+    "supportTasks",
+    "mainMethod",
+    "domain",
+    "revision",
+    "codeAvailability",
+    "license",
+    "inputs",
+    "kg",
+    "output",
+    "checkedByAuthor",
+    "checkedByAi",
+    "doi",
+    "citations",
+    "applicationPurpose",
+    "userInterfaceTool"
   ],
   "additionalProperties": false
 }

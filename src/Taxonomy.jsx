@@ -1,57 +1,229 @@
 /**
  * Taxonomy Component
- * 
- * This component creates an interactive radial tree visualization showing
- * the hierarchical classification of STI approaches and methods.
- * 
- * Features:
- * - D3.js radial tree visualization
- * - Interactive node highlighting
- * - SVG download functionality
- * - Responsive design with Tailwind CSS
- * - Hierarchical data visualization
+ *
+ * Interactive radial tree visualization for STI approaches taxonomy.
+ * Colors are preserved while layout and rendering logic are optimized.
  */
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import Icon from './Icon';
 import Navigation from './Navigation';
 
-// Colors are now loaded from taxonomy.json
+const GROUP_LABELS = {
+  systemLevel: 'System level',
+  resourcheImplementation: 'Implementation',
+  dataInterface: 'Data interface'
+};
 
-// Get the color for a branch based on its top-level taxonomy category
+const CORE_TASK_KEYS = ['coreTasks.cta', 'coreTasks.cpa', 'coreTasks.cea', 'coreTasks.cnea'];
+const BASE_EDGE_COLOR = '#a3a3a3';
+const MIN_CHART_SIZE = 760;
+const MAX_CHART_SIZE = 1500;
+const CHART_SCALE_FACTOR = 1.12;
+
+const TAILWIND_LABEL_ORDER = [
+  '#f97316', // orange-500
+  '#f59e0b', // amber-500
+  '#eab308', // yellow-500
+  '#84cc16', // lime-500
+  '#22c55e', // green-500
+  '#10b981', // emerald-500
+  '#14b8a6', // teal-500
+  '#06b6d4', // cyan-500
+  '#0ea5e9', // sky-500
+  '#3b82f6', // blue-500
+  '#6366f1', // indigo-500
+  '#8b5cf6', // violet-500
+  '#a855f7', // purple-500
+  '#d946ef', // fuchsia-500
+  '#ec4899', // pink-500
+  '#f43f5e' // rose-500
+];
+
+function getTopLevelLabel(meta, prop, fallback) {
+  void meta;
+  return prop?.label || fallback;
+}
+
+function getChildLabel(subProp, key) {
+  return subProp?.label || key;
+}
+
+function capitalizeFirstLetter(value) {
+  if (typeof value !== 'string' || value.length === 0) return value;
+  const firstLetterIndex = value.search(/[A-Za-zÀ-ÖØ-öø-ÿ]/);
+  if (firstLetterIndex === -1) return value;
+  return (
+    value.slice(0, firstLetterIndex) +
+    value.charAt(firstLetterIndex).toUpperCase() +
+    value.slice(firstLetterIndex + 1)
+  );
+}
+
 function getBranchColor(node, colorMap) {
   let current = node;
-  while (current.depth > 1) current = current.parent;
-  return colorMap[current.data.name] || '#a3a3a3';
-}
-
-// Calculates the transform for label positioning
-
-
-// Helper to get the top-level label (taxonomy number + label if available)
-function getTopLevelLabel(meta, prop, fallback) {
-  if (meta.taxonomy && prop && prop.label) {
-    return `${meta.taxonomy} ${prop.label}`;
+  while (current) {
+    if (colorMap[current.data.name]) return colorMap[current.data.name];
+    current = current.parent;
   }
-  return (prop && prop.label) ? prop.label : fallback;
+  return BASE_EDGE_COLOR;
 }
 
-// Helper to get child label (just the label or property name)
-function getChildLabel(subProp, val) {
-  return subProp.label || val;
+function buildOrderedLabelColorMap(root) {
+  const labels = root
+    .descendants()
+    .filter((node) => node.depth > 0)
+    .sort((a, b) => a.x - b.x);
+  const map = new Map();
+  const total = labels.length;
+  const interpolator = d3.interpolateRgbBasis(TAILWIND_LABEL_ORDER);
+
+  labels.forEach((node, index) => {
+    const t = total <= 1 ? 0 : index / (total - 1);
+    map.set(node, interpolator(t));
+  });
+
+  return map;
 }
 
-// Main Taxonomy component
+function projectToCartesian(node) {
+  return [
+    Math.cos(node.x - Math.PI / 2) * node.y,
+    Math.sin(node.x - Math.PI / 2) * node.y
+  ];
+}
+
+function drawCurvedConnection(group, sourceNode, targetNode) {
+  if (!sourceNode || !targetNode) return;
+  const [sx, sy] = projectToCartesian(sourceNode);
+  const [tx, ty] = projectToCartesian(targetNode);
+  const cx = ((sx + tx) / 2) * 0.68;
+  const cy = ((sy + ty) / 2) * 0.68;
+  const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
+
+  group.append('path').attr('d', pathData);
+}
+
+function buildTopLevelNode(name, meta, schemaProps, uiTaxonomyChildren) {
+  const prop = schemaProps[name];
+  let subChildren = [];
+
+  if (Array.isArray(uiTaxonomyChildren[name])) {
+    subChildren = uiTaxonomyChildren[name].map((value) => ({
+      name: value,
+      key: `${name}.${value}`
+    }));
+  } else if (prop?.properties?.type?.enum) {
+    subChildren = prop.properties.type.enum.map((value) => ({
+      name: value,
+      key: `${name}.type.${value}`
+    }));
+  } else if (prop?.properties) {
+    Object.entries(prop.properties).forEach(([subKey, subProp]) => {
+      if (subProp?.enum) {
+        subChildren = subProp.enum.map((value) => ({
+          name: value,
+          key: `${name}.${subKey}.${value}`
+        }));
+      }
+    });
+  }
+
+  if (subChildren.length === 0 && prop?.properties) {
+    subChildren = Object.entries(prop.properties).map(([subKey, subProp]) => ({
+      name: getChildLabel(subProp, subKey),
+      key: `${name}.${subKey}`
+    }));
+  }
+
+  return {
+    name: getTopLevelLabel(meta, prop, name),
+    key: name,
+    taxonomy: meta?.taxonomy,
+    children: subChildren.length > 0 ? subChildren : undefined
+  };
+}
+
+function buildTaxonomyFromSchema(json) {
+  const uiMeta = json._uiMeta || {};
+  const uiGroups = json._uiGroups || {};
+  const uiTaxonomyChildren = json._uiTaxonomyChildren || {};
+  const schemaProps = json.properties || {};
+
+  const map = {};
+  Object.entries(uiMeta).forEach(([name, meta]) => {
+    const prop = schemaProps[name];
+    const label = getTopLevelLabel(meta, prop, name);
+    if (meta?.color) map[label] = meta.color;
+  });
+
+  const topLevelNodes = Object.entries(uiMeta).map(([name, meta]) =>
+    buildTopLevelNode(name, meta, schemaProps, uiTaxonomyChildren)
+  );
+  const groupedKeys = new Set(Object.values(uiGroups).flat());
+
+  const groupedChildren = Object.entries(uiGroups)
+    .map(([groupKey, keys]) => {
+      const groupChildren = keys
+        .map((key) => topLevelNodes.find((node) => node.key === key))
+        .filter(Boolean);
+
+      if (groupChildren.length === 0) return null;
+
+      return {
+        name: GROUP_LABELS[groupKey] || groupKey,
+        key: groupKey,
+        children: groupChildren
+      };
+    })
+    .filter(Boolean);
+
+  const ungroupedChildren = topLevelNodes.filter((node) => !groupedKeys.has(node.key));
+  const rootChildren = [...ungroupedChildren, ...groupedChildren].map((node, index) => ({
+    ...node,
+    name: `${index + 1} ${node.name}`
+  }));
+
+  return {
+    treeData: {
+      name: 'Taxonomy',
+      key: 'taxonomy-root',
+      children: rootChildren
+    },
+    branchColorMap: map
+  };
+}
+
+function getLayoutConfig(root, width) {
+  const leafCount = root.leaves().length;
+  const denseGraph = leafCount > 38;
+  const outerPadding = Math.max(160, Math.min(230, Math.round(width * 0.15)));
+  const radius = width / 2 - outerPadding;
+
+  return {
+    radius,
+    siblingSeparation: denseGraph ? 2.9 : 2.6,
+    branchSeparation: denseGraph ? 5.8 : 5.2,
+    groupSeparation: denseGraph ? 9.6 : 8.6,
+    leafFontSize: width < 1200 ? 9 : 10,
+    midFontSize: width < 1200 ? 11 : 12,
+    topFontSize: width < 1200 ? 12 : 13,
+    labelOffset: width < 1200 ? 10 : 11
+  };
+}
+
 function Taxonomy() {
-  const chartRef = useRef();
+  const chartRef = useRef(null);
+  const chartContainerRef = useRef(null);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [svgNode, setSvgNode] = useState(null);
   const [labelStroke, setLabelStroke] = useState('black');
-  const [isDownloading, setIsDownloading] = useState(false); // Track download mode
+  const [isDownloading, setIsDownloading] = useState(false);
   const [colorMap, setColorMap] = useState({});
+  const [chartSize, setChartSize] = useState(1400);
 
-  // Load taxonomy data from sti-survey.schema.json (_uiMeta)
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/sti-survey.schema.json`)
       .then((res) => {
@@ -59,340 +231,184 @@ function Taxonomy() {
         return res.json();
       })
       .then((json) => {
-        const uiMeta = json._uiMeta || {};
-        const schemaProps = json.properties || {};
-        // Build color map using only top-level labels (with taxonomy number)
-        const map = {};
-        Object.entries(uiMeta).forEach(([name, meta]) => {
-          const prop = schemaProps[name];
-          const label = getTopLevelLabel(meta, prop, name);
-          if (meta.color) map[label] = meta.color;
-        });
-        setColorMap(map);
-        // Build tree with subclasses
-        const children = Object.entries(uiMeta).map(([name, meta]) => {
-          const prop = schemaProps[name];
-          let subChildren = [];
-          // If enum, add values as children
-          if (prop && prop.properties && prop.properties.type && prop.properties.type.enum) {
-            subChildren = prop.properties.type.enum.map(val => ({ name: val }));
-          }
-          // If enum on a nested property (e.g., domain.domain)
-          else if (prop && prop.properties) {
-            Object.entries(prop.properties).forEach(([, subProp]) => {
-              if (subProp.enum) {
-                subChildren = subProp.enum.map(val => ({ name: val }));
-              }
-            });
-          }
-          // If object with child properties (e.g., coreTasks, supportTasks)
-          if (subChildren.length === 0 && prop && prop.properties) {
-            subChildren = Object.entries(prop.properties).map(([val, subProp]) => ({
-              name: getChildLabel(subProp, val)
-            }));
-          }
-          // Top-level label: taxonomy number + label if available, else fallback
-          const label = getTopLevelLabel(meta, prop, name);
-          return {
-            name: label,
-            taxonomy: meta.taxonomy,
-            color: meta.color,
-            children: subChildren.length > 0 ? subChildren : undefined
-          };
-        });
-        const treeData = {
-          name: 'Taxonomy',
-          children
-        };
+        const { treeData, branchColorMap } = buildTaxonomyFromSchema(json);
+        setColorMap(branchColorMap);
         setData(treeData);
       })
       .catch((err) => setError(err.message));
   }, []);
 
-  // Memoized draw function to avoid unnecessary re-creation
-  const drawRadialTidyTree = useCallback((data, container, labelStroke, colorMap = {}) => {
-    const width = 1000;
-    const radius = width / 2 - 80;
-    const root = d3.hierarchy(data);
-    d3.tree().size([2 * Math.PI, radius]).separation((a, b) => (a.parent === b.parent ? 1.5 : 2.5))(root);
+  useEffect(() => {
+    const container = chartContainerRef.current;
+    if (!container) return undefined;
 
-    const svg = d3.create('svg')
-      .attr('viewBox', [-width / 2, -width / 2, width, width])
-      .attr('width', '100%')
-      .attr('height', width)
-      .attr('style', 'font: 10px sans-serif; background: none;');
+    const updateSize = () => {
+      const nextSize = Math.max(
+        MIN_CHART_SIZE,
+        Math.min(MAX_CHART_SIZE, Math.round(container.clientWidth * CHART_SCALE_FACTOR))
+      );
+      setChartSize((prev) => (prev === nextSize ? prev : nextSize));
+    };
 
-    // Static links (no animation)
-    svg.append('g')
-      .attr('fill', 'none')
-      .attr('stroke', '#a3a3a3')
-      .attr('stroke-width', 1.5)
-      .selectAll('path')
-      .data(root.links())
-      .join('path')
-      .attr('d', d3.linkRadial().angle(d => d.x).radius(d => d.y));
+    updateSize();
+    const observer = new ResizeObserver(updateSize);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
-    // Static nodes (no animation)
-    svg.append('g')
-      .selectAll('circle')
-      .data(root.descendants())
-      .join('circle')
-      .attr('transform', d => `rotate(${(d.x * 180 / Math.PI - 90)}) translate(${d.y},0)`)
-      .attr('r', 2.5)
-      .attr('fill', '#999');
+  const drawRadialTidyTree = useCallback(
+    (treeData, container, size, strokeForLabel, branchColorMap = {}) => {
+      const width = size;
+      const root = d3.hierarchy(treeData);
+      const {
+        radius,
+        siblingSeparation,
+        branchSeparation,
+        groupSeparation,
+        leafFontSize,
+        midFontSize,
+        topFontSize,
+        labelOffset
+      } = getLayoutConfig(root, width);
 
-    // Static labels (no animation)
-    svg.append('g')
-      .attr('stroke-linejoin', 'round')
-      .attr('stroke-width', 3)
-      .selectAll('text')
-      .data(root.descendants())
-      .join('text')
-      .attr('transform', d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y},0) rotate(${d.x >= Math.PI ? 180 : 0})`)
-      .attr('dy', '0.31em')
-      .attr('x', d => (d.x < Math.PI === !d.children ? 6 : -6))
-      .attr('text-anchor', d => (d.x < Math.PI === !d.children ? 'start' : 'end'))
-      .attr('paint-order', 'stroke')
-      .attr('stroke', labelStroke)
-      .attr('fill', d => {
-        if (d.depth === 0) {
-          // Root label: black in download mode, white in normal view
-          return isDownloading ? '#000' : '#fff';
-        }
-        return getBranchColor(d, colorMap);
-      })
-      .attr('font-size', 13)
-      .attr('font-weight', 'bold')
-      .style('opacity', 1)
-      .text(d => d.data.name);
+      const topKey = (node) => {
+        let current = node;
+        while (current.depth > 1) current = current.parent;
+        return current.data.key;
+      };
 
-    container.appendChild(svg.node());
-    setSvgNode(svg.node());
+      d3
+        .cluster()
+        .size([2 * Math.PI, radius])
+        .separation((a, b) => {
+          if (a.parent === b.parent) return siblingSeparation;
+          if (topKey(a) === topKey(b)) return branchSeparation;
+          return groupSeparation;
+        })(root);
 
-    // --- Custom dashed curved lines between 'Data Preparation' and core tasks ---
-    // Find nodes by label
-    const descendants = root.descendants();
-    const dataPrepNode = descendants.find(d => d.data.name === 'Data Preparation');
-    // Core tasks are children of '1 Core Tasks'
-    const coreTasksNode = descendants.find(d => d.data.name === '1 Core Tasks');
-    let coreTaskChildren = [];
-    if (coreTasksNode && coreTasksNode.children) {
-      coreTaskChildren = coreTasksNode.children.filter(d => ['CTA', 'CPA', 'CEA', 'CNEA'].includes(d.data.name));
-    }
-    // Draw a dashed curved line from Data Preparation to each core task
-    if (dataPrepNode && coreTaskChildren.length > 0) {
-      const customLinksGroup = d3.select(svg.node()).append('g')
-        .attr('fill', 'none')
-        .attr('stroke', '#a3a3a3')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4');
-      coreTaskChildren.forEach((targetNode) => {
-        // Use a quadratic Bezier curve for a smooth connection
-        const sx = Math.cos(dataPrepNode.x - Math.PI / 2) * dataPrepNode.y;
-        const sy = Math.sin(dataPrepNode.x - Math.PI / 2) * dataPrepNode.y;
-        const tx = Math.cos(targetNode.x - Math.PI / 2) * targetNode.y;
-        const ty = Math.sin(targetNode.x - Math.PI / 2) * targetNode.y;
-        // Control point: halfway between, pulled toward the center
-        const cx = (sx + tx) / 2 * 0.7;
-        const cy = (sy + ty) / 2 * 0.7;
-        const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
-        customLinksGroup.append('path')
-          .attr('d', pathData)
-          .attr('stroke-dasharray', '6,4')
-          .attr('stroke-dashoffset', 0);
+      // Force concentric depth rings: same depth => same distance from center.
+      const maxDepth = d3.max(root.descendants(), (node) => node.depth) || 1;
+      root.each((node) => {
+        node.y = (node.depth / maxDepth) * radius;
       });
-    }
 
-    // --- Custom dashed curved lines between 'Column Classification' and core tasks ---
-    const columnClassificationNode = descendants.find(d => d.data.name === 'Column Classification');
-    if (columnClassificationNode && coreTaskChildren.length > 0) {
-      const customLinksGroup2 = d3.select(svg.node()).append('g')
+      const linkGenerator = d3.linkRadial().angle((d) => d.x).radius((d) => d.y);
+      const labelColorMap = buildOrderedLabelColorMap(root);
+
+      const svg = d3
+        .create('svg')
+        .attr('viewBox', [-width / 2, -width / 2, width, width])
+        .attr('width', '100%')
+        .attr('height', width)
+        .attr('style', 'font: 12px ui-sans-serif, system-ui, sans-serif; background: none;');
+
+      svg
+        .append('g')
         .attr('fill', 'none')
-        .attr('stroke', '#a3a3a3')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4');
-      coreTaskChildren.forEach((targetNode) => {
-        // Use a quadratic Bezier curve for a smooth connection
-        const sx = Math.cos(columnClassificationNode.x - Math.PI / 2) * columnClassificationNode.y;
-        const sy = Math.sin(columnClassificationNode.x - Math.PI / 2) * columnClassificationNode.y;
-        const tx = Math.cos(targetNode.x - Math.PI / 2) * targetNode.y;
-        const ty = Math.sin(targetNode.x - Math.PI / 2) * targetNode.y;
-        // Control point: halfway between, pulled toward the center
-        const cx = (sx + tx) / 2 * 0.7;
-        const cy = (sy + ty) / 2 * 0.7;
-        const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
-        customLinksGroup2.append('path')
-          .attr('d', pathData)
-          .attr('stroke-dasharray', '6,4')
-          .attr('stroke-dashoffset', 0);
+        .attr('stroke-width', 1.35)
+        .selectAll('path')
+        .data(root.links())
+        .join('path')
+        .attr('d', linkGenerator)
+        .attr('stroke', BASE_EDGE_COLOR)
+        .attr('stroke-opacity', 0.72);
+
+      svg
+        .append('g')
+        .selectAll('circle')
+        .data(root.descendants())
+        .join('circle')
+        .attr('transform', (d) => `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0)`)
+        .attr('r', 2.6)
+        .attr('fill', BASE_EDGE_COLOR)
+        .attr('opacity', 0.95);
+
+      svg
+        .append('g')
+        .attr('stroke-linejoin', 'round')
+        .attr('stroke-width', 2.8)
+        .selectAll('text')
+        .data(root.descendants())
+        .join('text')
+        .attr('transform', (d) =>
+          `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0) rotate(${d.x >= Math.PI ? 180 : 0})`
+        )
+        .attr('dy', '0.31em')
+        .attr('x', (d) => (d.x < Math.PI === !d.children ? labelOffset : -labelOffset))
+        .attr('text-anchor', (d) => (d.x < Math.PI === !d.children ? 'start' : 'end'))
+        .attr('paint-order', 'stroke')
+        .attr('stroke', strokeForLabel)
+        .attr('fill', (d) => {
+          if (d.depth === 0) return isDownloading ? '#000000' : '#ffffff';
+          return labelColorMap.get(d) || getBranchColor(d, branchColorMap);
+        })
+        .attr('font-size', (d) => {
+          if (d.depth <= 1) return topFontSize;
+          if (d.depth === 2) return midFontSize;
+          return leafFontSize;
+        })
+        .attr('font-weight', 'bold')
+        .text((d) => capitalizeFirstLetter(d.data.name));
+
+      container.appendChild(svg.node());
+      setSvgNode(svg.node());
+
+      const nodeByKey = new Map(root.descendants().map((node) => [node.data.key, node]));
+      const coreTaskNodes = CORE_TASK_KEYS.map((key) => nodeByKey.get(key)).filter(Boolean);
+      const ctaNode = nodeByKey.get('coreTasks.cta');
+      const cpaNode = nodeByKey.get('coreTasks.cpa');
+      const ceaNode = nodeByKey.get('coreTasks.cea');
+      const cneaNode = nodeByKey.get('coreTasks.cnea');
+
+      const customLinksGroup = d3
+        .select(svg.node())
+        .append('g')
+        .attr('fill', 'none')
+        .attr('stroke', BASE_EDGE_COLOR)
+        .attr('stroke-width', 1.25)
+        .attr('stroke-dasharray', '6,4')
+        .attr('stroke-opacity', 0.82);
+
+      const pairList = [
+        ...coreTaskNodes.map((targetNode) => [nodeByKey.get('supportTasks.dataPreparation'), targetNode]),
+        ...coreTaskNodes.map((targetNode) => [nodeByKey.get('supportTasks.columnClassification'), targetNode]),
+        [nodeByKey.get('supportTasks.subjectDetection'), cpaNode],
+        [nodeByKey.get('supportTasks.datatypeAnnotation'), cpaNode],
+        [nodeByKey.get('supportTasks.entityLinking'), ctaNode],
+        [nodeByKey.get('supportTasks.entityLinking'), ceaNode],
+        [nodeByKey.get('supportTasks.typeAnnotation'), ctaNode],
+        [nodeByKey.get('supportTasks.predicateAnnotation'), cpaNode],
+        [nodeByKey.get('supportTasks.nilAnnotation'), cneaNode]
+      ];
+
+      pairList.forEach(([sourceNode, targetNode]) => {
+        drawCurvedConnection(customLinksGroup, sourceNode, targetNode);
       });
-    }
+    },
+    [isDownloading]
+  );
 
-    // --- Custom dashed curved lines between 'Subject Detection' and CPA ---
-    const subjectDetectionNode = descendants.find(d => d.data.name === 'Subject Detection');
-    const cpaNode = coreTaskChildren.find(d => d.data.name === 'CPA');
-    if (subjectDetectionNode && cpaNode) {
-      const customLinksGroup3 = d3.select(svg.node()).append('g')
-        .attr('fill', 'none')
-        .attr('stroke', '#a3a3a3')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4');
-      // Use a quadratic Bezier curve for a smooth connection
-      const sx = Math.cos(subjectDetectionNode.x - Math.PI / 2) * subjectDetectionNode.y;
-      const sy = Math.sin(subjectDetectionNode.x - Math.PI / 2) * subjectDetectionNode.y;
-      const tx = Math.cos(cpaNode.x - Math.PI / 2) * cpaNode.y;
-      const ty = Math.sin(cpaNode.x - Math.PI / 2) * cpaNode.y;
-      // Control point: halfway between, pulled toward the center
-      const cx = (sx + tx) / 2 * 0.7;
-      const cy = (sy + ty) / 2 * 0.7;
-      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
-      customLinksGroup3.append('path')
-        .attr('d', pathData)
-        .attr('stroke-dasharray', '6,4')
-        .attr('stroke-dashoffset', 0);
-    }
-
-    // --- Custom dashed curved lines between 'Datatype Annotation' and CPA ---
-    const datatypeAnnotationNode = descendants.find(d => d.data.name === 'Datatype Annotation');
-    if (datatypeAnnotationNode && cpaNode) {
-      const customLinksGroup4 = d3.select(svg.node()).append('g')
-        .attr('fill', 'none')
-        .attr('stroke', '#a3a3a3')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4');
-      // Use a quadratic Bezier curve for a smooth connection
-      const sx = Math.cos(datatypeAnnotationNode.x - Math.PI / 2) * datatypeAnnotationNode.y;
-      const sy = Math.sin(datatypeAnnotationNode.x - Math.PI / 2) * datatypeAnnotationNode.y;
-      const tx = Math.cos(cpaNode.x - Math.PI / 2) * cpaNode.y;
-      const ty = Math.sin(cpaNode.x - Math.PI / 2) * cpaNode.y;
-      // Control point: halfway between, pulled toward the center
-      const cx = (sx + tx) / 2 * 0.7;
-      const cy = (sy + ty) / 2 * 0.7;
-      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
-      customLinksGroup4.append('path')
-        .attr('d', pathData)
-        .attr('stroke-dasharray', '6,4')
-        .attr('stroke-dashoffset', 0);
-    }
-
-    // --- Custom dashed curved lines between 'Entity Linking' and CTA/CEA ---
-    const entityLinkingNode = descendants.find(d => d.data.name === 'Entity Linking');
-    const ctaNode = coreTaskChildren.find(d => d.data.name === 'CTA');
-    const ceaNode = coreTaskChildren.find(d => d.data.name === 'CEA');
-    if (entityLinkingNode && (ctaNode || ceaNode)) {
-      const customLinksGroup5 = d3.select(svg.node()).append('g')
-        .attr('fill', 'none')
-        .attr('stroke', '#a3a3a3')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4');
-      [ctaNode, ceaNode].forEach(targetNode => {
-        if (!targetNode) return;
-        // Use a quadratic Bezier curve for a smooth connection
-        const sx = Math.cos(entityLinkingNode.x - Math.PI / 2) * entityLinkingNode.y;
-        const sy = Math.sin(entityLinkingNode.x - Math.PI / 2) * entityLinkingNode.y;
-        const tx = Math.cos(targetNode.x - Math.PI / 2) * targetNode.y;
-        const ty = Math.sin(targetNode.x - Math.PI / 2) * targetNode.y;
-        // Control point: halfway between, pulled toward the center
-        const cx = (sx + tx) / 2 * 0.7;
-        const cy = (sy + ty) / 2 * 0.7;
-        const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
-        customLinksGroup5.append('path')
-          .attr('d', pathData)
-          .attr('stroke-dasharray', '6,4')
-          .attr('stroke-dashoffset', 0);
-      });
-    }
-
-    // --- Custom dashed curved line between 'Type Annotation' and CTA ---
-    const typeAnnotationNode = descendants.find(d => d.data.name === 'Type Annotation');
-    if (typeAnnotationNode && ctaNode) {
-      const customLinksGroup6 = d3.select(svg.node()).append('g')
-        .attr('fill', 'none')
-        .attr('stroke', '#a3a3a3')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4');
-      // Use a quadratic Bezier curve for a smooth connection
-      const sx = Math.cos(typeAnnotationNode.x - Math.PI / 2) * typeAnnotationNode.y;
-      const sy = Math.sin(typeAnnotationNode.x - Math.PI / 2) * typeAnnotationNode.y;
-      const tx = Math.cos(ctaNode.x - Math.PI / 2) * ctaNode.y;
-      const ty = Math.sin(ctaNode.x - Math.PI / 2) * ctaNode.y;
-      // Control point: halfway between, pulled toward the center
-      const cx = (sx + tx) / 2 * 0.7;
-      const cy = (sy + ty) / 2 * 0.7;
-      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
-      customLinksGroup6.append('path')
-        .attr('d', pathData)
-        .attr('stroke-dasharray', '6,4')
-        .attr('stroke-dashoffset', 0);
-    }
-    // --- Custom dashed curved line between 'Predicate Annotation' and CPA ---
-    const predicateAnnotationNode = descendants.find(d => d.data.name === 'Predicate Annotation');
-    if (predicateAnnotationNode && cpaNode) {
-      const customLinksGroup7 = d3.select(svg.node()).append('g')
-        .attr('fill', 'none')
-        .attr('stroke', '#a3a3a3')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4');
-      // Use a quadratic Bezier curve for a smooth connection
-      const sx = Math.cos(predicateAnnotationNode.x - Math.PI / 2) * predicateAnnotationNode.y;
-      const sy = Math.sin(predicateAnnotationNode.x - Math.PI / 2) * predicateAnnotationNode.y;
-      const tx = Math.cos(cpaNode.x - Math.PI / 2) * cpaNode.y;
-      const ty = Math.sin(cpaNode.x - Math.PI / 2) * cpaNode.y;
-      // Control point: halfway between, pulled toward the center
-      const cx = (sx + tx) / 2 * 0.7;
-      const cy = (sy + ty) / 2 * 0.7;
-      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
-      customLinksGroup7.append('path')
-        .attr('d', pathData)
-        .attr('stroke-dasharray', '6,4')
-        .attr('stroke-dashoffset', 0);
-    }
-    // --- Custom dashed curved line between 'Nil Annotation' and CNEA ---
-    const nilAnnotationNode = descendants.find(d => d.data.name === 'Nil Annotation');
-    const cneaNode = coreTaskChildren.find(d => d.data.name === 'CNEA');
-    if (nilAnnotationNode && cneaNode) {
-      const customLinksGroup8 = d3.select(svg.node()).append('g')
-        .attr('fill', 'none')
-        .attr('stroke', '#a3a3a3')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4');
-      // Use a quadratic Bezier curve for a smooth connection
-      const sx = Math.cos(nilAnnotationNode.x - Math.PI / 2) * nilAnnotationNode.y;
-      const sy = Math.sin(nilAnnotationNode.x - Math.PI / 2) * nilAnnotationNode.y;
-      const tx = Math.cos(cneaNode.x - Math.PI / 2) * cneaNode.y;
-      const ty = Math.sin(cneaNode.x - Math.PI / 2) * cneaNode.y;
-      // Control point: halfway between, pulled toward the center
-      const cx = (sx + tx) / 2 * 0.7;
-      const cy = (sy + ty) / 2 * 0.7;
-      const pathData = `M${sx},${sy} Q${cx},${cy} ${tx},${ty}`;
-      customLinksGroup8.append('path')
-        .attr('d', pathData)
-        .attr('stroke-dasharray', '6,4')
-        .attr('stroke-dashoffset', 0);
-    }
-  }, [isDownloading]);
-
-  // Render radial tree when data or labelStroke changes
   useEffect(() => {
     if (!data || !chartRef.current) return;
     chartRef.current.innerHTML = '';
-    drawRadialTidyTree(data, chartRef.current, labelStroke, colorMap);
-  }, [data, labelStroke, drawRadialTidyTree, colorMap]);
+    drawRadialTidyTree(data, chartRef.current, chartSize, labelStroke, colorMap);
+  }, [data, chartSize, labelStroke, colorMap, drawRadialTidyTree]);
 
-  // SVG download handler
   const handleDownloadSVG = useCallback(() => {
     if (!svgNode) return;
     setIsDownloading(true);
     setLabelStroke('white');
   }, [svgNode]);
 
-  // Effect to handle SVG download after re-render
   useEffect(() => {
-    if (!isDownloading || !svgNode) return;
-    // Wait for the SVG to be updated in the DOM
-    setTimeout(() => {
+    if (!isDownloading || !svgNode) return undefined;
+
+    const timer = setTimeout(() => {
       const serializer = new XMLSerializer();
-      let source = serializer.serializeToString(chartRef.current.querySelector('svg'));
+      const svgElement = chartRef.current?.querySelector('svg');
+      if (!svgElement) return;
+
+      let source = serializer.serializeToString(svgElement);
       if (!source.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
         source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
       }
@@ -405,10 +421,11 @@ function Taxonomy() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      // Restore state after download
       setLabelStroke('black');
       setIsDownloading(false);
     }, 0);
+
+    return () => clearTimeout(timer);
   }, [isDownloading, svgNode]);
 
   if (error) {
@@ -427,9 +444,9 @@ function Taxonomy() {
   return (
     <div className="min-h-screen bg-neutral-900 flex flex-col">
       <Navigation />
-      <div className="flex-1 flex flex-col items-center justify-center py-12 px-1">
+      <div className="flex-1 flex flex-col items-center justify-center py-10 md:py-12 px-1">
         <div className="w-full max-w-7xl flex flex-col items-center">
-          <div className="w-full pb-4 mb-8 flex justify-between items-start">
+          <div className="w-full pb-4 mb-6 md:mb-8 flex justify-between items-start">
             <div>
               <h1 className="text-3xl md:text-4xl text-neutral-100 font-bold tracking-tight mb-2">STI Approaches Taxonomy</h1>
               <p className="text-neutral-400 text-base">Hierarchical classification of STI approaches and methods</p>
@@ -444,8 +461,8 @@ function Taxonomy() {
             </button>
           </div>
         </div>
-        <div className="w-full">
-          <div className="w-full flex justify-center items-center">
+        <div className="w-full overflow-x-auto">
+          <div ref={chartContainerRef} className="w-full min-w-[760px] flex justify-center items-center">
             <div ref={chartRef} className="w-full flex justify-center items-center" />
           </div>
         </div>
@@ -454,5 +471,4 @@ function Taxonomy() {
   );
 }
 
-export default Taxonomy; 
-import Icon from './Icon';
+export default Taxonomy;
