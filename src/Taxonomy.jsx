@@ -243,13 +243,13 @@ function getLayoutConfig(root, width) {
 
   return {
     radius,
-    siblingSeparation: denseGraph ? 2.9 : 2.6,
-    branchSeparation: denseGraph ? 5.8 : 5.2,
-    groupSeparation: denseGraph ? 9.6 : 8.6,
-    leafFontSize: width < 1200 ? 9 : 10,
-    midFontSize: width < 1200 ? 11 : 12,
-    topFontSize: width < 1200 ? 12 : 13,
-    labelOffset: width < 1200 ? 10 : 11
+    siblingSeparation: denseGraph ? 3.25 : 2.9,
+    branchSeparation: denseGraph ? 6.5 : 5.8,
+    groupSeparation: denseGraph ? 10.8 : 9.6,
+    leafFontSize: width < 1200 ? 11 : 12,
+    midFontSize: width < 1200 ? 13 : 14,
+    topFontSize: width < 1200 ? 14 : 15,
+    labelOffset: width < 1200 ? 13 : 14
   };
 }
 
@@ -384,6 +384,9 @@ function Taxonomy() {
         .attr('stroke', strokeForLabel)
         .attr('fill', (d) => {
           if (d.depth === 0) return isDownloading ? '#000000' : '#ffffff';
+          if (!d.children && d.parent) {
+            return labelColorMap.get(d.parent) || getBranchColor(d.parent, branchColorMap);
+          }
           return labelColorMap.get(d) || getBranchColor(d, branchColorMap);
         })
         .attr('font-size', (d) => {
@@ -391,7 +394,7 @@ function Taxonomy() {
           if (d.depth === 2) return midFontSize;
           return leafFontSize;
         })
-        .attr('font-weight', 'bold')
+        .attr('font-weight', (d) => (d.depth <= 2 ? '700' : '500'))
         .attr('opacity', animateIntro ? 0 : 1)
         .text((d) => capitalizeFirstLetter(d.data.name));
 
@@ -436,9 +439,9 @@ function Taxonomy() {
         .append('g')
         .attr('fill', 'none')
         .attr('stroke', BASE_EDGE_COLOR)
-        .attr('stroke-width', 1.25)
-        .attr('stroke-dasharray', '6,4')
-        .attr('stroke-opacity', 0.82);
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '5,4')
+        .attr('stroke-opacity', 0.42);
 
       const pairList = [
         ...coreTaskNodes.map((targetNode) => [nodeByKey.get('supportTasks.dataPreparation'), targetNode]),

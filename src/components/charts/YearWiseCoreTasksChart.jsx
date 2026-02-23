@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import * as d3 from "d3";
 import useResizeObserver from '../../hooks/useResizeObserver';
 
+const CORE_TASK_COLORS = ['#6366f1', '#3b82f6', '#0ea5e9', '#06b6d4'];
+
 const YearWiseCoreTasksChart = ({ data }) => {
   const containerRef = useRef();
   const svgRef = useRef();
@@ -13,9 +15,14 @@ const YearWiseCoreTasksChart = ({ data }) => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const margin = { top: 20, right: 30, left: 40, bottom: 50 };
-    const width = dimensions.width - margin.left - margin.right;
-    const height = Math.min(400, dimensions.height || 400) - margin.top - margin.bottom;
+    const tasks = ['cta', 'cpa', 'cea', 'cnea'];
+    const legendRowHeight = 18;
+    const legendHeight = tasks.length * legendRowHeight;
+    const margin = { top: 22 + legendHeight, right: 30, left: 40, bottom: 50 };
+    const width = Math.max(0, dimensions.width - margin.left - margin.right);
+    const height = Math.max(220, Math.min(400, dimensions.height || 400) - margin.top - margin.bottom);
+
+    if (width <= 0) return;
 
     const chartSvg = svg
       .append("svg")
@@ -25,8 +32,7 @@ const YearWiseCoreTasksChart = ({ data }) => {
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // Process data: for each year, count CTA, CPA, CEA, CNEA
-    const years = [...new Set(data.map(d => d.year))].sort();
-    const tasks = ['cta', 'cpa', 'cea', 'cnea'];
+    const years = [...new Set(data.map(d => d.year))].sort((a, b) => a - b);
     
     // Create an array of objects { year, cta, cpa, ... }
     const chartData = years.map(year => {
@@ -42,13 +48,14 @@ const YearWiseCoreTasksChart = ({ data }) => {
       .domain(years)
       .range([0, width]);
 
+    const maxTaskCount = d3.max(chartData, d => Math.max(d.cta, d.cpa, d.cea, d.cnea)) || 0;
     const y = d3.scaleLinear()
-      .domain([0, d3.max(chartData, d => Math.max(d.cta, d.cpa, d.cea, d.cnea))])
+      .domain([0, Math.max(1, maxTaskCount)])
       .range([height, 0]);
 
     const color = d3.scaleOrdinal()
       .domain(tasks)
-      .range(['#ef4444', '#f97316', '#eab308', '#22c55e']); // Red, Orange, Yellow, Green
+      .range(CORE_TASK_COLORS);
 
     // Define lines
     const line = d3.line()
@@ -95,24 +102,29 @@ const YearWiseCoreTasksChart = ({ data }) => {
       .style("font-size", "12px");
 
     // Add Legend
+    const legendItemWidth = Math.max(110, Math.min(150, Math.floor(width * 0.35)));
+    const legendOffsetX = Math.max(0, width - legendItemWidth);
+    const legendVerticalOffset = 8;
+
     const legend = chartSvg.append("g")
         .attr("font-family", "sans-serif")
-        .attr("font-size", 10)
+        .attr("font-size", 11)
         .attr("text-anchor", "start")
         .selectAll("g")
         .data(tasks)
         .enter().append("g")
-        .attr("transform", (d, i) => `translate(${i * 60}, -10)`);
+        .attr("transform", (d, i) => `translate(${legendOffsetX},${-legendHeight + legendVerticalOffset + i * legendRowHeight})`);
 
     legend.append("rect")
         .attr("x", 0)
+        .attr("y", 1)
         .attr("width", 10)
         .attr("height", 10)
         .attr("fill", color);
 
     legend.append("text")
-        .attr("x", 15)
-        .attr("y", 9.5)
+        .attr("x", 16)
+        .attr("y", 6)
         .attr("dy", "0.32em")
         .style("fill", "#9ca3af")
         .text(d => d.toUpperCase());

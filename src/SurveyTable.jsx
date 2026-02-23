@@ -16,7 +16,7 @@
  */
 
 // Grouped imports
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import {
   createColumnHelper,
   flexRender,
@@ -105,6 +105,72 @@ const REQUIRED_FIELDS = {
 
 // Utility functions (outside component)
 
+const TAXONOMY_GROUP_LABELS = {
+  systemLevel: 'System level',
+  resourcheImplementation: 'Implementation',
+  dataInterface: 'Data interface',
+};
+
+// Colors aligned with the rendered Taxonomy labels (src/Taxonomy.jsx radial palette)
+const TAXONOMY_HEADER_COLORS = {
+  coreTasks: '#f6910e',
+  supportTasks: '#68c82e',
+  applicationPurpose: '#a3a3a3',
+  systemLevel: '#0ab0d9',
+  mainMethod: '#12b8a2',
+  revision: '#0ea9e2',
+  domain: '#318af2',
+  resourcheImplementation: '#885df5',
+  codeAvailability: '#5e6bf3',
+  license: '#955af6',
+  userInterfaceTool: '#cd4aea',
+  dataInterface: '#f14274',
+  inputs: '#e946a5',
+  output: '#f14274',
+};
+
+const getAttributeColor = (sectionKey) => {
+  return (
+    TAXONOMY_HEADER_COLORS[sectionKey] ||
+    schema._uiMeta?.[sectionKey]?.color ||
+    UNIFIED_COLORS.primaryText
+  );
+};
+
+const SCHEMA_PROPERTIES = schema.properties || {};
+
+const getSchemaProperty = (path) => {
+  if (!path) return null;
+
+  const segments = path.split('.');
+  let current = { properties: SCHEMA_PROPERTIES };
+
+  for (const segment of segments) {
+    current = current?.properties?.[segment];
+    if (!current) return null;
+  }
+
+  return current;
+};
+
+const getSchemaLabel = (path, fallback) => getSchemaProperty(path)?.label || fallback;
+
+const formatTaxonomyChildLabel = (value) => {
+  if (typeof value !== 'string' || value.length === 0) return value;
+  if (value.toLowerCase() === 'kg') return 'KG';
+  return value.charAt(0).toUpperCase() + value.slice(1);
+};
+
+const getTaxonomyChildLabel = (sectionKey, childValue, fallback) => {
+  const children = schema._uiTaxonomyChildren?.[sectionKey];
+  if (!Array.isArray(children)) return fallback;
+
+  const found = children.find(
+    (candidate) => String(candidate).toLowerCase() === String(childValue).toLowerCase()
+  );
+
+  return found ? formatTaxonomyChildLabel(found) : fallback;
+};
 
 // Function to count approaches with data preparation
 const countDataPreparationApproaches = (data) => {
@@ -142,15 +208,9 @@ const countSupportTaskApproaches = (data, taskPath) => {
   }).length;
 };
 // Unified badge color function
-const getUnifiedBadgeColor = (baseColor, isNone = false) => {
-  if (isNone) {
-    return {
-      backgroundColor: 'rgba(100,116,139,0.12)', // slate-500/20
-      color: '#e5e7eb' // slate-200
-    };
-  }
+const getUnifiedBadgeColor = (baseColor, isMuted = false) => {
   return {
-    backgroundColor: baseColor + UNIFIED_COLORS.badgeOpacity,
+    backgroundColor: `${baseColor}${isMuted ? '14' : UNIFIED_COLORS.badgeOpacity}`,
     color: baseColor
   };
 };
@@ -160,7 +220,7 @@ const getUnifiedBadgeColor = (baseColor, isNone = false) => {
 
 const getUserRevisionBadgeColor = (type) => {
   const lower = type?.toLowerCase();
-  const baseColor = schema._uiMeta?.revision?.color || '#06b6d4';
+  const baseColor = getAttributeColor('revision');
   return getUnifiedBadgeColor(baseColor, lower === 'none');
 };
 const isEmpty = (value) => {
@@ -194,15 +254,20 @@ const isRequiredFieldMissing = (row, fieldPath) => {
 
 
 // Unified cell rendering components
-const UnifiedTextCell = ({ value, isMissing, align = 'left', size = 'text-xs' }) => {
+const UnifiedTextCell = ({
+  value,
+  isMissing,
+  align = 'left',
+  size = 'text-xs',
+}) => {
   const alignClass = align === 'center' ? 'flex justify-center' : '';
-  const textColor = isMissing ? UNIFIED_COLORS.error : UNIFIED_COLORS.primaryText;
+  const effectiveTextColor = isMissing ? UNIFIED_COLORS.error : UNIFIED_COLORS.primaryText;
   
   return (
     <div className={alignClass}>
       <span 
         className={`${size} ${isMissing ? 'bg-red-500/20 text-red-200 px-2 py-1' : ''}`}
-        style={{ color: isMissing ? undefined : textColor }}
+        style={{ color: isMissing ? undefined : effectiveTextColor }}
       >
         {value || (isMissing ? "MISSING" : "")}
       </span>
@@ -338,7 +403,7 @@ const StepCell = ({ value, align = 'left' }) => {
 };
 const UnifiedMainMethodCell = ({ mainMethod, row, align = 'center' }) => {
   let { type, tech } = mainMethod || {};
-  const baseColor = schema._uiMeta?.mainMethod?.color || '#6366f1';
+  const baseColor = getAttributeColor('mainMethod');
   const badgeClass = 'inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium';
   
   // Normalize type labels
@@ -387,7 +452,7 @@ const MainMethodCell = ({ mainMethod, row, align = 'left' }) => {
 const UnifiedDomainCell = ({ domain, row, align = 'center' }) => {
   const domainValue = domain?.domain || "";
   const typeValue = domain?.type || "";
-  const baseColor = schema._uiMeta?.domain?.color || '#14b8a6';
+  const baseColor = getAttributeColor('domain');
   const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
   
   if (!domainValue && !typeValue) return "";
@@ -505,8 +570,9 @@ const CollapsibleNavigation = () => {
 
 // Unified license badge color function
 const getLicenseBadgeColor = (license) => {
-  const baseColor = schema._uiMeta?.license?.color || '#facc15';
-  const isNone = !license || license.trim().toLowerCase() === 'not specified' || license.trim() === 'Ns';
+  const baseColor = getAttributeColor('license');
+  const normalized = license?.trim().toLowerCase();
+  const isNone = !normalized || normalized === 'not specified' || normalized === 'ns';
   return getUnifiedBadgeColor(baseColor, isNone);
 };
 
@@ -535,6 +601,54 @@ function SurveyTable() {
     return taxonomy;
   }, []);
 
+  const rootTaxonomyHeaders = useMemo(() => {
+    const uiMeta = schema._uiMeta || {};
+    const uiGroups = schema._uiGroups || {};
+    const groupedKeys = new Set(Object.values(uiGroups).flat());
+
+    const rootOrder = [
+      ...Object.keys(uiMeta).filter((key) => !groupedKeys.has(key)),
+      ...Object.keys(uiGroups),
+    ];
+
+    const headers = {};
+    rootOrder.forEach((key, index) => {
+      if (uiGroups[key]) {
+        headers[key] = `${index + 1} ${TAXONOMY_GROUP_LABELS[key] || key}`;
+        return;
+      }
+      headers[key] = `${index + 1} ${getSchemaLabel(key, key)}`;
+    });
+
+    return headers;
+  }, []);
+
+  const getSectionHeaderColor = useCallback((sectionKey) => {
+    return TAXONOMY_HEADER_COLORS[sectionKey] || headerColors[sectionKey] || UNIFIED_COLORS.primaryText;
+  }, [headerColors]);
+
+  const getRootHeaderText = useCallback((rootKey, fallback) => {
+    return rootTaxonomyHeaders[rootKey] || fallback;
+  }, [rootTaxonomyHeaders]);
+
+  const getGroupHeaderColor = useCallback((groupKey) => {
+    return getSectionHeaderColor(groupKey);
+  }, [getSectionHeaderColor]);
+
+  const getTaxonomyHeaderText = useCallback((sectionKey, schemaPath, fallbackLabel) => {
+    const label = getSchemaLabel(schemaPath, fallbackLabel);
+    const taxonomyId = headerTaxonomy[sectionKey];
+    return taxonomyId ? `${taxonomyId} - ${label}` : label;
+  }, [headerTaxonomy]);
+
+  const getCountBadgeStyle = useCallback((sectionKey) => {
+    const color = getSectionHeaderColor(sectionKey);
+    return {
+      backgroundColor: `${color}${UNIFIED_COLORS.badgeOpacity}`,
+      color,
+    };
+  }, [getSectionHeaderColor]);
+
   // Load data on component mount
   useEffect(() => {
     const loadData = async () => {
@@ -562,7 +676,7 @@ function SurveyTable() {
       meta: { align: 'center' }
     }),
     columnHelper.accessor("id", {
-      header: () => <span>ID</span>,
+      header: () => <span>{getSchemaLabel('id', 'ID')}</span>,
       cell: (info) => (
         <span 
           className="text-[10px] font-mono" 
@@ -575,30 +689,30 @@ function SurveyTable() {
       meta: { align: 'center' }
     }),
     columnHelper.accessor("added", {
-      header: () => <span>Added</span>,
+      header: () => <span>{getSchemaLabel('added', 'Added')}</span>,
       cell: (info) => <UnifiedDateCell value={info.getValue()} isMissing={false} align="center" />,
       enableSorting: true,
       meta: { align: 'center' }
     }),
     columnHelper.accessor("year", {
-      header: () => <span>Year</span>,
+      header: () => <span>{getSchemaLabel('year', 'Year')}</span>,
       cell: (info) => info.getValue(),
       enableSorting: true,
       meta: { align: 'center' }
     }),
     columnHelper.accessor("firstAuthor", {
-      header: () => <span>First Author</span>,
+      header: () => <span>{getSchemaLabel('firstAuthor', 'First Author')}</span>,
       cell: (info) => <UnifiedTextCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'firstAuthor')} align="center" />,
       enableSorting: false,
       meta: { align: 'center' }
     }),
     columnHelper.accessor("authors", {
-      header: () => <span>Authors</span>,
+      header: () => <span>{getSchemaLabel('authors', 'Authors')}</span>,
       cell: (info) => <UnifiedAuthorsCell authors={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'authors')} align="left" />,
       enableSorting: false,
     }),
     columnHelper.accessor("title", {
-      header: () => <span>Title</span>,
+      header: () => <span>{getSchemaLabel('title', 'Title')}</span>,
       cell: (info) => {
         const titleText = info.getValue();
         const isMissing = isRequiredFieldMissing(info.row.original, 'title');
@@ -612,7 +726,7 @@ function SurveyTable() {
     }),
     columnHelper.accessor(row => row.venue, {
       id: "venue",
-      header: () => <span>Conference/Journal</span>,
+      header: () => <span>{getSchemaLabel('venue', 'Conference/Journal')}</span>,
       cell: (info) => <UnifiedVenueCell venue={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'venue.acronym')} align="center" />,
       enableColumnFilter: true,
       enableFacetedUniqueValues: true,
@@ -625,12 +739,12 @@ function SurveyTable() {
       meta: { align: 'center' }
     }),
     columnHelper.accessor("nameOfApproach", {
-      header: () => <span>Name of Approach</span>,
+      header: () => <span>{getSchemaLabel('nameOfApproach', 'Name of Approach')}</span>,
       cell: (info) => info.getValue(),
       enableSorting: false,
     }),
     columnHelper.accessor("techniqueTags", {
-      header: () => <span>Technique Tags</span>,
+      header: () => <span>{getSchemaLabel('techniqueTags', 'Technique Tags')}</span>,
       cell: (info) => {
         const tags = info.getValue();
         if (!tags || tags.length === 0) {
@@ -661,7 +775,11 @@ function SurveyTable() {
     // Core Tasks group
     {
       id: "coreTasks",
-      header: () => <span style={{ color: headerColors.coreTasks }}>{headerTaxonomy.coreTasks ? headerTaxonomy.coreTasks + ' - ' : ''}Core Tasks</span>,
+      header: () => (
+        <span style={{ color: getSectionHeaderColor('coreTasks') }}>
+          {getRootHeaderText('coreTasks', getTaxonomyHeaderText('coreTasks', 'coreTasks', 'Core Tasks'))}
+        </span>
+      ),
       columns: [
         columnHelper.accessor(row => row.coreTasks?.cta, {
           id: "cta",
@@ -669,8 +787,10 @@ function SurveyTable() {
             const count = data.length > 0 ? countSupportTaskApproaches(data, 'coreTasks.cta') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>CTA</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span style={{ color: getSectionHeaderColor('coreTasks') }}>
+                  {getSchemaLabel('coreTasks.cta', 'CTA')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('coreTasks')}>
                   {count}
                 </span>
               </div>
@@ -686,8 +806,10 @@ function SurveyTable() {
             const count = data.length > 0 ? countSupportTaskApproaches(data, 'coreTasks.cpa') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>CPA</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span style={{ color: getSectionHeaderColor('coreTasks') }}>
+                  {getSchemaLabel('coreTasks.cpa', 'CPA')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('coreTasks')}>
                   {count}
                 </span>
               </div>
@@ -703,8 +825,10 @@ function SurveyTable() {
             const count = data.length > 0 ? countSupportTaskApproaches(data, 'coreTasks.cea') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>CEA</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span style={{ color: getSectionHeaderColor('coreTasks') }}>
+                  {getSchemaLabel('coreTasks.cea', 'CEA')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('coreTasks')}>
                   {count}
                 </span>
               </div>
@@ -720,8 +844,10 @@ function SurveyTable() {
             const count = data.length > 0 ? countSupportTaskApproaches(data, 'coreTasks.cnea') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>CNEA</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span style={{ color: getSectionHeaderColor('coreTasks') }}>
+                  {getSchemaLabel('coreTasks.cnea', 'CNEA')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('coreTasks')}>
                   {count}
                 </span>
               </div>
@@ -736,7 +862,11 @@ function SurveyTable() {
     // Support Tasks group
     {
       id: "supportTasks",
-      header: () => <span style={{ color: headerColors.supportTasks }}>{headerTaxonomy.supportTasks ? headerTaxonomy.supportTasks + ' - ' : ''}Support Tasks</span>,
+      header: () => (
+        <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+          {getRootHeaderText('supportTasks', getTaxonomyHeaderText('supportTasks', 'supportTasks', 'Support Tasks'))}
+        </span>
+      ),
       columns: [
         columnHelper.accessor(row => row.supportTasks?.dataPreparation?.description || "", {
           id: "dataPreparation",
@@ -744,26 +874,11 @@ function SurveyTable() {
             const dataPrepCount = data.length > 0 ? countDataPreparationApproaches(data) : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>Data Preparation</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
-                  {dataPrepCount}
+                <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+                  {getSchemaLabel('supportTasks.dataPreparation', 'Data Preparation')}
                 </span>
-              </div>
-            );
-          },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.supportTasks?.subjectDetection || "", {
-          id: "subjectDetection",
-          header: () => {
-            const count = data.length > 0 ? countSupportTaskApproaches(data, 'subjectDetection') : 0;
-            return (
-              <div className="flex items-center gap-2">
-                <span>Subject Detection</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
-                  {count}
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('supportTasks')}>
+                  {dataPrepCount}
                 </span>
               </div>
             );
@@ -778,8 +893,10 @@ function SurveyTable() {
             const count = data.length > 0 ? countSupportTaskApproaches(data, 'columnClassification') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>Column Classification</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+                  {getSchemaLabel('supportTasks.columnClassification', 'Column Classification')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('supportTasks')}>
                   {count}
                 </span>
               </div>
@@ -789,31 +906,16 @@ function SurveyTable() {
           enableSorting: false,
           meta: { align: 'center' }
         }),
-        columnHelper.accessor(row => row.supportTasks?.typeAnnotation || "", {
-          id: "typeAnnotation",
+        columnHelper.accessor(row => row.supportTasks?.subjectDetection || "", {
+          id: "subjectDetection",
           header: () => {
-            const count = data.length > 0 ? countSupportTaskApproaches(data, 'typeAnnotation') : 0;
+            const count = data.length > 0 ? countSupportTaskApproaches(data, 'subjectDetection') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>Type Annotation</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
-                  {count}
+                <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+                  {getSchemaLabel('supportTasks.subjectDetection', 'Subject Detection')}
                 </span>
-              </div>
-            );
-          },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
-          enableSorting: false,
-          meta: { align: 'center' }
-        }),
-        columnHelper.accessor(row => row.supportTasks?.predicateAnnotation || "", {
-          id: "predicateAnnotation",
-          header: () => {
-            const count = data.length > 0 ? countSupportTaskApproaches(data, 'predicateAnnotation') : 0;
-            return (
-              <div className="flex items-center gap-2">
-                <span>Predicate Annotation</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('supportTasks')}>
                   {count}
                 </span>
               </div>
@@ -829,8 +931,10 @@ function SurveyTable() {
             const count = data.length > 0 ? countSupportTaskApproaches(data, 'datatypeAnnotation') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>Datatype Annotation</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+                  {getSchemaLabel('supportTasks.datatypeAnnotation', 'Datatype Annotation')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('supportTasks')}>
                   {count}
                 </span>
               </div>
@@ -846,8 +950,48 @@ function SurveyTable() {
             const count = data.length > 0 ? countSupportTaskApproaches(data, 'entityLinking.description') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>Entity Linking</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+                  {getSchemaLabel('supportTasks.entityLinking', 'Entity Linking')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('supportTasks')}>
+                  {count}
+                </span>
+              </div>
+            );
+          },
+          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.typeAnnotation || "", {
+          id: "typeAnnotation",
+          header: () => {
+            const count = data.length > 0 ? countSupportTaskApproaches(data, 'typeAnnotation') : 0;
+            return (
+              <div className="flex items-center gap-2">
+                <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+                  {getSchemaLabel('supportTasks.typeAnnotation', 'Type Annotation')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('supportTasks')}>
+                  {count}
+                </span>
+              </div>
+            );
+          },
+          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.supportTasks?.predicateAnnotation || "", {
+          id: "predicateAnnotation",
+          header: () => {
+            const count = data.length > 0 ? countSupportTaskApproaches(data, 'predicateAnnotation') : 0;
+            return (
+              <div className="flex items-center gap-2">
+                <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+                  {getSchemaLabel('supportTasks.predicateAnnotation', 'Predicate Annotation')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('supportTasks')}>
                   {count}
                 </span>
               </div>
@@ -863,8 +1007,10 @@ function SurveyTable() {
             const count = data.length > 0 ? countSupportTaskApproaches(data, 'nilAnnotation') : 0;
             return (
               <div className="flex items-center gap-2">
-                <span>Nil Annotation</span>
-                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium bg-blue-500/20 text-blue-200">
+                <span style={{ color: getSectionHeaderColor('supportTasks') }}>
+                  {getSchemaLabel('supportTasks.nilAnnotation', 'Nil Annotation')}
+                </span>
+                <span className="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-medium" style={getCountBadgeStyle('supportTasks')}>
                   {count}
                 </span>
               </div>
@@ -876,203 +1022,339 @@ function SurveyTable() {
         }),
       ],
     },
-    columnHelper.accessor(row => {
-      const type = row.mainMethod?.type || "";
-      const tech = row.mainMethod?.technique || "";
-      return { type, tech };
-    }, {
-      id: "mainMethod",
-      header: () => <span style={{ color: headerColors.mainMethod }}>{headerTaxonomy.mainMethod ? headerTaxonomy.mainMethod + ' - ' : ''}Main Method</span>,
-      cell: (info) => <UnifiedMainMethodCell mainMethod={info.getValue()} row={info.row.original} align="center" />,
-      enableSorting: false,
-      meta: { align: 'center' }
-    }),
-    // Type (Revision) column - before Domain
-    columnHelper.accessor(row => row.revision?.type || "", {
-      id: "revision",
-      header: () => <span style={{ color: headerColors.revision }}>{headerTaxonomy.revision ? headerTaxonomy.revision + ' - ' : ''}Revision</span>,
-      cell: (info) => {
-        const value = info.getValue();
-        const isMissing = isRequiredFieldMissing(info.row.original, 'revision.type');
-        const description = info.row.original.revision?.description;
-        const badgeStyle = getUserRevisionBadgeColor(value);
-        const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
-        const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-        
-        if (isMissing) {
-          return (
-            <div className={alignClass}>
-              <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>
-            </div>
-          );
-        }
-        if (description && description.trim() !== "") {
-          return (
-            <div className={alignClass}>
-              <div className="relative group inline-flex items-center">
-                <span className={badgeClass} style={badgeStyle}>
-                  {value}
-                  <Icon name="info_outline" className="ml-1 align-middle leading-none text-[16px]" />
-                </span>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
-                  {description}
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
-                </div>
-              </div>
-            </div>
-          );
-        }
-        return (
-          <div className={alignClass}>
-            <span className={badgeClass} style={badgeStyle}>{value}</span>
-          </div>
-        );
-      },
-      enableSorting: false,
-      meta: { align: 'center' }
-    }),
-    // Domain column - after Type
-    columnHelper.accessor(row => row.domain, {
-      id: "domain",
-      header: () => <span style={{ color: headerColors.domain }}>{headerTaxonomy.domain ? headerTaxonomy.domain + ' - ' : ''}Domain</span>,
-      cell: (info) => <UnifiedDomainCell domain={info.getValue()} row={info.row.original} align="center" />,
-      enableSorting: false,
-      meta: { align: 'center' }
-    }),
-    columnHelper.accessor(row => row.validation || "", {
-      id: "validation",
-      header: () => <span style={{ color: headerColors.validation }}>{headerTaxonomy.validation ? headerTaxonomy.validation + ' - ' : ''}Validation</span>,
-      cell: (info) => <ValidationCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'validation')} />,
+    columnHelper.accessor(row => row.applicationPurpose, {
+      id: "applicationPurpose",
+      header: () => (
+        <span style={{ color: getSectionHeaderColor('applicationPurpose') }}>
+          {getRootHeaderText('applicationPurpose', '3 Application/Purpose')}
+        </span>
+      ),
+      cell: (info) => (
+        <MissingFieldCell
+          value={info.getValue()}
+          isMissing={isRequiredFieldMissing(info.row.original, 'applicationPurpose')}
+        />
+      ),
       enableSorting: false,
     }),
-    columnHelper.accessor(row => row.codeAvailability || "", {
-      id: "codeAvailability",
-      header: () => <span style={{ color: headerColors.codeAvailability }}>{headerTaxonomy.codeAvailability ? headerTaxonomy.codeAvailability + ' - ' : ''}Code Availability</span>,
-      cell: (info) => {
-        const value = info.getValue();
-        const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-        const headerColor = headerColors.codeAvailability || '#10b981';
-        
-        if (!value || value.trim() === "") {
-          return (
-            <div className={alignClass}>
-              <span className="inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium bg-slate-500/20 text-slate-200">No</span>
-            </div>
-          );
-        }
-        return (
-          <div className={alignClass}>
-            <span className="inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: headerColor + '20', color: headerColor }}>
-              <a href={value} target="_blank" rel="noopener noreferrer"
-                 className="flex items-center justify-center h-full w-full"
-                 title="Open code link">
-                <Icon name="launch" className="align-middle leading-none text-[16px]" style={{ color: headerColor }} />
-              </a>
-            </span>
-          </div>
-        );
-      },
-      enableSorting: false,
-      meta: { align: 'center' },
-    }),
-    columnHelper.accessor(row => row.license || "", {
-      id: "license",
-      header: () => <span style={{ color: headerColors.license }}>{headerTaxonomy.license ? headerTaxonomy.license + ' - ' : ''}License</span>,
-      cell: (info) => {
-        const value = info.getValue();
-        const badgeStyle = getLicenseBadgeColor(value);
-        const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
-        const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-        
-        return (
-          <div className={alignClass}>
-            <span className={badgeClass} style={badgeStyle}>{value || 'Not specified'}</span>
-          </div>
-        );
-      },
-      enableSorting: false,
-      meta: { align: 'center' }
-    }),
-    // Inputs group
     {
-      id: "inputs",
-      header: () => <span style={{ color: headerColors.inputs }}>{headerTaxonomy.inputs ? headerTaxonomy.inputs + ' - ' : ''}Inputs</span>,
+      id: "systemLevel",
+      header: () => (
+        <span style={{ color: getGroupHeaderColor('systemLevel') }}>
+          {getRootHeaderText('systemLevel', '4 System level')}
+        </span>
+      ),
       columns: [
-        columnHelper.accessor(row => row.inputs?.typeOfTable || "", {
-          id: "typeOfTable",
-          header: () => <span>Type of Table</span>,
-          cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'inputs.typeOfTable')} align={info.column.columnDef.meta?.align} />,
+        columnHelper.accessor(row => {
+          const type = row.mainMethod?.type || "";
+          const tech = row.mainMethod?.technique || "";
+          return { type, tech };
+        }, {
+          id: "mainMethod",
+          header: () => (
+            <span style={{ color: getSectionHeaderColor('mainMethod') }}>
+              {getSchemaLabel('mainMethod', 'Methodological')}
+            </span>
+          ),
+          cell: (info) => <UnifiedMainMethodCell mainMethod={info.getValue()} row={info.row.original} align="center" />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
-        columnHelper.accessor(row => row.inputs?.tableSources || [], {
-          id: "tableSources",
-          header: () => <span>Table Sources</span>,
+        // Type (Revision) column - before Domain
+        columnHelper.accessor(row => row.revision?.type || "", {
+          id: "revision",
+          header: () => (
+            <span style={{ color: getSectionHeaderColor('revision') }}>
+              {getSchemaLabel('revision', 'Automation')}
+            </span>
+          ),
           cell: (info) => {
-            const sources = info.getValue();
-            const headerColor = headerColors.inputs || '#6366f1';
-            if (!sources || sources.length === 0) {
-              const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
+            const value = info.getValue();
+            const isMissing = isRequiredFieldMissing(info.row.original, 'revision.type');
+            const description = info.row.original.revision?.description;
+            const badgeStyle = getUserRevisionBadgeColor(value);
+            const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
+            const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
+            
+            if (isMissing) {
               return (
                 <div className={alignClass}>
-                  <span className="text-neutral-500 text-[10px]">-</span>
+                  <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>
                 </div>
               );
             }
-            const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-            
+            if (description && description.trim() !== "") {
+              return (
+                <div className={alignClass}>
+                  <div className="relative group inline-flex items-center">
+                    <span className={badgeClass} style={badgeStyle}>
+                      {value}
+                      <Icon name="info_outline" className="ml-1 align-middle leading-none text-[16px]" />
+                    </span>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 shadow-lg text-xs text-neutral-300 whitespace-pre-line opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px] max-w-xs">
+                      {description}
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
             return (
               <div className={alignClass}>
-                <div className="flex flex-wrap justify-center gap-1">
-                  {sources.map((source, index) => (
-                    <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: headerColor + '20', color: headerColor }}>
-                      {source}
-                    </span>
-                  ))}
-                </div>
+                <span className={badgeClass} style={badgeStyle}>{value}</span>
               </div>
             );
           },
           enableSorting: false,
           meta: { align: 'center' }
         }),
-        columnHelper.accessor(row => row.kg?.tripleStore || "", {
-          id: "tripleStore",
-          header: () => <span>Triple Store</span>,
-          cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'kg.tripleStore')} align={info.column.columnDef.meta?.align} />,
+        // Domain column - after Type
+        columnHelper.accessor(row => row.domain, {
+          id: "domain",
+          header: () => (
+            <span style={{ color: getSectionHeaderColor('domain') }}>
+              {getSchemaLabel('domain', 'Domain')}
+            </span>
+          ),
+          cell: (info) => <UnifiedDomainCell domain={info.getValue()} row={info.row.original} align="center" />,
           enableSorting: false,
           meta: { align: 'center' }
         }),
-        columnHelper.accessor(row => row.kg?.index || "", {
-          id: "kgIndex",
-          header: () => <span>Index</span>,
-          cell: (info) => info.getValue(),
+      ],
+    },
+    {
+      id: "implementation",
+      header: () => (
+        <span style={{ color: getGroupHeaderColor('resourcheImplementation') }}>
+          {getRootHeaderText('resourcheImplementation', '5 Implementation')}
+        </span>
+      ),
+      columns: [
+        columnHelper.accessor(row => row.codeAvailability || "", {
+          id: "codeAvailability",
+          header: () => (
+            <span style={{ color: getSectionHeaderColor('codeAvailability') }}>
+              {getSchemaLabel('codeAvailability', 'Code Availability')}
+            </span>
+          ),
+          cell: (info) => {
+            const value = info.getValue();
+            const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
+            const headerColor = getSectionHeaderColor('codeAvailability');
+            const emptyBadgeStyle = getUnifiedBadgeColor(headerColor, true);
+            
+            if (!value || value.trim() === "") {
+              return (
+                <div className={alignClass}>
+                  <span
+                    className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium"
+                    style={emptyBadgeStyle}
+                  >
+                    No
+                  </span>
+                </div>
+              );
+            }
+            return (
+              <div className={alignClass}>
+                <span className="inline-flex items-center justify-center px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: headerColor + '20', color: headerColor }}>
+                  <a href={value} target="_blank" rel="noopener noreferrer"
+                     className="flex items-center justify-center h-full w-full"
+                     title="Open code link">
+                    <Icon name="launch" className="align-middle leading-none text-[16px]" style={{ color: headerColor }} />
+                  </a>
+                </span>
+              </div>
+            );
+          },
+          enableSorting: false,
+          meta: { align: 'center' },
+        }),
+        columnHelper.accessor(row => row.license || "", {
+          id: "license",
+          header: () => (
+            <span style={{ color: getSectionHeaderColor('license') }}>
+              {getSchemaLabel('license', 'License')}
+            </span>
+          ),
+          cell: (info) => {
+            const value = info.getValue();
+            const badgeStyle = getLicenseBadgeColor(value);
+            const badgeClass = 'inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium';
+            const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
+            
+            return (
+              <div className={alignClass}>
+                <span className={badgeClass} style={badgeStyle}>{value || 'Not specified'}</span>
+              </div>
+            );
+          },
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+        columnHelper.accessor(row => row.userInterfaceTool, {
+          id: "userInterfaceTool",
+          header: () => (
+            <span style={{ color: getSectionHeaderColor('userInterfaceTool') }}>
+              {getSchemaLabel('userInterfaceTool', 'User Interface/Tool')}
+            </span>
+          ),
+          cell: (info) => (
+            <MissingFieldCell
+              value={info.getValue()}
+              isMissing={isRequiredFieldMissing(info.row.original, 'userInterfaceTool')}
+            />
+          ),
           enableSorting: false,
         }),
       ],
     },
-    columnHelper.accessor(row => row.output || "", {
-      id: "output",
-      header: () => <span style={{ color: headerColors.output }}>{headerTaxonomy.output ? headerTaxonomy.output + ' - ' : ''}Output</span>,
-      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'output')} align={info.column.columnDef.meta?.align} />,
-      enableSorting: false,
-      meta: { align: 'center' }
-    }),
-    columnHelper.accessor(row => row.applicationPurpose, {
-      id: "applicationPurpose",
-      header: () => <span style={{ color: headerColors.applicationPurpose }}>{headerTaxonomy.applicationPurpose ? headerTaxonomy.applicationPurpose + ' - ' : ''}Application Purpose</span>,
-      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'applicationPurpose')} />,
-      enableSorting: false,
-    }),
-    columnHelper.accessor(row => row.userInterfaceTool, {
-      id: "userInterfaceTool",
-      header: () => <span style={{ color: headerColors.userInterfaceTool }}>{headerTaxonomy.userInterfaceTool ? headerTaxonomy.userInterfaceTool + ' - ' : ''}User Interface Tool</span>,
-      cell: (info) => <MissingFieldCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'userInterfaceTool')} />,
+    {
+      id: "dataInterface",
+      header: () => (
+        <span style={{ color: getGroupHeaderColor('dataInterface') }}>
+          {getRootHeaderText('dataInterface', '6 Data interface')}
+        </span>
+      ),
+      columns: [
+        // Inputs group
+        {
+          id: "inputs",
+          header: () => (
+            <span style={{ color: getSectionHeaderColor('inputs') }}>
+              {getSchemaLabel('inputs', 'Inputs')}
+            </span>
+          ),
+          columns: [
+            {
+              id: "inputsTableGroup",
+              header: () => (
+                <span style={{ color: getSectionHeaderColor('inputs') }}>
+                  {getTaxonomyChildLabel('inputs', 'table', 'Table')}
+                </span>
+              ),
+              columns: [
+                columnHelper.accessor(row => row.inputs?.typeOfTable || "", {
+                  id: "typeOfTable",
+                  header: () => (
+                    <span style={{ color: getSectionHeaderColor('inputs') }}>
+                      {getSchemaLabel('inputs.typeOfTable', 'Type of Table')}
+                    </span>
+                  ),
+                  cell: (info) => (
+                    <MissingFieldCell
+                      value={info.getValue()}
+                      isMissing={isRequiredFieldMissing(info.row.original, 'inputs.typeOfTable')}
+                      align={info.column.columnDef.meta?.align}
+                    />
+                  ),
+                  enableSorting: false,
+                  meta: { align: 'center' }
+                }),
+                columnHelper.accessor(row => row.inputs?.tableSources || [], {
+                  id: "tableSources",
+                  header: () => (
+                    <span style={{ color: getSectionHeaderColor('inputs') }}>
+                      {getSchemaLabel('inputs.tableSources', 'Table Sources')}
+                    </span>
+                  ),
+                  cell: (info) => {
+                    const sources = info.getValue();
+                    const headerColor = getSectionHeaderColor('inputs');
+                    if (!sources || sources.length === 0) {
+                      const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
+                      return (
+                        <div className={alignClass}>
+                          <span className="text-neutral-500 text-[10px]">-</span>
+                        </div>
+                      );
+                    }
+                    const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
+                    
+                    return (
+                      <div className={alignClass}>
+                        <div className="flex flex-wrap justify-center gap-1">
+                          {sources.map((source, index) => (
+                            <span key={index} className="inline-flex items-center justify-center rounded px-2 py-1 text-[10px] font-medium" style={{ backgroundColor: headerColor + '20', color: headerColor }}>
+                              {source}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  },
+                  enableSorting: false,
+                  meta: { align: 'center' }
+                }),
+              ],
+            },
+            {
+              id: "inputsKgGroup",
+              header: () => (
+                <span style={{ color: getSectionHeaderColor('inputs') }}>
+                  {getTaxonomyChildLabel('inputs', 'kg', 'KG')}
+                </span>
+              ),
+              columns: [
+                columnHelper.accessor(row => row.kg?.tripleStore || "", {
+                  id: "tripleStore",
+                  header: () => (
+                    <span style={{ color: getSectionHeaderColor('inputs') }}>
+                      {getSchemaLabel('kg.tripleStore', 'Triple Store')}
+                    </span>
+                  ),
+                  cell: (info) => (
+                    <MissingFieldCell
+                      value={info.getValue()}
+                      isMissing={isRequiredFieldMissing(info.row.original, 'kg.tripleStore')}
+                      align={info.column.columnDef.meta?.align}
+                    />
+                  ),
+                  enableSorting: false,
+                  meta: { align: 'center' }
+                }),
+                columnHelper.accessor(row => row.kg?.index || "", {
+                  id: "kgIndex",
+                  header: () => (
+                    <span style={{ color: getSectionHeaderColor('inputs') }}>
+                      {getSchemaLabel('kg.index', 'Index')}
+                    </span>
+                  ),
+                  cell: (info) => info.getValue(),
+                  enableSorting: false,
+                }),
+              ],
+            },
+          ],
+        },
+        columnHelper.accessor(row => row.output || "", {
+          id: "output",
+          header: () => (
+            <span style={{ color: getSectionHeaderColor('output') }}>
+              {getSchemaLabel('output', 'Output')}
+            </span>
+          ),
+          cell: (info) => (
+            <MissingFieldCell
+              value={info.getValue()}
+              isMissing={isRequiredFieldMissing(info.row.original, 'output')}
+              align={info.column.columnDef.meta?.align}
+            />
+          ),
+          enableSorting: false,
+          meta: { align: 'center' }
+        }),
+      ],
+    },
+    columnHelper.accessor(row => row.validation || "", {
+      id: "validation",
+      header: () => <span>{getSchemaLabel('validation', 'Validation')}</span>,
+      cell: (info) => <ValidationCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'validation')} />,
       enableSorting: false,
     }),
     columnHelper.accessor(row => row.checkedByAuthor, {
       id: "checkedByAuthor",
-      header: "Checked by Author",
+      header: () => <span>{getSchemaLabel('checkedByAuthor', 'Checked by Author')}</span>,
       cell: (info) => {
         const value = info.getValue();
         const isMissing = isRequiredFieldMissing(info.row.original, 'checkedByAuthor');
@@ -1096,7 +1378,7 @@ function SurveyTable() {
     }),
     columnHelper.accessor(row => row.checkedByAi, {
       id: "checkedByAi",
-      header: "Checked by AI",
+      header: () => <span>{getSchemaLabel('checkedByAi', 'Checked by AI')}</span>,
       cell: (info) => {
         const value = info.getValue();
         const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
@@ -1112,7 +1394,7 @@ function SurveyTable() {
     }),
     columnHelper.accessor(row => row.doi, {
       id: "doi",
-      header: "DOI",
+      header: () => <span>{getSchemaLabel('doi', 'DOI')}</span>,
       cell: (info) => {
         const doiValue = info.getValue();
         const isMissing = isRequiredFieldMissing(info.row.original, 'doi');
@@ -1142,32 +1424,26 @@ function SurveyTable() {
       },
       enableSorting: false,
     }),
-    // Citations group
-    {
-      id: "citations",
-      header: () => <span style={{ color: headerColors.citations }}>{headerTaxonomy.citations ? headerTaxonomy.citations + ' - ' : ''}Citations</span>,
-      columns: [
-        columnHelper.accessor(row => Array.isArray(row.citations?.references) ? row.citations.references.length : 0, {
-          id: "referencesCount",
-          header: () => <span></span>,
-          cell: (info) => {
-            const referencesCount = info.getValue();
-            const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-            
-            return (
-              <div className={alignClass}>
-                <span className="text-[10px] text-neutral-400">
-                  {referencesCount}
-                </span>
-              </div>
-            );
-          },
-          enableSorting: true,
-          meta: { align: 'center' }
-        }),
-      ],
-    },
-  ], [headerColors, headerTaxonomy, data]);
+    // Citations column
+    columnHelper.accessor(row => Array.isArray(row.citations?.references) ? row.citations.references.length : 0, {
+      id: "referencesCount",
+      header: () => <span>{getSchemaLabel('citations', 'Citations')}</span>,
+      cell: (info) => {
+        const referencesCount = info.getValue();
+        const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
+
+        return (
+          <div className={alignClass}>
+            <span className="text-[10px] text-neutral-400">
+              {referencesCount}
+            </span>
+          </div>
+        );
+      },
+      enableSorting: true,
+      meta: { align: 'center' }
+    }),
+  ], [data, getCountBadgeStyle, getGroupHeaderColor, getRootHeaderText, getSectionHeaderColor, getTaxonomyHeaderText]);
 
   // React Table instance
   const table = useReactTable({
@@ -1202,26 +1478,43 @@ function SurveyTable() {
       <CollapsibleNavigation />
       <table className="w-full table-auto text-xs">
         <thead className="bg-neutral-800 sticky top-0 z-10">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  colSpan={header.colSpan}
-                  className="px-4 py-2 text-center text-xs font-semibold text-neutral-300"
-                  onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
-                  style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
-                >
-                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  {header.column.getCanSort() && (
-                    <span className="ml-2">
-                      {header.column.getIsSorted() === 'asc' ? '▲' : header.column.getIsSorted() === 'desc' ? '▼' : ''}
-                    </span>
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
+          {(() => {
+            const headerGroups = table.getHeaderGroups();
+            const maxHeaderDepth = headerGroups.length;
+
+            return headerGroups.map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  const isLeafHeader = header.subHeaders.length === 0;
+                  const computedRowSpan = header.isPlaceholder
+                    ? 1
+                    : isLeafHeader
+                      ? Math.max(1, maxHeaderDepth - header.depth)
+                      : 1;
+
+                  return (
+                    <th
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      rowSpan={computedRowSpan}
+                      className={`px-4 py-1 text-center text-xs font-semibold leading-tight text-neutral-300 ${
+                        isLeafHeader && computedRowSpan > 1 ? 'align-top' : ''
+                      }`}
+                      onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
+                      style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
+                    >
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      {header.column.getCanSort() && (
+                        <span className="ml-2">
+                          {header.column.getIsSorted() === 'asc' ? '▲' : header.column.getIsSorted() === 'desc' ? '▼' : ''}
+                        </span>
+                      )}
+                    </th>
+                  );
+                })}
+              </tr>
+            ));
+          })()}
         </thead>
         <tbody className="bg-neutral-900">
           {table.getRowModel().rows.map((row, index) => {

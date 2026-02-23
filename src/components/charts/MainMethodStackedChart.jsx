@@ -57,7 +57,7 @@ const MainMethodStackedChart = ({ data }) => {
 
     const color = d3.scaleOrdinal()
       .domain(methodTypes)
-      .range(['#0ea5e9', '#38bdf8', '#7dd3fc']); // Sky blue variations based on taxonomy label 3
+      .range(['#0ea5e9', '#06b6d4', '#14b8a6']);
 
     // Add bars
     chartSvg.append("g")
