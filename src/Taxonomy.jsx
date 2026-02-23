@@ -105,6 +105,46 @@ function drawCurvedConnection(group, sourceNode, targetNode) {
   group.append('path').attr('d', pathData);
 }
 
+function animatePathReveal(selection, options = {}) {
+  const {
+    duration = 720,
+    delayBase = 0,
+    delayStep = 5,
+    targetOpacity = 1
+  } = options;
+
+  selection.each(function animateEach(_, index) {
+    const path = d3.select(this);
+    const length = typeof this.getTotalLength === 'function' ? this.getTotalLength() : 0;
+    const delay = delayBase + index * delayStep;
+
+    if (!Number.isFinite(length) || length <= 0) {
+      path
+        .attr('opacity', 0)
+        .transition()
+        .delay(delay)
+        .duration(Math.round(duration * 0.6))
+        .ease(d3.easeCubicOut)
+        .attr('opacity', targetOpacity);
+      return;
+    }
+
+    path
+      .attr('stroke-dasharray', `${length} ${length}`)
+      .attr('stroke-dashoffset', length)
+      .attr('opacity', 0)
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .ease(d3.easeCubicOut)
+      .attr('stroke-dashoffset', 0)
+      .attr('opacity', targetOpacity)
+      .on('end', function onEnd() {
+        d3.select(this).attr('stroke-dasharray', null).attr('stroke-dashoffset', null);
+      });
+  });
+}
+
 function buildTopLevelNode(name, meta, schemaProps, uiTaxonomyChildren) {
   const prop = schemaProps[name];
   let subChildren = [];
@@ -216,6 +256,7 @@ function getLayoutConfig(root, width) {
 function Taxonomy() {
   const chartRef = useRef(null);
   const chartContainerRef = useRef(null);
+  const hasAnimatedRef = useRef(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [svgNode, setSvgNode] = useState(null);
@@ -257,7 +298,7 @@ function Taxonomy() {
   }, []);
 
   const drawRadialTidyTree = useCallback(
-    (treeData, container, size, strokeForLabel, branchColorMap = {}) => {
+    (treeData, container, size, strokeForLabel, branchColorMap = {}, animateIntro = false) => {
       const width = size;
       const root = d3.hierarchy(treeData);
       const {
@@ -294,6 +335,10 @@ function Taxonomy() {
 
       const linkGenerator = d3.linkRadial().angle((d) => d.x).radius((d) => d.y);
       const labelColorMap = buildOrderedLabelColorMap(root);
+      const nodeTransform = (d) => `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0)`;
+      const nodeTransformFromCenter = (d) => `rotate(${(d.x * 180) / Math.PI - 90}) translate(0,0)`;
+      const textTransform = (d, radialDistance = d.y) =>
+        `rotate(${(d.x * 180) / Math.PI - 90}) translate(${radialDistance},0) rotate(${d.x >= Math.PI ? 180 : 0})`;
 
       const svg = d3
         .create('svg')
@@ -302,7 +347,7 @@ function Taxonomy() {
         .attr('height', width)
         .attr('style', 'font: 12px ui-sans-serif, system-ui, sans-serif; background: none;');
 
-      svg
+      const mainLinks = svg
         .append('g')
         .attr('fill', 'none')
         .attr('stroke-width', 1.35)
@@ -311,28 +356,27 @@ function Taxonomy() {
         .join('path')
         .attr('d', linkGenerator)
         .attr('stroke', BASE_EDGE_COLOR)
-        .attr('stroke-opacity', 0.72);
+        .attr('stroke-opacity', 0.72)
+        .attr('opacity', animateIntro ? 0 : 1);
 
-      svg
+      const nodes = svg
         .append('g')
         .selectAll('circle')
         .data(root.descendants())
         .join('circle')
-        .attr('transform', (d) => `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0)`)
-        .attr('r', 2.6)
+        .attr('transform', animateIntro ? nodeTransformFromCenter : nodeTransform)
+        .attr('r', animateIntro ? 0 : 2.6)
         .attr('fill', BASE_EDGE_COLOR)
-        .attr('opacity', 0.95);
+        .attr('opacity', animateIntro ? 0 : 0.95);
 
-      svg
+      const labels = svg
         .append('g')
         .attr('stroke-linejoin', 'round')
         .attr('stroke-width', 2.8)
         .selectAll('text')
         .data(root.descendants())
         .join('text')
-        .attr('transform', (d) =>
-          `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0) rotate(${d.x >= Math.PI ? 180 : 0})`
-        )
+        .attr('transform', (d) => textTransform(d, animateIntro ? d.y * 0.82 : d.y))
         .attr('dy', '0.31em')
         .attr('x', (d) => (d.x < Math.PI === !d.children ? labelOffset : -labelOffset))
         .attr('text-anchor', (d) => (d.x < Math.PI === !d.children ? 'start' : 'end'))
@@ -348,7 +392,34 @@ function Taxonomy() {
           return leafFontSize;
         })
         .attr('font-weight', 'bold')
+        .attr('opacity', animateIntro ? 0 : 1)
         .text((d) => capitalizeFirstLetter(d.data.name));
+
+      if (animateIntro) {
+        animatePathReveal(mainLinks, {
+          duration: 760,
+          delayBase: 40,
+          delayStep: 4,
+          targetOpacity: 1
+        });
+
+        nodes
+          .transition()
+          .delay((d) => 70 + d.depth * 80)
+          .duration(520)
+          .ease(d3.easeCubicOut)
+          .attr('transform', nodeTransform)
+          .attr('r', 2.6)
+          .attr('opacity', 0.95);
+
+        labels
+          .transition()
+          .delay((d, index) => 180 + d.depth * 70 + index * 2)
+          .duration(520)
+          .ease(d3.easeCubicOut)
+          .attr('transform', (d) => textTransform(d))
+          .attr('opacity', 1);
+      }
 
       container.appendChild(svg.node());
       setSvgNode(svg.node());
@@ -384,6 +455,16 @@ function Taxonomy() {
       pairList.forEach(([sourceNode, targetNode]) => {
         drawCurvedConnection(customLinksGroup, sourceNode, targetNode);
       });
+
+      if (animateIntro) {
+        const customPaths = customLinksGroup.selectAll('path').attr('opacity', 0);
+        animatePathReveal(customPaths, {
+          duration: 680,
+          delayBase: 260,
+          delayStep: 14,
+          targetOpacity: 1
+        });
+      }
     },
     [isDownloading]
   );
@@ -391,7 +472,9 @@ function Taxonomy() {
   useEffect(() => {
     if (!data || !chartRef.current) return;
     chartRef.current.innerHTML = '';
-    drawRadialTidyTree(data, chartRef.current, chartSize, labelStroke, colorMap);
+    const shouldAnimateIntro = !hasAnimatedRef.current && !isDownloading;
+    drawRadialTidyTree(data, chartRef.current, chartSize, labelStroke, colorMap, shouldAnimateIntro);
+    if (shouldAnimateIntro) hasAnimatedRef.current = true;
   }, [data, chartSize, labelStroke, colorMap, drawRadialTidyTree]);
 
   const handleDownloadSVG = useCallback(() => {
