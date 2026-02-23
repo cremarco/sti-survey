@@ -478,7 +478,7 @@ function Taxonomy() {
     const shouldAnimateIntro = !hasAnimatedRef.current && !isDownloading;
     drawRadialTidyTree(data, chartRef.current, chartSize, labelStroke, colorMap, shouldAnimateIntro);
     if (shouldAnimateIntro) hasAnimatedRef.current = true;
-  }, [data, chartSize, labelStroke, colorMap, drawRadialTidyTree]);
+  }, [data, chartSize, labelStroke, colorMap, drawRadialTidyTree, isDownloading]);
 
   const handleDownloadSVG = useCallback(() => {
     if (!svgNode) return;

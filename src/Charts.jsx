@@ -9,9 +9,7 @@
  * - Responsive design with Tailwind CSS
  * - Comprehensive data analysis and statistics
  */
-
-
-import React, { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import Navigation from './Navigation';
 import * as d3 from "d3";
 import Icon from './Icon';
@@ -19,6 +17,7 @@ import MainMethodStackedChart from './components/charts/MainMethodStackedChart';
 import ConferenceJournalBarChart from './components/charts/ConferenceJournalBarChart';
 import YearWiseCoreTasksChart from './components/charts/YearWiseCoreTasksChart';
 import useResizeObserver from './hooks/useResizeObserver';
+import { buildBaseSurveyStats, toChartsStats } from './lib/surveyStats';
 
 const TAXONOMY_COLORS = {
   coreTasks: '#6366f1',
@@ -40,7 +39,7 @@ const TechniqueTrendsChart = ({ data }) => {
   const svgRef = useRef();
   const dimensions = useResizeObserver(containerRef);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!data || data.length === 0 || !dimensions) return;
 
     const svg = d3.select(svgRef.current);
@@ -245,244 +244,14 @@ function downloadSVG(svgElement, filename = "chart.svg") {
 }
 
 /**
- * Required fields configuration for validation
- */
-const REQUIRED_FIELDS = {
-  id: true,
-  authors: true,
-  // author: true, // Field doesn't exist in current data structure
-  year: true,
-  "title": true,
-  "venue.acronym": true,
-  "mainMethod.type": true,
-  "mainMethod.technique": true,
-  "domain.domain": true,
-  "coreTasks.cta": true,
-  "coreTasks.cpa": true,
-  "coreTasks.cea": true,
-  "coreTasks.cnea": true,
-  "revision.type": true,
-  "license": true,
-  "inputs.typeOfTable": true,
-  "kg.tripleStore": true,
-  "output": true,
-  "checkedByAuthor": true,
-  doi: true,
-};
-
-/**
- * Utility function to check if a value is empty, null, or undefined
- */
-const isEmpty = (value) => {
-  if (value === null || value === undefined) return true;
-  if (typeof value === "string") return value.trim() === "";
-  if (typeof value === "object" && !Array.isArray(value)) {
-    return Object.keys(value).length === 0;
-  }
-  return false;
-};
-
-/**
- * Gets nested value from object using dot notation path
- */
-const getNestedValue = (obj, path) => {
-  const keys = path.split(".");
-  let current = obj;
-  for (const key of keys) {
-    if (current == null) return undefined;
-    current = current[key];
-  }
-  return current;
-};
-
-/**
- * Checks if a required field is missing from a row
- */
-const isRequiredFieldMissing = (row, fieldPath) => {
-  if (!REQUIRED_FIELDS[fieldPath]) return false;
-  const value = getNestedValue(row, fieldPath);
-  return isEmpty(value);
-};
-
-/**
- * Calculate summary statistics for the charts
- * 
- * Processes the survey data to generate comprehensive statistics including:
- * - Missing field analysis
- * - Method type distributions
- * - Domain distributions
- * - Task coverage
- * - License distributions
- * - Conference/Journal distributions
- */
-const calculateSummaryStats = (data) => {
-  if (data.length === 0) {
-    return {
-      totalEntries: 0,
-      entriesWithMissingFields: 0,
-      totalMissingFields: 0,
-      mostMissing: 'N/A',
-      mainMethodTypeDistribution: {},
-      domainDistribution: {},
-      yearRange: { min: 'N/A', max: 'N/A' },
-      approachesWithCode: 0,
-      licenseDistribution: {},
-      taskCounts: { cta: 0, cpa: 0, cea: 0, cnea: 0 },
-    };
-  }
-
-  const totalEntries = data.length;
-  
-  // Single pass through data for better performance
-  const stats = data.reduce((acc, row) => {
-    // Missing fields analysis
-    const missingFields = Object.keys(REQUIRED_FIELDS).filter(field => isRequiredFieldMissing(row, field));
-    if (missingFields.length > 0) {
-      acc.entriesWithMissingFields++;
-      acc.totalMissingFields += missingFields.length;
-      missingFields.forEach(field => {
-        acc.fieldCounts[field] = (acc.fieldCounts[field] || 0) + 1;
-      });
-    }
-
-    // Main method distribution
-    const methodType = row['mainMethod']?.type || 'N/A';
-    acc.mainMethodTypeDistribution[methodType] = (acc.mainMethodTypeDistribution[methodType] || 0) + 1;
-
-    // Domain distribution
-    const domain = row['domain']?.domain || 'N/A';
-    acc.domainDistribution[domain] = (acc.domainDistribution[domain] || 0) + 1;
-
-    // Year range
-    if (typeof row.year === 'number') {
-      acc.years.push(row.year);
-    }
-
-    // Code availability
-    if (row['codeAvailability'] && row['codeAvailability'].trim() !== '') {
-      acc.approachesWithCode++;
-    }
-
-    // License distribution
-    const license = row['license'] || 'N/A';
-    acc.licenseDistribution[license] = (acc.licenseDistribution[license] || 0) + 1;
-
-    // Technique Tags stats (for selected tags)
-    const selectedTags = ['ontology-driven', 'rule-based', 'embeddings', 'transformer', 'CRF'];
-    if (row.techniqueTags && Array.isArray(row.techniqueTags)) {
-      row.techniqueTags.forEach(tag => {
-        if (selectedTags.includes(tag)) {
-          acc.techniqueTagCounts[tag] = (acc.techniqueTagCounts[tag] || 0) + 1;
-        }
-      });
-    }
-
-    // Task counts
-    if (row.coreTasks?.cta) acc.taskCounts.cta++;
-    if (row.coreTasks?.cpa) acc.taskCounts.cpa++;
-    if (row.coreTasks?.cea) acc.taskCounts.cea++;
-    if (row.coreTasks?.cnea) acc.taskCounts.cnea++;
-
-    // User revision distribution
-    const userRevisionType = row['revision']?.type || 'N/A';
-    acc.userRevisionDistribution[userRevisionType] = (acc.userRevisionDistribution[userRevisionType] || 0) + 1;
-
-    // Steps coverage
-    if (row.supportTasks?.['dataPreparation']?.description) acc.stepsCoverage['data-preparation']++;
-    if (row.supportTasks?.['subjectDetection']) acc.stepsCoverage['subject-detection']++;
-    if (row.supportTasks?.['columnClassification']) acc.stepsCoverage['column-analysis']++;
-    if (row.supportTasks?.['typeAnnotation']) acc.stepsCoverage['type-annotation']++;
-    if (row.supportTasks?.['predicateAnnotation']) acc.stepsCoverage['predicate-annotation']++;
-    if (row.supportTasks?.['datatypeAnnotation']) acc.stepsCoverage['datatype-annotation']++;
-    if (row.supportTasks?.['entityLinking']?.description) acc.stepsCoverage['entity-linking']++;
-    if (row.supportTasks?.['nilAnnotation']) acc.stepsCoverage['nil-annotation']++;
-
-    // Conference/Journal distribution
-    const venue = row['venue']?.acronym || 'N/A';
-    acc.conferenceJournalDistribution[venue] = (acc.conferenceJournalDistribution[venue] || 0) + 1;
-
-    return acc;
-  }, {
-    entriesWithMissingFields: 0,
-    totalMissingFields: 0,
-    fieldCounts: {},
-    mainMethodTypeDistribution: {},
-    domainDistribution: {},
-    years: [],
-    approachesWithCode: 0,
-    licenseDistribution: {},
-    techniqueTagCounts: {},
-    taskCounts: { cta: 0, cpa: 0, cea: 0, cnea: 0 },
-    userRevisionDistribution: {},
-    stepsCoverage: {
-      'data-preparation': 0,
-      'subject-detection': 0,
-      'column-analysis': 0,
-      'type-annotation': 0,
-      'predicate-annotation': 0,
-      'datatype-annotation': 0,
-      'entity-linking': 0,
-      'nil-annotation': 0
-    },
-    conferenceJournalDistribution: {}
-  });
-
-  // Calculate most missing field
-  const mostMissingEntry = Object.entries(stats.fieldCounts)
-    .sort(([,a], [,b]) => b - a)[0];
-  const mostMissing = mostMissingEntry ? `${mostMissingEntry[0]} (${mostMissingEntry[1]})` : 'None';
-
-  // Calculate year range
-  const yearRange = {
-    min: stats.years.length > 0 ? Math.min(...stats.years) : 'N/A',
-    max: stats.years.length > 0 ? Math.max(...stats.years) : 'N/A',
-  };
-
-  // Calculate percentages
-  const calculatePercentages = (distribution) => 
-    Object.fromEntries(
-      Object.entries(distribution).map(([key, value]) => [
-        key,
-        { count: value, percentage: totalEntries > 0 ? (value / totalEntries) * 100 : 0 },
-      ])
-    );
-
-  const taskPercentages = {
-    cta: totalEntries > 0 ? (stats.taskCounts.cta / totalEntries) * 100 : 0,
-    cpa: totalEntries > 0 ? (stats.taskCounts.cpa / totalEntries) * 100 : 0,
-    cea: totalEntries > 0 ? (stats.taskCounts.cea / totalEntries) * 100 : 0,
-    cnea: totalEntries > 0 ? (stats.taskCounts.cnea / totalEntries) * 100 : 0,
-  };
-  
-  return {
-    totalEntries,
-    entriesWithMissingFields: stats.entriesWithMissingFields,
-    totalMissingFields: stats.totalMissingFields,
-    mostMissing,
-    mainMethodTypeDistribution: calculatePercentages(stats.mainMethodTypeDistribution),
-    domainDistribution: calculatePercentages(stats.domainDistribution),
-    yearRange,
-    approachesWithCode: stats.approachesWithCode,
-    approachesWithCodePercentage: totalEntries > 0 ? (stats.approachesWithCode / totalEntries) * 100 : 0,
-    licenseDistribution: calculatePercentages(stats.licenseDistribution),
-    techniqueTagDistribution: calculatePercentages(stats.techniqueTagCounts),
-    taskCounts: stats.taskCounts,
-    taskPercentages,
-    userRevisionDistribution: stats.userRevisionDistribution,
-    stepsCoverage: stats.stepsCoverage,
-    conferenceJournalDistribution: stats.conferenceJournalDistribution,
-  };
-};
-
-/**
  * Main Charts Component
  * 
  * Renders the complete charts dashboard with interactive visualizations
  * and comprehensive data analytics for the STI survey data.
  */
-function Charts({ data }) {
+function Charts({ data = [] }) {
   // Calculate summary statistics using the data
-  const summaryStats = useMemo(() => calculateSummaryStats(data), [data]);
+  const summaryStats = useMemo(() => toChartsStats(buildBaseSurveyStats(data)), [data]);
 
   // State for chart visibility toggles
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);

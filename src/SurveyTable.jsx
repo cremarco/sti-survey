@@ -16,7 +16,7 @@
  */
 
 // Grouped imports
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import {
   createColumnHelper,
   flexRender,
@@ -30,6 +30,7 @@ import {
 import Navigation from "./Navigation";
 import Icon from "./Icon";
 import schema from '../public/data/sti-survey.schema.json';
+import { REQUIRED_FIELD_PATHS, isRequiredFieldMissing } from "./lib/surveyValidation";
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -49,58 +50,6 @@ const UNIFIED_COLORS = {
   error: '#ef4444', // red-500
   warning: '#f59e0b', // amber-500
   info: '#3b82f6', // blue-500
-};
-
-// Legacy color mappings (kept for backward compatibility)
-const METHOD_TYPE_COLORS = {
-  unsup: "bg-orange-500/20 text-orange-200",
-  sup: "bg-indigo-500/20 text-indigo-200",
-  "semi-automated": "bg-amber-500/20 text-amber-200",
-  "fully-automated": "bg-emerald-500/20 text-emerald-200",
-  hybrid: "bg-violet-500/20 text-violet-200",
-};
-
-const DOMAIN_COLORS = {
-  independent: "bg-blue-500/20 text-blue-200",
-  dependent: "bg-red-500/20 text-red-200",
-  specific: "bg-purple-500/20 text-purple-200",
-  general: "bg-teal-500/20 text-teal-200",
-  biomedical: "bg-pink-500/20 text-pink-200",
-  geographic: "bg-yellow-500/20 text-yellow-200",
-  financial: "bg-green-500/20 text-green-200",
-  scientific: "bg-cyan-500/20 text-cyan-200",
-  educational: "bg-lime-500/20 text-lime-200",
-};
-
-const USER_REVISION_COLORS = {
-  manual: "bg-blue-500/20 text-blue-200",
-  "semi-automatic": "bg-orange-500/20 text-orange-200",
-  automatic: "bg-emerald-500/20 text-emerald-200",
-  none: "bg-slate-500/20 text-slate-200",
-};
-
-// Required fields configuration for validation
-const REQUIRED_FIELDS = {
-  id: true,
-  authors: true,
-  firstAuthor: true,
-  year: true,
-  "title": true,
-  "venue.acronym": true,
-  "mainMethod.type": true,
-  "mainMethod.technique": true,
-  "domain.domain": true,
-  "coreTasks.cta": true,
-  "coreTasks.cpa": true,
-  "coreTasks.cea": true,
-  "coreTasks.cnea": true,
-  "revision.type": true,
-  license: true,
-  "inputs.typeOfTable": true,
-  "kg.tripleStore": true,
-  output: true,
-  checkedByAuthor: true,
-  doi: true,
 };
 
 // Utility functions (outside component)
@@ -223,31 +172,11 @@ const getUserRevisionBadgeColor = (type) => {
   const baseColor = getAttributeColor('revision');
   return getUnifiedBadgeColor(baseColor, lower === 'none');
 };
-const isEmpty = (value) => {
-  if (value === null || value === undefined) return true;
-  if (typeof value === "string") return value.trim() === "";
-  if (typeof value === "object" && !Array.isArray(value)) return Object.keys(value).length === 0;
-  return false;
-};
 const formatDate = (dateString) => {
   if (!dateString || dateString.trim() === "") return null;
   const date = new Date(dateString);
   if (isNaN(date.getTime())) return dateString;
   return date.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
-};
-const getNestedValue = (obj, path) => {
-  const keys = path.split(".");
-  let current = obj;
-  for (const key of keys) {
-    if (current == null) return undefined;
-    current = current[key];
-  }
-  return current;
-};
-const isRequiredFieldMissing = (row, fieldPath) => {
-  if (!REQUIRED_FIELDS[fieldPath]) return false;
-  const value = getNestedValue(row, fieldPath);
-  return isEmpty(value);
 };
 
 // Color utility functions (kept for potential future use)
@@ -282,7 +211,7 @@ const UnifiedDateCell = ({ value, isMissing, align = 'center' }) => {
   if (isMissing) {
     return (
       <div className={alignClass}>
-    return <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>;
+        <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>
       </div>
     );
   }
@@ -317,7 +246,7 @@ const UnifiedAuthorsCell = ({ authors, isMissing, align = 'left' }) => {
   if (isMissing) {
     return (
       <div className={alignClass}>
-    return <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>;
+        <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>
       </div>
     );
   }
@@ -345,7 +274,7 @@ const UnifiedVenueCell = ({ venue, isMissing, align = 'center' }) => {
   if (isMissing || !venue) {
     return (
       <div className={alignClass}>
-    return <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>;
+        <span className="bg-red-500/20 text-red-200 px-2 py-1">MISSING</span>
       </div>
     );
   }
@@ -445,10 +374,6 @@ const UnifiedMainMethodCell = ({ mainMethod, row, align = 'center' }) => {
   );
 };
 
-// Legacy component for backward compatibility
-const MainMethodCell = ({ mainMethod, row, align = 'left' }) => {
-  return <UnifiedMainMethodCell mainMethod={mainMethod} row={row} align={align} />;
-};
 const UnifiedDomainCell = ({ domain, row, align = 'center' }) => {
   const domainValue = domain?.domain || "";
   const typeValue = domain?.type || "";
@@ -483,11 +408,6 @@ const UnifiedDomainCell = ({ domain, row, align = 'center' }) => {
   );
 };
 
-// Legacy component for backward compatibility
-const DomainCell = ({ domain, row, align = 'left' }) => {
-  return <UnifiedDomainCell domain={domain} row={row} align={align} />;
-};
-
 const ValidationCell = ({ value, isMissing }) => {
   if (isMissing) {
     return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
@@ -515,7 +435,7 @@ const ValidationCell = ({ value, isMissing }) => {
   );
 };
 const RowNumberCell = ({ row, index }) => {
-  const missingFields = Object.keys(REQUIRED_FIELDS).filter((field) => isRequiredFieldMissing(row.original, field));
+  const missingFields = REQUIRED_FIELD_PATHS.filter((field) => isRequiredFieldMissing(row.original, field));
   const hasMissingFields = missingFields.length > 0;
   return (
     <div className="flex flex-col items-center">
@@ -576,10 +496,7 @@ const getLicenseBadgeColor = (license) => {
   return getUnifiedBadgeColor(baseColor, isNone);
 };
 
-function SurveyTable() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function SurveyTable({ data = [] }) {
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
 
@@ -648,23 +565,6 @@ function SurveyTable() {
       color,
     };
   }, [getSectionHeaderColor]);
-
-  // Load data on component mount
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const response = await fetch(import.meta.env.BASE_URL + 'data/sti-survey.json');
-        if (!response.ok) throw new Error('Failed to load data');
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadData();
-  }, []);
 
   // Column definitions
   const columns = useMemo(() => [
@@ -1459,20 +1359,6 @@ function SurveyTable() {
     onSortingChange: setSorting,
   });
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <div className="text-neutral-300 text-lg">Loading data...</div>
-      </div>
-    );
-  }
-  if (error) {
-    return (
-      <div className="min-h-screen bg-neutral-900 flex items-center justify-center">
-        <div className="text-red-400 bg-red-900/20 p-6 text-lg">Error: {error}</div>
-      </div>
-    );
-  }
   return (
     <div className="bg-neutral-900 h-screen overflow-auto relative">
       <CollapsibleNavigation />
@@ -1518,7 +1404,7 @@ function SurveyTable() {
         </thead>
         <tbody className="bg-neutral-900">
           {table.getRowModel().rows.map((row, index) => {
-            const missingFields = Object.keys(REQUIRED_FIELDS).filter(field => isRequiredFieldMissing(row.original, field));
+            const missingFields = REQUIRED_FIELD_PATHS.filter(field => isRequiredFieldMissing(row.original, field));
             const hasMissingFields = missingFields.length > 0;
             return (
               <tr
@@ -1543,4 +1429,4 @@ function SurveyTable() {
   );
 }
 
-export default SurveyTable; 
+export default SurveyTable;
