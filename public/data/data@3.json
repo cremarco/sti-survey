@@ -1761,6 +1761,14 @@
   },
   {
     "type": "cite",
+    "source": "Cremaschi",
+    "source_date": "2019-01-01",
+    "target": "Ritze",
+    "target_date": "2015-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Hulsebos",
     "source_date": "2019-01-01",
     "target": "Ramnandan",
@@ -1810,6 +1818,14 @@
   {
     "type": "cite",
     "source": "Chen",
+    "source_date": "2019-01-01",
+    "target": "Pham",
+    "target_date": "2016-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Cremaschi",
     "source_date": "2019-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
@@ -1913,6 +1929,14 @@
   },
   {
     "type": "cite",
+    "source": "Cremaschi",
+    "source_date": "2019-01-01",
+    "target": "Zhang",
+    "target_date": "2017-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Kruit",
     "source_date": "2019-01-01",
     "target": "Efthymiou",
@@ -1988,6 +2012,14 @@
     "source": "Chen",
     "source_date": "2019-01-01",
     "target": "Chen",
+    "target_date": "2019-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Cremaschi",
+    "source_date": "2019-01-01",
+    "target": "Cremaschi",
     "target_date": "2019-01-01",
     "value": 1
   },
@@ -3657,6 +3689,14 @@
   },
   {
     "type": "evolve",
+    "source": "Avogadro",
+    "source_date": "2021-01-01",
+    "target": "Avogadro",
+    "target_date": "2024-01-01",
+    "value": 1
+  },
+  {
+    "type": "evolve",
     "source": "Nguyen",
     "source_date": "2021-01-01",
     "target": "Nguyen",
@@ -4181,6 +4221,14 @@
     "source_date": "2022-01-01",
     "target": "Liu",
     "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "evolve",
+    "source": "Abdelmageed",
+    "source_date": "2022-01-01",
+    "target": "Abdelmageed",
+    "target_date": "2025-01-01",
     "value": 1
   },
   {
@@ -4768,6 +4816,14 @@
     "value": 1
   },
   {
+    "type": "evolve",
+    "source": "Baazouzi",
+    "source_date": "2023-01-01",
+    "target": "Baazouzi",
+    "target_date": "2025-01-01",
+    "value": 1
+  },
+  {
     "type": "cite",
     "source": "Korini",
     "source_date": "2024-01-01",
@@ -4861,6 +4917,14 @@
     "source_date": "2024-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Avogadro",
+    "source_date": "2024-01-01",
+    "target": "Chen",
+    "target_date": "2019-01-01",
     "value": 1
   },
   {
@@ -5041,6 +5105,22 @@
   },
   {
     "type": "cite",
+    "source": "Avogadro",
+    "source_date": "2024-01-01",
+    "target": "Cremaschi",
+    "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Avogadro",
+    "source_date": "2024-01-01",
+    "target": "Deng",
+    "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Feuer",
     "source_date": "2024-01-01",
     "target": "Deng",
@@ -5161,6 +5241,14 @@
   },
   {
     "type": "cite",
+    "source": "Tachioka",
+    "source_date": "2025-01-01",
+    "target": "Bhagavatula",
+    "target_date": "2015-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Cremaschi",
     "source_date": "2025-01-01",
     "target": "Efthymiou",
@@ -5227,6 +5315,14 @@
     "type": "cite",
     "source": "Cremaschi",
     "source_date": "2025-01-01",
+    "target": "Cremaschi",
+    "target_date": "2019-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Cremaschi",
+    "source_date": "2025-01-01",
     "target": "Kruit",
     "target_date": "2019-01-01",
     "value": 1
@@ -5260,6 +5356,14 @@
     "source": "Cremaschi",
     "source_date": "2025-01-01",
     "target": "Thawani",
+    "target_date": "2019-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Tachioka",
+    "source_date": "2025-01-01",
+    "target": "Hulsebos",
     "target_date": "2019-01-01",
     "value": 1
   },
@@ -5409,6 +5513,14 @@
   },
   {
     "type": "cite",
+    "source": "Bar",
+    "source_date": "2025-01-01",
+    "target": "Deng",
+    "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Cremaschi",
     "source_date": "2025-01-01",
     "target": "Chen",
@@ -5461,6 +5573,22 @@
     "source_date": "2025-01-01",
     "target": "Dasoulas",
     "target_date": "2023-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Bar",
+    "source_date": "2025-01-01",
+    "target": "Zhang",
+    "target_date": "2024-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Tachioka",
+    "source_date": "2025-01-01",
+    "target": "Zhang",
+    "target_date": "2024-01-01",
     "value": 1
   }
 ]

@@ -23625,5 +23625,468 @@
             "note": null
         },
         "uncertainFields": []
+    },
+    {
+        "id": "2025_bar_llm-driven",
+        "added": "2026-02-24",
+        "year": 2025,
+        "firstAuthor": "Bar",
+        "authors": [
+            "Koby Bar",
+            "Tomer Sagi"
+        ],
+        "title": "LLM-Driven Retrieval, Debate, and Verification for Robust Table-to-Knowledge-Graph Matching",
+        "venue": {
+            "type": "challenge",
+            "acronym": "SemTab"
+        },
+        "nameOfApproach": "RAGDify",
+        "techniqueTags": [
+            "transformer"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Lightly cleans CSV tables with an LLM prompt (formatting/typos, casing, stray punctuation) while preserving the original structure.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "RAG-style CEA pipeline for Wikidata combining retrieval, debate-style ranking, and a final verification step that can also output NIL.",
+                "candidateGeneration": "Retrieves candidates from an Elasticsearch index over Wikidata labels/descriptions using direct lookup, an LLM-rewritten contextual query (column/table metadata), and a fuzzy search fallback (≥75% similarity).",
+                "entityDisambiguation": "LLM selects top candidates with a debate prompt (three supporting arguments) and then re-checks the decision with a chain-of-verification-style prompt across cell/column/table consistency, revising or choosing NIL if needed."
+            }
+        },
+        "mainMethod": {
+            "type": "Hybrid",
+            "technique": "LLM prompting (GPT-4.1 nano) + retrieval over Wikidata (Elasticsearch) with debate and verification prompting"
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "End-to-end automatic annotation; no human-in-the-loop editing is described."
+        },
+        "domain": {
+            "domain": "Independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "SemTab 2025 MammoTab track (870 Wikipedia tables; Wikidata v20240720) evaluated on the official leaderboard.",
+            "metrics": [
+                "Precision",
+                "Recall",
+                "F1"
+            ]
+        },
+        "codeAvailability": "",
+        "license": "CC-BY-4.0",
+        "inputs": {
+            "typeOfTable": "CSV",
+            "tableSources": [
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Wikidata",
+            "index": "Elasticsearch full-text index over Wikidata labels and descriptions"
+        },
+        "output": "CSV",
+        "applicationPurpose": "Robust cell entity annotation (CEA) for table-to-KG matching in SemTab’25, reducing ambiguity and hallucination via retrieval and verification.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "",
+        "citations": {
+            "references": [
+                {
+                    "ref": "2020_benjelloun_google",
+                    "title": "Google dataset search by the numbers"
+                },
+                {
+                    "ref": "2024_cremaschi_survey",
+                    "title": "Survey on semantic interpretation of tabular data: Challenges and directions"
+                },
+                {
+                    "ref": "2023_liu_from",
+                    "title": "From tabular data to knowledge graphs: A survey of semantic table interpretation tasks and methods"
+                },
+                {
+                    "ref": "2024_hassanzadeh_results",
+                    "title": "Results of SemTab 2024"
+                },
+                {
+                    "ref": "2020_brown_language",
+                    "title": "Language models are few-shot learners"
+                },
+                {
+                    "ref": "2019_radford_language",
+                    "title": "Language models are unsupervised multitask learners"
+                },
+                {
+                    "ref": "2023_ji_survey",
+                    "title": "Survey of hallucination in natural language generation"
+                },
+                {
+                    "ref": "2020_lewis_retrieval-augmented",
+                    "title": "Retrieval-augmented generation for knowledge-intensive NLP tasks"
+                },
+                {
+                    "ref": "2023_du_improving",
+                    "title": "Improving factuality and reasoning in language models through multiagent debate"
+                },
+                {
+                    "ref": "2022_wei_chain-of-thought",
+                    "title": "Chain-of-thought prompting elicits reasoning in large language models"
+                },
+                {
+                    "ref": "2023_wang_self-consistency",
+                    "title": "Self-consistency improves chain of thought reasoning in language models"
+                },
+                {
+                    "ref": "2024_dhuliawala_chain-of-verification",
+                    "title": "Chain-of-verification reduces hallucination in large language models"
+                },
+                {
+                    "ref": "2022_marzocchi_mammotab",
+                    "title": "MammoTab: a giant and comprehensive dataset for semantic table interpretation"
+                },
+                {
+                    "ref": "2025_semtab_leaderboard",
+                    "title": "SemTab 2025 leaderboard"
+                },
+                {
+                    "ref": "2022_deng_turl",
+                    "title": "TURL: Table Understanding through Representation Learning"
+                },
+                {
+                    "ref": "2024_zhang_tablellama",
+                    "title": "TableLlama: Towards Open Large Generalist Models for Tables"
+                },
+                {
+                    "ref": "2020_herzig_tapas",
+                    "title": "TAPAS: Weakly supervised table parsing via pre-training"
+                },
+                {
+                    "ref": "2024_bikim_leveraging",
+                    "title": "Leveraging GPT models for semantic table annotation"
+                },
+                {
+                    "ref": "2024_baazouzi_kepler-asi",
+                    "title": "Kepler-aSI: Semantic annotation for tabular data"
+                },
+                {
+                    "ref": "2024_li_citysti",
+                    "title": "CitySTI 2024 system: Tabular data to KG matching using LLMs"
+                },
+                {
+                    "ref": "2024_vandemoortele_scalable",
+                    "title": "Scalable table-to-knowledge graph matching from metadata using LLMs"
+                }
+            ],
+            "count": 21,
+            "note": null
+        },
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "No DOI is stated in the paper text (CEUR/SemTab proceedings typically do not provide one)."
+            },
+            {
+                "field": "codeAvailability",
+                "reason": "The paper does not provide a public repository link for RAGDify."
+            }
+        ]
+    },
+    {
+        "id": "2025_tachioka_cell",
+        "added": "2026-02-24",
+        "year": 2025,
+        "firstAuthor": "Tachioka",
+        "authors": [
+            "Yuuki Tachioka",
+            "Yasunori Terao"
+        ],
+        "title": "Cell Entity Annotation for SemTab 2025 MammoTab via Iterative Refinement with Transposed Contexts and Unsupervised Scoring",
+        "venue": {
+            "type": "challenge",
+            "acronym": "SemTab"
+        },
+        "nameOfApproach": "",
+        "techniqueTags": [
+            "transformer",
+            "heuristic",
+            "iterative"
+        ],
+        "coreTasks": {
+            "cta": true,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Builds QID candidate sets from a Wikidata dump with staged string/token-set matching heuristics and uses table transposition to alter context for LLM-based annotation.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Initial CTA via majority voting over instanceOf labels of the generated QID candidates; alternatively, generates pseudo column names with ChatGPT to initialise CTA.",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Performs CEA with TableLlama in an iterative loop alternating CTA and CEA; uses original and transposed table orientations and unsupervised scores (consistency and entropy) for selection without gold labels.",
+                "candidateGeneration": "Six-stage candidate generation from Wikidata dump: year/ID detection, exact match, token-set match, description removal, and two partial set-matching stages to increase coverage while controlling noise.",
+                "entityDisambiguation": "TableLlama selects the best QID given the (iteratively refined) CTA and context; results from original vs transposed contexts are compared/selected using unsupervised consistency/entropy scores."
+            }
+        },
+        "mainMethod": {
+            "type": "Hybrid",
+            "technique": "Heuristic Wikidata candidate generation + iterative CTA/CEA with TableLlama; optional ChatGPT column-name prompting and unsupervised entropy/consistency scoring"
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "No manual post-editing; iteration control and selection are automated via unsupervised scores."
+        },
+        "domain": {
+            "domain": "Independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "SemTab 2025 MammoTab track (870 tables; 84,907 entities; 3,576 columns; Wikidata v20240720) with no provided gold labels.",
+            "metrics": [
+                "Coverage",
+                "Consistency",
+                "Entropy"
+            ]
+        },
+        "codeAvailability": "",
+        "license": "CC-BY-4.0",
+        "inputs": {
+            "typeOfTable": "CSV",
+            "tableSources": [
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Wikidata",
+            "index": "Wikidata dump lookups for label matching and instanceOf retrieval"
+        },
+        "output": "CSV",
+        "applicationPurpose": "Label-free CEA (with supporting CTA) for SemTab’25 MammoTab using iterative refinement, transposed contexts, and unsupervised performance estimation.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "",
+        "citations": {
+            "references": [
+                {
+                    "ref": "2024_sui_table",
+                    "title": "Table meets LLM: Can large language models understand structured table data? A benchmark and empirical study"
+                },
+                {
+                    "ref": "2024_fang_large",
+                    "title": "Large language models (LLMs) on tabular data: Prediction, generation, and understanding - a survey"
+                },
+                {
+                    "ref": "2025_wu_tabular",
+                    "title": "Tabular data understanding with LLMs: A survey of recent advances and challenges"
+                },
+                {
+                    "ref": "2020_jimenez-ruiz_semtab",
+                    "title": "SemTab 2019: Resources to benchmark tabular data to knowledge graph matching systems"
+                },
+                {
+                    "ref": "2022_marzocchi_mammotab",
+                    "title": "MammoTab: A giant and comprehensive dataset for semantic table interpretation"
+                },
+                {
+                    "ref": "2015_bhagavatula_tabel",
+                    "title": "TabEL: Entity Linking in Web Tables"
+                },
+                {
+                    "ref": "2022_ruas_nilinker",
+                    "title": "NILINKER: Attention-based approach to NIL entity linking"
+                },
+                {
+                    "ref": "2019_hulsebos_sherlock",
+                    "title": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
+                },
+                {
+                    "ref": "2024_bikim_leveraging",
+                    "title": "Leveraging GPT models for semantic table annotation"
+                },
+                {
+                    "ref": "2004_grandvalet_semi-supervised",
+                    "title": "Semi-supervised learning by entropy minimization"
+                },
+                {
+                    "ref": "2024_zhang_tablellama",
+                    "title": "TableLlama: Towards Open Large Generalist Models for Tables"
+                }
+            ],
+            "count": 11,
+            "note": null
+        },
+        "uncertainFields": [
+            {
+                "field": "year",
+                "reason": "The CEURART template includes a 'Woodstock’22' line and © 2022, but the paper explicitly targets the SemTab 2025 MammoTab task and the PDF metadata is from 2025."
+            },
+            {
+                "field": "doi",
+                "reason": "No DOI is stated in the paper text."
+            },
+            {
+                "field": "nameOfApproach",
+                "reason": "The paper describes a method/pipeline but does not provide a specific system name."
+            }
+        ]
+    },
+    {
+        "id": "2025_walter_knowledge",
+        "added": "2026-02-24",
+        "year": 2025,
+        "firstAuthor": "Walter",
+        "authors": [
+            "Sebastian Walter",
+            "Hannah Bast"
+        ],
+        "title": "Knowledge Graph Entity Linking via Interactive Reasoning and Exploration with GRASP",
+        "venue": {
+            "type": "workshop",
+            "acronym": "OM"
+        },
+        "nameOfApproach": "GRASP",
+        "techniqueTags": [
+            "transformer"
+        ],
+        "coreTasks": {
+            "cta": false,
+            "cpa": false,
+            "cea": true,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Annotates tables row-wise, providing 10 surrounding rows as context; builds multilingual Wikidata indices (labels/aliases) for entity and property lookup.",
+                "spellChecker": "",
+                "unitsOfMeasurements": ""
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "Zero-shot, agentic CEA in which an LLM explores Wikidata via search and SPARQL-style functions to retrieve candidates, inspect triples, and ground annotations (or NIL).",
+                "candidateGeneration": "Uses GRASP search functions over multilingual indices to find candidate entities/properties, retrieving top-k results for inspection.",
+                "entityDisambiguation": "Disambiguates by interactively querying/listing Wikidata triples (e.g., EXE/LST) and constrained search (SCN/SAC), with a know-before-use restriction that limits annotations to previously retrieved KG items."
+            }
+        },
+        "mainMethod": {
+            "type": "Hybrid",
+            "technique": "LLM agent with function-calling over Wikidata (GRASP); open-source Qwen3 models served with vLLM"
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "End-to-end automatic annotation via an LLM-driven tool-using agent; no user corrections are described."
+        },
+        "domain": {
+            "domain": "Independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "SemTab 2025 MammoTab track (870 tables; 84,907 cells; Wikidata v20240720), scored with F1 (equals accuracy when annotating all cells).",
+            "metrics": [
+                "F1"
+            ]
+        },
+        "codeAvailability": "https://github.com/ad-freiburg/grasp/tree/semtab-2025",
+        "license": "CC-BY-4.0",
+        "inputs": {
+            "typeOfTable": "CSV",
+            "tableSources": [
+                "wiki"
+            ]
+        },
+        "kg": {
+            "tripleStore": "Wikidata",
+            "index": "Multilingual entity/property indices (labels and aliases) plus SPARQL querying"
+        },
+        "output": "CSV",
+        "applicationPurpose": "Interactive knowledge-graph entity linking for CEA in SemTab’25 MammoTab, grounding LLM decisions via KG exploration.",
+        "userInterfaceTool": "",
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "",
+        "citations": {
+            "references": [
+                {
+                    "ref": "2018_balog_entity-oriented",
+                    "title": "Entity-Oriented Search"
+                },
+                {
+                    "ref": "2022_sevgili_neural",
+                    "title": "Neural entity linking: A survey of models based on deep learning"
+                },
+                {
+                    "ref": "2022_bast_elevant",
+                    "title": "ELEVANT: A fully automatic fine-grained entity linking evaluation and analysis tool"
+                },
+                {
+                    "ref": "2025_walter_grasp",
+                    "title": "GRASP: Generic Reasoning And SPARQL Generation across Knowledge Graphs"
+                },
+                {
+                    "ref": "2025_semtab_website",
+                    "title": "SemTab 2025 - Semantic Web Challenge on Tabular Data to Knowledge Graph Matching - LLMs & Tabular Data Matching"
+                },
+                {
+                    "ref": "2025_walter_grasp-demo",
+                    "title": "GRASP: Generic Reasoning And SPARQL Generation across Knowledge Graphs - Demo System"
+                },
+                {
+                    "ref": "2022_marzocchi_mammotab",
+                    "title": "MammoTab: A giant and comprehensive dataset for semantic table interpretation"
+                },
+                {
+                    "ref": "2014_vrandecic_wikidata",
+                    "title": "Wikidata: A free collaborative knowledgebase"
+                },
+                {
+                    "ref": "2025_qwen_qwen3",
+                    "title": "Qwen3 Technical Report"
+                },
+                {
+                    "ref": "2023_kwon_efficient",
+                    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention"
+                }
+            ],
+            "count": 10,
+            "note": null
+        },
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "No DOI is stated in the paper text."
+            },
+            {
+                "field": "venue.acronym",
+                "reason": "The header states 'International Workshop on Ontology Matching'; the acronym 'OM' is inferred from the workshop name."
+            }
+        ]
     }
 ]

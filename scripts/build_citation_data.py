@@ -44,9 +44,19 @@ def main():
         source_date = to_date(source_year)
         if not source or not source_date:
             continue
-        citations = (item.get('citations') or {}).get('references')
-        if isinstance(citations, list):
-            for r in citations:
+        citations = item.get('citations')
+        # Support both schema variants:
+        # - { citations: { references: [...] } } (current dataset)
+        # - { citations: [...] } (legacy entries)
+        if isinstance(citations, dict):
+            references = citations.get('references')
+        elif isinstance(citations, list):
+            references = citations
+        else:
+            references = None
+
+        if isinstance(references, list):
+            for r in references:
                 if not isinstance(r, dict):
                     continue
                 ref_id = r.get('ref')
