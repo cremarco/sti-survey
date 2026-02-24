@@ -235,10 +235,10 @@
             ]
         },
         "kg": {
-            "tripleStore": "",
+            "tripleStore": "None",
             "index": ""
         },
-        "output": "",
+        "output": "Integrated tables",
         "applicationPurpose": "Interactive creation and integration of structured Web data sources into new datasets.",
         "userInterfaceTool": "Web UI",
         "checkedByAuthor": false,
@@ -432,7 +432,7 @@
             ]
         },
         "kg": {
-            "tripleStore": "",
+            "tripleStore": "Domain OWL ontology (MIEL vocabulary)",
             "index": ""
         },
         "output": "RDF",
@@ -637,7 +637,7 @@
                 },
                 {
                     "ref": "2004_buitelaar_ontolt",
-                    "title": "Ontolt: a Prot\u00e9g\u00e9 plug-in for ontology extraction from text based on linguistic analysis"
+                    "title": "Ontolt: a Protégé plug-in for ontology extraction from text based on linguistic analysis"
                 },
                 {
                     "ref": "2000_chen_mining",
@@ -649,7 +649,7 @@
                 },
                 {
                     "ref": "2005_cimiano_text2onto",
-                    "title": "Text2Onto\u2014a framework for ontology learning and data-driven change discovery"
+                    "title": "Text2Onto—a framework for ontology learning and data-driven change discovery"
                 },
                 {
                     "ref": "2002_cohen_a",
@@ -705,7 +705,7 @@
                 },
                 {
                     "ref": "2002_handschuh_s-cream",
-                    "title": "S-CREAM\u2014Semi-automatic CREAtion of Metadata"
+                    "title": "S-CREAM—Semi-automatic CREAtion of Metadata"
                 },
                 {
                     "ref": "2006_holzinger_using",
@@ -733,7 +733,7 @@
                 },
                 {
                     "ref": "2001_noy_creating",
-                    "title": "Creating semantic web contents with Prot\u00e9g\u00e9-2000"
+                    "title": "Creating semantic web contents with Protégé-2000"
                 },
                 {
                     "ref": "2006_pivk_automatic",
@@ -745,11 +745,11 @@
                 },
                 {
                     "ref": "2004_popov_kim",
-                    "title": "KIM\u2014a semantic platform for information extraction and retrieval"
+                    "title": "KIM—a semantic platform for information extraction and retrieval"
                 },
                 {
                     "ref": "2002_spyns_ontoweb",
-                    "title": "OntoWeb\u2014a semantic web community portal"
+                    "title": "OntoWeb—a semantic web community portal"
                 },
                 {
                     "ref": "1979_tai_the",
@@ -922,7 +922,7 @@
             "tripleStore": "YAGO; DBpedia",
             "index": "Lemma/text index (Lucene) for candidate retrieval"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Relational Web search over annotated tables (select-project/join queries).",
         "userInterfaceTool": "Prototype relational Web search tool",
         "checkedByAuthor": false,
@@ -1466,7 +1466,7 @@
                 "web"
             ]
         },
-        "output": "",
+        "output": "Table type labels",
         "applicationPurpose": "Classify HTML tables by type to support knowledge extraction.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -1567,7 +1567,11 @@
                 "field": "citations[6].ref",
                 "reason": "First author appears as \"Huanhuan, J. H.\" in the reference text, which may reflect formatting/ordering issues."
             }
-        ]
+        ],
+        "kg": {
+            "tripleStore": "None",
+            "index": ""
+        }
     },
     {
         "id": "2011_mulwad_automatically",
@@ -1850,7 +1854,7 @@
                 "web"
             ]
         },
-        "output": "",
+        "output": "column-to-class annotations and column-to-property annotations",
         "applicationPurpose": "Improve table search and find related tables by recovering column types and inter-column relations.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -2007,7 +2011,11 @@
                 "field": "citations",
                 "reason": "List may be incomplete; only key references were extracted."
             }
-        ]
+        ],
+        "kg": {
+            "tripleStore": "Web-extracted isA and relations databases",
+            "index": ""
+        }
     },
     {
         "id": "2012_goel_exploiting",
@@ -2082,7 +2090,7 @@
                 "relational"
             ]
         },
-        "output": "",
+        "output": "Field semantic labels",
         "applicationPurpose": "Semantic labelling of structured data fields to support data integration.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -2191,7 +2199,11 @@
                 "field": "validation.goldStandard",
                 "reason": "Datasets are scraped and manually labelled; not a named public GS."
             }
-        ]
+        ],
+        "kg": {
+            "tripleStore": "None",
+            "index": ""
+        }
     },
     {
         "id": "2012_knoblock_semi-automatically",
@@ -2269,7 +2281,7 @@
             ]
         },
         "kg": {
-            "tripleStore": "",
+            "tripleStore": "Ontology",
             "index": ""
         },
         "output": "RDF",
@@ -2585,7 +2597,11 @@
                 "field": "techniqueTags",
                 "reason": "No listed tag (SVM/CRF/clustering/transformer/etc.) directly applies; left empty."
             }
-        ]
+        ],
+        "kg": {
+            "tripleStore": "None",
+            "index": ""
+        }
     },
     {
         "id": "2012_wang_understanding",
@@ -2873,7 +2889,7 @@
                 "spreadsheet"
             ]
         },
-        "output": "",
+        "output": "Extracted table schema",
         "applicationPurpose": "Schema extraction of web and spreadsheet tables",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -3010,7 +3026,11 @@
                 "field": "code",
                 "reason": "No code repository or release is mentioned."
             }
-        ]
+        ],
+        "kg": {
+            "tripleStore": "None",
+            "index": ""
+        }
     },
     {
         "id": "2013_buche_fuzzy",
@@ -3318,7 +3338,7 @@
         "userInterfaceTool": "Web UI",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1145/2525314.2525324",
         "citations": {
             "references": [
                 {
@@ -3779,7 +3799,7 @@
             ]
         },
         "kg": {
-            "tripleStore": "",
+            "tripleStore": "PublicData.eu (RDF)",
             "index": ""
         },
         "output": "RDF",
@@ -4325,7 +4345,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "Cell entity annotations",
         "applicationPurpose": "Discover and annotate previously unseen entities in tables (e.g., POIs) to support data extraction and enrichment for faceted browsing.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -4522,7 +4542,7 @@
                 "web"
             ]
         },
-        "output": "",
+        "output": "Semantic graph (unit/scale/timestamp labels and column matches)",
         "applicationPurpose": "Entity augmentation for numeric and time-varying attributes using a semantic graph.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -4627,7 +4647,11 @@
                 "field": "doi",
                 "reason": "DOI confirmed via ACM Digital Library."
             }
-        ]
+        ],
+        "kg": {
+            "tripleStore": "None",
+            "index": ""
+        }
     },
     {
         "id": "2014_sekhavat_knowledge",
@@ -5078,7 +5102,7 @@
             "tripleStore": "YAGO",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations",
         "applicationPurpose": "Entity linking in Web tables to support semantic table interpretation and downstream KG augmentation.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -5357,7 +5381,7 @@
             "tripleStore": "DBpedia; Europeana Data Model",
             "index": "Apache Lucene used to index textual label documents"
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Automated semantic labelling of data source attributes to support data integration.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -5528,7 +5552,7 @@
             "tripleStore": "DBpedia",
             "index": "Lucene"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Knowledge base extension (slot filling).",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -5949,7 +5973,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "Semantic labels for numerical values",
         "applicationPurpose": "Semantic labelling of numerical columns and their contexts in tabular data",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -6170,7 +6194,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations and column-to-property annotations",
         "applicationPurpose": "Automatic semantic labelling of table attributes for heterogeneous data integration. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -6843,7 +6867,7 @@
             "tripleStore": "DBpedia; Wikidata",
             "index": "FactBase generic index; DBpedia Lookup"
         },
-        "output": "",
+        "output": "cell-to-entity annotations",
         "applicationPurpose": "Unsupervised annotation of web tables and empirical benchmarking of methods for KB augmentation/search. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -7102,7 +7126,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.4119/unibi/2912802",
         "citations": {
             "references": [
                 {
@@ -7276,7 +7300,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-property annotations",
         "applicationPurpose": "Knowledge base augmentation and improved schema matching on small web tables",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -7823,7 +7847,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-property annotations",
         "applicationPurpose": "Assign semantic labels to numerical columns to aid data discovery and KB integration.",
         "userInterfaceTool": "",
         "usesLLM": null,
@@ -8025,7 +8049,7 @@
             "tripleStore": "Wikipedia",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations",
         "applicationPurpose": "KB enrichment and fact discovery from non-English web tables.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -8270,7 +8294,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "Ranked list of tables",
         "applicationPurpose": "Ad hoc table retrieval / table search. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -8744,7 +8768,7 @@
             "tripleStore": "DBpedia",
             "index": "DBpedia Lookup service and SPARQL endpoint"
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Column type prediction for web tables using DBpedia.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -9360,12 +9384,12 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Semantic type detection to support data cleaning, schema matching, and data discovery.",
         "userInterfaceTool": "Python library",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1145/3292500.3330993",
         "citations": {
             "references": [
                 {
@@ -9830,7 +9854,7 @@
             "tripleStore": "DBpedia",
             "index": "LOD4ALL keyword store with Elasticsearch and SimString; BM25-based Score DB for classes"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Knowledge Graph construction from web tables",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -9973,7 +9997,7 @@
             "tripleStore": "DBpedia",
             "index": "DBpedia Lookup; DBpedia SPARQL endpoint; Wikipedia/Wikidata redirects"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "SemTab 2019 challenge system for matching tables to DBpedia",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -10125,7 +10149,7 @@
             "tripleStore": "DBpedia",
             "index": "ElasticSearch index of labels; categories/types with tf-idf weighting."
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Semantic annotation of tables to a KG (CTA/CEA/CPA) and evaluation in the SemTab challenge.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -10259,7 +10283,7 @@
             "tripleStore": "DBpedia",
             "index": "DBpedia Lookup API; DBpedia Spotlight; SPARQL queries for domain/range"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Semantic annotation of CSV tables and KG construction/linking for DBpedia; SemTab 2019 participation.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -10608,7 +10632,7 @@
             "tripleStore": "DBpedia; Wikidata",
             "index": "Elasticsearch indexes over Wikidata (labels/aliases/descriptions) and DBpedia labels mapped to Wikidata; Name Abbreviations Index"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Linking tabular data to knowledge graphs (CEA/CTA/CPA) for the SemTab challenge.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -10743,10 +10767,10 @@
             ]
         },
         "kg": {
-            "tripleStore": "",
+            "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Semantic typing of table columns to support data cleaning, schema matching, and data discovery.",
         "userInterfaceTool": "Web UI (demo)",
         "usesLLM": null,
@@ -11038,7 +11062,7 @@
             "tripleStore": "Wikidata",
             "index": "Wikidata Lookup API and SPARQL endpoint"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Semantic table annotation to link tabular data to Wikidata",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -11192,7 +11216,7 @@
             "tripleStore": "Wikidata",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations and column-to-class annotations",
         "applicationPurpose": "Fast annotation of tabular data with KG entities and types (CTA/CEA) for table-to-KG matching.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -11368,7 +11392,7 @@
             "tripleStore": "Wikidata",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Participation in SemTab 2020 CTA task.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -11967,7 +11991,7 @@
             "tripleStore": "Wikidata",
             "index": "Surface-form index mapping labels to Wikidata IDs"
         },
-        "output": "",
+        "output": "cell-to-entity annotations",
         "applicationPurpose": "Enable web table annotation to support knowledge base augmentation, search, and downstream applications.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -12153,7 +12177,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Improve column type detection for table interpretation by modelling single-column semantics and inter-column dependencies. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -12350,7 +12374,7 @@
             "tripleStore": "Wikidata",
             "index": "Spark-based lookup using Wikidata Toolkit on HDFS"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Automatic semantic table interpretation for entity, type and relation annotation aligned to Wikidata; competitive SemTab system.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -12575,7 +12599,7 @@
             "tripleStore": "Wikidata",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Knowledge graph matching for semantic table annotation",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -12709,7 +12733,7 @@
             "tripleStore": "Wikidata",
             "index": "Fuzzy entity and statement indexes built from a Wikidata dump and item history revisions."
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Automatic semantic annotation of table cells, columns and column relations against Wikidata for SemTab 2020.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -13036,7 +13060,7 @@
             "tripleStore": "Wikidata",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-property annotations",
         "applicationPurpose": "CPA in the SemTab challenge using deterministic SPARQL-based matching. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -13350,7 +13374,7 @@
             "tripleStore": "DBpedia",
             "index": "Wikipedia search API and DBpedia lookup/surface forms"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-property annotations, and NIL annotations",
         "applicationPurpose": "Knowledge base population and extension",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -13613,7 +13637,7 @@
             "tripleStore": "Wikidata and DBpedia",
             "index": "Generic precomputed lookup (Jaro–Winkler) and caching over KG labels/aliases"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Semantic table annotation for SemTab 2021 (CEA/CTA/CPA).",
         "userInterfaceTool": "",
         "usesLLM": {},
@@ -13794,7 +13818,7 @@
             "tripleStore": "Wikidata; DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Table-to-KG matching for the SemTab 2021 challenge (annotation of tabular data against Wikidata/DBpedia).",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -14318,7 +14342,7 @@
             "tripleStore": "Wikidata; DBpedia",
             "index": "Elasticsearch-based index with enriched labels and aliases"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Automatic STI for dataset indexing/recommendation and KG refinement; industrial deployment via TableAnnotation API and DAGOBAH UI.",
         "userInterfaceTool": "TableAnnotation REST API; DAGOBAH UI",
         "checkedByAuthor": false,
@@ -14483,7 +14507,7 @@
             ]
         },
         "kg": {
-            "tripleStore": "",
+            "tripleStore": "None",
             "index": ""
         },
         "output": "CSV (match/no-match labels)",
@@ -14839,7 +14863,7 @@
             "tripleStore": "Wikidata, DBpedia, Wikipedia (integrated WikiGraph)",
             "index": "BM25 index; Symmetric Delete precomputed deletes for fuzzy matching"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "General-purpose tabular data annotation with knowledge graphs, emphasising usability and performance.",
         "userInterfaceTool": "Web UI and public APIs",
         "checkedByAuthor": false,
@@ -15076,7 +15100,7 @@
             "tripleStore": "Wikidata; DBpedia",
             "index": "Elasticsearch"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Table enrichment and knowledge graph enrichment through annotation-driven completion and expansion.",
         "userInterfaceTool": "Web UI",
         "checkedByAuthor": false,
@@ -15232,7 +15256,7 @@
             "tripleStore": "DBpedia; Wikidata",
             "index": "HDT via RDFLib"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Data enrichment and augmentation of tables via KGs.",
         "userInterfaceTool": "GUI",
         "checkedByAuthor": false,
@@ -15422,10 +15446,10 @@
             ]
         },
         "kg": {
-            "tripleStore": "",
+            "tripleStore": "Proprietary music ontology",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations and column-to-property annotations",
         "applicationPurpose": "Web table interpretation (column typing and relation prediction) for knowledge base augmentation.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -15760,7 +15784,7 @@
             "tripleStore": "DBpedia; Wikidata",
             "index": "Custom hash-table index for DBpedia; Wikidata MediaWiki API"
         },
-        "output": "",
+        "output": "cell-to-entity annotations and column-to-class annotations",
         "applicationPurpose": "Participation in SemTab 2021 to interpret tables and match them to KG entities and types.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -15929,7 +15953,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Improve column concept type detection (CTA) in tabular data to support search, information extraction and question answering.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -16339,7 +16363,7 @@
             "tripleStore": "Wikidata",
             "index": "Alias map and Elasticsearch fuzzy index; key–value KG access (in-memory Redis or disk-backed RocksDB)."
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Table annotation, semantic flash fill, table fact checking",
         "userInterfaceTool": "RESTful API; Excel Add-in",
         "checkedByAuthor": false,
@@ -16692,12 +16716,12 @@
             "tripleStore": "Wikidata; Freebase; DBpedia",
             "index": "Wikidata Lookup and corpus-level header/entity co-occurrence indices"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Universal pre-trained model for table interpretation (CEA/CTA/CPA) and augmentation (row population, cell filling, schema augmentation).",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.14778/3430915.3430921",
         "citations": {
             "references": [
                 {
@@ -17270,7 +17294,7 @@
             "tripleStore": "Wikidata",
             "index": "MediaWiki Action API (wbsearchentities, query)"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "SemTab participation: annotate tables with entities, types and properties using Wikidata. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -17401,7 +17425,7 @@
             "tripleStore": "Wikidata; DBpedia",
             "index": "Elasticsearch alias index with BM25 and PageRank scoring"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Semantic interpretation of tables for CEA/CTA/CPA, with enrichment of tables and knowledge graphs; SemTab 2022 participation.",
         "userInterfaceTool": "Web UI (DAGOBAH UI) and API",
         "checkedByAuthor": false,
@@ -17650,10 +17674,10 @@
             ]
         },
         "kg": {
-            "tripleStore": "",
+            "tripleStore": "Freebase; DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations and column-to-property annotations",
         "applicationPurpose": "Unified column annotation (types and relations) for table understanding and downstream data-management tasks. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -18006,7 +18030,7 @@
             "tripleStore": "Wikidata; DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Participation in SemTab 2023 to annotate tabular data with KG semantics.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -18177,7 +18201,7 @@
             "tripleStore": "Wikidata; DBpedia; Schema.org",
             "index": "Elasticsearch over Wikidata; SPARQL endpoint and Wikipedia API for retrieval"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Semantic annotation of tables for CEA/CTA/CPA across diverse datasets",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -18777,7 +18801,7 @@
             "tripleStore": "DBpedia; Schema.org; Wikidata",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Improve machine-to-machine interoperability by semantically annotating tables (columns, properties, qualifiers).",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -18965,7 +18989,7 @@
             "tripleStore": "DBpedia; Schema.org",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations and column-to-property annotations",
         "applicationPurpose": "Table matching (CTA/CPA) for data integration and knowledge discovery. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -19129,7 +19153,7 @@
                 "web"
             ]
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Improve column semantic type annotation for schema matching, data cleaning, and data integration.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -19286,7 +19310,11 @@
                 "field": "userInterfaceTool",
                 "reason": "No UI or tool front-end is described; left empty pending confirmation."
             }
-        ]
+        ],
+        "kg": {
+            "tripleStore": "None",
+            "index": ""
+        }
     },
     {
         "id": "2024_feuer_archetype",
@@ -19368,7 +19396,7 @@
             "tripleStore": "Schema.org",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Open-set column type annotation for data cleaning, schema matching, and data discovery.",
         "userInterfaceTool": "",
         "usesLLM": {
@@ -19675,7 +19703,7 @@
             "tripleStore": "DBpedia and Wikidata",
             "index": "Inverted entity–concept count index; numerical interval tree; composite pattern (regex) tree; column co-occurrence & tuple-validation index. "
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Column type annotation for data integration, cleaning, search, and feature engineering/model building. ",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -20057,7 +20085,7 @@
             "tripleStore": "DBpedia; Wikidata",
             "index": "LamAPI (ElasticSearch + Redis) indices for labels, predicates, objects, and concepts"
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Efficient STI pipeline and tooling (LamAPI) to annotate tables and support SemTab evaluation.",
         "userInterfaceTool": "Web UI (Django) with Docker/Celery and MongoDB backend",
         "checkedByAuthor": false,
@@ -20710,12 +20738,12 @@
             "tripleStore": "DBpedia",
             "index": "Elasticsearch keyword BM25, fuzzy edit-distance search, and aggregation over the DBpedia 2016-10 dump. "
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Semantic annotation of tabular data with DBpedia; reproducible benchmarking resources and public services (APIs/UI). ",
         "userInterfaceTool": "Web UI and REST APIs (mtab4d.kgraph.jp). ",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.3233/SW-223098",
         "citations": {
             "references": [
                 {
@@ -20918,7 +20946,7 @@
             "tripleStore": "DBpedia; schema.org",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations and column-to-property annotations",
         "applicationPurpose": "Improve CPA (and CTA) for downstream data search, data integration, and knowledge graph enrichment.",
         "userInterfaceTool": "",
         "usesLLM": {
@@ -22288,7 +22316,7 @@
             "tripleStore": "Wikidata; DBpedia; Schema.org",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
         "applicationPurpose": "Table-to-KG matching for CTA, CEA, CPA and TTD in SemTab 2023.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -22458,7 +22486,7 @@
             "tripleStore": "Wikidata",
             "index": ""
         },
-        "output": "",
+        "output": "cell-to-entity annotations",
         "applicationPurpose": "Disambiguate ambiguous cell–entity annotations and improve STI accuracy.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -22722,7 +22750,7 @@
             "tripleStore": "DBpedia",
             "index": ""
         },
-        "output": "",
+        "output": "column-to-class annotations",
         "applicationPurpose": "Annotate table headers with semantic types to support web table disambiguation.",
         "userInterfaceTool": "",
         "checkedByAuthor": false,
@@ -23030,54 +23058,49 @@
             "technique": "rule-based"
         },
         "revision": {
-            "type": "semi automated",
+            "type": "Semi automated",
             "description": "All STI steps run automatically, and a GUI allows users to inspect and edit results."
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "general-purpose"
         },
         "validation": {
             "goldStandard": "",
             "metrics": []
         },
-        "code": "http://mantistable.disco.unimib.it",
         "license": "Not Specified",
         "inputs": {
             "typeOfTable": "HTML tables",
             "tableSources": [
                 "web"
-            ],
-            "kg": {
-                "tripleStore": "DBpedia",
-                "index": ""
-            },
-            "output": "",
-            "applicationPurpose": "Automatically annotates, manages, and makes table semantics accessible to humans and machines.",
-            "userInterfaceTool": "Web UI"
+            ]
         },
-        "usesLLM": {},
-        "checkedByAuthor": "",
+        "checkedByAuthor": false,
         "checkedByAi": true,
         "doi": "",
-        "citations": [
-            {
-                "ref": "2019_cremaschi_mantistable",
-                "title": "MantisTable: a Tool for Creating Semantic Annotations on Tabular Data"
-            },
-            {
-                "ref": "2016_pham_semantic",
-                "title": "Semantic labeling: a domain-independent approach"
-            },
-            {
-                "ref": "2015_ritze_matching",
-                "title": "Matching HTML Tables to DBpedia"
-            },
-            {
-                "ref": "2017_zhang_effective",
-                "title": "Effective and efficient semantic table interpretation using tableminer+"
-            }
-        ],
+        "citations": {
+            "references": [
+                {
+                    "ref": "2019_cremaschi_mantistable",
+                    "title": "MantisTable: a Tool for Creating Semantic Annotations on Tabular Data"
+                },
+                {
+                    "ref": "2016_pham_semantic",
+                    "title": "Semantic labeling: a domain-independent approach"
+                },
+                {
+                    "ref": "2015_ritze_matching",
+                    "title": "Matching HTML Tables to DBpedia"
+                },
+                {
+                    "ref": "2017_zhang_effective",
+                    "title": "Effective and efficient semantic table interpretation using tableminer+"
+                }
+            ],
+            "count": 4,
+            "note": null
+        },
         "uncertainFields": [
             {
                 "field": "venue.type",
@@ -23123,7 +23146,15 @@
                 "field": "code",
                 "reason": "The URL points to a project site; a repository link is not provided in the poster."
             }
-        ]
+        ],
+        "codeAvailability": "http://mantistable.disco.unimib.it",
+        "kg": {
+            "tripleStore": "DBpedia",
+            "index": ""
+        },
+        "output": "cell-to-entity annotations, column-to-class annotations, and column-to-property annotations",
+        "applicationPurpose": "Automatically annotates, manages, and makes table semantics accessible to humans and machines.",
+        "userInterfaceTool": "Web UI"
     },
     {
         "id": "2024_avogadro_featurevector",
@@ -23140,8 +23171,6 @@
             "type": "journal",
             "acronym": "KBS"
         },
-        "type": "journal",
-        "acronym": "KBS",
         "nameOfApproach": "LamAPI and s-elBat",
         "techniqueTags": [
             "rule-based",
@@ -23174,14 +23203,10 @@
         },
         "mainMethod": {
             "type": "Hybrid",
-            "technique": "Heuristic rules + neural network re-ranking with FastText embeddings and table-context features",
-            "revision": {
-                "type": "semi automated",
-                "description": "Automated revision reorders candidates to be consistent with CTA/CPA; SemTUI UI enables inspection and optional user adjustments. "
-            }
+            "technique": "Heuristic rules + neural network re-ranking with FastText embeddings and table-context features"
         },
         "domain": {
-            "domain": "independent",
+            "domain": "Independent",
             "type": "generic"
         },
         "validation": {
@@ -23192,7 +23217,6 @@
                 "F1"
             ]
         },
-        "code": "https://github.com/unimib-datAI/lamAPI; https: //github.com/unimib-datAI/s-elbat",
         "license": "CC BY 4.0 ",
         "inputs": {
             "typeOfTable": "Web tables",
@@ -23200,52 +23224,51 @@
                 "web",
                 "wiki",
                 "relational"
-            ],
-            "kg": {
-                "tripleStore": "Wikidata; DBpedia",
-                "index": "Custom Elasticsearch index over DBpedia/Wikidata with MongoDB storage for triples. "
-            },
-            "output": "CSV"
+            ]
         },
         "applicationPurpose": "Semantic table interpretation for data enrichment and KG construction/extension. ",
         "userInterfaceTool": "SemTUI (Web UI). ",
-        "checkedByAuthor": "",
+        "checkedByAuthor": false,
         "checkedByAi": true,
         "doi": "https://doi.org/10.1016/j.knosys.2024.112447",
-        "citations": [
-            {
-                "ref": "2017_ritze_matching-web-tables-to-dbpedia",
-                "title": "Matching web tables to DBpedia - a feature utility study"
-            },
-            {
-                "ref": "2019_chen_colnet",
-                "title": "ColNet: Embedding the semantics of web tables for column type prediction"
-            },
-            {
-                "ref": "2010_limaye_annotating-and-searching-web-tables",
-                "title": "Annotating and searching web tables using entities, types and relationships"
-            },
-            {
-                "ref": "2021_nguyen_semtab-2021-tabular-data-annotation-with-mtab-tool",
-                "title": "SemTab 2021: Tabular data annotation with mtab tool"
-            },
-            {
-                "ref": "2022_deng_turl",
-                "title": "TURL: Table understanding through representation learning"
-            },
-            {
-                "ref": "2023_zhang_tablellama",
-                "title": "TableLlama: Towards open large generalist models for tables"
-            },
-            {
-                "ref": "2020_huynh_dagobah-enhanced-scoring",
-                "title": "DAGOBAH: Enhanced scoring algorithms for scalable annotations of tabular data"
-            },
-            {
-                "ref": "2022_cremaschi_s-elbat",
-                "title": "S-elBat: a semantic interpretation approach for messy table-s"
-            }
-        ],
+        "citations": {
+            "references": [
+                {
+                    "ref": "2017_ritze_matching-web-tables-to-dbpedia",
+                    "title": "Matching web tables to DBpedia - a feature utility study"
+                },
+                {
+                    "ref": "2019_chen_colnet",
+                    "title": "ColNet: Embedding the semantics of web tables for column type prediction"
+                },
+                {
+                    "ref": "2010_limaye_annotating-and-searching-web-tables",
+                    "title": "Annotating and searching web tables using entities, types and relationships"
+                },
+                {
+                    "ref": "2021_nguyen_semtab-2021-tabular-data-annotation-with-mtab-tool",
+                    "title": "SemTab 2021: Tabular data annotation with mtab tool"
+                },
+                {
+                    "ref": "2022_deng_turl",
+                    "title": "TURL: Table understanding through representation learning"
+                },
+                {
+                    "ref": "2023_zhang_tablellama",
+                    "title": "TableLlama: Towards open large generalist models for tables"
+                },
+                {
+                    "ref": "2020_huynh_dagobah-enhanced-scoring",
+                    "title": "DAGOBAH: Enhanced scoring algorithms for scalable annotations of tabular data"
+                },
+                {
+                    "ref": "2022_cremaschi_s-elbat",
+                    "title": "S-elBat: a semantic interpretation approach for messy table-s"
+                }
+            ],
+            "count": 8,
+            "note": null
+        },
         "uncertainFields": [
             {
                 "field": "inputs.output",
@@ -23263,7 +23286,17 @@
                 "field": "techniqueTags",
                 "reason": "The approach mixes heuristic rules, embeddings, and KG-type/property reasoning; mapping this to the restricted tag set may be debatable."
             }
-        ]
+        ],
+        "revision": {
+            "type": "Semi automated",
+            "description": "Automated revision reorders candidates to be consistent with CTA/CPA; SemTUI UI enables inspection and optional user adjustments. "
+        },
+        "codeAvailability": "https://github.com/unimib-datAI/lamAPI; https://github.com/unimib-datAI/s-elbat",
+        "kg": {
+            "tripleStore": "Wikidata; DBpedia",
+            "index": "Custom Elasticsearch index over DBpedia/Wikidata with MongoDB storage for triples. "
+        },
+        "output": "CSV"
     },
     {
         "id": "2025_abdelmageed_kg2tables",
