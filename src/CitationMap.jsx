@@ -65,15 +65,25 @@ function CitationMap() {
      */
     const formatYear = (str) => {
       const parsed = Date.parse(str);
+      if (Number.isNaN(parsed)) return null;
       const date = new Date(parsed);
       return date.getFullYear();
     };
 
+    const toPaperLabel = (author, dateString) => {
+      const year = formatYear(dateString);
+      if (!author || !Number.isFinite(year)) return null;
+      return `${author} ${year}`;
+    };
+
+    const citeEdges = data.filter((d) => d.type === 'cite');
+    const evolveEdges = data.filter((d) => d.type === 'evolve');
+
     // Compute unique names for the chord diagram
-    // Build unique names and sort by year ascending (then by label)
+    // Build unique names from citation edges and sort by year ascending (then by label)
     const allNames = d3.union(
-      data.map((d) => `${d.source} ${formatYear(d.source_date)}`).filter((name) => name && name.trim() !== 'NaN' && name.trim() !== ''),
-      data.map((d) => `${d.target} ${formatYear(d.target_date)}`)
+      citeEdges.map((d) => toPaperLabel(d.source, d.source_date)).filter(Boolean),
+      citeEdges.map((d) => toPaperLabel(d.target, d.target_date)).filter(Boolean)
     );
     const getYearFromLabel = (name) => {
       const lastSpace = name.lastIndexOf(' ');
@@ -88,19 +98,36 @@ function CitationMap() {
     });
     const index = new Map(names.map((name, i) => [name, i]));
 
+    if (names.length === 0) {
+      const emptyMessage = document.createElement('div');
+      emptyMessage.className = 'text-neutral-400 text-sm';
+      emptyMessage.textContent = 'No citation edges found in dataset.';
+      container.appendChild(emptyMessage);
+      setSvgNode(null);
+      return;
+    }
+
     // Map for 'evolve' type relationships
     const evolveMap = new Map();
-    data.forEach((datum) => {
-      if (datum.type === 'evolve') {
-        evolveMap.set(index.get(`${datum.target} ${formatYear(datum.target_date)}`), `${datum.source} ${formatYear(datum.source_date)}`);
-      }
+    evolveEdges.forEach((datum) => {
+      const targetLabel = toPaperLabel(datum.target, datum.target_date);
+      const sourceLabel = toPaperLabel(datum.source, datum.source_date);
+      if (!targetLabel || !sourceLabel) return;
+      const targetIndex = index.get(targetLabel);
+      if (targetIndex === undefined) return;
+      evolveMap.set(targetIndex, sourceLabel);
     });
 
     // Build adjacency matrix for chord diagram
     const matrix = Array.from(index, () => new Array(names.length).fill(0));
-    for (const { source, target, source_date, target_date, value } of data) {
-      if (source === '') continue;
-      matrix[index.get(`${source} ${formatYear(source_date)}`)][index.get(`${target} ${formatYear(target_date)}`)] += value;
+    for (const { source, target, source_date, target_date, value } of citeEdges) {
+      const sourceLabel = toPaperLabel(source, source_date);
+      const targetLabel = toPaperLabel(target, target_date);
+      if (!sourceLabel || !targetLabel) continue;
+      const sourceIndex = index.get(sourceLabel);
+      const targetIndex = index.get(targetLabel);
+      if (sourceIndex === undefined || targetIndex === undefined) continue;
+      matrix[sourceIndex][targetIndex] += Number.isFinite(value) ? value : 1;
     }
 
     // D3 generators for chord diagram
@@ -205,8 +232,8 @@ function CitationMap() {
       .append('title')
       .text(
         (d) => `${names[d.index]}
-${d3.sum(chords, (c) => (c.source.index === d.index) * c.source.value)} Cited →
-${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing ←`
+Outgoing citations (this paper cites): ${d3.sum(chords, (c) => (c.source.index === d.index ? c.source.value : 0))}
+Incoming citations (cited by others): ${d3.sum(chords, (c) => (c.target.index === d.index ? c.source.value : 0))}`
       );
 
     // Add chord edges
@@ -223,7 +250,7 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing �
     // Add tooltips for edges
     edges
       .append('title')
-      .text((d) => `${names[d.source.index]} → ${names[d.target.index]} ${d.source.value}`);
+      .text((d) => `${names[d.source.index]} cites ${names[d.target.index]}: ${d.source.value}`);
 
     // Append SVG to container
     container.appendChild(svg.node());
@@ -319,7 +346,8 @@ ${d3.sum(chords, (c) => (c.target.index === d.index) * c.source.value)} Citing �
           <div className="w-full pb-4 mb-8 flex justify-between items-start">
             <div>
               <h1 className="text-3xl md:text-4xl text-neutral-100 font-bold tracking-tight mb-2">Citation Map</h1>
-              <p className="text-neutral-400 text-base">Visualization of citations between documents</p>
+              <p className="text-neutral-400 text-base">Directed citation links between documents (hover nodes for outgoing/incoming counts)</p>
+              <p className="text-neutral-500 text-sm mt-1">Label suffix <span className="font-mono">≪ Author Year</span> indicates the previous item in the same author timeline (not counted as citation edge).</p>
             </div>
             <button
               onClick={handleDownloadSVG}
