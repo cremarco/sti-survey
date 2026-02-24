@@ -1252,30 +1252,6 @@ function SurveyTable({ data = [] }) {
       cell: (info) => <ValidationCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'validation')} />,
       enableSorting: false,
     }),
-    columnHelper.accessor(row => row.checkedByAuthor, {
-      id: "checkedByAuthor",
-      header: () => <span>{getSchemaLabel('checkedByAuthor', 'Checked by Author')}</span>,
-      cell: (info) => {
-        const value = info.getValue();
-        const isMissing = isRequiredFieldMissing(info.row.original, 'checkedByAuthor');
-        const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-        
-        if (isMissing) {
-          return (
-            <div className={alignClass}>
-              <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>
-            </div>
-          );
-        }
-        return (
-          <div className={alignClass}>
-            {value ? <Icon name="done" className="text-green-500 text-lg" /> : <Icon name="clear" className="text-red-500 text-lg" />}
-          </div>
-        );
-      },
-      enableSorting: false,
-      meta: { align: 'center' }
-    }),
     columnHelper.accessor(row => row.doi, {
       id: "doi",
       header: () => <span>{getSchemaLabel('doi', 'DOI')}</span>,
