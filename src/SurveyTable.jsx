@@ -434,29 +434,9 @@ const ValidationCell = ({ value, isMissing }) => {
     </div>
   );
 };
-const RowNumberCell = ({ row, index }) => {
-  const missingFields = REQUIRED_FIELD_PATHS.filter((field) => isRequiredFieldMissing(row.original, field));
-  const hasMissingFields = missingFields.length > 0;
+const RowNumberCell = ({ index }) => {
   return (
-    <div className="flex flex-col items-center">
-      <span>{index + 1}</span>
-      {hasMissingFields && (
-        <div className="relative group mt-1">
-          <span className="text-[11px] text-red-400 bg-red-900/60 px-2 py-0.5 leading-none cursor-pointer whitespace-nowrap">
-            {missingFields.length} missing
-          </span>
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-800 shadow-lg text-xs text-neutral-300 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 pointer-events-none min-w-[120px]">
-            <div className="font-semibold mb-1">Missing fields:</div>
-            <div className="space-y-1">
-              {missingFields.map((field) => (
-                <div key={field} className="text-[10px] text-neutral-400">• {field}</div>
-              ))}
-            </div>
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
-          </div>
-        </div>
-      )}
-    </div>
+    <span>{index + 1}</span>
   );
 };
 
@@ -571,7 +551,7 @@ function SurveyTable({ data = [] }) {
     columnHelper.display({
       id: "rowNumber",
       header: "#",
-      cell: (info) => <RowNumberCell row={info.row} index={info.row.index} />, // Always first
+      cell: (info) => <RowNumberCell index={info.row.index} />, // Always first
       enableSorting: false,
       meta: { align: 'center' }
     }),
