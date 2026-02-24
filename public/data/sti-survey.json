@@ -23965,8 +23965,8 @@
         ],
         "title": "Knowledge Graph Entity Linking via Interactive Reasoning and Exploration with GRASP",
         "venue": {
-            "type": "workshop",
-            "acronym": "OM"
+            "type": "challenge",
+            "acronym": "SemTab"
         },
         "nameOfApproach": "GRASP",
         "techniqueTags": [
@@ -24082,10 +24082,6 @@
             {
                 "field": "doi",
                 "reason": "No DOI is stated in the paper text."
-            },
-            {
-                "field": "venue.acronym",
-                "reason": "The header states 'International Workshop on Ontology Matching'; the acronym 'OM' is inferred from the workshop name."
             }
         ]
     }
