@@ -1276,22 +1276,6 @@ function SurveyTable({ data = [] }) {
       enableSorting: false,
       meta: { align: 'center' }
     }),
-    columnHelper.accessor(row => row.checkedByAi, {
-      id: "checkedByAi",
-      header: () => <span>{getSchemaLabel('checkedByAi', 'Checked by AI')}</span>,
-      cell: (info) => {
-        const value = info.getValue();
-        const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';
-        
-        return (
-          <div className={alignClass}>
-            {value ? <Icon name="done" className="text-green-500 text-lg" /> : <Icon name="clear" className="text-red-500 text-lg" />}
-          </div>
-        );
-      },
-      enableSorting: false,
-      meta: { align: 'center' },
-    }),
     columnHelper.accessor(row => row.doi, {
       id: "doi",
       header: () => <span>{getSchemaLabel('doi', 'DOI')}</span>,
