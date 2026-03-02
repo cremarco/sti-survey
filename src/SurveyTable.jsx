@@ -62,20 +62,20 @@ const TAXONOMY_GROUP_LABELS = {
 
 // Colors aligned with the rendered Taxonomy labels (src/Taxonomy.jsx radial palette)
 const TAXONOMY_HEADER_COLORS = {
-  coreTasks: '#f6910e',
-  supportTasks: '#68c82e',
-  applicationPurpose: '#a3a3a3',
-  systemLevel: '#0ab0d9',
-  mainMethod: '#12b8a2',
-  revision: '#0ea9e2',
-  domain: '#318af2',
-  resourcheImplementation: '#885df5',
-  codeAvailability: '#5e6bf3',
-  license: '#955af6',
-  userInterfaceTool: '#cd4aea',
-  dataInterface: '#f14274',
-  inputs: '#e946a5',
-  output: '#f14274',
+  coreTasks: '#ef4444',
+  supportTasks: '#f97316',
+  applicationPurpose: '#f59e0b',
+  mainMethod: '#eab308',
+  systemLevel: '#84cc16',
+  revision: '#22c55e',
+  domain: '#10b981',
+  codeAvailability: '#14b8a6',
+  resourcheImplementation: '#06b6d4',
+  license: '#0ea5e9',
+  userInterfaceTool: '#3b82f6',
+  inputs: '#6366f1',
+  dataInterface: '#8b5cf6',
+  output: '#8b5cf6',
 };
 
 const getAttributeColor = (sectionKey) => {

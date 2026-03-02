@@ -20,13 +20,35 @@ import useResizeObserver from './hooks/useResizeObserver';
 import { buildBaseSurveyStats, toChartsStats } from './lib/surveyStats';
 
 const TAXONOMY_COLORS = {
-  coreTasks: '#6366f1',
-  supportTasks: '#3b82f6',
-  mainMethod: '#0ea5e9',
-  revision: '#06b6d4',
-  domain: '#14b8a6',
-  license: '#facc15'
+  coreTasks: '#ef4444',
+  supportTasks: '#f97316',
+  applicationPurpose: '#f59e0b',
+  mainMethod: '#eab308',
+  systemLevel: '#84cc16',
+  revision: '#22c55e',
+  domain: '#10b981',
+  codeAvailability: '#14b8a6',
+  resourcheImplementation: '#06b6d4',
+  license: '#0ea5e9',
+  userInterfaceTool: '#3b82f6',
+  inputs: '#6366f1',
+  dataInterface: '#8b5cf6',
+  output: '#8b5cf6'
 };
+
+function getMonochromeShade(baseColor, index, total, options = {}) {
+  const {
+    minLightness = 0.36,
+    maxLightness = 0.68,
+    minSaturation = 0.5,
+    maxSaturation = 0.92
+  } = options;
+  const base = d3.hsl(baseColor);
+  const ratio = total <= 1 ? 1 : 1 - index / (total - 1);
+  const lightness = minLightness + ratio * (maxLightness - minLightness);
+  const saturation = minSaturation + ratio * (maxSaturation - minSaturation);
+  return d3.hsl(base.h, saturation, lightness).formatHex();
+}
 
 /**
  * Technique Trends Chart Component
@@ -94,13 +116,11 @@ const TechniqueTrendsChart = ({ data }) => {
 
     const color = d3.scaleOrdinal()
       .domain(selectedTags)
-      .range([
-        TAXONOMY_COLORS.mainMethod,
-        TAXONOMY_COLORS.revision,
-        TAXONOMY_COLORS.domain,
-        TAXONOMY_COLORS.supportTasks,
-        TAXONOMY_COLORS.coreTasks
-      ]);
+      .range(['#fff7cc', '#fde047', '#f59e0b', '#d97706', '#92400e']);
+    const dashPattern = d3
+      .scaleOrdinal()
+      .domain(selectedTags)
+      .range(['0', '12,4', '8,3', '4,3', '2,4']);
 
     const line = d3.line()
       .x(d => x(d.year))
@@ -151,7 +171,10 @@ const TechniqueTrendsChart = ({ data }) => {
         .datum(lineData)
         .attr("fill", "none")
         .attr("stroke", color(tag))
-        .attr("stroke-width", 2)
+        .attr("stroke-width", 2.3)
+        .attr("stroke-linecap", "round")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-dasharray", dashPattern(tag))
         .attr("d", line);
 
       chartSvg.selectAll(`.dot-${tag}`)
@@ -168,6 +191,7 @@ const TechniqueTrendsChart = ({ data }) => {
     const legendItemWidth = Math.max(120, Math.min(170, Math.floor(width * 0.4)));
     const legendOffsetX = Math.max(0, width - legendItemWidth);
     const legendVerticalOffset = 8;
+    const legendY = -legendHeight - legendTopGap + legendVerticalOffset;
     const legend = chartSvg.append("g")
       .attr("font-family", "sans-serif")
       .attr("font-size", 11)
@@ -175,20 +199,30 @@ const TechniqueTrendsChart = ({ data }) => {
       .selectAll("g")
       .data(selectedTags)
       .join("g")
-      .attr("transform", (d, i) => `translate(${legendOffsetX},${-legendHeight - legendTopGap + legendVerticalOffset + i * legendRowHeight})`);
+      .attr("transform", (d, i) => `translate(${legendOffsetX},${legendY + i * legendRowHeight})`);
 
-    legend.append("rect")
+    legend.append("line")
       .attr("x", 0)
-      .attr("y", 1)
-      .attr("width", 10)
-      .attr("height", 10)
+      .attr("x2", 12)
+      .attr("y1", 6)
+      .attr("y2", 6)
+      .attr("stroke", color)
+      .attr("stroke-width", 2.3)
+      .attr("stroke-linecap", "round")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-dasharray", dashPattern);
+
+    legend.append("circle")
+      .attr("cx", 6)
+      .attr("cy", 6)
+      .attr("r", 3.2)
       .attr("fill", color);
 
     legend.append("text")
-      .attr("x", 14)
+      .attr("x", 18)
       .attr("y", 6)
       .attr("dy", "0.32em")
-      .style("fill", "#9ca3af")
+      .style("fill", "#d1d5db")
       .text(d => d);
 
     chartSvg.append("text")
@@ -287,7 +321,7 @@ function Charts({ data = [] }) {
               <div className="grid grid-cols-1 gap-6 mb-6">
                 <div className="relative perspective-1000 h-[500px]">
                   <div 
-                    className={`bg-gradient-to-r from-sky-500/10 to-sky-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showMainMethodChart ? 'rotate-y-180' : ''}`}
+                    className={`bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showMainMethodChart ? 'rotate-y-180' : ''}`}
                     style={{ 
                       transformStyle: 'preserve-3d',
                       transform: showMainMethodChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
@@ -296,16 +330,16 @@ function Charts({ data = [] }) {
                     {/* Front side - Statistics */}
                     <div className="backface-hidden h-[500px]">
                       <div className="flex items-center justify-between mb-4 w-full">
-                        <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
+                        <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
                           Main Method Types
-                          <span className="ml-2 px-2 py-0.5 bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
+                          <span className="ml-2 px-2 py-0.5 bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
                             {Object.keys(summaryStats.mainMethodTypeDistribution).length}
                           </span>
                         </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowMainMethodChart(!showMainMethodChart)}
-                            className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                            className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                             title={showMainMethodChart ? 'Show statistics' : 'Show chart'}
                           >
                             <Icon name="360" className="text-lg" />
@@ -316,16 +350,19 @@ function Charts({ data = [] }) {
                       <div className="space-y-3">
                         {Object.entries(summaryStats.mainMethodTypeDistribution)
                           .sort(([, a], [, b]) => b.count - a.count)
-                          .map(([type, data], index) => (
+                          .map(([type, data], index, items) => (
                           <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                             <div className="flex justify-between items-center mb-1">
-                              <span className="text-sky-200 text-sm font-medium">{type}</span>
-                              <span className="text-sky-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                              <span className="text-yellow-200 text-sm font-medium">{type}</span>
+                              <span className="text-yellow-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                             </div>
                             <div className="h-2 w-full bg-gray-700 overflow-hidden">
                               <div 
-                                className="h-2 bg-sky-500 transition-all duration-1000 ease-out"
-                                style={{ width: `${data.percentage}%` }}
+                                className="h-2 transition-all duration-1000 ease-out"
+                                style={{
+                                  width: `${data.percentage}%`,
+                                  backgroundColor: getMonochromeShade(TAXONOMY_COLORS.mainMethod, index, items.length)
+                                }}
                               ></div>
                             </div>
                           </div>
@@ -335,7 +372,7 @@ function Charts({ data = [] }) {
                     
                     {/* Back side - Chart */}
                     <div 
-                      className="absolute inset-0 bg-gradient-to-r from-sky-500/10 to-sky-600/10 p-4 backface-hidden h-[500px]"
+                      className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 p-4 backface-hidden h-[500px]"
                       style={{ 
                         transform: 'rotateY(180deg)',
                         backfaceVisibility: 'hidden'
@@ -343,16 +380,16 @@ function Charts({ data = [] }) {
                     >
                       <div className="flex flex-col h-full w-full">
                         <div className="flex items-center justify-between mb-4 w-full">
-                          <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
+                          <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
                             Main Method Distribution by Year
-                            <span className="ml-2 px-2 py-0.5 bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
+                            <span className="ml-2 px-2 py-0.5 bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
                               {Object.keys(summaryStats.mainMethodTypeDistribution).length}
                             </span>
                           </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowMainMethodChart(!showMainMethodChart)}
-                              className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                              className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                               title={showMainMethodChart ? "Show statistics" : "Show chart"}
                             >
                               <Icon name="360" className="text-lg" />
@@ -363,7 +400,7 @@ function Charts({ data = [] }) {
                                   downloadSVG(chartRef.current.children[0].children[0], "main-method-chart.svg");
                                 }
                               }}
-                              className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                              className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                               title="Download SVG"
                             >
                               <Icon name="download" className="text-lg" />
@@ -382,11 +419,11 @@ function Charts({ data = [] }) {
               {/* Row 2: Domains & Tasks Addressed (Two Columns) */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 {/* Domains */}
-                <div className="bg-gradient-to-r from-teal-500/10 to-teal-600/10 p-4 h-[500px]">
+                <div className="bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 p-4 h-[500px]">
                   <div className="flex items-center justify-between mb-4 w-full">
-                    <span className="text-teal-300 font-semibold text-lg flex items-center gap-2">
+                    <span className="text-emerald-300 font-semibold text-lg flex items-center gap-2">
                       Domains
-                      <span className="ml-2 px-2 py-0.5 bg-teal-700/40 text-teal-200 text-xs font-mono align-middle">
+                      <span className="ml-2 px-2 py-0.5 bg-emerald-700/40 text-emerald-200 text-xs font-mono align-middle">
                         {Object.keys(summaryStats.domainDistribution).length}
                       </span>
                     </span>
@@ -394,16 +431,19 @@ function Charts({ data = [] }) {
                   <div className="space-y-3">
                     {Object.entries(summaryStats.domainDistribution)
                       .sort(([, a], [, b]) => b.count - a.count)
-                      .map(([domain, data], index) => (
+                      .map(([domain, data], index, items) => (
                       <div key={domain} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-teal-200 text-sm font-medium">{domain}</span>
-                          <span className="text-teal-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                          <span className="text-emerald-200 text-sm font-medium">{domain}</span>
+                          <span className="text-emerald-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                         </div>
                         <div className="h-2 w-full bg-gray-700 overflow-hidden">
                           <div 
-                            className="h-2 bg-teal-500 transition-all duration-1000 ease-out"
-                            style={{ width: `${data.percentage}%` }}
+                            className="h-2 transition-all duration-1000 ease-out"
+                            style={{
+                              width: `${data.percentage}%`,
+                              backgroundColor: getMonochromeShade(TAXONOMY_COLORS.domain, index, items.length)
+                            }}
                           ></div>
                         </div>
                       </div>
@@ -412,26 +452,29 @@ function Charts({ data = [] }) {
                 </div>
 
                 {/* Tasks Addressed */}
-                <div className="bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 h-[500px]">
+                <div className="bg-gradient-to-r from-red-500/10 to-red-600/10 p-4 h-[500px]">
                   <div className="flex items-center justify-between mb-4 w-full">
-                    <span className="text-indigo-300 font-semibold text-lg flex items-center gap-2">
+                    <span className="text-red-300 font-semibold text-lg flex items-center gap-2">
                       Tasks Addressed
-                      <span className="ml-2 px-2 py-0.5 bg-indigo-700/40 text-indigo-200 text-xs font-mono align-middle">
+                      <span className="ml-2 px-2 py-0.5 bg-red-700/40 text-red-200 text-xs font-mono align-middle">
                         {Object.keys(summaryStats.taskCounts).length}
                       </span>
                     </span>
                   </div>
                   <div className="space-y-3">
-                    {Object.entries(summaryStats.taskPercentages).map(([task, percentage], index) => (
+                    {Object.entries(summaryStats.taskPercentages).map(([task, percentage], index, items) => (
                       <div key={task} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-indigo-200 text-sm font-medium">{task.toUpperCase()}</span>
-                          <span className="text-indigo-300 text-sm">{summaryStats.taskCounts[task]} ({percentage.toFixed(1)}%)</span>
+                          <span className="text-red-200 text-sm font-medium">{task.toUpperCase()}</span>
+                          <span className="text-red-300 text-sm">{summaryStats.taskCounts[task]} ({percentage.toFixed(1)}%)</span>
                         </div>
                         <div className="h-2 w-full bg-gray-700 overflow-hidden">
                           <div 
-                            className="h-2 bg-indigo-500 transition-all duration-1000 ease-out"
-                            style={{ width: `${percentage}%` }}
+                            className="h-2 transition-all duration-1000 ease-out"
+                            style={{
+                              width: `${percentage}%`,
+                              backgroundColor: getMonochromeShade(TAXONOMY_COLORS.coreTasks, index, items.length)
+                            }}
                           ></div>
                         </div>
                       </div>
@@ -443,11 +486,11 @@ function Charts({ data = [] }) {
               {/* Row 3: Steps Coverage & User Revision (Two Columns) */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 {/* Steps Coverage */}
-                <div className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 p-4 h-[500px]">
+                <div className="bg-gradient-to-r from-orange-500/10 to-orange-600/10 p-4 h-[500px]">
                   <div className="flex items-center justify-between mb-4 w-full">
-                    <span className="text-blue-300 font-semibold text-lg flex items-center gap-2">
+                    <span className="text-orange-300 font-semibold text-lg flex items-center gap-2">
                       Steps Coverage
-                      <span className="ml-2 px-2 py-0.5 bg-blue-700/40 text-blue-200 text-xs font-mono align-middle">
+                      <span className="ml-2 px-2 py-0.5 bg-orange-700/40 text-orange-200 text-xs font-mono align-middle">
                         {Object.keys(summaryStats.stepsCoverage).length}
                       </span>
                     </span>
@@ -455,16 +498,19 @@ function Charts({ data = [] }) {
                   <div className="space-y-3">
                     {Object.entries(summaryStats.stepsCoverage)
                       .sort(([, a], [, b]) => b - a)
-                      .map(([step, count], index) => (
+                      .map(([step, count], index, items) => (
                       <div key={step} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-blue-200 text-sm font-medium">{step.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
-                          <span className="text-blue-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
+                          <span className="text-orange-200 text-sm font-medium">{step.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                          <span className="text-orange-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
                         </div>
                         <div className="h-2 w-full bg-gray-700 overflow-hidden">
                           <div 
-                            className="h-2 bg-blue-500 transition-all duration-1000 ease-out"
-                            style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
+                            className="h-2 transition-all duration-1000 ease-out"
+                            style={{
+                              width: `${(count / summaryStats.totalEntries * 100)}%`,
+                              backgroundColor: getMonochromeShade(TAXONOMY_COLORS.supportTasks, index, items.length)
+                            }}
                           ></div>
                         </div>
                       </div>
@@ -473,11 +519,11 @@ function Charts({ data = [] }) {
                 </div>
 
                 {/* User Revision */}
-                <div className="bg-gradient-to-r from-cyan-500/10 to-cyan-600/10 p-4 h-[500px]">
+                <div className="bg-gradient-to-r from-green-500/10 to-green-600/10 p-4 h-[500px]">
                   <div className="flex items-center justify-between mb-4 w-full">
-                    <span className="text-cyan-300 font-semibold text-lg flex items-center gap-2">
+                    <span className="text-green-300 font-semibold text-lg flex items-center gap-2">
                       User Revision
-                      <span className="ml-2 px-2 py-0.5 bg-cyan-700/40 text-cyan-200 text-xs font-mono align-middle">
+                      <span className="ml-2 px-2 py-0.5 bg-green-700/40 text-green-200 text-xs font-mono align-middle">
                         {Object.keys(summaryStats.userRevisionDistribution).length}
                       </span>
                     </span>
@@ -485,16 +531,19 @@ function Charts({ data = [] }) {
                   <div className="space-y-3">
                     {Object.entries(summaryStats.userRevisionDistribution)
                       .sort(([, a], [, b]) => b - a)
-                      .map(([type, count], index) => (
+                      .map(([type, count], index, items) => (
                       <div key={type} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-cyan-200 text-sm font-medium">{type}</span>
-                          <span className="text-cyan-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
+                          <span className="text-green-200 text-sm font-medium">{type}</span>
+                          <span className="text-green-300 text-sm">{count} ({(count / summaryStats.totalEntries * 100).toFixed(1)}%)</span>
                         </div>
                         <div className="h-2 w-full bg-gray-700 overflow-hidden">
                           <div 
-                            className="h-2 bg-cyan-500 transition-all duration-1000 ease-out"
-                            style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
+                            className="h-2 transition-all duration-1000 ease-out"
+                            style={{
+                              width: `${(count / summaryStats.totalEntries * 100)}%`,
+                              backgroundColor: getMonochromeShade(TAXONOMY_COLORS.revision, index, items.length)
+                            }}
                           ></div>
                         </div>
                       </div>
@@ -507,7 +556,7 @@ function Charts({ data = [] }) {
               <div className="grid grid-cols-1 gap-6 mb-6">
                 <div className="relative perspective-1000 h-[500px]">
                   <div 
-                    className={`bg-gradient-to-r from-sky-500/10 to-sky-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showTechniqueChart ? 'rotate-y-180' : ''}`}
+                    className={`bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showTechniqueChart ? 'rotate-y-180' : ''}`}
                     style={{ 
                       transformStyle: 'preserve-3d',
                       transform: showTechniqueChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
@@ -516,16 +565,16 @@ function Charts({ data = [] }) {
                     {/* Front side - Statistics */}
                     <div className="backface-hidden h-[500px]">
                       <div className="flex items-center justify-between mb-4 w-full">
-                        <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
+                        <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
                           Technique Evolution
-                          <span className="ml-2 px-2 py-0.5 rounded bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
+                          <span className="ml-2 px-2 py-0.5 rounded bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
                             {Object.keys(summaryStats.techniqueTagDistribution).length}
                           </span>
                         </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowTechniqueChart(!showTechniqueChart)}
-                            className="flex items-center justify-center w-8 h-8 rounded-lg bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                            className="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                             title={showTechniqueChart ? 'Show statistics' : 'Show chart'}
                           >
                             <Icon name="360" className="text-lg" />
@@ -536,16 +585,19 @@ function Charts({ data = [] }) {
                       <div className="space-y-3">
                         {Object.entries(summaryStats.techniqueTagDistribution)
                           .sort(([, a], [, b]) => b.count - a.count)
-                          .map(([tag, data], index) => (
+                          .map(([tag, data], index, items) => (
                           <div key={tag} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                             <div className="flex justify-between items-center mb-1">
-                              <span className="text-sky-200 text-sm font-medium">{tag}</span>
-                              <span className="text-sky-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                              <span className="text-yellow-200 text-sm font-medium">{tag}</span>
+                              <span className="text-yellow-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                             </div>
                             <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
                               <div 
-                                className="h-2 bg-sky-500 rounded-full transition-all duration-1000 ease-out"
-                                style={{ width: `${data.percentage}%` }}
+                                className="h-2 rounded-full transition-all duration-1000 ease-out"
+                                style={{
+                                  width: `${data.percentage}%`,
+                                  backgroundColor: getMonochromeShade(TAXONOMY_COLORS.mainMethod, index, items.length)
+                                }}
                               ></div>
                             </div>
                           </div>
@@ -555,7 +607,7 @@ function Charts({ data = [] }) {
                     
                     {/* Back side - Chart */}
                     <div 
-                      className="absolute inset-0 bg-gradient-to-r from-sky-500/10 to-sky-600/10 p-4 backface-hidden h-[500px]"
+                      className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 p-4 backface-hidden h-[500px]"
                       style={{ 
                         transform: 'rotateY(180deg)',
                         backfaceVisibility: 'hidden'
@@ -563,13 +615,13 @@ function Charts({ data = [] }) {
                     >
                       <div className="flex flex-col h-full w-full">
                         <div className="flex items-center justify-between mb-4 w-full">
-                          <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
+                          <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
                             Technique Trends over Time
                           </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowTechniqueChart(!showTechniqueChart)}
-                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                               title={showTechniqueChart ? "Show statistics" : "Show chart"}
                             >
                               <Icon name="360" className="text-lg" />
@@ -579,7 +631,7 @@ function Charts({ data = [] }) {
                                 const chart = document.querySelector('.technique-chart svg');
                                 if (chart) downloadSVG(chart, "technique-trends.svg");
                               }}
-                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
+                              className="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
                               title="Download SVG"
                             >
                               <Icon name="download" className="text-lg" />
@@ -599,7 +651,7 @@ function Charts({ data = [] }) {
               <div className="grid grid-cols-1 gap-6 mb-6">
                 <div className="relative perspective-1000 h-[500px]">
                   <div 
-                    className={`bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showLicensesChart ? 'rotate-y-180' : ''}`}
+                    className={`bg-gradient-to-r from-sky-500/10 to-sky-600/10 p-4 transition-transform duration-700 ease-in-out transform-style-preserve-3d h-[500px] ${showLicensesChart ? 'rotate-y-180' : ''}`}
                     style={{ 
                       transformStyle: 'preserve-3d',
                       transform: showLicensesChart ? 'rotateY(180deg)' : 'rotateY(0deg)'
@@ -608,16 +660,16 @@ function Charts({ data = [] }) {
                     {/* Front side - Statistics */}
                     <div className="backface-hidden h-[500px]">
                       <div className="flex items-center justify-between mb-4 w-full">
-                        <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
+                        <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
                           Licenses
-                          <span className="ml-2 px-2 py-0.5 bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
+                          <span className="ml-2 px-2 py-0.5 bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
                             {Object.keys(summaryStats.licenseDistribution).length}
                           </span>
                         </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setShowLicensesChart(!showLicensesChart)}
-                            className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
+                            className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
                             title={showLicensesChart ? 'Show statistics' : 'Show chart'}
                           >
                             <Icon name="360" className="text-lg" />
@@ -627,16 +679,19 @@ function Charts({ data = [] }) {
                       <div className="space-y-3 h-[400px] overflow-y-auto pr-1">
                         {Object.entries(summaryStats.licenseDistribution)
                           .sort(([, a], [, b]) => b.count - a.count)
-                          .map(([license, data], index) => (
+                          .map(([license, data], index, items) => (
                           <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                             <div className="flex justify-between items-center mb-1">
-                          <span className="text-yellow-200 text-sm font-medium">{license}</span>
-                          <span className="text-yellow-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
+                          <span className="text-sky-200 text-sm font-medium">{license}</span>
+                          <span className="text-sky-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                             </div>
                             <div className="h-2 w-full bg-gray-700 overflow-hidden">
                               <div 
-                                className="h-2 bg-yellow-500 transition-all duration-1000 ease-out"
-                                style={{ width: `${data.percentage}%` }}
+                                className="h-2 transition-all duration-1000 ease-out"
+                                style={{
+                                  width: `${data.percentage}%`,
+                                  backgroundColor: getMonochromeShade(TAXONOMY_COLORS.license, index, items.length)
+                                }}
                               ></div>
                             </div>
                           </div>
@@ -646,7 +701,7 @@ function Charts({ data = [] }) {
                     
                     {/* Back side - Chart */}
                     <div 
-                      className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 p-4 backface-hidden h-[500px]"
+                      className="absolute inset-0 bg-gradient-to-r from-sky-500/10 to-sky-600/10 p-4 backface-hidden h-[500px]"
                       style={{ 
                         transform: 'rotateY(180deg)',
                         backfaceVisibility: 'hidden'
@@ -654,16 +709,16 @@ function Charts({ data = [] }) {
                     >
                       <div className="flex flex-col h-full w-full">
                         <div className="flex items-center justify-between mb-4 w-full">
-                          <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
+                          <span className="text-sky-300 font-semibold text-lg flex items-center gap-2">
                             License Distribution
-                            <span className="ml-2 px-2 py-0.5 bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
+                            <span className="ml-2 px-2 py-0.5 bg-sky-700/40 text-sky-200 text-xs font-mono align-middle">
                               {Object.keys(summaryStats.licenseDistribution).length}
                             </span>
                           </span>
                           <div className="flex items-center gap-4">
                             <button
                               onClick={() => setShowLicensesChart(!showLicensesChart)}
-                              className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
+                              className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
                               title={showLicensesChart ? 'Show statistics' : 'Show chart'}
                             >
                               <Icon name="360" className="text-lg" />
@@ -675,7 +730,7 @@ function Charts({ data = [] }) {
                                   downloadSVG(chartElement, "licenses-chart.svg");
                                 }
                               }}
-                              className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
+                              className="flex items-center justify-center w-8 h-8 bg-sky-600/30 hover:bg-sky-600/50 transition-colors duration-200 text-sky-300 hover:text-sky-100"
                               title="Download SVG"
                             >
                               <Icon name="download" className="text-lg" />
@@ -687,7 +742,7 @@ function Charts({ data = [] }) {
                             data={Object.fromEntries(Object.entries(summaryStats.licenseDistribution).map(([k, v]) => [k, v.count]))} 
                             total={summaryStats.totalEntries} 
                             barColor={TAXONOMY_COLORS.license}
-                            labelColor="#fef3c7"
+                            labelColor="#e0f2fe"
                           />
                         </div>
                       </div>
@@ -729,7 +784,7 @@ function Charts({ data = [] }) {
                       <div className="space-y-3 overflow-y-scroll h-[400px]">
                         {Object.entries(summaryStats.conferenceJournalDistribution)
                           .sort(([, a], [, b]) => b - a)
-                          .map(([venue, count], index) => (
+                          .map(([venue, count], index, items) => (
                             <div key={venue} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                               <div className="flex justify-between items-center mb-1">
                                 <span className="text-cyan-200 text-sm font-medium truncate max-w-[180px]" title={venue}>{venue}</span>
@@ -737,8 +792,11 @@ function Charts({ data = [] }) {
                               </div>
                               <div className="h-2 w-full bg-neutral-700 overflow-hidden">
                                 <div 
-                                  className="h-2 bg-cyan-500 transition-all duration-1000 ease-out"
-                                  style={{ width: `${(count / summaryStats.totalEntries * 100)}%` }}
+                                  className="h-2 transition-all duration-1000 ease-out"
+                                  style={{
+                                    width: `${(count / summaryStats.totalEntries * 100)}%`,
+                                    backgroundColor: getMonochromeShade(TAXONOMY_COLORS.resourcheImplementation, index, items.length)
+                                  }}
                                 ></div>
                               </div>
                             </div>
@@ -787,8 +845,8 @@ function Charts({ data = [] }) {
                           <ConferenceJournalBarChart 
                             data={summaryStats.conferenceJournalDistribution} 
                             total={summaryStats.totalEntries} 
-                            barColor={TAXONOMY_COLORS.revision}
-                            labelColor="#bae6fd"
+                            barColor={TAXONOMY_COLORS.resourcheImplementation}
+                            labelColor="#cffafe"
                           />
                         </div>
                       </div>
@@ -799,11 +857,23 @@ function Charts({ data = [] }) {
 
               {/* Row 6: Year-wise Core Tasks (Full Width) */}
               <div className="grid grid-cols-1 gap-6 mb-6 mt-6">
-                <div className="bg-gradient-to-r from-indigo-500/10 to-indigo-600/10 p-4 overflow-hidden">
+                <div className="bg-gradient-to-r from-red-500/10 to-red-600/10 p-4 overflow-hidden">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-indigo-300 font-semibold text-lg">Year-wise Trends of Core Tasks</span>
+                    <span className="text-red-300 font-semibold text-lg">Year-wise Trends of Core Tasks</span>
+                    <button
+                      onClick={() => {
+                        const chartElement = document.querySelector('.year-wise-core-tasks-chart svg');
+                        if (chartElement) {
+                          downloadSVG(chartElement, "year-wise-core-tasks-chart.svg");
+                        }
+                      }}
+                      className="flex items-center justify-center w-8 h-8 bg-red-600/30 hover:bg-red-600/50 transition-colors duration-200 text-red-300 hover:text-red-100"
+                      title="Download SVG"
+                    >
+                      <Icon name="download" className="text-lg" />
+                    </button>
                   </div>
-                  <div className="h-[400px] min-w-0 overflow-hidden">
+                  <div className="h-[400px] min-w-0 overflow-hidden year-wise-core-tasks-chart">
                     <YearWiseCoreTasksChart data={data} />
                   </div>
                 </div>
