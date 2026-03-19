@@ -18,6 +18,7 @@ import ConferenceJournalBarChart from './components/charts/ConferenceJournalBarC
 import YearWiseCoreTasksChart from './components/charts/YearWiseCoreTasksChart';
 import useResizeObserver from './hooks/useResizeObserver';
 import { buildBaseSurveyStats, toChartsStats } from './lib/surveyStats';
+import { getTechniqueTags } from './lib/surveyDataAccess';
 
 const TAXONOMY_COLORS = {
   coreTasks: '#ef4444',
@@ -100,7 +101,7 @@ const TechniqueTrendsChart = ({ data }) => {
       const yearData = data.filter(d => d.year === year);
       const result = { year };
       selectedTags.forEach(tag => {
-        result[tag] = yearData.filter(d => d.techniqueTags?.includes(tag)).length;
+        result[tag] = yearData.filter(d => getTechniqueTags(d).includes(tag)).length;
       });
       return result;
     });
@@ -263,8 +264,21 @@ const TechniqueTrendsChart = ({ data }) => {
  * @param {string} filename - The filename for the downloaded file
  */
 function downloadSVG(svgElement, filename = "chart.svg") {
+  if (!svgElement) return;
+
+  const svgNode = svgElement.tagName?.toLowerCase() === "svg"
+    ? svgElement
+    : svgElement.querySelector?.("svg");
+
+  if (!svgNode) return;
+
   const serializer = new XMLSerializer();
-  const svgString = serializer.serializeToString(svgElement);
+  let svgString = serializer.serializeToString(svgNode);
+
+  if (!svgString.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
+    svgString = svgString.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+  }
+
   const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
   const svgUrl = URL.createObjectURL(svgBlob);
   
@@ -396,8 +410,9 @@ function Charts({ data = [] }) {
                             </button>
                             <button
                               onClick={() => {
-                                if (chartRef?.current?.children[0]?.children[0]) {
-                                  downloadSVG(chartRef.current.children[0].children[0], "main-method-chart.svg");
+                                const chartElement = chartRef.current?.querySelector("svg");
+                                if (chartElement) {
+                                  downloadSVG(chartElement, "main-method-chart.svg");
                                 }
                               }}
                               className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"

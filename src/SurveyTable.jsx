@@ -31,6 +31,7 @@ import Navigation from "./Navigation";
 import Icon from "./Icon";
 import schema from '../public/data/sti-survey.schema.json';
 import { REQUIRED_FIELD_PATHS, isRequiredFieldMissing } from "./lib/surveyValidation";
+import { getApplicationPurposeText, getMainMethodTechniqueText, getTechniqueTags } from "./lib/surveyDataAccess";
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -172,6 +173,38 @@ const getUserRevisionBadgeColor = (type) => {
   const baseColor = getAttributeColor('revision');
   return getUnifiedBadgeColor(baseColor, lower === 'none');
 };
+
+const normalizeClusterValues = (clusters) => {
+  if (typeof clusters === 'string') {
+    const value = clusters.trim();
+    return value ? [value] : [];
+  }
+
+  if (Array.isArray(clusters)) {
+    return clusters
+      .filter((cluster) => typeof cluster === 'string')
+      .map((cluster) => cluster.trim())
+      .filter((cluster) => cluster.length > 0);
+  }
+
+  return [];
+};
+
+const formatClusterLabel = (cluster) => {
+  if (typeof cluster !== 'string' || cluster.length === 0) return cluster;
+
+  return cluster
+    .split('_')
+    .map((part) => {
+      const upper = part.toUpperCase();
+      if (['TF', 'IDF', 'LLM', 'NER', 'KG'].includes(upper)) {
+        return upper;
+      }
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    })
+    .join(' ');
+};
+
 const formatDate = (dateString) => {
   if (!dateString || dateString.trim() === "") return null;
   const date = new Date(dateString);
@@ -319,14 +352,31 @@ const TaskCell = ({ value, isMissing, align = 'left' }) => {
     </div>
   );
 };
-const StepCell = ({ value, align = 'left' }) => {
+const StepCell = ({ value, clusters, align = 'left', clusterColor = getAttributeColor('supportTasks') }) => {
   const hasContent = Boolean(value?.trim());
   const iconClass = hasContent ? "text-green-500 text-lg" : "text-red-500 text-lg";
+  const clusterValues = normalizeClusterValues(clusters);
   const alignClass = align === 'center' ? 'flex justify-center' : '';
   
   return (
     <div className={alignClass}>
-      <Icon name={hasContent ? 'done' : 'clear'} className={iconClass} />
+      <div className="flex flex-col items-center gap-1">
+        <Icon name={hasContent ? 'done' : 'clear'} className={iconClass} />
+        {clusterValues.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-1 max-w-[180px]">
+            {clusterValues.map((cluster, index) => (
+              <span
+                key={`${cluster}-${index}`}
+                className="inline-flex items-center justify-center rounded px-1.5 py-0.5 text-[9px] font-medium"
+                style={{ backgroundColor: `${clusterColor}${UNIFIED_COLORS.badgeOpacity}`, color: clusterColor }}
+                title={cluster}
+              >
+                {formatClusterLabel(cluster)}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -623,8 +673,9 @@ function SurveyTable({ data = [] }) {
       cell: (info) => info.getValue(),
       enableSorting: false,
     }),
-    columnHelper.accessor("techniqueTags", {
-      header: () => <span>{getSchemaLabel('techniqueTags', 'Technique Tags')}</span>,
+    columnHelper.accessor(row => getTechniqueTags(row), {
+      id: "techniqueTags",
+      header: () => <span>{getSchemaLabel('mainMethod.technique', 'Technique Tags')}</span>,
       cell: (info) => {
         const tags = info.getValue();
         if (!tags || tags.length === 0) {
@@ -763,7 +814,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.dataPreparation?.cluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -782,7 +840,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.columnClassificationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -801,7 +866,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.subjectDetectionCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -820,7 +892,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.datatypeAnnotationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -839,7 +918,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.entityLinkingClusters}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -858,7 +944,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.typeAnnotationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -877,7 +970,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.predicateAnnotationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -896,13 +996,20 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.nilAnnotationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
       ],
     },
-    columnHelper.accessor(row => row.applicationPurpose, {
+    columnHelper.accessor(row => getApplicationPurposeText(row), {
       id: "applicationPurpose",
       header: () => (
         <span style={{ color: getSectionHeaderColor('applicationPurpose') }}>
@@ -927,7 +1034,7 @@ function SurveyTable({ data = [] }) {
       columns: [
         columnHelper.accessor(row => {
           const type = row.mainMethod?.type || "";
-          const tech = row.mainMethod?.technique || "";
+          const tech = getMainMethodTechniqueText(row);
           return { type, tech };
         }, {
           id: "mainMethod",

@@ -1,3 +1,5 @@
+import { getApplicationPurposeText } from './surveyDataAccess';
+
 export const REQUIRED_FIELD_PATHS = [
   'id',
   'authors',
@@ -26,8 +28,12 @@ const REQUIRED_FIELDS_SET = new Set(REQUIRED_FIELD_PATHS);
 export const isEmptyValue = (value) => {
   if (value === null || value === undefined) return true;
   if (typeof value === 'string') return value.trim() === '';
+  if (Array.isArray(value)) {
+    return value.length === 0 || value.every((item) => isEmptyValue(item));
+  }
   if (typeof value === 'object' && !Array.isArray(value)) {
-    return Object.keys(value).length === 0;
+    const keys = Object.keys(value);
+    return keys.length === 0 || keys.every((key) => isEmptyValue(value[key]));
   }
   return false;
 };
@@ -46,5 +52,8 @@ export const getNestedValue = (obj, path) => {
 
 export const isRequiredFieldMissing = (row, fieldPath) => {
   if (!REQUIRED_FIELDS_SET.has(fieldPath)) return false;
+  if (fieldPath === 'applicationPurpose') {
+    return getApplicationPurposeText(row) === '';
+  }
   return isEmptyValue(getNestedValue(row, fieldPath));
 };

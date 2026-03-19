@@ -1,4 +1,5 @@
 import { REQUIRED_FIELD_PATHS, isRequiredFieldMissing } from './surveyValidation';
+import { getTechniqueTags } from './surveyDataAccess';
 
 const SELECTED_TECHNIQUE_TAGS = ['ontology-driven', 'rule-based', 'embeddings', 'transformer', 'CRF'];
 
@@ -85,13 +86,11 @@ export const buildBaseSurveyStats = (data) => {
     const license = row.license || 'N/A';
     stats.licenseDistribution[license] = (stats.licenseDistribution[license] || 0) + 1;
 
-    if (Array.isArray(row.techniqueTags)) {
-      row.techniqueTags.forEach((tag) => {
-        if (SELECTED_TECHNIQUE_TAGS.includes(tag)) {
-          stats.techniqueTagCounts[tag] = (stats.techniqueTagCounts[tag] || 0) + 1;
-        }
-      });
-    }
+    getTechniqueTags(row).forEach((tag) => {
+      if (SELECTED_TECHNIQUE_TAGS.includes(tag)) {
+        stats.techniqueTagCounts[tag] = (stats.techniqueTagCounts[tag] || 0) + 1;
+      }
+    });
 
     if (row.coreTasks?.cta) stats.taskCounts.cta += 1;
     if (row.coreTasks?.cpa) stats.taskCounts.cpa += 1;
