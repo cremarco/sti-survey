@@ -19,7 +19,10 @@ const MainMethodStackedChart = ({ data }) => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const margin = { top: 20, right: 30, left: 40, bottom: 50 };
+    const methodTypes = ['Unsupervised', 'Supervised', 'Hybrid'];
+    const legendRowHeight = 18;
+    const legendHeight = methodTypes.length * legendRowHeight;
+    const margin = { top: 22 + legendHeight, right: 30, left: 40, bottom: 50 };
     const width = dimensions.width - margin.left - margin.right;
     const height = Math.min(400, dimensions.height || 400) - margin.top - margin.bottom;
 
@@ -32,8 +35,6 @@ const MainMethodStackedChart = ({ data }) => {
 
     // Process data for stacked chart
     const years = [...new Set(data.map(d => d.year))].sort();
-    const methodTypes = ['Unsupervised', 'Supervised', 'Hybrid'];
-    
     const stackedData = years.map(year => {
       const yearData = data.filter(d => d.year === year);
       const result = { year };
@@ -57,7 +58,34 @@ const MainMethodStackedChart = ({ data }) => {
 
     const color = d3.scaleOrdinal()
       .domain(methodTypes)
-      .range(['#0ea5e9', '#06b6d4', '#14b8a6']);
+      .range(['#facc15', '#eab308', '#ca8a04']);
+
+    const legendItemWidth = Math.max(120, Math.min(170, Math.floor(width * 0.35)));
+    const legendOffsetX = Math.max(0, width - legendItemWidth);
+    const legendVerticalOffset = 8;
+
+    const legend = chartSvg.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 11)
+      .attr("text-anchor", "start")
+      .selectAll("g")
+      .data(methodTypes)
+      .join("g")
+      .attr("transform", (d, i) => `translate(${legendOffsetX},${-legendHeight + legendVerticalOffset + i * legendRowHeight})`);
+
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("y", 1)
+      .attr("width", 10)
+      .attr("height", 10)
+      .attr("fill", color);
+
+    legend.append("text")
+      .attr("x", 14)
+      .attr("y", 6)
+      .attr("dy", "0.32em")
+      .style("fill", "#d1d5db")
+      .text(d => d);
 
     // Add bars
     chartSvg.append("g")

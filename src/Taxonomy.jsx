@@ -23,6 +23,7 @@ const MAX_CHART_SIZE = 1500;
 const CHART_SCALE_FACTOR = 1.12;
 
 const TAILWIND_LABEL_ORDER = [
+  '#ef4444', // red-500
   '#f97316', // orange-500
   '#f59e0b', // amber-500
   '#eab308', // yellow-500
@@ -38,7 +39,16 @@ const TAILWIND_LABEL_ORDER = [
   '#a855f7', // purple-500
   '#d946ef', // fuchsia-500
   '#ec4899', // pink-500
-  '#f43f5e' // rose-500
+  '#f43f5e', // rose-500
+  '#64748b', // slate-500
+  '#6b7280', // gray-500
+  '#71717a', // zinc-500
+  '#737373', // neutral-500
+  '#78716c', // stone-500
+  '#8b7d6b', // taupe
+  '#9b7ba8', // mauve
+  '#94a3b8', // mist
+  '#6b8e23' // olive
 ];
 
 function getTopLevelLabel(meta, prop, fallback) {
@@ -64,7 +74,10 @@ function capitalizeFirstLetter(value) {
 function getBranchColor(node, colorMap) {
   let current = node;
   while (current) {
-    if (colorMap[current.data.name]) return colorMap[current.data.name];
+    const nodeKey = current.data?.key;
+    const nodeName = current.data?.name;
+    if (nodeKey && colorMap[nodeKey]) return colorMap[nodeKey];
+    if (nodeName && colorMap[nodeName]) return colorMap[nodeName];
     current = current.parent;
   }
   return BASE_EDGE_COLOR;
@@ -73,15 +86,12 @@ function getBranchColor(node, colorMap) {
 function buildOrderedLabelColorMap(root) {
   const labels = root
     .descendants()
-    .filter((node) => node.depth > 0)
+    .filter((node) => node.depth > 0 && (node.depth === 1 || node.children))
     .sort((a, b) => a.x - b.x);
   const map = new Map();
-  const total = labels.length;
-  const interpolator = d3.interpolateRgbBasis(TAILWIND_LABEL_ORDER);
 
   labels.forEach((node, index) => {
-    const t = total <= 1 ? 0 : index / (total - 1);
-    map.set(node, interpolator(t));
+    map.set(node, TAILWIND_LABEL_ORDER[index % TAILWIND_LABEL_ORDER.length]);
   });
 
   return map;
@@ -195,7 +205,10 @@ function buildTaxonomyFromSchema(json) {
   Object.entries(uiMeta).forEach(([name, meta]) => {
     const prop = schemaProps[name];
     const label = getTopLevelLabel(meta, prop, name);
-    if (meta?.color) map[label] = meta.color;
+    if (meta?.color) {
+      map[name] = meta.color;
+      if (label !== name) map[label] = meta.color;
+    }
   });
 
   const topLevelNodes = Object.entries(uiMeta).map(([name, meta]) =>
@@ -384,7 +397,7 @@ function Taxonomy() {
         .attr('stroke', strokeForLabel)
         .attr('fill', (d) => {
           if (d.depth === 0) return isDownloading ? '#000000' : '#ffffff';
-          if (!d.children && d.parent) {
+          if (!d.children && d.parent?.depth > 0) {
             return labelColorMap.get(d.parent) || getBranchColor(d.parent, branchColorMap);
           }
           return labelColorMap.get(d) || getBranchColor(d, branchColorMap);

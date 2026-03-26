@@ -31,6 +31,7 @@ import Navigation from "./Navigation";
 import Icon from "./Icon";
 import schema from '../public/data/sti-survey.schema.json';
 import { REQUIRED_FIELD_PATHS, isRequiredFieldMissing } from "./lib/surveyValidation";
+import { getApplicationPurposeText, getMainMethodTechniqueText, getTechniqueTags } from "./lib/surveyDataAccess";
 
 // Column helper for type-safe column definitions
 const columnHelper = createColumnHelper();
@@ -62,20 +63,20 @@ const TAXONOMY_GROUP_LABELS = {
 
 // Colors aligned with the rendered Taxonomy labels (src/Taxonomy.jsx radial palette)
 const TAXONOMY_HEADER_COLORS = {
-  coreTasks: '#f6910e',
-  supportTasks: '#68c82e',
-  applicationPurpose: '#a3a3a3',
-  systemLevel: '#0ab0d9',
-  mainMethod: '#12b8a2',
-  revision: '#0ea9e2',
-  domain: '#318af2',
-  resourcheImplementation: '#885df5',
-  codeAvailability: '#5e6bf3',
-  license: '#955af6',
-  userInterfaceTool: '#cd4aea',
-  dataInterface: '#f14274',
-  inputs: '#e946a5',
-  output: '#f14274',
+  coreTasks: '#ef4444',
+  supportTasks: '#f97316',
+  applicationPurpose: '#f59e0b',
+  mainMethod: '#eab308',
+  systemLevel: '#84cc16',
+  revision: '#22c55e',
+  domain: '#10b981',
+  codeAvailability: '#14b8a6',
+  resourcheImplementation: '#06b6d4',
+  license: '#0ea5e9',
+  userInterfaceTool: '#3b82f6',
+  inputs: '#6366f1',
+  dataInterface: '#8b5cf6',
+  output: '#8b5cf6',
 };
 
 const getAttributeColor = (sectionKey) => {
@@ -172,6 +173,38 @@ const getUserRevisionBadgeColor = (type) => {
   const baseColor = getAttributeColor('revision');
   return getUnifiedBadgeColor(baseColor, lower === 'none');
 };
+
+const normalizeClusterValues = (clusters) => {
+  if (typeof clusters === 'string') {
+    const value = clusters.trim();
+    return value ? [value] : [];
+  }
+
+  if (Array.isArray(clusters)) {
+    return clusters
+      .filter((cluster) => typeof cluster === 'string')
+      .map((cluster) => cluster.trim())
+      .filter((cluster) => cluster.length > 0);
+  }
+
+  return [];
+};
+
+const formatClusterLabel = (cluster) => {
+  if (typeof cluster !== 'string' || cluster.length === 0) return cluster;
+
+  return cluster
+    .split('_')
+    .map((part) => {
+      const upper = part.toUpperCase();
+      if (['TF', 'IDF', 'LLM', 'NER', 'KG'].includes(upper)) {
+        return upper;
+      }
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    })
+    .join(' ');
+};
+
 const formatDate = (dateString) => {
   if (!dateString || dateString.trim() === "") return null;
   const date = new Date(dateString);
@@ -397,14 +430,31 @@ const TaskCell = ({ value, isMissing, align = 'left' }) => {
     </div>
   );
 };
-const StepCell = ({ value, align = 'left' }) => {
+const StepCell = ({ value, clusters, align = 'left', clusterColor = getAttributeColor('supportTasks') }) => {
   const hasContent = Boolean(value?.trim());
   const iconClass = hasContent ? "text-green-500 text-lg" : "text-red-500 text-lg";
+  const clusterValues = normalizeClusterValues(clusters);
   const alignClass = align === 'center' ? 'flex justify-center' : '';
   
   return (
     <div className={alignClass}>
-      <Icon name={hasContent ? 'done' : 'clear'} className={iconClass} />
+      <div className="flex flex-col items-center gap-1">
+        <Icon name={hasContent ? 'done' : 'clear'} className={iconClass} />
+        {clusterValues.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-1 max-w-[180px]">
+            {clusterValues.map((cluster, index) => (
+              <span
+                key={`${cluster}-${index}`}
+                className="inline-flex items-center justify-center rounded px-1.5 py-0.5 text-[9px] font-medium"
+                style={{ backgroundColor: `${clusterColor}${UNIFIED_COLORS.badgeOpacity}`, color: clusterColor }}
+                title={cluster}
+              >
+                {formatClusterLabel(cluster)}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -701,8 +751,9 @@ function SurveyTable({ data = [] }) {
       cell: (info) => info.getValue(),
       enableSorting: false,
     }),
-    columnHelper.accessor("techniqueTags", {
-      header: () => <span>{getSchemaLabel('techniqueTags', 'Technique Tags')}</span>,
+    columnHelper.accessor(row => getTechniqueTags(row), {
+      id: "techniqueTags",
+      header: () => <span>{getSchemaLabel('mainMethod.technique', 'Technique Tags')}</span>,
       cell: (info) => {
         const tags = info.getValue();
         if (!tags || tags.length === 0) {
@@ -841,7 +892,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.dataPreparation?.cluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -860,7 +918,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.columnClassificationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -879,7 +944,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.subjectDetectionCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -898,7 +970,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.datatypeAnnotationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -917,7 +996,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.entityLinkingClusters}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -936,7 +1022,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.typeAnnotationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -955,7 +1048,14 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.predicateAnnotationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
@@ -974,13 +1074,20 @@ function SurveyTable({ data = [] }) {
               </div>
             );
           },
-          cell: (info) => <StepCell value={info.getValue()} align={info.column.columnDef.meta?.align} />,
+          cell: (info) => (
+            <StepCell
+              value={info.getValue()}
+              clusters={info.row.original.supportTasks?.nilAnnotationCluster}
+              align={info.column.columnDef.meta?.align}
+              clusterColor={getSectionHeaderColor('supportTasks')}
+            />
+          ),
           enableSorting: false,
           meta: { align: 'center' }
         }),
       ],
     },
-    columnHelper.accessor(row => row.applicationPurpose, {
+    columnHelper.accessor(row => getApplicationPurposeText(row), {
       id: "applicationPurpose",
       header: () => (
         <span style={{ color: getSectionHeaderColor('applicationPurpose') }}>
@@ -1005,7 +1112,7 @@ function SurveyTable({ data = [] }) {
       columns: [
         columnHelper.accessor(row => {
           const type = row.mainMethod?.type || "";
-          const tech = row.mainMethod?.technique || "";
+          const tech = getMainMethodTechniqueText(row);
           return { type, tech };
         }, {
           id: "mainMethod",

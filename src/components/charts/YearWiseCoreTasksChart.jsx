@@ -2,7 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import * as d3 from "d3";
 import useResizeObserver from '../../hooks/useResizeObserver';
 
-const CORE_TASK_COLORS = ['#6366f1', '#3b82f6', '#0ea5e9', '#06b6d4'];
+const CORE_TASK_COLORS = ['#ffe4e6', '#fb7185', '#ef4444', '#991b1b'];
+const CORE_TASK_DASH_PATTERNS = ['0', '12,4', '8,3', '4,3'];
 
 const YearWiseCoreTasksChart = ({ data }) => {
   const containerRef = useRef();
@@ -63,7 +64,7 @@ const YearWiseCoreTasksChart = ({ data }) => {
       .y(d => y(d.count));
 
     // Add lines for each task
-    tasks.forEach(task => {
+    tasks.forEach((task, taskIndex) => {
         const taskData = chartData.map(d => ({ year: d.year, count: d[task] }));
         
         chartSvg.append("path")
@@ -71,6 +72,9 @@ const YearWiseCoreTasksChart = ({ data }) => {
             .attr("fill", "none")
             .attr("stroke", color(task))
             .attr("stroke-width", 2)
+            .attr("stroke-linecap", "round")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-dasharray", CORE_TASK_DASH_PATTERNS[taskIndex])
             .attr("d", line);
             
         // Add dots
@@ -115,18 +119,28 @@ const YearWiseCoreTasksChart = ({ data }) => {
         .enter().append("g")
         .attr("transform", (d, i) => `translate(${legendOffsetX},${-legendHeight + legendVerticalOffset + i * legendRowHeight})`);
 
-    legend.append("rect")
+    legend.append("line")
         .attr("x", 0)
-        .attr("y", 1)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("x2", 12)
+        .attr("y1", 6)
+        .attr("y2", 6)
+        .attr("stroke", color)
+        .attr("stroke-width", 2)
+        .attr("stroke-linecap", "round")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-dasharray", (d, i) => CORE_TASK_DASH_PATTERNS[i]);
+
+    legend.append("circle")
+        .attr("cx", 6)
+        .attr("cy", 6)
+        .attr("r", 3.2)
         .attr("fill", color);
 
     legend.append("text")
-        .attr("x", 16)
+        .attr("x", 18)
         .attr("y", 6)
         .attr("dy", "0.32em")
-        .style("fill", "#9ca3af")
+        .style("fill", "#d1d5db")
         .text(d => d.toUpperCase());
 
   }, [data, dimensions]);
