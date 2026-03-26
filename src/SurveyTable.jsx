@@ -298,6 +298,84 @@ const UnifiedVenueCell = ({ venue, isMissing, align = 'center' }) => {
   );
 };
 
+const normalizeApplicationPurpose = (value) => {
+  if (typeof value === 'string') {
+    const normalized = value.trim();
+    return {
+      category: '',
+      objective: normalized,
+      legacy: normalized,
+    };
+  }
+
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return {
+      category: '',
+      objective: '',
+      legacy: '',
+    };
+  }
+
+  return {
+    category: typeof value.category === 'string' ? value.category.trim() : '',
+    objective: typeof value.objective === 'string' ? value.objective.trim() : '',
+    legacy: typeof value.legacy === 'string' ? value.legacy.trim() : '',
+  };
+};
+
+const ApplicationPurposeCell = ({ value, isMissing, align = 'left' }) => {
+  const alignClass = align === 'center' ? 'flex justify-center' : '';
+
+  if (isMissing) {
+    return (
+      <div className={alignClass}>
+        <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>
+      </div>
+    );
+  }
+
+  const { category, objective, legacy } = normalizeApplicationPurpose(value);
+  const primaryText = objective || legacy;
+  const showLegacy = Boolean(legacy) && legacy !== primaryText;
+
+  if (!category && !primaryText) {
+    return (
+      <div className={alignClass}>
+        <span className="text-xs italic" style={{ color: UNIFIED_COLORS.accentText }}>-</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className={alignClass}>
+      <div className="flex max-w-sm flex-col gap-1 break-words">
+        {category && (
+          <span
+            className="inline-flex w-fit items-center justify-center rounded px-2 py-1 text-[10px] font-medium"
+            style={getUnifiedBadgeColor(getAttributeColor('applicationPurpose'))}
+          >
+            {category}
+          </span>
+        )}
+        {primaryText && (
+          <span className="text-xs leading-snug" style={{ color: UNIFIED_COLORS.primaryText }}>
+            {primaryText}
+          </span>
+        )}
+        {showLegacy && (
+          <span
+            className="text-[10px] italic leading-snug"
+            style={{ color: UNIFIED_COLORS.secondaryText }}
+            title={`Legacy: ${legacy}`}
+          >
+            Legacy: {legacy}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // Legacy component for backward compatibility
 const MissingFieldCell = ({ value, isMissing, align = 'left' }) => {
   return <UnifiedTextCell value={value} isMissing={isMissing} align={align} />;
@@ -910,7 +988,7 @@ function SurveyTable({ data = [] }) {
         </span>
       ),
       cell: (info) => (
-        <MissingFieldCell
+        <ApplicationPurposeCell
           value={info.getValue()}
           isMissing={isRequiredFieldMissing(info.row.original, 'applicationPurpose')}
         />

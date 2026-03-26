@@ -369,8 +369,23 @@
       "label": "Output"
     },
     "applicationPurpose": {
-      "type": "string",
-      "label": "Application/Purpose"
+      "type": "object",
+      "label": "Application/Purpose",
+      "properties": {
+        "category": {
+          "type": "string",
+          "label": "Category"
+        },
+        "objective": {
+          "type": "string",
+          "label": "Objective"
+        },
+        "legacy": {
+          "type": "string",
+          "label": "Legacy"
+        }
+      },
+      "additionalProperties": false
     },
     "userInterfaceTool": {
       "type": "string",
