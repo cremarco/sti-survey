@@ -3697,6 +3697,14 @@
   },
   {
     "type": "evolve",
+    "source": "Li",
+    "source_date": "2021-01-01",
+    "target": "Li",
+    "target_date": "2024-01-01",
+    "value": 1
+  },
+  {
+    "type": "evolve",
     "source": "Nguyen",
     "source_date": "2021-01-01",
     "target": "Nguyen",
@@ -4225,14 +4233,6 @@
   },
   {
     "type": "evolve",
-    "source": "Abdelmageed",
-    "source_date": "2022-01-01",
-    "target": "Abdelmageed",
-    "target_date": "2025-01-01",
-    "value": 1
-  },
-  {
-    "type": "evolve",
     "source": "Cremaschi",
     "source_date": "2022-01-01",
     "target": "Cremaschi",
@@ -4513,6 +4513,14 @@
   },
   {
     "type": "cite",
+    "source": "Korini",
+    "source_date": "2023-01-01",
+    "target": "Hulsebos",
+    "target_date": "2019-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Mehryar",
     "source_date": "2023-01-01",
     "target": "Hulsebos",
@@ -4609,6 +4617,14 @@
   },
   {
     "type": "cite",
+    "source": "Korini",
+    "source_date": "2023-01-01",
+    "target": "Zhang",
+    "target_date": "2020-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Mehryar",
     "source_date": "2023-01-01",
     "target": "Abdelmageed",
@@ -4700,6 +4716,14 @@
     "source": "Foko",
     "source_date": "2023-01-01",
     "target": "Nguyen",
+    "target_date": "2021-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Korini",
+    "source_date": "2023-01-01",
+    "target": "Wang",
     "target_date": "2021-01-01",
     "value": 1
   },
@@ -4801,10 +4825,42 @@
   },
   {
     "type": "cite",
+    "source": "Korini",
+    "source_date": "2023-01-01",
+    "target": "Deng",
+    "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Korini",
+    "source_date": "2023-01-01",
+    "target": "Suhara",
+    "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Sun",
     "source_date": "2023-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Korini",
+    "source_date": "2023-01-01",
+    "target": "Sun",
+    "target_date": "2023-01-01",
+    "value": 1
+  },
+  {
+    "type": "evolve",
+    "source": "Korini",
+    "source_date": "2023-01-01",
+    "target": "Korini",
+    "target_date": "2024-01-01",
     "value": 1
   },
   {
@@ -4953,6 +5009,14 @@
   },
   {
     "type": "cite",
+    "source": "Li",
+    "source_date": "2024-01-01",
+    "target": "Hulsebos",
+    "target_date": "2019-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Nguyen",
     "source_date": "2024-01-01",
     "target": "Chabot",
@@ -5057,6 +5121,14 @@
   },
   {
     "type": "cite",
+    "source": "Li",
+    "source_date": "2024-01-01",
+    "target": "Zhang",
+    "target_date": "2020-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Nguyen",
     "source_date": "2024-01-01",
     "target": "Cremaschi",
@@ -5077,6 +5149,14 @@
     "source_date": "2024-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Li",
+    "source_date": "2024-01-01",
+    "target": "Li",
+    "target_date": "2021-01-01",
     "value": 1
   },
   {
@@ -5145,6 +5225,22 @@
   },
   {
     "type": "cite",
+    "source": "Li",
+    "source_date": "2024-01-01",
+    "target": "Deng",
+    "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Li",
+    "source_date": "2024-01-01",
+    "target": "Suhara",
+    "target_date": "2022-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Parmar",
     "source_date": "2024-01-01",
     "target": "Cremaschi",
@@ -5161,10 +5257,50 @@
   },
   {
     "type": "cite",
+    "source": "Feuer",
+    "source_date": "2024-01-01",
+    "target": "Korini",
+    "target_date": "2023-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Korini",
+    "source_date": "2024-01-01",
+    "target": "Korini",
+    "target_date": "2023-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Li",
+    "source_date": "2024-01-01",
+    "target": "Korini",
+    "target_date": "2023-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
     "source": "Parmar",
     "source_date": "2024-01-01",
     "target": "Parmar",
     "target_date": "2023-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Korini",
+    "source_date": "2024-01-01",
+    "target": "Li",
+    "target_date": "2024-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Zhang",
+    "source_date": "2024-01-01",
+    "target": "Li",
+    "target_date": "2024-01-01",
     "value": 1
   },
   {
@@ -5572,6 +5708,14 @@
     "source": "Cremaschi",
     "source_date": "2025-01-01",
     "target": "Dasoulas",
+    "target_date": "2023-01-01",
+    "value": 1
+  },
+  {
+    "type": "cite",
+    "source": "Cremaschi",
+    "source_date": "2025-01-01",
+    "target": "Korini",
     "target_date": "2023-01-01",
     "value": 1
   },
