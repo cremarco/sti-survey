@@ -20717,7 +20717,7 @@
                     "title": "BLIP-2: Bootstrapping language-image pretraining with frozen image encoders and large language models"
                 },
                 {
-                    "ref": "2023_li_table-gpt",
+                    "ref": "2024_li_table-gpt",
                     "title": "Table-GPT: Table-tuned GPT for diverse table tasks"
                 },
                 {
@@ -21227,7 +21227,7 @@
                     "title": "SOTAB: The WDC schema.org table annotation benchmark"
                 },
                 {
-                    "ref": "2023_li_table-gpt",
+                    "ref": "2024_li_table-gpt",
                     "title": "Table-GPT: Table-tuned GPT for Diverse Table Tasks"
                 },
                 {
@@ -24343,6 +24343,265 @@
             {
                 "field": "doi",
                 "reason": "No DOI is stated in the paper text."
+            }
+        ]
+    },
+    {
+        "id": "2023_korini_column",
+        "added": "2026-11-17",
+        "year": 2023,
+        "firstAuthor": "Korini",
+        "authors": [
+            "Keti Korini",
+            "Christian Bizer"
+        ],
+        "title": "Column Type Annotation using ChatGPT",
+        "venue": {
+            "type": "workshop",
+            "acronym": "TaDA"
+        },
+        "nameOfApproach": "",
+        "coreTasks": {
+            "cta": true,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Serialises table content and candidate semantic types into prompts; a two-step pipeline first identifies the table entity class and then restricts the column-type vocabulary.",
+                "spellChecker": "",
+                "unitsOfMeasurements": "",
+                "cluster": "structure_context_packaging"
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "Uses ChatGPT with zero-shot instructions, message roles, few-shot demonstrations, and a two-step vocabulary restriction to predict column types from schema.org-derived SOTAB labels.",
+            "typeAnnotationCluster": "machine_learning",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "Hybrid",
+            "technique": [
+                "transformer"
+            ]
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "Annotation is generated automatically; no interactive correction interface is described."
+        },
+        "domain": {
+            "domain": "Independent",
+            "type": "open data tables"
+        },
+        "validation": {
+            "goldStandard": "Down-sampled SOTAB CTA: 32 labels; 62 training/example tables (356 columns), 41 test tables (250 columns).",
+            "metrics": [
+                "F1"
+            ]
+        },
+        "codeAvailability": "https://github.com/wbsg-uni-mannheim/TabAnnGPT/tree/main/CTAusingChatGPT",
+        "license": "Ns",
+        "inputs": {
+            "typeOfTable": "Web tables",
+            "tableSources": [
+                "web"
+            ]
+        },
+        "kg": {
+            "tripleStore": "schema.org",
+            "index": ""
+        },
+        "output": "column-to-class annotations",
+        "applicationPurpose": {
+            "category": "DATA ENRICHMENT",
+            "objective": "Semantic column annotation for data search and data integration.",
+            "legacy": "Semantic column annotation for data search and data integration."
+        },
+        "userInterfaceTool": "",
+        "usesLLM": {
+            "modelName": "ChatGPT (gpt-3.5-turbo-0301)"
+        },
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "",
+        "citations": {
+            "references": [
+                {
+                    "ref": "2019_hulsebos_sherlock",
+                    "title": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
+                },
+                {
+                    "ref": "2020_zhang_sato",
+                    "title": "Sato: Contextual Semantic Type Detection in Tables"
+                },
+                {
+                    "ref": "2021_wang_tcn",
+                    "title": "TCN: Table Convolutional Network for Web Table Interpretation"
+                },
+                {
+                    "ref": "2022_deng_turl",
+                    "title": "TURL: Table Understanding through Representation Learning"
+                },
+                {
+                    "ref": "2022_suhara_annotating",
+                    "title": "Annotating Columns with Pre-trained Language Models"
+                },
+                {
+                    "ref": "2023_sun_reca",
+                    "title": "RECA: Related Tables Enhanced Column Semantic Type Annotation Framework"
+                }
+            ]
+        },
+        "uncertainFields": [
+            {
+                "field": "doi",
+                "reason": "The CEUR-WS TaDA 2023 paper has no DOI stated; publication URL: https://ceur-ws.org/Vol-3462/TADA1.pdf"
+            },
+            {
+                "field": "license",
+                "reason": "No explicit implementation licence was found in TabAnnGPT/CTAusingChatGPT; the CC BY 4.0 paper licence is not treated as a software licence."
+            },
+            {
+                "field": "mainMethod.type",
+                "reason": "Hybrid summarises the reported zero-shot and labelled few-shot configurations; the proposed ChatGPT pipeline does not fine-tune model weights."
+            }
+        ]
+    },
+    {
+        "id": "2024_li_table-gpt",
+        "added": "2026-11-17",
+        "year": 2024,
+        "firstAuthor": "Li",
+        "authors": [
+            "Peng Li",
+            "Yeye He",
+            "Dror Yashar",
+            "Weiwei Cui",
+            "Song Ge",
+            "Haidong Zhang",
+            "Danielle Rifinski Fainman",
+            "Dongmei Zhang",
+            "Surajit Chaudhuri"
+        ],
+        "title": "Table-GPT: Table Fine-tuned GPT for Diverse Table Tasks",
+        "venue": {
+            "type": "journal",
+            "acronym": "PACMMOD / SIGMOD"
+        },
+        "nameOfApproach": "Table-GPT",
+        "coreTasks": {
+            "cta": true,
+            "cpa": false,
+            "cea": false,
+            "cnea": false
+        },
+        "supportTasks": {
+            "dataPreparation": {
+                "description": "Serialises tables into task prompts and synthesises multi-task fine-tuning instances, with instruction-, table-, and completion-level augmentation.",
+                "spellChecker": "",
+                "unitsOfMeasurements": "",
+                "cluster": "structure_context_packaging"
+            },
+            "columnClassification": "",
+            "subjectDetection": "",
+            "datatypeAnnotation": "",
+            "typeAnnotation": "A table-tuned GPT model selects a semantic type from supplied candidates; CTA is evaluated as a held-out task in zero- and few-shot prompting settings. The selected type is returned as a JSON object with the key chosen_semantic_type.",
+            "typeAnnotationCluster": "machine_learning",
+            "predicateAnnotation": "",
+            "nilAnnotation": "",
+            "entityLinking": {
+                "description": "",
+                "candidateGeneration": "",
+                "entityDisambiguation": ""
+            }
+        },
+        "mainMethod": {
+            "type": "Supervised",
+            "technique": [
+                "transformer"
+            ]
+        },
+        "revision": {
+            "type": "Fully automated",
+            "description": "Annotation is generated automatically; no interactive correction interface is described."
+        },
+        "domain": {
+            "domain": "Independent",
+            "type": "generic"
+        },
+        "validation": {
+            "goldStandard": "CTA: Efthymiou, Limaye, Sherlock, T2D. Entity-matching benchmarks are evaluated separately and are not coded as CEA.",
+            "metrics": [
+                "F1"
+            ]
+        },
+        "codeAvailability": "https://github.com/microsoft/Table-GPT",
+        "license": "MIT",
+        "inputs": {
+            "typeOfTable": "Web tables, relational tables, and spreadsheets",
+            "tableSources": [
+                "web",
+                "structured",
+                "spreadsheets"
+            ]
+        },
+        "kg": {
+            "tripleStore": "DBpedia (CTA benchmark type vocabularies)",
+            "index": ""
+        },
+        "output": "column-to-class annotations",
+        "applicationPurpose": {
+            "category": "DATA ENRICHMENT",
+            "objective": "Generalist table understanding including semantic column annotation for downstream data management.",
+            "legacy": "Generalist table understanding including semantic column annotation for downstream data management."
+        },
+        "userInterfaceTool": "",
+        "usesLLM": {
+            "modelName": "GPT-3.5 and ChatGPT, with multi-task table fine-tuning"
+        },
+        "checkedByAuthor": false,
+        "checkedByAi": true,
+        "doi": "https://doi.org/10.1145/3654979",
+        "citations": {
+            "references": [
+                {
+                    "ref": "2019_hulsebos_sherlock",
+                    "title": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
+                },
+                {
+                    "ref": "2020_zhang_sato",
+                    "title": "Sato: Contextual Semantic Type Detection in Tables"
+                },
+                {
+                    "ref": "2021_li_deep",
+                    "title": "Deep Entity Matching with Pre-Trained Language Models"
+                },
+                {
+                    "ref": "2022_deng_turl",
+                    "title": "TURL: Table Understanding through Representation Learning"
+                },
+                {
+                    "ref": "2022_suhara_annotating",
+                    "title": "Annotating Columns with Pre-trained Language Models"
+                },
+                {
+                    "ref": "2023_korini_column",
+                    "title": "Column Type Annotation using ChatGPT"
+                }
+            ]
+        },
+        "uncertainFields": [
+            {
+                "field": "citations",
+                "reason": "The 2023 arXiv preprint and the 2024 PACMMOD/SIGMOD article are represented by one canonical 2024 record."
             }
         ]
     }
