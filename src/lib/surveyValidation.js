@@ -24,7 +24,7 @@ export const REQUIRED_FIELD_PATHS = [
 
 const REQUIRED_FIELDS_SET = new Set(REQUIRED_FIELD_PATHS);
 
-export const isEmptyValue = (value) => {
+const isEmptyValue = (value) => {
   if (value === null || value === undefined) return true;
   if (typeof value === 'string') return value.trim() === '';
   if (Array.isArray(value)) {
@@ -37,7 +37,7 @@ export const isEmptyValue = (value) => {
   return false;
 };
 
-export const getNestedValue = (obj, path) => {
+const getNestedValue = (obj, path) => {
   const keys = path.split('.');
   let current = obj;
 

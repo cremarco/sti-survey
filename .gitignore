@@ -1,28 +1,38 @@
-# Logs
-logs
+# Dependencies and build products
+node_modules/
+/dist/
+/dist-ssr/
+/.vite/
+/coverage/
+
+# Local screenshots and design review output
+/tmp/
+/.tmp-*
+/.impeccable/critique/
+
+# Logs and caches
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+/logs/
+__pycache__/
+*.py[cod]
+/.pytest_cache/
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Local environment files
 .env
-*.env
 .env.*
-venv/
+!.env.example
+!.env.*.example
+*.local
+/.venv/
+/venv/
+
+# Local editor and OS files
+/.vscode/*
+!/.vscode/extensions.json
+/.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+._*
+Thumbs.db

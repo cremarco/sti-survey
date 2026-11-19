@@ -31,7 +31,7 @@ The production build is written to `dist/`.
 
 ## Maintain and fork the resource
 
-The React application is in `src/`. Its current dataset is `public/data/sti-survey.json`; archived datasets are retained under `public/data/old/`. The field definitions and display configuration are in `public/data/sti-survey.schema.json`.
+The React application is in `src/`. Its current dataset is `public/data/sti-survey.json`. Earlier data snapshots and the original TURL article are kept in [archive/](archive/) for reference. The field definitions and display configuration are in `public/data/sti-survey.schema.json`.
 
 To propose a correction or extension, open an issue or submit a pull request. For metadata changes, identify the affected record and include supporting publication or repository links. Check the affected catalogue entries and charts locally and run `npm run build` before submitting.
 
@@ -40,7 +40,7 @@ Forks can run the same code and modify the metadata under the licences below. Wh
 ## Licensing and attribution
 
 - **Website source code, scripts, and software configuration:** [MIT](LICENSE). Redistribution must retain the copyright and licence notices required by MIT.
-- **Original survey metadata, annotations, and curation:** [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE-DATA), including original contributions in `public/data/`, `approaches/`, and `approaches bk/`. This includes the original metadata field definitions and UI labels. When sharing or adapting this material, give appropriate credit, link to the licence, and indicate changes as required by CC BY 4.0.
+- **Original survey metadata, annotations, and curation:** [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE-DATA), including original contributions in `public/data/`, `approaches/`, and `archive/`. This includes the original metadata field definitions and UI labels. When sharing or adapting this material, give appropriate credit, link to the licence, and indicate changes as required by CC BY 4.0.
 
 Attribution for the curated survey resource should identify Marco Cremaschi, Blerina Spahiu, Ernesto Jiménez-Ruiz, and Matteo Palmonari, the resource title, and this repository.
 

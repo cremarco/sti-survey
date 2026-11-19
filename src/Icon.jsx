@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Svg = ({ children, className, viewBox = '0 0 24 24', stroke = 'currentColor', fill = 'none' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
