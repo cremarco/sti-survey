@@ -984,7 +984,7 @@ function SurveyTable({ data = [] }) {
         columnHelper.accessor(row => row.supportTasks?.entityLinking?.description || "", {
           id: "entityLinking",
           header: () => {
-            const count = data.length > 0 ? countSupportTaskApproaches(data, 'entityLinking.description') : 0;
+            const count = data.length > 0 ? countSupportTaskApproaches(data, 'supportTasks.entityLinking.description') : 0;
             return (
               <div className="flex items-center gap-2">
                 <span style={{ color: getSectionHeaderColor('supportTasks') }}>
