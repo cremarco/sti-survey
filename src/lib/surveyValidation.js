@@ -20,7 +20,6 @@ export const REQUIRED_FIELD_PATHS = [
   'kg.tripleStore',
   'output',
   'checkedByAuthor',
-  'doi',
 ];
 
 const REQUIRED_FIELDS_SET = new Set(REQUIRED_FIELD_PATHS);

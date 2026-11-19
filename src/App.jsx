@@ -265,13 +265,13 @@ function App() {
                 
                 {/* Authors */}
                 <div className="text-neutral-300 text-sm mb-2">
-                  <p>Marco Cremaschi¹, Blerina Spahiu¹, Matteo Palmonari¹, Ernesto Jimenez-Ruiz²</p>
+                  <p>Marco Cremaschi¹, Blerina Spahiu¹, Ernesto Jiménez-Ruiz², Matteo Palmonari¹</p>
                 </div>
                 
                 {/* Affiliations */}
                 <div className="text-neutral-400 text-xs mb-4">
-                  <p>¹ University of Milano - Bicocca, viale Sarca, 336 - Edificio U14, Milan, 20126, Italy</p>
-                  <p>² City, University of London, Northampton Square, London, EC1V 0HB, United Kingdom</p>
+                  <p>¹ Department of Informatics, Systems and Communication (DISCo), University of Milano-Bicocca, viale Sarca, 336 - Edificio U14, Milan, 20126, Italy</p>
+                  <p>² City St George’s, University of London, Northampton Square, London, EC1V 0HB, United Kingdom</p>
                 </div>
               </div>
               

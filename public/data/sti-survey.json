@@ -154,10 +154,6 @@
         },
         "uncertainFields": [
             {
-                "field": "doi",
-                "reason": "DOI is not stated in the paper text; external lookup would be required."
-            },
-            {
                 "field": "venue.acronym",
                 "reason": "The publication appears in 'WISE 2007 Workshops (LNCS 4832)'; using 'WISE' may conflate workshop vs conference branding."
             },
@@ -187,8 +183,8 @@
         ],
         "title": "Data Integration for the Relational Web",
         "venue": {
-            "type": "conference",
-            "acronym": "VLDB"
+            "type": "journal",
+            "acronym": "PVLDB"
         },
         "nameOfApproach": "Octopus",
         "coreTasks": {
@@ -344,10 +340,6 @@
             "note": null
         },
         "uncertainFields": [
-            {
-                "field": "doi",
-                "reason": "A DOI is not visible in the provided PDF; one may exist in digital libraries."
-            },
             {
                 "field": "kg.tripleStore",
                 "reason": "The system does not rely on a knowledge graph; no triple store is mentioned."
@@ -555,10 +547,6 @@
             {
                 "field": "userInterfaceTool",
                 "reason": "@Web is a software platform; the existence of a dedicated end-user GUI for annotation is implied but not detailed."
-            },
-            {
-                "field": "doi",
-                "reason": "The DOI is not provided in the paper text available; leaving it empty to avoid inventing information."
             }
         ]
     },
@@ -1100,8 +1088,8 @@
             "typeAnnotationCluster": "majority_voting",
             "predicateAnnotation": "Selects relations between column pairs from KB-derived candidates using a scoring procedure.",
             "predicateAnnotationCluster": "majority_voting",
-            "nilAnnotation": "Flags cells as NIL/new entities when confidence is low, enabling discovery of entities absent from the KG.",
-            "nilAnnotationCluster": "score_thresholding_or_abstention",
+            "nilAnnotation": "After candidate ranking, a second SVM uses the top candidate’s features, rank score and gap to the next candidate to decide whether to link the cell or treat it as a potential new entity.",
+            "nilAnnotationCluster": "separate_post_ranking_models",
             "entityLinking": {
                 "description": "Links cell strings to KG entities using a two-stage SVM pipeline.",
                 "candidateGeneration": "Retrieves top-N entity candidates from KB lookups using header/context-enhanced queries.",
@@ -1223,7 +1211,8 @@
                 "field": "validation.goldStandard",
                 "reason": "The evaluation uses a small curated set of tables rather than a named public gold standard."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-658/paper489.pdf"
     },
     {
         "id": "2010_syed_exploiting",
@@ -1436,7 +1425,8 @@
                 "field": "output",
                 "reason": "The paper does not explicitly describe a supported output artifact or serialization, so the previous output value could not be verified strictly."
             }
-        ]
+        ],
+        "publicationUrl": "https://ebiquity.umbc.edu/paper/html/id/474"
     },
     {
         "id": "2011_crestan_web-scale",
@@ -1592,10 +1582,6 @@
                 "reason": "They use manually annotated samples but no named gold standard; the description summarises this."
             },
             {
-                "field": "doi",
-                "reason": "The DOI is not stated in the provided text; left empty to avoid invention."
-            },
-            {
                 "field": "citations[6].ref",
                 "reason": "First author appears as \"Huanhuan, J. H.\" in the reference text, which may reflect formatting/ordering issues."
             },
@@ -1646,8 +1632,8 @@
             "typeAnnotationCluster": "majority_voting",
             "predicateAnnotation": "Discovers relations between columns via majority voting over relations observed in DBpedia.",
             "predicateAnnotationCluster": "majority_voting",
-            "nilAnnotation": "Identifies cells that refer to entities not in the KB (NIL/new entities).",
-            "nilAnnotationCluster": "score_thresholding_or_abstention",
+            "nilAnnotation": "After candidate ranking, a second SVM uses the top candidate’s features, rank score and gap to the next candidate to decide whether to link the cell or treat it as a potential new entity.",
+            "nilAnnotationCluster": "separate_post_ranking_models",
             "entityLinking": {
                 "description": "Two-stage linking: candidate retrieval from Wikitology, then SVM-based ranking and decision to link or mark as new.",
                 "candidateGeneration": "Wikitology queries return top-N candidate entities per cell.",
@@ -1814,7 +1800,8 @@
                 "field": "nameOfApproach",
                 "reason": "Related work references T2LD, but this paper does not clearly name the presented system."
             }
-        ]
+        ],
+        "publicationUrl": "https://ebiquity.umbc.edu/paper/html/id/552/Automatically-Generating-Government-Linked-Data-from-Tables"
     },
     {
         "id": "2011_venetis_recovering",
@@ -2030,10 +2017,6 @@
         },
         "uncertainFields": [
             {
-                "field": "doi",
-                "reason": "DOI not stated in the provided text; PVLDB papers often use 10.14778/... identifiers but none is specified."
-            },
-            {
                 "field": "userInterfaceTool",
                 "reason": "The paper does not specify a UI or tool modality."
             },
@@ -2245,7 +2228,8 @@
         "kg": {
             "tripleStore": "None",
             "index": ""
-        }
+        },
+        "publicationUrl": "https://usc-isi-i2.github.io/papers/goel12-icai.pdf"
     },
     {
         "id": "2012_knoblock_semi-automatically",
@@ -3166,7 +3150,7 @@
         "userInterfaceTool": "@Web; MIEL++ GUI",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1109/TKDE.2011.245",
+        "doi": "https://doi.org/10.1109/tkde.2011.245",
         "citations": {
             "references": [
                 {
@@ -4316,7 +4300,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Classified as ontology-driven since DBpedia guides extraction; alternative labels like rule-based could also apply."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-1057/MunozEtAl_LD4IE2013.pdf"
     },
     {
         "id": "2013_quercini_entity",
@@ -4607,7 +4592,7 @@
         "userInterfaceTool": "Entity augmentation API",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.1145/2463676.2465276",
         "citations": {
             "references": [
                 {
@@ -4694,10 +4679,6 @@
             {
                 "field": "validation.metrics",
                 "reason": "Paper explicitly discusses precision/recall and accuracy for components; other metrics like F1 are not clearly reported."
-            },
-            {
-                "field": "doi",
-                "reason": "DOI confirmed via ACM Digital Library."
             }
         ],
         "kg": {
@@ -4885,7 +4866,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Tagged as ontology-driven because relations come from YAGO; this could be debated as the core method is pattern-based."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-1184/ldow2014_paper_02.pdf"
     },
     {
         "id": "2014_taheriyan_a",
@@ -4972,7 +4954,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1109/ICSC.2014.13",
+        "doi": "https://doi.org/10.1109/icsc.2014.13",
         "citations": {
             "references": [
                 {
@@ -5345,10 +5327,6 @@
             "note": null
         },
         "uncertainFields": [
-            {
-                "field": "doi",
-                "reason": "The DOI is not stated in the text available."
-            },
             {
                 "field": "code",
                 "reason": "Authors mention releasing resources, but no code URL is provided."
@@ -6135,10 +6113,6 @@
             "note": "processed"
         },
         "uncertainFields": [
-            {
-                "field": "doi",
-                "reason": "The DOI is not stated in the available text."
-            },
             {
                 "field": "coreTasks.cta",
                 "reason": "The paper labels numeric columns with properties and contexts but does not explicitly frame this as CTA."
@@ -7120,8 +7094,8 @@
         ],
         "title": "Towards a Large Corpus of Richly Annotated Web Tables for Knowledge Base Population",
         "venue": {
-            "type": "conference",
-            "acronym": "ISWC"
+            "type": "workshop",
+            "acronym": "LD4IE"
         },
         "nameOfApproach": "",
         "coreTasks": {
@@ -7192,7 +7166,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.4119/unibi/2912802",
+        "doi": "",
         "citations": {
             "references": [
                 {
@@ -7277,14 +7251,6 @@
         },
         "uncertainFields": [
             {
-                "field": "venue.acronym",
-                "reason": "Assumed from the filename; not explicitly stated in the paper header."
-            },
-            {
-                "field": "doi",
-                "reason": "A DOI for the paper was not found in the provided text; only a dataset DOI was mentioned."
-            },
-            {
                 "field": "kg.index",
                 "reason": "High-level description inferred; precise indexing implementation details are not fully specified."
             },
@@ -7296,7 +7262,12 @@
                 "field": "mainMethod.technique",
                 "reason": "Classified as ontology-driven because the approach relies on DBpedia; the paper does not use this exact label."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-1946/paper-02.pdf",
+        "relatedResource": {
+            "label": "Dataset",
+            "url": "https://doi.org/10.4119/unibi/2912802"
+        }
     },
     {
         "id": "2017_lehmberg_stitching",
@@ -7653,7 +7624,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.3233/SW-160242",
+        "doi": "https://doi.org/10.3233/sw-160242",
         "citations": {
             "references": [
                 {
@@ -8035,10 +8006,6 @@
             "note": "processed"
         },
         "uncertainFields": [
-            {
-                "field": "doi",
-                "reason": "The DOI of the paper is not stated in the provided text excerpt."
-            },
             {
                 "field": "userInterfaceTool",
                 "reason": "No UI or tool front-end is described; unclear if a CLI/Web UI exists."
@@ -8780,7 +8747,8 @@
                 "field": "userInterfaceTool",
                 "reason": "The paper describes a pipeline but does not mention a UI or tool interface."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2553/paper6.pdf"
     },
     {
         "id": "2019_chen_learning",
@@ -9376,7 +9344,8 @@
                 "field": "validation.metrics",
                 "reason": "Paper reports 'F1' and another score labelled 'F2' which in places corresponds to Precision; mapped conservatively to Precision."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2553/paper3.pdf"
     },
     {
         "id": "2019_hulsebos_sherlock",
@@ -10010,7 +9979,8 @@
                 "field": "validation.goldStandard",
                 "reason": "Described as participation across SemTab rounds; the precise dataset names per round are not enumerated."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2553/paper7.pdf"
     },
     {
         "id": "2019_nguyen_mtab",
@@ -10167,7 +10137,8 @@
                 "field": "mainMethod.technique",
                 "reason": "EmbNum relies on deep metric learning embeddings; other components are heuristic/probabilistic rather than explicit rule-based or transformer."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2553/paper2.pdf"
     },
     {
         "id": "2019_oliveira_adog",
@@ -10300,7 +10271,8 @@
                 "field": "kg.index",
                 "reason": "Indexing details are summarised (labels, categories with tf-idf) without full configuration specifics."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2553/paper1.pdf"
     },
     {
         "id": "2019_steenwinckel_csv2kg",
@@ -10466,7 +10438,8 @@
                 "field": "venue.acronym",
                 "reason": "The venue is the SemTab challenge at ISWC 2019; acronym could also appear as 'ISWC SemTab' in other sources."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2553/paper5.pdf"
     },
     {
         "id": "2019_takeoka_meimei",
@@ -10639,10 +10612,6 @@
         },
         "uncertainFields": [
             {
-                "field": "doi",
-                "reason": "The DOI for the AAAI-19 paper was not present in the provided text; leaving it empty to avoid speculation."
-            },
-            {
                 "field": "code",
                 "reason": "No code repository or URL was mentioned in the paper excerpt."
             },
@@ -10804,7 +10773,8 @@
                 "field": "mainMethod.technique",
                 "reason": "A neural model is used but tags do not include 'neural network'; selected tags reflect heuristics and ontology features."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2553/paper4.pdf"
     },
     {
         "id": "2020_zhang_sato",
@@ -10821,8 +10791,8 @@
         ],
         "title": "Sato: Contextual Semantic Type Detection in Tables",
         "venue": {
-            "type": "conference",
-            "acronym": "VLDB"
+            "type": "journal",
+            "acronym": "PVLDB"
         },
         "nameOfApproach": "Sato",
         "coreTasks": {
@@ -10895,7 +10865,7 @@
         "usesLLM": null,
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.48550/arXiv.1911.06311",
+        "doi": "https://doi.org/10.14778/3407790.3407793",
         "citations": {
             "references": [
                 {
@@ -11076,18 +11046,6 @@
         },
         "uncertainFields": [
             {
-                "field": "venue.type",
-                "reason": "The PDF appears to be an arXiv preprint; the final publication venue may be PVLDB (journal) rather than a conference."
-            },
-            {
-                "field": "venue.acronym",
-                "reason": "Set to 'VLDB' based on the file name; the official acronym could be 'PVLDB'."
-            },
-            {
-                "field": "doi",
-                "reason": "Using the arXiv DataCite DOI inferred from the arXiv identifier; a different publisher DOI may exist."
-            },
-            {
                 "field": "kg.tripleStore",
                 "reason": "The approach does not rely on a knowledge graph; no triple store is specified."
             },
@@ -11260,7 +11218,8 @@
                 "field": "doi",
                 "reason": "Workshop paper likely has no DOI; none is provided in the document."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper4.pdf"
     },
     {
         "id": "2020_azzi_amalgam",
@@ -11350,7 +11309,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1007/978-3-030-72651-5_8",
+        "doi": "",
         "citations": {
             "references": [
                 {
@@ -11407,10 +11366,6 @@
         },
         "uncertainFields": [
             {
-                "field": "venue.acronym",
-                "reason": "Paper is in the SemTab 2020 challenge context; exact workshop label/acronym vs. hosting venue not explicitly stated."
-            },
-            {
                 "field": "code",
                 "reason": "No repository or download link mentioned."
             },
@@ -11431,10 +11386,6 @@
                 "reason": "No UI or tool name is described."
             },
             {
-                "field": "doi",
-                "reason": "No DOI is provided for the paper."
-            },
-            {
                 "field": "supportTasks.subjectDetection",
                 "reason": "Row context is discussed, but a dedicated subject column detection procedure is not clearly defined."
             },
@@ -11442,7 +11393,8 @@
                 "field": "supportTasks.columnClassification",
                 "reason": "The paper does not describe a specific column literal/NE classification step."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper1.pdf"
     },
     {
         "id": "2020_baazouzi_kepler-asi",
@@ -11618,7 +11570,8 @@
                 "field": "citations[4].ref",
                 "reason": "Slug formation assumes exact title wording; minor variations could change the first word."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper5.pdf"
     },
     {
         "id": "2020_chen_linkingpark",
@@ -11772,7 +11725,8 @@
                 "field": "code",
                 "reason": "No repository link is provided in the paper."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper7.pdf"
     },
     {
         "id": "2020_cremaschi_a",
@@ -12206,10 +12160,6 @@
             {
                 "field": "venue.acronym",
                 "reason": "The acronym is inferred from the repository name and not explicitly stated in the text."
-            },
-            {
-                "field": "doi",
-                "reason": "A DOI is not visible in the provided text; it may be absent or on a missing page."
             },
             {
                 "field": "code",
@@ -12665,7 +12615,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Tags include 'ontology-driven' and 'rule-based' based on hierarchy use and heuristics; the paper does not explicitly label them as such."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper3.pdf"
     },
     {
         "id": "2020_kim_generating",
@@ -12804,7 +12755,8 @@
                 "field": "nameOfApproach",
                 "reason": "The paper describes an approach/method but does not provide a specific system or approach name."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper10.pdf"
     },
     {
         "id": "2020_nguyen_mtab4wikidata",
@@ -12979,7 +12931,8 @@
                 "field": "validation.goldStandard",
                 "reason": "Named collectively; exact official dataset titles/versions are not fully enumerated in the text."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper9.pdf"
     },
     {
         "id": "2020_shigapov_bbw",
@@ -13150,7 +13103,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Classified as rule-based and ontology-driven based on heuristics and Wikidata use; no ML models are mentioned."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper2.pdf"
     },
     {
         "id": "2020_yumusak_knowledge",
@@ -13294,7 +13248,8 @@
                 "field": "nameOfApproach",
                 "reason": "Paper mentions submission as TeamTR; unclear if this is the formal system name."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper11.pdf"
     },
     {
         "id": "2020_tyagi_lexma",
@@ -13457,7 +13412,8 @@
                 "field": "doi",
                 "reason": "No DOI for the paper is provided."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper6.pdf"
     },
     {
         "id": "2020_zhang_novel",
@@ -13914,7 +13870,8 @@
                 "field": "doi",
                 "reason": "A DOI for the paper was not identified in the text; CEUR-WS challenge papers sometimes lack DOIs."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3103/paper4.pdf"
     },
     {
         "id": "2021_baazouzi_kepler-asi",
@@ -14166,7 +14123,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Classified as rule-based/ontology-driven from SPARQL and KG lookups; no ML models are explicitly described."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3103/paper5.pdf"
     },
     {
         "id": "2021_heist_information",
@@ -14603,7 +14561,8 @@
                 "field": "doi",
                 "reason": "CEUR-WS challenge papers typically lack DOIs and none is shown in the PDF."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3103/paper2.pdf"
     },
     {
         "id": "2021_li_deep",
@@ -15189,12 +15148,13 @@
                 "field": "supportTasks.datatypeAnnotation",
                 "reason": "Paper includes data type prediction (NE vs literal) but not explicit KG datatype annotation."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3103/paper8.pdf"
     },
     {
         "id": "2021_sarthou-camy_dagobah",
         "added": "2025-07-03",
-        "year": 2021,
+        "year": 2022,
         "firstAuthor": "Sarthou-Camy",
         "authors": [
             "Christophe Sarthou-Camy",
@@ -15331,14 +15291,6 @@
         },
         "uncertainFields": [
             {
-                "field": "venue.type",
-                "reason": "The paper describes a demonstration at a conference but the specific venue is not explicitly stated."
-            },
-            {
-                "field": "venue.acronym",
-                "reason": "Acronym of the hosting venue is not given in the text."
-            },
-            {
                 "field": "validation.metrics[0]",
                 "reason": "Only that the system won the 'Accuracy' track is stated; exact metric definitions used in evaluation are not detailed."
             },
@@ -15349,10 +15301,6 @@
             {
                 "field": "inputs.tableSources",
                 "reason": "Web and spreadsheet inputs are stated; inclusion of 'wiki' is inferred from examples but not formalised as a source type."
-            },
-            {
-                "field": "doi",
-                "reason": "No DOI is provided in the paper."
             },
             {
                 "field": "code",
@@ -15551,7 +15499,8 @@
                 "field": "citations[7].ref",
                 "reason": "Normalisation of the hyphenated surname in the slug may differ (Jimenez-Ruiz vs Jimenez Ruiz)."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3103/paper6.pdf"
     },
     {
         "id": "2021_wang_tcn",
@@ -16057,7 +16006,8 @@
                 "field": "domain",
                 "reason": "Method is generic, but Round 2 uses BioTable (biomedical); treated as domain-independent overall."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3103/paper3.pdf"
     },
     {
         "id": "2021_zhou_tabular",
@@ -16463,7 +16413,8 @@
                 "field": "supportTasks.predicateAnnotation",
                 "reason": "The CPA selection heuristics are referenced but not described in detail."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3320/paper8.pdf"
     },
     {
         "id": "2022_chen_linkingpark",
@@ -16920,7 +16871,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.14778/3430915.3430921",
+        "doi": "https://doi.org/10.1145/3542700.3542709",
         "citations": {
             "references": [
                 {
@@ -17068,10 +17019,6 @@
             "note": "processed"
         },
         "uncertainFields": [
-            {
-                "field": "venue.acronym",
-                "reason": "SIGMOD Record is a journal name rather than an acronym; no standard short acronym is provided in the paper."
-            },
             {
                 "field": "kg.tripleStore",
                 "reason": "Multiple KGs (Wikidata, Freebase, DBpedia) are involved across tasks; the field expects a single value."
@@ -17546,7 +17493,8 @@
                 "field": "supportTasks.columnClassification",
                 "reason": "Entity column detection leverages SemTab targets rather than a general algorithm, which may not generalise."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3557/paper3.pdf"
     },
     {
         "id": "2022_huynh_from",
@@ -17659,7 +17607,7 @@
                     "title": "DAGOBAH: Table and Graph Contexts for Efficient Semantic Annotation of Tabular Data"
                 },
                 {
-                    "ref": "2022_sarthou-camy_dagobah",
+                    "ref": "2021_sarthou-camy_dagobah",
                     "title": "DAGOBAH UI: A New Hope For Semantic Table Interpretation"
                 },
                 {
@@ -17799,7 +17747,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Ontology-driven tag is omitted; although KGs are used, the approach is not described as ontology-driven explicitly."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3320/paper6.pdf"
     },
     {
         "id": "2022_suhara_annotating",
@@ -18328,7 +18277,8 @@
                 "field": "license",
                 "reason": "Paper licence is CC BY 4.0, but the approach/code licence is unspecified."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3557/paper7.pdf"
     },
     {
         "id": "2023_dasoulas_torchictab",
@@ -18619,7 +18569,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Tagged as rule-based and transformer based on heuristic scoring and BERT fine-tuning; ontology-driven use is implicit but not emphasised."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3557/paper2.pdf"
     },
     {
         "id": "2023_khatiwada_santos",
@@ -19122,7 +19073,8 @@
                 "field": "coreTasks.cea",
                 "reason": "CEA is evaluated in the first setting via query-based annotating; the primary contribution focuses on CTA/CPA/CQA."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3557/paper5.pdf"
     },
     {
         "id": "2023_parmar_dreifluss",
@@ -19288,7 +19240,8 @@
                 "field": "doi",
                 "reason": "CEUR-WS papers often lack DOIs and none is given in the paper."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3557/paper4.pdf"
     },
     {
         "id": "2023_sun_reca",
@@ -19842,7 +19795,7 @@
         ],
         "title": "Semantic Annotation for Tabular Data",
         "venue": {
-            "type": "journal",
+            "type": "preprint",
             "acronym": "arXiv"
         },
         "nameOfApproach": "C2",
@@ -19917,7 +19870,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.1145/3459637.3482295",
+        "doi": "https://doi.org/10.48550/arXiv.2012.08594",
         "citations": {
             "references": [
                 {
@@ -20042,10 +19995,6 @@
         },
         "uncertainFields": [
             {
-                "field": "venue.type",
-                "reason": "The paper appears as an arXiv preprint; mapped to 'journal' for schema compliance."
-            },
-            {
                 "field": "kg.tripleStore",
                 "reason": "Both DBpedia and Wikidata are used; the field accepts a single string, so both are combined."
             },
@@ -20060,10 +20009,6 @@
             {
                 "field": "userInterfaceTool",
                 "reason": "No UI or tool front-end is mentioned."
-            },
-            {
-                "field": "doi",
-                "reason": "A DOI is not indicated for this arXiv version."
             },
             {
                 "field": "mainMethod.technique",
@@ -20222,7 +20167,8 @@
                 "field": "kg.tripleStore",
                 "reason": "DBpedia and Wikidata are used as KGs; the term 'tripleStore' here summarises the KG choices rather than a specific hosting endpoint."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3103/paper7.pdf"
     },
     {
         "id": "2020_cremaschi_mantistable",
@@ -20365,7 +20311,8 @@
                 "field": "inputs.tableSources",
                 "reason": "Table sources (web/wiki/spreadsheet, etc.) are not explicitly listed."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2775/paper8.pdf"
     },
     {
         "id": "2022_cremaschi_s-elbat",
@@ -20550,7 +20497,8 @@
                 "field": "userInterfaceTool",
                 "reason": "LamAPI is described as a service; a specific UI/CLI is not detailed."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3320/paper7.pdf"
     },
     {
         "id": "2024_zhang_tablellama",
@@ -20649,7 +20597,7 @@
         },
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.18653/v1/2024.naacl-long.335",
         "citations": {
             "references": [
                 {
@@ -20856,10 +20804,6 @@
             {
                 "field": "code",
                 "reason": "URL points to the project page linking to resources, not a direct repository."
-            },
-            {
-                "field": "doi",
-                "reason": "The manuscript and bibliography track the NAACL 2024 archival version, but the frozen dataset does not yet record a normalised archival DOI."
             },
             {
                 "field": "inputs.tableSources",
@@ -21296,10 +21240,6 @@
                 "reason": "Acronym of the venue is not stated in the text."
             },
             {
-                "field": "doi",
-                "reason": "No DOI is indicated in the paper; CEUR-style workshops often lack DOIs."
-            },
-            {
                 "field": "kg.tripleStore",
                 "reason": "CPA uses schema.org (a vocabulary) for SOTAB and DBpedia for T2Dv2; listing both may not reflect a single triple store."
             },
@@ -21488,7 +21428,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Classified as 'ontology-driven' since it relies on Wikidata querying; alternative labelling as 'rule-based' could also be argued."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3889/paper5.pdf"
     },
     {
         "id": "2025_cremaschi_steellm",
@@ -22658,7 +22599,8 @@
                 "field": "nameOfApproach",
                 "reason": "The paper describes an approach/method but does not provide a specific system or approach name."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3557/paper6.pdf"
     },
     {
         "id": "2022_liu_radar",
@@ -22852,7 +22794,7 @@
                     "title": "Matching HTML tables to DBpedia"
                 },
                 {
-                    "ref": "2022_sarthou-camy_dagobah",
+                    "ref": "2021_sarthou-camy_dagobah",
                     "title": "DAGOBAH UI: a new hope for semantic table interpretation"
                 },
                 {
@@ -23060,7 +23002,8 @@
                 "field": "mainMethod.technique",
                 "reason": "Ontology usage is clear; whether to also label it rule-based vs purely ontology-driven is somewhat interpretative."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-1035/iswc2013_poster_7.pdf"
     },
     {
         "id": "2021_abdelmageed_jentab-2",
@@ -23153,7 +23096,7 @@
         "userInterfaceTool": "JenTab Manager dashboard",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "https://doi.org/10.5281/zenodo.4730314",
+        "doi": "",
         "citations": {
             "references": [
                 {
@@ -23242,10 +23185,6 @@
         },
         "uncertainFields": [
             {
-                "field": "doi",
-                "reason": "Workshop paper appears in CEUR-WS (typically without DOIs); using the authors' Zenodo record cited for KGCW 2021."
-            },
-            {
                 "field": "inputs.typeOfTable",
                 "reason": "Assumed CSV as per SemTab distributions; not explicitly stated in the text."
             },
@@ -23261,7 +23200,12 @@
                 "field": "citations",
                 "reason": "Only a subset of references included; full bibliography not exhaustively extracted from the PDF."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-2873/paper5.pdf",
+        "relatedResource": {
+            "label": "Software release",
+            "url": "https://doi.org/10.5281/zenodo.4730314"
+        }
     },
     {
         "id": "2019_cremaschi_semantic",
@@ -23417,7 +23361,8 @@
             "objective": "Automatically annotates, manages, and makes table semantics accessible to humans and machines.",
             "legacy": "Automatically annotates, manages, and makes table semantics accessible to humans and machines."
         },
-        "userInterfaceTool": "MantisTable (web interface)"
+        "userInterfaceTool": "MantisTable (web interface)",
+        "publicationUrl": "https://ceur-ws.org/Vol-2536/om2019_poster4.pdf"
     },
     {
         "id": "2024_avogadro_featurevector",
@@ -23759,7 +23704,7 @@
         "userInterfaceTool": "",
         "checkedByAuthor": false,
         "checkedByAi": true,
-        "doi": "",
+        "doi": "https://doi.org/10.18653/v1/2025.acl-srw.52",
         "citations": {
             "references": [],
             "count": 0,
@@ -24051,7 +23996,8 @@
                 "field": "codeAvailability",
                 "reason": "The paper does not provide a public repository link for RAGDify."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-4144/om2025-SemTab-paper1.pdf"
     },
     {
         "id": "2025_tachioka_cell",
@@ -24205,7 +24151,8 @@
                 "field": "nameOfApproach",
                 "reason": "The paper describes a method/pipeline but does not provide a specific system name."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-4144/om2025-SemTab-paper2.pdf"
     },
     {
         "id": "2025_walter_knowledge",
@@ -24240,8 +24187,8 @@
             "datatypeAnnotation": "",
             "typeAnnotation": "",
             "predicateAnnotation": "",
-            "nilAnnotation": "Allows the agent to return NIL when grounding fails after interactive candidate search and triple inspection over Wikidata.",
-            "nilAnnotationCluster": "separate_post_ranking_models",
+            "nilAnnotation": "The grounding agent can abstain after interactively searching Wikidata and inspecting triples; it can remove a tentative annotation before returning the final set.",
+            "nilAnnotationCluster": "score_thresholding_or_abstention",
             "entityLinking": {
                 "description": "Zero-shot, agentic CEA in which an LLM explores Wikidata via search and SPARQL-style functions to retrieve candidates, inspect triples, and ground annotations (or NIL).",
                 "candidateGeneration": "Uses GRASP search functions over multilingual indices to find candidate entities/properties, retrieving top-k results for inspection.",
@@ -24344,7 +24291,8 @@
                 "field": "doi",
                 "reason": "No DOI is stated in the paper text."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-4144/om2025-SemTab-paper3.pdf"
     },
     {
         "id": "2023_korini_column",
@@ -24473,7 +24421,8 @@
                 "field": "mainMethod.type",
                 "reason": "Hybrid summarises the reported zero-shot and labelled few-shot configurations; the proposed ChatGPT pipeline does not fine-tune model weights."
             }
-        ]
+        ],
+        "publicationUrl": "https://ceur-ws.org/Vol-3462/TADA1.pdf"
     },
     {
         "id": "2024_li_table-gpt",

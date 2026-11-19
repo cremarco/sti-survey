@@ -14,6 +14,7 @@ import Navigation from './Navigation';
 import * as d3 from "d3";
 import Icon from './Icon';
 import MainMethodStackedChart from './components/charts/MainMethodStackedChart';
+import { SYSTEM_LEVEL_CRITERIA } from './components/charts/systemLevelSvg';
 import ConferenceJournalBarChart from './components/charts/ConferenceJournalBarChart';
 import YearWiseCoreTasksChart from './components/charts/YearWiseCoreTasksChart';
 import useResizeObserver from './hooks/useResizeObserver';
@@ -303,6 +304,8 @@ function Charts({ data = [] }) {
 
   // State for chart visibility toggles
   const [showMainMethodChart, setShowMainMethodChart] = useState(false);
+  const [criterion, setCriterion] = useState('supervision');
+  const systemLevel = SYSTEM_LEVEL_CRITERIA[criterion];
   const [showTechniqueChart, setShowTechniqueChart] = useState(false);
   const [showLicensesChart, setShowLicensesChart] = useState(false);
   const [showConferenceJournalChart, setShowConferenceJournalChart] = useState(false);
@@ -395,10 +398,13 @@ function Charts({ data = [] }) {
                       <div className="flex flex-col h-full w-full">
                         <div className="flex items-center justify-between mb-4 w-full">
                           <span className="text-yellow-300 font-semibold text-lg flex items-center gap-2">
-                            Main Method Distribution by Year
-                            <span className="ml-2 px-2 py-0.5 bg-yellow-700/40 text-yellow-200 text-xs font-mono align-middle">
-                              {Object.keys(summaryStats.mainMethodTypeDistribution).length}
-                            </span>
+                            Annual distribution
+                            <select className="select select-sm" aria-label="System-level criterion"
+                              value={criterion} onChange={(event) => setCriterion(event.target.value)}>
+                              {Object.entries(SYSTEM_LEVEL_CRITERIA).map(([key, value]) => (
+                                <option key={key} value={key}>{value.label}</option>
+                              ))}
+                            </select>
                           </span>
                           <div className="flex items-center gap-4">
                             <button
@@ -412,7 +418,7 @@ function Charts({ data = [] }) {
                               onClick={() => {
                                 const chartElement = chartRef.current?.querySelector("svg");
                                 if (chartElement) {
-                                  downloadSVG(chartElement, "main-method-chart.svg");
+                                  downloadSVG(chartElement, systemLevel.filename);
                                 }
                               }}
                               className="flex items-center justify-center w-8 h-8 bg-yellow-600/30 hover:bg-yellow-600/50 transition-colors duration-200 text-yellow-300 hover:text-yellow-100"
@@ -423,7 +429,7 @@ function Charts({ data = [] }) {
                           </div>
                         </div>
                         <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full min-w-0 overflow-hidden" ref={chartRef}>
-                          <MainMethodStackedChart data={data} />
+                          <MainMethodStackedChart data={data} criterion={criterion} />
                         </div>
                       </div>
                     </div>
@@ -697,7 +703,7 @@ function Charts({ data = [] }) {
                           .map(([license, data], index, items) => (
                           <div key={license} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                             <div className="flex justify-between items-center mb-1">
-                          <span className="text-sky-200 text-sm font-medium">{license}</span>
+                          <span className="text-sky-200 text-sm font-medium">{/^ns$/i.test(license) ? 'Not specified' : license}</span>
                           <span className="text-sky-300 text-sm">{data.count} ({data.percentage.toFixed(1)}%)</span>
                             </div>
                             <div className="h-2 w-full bg-gray-700 overflow-hidden">
@@ -754,8 +760,9 @@ function Charts({ data = [] }) {
                         </div>
                         <div className="flex-grow flex flex-col justify-end pt-2 h-[400px] w-full min-w-0 overflow-hidden licenses-chart">
                           <ConferenceJournalBarChart 
-                            data={Object.fromEntries(Object.entries(summaryStats.licenseDistribution).map(([k, v]) => [k, v.count]))} 
+                            data={Object.fromEntries(Object.entries(summaryStats.licenseDistribution).map(([name, item]) => [/^ns$/i.test(name) ? 'Not specified' : name, item.count]))}
                             total={summaryStats.totalEntries} 
+                            groupSingletons={false}
                             barColor={TAXONOMY_COLORS.license}
                             labelColor="#e0f2fe"
                           />

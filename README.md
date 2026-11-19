@@ -53,3 +53,7 @@ For scholarly use, please cite the accompanying survey manuscript and the versio
 > Marco Cremaschi, Blerina Spahiu, Ernesto Jiménez-Ruiz, and Matteo Palmonari. *STI Survey companion website and curated metadata*. https://github.com/cremarco/sti-survey. Include the commit identifier and access date.
 
 For reproducibility, cite a specific commit using `https://github.com/cremarco/sti-survey/tree/<commit-sha>`, rather than relying only on the changing default branch. No DOI or archival identifier is assigned by this repository update.
+
+## Annual distributions
+
+The first chart on the Charts page shows annual percentages for supervision, domain and automation. Select the chart side of the card and choose a criterion. To reproduce the three manuscript panels from the catalogue, run `npm run export:system-level -- /path/to/output`.

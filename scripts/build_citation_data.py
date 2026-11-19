@@ -56,17 +56,19 @@ def main():
             references = None
 
         if isinstance(references, list):
+            seen_targets = set()
             for r in references:
                 if not isinstance(r, dict):
                     continue
                 ref_id = r.get('ref')
                 target_item = by_id.get(ref_id)
-                if not target_item:
+                if not target_item or ref_id in seen_targets:
                     continue
                 target = target_item.get('firstAuthor')
                 target_date = to_date(target_item.get('year'))
                 if not target or not target_date:
                     continue
+                seen_targets.add(ref_id)
                 edges.append({
                     'type': 'cite',
                     'source': source,
@@ -74,6 +76,8 @@ def main():
                     'target': target,
                     'target_date': target_date,
                     'value': 1,
+                    'source_id': item['id'],
+                    'target_id': ref_id,
                 })
 
     # evolve edges
@@ -106,11 +110,13 @@ def main():
                 'target': curr.get('firstAuthor'),
                 'target_date': to_date(curr.get('year')),
                 'value': 1,
+                'source_id': prev['id'],
+                'target_id': curr['id'],
             })
 
     # sort primarily by year for readability and stability
     # order: source_date (asc), then target_date (asc), then type/source/target
-    edges.sort(key=lambda e: (e['source_date'], e['target_date'], e['type'], e['source'], e['target']))
+    edges.sort(key=lambda e: (e['source_date'], e['target_date'], e['type'], e['source'], e['target'], e['source_id'], e['target_id']))
 
     OUTPUT.write_text(json.dumps(edges, indent=2) + '\n', 'utf-8')
     print(f"Wrote {len(edges)} edges to {OUTPUT.relative_to(ROOT)}")

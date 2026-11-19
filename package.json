@@ -6,6 +6,7 @@
   "homepage": "https://cremarco.github.io/sti-survey",
   "scripts": {
     "dev": "vite",
+    "export:system-level": "node scripts/export-system-level-svg.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",

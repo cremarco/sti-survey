@@ -403,6 +403,20 @@
       "type": "string",
       "label": "DOI"
     },
+    "publicationUrl": {
+      "type": "string",
+      "label": "Publication record",
+      "format": "uri"
+    },
+    "relatedResource": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      },
+      "required": ["label", "url"],
+      "additionalProperties": false
+    },
     "citations": {
       "type": "array",
       "label": "Citations",

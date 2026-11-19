@@ -22,6 +22,7 @@ const ConferenceJournalBarChart = ({
   barColor = "#06b6d4",
   labelColor = "#bae6fd",
   showLegend = false,
+  groupSingletons = true,
   useCategoryColors = false
 }) => {
   const containerRef = useRef();
@@ -34,18 +35,11 @@ const ConferenceJournalBarChart = ({
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    // Sort data by count and filter venues with count >= 2
-    const entries = Object.entries(data);
-    const venuesWithAtLeast2 = entries.filter(([, count]) => count >= 2);
-    const venuesWith1 = entries.filter(([, count]) => count === 1);
-    const sortedData = venuesWithAtLeast2.sort(([, a], [, b]) => b - a);
-
-    // Add 'other' column if there are venues with count 1
-    if (venuesWith1.length > 0) {
-      sortedData.push([
-        `other (${venuesWith1.length})`,
-        1 // The bar value is 1, since each of those venues has value 1
-      ]);
+    const entries = Object.entries(data).sort((a, b) => b[1] - a[1]);
+    const sortedData = groupSingletons ? entries.filter(([, count]) => count > 1) : entries;
+    const singletonCount = entries.length - sortedData.length;
+    if (singletonCount) {
+      sortedData.push([`Other venues (${singletonCount})`, singletonCount]);
     }
 
     const legendRowHeight = 16;
@@ -159,7 +153,7 @@ const ConferenceJournalBarChart = ({
         .text((d) => d.label);
     }
 
-  }, [data, total, barColor, labelColor, dimensions, showLegend, useCategoryColors]);
+  }, [data, total, barColor, labelColor, dimensions, showLegend, groupSingletons, useCategoryColors]);
 
   return (
     <div ref={containerRef} className="w-full h-full flex justify-center items-center">

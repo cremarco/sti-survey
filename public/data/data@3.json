@@ -5,7 +5,9 @@
     "source_date": "2007-01-01",
     "target": "Hignette",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2007_hignette_an",
+    "target_id": "2009_hignette_fuzzy"
   },
   {
     "type": "cite",
@@ -13,7 +15,9 @@
     "source_date": "2009-01-01",
     "target": "Hignette",
     "target_date": "2007-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2009_hignette_fuzzy",
+    "target_id": "2007_hignette_an"
   },
   {
     "type": "cite",
@@ -21,7 +25,9 @@
     "source_date": "2010-01-01",
     "target": "Mulwad",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2010_mulwad_t2ld",
+    "target_id": "2010_mulwad_t2ld"
   },
   {
     "type": "cite",
@@ -29,7 +35,9 @@
     "source_date": "2010-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2010_mulwad_t2ld",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "evolve",
@@ -37,7 +45,9 @@
     "source_date": "2010-01-01",
     "target": "Mulwad",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2010_mulwad_t2ld",
+    "target_id": "2011_mulwad_automatically"
   },
   {
     "type": "cite",
@@ -45,7 +55,9 @@
     "source_date": "2011-01-01",
     "target": "Cafarella",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2011_venetis_recovering",
+    "target_id": "2009_cafarella_data"
   },
   {
     "type": "cite",
@@ -53,7 +65,9 @@
     "source_date": "2011-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2011_mulwad_automatically",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -61,7 +75,9 @@
     "source_date": "2011-01-01",
     "target": "Mulwad",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2011_mulwad_automatically",
+    "target_id": "2010_mulwad_t2ld"
   },
   {
     "type": "cite",
@@ -69,7 +85,9 @@
     "source_date": "2011-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2011_mulwad_automatically",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -77,7 +95,9 @@
     "source_date": "2011-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2011_venetis_recovering",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -85,7 +105,9 @@
     "source_date": "2011-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2011_mulwad_automatically",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "evolve",
@@ -93,7 +115,9 @@
     "source_date": "2011-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2011_mulwad_automatically",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -101,7 +125,9 @@
     "source_date": "2012-01-01",
     "target": "Cafarella",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2012_pimplikar_answering",
+    "target_id": "2009_cafarella_data"
   },
   {
     "type": "cite",
@@ -109,7 +135,9 @@
     "source_date": "2012-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2012_wang_understanding",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -117,7 +145,9 @@
     "source_date": "2012-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2012_wang_understanding",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -125,7 +155,9 @@
     "source_date": "2012-01-01",
     "target": "Crestan",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2012_pimplikar_answering",
+    "target_id": "2011_crestan_web-scale"
   },
   {
     "type": "cite",
@@ -133,7 +165,9 @@
     "source_date": "2012-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2012_wang_understanding",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "evolve",
@@ -141,7 +175,9 @@
     "source_date": "2012-01-01",
     "target": "Wang",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2012_wang_understanding",
+    "target_id": "2021_wang_tcn"
   },
   {
     "type": "cite",
@@ -149,7 +185,9 @@
     "source_date": "2013-01-01",
     "target": "Hignette",
     "target_date": "2007-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_buche_fuzzy",
+    "target_id": "2007_hignette_an"
   },
   {
     "type": "cite",
@@ -157,7 +195,9 @@
     "source_date": "2013-01-01",
     "target": "Cafarella",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_adelfio_schema",
+    "target_id": "2009_cafarella_data"
   },
   {
     "type": "cite",
@@ -165,7 +205,9 @@
     "source_date": "2013-01-01",
     "target": "Hignette",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_buche_fuzzy",
+    "target_id": "2009_hignette_fuzzy"
   },
   {
     "type": "cite",
@@ -173,7 +215,9 @@
     "source_date": "2013-01-01",
     "target": "Hignette",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_deng_scalable",
+    "target_id": "2009_hignette_fuzzy"
   },
   {
     "type": "cite",
@@ -181,7 +225,9 @@
     "source_date": "2013-01-01",
     "target": "Hignette",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_quercini_entity",
+    "target_id": "2009_hignette_fuzzy"
   },
   {
     "type": "cite",
@@ -189,7 +235,9 @@
     "source_date": "2013-01-01",
     "target": "Cafarella",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_zhang_infogather",
+    "target_id": "2009_cafarella_data"
   },
   {
     "type": "cite",
@@ -197,7 +245,9 @@
     "source_date": "2013-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_adelfio_schema",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -205,7 +255,9 @@
     "source_date": "2013-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_deng_scalable",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -213,7 +265,9 @@
     "source_date": "2013-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_mulwad_semantic",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -221,7 +275,9 @@
     "source_date": "2013-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_munoz_triplifying",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -229,7 +285,9 @@
     "source_date": "2013-01-01",
     "target": "Mulwad",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_munoz_triplifying",
+    "target_id": "2010_mulwad_t2ld"
   },
   {
     "type": "cite",
@@ -237,7 +295,9 @@
     "source_date": "2013-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_munoz_triplifying",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -245,7 +305,9 @@
     "source_date": "2013-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_quercini_entity",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -253,7 +315,9 @@
     "source_date": "2013-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_zhang_infogather",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -261,7 +325,9 @@
     "source_date": "2013-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_zwicklbauer_towards",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -269,7 +335,9 @@
     "source_date": "2013-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_adelfio_schema",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -277,7 +345,9 @@
     "source_date": "2013-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_deng_scalable",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -285,7 +355,9 @@
     "source_date": "2013-01-01",
     "target": "Mulwad",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_ermilov_user-driven",
+    "target_id": "2011_mulwad_automatically"
   },
   {
     "type": "cite",
@@ -293,7 +365,9 @@
     "source_date": "2013-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_mulwad_semantic",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -301,7 +375,9 @@
     "source_date": "2013-01-01",
     "target": "Crestan",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_munoz_triplifying",
+    "target_id": "2011_crestan_web-scale"
   },
   {
     "type": "cite",
@@ -309,7 +385,9 @@
     "source_date": "2013-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_munoz_triplifying",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -317,7 +395,9 @@
     "source_date": "2013-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_quercini_entity",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -325,7 +405,9 @@
     "source_date": "2013-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_zhang_infogather",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -333,7 +415,9 @@
     "source_date": "2013-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_zwicklbauer_towards",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -341,7 +425,9 @@
     "source_date": "2013-01-01",
     "target": "Pimplikar",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_adelfio_schema",
+    "target_id": "2012_pimplikar_answering"
   },
   {
     "type": "cite",
@@ -349,7 +435,9 @@
     "source_date": "2013-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_cruz_giva",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -357,7 +445,9 @@
     "source_date": "2013-01-01",
     "target": "Pimplikar",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_deng_scalable",
+    "target_id": "2012_pimplikar_answering"
   },
   {
     "type": "cite",
@@ -365,7 +455,9 @@
     "source_date": "2013-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_deng_scalable",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -373,7 +465,9 @@
     "source_date": "2013-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_quercini_entity",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -381,7 +475,9 @@
     "source_date": "2013-01-01",
     "target": "Pimplikar",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_zhang_infogather",
+    "target_id": "2012_pimplikar_answering"
   },
   {
     "type": "cite",
@@ -389,7 +485,9 @@
     "source_date": "2013-01-01",
     "target": "Quercini",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_deng_scalable",
+    "target_id": "2013_quercini_entity"
   },
   {
     "type": "cite",
@@ -397,7 +495,9 @@
     "source_date": "2013-01-01",
     "target": "Quercini",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_zwicklbauer_towards",
+    "target_id": "2013_quercini_entity"
   },
   {
     "type": "evolve",
@@ -405,7 +505,9 @@
     "source_date": "2013-01-01",
     "target": "Ermilov",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_ermilov_user-driven",
+    "target_id": "2016_ermilov_taipan"
   },
   {
     "type": "evolve",
@@ -413,7 +515,9 @@
     "source_date": "2013-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_zhang_infogather",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "evolve",
@@ -421,7 +525,9 @@
     "source_date": "2013-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2013_deng_scalable",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -429,7 +535,9 @@
     "source_date": "2014-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_sekhavat_knowledge",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -437,7 +545,9 @@
     "source_date": "2014-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_taheriyan_a",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -445,7 +555,9 @@
     "source_date": "2014-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_sekhavat_knowledge",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -453,7 +565,9 @@
     "source_date": "2014-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_taheriyan_a",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -461,7 +575,9 @@
     "source_date": "2014-01-01",
     "target": "Goel",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_taheriyan_a",
+    "target_id": "2012_goel_exploiting"
   },
   {
     "type": "cite",
@@ -469,7 +585,9 @@
     "source_date": "2014-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_taheriyan_a",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -477,7 +595,9 @@
     "source_date": "2014-01-01",
     "target": "Adelfio",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_sekhavat_knowledge",
+    "target_id": "2013_adelfio_schema"
   },
   {
     "type": "cite",
@@ -485,7 +605,9 @@
     "source_date": "2014-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_sekhavat_knowledge",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -493,7 +615,9 @@
     "source_date": "2014-01-01",
     "target": "Mu\u00f1oz",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_sekhavat_knowledge",
+    "target_id": "2013_munoz_triplifying"
   },
   {
     "type": "cite",
@@ -501,7 +625,9 @@
     "source_date": "2014-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_taheriyan_a",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "evolve",
@@ -509,7 +635,9 @@
     "source_date": "2014-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2014_taheriyan_a",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -517,7 +645,9 @@
     "source_date": "2015-01-01",
     "target": "Hignette",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2009_hignette_fuzzy"
   },
   {
     "type": "cite",
@@ -525,7 +655,9 @@
     "source_date": "2015-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -533,7 +665,9 @@
     "source_date": "2015-01-01",
     "target": "Mulwad",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2010_mulwad_t2ld"
   },
   {
     "type": "cite",
@@ -541,7 +675,9 @@
     "source_date": "2015-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -549,7 +685,9 @@
     "source_date": "2015-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ramnandan_assigning",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -557,7 +695,9 @@
     "source_date": "2015-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ramnandan_assigning",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -565,7 +705,9 @@
     "source_date": "2015-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ritze_matching",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -573,7 +715,9 @@
     "source_date": "2015-01-01",
     "target": "Mulwad",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2011_mulwad_automatically"
   },
   {
     "type": "cite",
@@ -581,7 +725,9 @@
     "source_date": "2015-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -589,7 +735,9 @@
     "source_date": "2015-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ramnandan_assigning",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -597,7 +745,9 @@
     "source_date": "2015-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ritze_matching",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -605,7 +755,9 @@
     "source_date": "2015-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -613,7 +765,9 @@
     "source_date": "2015-01-01",
     "target": "Goel",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ramnandan_assigning",
+    "target_id": "2012_goel_exploiting"
   },
   {
     "type": "cite",
@@ -621,7 +775,9 @@
     "source_date": "2015-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ritze_matching",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -629,7 +785,9 @@
     "source_date": "2015-01-01",
     "target": "Buche",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2013_buche_fuzzy"
   },
   {
     "type": "cite",
@@ -637,7 +795,9 @@
     "source_date": "2015-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -645,7 +805,9 @@
     "source_date": "2015-01-01",
     "target": "Mu\u00f1oz",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2013_munoz_triplifying"
   },
   {
     "type": "cite",
@@ -653,7 +815,9 @@
     "source_date": "2015-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ramnandan_assigning",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -661,7 +825,9 @@
     "source_date": "2015-01-01",
     "target": "Sekhavat",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_bhagavatula_tabel",
+    "target_id": "2014_sekhavat_knowledge"
   },
   {
     "type": "cite",
@@ -669,7 +835,9 @@
     "source_date": "2015-01-01",
     "target": "Taheriyan",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ramnandan_assigning",
+    "target_id": "2014_taheriyan_a"
   },
   {
     "type": "cite",
@@ -677,7 +845,9 @@
     "source_date": "2015-01-01",
     "target": "Sekhavat",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2015_ritze_matching",
+    "target_id": "2014_sekhavat_knowledge"
   },
   {
     "type": "cite",
@@ -685,7 +855,9 @@
     "source_date": "2016-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_ermilov_taipan",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -693,7 +865,9 @@
     "source_date": "2016-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -701,7 +875,9 @@
     "source_date": "2016-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_pham_semantic",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -709,7 +885,9 @@
     "source_date": "2016-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_pham_semantic",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -717,7 +895,9 @@
     "source_date": "2016-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_learning",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -725,7 +905,9 @@
     "source_date": "2016-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_leveraging",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -733,7 +915,9 @@
     "source_date": "2016-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_ermilov_taipan",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -741,7 +925,9 @@
     "source_date": "2016-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -749,7 +935,9 @@
     "source_date": "2016-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_pham_semantic",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -757,7 +945,9 @@
     "source_date": "2016-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_learning",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -765,7 +955,9 @@
     "source_date": "2016-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_leveraging",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -773,7 +965,9 @@
     "source_date": "2016-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_ermilov_taipan",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -781,7 +975,9 @@
     "source_date": "2016-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_ermilov_taipan",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -789,7 +985,9 @@
     "source_date": "2016-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -797,7 +995,9 @@
     "source_date": "2016-01-01",
     "target": "Goel",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_pham_semantic",
+    "target_id": "2012_goel_exploiting"
   },
   {
     "type": "cite",
@@ -805,7 +1005,9 @@
     "source_date": "2016-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_learning",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -813,7 +1015,9 @@
     "source_date": "2016-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_leveraging",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -821,7 +1025,9 @@
     "source_date": "2016-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_learning",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -829,7 +1035,9 @@
     "source_date": "2016-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_leveraging",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -837,7 +1045,9 @@
     "source_date": "2016-01-01",
     "target": "Ermilov",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_ermilov_taipan",
+    "target_id": "2013_ermilov_user-driven"
   },
   {
     "type": "cite",
@@ -845,7 +1055,9 @@
     "source_date": "2016-01-01",
     "target": "Adelfio",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2013_adelfio_schema"
   },
   {
     "type": "cite",
@@ -853,7 +1065,9 @@
     "source_date": "2016-01-01",
     "target": "Ermilov",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2013_ermilov_user-driven"
   },
   {
     "type": "cite",
@@ -861,7 +1075,9 @@
     "source_date": "2016-01-01",
     "target": "Zhang",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2013_zhang_infogather"
   },
   {
     "type": "cite",
@@ -869,7 +1085,9 @@
     "source_date": "2016-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_pham_semantic",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -877,7 +1095,9 @@
     "source_date": "2016-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_learning",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -885,7 +1105,9 @@
     "source_date": "2016-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_leveraging",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -893,7 +1115,9 @@
     "source_date": "2016-01-01",
     "target": "Mu\u00f1oz",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_learning",
+    "target_id": "2013_munoz_triplifying"
   },
   {
     "type": "cite",
@@ -901,7 +1125,9 @@
     "source_date": "2016-01-01",
     "target": "Taheriyan",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2014_taheriyan_a"
   },
   {
     "type": "cite",
@@ -909,7 +1135,9 @@
     "source_date": "2016-01-01",
     "target": "Taheriyan",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_learning",
+    "target_id": "2014_taheriyan_a"
   },
   {
     "type": "cite",
@@ -917,7 +1145,9 @@
     "source_date": "2016-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_ermilov_taipan",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -925,7 +1155,9 @@
     "source_date": "2016-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -933,7 +1165,9 @@
     "source_date": "2016-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_neumaier_multi-level",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -941,7 +1175,9 @@
     "source_date": "2016-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_pham_semantic",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -949,7 +1185,9 @@
     "source_date": "2016-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_pham_semantic",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -957,7 +1195,9 @@
     "source_date": "2016-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_pham_semantic",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -965,7 +1205,9 @@
     "source_date": "2016-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_leveraging",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -973,7 +1215,9 @@
     "source_date": "2016-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2016_taheriyan_leveraging",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -981,7 +1225,9 @@
     "source_date": "2017-01-01",
     "target": "Hignette",
     "target_date": "2007-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2007_hignette_an"
   },
   {
     "type": "cite",
@@ -989,7 +1235,9 @@
     "source_date": "2017-01-01",
     "target": "Cafarella",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_lehmberg_stitching",
+    "target_id": "2009_cafarella_data"
   },
   {
     "type": "cite",
@@ -997,7 +1245,9 @@
     "source_date": "2017-01-01",
     "target": "Hignette",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2009_hignette_fuzzy"
   },
   {
     "type": "cite",
@@ -1005,7 +1255,9 @@
     "source_date": "2017-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_efthymiou_matching",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1013,7 +1265,9 @@
     "source_date": "2017-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_lehmberg_stitching",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1021,7 +1275,9 @@
     "source_date": "2017-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1029,7 +1285,9 @@
     "source_date": "2017-01-01",
     "target": "Mulwad",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2010_mulwad_t2ld"
   },
   {
     "type": "cite",
@@ -1037,7 +1295,9 @@
     "source_date": "2017-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_efthymiou_matching",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1045,7 +1305,9 @@
     "source_date": "2017-01-01",
     "target": "Crestan",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_ell_towards",
+    "target_id": "2011_crestan_web-scale"
   },
   {
     "type": "cite",
@@ -1053,7 +1315,9 @@
     "source_date": "2017-01-01",
     "target": "Mulwad",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_ell_towards",
+    "target_id": "2011_mulwad_automatically"
   },
   {
     "type": "cite",
@@ -1061,7 +1325,9 @@
     "source_date": "2017-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_lehmberg_stitching",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1069,7 +1335,9 @@
     "source_date": "2017-01-01",
     "target": "Mulwad",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2011_mulwad_automatically"
   },
   {
     "type": "cite",
@@ -1077,7 +1345,9 @@
     "source_date": "2017-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1085,7 +1355,9 @@
     "source_date": "2017-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_efthymiou_matching",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -1093,7 +1365,9 @@
     "source_date": "2017-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_ell_towards",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -1101,7 +1375,9 @@
     "source_date": "2017-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_lehmberg_stitching",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -1109,7 +1385,9 @@
     "source_date": "2017-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -1117,7 +1395,9 @@
     "source_date": "2017-01-01",
     "target": "Quercini",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_efthymiou_matching",
+    "target_id": "2013_quercini_entity"
   },
   {
     "type": "cite",
@@ -1125,7 +1405,9 @@
     "source_date": "2017-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_ell_towards",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -1133,7 +1415,9 @@
     "source_date": "2017-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_lehmberg_stitching",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -1141,7 +1425,9 @@
     "source_date": "2017-01-01",
     "target": "Buche",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2013_buche_fuzzy"
   },
   {
     "type": "cite",
@@ -1149,7 +1435,9 @@
     "source_date": "2017-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -1157,7 +1445,9 @@
     "source_date": "2017-01-01",
     "target": "Mu\u00f1oz",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2013_munoz_triplifying"
   },
   {
     "type": "cite",
@@ -1165,7 +1455,9 @@
     "source_date": "2017-01-01",
     "target": "Zwicklbauer",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2013_zwicklbauer_towards"
   },
   {
     "type": "cite",
@@ -1173,7 +1465,9 @@
     "source_date": "2017-01-01",
     "target": "Sekhavat",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_efthymiou_matching",
+    "target_id": "2014_sekhavat_knowledge"
   },
   {
     "type": "cite",
@@ -1181,7 +1475,9 @@
     "source_date": "2017-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_efthymiou_matching",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1189,7 +1485,9 @@
     "source_date": "2017-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_efthymiou_matching",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1197,7 +1495,9 @@
     "source_date": "2017-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_ell_towards",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1205,7 +1505,9 @@
     "source_date": "2017-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_ell_towards",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1213,7 +1515,9 @@
     "source_date": "2017-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_lehmberg_stitching",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1221,7 +1525,9 @@
     "source_date": "2017-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_lehmberg_stitching",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1229,7 +1535,9 @@
     "source_date": "2017-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_lehmberg_stitching",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "evolve",
@@ -1237,7 +1545,9 @@
     "source_date": "2017-01-01",
     "target": "Zhang",
     "target_date": "2018-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2017_zhang_effective",
+    "target_id": "2018_zhang_ad"
   },
   {
     "type": "cite",
@@ -1245,7 +1555,9 @@
     "source_date": "2018-01-01",
     "target": "Cafarella",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2009_cafarella_data"
   },
   {
     "type": "cite",
@@ -1253,7 +1565,9 @@
     "source_date": "2018-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1261,7 +1575,9 @@
     "source_date": "2018-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -1269,7 +1585,9 @@
     "source_date": "2018-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_luo_cross-lingual",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1277,7 +1595,9 @@
     "source_date": "2018-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1285,7 +1605,9 @@
     "source_date": "2018-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1293,7 +1615,9 @@
     "source_date": "2018-01-01",
     "target": "Crestan",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2011_crestan_web-scale"
   },
   {
     "type": "cite",
@@ -1301,7 +1625,9 @@
     "source_date": "2018-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1309,7 +1635,9 @@
     "source_date": "2018-01-01",
     "target": "Goel",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2012_goel_exploiting"
   },
   {
     "type": "cite",
@@ -1317,7 +1645,9 @@
     "source_date": "2018-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -1325,7 +1655,9 @@
     "source_date": "2018-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_luo_cross-lingual",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -1333,7 +1665,9 @@
     "source_date": "2018-01-01",
     "target": "Pimplikar",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2012_pimplikar_answering"
   },
   {
     "type": "cite",
@@ -1341,7 +1675,9 @@
     "source_date": "2018-01-01",
     "target": "Adelfio",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2013_adelfio_schema"
   },
   {
     "type": "cite",
@@ -1349,7 +1685,9 @@
     "source_date": "2018-01-01",
     "target": "Zwicklbauer",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2013_zwicklbauer_towards"
   },
   {
     "type": "cite",
@@ -1357,7 +1695,9 @@
     "source_date": "2018-01-01",
     "target": "Sekhavat",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_luo_cross-lingual",
+    "target_id": "2014_sekhavat_knowledge"
   },
   {
     "type": "cite",
@@ -1365,7 +1705,9 @@
     "source_date": "2018-01-01",
     "target": "Sekhavat",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2014_sekhavat_knowledge"
   },
   {
     "type": "cite",
@@ -1373,7 +1715,9 @@
     "source_date": "2018-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1381,7 +1725,9 @@
     "source_date": "2018-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -1389,7 +1735,9 @@
     "source_date": "2018-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1397,7 +1745,9 @@
     "source_date": "2018-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_luo_cross-lingual",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1405,7 +1755,9 @@
     "source_date": "2018-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1413,7 +1765,9 @@
     "source_date": "2018-01-01",
     "target": "Ermilov",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2016_ermilov_taipan"
   },
   {
     "type": "cite",
@@ -1421,7 +1775,9 @@
     "source_date": "2018-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -1429,7 +1785,9 @@
     "source_date": "2018-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_kacprzak_making",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "evolve",
@@ -1437,7 +1795,9 @@
     "source_date": "2018-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2018_zhang_ad",
+    "target_id": "2020_zhang_novel"
   },
   {
     "type": "cite",
@@ -1445,7 +1805,9 @@
     "source_date": "2019-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1453,7 +1815,9 @@
     "source_date": "2019-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1461,7 +1825,9 @@
     "source_date": "2019-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -1469,7 +1835,9 @@
     "source_date": "2019-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1477,7 +1845,9 @@
     "source_date": "2019-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -1485,7 +1855,9 @@
     "source_date": "2019-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_hulsebos_sherlock",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1493,7 +1865,9 @@
     "source_date": "2019-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_hulsebos_sherlock",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -1501,7 +1875,9 @@
     "source_date": "2019-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1509,7 +1885,9 @@
     "source_date": "2019-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_nguyen_mtab",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1517,7 +1895,9 @@
     "source_date": "2019-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_takeoka_meimei",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -1525,7 +1905,9 @@
     "source_date": "2019-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1533,7 +1915,9 @@
     "source_date": "2019-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1541,7 +1925,9 @@
     "source_date": "2019-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1549,7 +1935,9 @@
     "source_date": "2019-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_hulsebos_sherlock",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1557,7 +1945,9 @@
     "source_date": "2019-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1565,7 +1955,9 @@
     "source_date": "2019-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_takeoka_meimei",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -1573,7 +1965,9 @@
     "source_date": "2019-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -1581,7 +1975,9 @@
     "source_date": "2019-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -1589,7 +1985,9 @@
     "source_date": "2019-01-01",
     "target": "Goel",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_hulsebos_sherlock",
+    "target_id": "2012_goel_exploiting"
   },
   {
     "type": "cite",
@@ -1597,7 +1995,9 @@
     "source_date": "2019-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -1605,7 +2005,9 @@
     "source_date": "2019-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -1613,7 +2015,9 @@
     "source_date": "2019-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -1621,7 +2025,9 @@
     "source_date": "2019-01-01",
     "target": "Quercini",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2013_quercini_entity"
   },
   {
     "type": "cite",
@@ -1629,7 +2035,9 @@
     "source_date": "2019-01-01",
     "target": "Zwicklbauer",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2013_zwicklbauer_towards"
   },
   {
     "type": "cite",
@@ -1637,7 +2045,9 @@
     "source_date": "2019-01-01",
     "target": "Zwicklbauer",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2013_zwicklbauer_towards"
   },
   {
     "type": "cite",
@@ -1645,7 +2055,9 @@
     "source_date": "2019-01-01",
     "target": "Deng",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2013_deng_scalable"
   },
   {
     "type": "cite",
@@ -1653,7 +2065,9 @@
     "source_date": "2019-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -1661,7 +2075,9 @@
     "source_date": "2019-01-01",
     "target": "Quercini",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2013_quercini_entity"
   },
   {
     "type": "cite",
@@ -1669,7 +2085,9 @@
     "source_date": "2019-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -1677,7 +2095,9 @@
     "source_date": "2019-01-01",
     "target": "Zwicklbauer",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_morikawa_semantic",
+    "target_id": "2013_zwicklbauer_towards"
   },
   {
     "type": "cite",
@@ -1685,7 +2105,9 @@
     "source_date": "2019-01-01",
     "target": "Zwicklbauer",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_steenwinckel_csv2kg",
+    "target_id": "2013_zwicklbauer_towards"
   },
   {
     "type": "cite",
@@ -1693,7 +2115,9 @@
     "source_date": "2019-01-01",
     "target": "Deng",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_takeoka_meimei",
+    "target_id": "2013_deng_scalable"
   },
   {
     "type": "cite",
@@ -1701,7 +2125,9 @@
     "source_date": "2019-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_takeoka_meimei",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -1709,7 +2135,9 @@
     "source_date": "2019-01-01",
     "target": "Sekhavat",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2014_sekhavat_knowledge"
   },
   {
     "type": "cite",
@@ -1717,7 +2145,9 @@
     "source_date": "2019-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1725,7 +2155,9 @@
     "source_date": "2019-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1733,7 +2165,9 @@
     "source_date": "2019-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1741,7 +2175,9 @@
     "source_date": "2019-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1749,7 +2185,9 @@
     "source_date": "2019-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -1757,7 +2195,9 @@
     "source_date": "2019-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1765,7 +2205,9 @@
     "source_date": "2019-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_semantic",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1773,7 +2215,9 @@
     "source_date": "2019-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_hulsebos_sherlock",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -1781,7 +2225,9 @@
     "source_date": "2019-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1789,7 +2235,9 @@
     "source_date": "2019-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1797,7 +2245,9 @@
     "source_date": "2019-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_steenwinckel_csv2kg",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -1805,7 +2255,9 @@
     "source_date": "2019-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_steenwinckel_csv2kg",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -1813,7 +2265,9 @@
     "source_date": "2019-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -1821,7 +2275,9 @@
     "source_date": "2019-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -1829,7 +2285,9 @@
     "source_date": "2019-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -1837,7 +2295,9 @@
     "source_date": "2019-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_semantic",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -1845,7 +2305,9 @@
     "source_date": "2019-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -1853,7 +2315,9 @@
     "source_date": "2019-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_hulsebos_sherlock",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -1861,7 +2325,9 @@
     "source_date": "2019-01-01",
     "target": "Ermilov",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2016_ermilov_taipan"
   },
   {
     "type": "cite",
@@ -1869,7 +2335,9 @@
     "source_date": "2019-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -1877,7 +2345,9 @@
     "source_date": "2019-01-01",
     "target": "Neumaier",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_takeoka_meimei",
+    "target_id": "2016_neumaier_multi-level"
   },
   {
     "type": "cite",
@@ -1885,7 +2355,9 @@
     "source_date": "2019-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_takeoka_meimei",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -1893,7 +2365,9 @@
     "source_date": "2019-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -1901,7 +2375,9 @@
     "source_date": "2019-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -1909,7 +2385,9 @@
     "source_date": "2019-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -1917,7 +2395,9 @@
     "source_date": "2019-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -1925,7 +2405,9 @@
     "source_date": "2019-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -1933,7 +2415,9 @@
     "source_date": "2019-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_semantic",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -1941,7 +2425,9 @@
     "source_date": "2019-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -1949,7 +2435,9 @@
     "source_date": "2019-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -1957,7 +2445,9 @@
     "source_date": "2019-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_morikawa_semantic",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -1965,7 +2455,9 @@
     "source_date": "2019-01-01",
     "target": "Lehmberg",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_nguyen_mtab",
+    "target_id": "2017_lehmberg_stitching"
   },
   {
     "type": "cite",
@@ -1973,7 +2465,9 @@
     "source_date": "2019-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_nguyen_mtab",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -1981,7 +2475,9 @@
     "source_date": "2019-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_steenwinckel_csv2kg",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -1989,7 +2485,9 @@
     "source_date": "2019-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_steenwinckel_csv2kg",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -1997,7 +2495,9 @@
     "source_date": "2019-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_takeoka_meimei",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -2005,7 +2505,9 @@
     "source_date": "2019-01-01",
     "target": "Luo",
     "target_date": "2018-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2018_luo_cross-lingual"
   },
   {
     "type": "cite",
@@ -2013,7 +2515,9 @@
     "source_date": "2019-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_learning",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -2021,7 +2525,9 @@
     "source_date": "2019-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_semantic",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -2029,7 +2535,9 @@
     "source_date": "2019-01-01",
     "target": "Kruit",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_kruit_extracting",
+    "target_id": "2019_kruit_extracting"
   },
   {
     "type": "cite",
@@ -2037,7 +2545,9 @@
     "source_date": "2019-01-01",
     "target": "Kruit",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_morikawa_semantic",
+    "target_id": "2019_kruit_extracting"
   },
   {
     "type": "cite",
@@ -2045,7 +2555,9 @@
     "source_date": "2019-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_steenwinckel_csv2kg",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "evolve",
@@ -2053,7 +2565,9 @@
     "source_date": "2019-01-01",
     "target": "Chen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_chen_colnet",
+    "target_id": "2020_chen_linkingpark"
   },
   {
     "type": "evolve",
@@ -2061,7 +2575,9 @@
     "source_date": "2019-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_cremaschi_mantistable",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "evolve",
@@ -2069,7 +2585,9 @@
     "source_date": "2019-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_nguyen_mtab",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "evolve",
@@ -2077,7 +2595,9 @@
     "source_date": "2019-01-01",
     "target": "Steenwinckel",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2019_steenwinckel_csv2kg",
+    "target_id": "2021_steenwinckel_magic"
   },
   {
     "type": "cite",
@@ -2085,7 +2605,9 @@
     "source_date": "2020-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_chen_linkingpark",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2093,7 +2615,9 @@
     "source_date": "2020-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2101,7 +2625,9 @@
     "source_date": "2020-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -2109,7 +2635,9 @@
     "source_date": "2020-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_eslahi_annotating",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2117,7 +2645,9 @@
     "source_date": "2020-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2125,7 +2655,9 @@
     "source_date": "2020-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2133,7 +2665,9 @@
     "source_date": "2020-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_sato",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2141,7 +2675,9 @@
     "source_date": "2020-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_sato",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -2149,7 +2685,9 @@
     "source_date": "2020-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -2157,7 +2695,9 @@
     "source_date": "2020-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_eslahi_annotating",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -2165,7 +2705,9 @@
     "source_date": "2020-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -2173,7 +2715,9 @@
     "source_date": "2020-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -2181,7 +2725,9 @@
     "source_date": "2020-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_sato",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -2189,7 +2735,9 @@
     "source_date": "2020-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -2197,7 +2745,9 @@
     "source_date": "2020-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -2205,7 +2755,9 @@
     "source_date": "2020-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -2213,7 +2765,9 @@
     "source_date": "2020-01-01",
     "target": "Goel",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_sato",
+    "target_id": "2012_goel_exploiting"
   },
   {
     "type": "cite",
@@ -2221,7 +2775,9 @@
     "source_date": "2020-01-01",
     "target": "Deng",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2013_deng_scalable"
   },
   {
     "type": "cite",
@@ -2229,7 +2785,9 @@
     "source_date": "2020-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -2237,7 +2795,9 @@
     "source_date": "2020-01-01",
     "target": "Quercini",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2013_quercini_entity"
   },
   {
     "type": "cite",
@@ -2245,7 +2805,9 @@
     "source_date": "2020-01-01",
     "target": "Deng",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2013_deng_scalable"
   },
   {
     "type": "cite",
@@ -2253,7 +2815,9 @@
     "source_date": "2020-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -2261,7 +2825,9 @@
     "source_date": "2020-01-01",
     "target": "Quercini",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2013_quercini_entity"
   },
   {
     "type": "cite",
@@ -2269,7 +2835,9 @@
     "source_date": "2020-01-01",
     "target": "Zhang",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2013_zhang_infogather"
   },
   {
     "type": "cite",
@@ -2277,7 +2845,9 @@
     "source_date": "2020-01-01",
     "target": "Zwicklbauer",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2013_zwicklbauer_towards"
   },
   {
     "type": "cite",
@@ -2285,7 +2855,9 @@
     "source_date": "2020-01-01",
     "target": "Sekhavat",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2014_sekhavat_knowledge"
   },
   {
     "type": "cite",
@@ -2293,7 +2865,9 @@
     "source_date": "2020-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -2301,7 +2875,9 @@
     "source_date": "2020-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -2309,7 +2885,9 @@
     "source_date": "2020-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_chen_linkingpark",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -2317,7 +2895,9 @@
     "source_date": "2020-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_chen_linkingpark",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -2325,7 +2905,9 @@
     "source_date": "2020-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -2333,7 +2915,9 @@
     "source_date": "2020-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -2341,7 +2925,9 @@
     "source_date": "2020-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_eslahi_annotating",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -2349,7 +2935,9 @@
     "source_date": "2020-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_eslahi_annotating",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -2357,7 +2945,9 @@
     "source_date": "2020-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -2365,7 +2955,9 @@
     "source_date": "2020-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -2373,7 +2965,9 @@
     "source_date": "2020-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -2381,7 +2975,9 @@
     "source_date": "2020-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -2389,7 +2985,9 @@
     "source_date": "2020-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_sato",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -2397,7 +2995,9 @@
     "source_date": "2020-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -2405,7 +3005,9 @@
     "source_date": "2020-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_azzi_amalgam",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -2413,7 +3015,9 @@
     "source_date": "2020-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -2421,7 +3025,9 @@
     "source_date": "2020-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -2429,7 +3035,9 @@
     "source_date": "2020-01-01",
     "target": "Neumaier",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2016_neumaier_multi-level"
   },
   {
     "type": "cite",
@@ -2437,7 +3045,9 @@
     "source_date": "2020-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -2445,7 +3055,9 @@
     "source_date": "2020-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -2453,7 +3065,9 @@
     "source_date": "2020-01-01",
     "target": "Neumaier",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2016_neumaier_multi-level"
   },
   {
     "type": "cite",
@@ -2461,7 +3075,9 @@
     "source_date": "2020-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_sato",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -2469,7 +3085,9 @@
     "source_date": "2020-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_azzi_amalgam",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -2477,7 +3095,9 @@
     "source_date": "2020-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -2485,7 +3105,9 @@
     "source_date": "2020-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_chen_linkingpark",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -2493,7 +3115,9 @@
     "source_date": "2020-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -2501,7 +3125,9 @@
     "source_date": "2020-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -2509,7 +3135,9 @@
     "source_date": "2020-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_mantistable",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -2517,7 +3145,9 @@
     "source_date": "2020-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_eslahi_annotating",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -2525,7 +3155,9 @@
     "source_date": "2020-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -2533,7 +3165,9 @@
     "source_date": "2020-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -2541,7 +3175,9 @@
     "source_date": "2020-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -2549,7 +3185,9 @@
     "source_date": "2020-01-01",
     "target": "Zhang",
     "target_date": "2018-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2018_zhang_ad"
   },
   {
     "type": "cite",
@@ -2557,7 +3195,9 @@
     "source_date": "2020-01-01",
     "target": "Kacprzak",
     "target_date": "2018-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2018_kacprzak_making"
   },
   {
     "type": "cite",
@@ -2565,7 +3205,9 @@
     "source_date": "2020-01-01",
     "target": "Zhang",
     "target_date": "2018-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2018_zhang_ad"
   },
   {
     "type": "cite",
@@ -2573,7 +3215,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -2581,7 +3225,9 @@
     "source_date": "2020-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_chen_linkingpark",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -2589,7 +3235,9 @@
     "source_date": "2020-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -2597,7 +3245,9 @@
     "source_date": "2020-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -2605,7 +3255,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -2613,7 +3265,9 @@
     "source_date": "2020-01-01",
     "target": "Kruit",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2019_kruit_extracting"
   },
   {
     "type": "cite",
@@ -2621,7 +3275,9 @@
     "source_date": "2020-01-01",
     "target": "Morikawa",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2019_morikawa_semantic"
   },
   {
     "type": "cite",
@@ -2629,7 +3285,9 @@
     "source_date": "2020-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -2637,7 +3295,9 @@
     "source_date": "2020-01-01",
     "target": "Oliveira",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2019_oliveira_adog"
   },
   {
     "type": "cite",
@@ -2645,7 +3305,9 @@
     "source_date": "2020-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -2653,7 +3315,9 @@
     "source_date": "2020-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -2661,7 +3325,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -2669,7 +3335,9 @@
     "source_date": "2020-01-01",
     "target": "Morikawa",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2019_morikawa_semantic"
   },
   {
     "type": "cite",
@@ -2677,7 +3345,9 @@
     "source_date": "2020-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -2685,7 +3355,9 @@
     "source_date": "2020-01-01",
     "target": "Oliveira",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2019_oliveira_adog"
   },
   {
     "type": "cite",
@@ -2693,7 +3365,9 @@
     "source_date": "2020-01-01",
     "target": "Steenwinckel",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2019_steenwinckel_csv2kg"
   },
   {
     "type": "cite",
@@ -2701,7 +3375,9 @@
     "source_date": "2020-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -2709,7 +3385,9 @@
     "source_date": "2020-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -2717,7 +3395,9 @@
     "source_date": "2020-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2019_chen_learning"
   },
   {
     "type": "cite",
@@ -2725,7 +3405,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -2733,7 +3415,9 @@
     "source_date": "2020-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -2741,7 +3425,9 @@
     "source_date": "2020-01-01",
     "target": "Morikawa",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2019_morikawa_semantic"
   },
   {
     "type": "cite",
@@ -2749,7 +3435,9 @@
     "source_date": "2020-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_khurana_semantic",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -2757,7 +3445,9 @@
     "source_date": "2020-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_nguyen_mtab4wikidata",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -2765,7 +3455,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_nguyen_mtab4wikidata",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -2773,7 +3465,9 @@
     "source_date": "2020-01-01",
     "target": "Morikawa",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_nguyen_mtab4wikidata",
+    "target_id": "2019_morikawa_semantic"
   },
   {
     "type": "cite",
@@ -2781,7 +3475,9 @@
     "source_date": "2020-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_nguyen_mtab4wikidata",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -2789,7 +3485,9 @@
     "source_date": "2020-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_nguyen_mtab4wikidata",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -2797,7 +3495,9 @@
     "source_date": "2020-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_shigapov_bbw",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -2805,7 +3505,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_shigapov_bbw",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -2813,7 +3515,9 @@
     "source_date": "2020-01-01",
     "target": "Morikawa",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_shigapov_bbw",
+    "target_id": "2019_morikawa_semantic"
   },
   {
     "type": "cite",
@@ -2821,7 +3525,9 @@
     "source_date": "2020-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_shigapov_bbw",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -2829,7 +3535,9 @@
     "source_date": "2020-01-01",
     "target": "Oliveira",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_shigapov_bbw",
+    "target_id": "2019_oliveira_adog"
   },
   {
     "type": "cite",
@@ -2837,7 +3545,9 @@
     "source_date": "2020-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_shigapov_bbw",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -2845,7 +3555,9 @@
     "source_date": "2020-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_tyagi_lexma",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -2853,7 +3565,9 @@
     "source_date": "2020-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_sato",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -2861,7 +3575,9 @@
     "source_date": "2020-01-01",
     "target": "Takeoka",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_sato",
+    "target_id": "2019_takeoka_meimei"
   },
   {
     "type": "cite",
@@ -2869,7 +3585,9 @@
     "source_date": "2020-01-01",
     "target": "Eslahi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_azzi_amalgam",
+    "target_id": "2020_eslahi_annotating"
   },
   {
     "type": "cite",
@@ -2877,7 +3595,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -2885,7 +3605,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_mantistable",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "evolve",
@@ -2893,7 +3615,9 @@
     "source_date": "2020-01-01",
     "target": "Abdelmageed",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_abdelmageed_jentab",
+    "target_id": "2021_abdelmageed_jentab-1"
   },
   {
     "type": "evolve",
@@ -2901,7 +3625,9 @@
     "source_date": "2020-01-01",
     "target": "Baazouzi",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_baazouzi_kepler-asi",
+    "target_id": "2021_baazouzi_kepler-asi"
   },
   {
     "type": "evolve",
@@ -2909,7 +3635,9 @@
     "source_date": "2020-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_huynh_dagobah",
+    "target_id": "2021_huynh_dagobah"
   },
   {
     "type": "evolve",
@@ -2917,7 +3645,9 @@
     "source_date": "2020-01-01",
     "target": "Nguyen",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_nguyen_mtab4wikidata",
+    "target_id": "2021_nguyen_semtab"
   },
   {
     "type": "evolve",
@@ -2925,7 +3655,9 @@
     "source_date": "2020-01-01",
     "target": "Chen",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_chen_linkingpark",
+    "target_id": "2022_chen_linkingpark"
   },
   {
     "type": "evolve",
@@ -2933,7 +3665,9 @@
     "source_date": "2020-01-01",
     "target": "Cremaschi",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_cremaschi_a",
+    "target_id": "2022_cremaschi_s-elbat"
   },
   {
     "type": "evolve",
@@ -2941,7 +3675,9 @@
     "source_date": "2020-01-01",
     "target": "Zhang",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2020_zhang_novel",
+    "target_id": "2024_zhang_tablellama"
   },
   {
     "type": "cite",
@@ -2949,7 +3685,9 @@
     "source_date": "2021-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2957,7 +3695,9 @@
     "source_date": "2021-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2965,7 +3705,9 @@
     "source_date": "2021-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_yang_gbmtab",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2973,7 +3715,9 @@
     "source_date": "2021-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -2981,7 +3725,9 @@
     "source_date": "2021-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -2989,7 +3735,9 @@
     "source_date": "2021-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -2997,7 +3745,9 @@
     "source_date": "2021-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -3005,7 +3755,9 @@
     "source_date": "2021-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -3013,7 +3765,9 @@
     "source_date": "2021-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_yang_gbmtab",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -3021,7 +3775,9 @@
     "source_date": "2021-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -3029,7 +3785,9 @@
     "source_date": "2021-01-01",
     "target": "Sekhavat",
     "target_date": "2014-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2014_sekhavat_knowledge"
   },
   {
     "type": "cite",
@@ -3037,7 +3795,9 @@
     "source_date": "2021-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -3045,7 +3805,9 @@
     "source_date": "2021-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -3053,7 +3815,9 @@
     "source_date": "2021-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -3061,7 +3825,9 @@
     "source_date": "2021-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -3069,7 +3835,9 @@
     "source_date": "2021-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_yang_gbmtab",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -3077,7 +3845,9 @@
     "source_date": "2021-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -3085,7 +3855,9 @@
     "source_date": "2021-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -3093,7 +3865,9 @@
     "source_date": "2021-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -3101,7 +3875,9 @@
     "source_date": "2021-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -3109,7 +3885,9 @@
     "source_date": "2021-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -3117,7 +3895,9 @@
     "source_date": "2021-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_avogadro_mantistable",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -3125,7 +3905,9 @@
     "source_date": "2021-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_avogadro_mantistable",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -3133,7 +3915,9 @@
     "source_date": "2021-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -3141,7 +3925,9 @@
     "source_date": "2021-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -3149,7 +3935,9 @@
     "source_date": "2021-01-01",
     "target": "Lehmberg",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_heist_information",
+    "target_id": "2017_lehmberg_stitching"
   },
   {
     "type": "cite",
@@ -3157,7 +3945,9 @@
     "source_date": "2021-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -3165,7 +3955,9 @@
     "source_date": "2021-01-01",
     "target": "Lehmberg",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2017_lehmberg_stitching"
   },
   {
     "type": "cite",
@@ -3173,7 +3965,9 @@
     "source_date": "2021-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -3181,7 +3975,9 @@
     "source_date": "2021-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -3189,7 +3985,9 @@
     "source_date": "2021-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -3197,7 +3995,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -3205,7 +4005,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2019_chen_learning"
   },
   {
     "type": "cite",
@@ -3213,7 +4015,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -3221,7 +4025,9 @@
     "source_date": "2021-01-01",
     "target": "Steenwinckel",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-1",
+    "target_id": "2019_steenwinckel_csv2kg"
   },
   {
     "type": "cite",
@@ -3229,7 +4035,9 @@
     "source_date": "2021-01-01",
     "target": "Steenwinckel",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2019_steenwinckel_csv2kg"
   },
   {
     "type": "cite",
@@ -3237,7 +4045,9 @@
     "source_date": "2021-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -3245,7 +4055,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -3253,7 +4065,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2019_chen_learning"
   },
   {
     "type": "cite",
@@ -3261,7 +4075,9 @@
     "source_date": "2021-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -3269,7 +4085,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -3277,7 +4095,9 @@
     "source_date": "2021-01-01",
     "target": "Morikawa",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2019_morikawa_semantic"
   },
   {
     "type": "cite",
@@ -3285,7 +4105,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -3293,15 +4115,9 @@
     "source_date": "2021-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
-  },
-  {
-    "type": "cite",
-    "source": "Sarthou-Camy",
-    "source_date": "2021-01-01",
-    "target": "Cremaschi",
-    "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -3309,7 +4125,9 @@
     "source_date": "2021-01-01",
     "target": "Steenwinckel",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_steenwinckel_magic",
+    "target_id": "2019_steenwinckel_csv2kg"
   },
   {
     "type": "cite",
@@ -3317,7 +4135,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2019_chen_learning"
   },
   {
     "type": "cite",
@@ -3325,7 +4145,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -3333,7 +4155,9 @@
     "source_date": "2021-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -3341,7 +4165,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -3349,7 +4175,9 @@
     "source_date": "2021-01-01",
     "target": "Steenwinckel",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2019_steenwinckel_csv2kg"
   },
   {
     "type": "cite",
@@ -3357,7 +4185,9 @@
     "source_date": "2021-01-01",
     "target": "Takeoka",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_wang_tcn",
+    "target_id": "2019_takeoka_meimei"
   },
   {
     "type": "cite",
@@ -3365,7 +4195,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2019_chen_learning"
   },
   {
     "type": "cite",
@@ -3373,7 +4205,9 @@
     "source_date": "2021-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -3381,7 +4215,9 @@
     "source_date": "2021-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-1",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -3389,7 +4225,9 @@
     "source_date": "2021-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -3397,7 +4235,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2020_chen_linkingpark"
   },
   {
     "type": "cite",
@@ -3405,7 +4245,9 @@
     "source_date": "2021-01-01",
     "target": "Kim",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2020_kim_generating"
   },
   {
     "type": "cite",
@@ -3413,7 +4255,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "cite",
@@ -3421,7 +4265,9 @@
     "source_date": "2021-01-01",
     "target": "Shigapov",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-2",
+    "target_id": "2020_shigapov_bbw"
   },
   {
     "type": "cite",
@@ -3429,7 +4275,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_avogadro_mantistable",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -3437,7 +4285,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_avogadro_mantistable",
+    "target_id": "2020_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -3445,7 +4295,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -3453,7 +4305,9 @@
     "source_date": "2021-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_heist_information",
+    "target_id": "2020_zhang_novel"
   },
   {
     "type": "cite",
@@ -3461,7 +4315,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_huynh_dagobah",
+    "target_id": "2020_chen_linkingpark"
   },
   {
     "type": "cite",
@@ -3469,7 +4325,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_huynh_dagobah",
+    "target_id": "2020_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -3477,7 +4335,9 @@
     "source_date": "2021-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_huynh_dagobah",
+    "target_id": "2020_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -3485,7 +4345,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_huynh_dagobah",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "cite",
@@ -3493,7 +4355,9 @@
     "source_date": "2021-01-01",
     "target": "Shigapov",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_huynh_dagobah",
+    "target_id": "2020_shigapov_bbw"
   },
   {
     "type": "cite",
@@ -3501,7 +4365,9 @@
     "source_date": "2021-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -3509,7 +4375,9 @@
     "source_date": "2021-01-01",
     "target": "Chen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2020_chen_linkingpark"
   },
   {
     "type": "cite",
@@ -3517,7 +4385,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -3525,7 +4395,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2020_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -3533,7 +4405,9 @@
     "source_date": "2021-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2020_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -3541,7 +4415,9 @@
     "source_date": "2021-01-01",
     "target": "Kim",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2020_kim_generating"
   },
   {
     "type": "cite",
@@ -3549,7 +4425,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "cite",
@@ -3557,7 +4435,9 @@
     "source_date": "2021-01-01",
     "target": "Shigapov",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2020_shigapov_bbw"
   },
   {
     "type": "cite",
@@ -3565,7 +4445,9 @@
     "source_date": "2021-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_steenwinckel_magic",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -3573,7 +4455,9 @@
     "source_date": "2021-01-01",
     "target": "Azzi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_steenwinckel_magic",
+    "target_id": "2020_azzi_amalgam"
   },
   {
     "type": "cite",
@@ -3581,7 +4465,9 @@
     "source_date": "2021-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_steenwinckel_magic",
+    "target_id": "2020_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -3589,7 +4475,9 @@
     "source_date": "2021-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_steenwinckel_magic",
+    "target_id": "2020_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -3597,7 +4485,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_steenwinckel_magic",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "cite",
@@ -3605,7 +4495,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_yang_gbmtab",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "cite",
@@ -3613,7 +4505,9 @@
     "source_date": "2021-01-01",
     "target": "Tyagi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_yang_gbmtab",
+    "target_id": "2020_tyagi_lexma"
   },
   {
     "type": "cite",
@@ -3621,7 +4515,9 @@
     "source_date": "2021-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_zhou_tabular",
+    "target_id": "2020_zhang_sato"
   },
   {
     "type": "cite",
@@ -3629,7 +4525,9 @@
     "source_date": "2021-01-01",
     "target": "Abdelmageed",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-1",
+    "target_id": "2021_abdelmageed_jentab-2"
   },
   {
     "type": "cite",
@@ -3637,23 +4535,9 @@
     "source_date": "2021-01-01",
     "target": "Wang",
     "target_date": "2021-01-01",
-    "value": 1
-  },
-  {
-    "type": "cite",
-    "source": "Sarthou-Camy",
-    "source_date": "2021-01-01",
-    "target": "Huynh",
-    "target_date": "2021-01-01",
-    "value": 1
-  },
-  {
-    "type": "cite",
-    "source": "Sarthou-Camy",
-    "source_date": "2021-01-01",
-    "target": "Nguyen",
-    "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2021_wang_tcn"
   },
   {
     "type": "cite",
@@ -3661,7 +4545,9 @@
     "source_date": "2021-01-01",
     "target": "Wang",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_yang_gbmtab",
+    "target_id": "2021_wang_tcn"
   },
   {
     "type": "evolve",
@@ -3669,7 +4555,9 @@
     "source_date": "2021-01-01",
     "target": "Abdelmageed",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_abdelmageed_jentab-1",
+    "target_id": "2022_abdelmageed_jentab"
   },
   {
     "type": "evolve",
@@ -3677,7 +4565,9 @@
     "source_date": "2021-01-01",
     "target": "Huynh",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_huynh_dagobah",
+    "target_id": "2022_huynh_from"
   },
   {
     "type": "evolve",
@@ -3685,7 +4575,9 @@
     "source_date": "2021-01-01",
     "target": "Baazouzi",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_baazouzi_kepler-asi",
+    "target_id": "2023_baazouzi_kepler-asi"
   },
   {
     "type": "evolve",
@@ -3693,7 +4585,9 @@
     "source_date": "2021-01-01",
     "target": "Avogadro",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_avogadro_mantistable",
+    "target_id": "2024_avogadro_featurevector"
   },
   {
     "type": "evolve",
@@ -3701,7 +4595,9 @@
     "source_date": "2021-01-01",
     "target": "Li",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_li_deep",
+    "target_id": "2024_li_table-gpt"
   },
   {
     "type": "evolve",
@@ -3709,7 +4605,9 @@
     "source_date": "2021-01-01",
     "target": "Nguyen",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2021_nguyen_semtab",
+    "target_id": "2024_nguyen_mtab4d"
   },
   {
     "type": "cite",
@@ -3717,7 +4615,9 @@
     "source_date": "2022-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_deng_turl",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -3725,7 +4625,9 @@
     "source_date": "2022-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_huynh_from",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -3733,7 +4635,9 @@
     "source_date": "2022-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -3741,7 +4645,9 @@
     "source_date": "2022-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_suhara_annotating",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -3749,7 +4655,9 @@
     "source_date": "2022-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_suhara_annotating",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -3757,7 +4665,9 @@
     "source_date": "2022-01-01",
     "target": "Knoblock",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2012_knoblock_semi-automatically"
   },
   {
     "type": "cite",
@@ -3765,7 +4675,9 @@
     "source_date": "2022-01-01",
     "target": "Zwicklbauer",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2013_zwicklbauer_towards"
   },
   {
     "type": "cite",
@@ -3773,7 +4685,9 @@
     "source_date": "2022-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_deng_turl",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -3781,7 +4695,9 @@
     "source_date": "2022-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_deng_turl",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -3789,7 +4705,9 @@
     "source_date": "2022-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -3797,7 +4715,9 @@
     "source_date": "2022-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -3805,7 +4725,9 @@
     "source_date": "2022-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_huynh_from",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -3813,7 +4735,9 @@
     "source_date": "2022-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -3821,7 +4745,9 @@
     "source_date": "2022-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -3829,7 +4755,9 @@
     "source_date": "2022-01-01",
     "target": "Neumaier",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_cremaschi_s-elbat",
+    "target_id": "2016_neumaier_multi-level"
   },
   {
     "type": "cite",
@@ -3837,7 +4765,9 @@
     "source_date": "2022-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -3845,7 +4775,9 @@
     "source_date": "2022-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2016_taheriyan_learning"
   },
   {
     "type": "cite",
@@ -3853,7 +4785,9 @@
     "source_date": "2022-01-01",
     "target": "Taheriyan",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2016_taheriyan_leveraging"
   },
   {
     "type": "cite",
@@ -3861,7 +4795,9 @@
     "source_date": "2022-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_deng_turl",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -3869,7 +4805,9 @@
     "source_date": "2022-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_deng_turl",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -3877,7 +4815,9 @@
     "source_date": "2022-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -3885,7 +4825,9 @@
     "source_date": "2022-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -3893,7 +4835,9 @@
     "source_date": "2022-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_huynh_from",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -3901,7 +4845,9 @@
     "source_date": "2022-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -3909,7 +4855,9 @@
     "source_date": "2022-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -3917,7 +4865,9 @@
     "source_date": "2022-01-01",
     "target": "Zhang",
     "target_date": "2018-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_chen_linkingpark",
+    "target_id": "2018_zhang_ad"
   },
   {
     "type": "cite",
@@ -3925,7 +4875,9 @@
     "source_date": "2022-01-01",
     "target": "Luo",
     "target_date": "2018-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2018_luo_cross-lingual"
   },
   {
     "type": "cite",
@@ -3933,7 +4885,9 @@
     "source_date": "2022-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_deng_turl",
+    "target_id": "2019_chen_learning"
   },
   {
     "type": "cite",
@@ -3941,7 +4895,9 @@
     "source_date": "2022-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_deng_turl",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -3949,7 +4905,9 @@
     "source_date": "2022-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -3957,7 +4915,9 @@
     "source_date": "2022-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -3965,7 +4925,9 @@
     "source_date": "2022-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -3973,7 +4935,9 @@
     "source_date": "2022-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -3981,7 +4945,9 @@
     "source_date": "2022-01-01",
     "target": "Steenwinckel",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2019_steenwinckel_csv2kg"
   },
   {
     "type": "cite",
@@ -3989,7 +4955,9 @@
     "source_date": "2022-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_huynh_from",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -3997,7 +4965,19 @@
     "source_date": "2022-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2019_chabot_dagobah"
+  },
+  {
+    "type": "cite",
+    "source": "Sarthou-Camy",
+    "source_date": "2022-01-01",
+    "target": "Cremaschi",
+    "target_date": "2019-01-01",
+    "value": 1,
+    "source_id": "2021_sarthou-camy_dagobah",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -4005,7 +4985,9 @@
     "source_date": "2022-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_suhara_annotating",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -4013,7 +4995,9 @@
     "source_date": "2022-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_suhara_annotating",
+    "target_id": "2019_chen_learning"
   },
   {
     "type": "cite",
@@ -4021,7 +5005,9 @@
     "source_date": "2022-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_suhara_annotating",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -4029,7 +5015,9 @@
     "source_date": "2022-01-01",
     "target": "Takeoka",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_suhara_annotating",
+    "target_id": "2019_takeoka_meimei"
   },
   {
     "type": "cite",
@@ -4037,7 +5025,9 @@
     "source_date": "2022-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_abdelmageed_jentab",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -4045,7 +5035,9 @@
     "source_date": "2022-01-01",
     "target": "Shigapov",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_abdelmageed_jentab",
+    "target_id": "2020_shigapov_bbw"
   },
   {
     "type": "cite",
@@ -4053,7 +5045,9 @@
     "source_date": "2022-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_cremaschi_s-elbat",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -4061,7 +5055,9 @@
     "source_date": "2022-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_cremaschi_s-elbat",
+    "target_id": "2020_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -4069,7 +5065,9 @@
     "source_date": "2022-01-01",
     "target": "Chen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2020_chen_linkingpark"
   },
   {
     "type": "cite",
@@ -4077,7 +5075,9 @@
     "source_date": "2022-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -4085,7 +5085,9 @@
     "source_date": "2022-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2020_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -4093,7 +5095,9 @@
     "source_date": "2022-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_gottschalk_tab2kg",
+    "target_id": "2020_zhang_novel"
   },
   {
     "type": "cite",
@@ -4101,7 +5105,9 @@
     "source_date": "2022-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -4109,7 +5115,9 @@
     "source_date": "2022-01-01",
     "target": "Chen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2020_chen_linkingpark"
   },
   {
     "type": "cite",
@@ -4117,7 +5125,9 @@
     "source_date": "2022-01-01",
     "target": "Eslahi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2020_eslahi_annotating"
   },
   {
     "type": "cite",
@@ -4125,7 +5135,9 @@
     "source_date": "2022-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2020_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -4133,7 +5145,9 @@
     "source_date": "2022-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "cite",
@@ -4141,7 +5155,9 @@
     "source_date": "2022-01-01",
     "target": "Shigapov",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2020_shigapov_bbw"
   },
   {
     "type": "cite",
@@ -4149,7 +5165,9 @@
     "source_date": "2022-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_suhara_annotating",
+    "target_id": "2020_zhang_sato"
   },
   {
     "type": "cite",
@@ -4157,7 +5175,9 @@
     "source_date": "2022-01-01",
     "target": "Abdelmageed",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_abdelmageed_jentab",
+    "target_id": "2021_abdelmageed_jentab-1"
   },
   {
     "type": "cite",
@@ -4165,7 +5185,9 @@
     "source_date": "2022-01-01",
     "target": "Abdelmageed",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_abdelmageed_jentab",
+    "target_id": "2021_abdelmageed_jentab-2"
   },
   {
     "type": "cite",
@@ -4173,7 +5195,9 @@
     "source_date": "2022-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_abdelmageed_jentab",
+    "target_id": "2021_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -4181,7 +5205,9 @@
     "source_date": "2022-01-01",
     "target": "Nguyen",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_abdelmageed_jentab",
+    "target_id": "2021_nguyen_semtab"
   },
   {
     "type": "cite",
@@ -4189,7 +5215,9 @@
     "source_date": "2022-01-01",
     "target": "Avogadro",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_cremaschi_s-elbat",
+    "target_id": "2021_avogadro_mantistable"
   },
   {
     "type": "cite",
@@ -4197,7 +5225,9 @@
     "source_date": "2022-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_huynh_from",
+    "target_id": "2021_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -4205,7 +5235,29 @@
     "source_date": "2022-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2021_huynh_dagobah"
+  },
+  {
+    "type": "cite",
+    "source": "Sarthou-Camy",
+    "source_date": "2022-01-01",
+    "target": "Huynh",
+    "target_date": "2021-01-01",
+    "value": 1,
+    "source_id": "2021_sarthou-camy_dagobah",
+    "target_id": "2021_huynh_dagobah"
+  },
+  {
+    "type": "cite",
+    "source": "Sarthou-Camy",
+    "source_date": "2022-01-01",
+    "target": "Nguyen",
+    "target_date": "2021-01-01",
+    "value": 1,
+    "source_id": "2021_sarthou-camy_dagobah",
+    "target_id": "2021_nguyen_semtab"
   },
   {
     "type": "cite",
@@ -4213,7 +5265,9 @@
     "source_date": "2022-01-01",
     "target": "Wang",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_suhara_annotating",
+    "target_id": "2021_wang_tcn"
   },
   {
     "type": "cite",
@@ -4221,7 +5275,9 @@
     "source_date": "2022-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_huynh_from",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -4229,7 +5285,29 @@
     "source_date": "2022-01-01",
     "target": "Liu",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_huynh_from",
+    "target_id": "2022_liu_radar"
+  },
+  {
+    "type": "cite",
+    "source": "Huynh",
+    "source_date": "2022-01-01",
+    "target": "Sarthou-Camy",
+    "target_date": "2022-01-01",
+    "value": 1,
+    "source_id": "2022_huynh_from",
+    "target_id": "2021_sarthou-camy_dagobah"
+  },
+  {
+    "type": "cite",
+    "source": "Liu",
+    "source_date": "2022-01-01",
+    "target": "Sarthou-Camy",
+    "target_date": "2022-01-01",
+    "value": 1,
+    "source_id": "2022_liu_radar",
+    "target_id": "2021_sarthou-camy_dagobah"
   },
   {
     "type": "evolve",
@@ -4237,7 +5315,9 @@
     "source_date": "2022-01-01",
     "target": "Cremaschi",
     "target_date": "2025-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2022_cremaschi_s-elbat",
+    "target_id": "2025_cremaschi_steellm"
   },
   {
     "type": "cite",
@@ -4245,7 +5325,9 @@
     "source_date": "2023-01-01",
     "target": "Cafarella",
     "target_date": "2009-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2009_cafarella_data"
   },
   {
     "type": "cite",
@@ -4253,7 +5335,9 @@
     "source_date": "2023-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -4261,7 +5345,9 @@
     "source_date": "2023-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -4269,7 +5355,9 @@
     "source_date": "2023-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -4277,7 +5365,9 @@
     "source_date": "2023-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -4285,7 +5375,9 @@
     "source_date": "2023-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -4293,7 +5385,9 @@
     "source_date": "2023-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -4301,7 +5395,9 @@
     "source_date": "2023-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -4309,7 +5405,9 @@
     "source_date": "2023-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_sun_reca",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -4317,7 +5415,9 @@
     "source_date": "2023-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -4325,7 +5425,9 @@
     "source_date": "2023-01-01",
     "target": "Adelfio",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2013_adelfio_schema"
   },
   {
     "type": "cite",
@@ -4333,7 +5435,9 @@
     "source_date": "2023-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -4341,7 +5445,9 @@
     "source_date": "2023-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -4349,7 +5455,9 @@
     "source_date": "2023-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -4357,7 +5465,9 @@
     "source_date": "2023-01-01",
     "target": "Ramnandan",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_sun_reca",
+    "target_id": "2015_ramnandan_assigning"
   },
   {
     "type": "cite",
@@ -4365,7 +5475,9 @@
     "source_date": "2023-01-01",
     "target": "Neumaier",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2016_neumaier_multi-level"
   },
   {
     "type": "cite",
@@ -4373,7 +5485,9 @@
     "source_date": "2023-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -4381,7 +5495,9 @@
     "source_date": "2023-01-01",
     "target": "Ermilov",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2016_ermilov_taipan"
   },
   {
     "type": "cite",
@@ -4389,7 +5505,9 @@
     "source_date": "2023-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_sun_reca",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -4397,7 +5515,9 @@
     "source_date": "2023-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -4405,7 +5525,9 @@
     "source_date": "2023-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -4413,7 +5535,9 @@
     "source_date": "2023-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -4421,7 +5545,9 @@
     "source_date": "2023-01-01",
     "target": "Lehmberg",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2017_lehmberg_stitching"
   },
   {
     "type": "cite",
@@ -4429,7 +5555,9 @@
     "source_date": "2023-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -4437,7 +5565,9 @@
     "source_date": "2023-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_baazouzi_kepler-asi",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -4445,7 +5575,9 @@
     "source_date": "2023-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -4453,7 +5585,9 @@
     "source_date": "2023-01-01",
     "target": "Steenwinckel",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2019_steenwinckel_csv2kg"
   },
   {
     "type": "cite",
@@ -4461,7 +5595,9 @@
     "source_date": "2023-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -4469,7 +5605,9 @@
     "source_date": "2023-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -4477,7 +5615,9 @@
     "source_date": "2023-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -4485,7 +5625,9 @@
     "source_date": "2023-01-01",
     "target": "Kruit",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2019_kruit_extracting"
   },
   {
     "type": "cite",
@@ -4493,7 +5635,9 @@
     "source_date": "2023-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -4501,7 +5645,9 @@
     "source_date": "2023-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -4509,7 +5655,9 @@
     "source_date": "2023-01-01",
     "target": "Takeoka",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2019_takeoka_meimei"
   },
   {
     "type": "cite",
@@ -4517,7 +5665,9 @@
     "source_date": "2023-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_korini_column",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -4525,7 +5675,9 @@
     "source_date": "2023-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_mehryar_semantic",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -4533,7 +5685,9 @@
     "source_date": "2023-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_parmar_dreifluss",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -4541,7 +5695,9 @@
     "source_date": "2023-01-01",
     "target": "Oliveira",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_parmar_dreifluss",
+    "target_id": "2019_oliveira_adog"
   },
   {
     "type": "cite",
@@ -4549,7 +5705,9 @@
     "source_date": "2023-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_parmar_dreifluss",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -4557,7 +5715,9 @@
     "source_date": "2023-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_sun_reca",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -4565,7 +5725,9 @@
     "source_date": "2023-01-01",
     "target": "Baazouzi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_baazouzi_kepler-asi",
+    "target_id": "2020_baazouzi_kepler-asi"
   },
   {
     "type": "cite",
@@ -4573,7 +5735,9 @@
     "source_date": "2023-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2020_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -4581,7 +5745,9 @@
     "source_date": "2023-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "cite",
@@ -4589,7 +5755,9 @@
     "source_date": "2023-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -4597,7 +5765,9 @@
     "source_date": "2023-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2020_zhang_sato"
   },
   {
     "type": "cite",
@@ -4605,7 +5775,9 @@
     "source_date": "2023-01-01",
     "target": "Shigapov",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_foko_exploring",
+    "target_id": "2020_shigapov_bbw"
   },
   {
     "type": "cite",
@@ -4613,7 +5785,9 @@
     "source_date": "2023-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2020_zhang_sato"
   },
   {
     "type": "cite",
@@ -4621,7 +5795,9 @@
     "source_date": "2023-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_korini_column",
+    "target_id": "2020_zhang_sato"
   },
   {
     "type": "cite",
@@ -4629,7 +5805,9 @@
     "source_date": "2023-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_mehryar_semantic",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -4637,7 +5815,9 @@
     "source_date": "2023-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_parmar_dreifluss",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -4645,7 +5825,9 @@
     "source_date": "2023-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_parmar_dreifluss",
+    "target_id": "2020_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -4653,7 +5835,9 @@
     "source_date": "2023-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_sun_reca",
+    "target_id": "2020_zhang_sato"
   },
   {
     "type": "cite",
@@ -4661,7 +5845,9 @@
     "source_date": "2023-01-01",
     "target": "Baazouzi",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_baazouzi_kepler-asi",
+    "target_id": "2021_baazouzi_kepler-asi"
   },
   {
     "type": "cite",
@@ -4669,7 +5855,9 @@
     "source_date": "2023-01-01",
     "target": "Nguyen",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2021_nguyen_semtab"
   },
   {
     "type": "cite",
@@ -4677,7 +5865,9 @@
     "source_date": "2023-01-01",
     "target": "Steenwinckel",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2021_steenwinckel_magic"
   },
   {
     "type": "cite",
@@ -4685,7 +5875,9 @@
     "source_date": "2023-01-01",
     "target": "Baazouzi",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2021_baazouzi_kepler-asi"
   },
   {
     "type": "cite",
@@ -4693,7 +5885,9 @@
     "source_date": "2023-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2021_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -4701,7 +5895,9 @@
     "source_date": "2023-01-01",
     "target": "Steenwinckel",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2021_steenwinckel_magic"
   },
   {
     "type": "cite",
@@ -4709,7 +5905,9 @@
     "source_date": "2023-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_foko_exploring",
+    "target_id": "2021_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -4717,7 +5915,9 @@
     "source_date": "2023-01-01",
     "target": "Nguyen",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_foko_exploring",
+    "target_id": "2021_nguyen_semtab"
   },
   {
     "type": "cite",
@@ -4725,7 +5925,9 @@
     "source_date": "2023-01-01",
     "target": "Wang",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_korini_column",
+    "target_id": "2021_wang_tcn"
   },
   {
     "type": "cite",
@@ -4733,7 +5935,9 @@
     "source_date": "2023-01-01",
     "target": "Avogadro",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_parmar_dreifluss",
+    "target_id": "2021_avogadro_mantistable"
   },
   {
     "type": "cite",
@@ -4741,7 +5945,9 @@
     "source_date": "2023-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_parmar_dreifluss",
+    "target_id": "2021_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -4749,7 +5955,9 @@
     "source_date": "2023-01-01",
     "target": "Wang",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_sun_reca",
+    "target_id": "2021_wang_tcn"
   },
   {
     "type": "cite",
@@ -4757,7 +5965,9 @@
     "source_date": "2023-01-01",
     "target": "Zhou",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_sun_reca",
+    "target_id": "2021_zhou_tabular"
   },
   {
     "type": "cite",
@@ -4765,7 +5975,9 @@
     "source_date": "2023-01-01",
     "target": "Abdelmageed",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2022_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -4773,7 +5985,9 @@
     "source_date": "2023-01-01",
     "target": "Cremaschi",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2022_cremaschi_s-elbat"
   },
   {
     "type": "cite",
@@ -4781,7 +5995,9 @@
     "source_date": "2023-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -4789,7 +6005,9 @@
     "source_date": "2023-01-01",
     "target": "Huynh",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2022_huynh_from"
   },
   {
     "type": "cite",
@@ -4797,7 +6015,9 @@
     "source_date": "2023-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dasoulas_torchictab",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -4805,7 +6025,9 @@
     "source_date": "2023-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_dorodnykh_knowledge",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -4813,7 +6035,9 @@
     "source_date": "2023-01-01",
     "target": "Cremaschi",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_henriksen_semtex",
+    "target_id": "2022_cremaschi_s-elbat"
   },
   {
     "type": "cite",
@@ -4821,7 +6045,9 @@
     "source_date": "2023-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_khatiwada_santos",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -4829,7 +6055,9 @@
     "source_date": "2023-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_korini_column",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -4837,7 +6065,9 @@
     "source_date": "2023-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_korini_column",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -4845,7 +6075,9 @@
     "source_date": "2023-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_sun_reca",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -4853,7 +6085,9 @@
     "source_date": "2023-01-01",
     "target": "Sun",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_korini_column",
+    "target_id": "2023_sun_reca"
   },
   {
     "type": "evolve",
@@ -4861,7 +6095,9 @@
     "source_date": "2023-01-01",
     "target": "Korini",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_korini_column",
+    "target_id": "2024_korini_column"
   },
   {
     "type": "evolve",
@@ -4869,7 +6105,9 @@
     "source_date": "2023-01-01",
     "target": "Parmar",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_parmar_dreifluss",
+    "target_id": "2024_parmar_wikidata-driven"
   },
   {
     "type": "evolve",
@@ -4877,7 +6115,9 @@
     "source_date": "2023-01-01",
     "target": "Baazouzi",
     "target_date": "2025-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2023_baazouzi_kepler-asi",
+    "target_id": "2025_baazouzi_kepler-asi"
   },
   {
     "type": "cite",
@@ -4885,7 +6125,9 @@
     "source_date": "2024-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_korini_column",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -4893,7 +6135,9 @@
     "source_date": "2024-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -4901,7 +6145,9 @@
     "source_date": "2024-01-01",
     "target": "Venetis",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_korini_column",
+    "target_id": "2011_venetis_recovering"
   },
   {
     "type": "cite",
@@ -4909,7 +6155,9 @@
     "source_date": "2024-01-01",
     "target": "Quercini",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2013_quercini_entity"
   },
   {
     "type": "cite",
@@ -4917,7 +6165,9 @@
     "source_date": "2024-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_korini_column",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -4925,7 +6175,9 @@
     "source_date": "2024-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -4933,7 +6185,9 @@
     "source_date": "2024-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_zhang_tablellama",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -4941,7 +6195,9 @@
     "source_date": "2024-01-01",
     "target": "Pham",
     "target_date": "2016-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2016_pham_semantic"
   },
   {
     "type": "cite",
@@ -4949,7 +6205,9 @@
     "source_date": "2024-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_feuer_archetype",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -4957,7 +6215,9 @@
     "source_date": "2024-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -4965,7 +6225,9 @@
     "source_date": "2024-01-01",
     "target": "Lehmberg",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2017_lehmberg_stitching"
   },
   {
     "type": "cite",
@@ -4973,7 +6235,9 @@
     "source_date": "2024-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -4981,7 +6245,9 @@
     "source_date": "2024-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_avogadro_featurevector",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -4989,7 +6255,9 @@
     "source_date": "2024-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_feuer_archetype",
+    "target_id": "2019_chen_learning"
   },
   {
     "type": "cite",
@@ -4997,7 +6265,9 @@
     "source_date": "2024-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_feuer_archetype",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -5005,7 +6275,9 @@
     "source_date": "2024-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_korini_column",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -5013,7 +6285,9 @@
     "source_date": "2024-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_li_table-gpt",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -5021,7 +6295,9 @@
     "source_date": "2024-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -5029,7 +6305,9 @@
     "source_date": "2024-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -5037,7 +6315,9 @@
     "source_date": "2024-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -5045,7 +6325,9 @@
     "source_date": "2024-01-01",
     "target": "Morikawa",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2019_morikawa_semantic"
   },
   {
     "type": "cite",
@@ -5053,15 +6335,9 @@
     "source_date": "2024-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
-  },
-  {
-    "type": "cite",
-    "source": "Nguyen",
-    "source_date": "2024-01-01",
-    "target": "Nguyen",
-    "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -5069,7 +6345,9 @@
     "source_date": "2024-01-01",
     "target": "Oliveira",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2019_oliveira_adog"
   },
   {
     "type": "cite",
@@ -5077,7 +6355,9 @@
     "source_date": "2024-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -5085,7 +6365,9 @@
     "source_date": "2024-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -5093,7 +6375,9 @@
     "source_date": "2024-01-01",
     "target": "Oliveira",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2019_oliveira_adog"
   },
   {
     "type": "cite",
@@ -5101,7 +6385,9 @@
     "source_date": "2024-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -5109,7 +6395,9 @@
     "source_date": "2024-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_zhang_tablellama",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -5117,7 +6405,9 @@
     "source_date": "2024-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_feuer_archetype",
+    "target_id": "2020_zhang_sato"
   },
   {
     "type": "cite",
@@ -5125,7 +6415,9 @@
     "source_date": "2024-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_li_table-gpt",
+    "target_id": "2020_zhang_sato"
   },
   {
     "type": "cite",
@@ -5133,7 +6425,9 @@
     "source_date": "2024-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -5141,7 +6435,9 @@
     "source_date": "2024-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -5149,7 +6445,9 @@
     "source_date": "2024-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2020_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -5157,7 +6455,9 @@
     "source_date": "2024-01-01",
     "target": "Li",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_li_table-gpt",
+    "target_id": "2021_li_deep"
   },
   {
     "type": "cite",
@@ -5165,7 +6465,9 @@
     "source_date": "2024-01-01",
     "target": "Wang",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_nguyen_mtab4d",
+    "target_id": "2021_wang_tcn"
   },
   {
     "type": "cite",
@@ -5173,7 +6475,9 @@
     "source_date": "2024-01-01",
     "target": "Avogadro",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2021_avogadro_mantistable"
   },
   {
     "type": "cite",
@@ -5181,7 +6485,9 @@
     "source_date": "2024-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2021_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -5189,7 +6495,9 @@
     "source_date": "2024-01-01",
     "target": "Cremaschi",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_avogadro_featurevector",
+    "target_id": "2022_cremaschi_s-elbat"
   },
   {
     "type": "cite",
@@ -5197,7 +6505,9 @@
     "source_date": "2024-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_avogadro_featurevector",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -5205,7 +6515,9 @@
     "source_date": "2024-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_feuer_archetype",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -5213,7 +6525,9 @@
     "source_date": "2024-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_feuer_archetype",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -5221,7 +6535,9 @@
     "source_date": "2024-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_korini_column",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -5229,7 +6545,9 @@
     "source_date": "2024-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_li_table-gpt",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -5237,7 +6555,9 @@
     "source_date": "2024-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_li_table-gpt",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -5245,7 +6565,9 @@
     "source_date": "2024-01-01",
     "target": "Cremaschi",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2022_cremaschi_s-elbat"
   },
   {
     "type": "cite",
@@ -5253,7 +6575,9 @@
     "source_date": "2024-01-01",
     "target": "Khatiwada",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_feuer_archetype",
+    "target_id": "2023_khatiwada_santos"
   },
   {
     "type": "cite",
@@ -5261,7 +6585,9 @@
     "source_date": "2024-01-01",
     "target": "Korini",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_feuer_archetype",
+    "target_id": "2023_korini_column"
   },
   {
     "type": "cite",
@@ -5269,7 +6595,9 @@
     "source_date": "2024-01-01",
     "target": "Korini",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_korini_column",
+    "target_id": "2023_korini_column"
   },
   {
     "type": "cite",
@@ -5277,7 +6605,9 @@
     "source_date": "2024-01-01",
     "target": "Korini",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_li_table-gpt",
+    "target_id": "2023_korini_column"
   },
   {
     "type": "cite",
@@ -5285,7 +6615,9 @@
     "source_date": "2024-01-01",
     "target": "Parmar",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_parmar_wikidata-driven",
+    "target_id": "2023_parmar_dreifluss"
   },
   {
     "type": "cite",
@@ -5293,7 +6625,9 @@
     "source_date": "2024-01-01",
     "target": "Li",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_korini_column",
+    "target_id": "2024_li_table-gpt"
   },
   {
     "type": "cite",
@@ -5301,7 +6635,9 @@
     "source_date": "2024-01-01",
     "target": "Li",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2024_zhang_tablellama",
+    "target_id": "2024_li_table-gpt"
   },
   {
     "type": "cite",
@@ -5309,7 +6645,9 @@
     "source_date": "2025-01-01",
     "target": "Limaye",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2010_limaye_annotating"
   },
   {
     "type": "cite",
@@ -5317,7 +6655,9 @@
     "source_date": "2025-01-01",
     "target": "Mulwad",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2010_mulwad_t2ld"
   },
   {
     "type": "cite",
@@ -5325,7 +6665,9 @@
     "source_date": "2025-01-01",
     "target": "Syed",
     "target_date": "2010-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2010_syed_exploiting"
   },
   {
     "type": "cite",
@@ -5333,7 +6675,9 @@
     "source_date": "2025-01-01",
     "target": "Mulwad",
     "target_date": "2011-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2011_mulwad_automatically"
   },
   {
     "type": "cite",
@@ -5341,7 +6685,9 @@
     "source_date": "2025-01-01",
     "target": "Wang",
     "target_date": "2012-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2012_wang_understanding"
   },
   {
     "type": "cite",
@@ -5349,7 +6695,9 @@
     "source_date": "2025-01-01",
     "target": "Mulwad",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2013_mulwad_semantic"
   },
   {
     "type": "cite",
@@ -5357,7 +6705,9 @@
     "source_date": "2025-01-01",
     "target": "Zhang",
     "target_date": "2013-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2013_zhang_infogather"
   },
   {
     "type": "cite",
@@ -5365,7 +6715,9 @@
     "source_date": "2025-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -5373,7 +6725,9 @@
     "source_date": "2025-01-01",
     "target": "Ritze",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2015_ritze_matching"
   },
   {
     "type": "cite",
@@ -5381,7 +6735,9 @@
     "source_date": "2025-01-01",
     "target": "Bhagavatula",
     "target_date": "2015-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_tachioka_cell",
+    "target_id": "2015_bhagavatula_tabel"
   },
   {
     "type": "cite",
@@ -5389,7 +6745,9 @@
     "source_date": "2025-01-01",
     "target": "Efthymiou",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2017_efthymiou_matching"
   },
   {
     "type": "cite",
@@ -5397,7 +6755,9 @@
     "source_date": "2025-01-01",
     "target": "Ell",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2017_ell_towards"
   },
   {
     "type": "cite",
@@ -5405,7 +6765,9 @@
     "source_date": "2025-01-01",
     "target": "Zhang",
     "target_date": "2017-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2017_zhang_effective"
   },
   {
     "type": "cite",
@@ -5413,7 +6775,9 @@
     "source_date": "2025-01-01",
     "target": "Zhang",
     "target_date": "2018-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2018_zhang_ad"
   },
   {
     "type": "cite",
@@ -5421,7 +6785,9 @@
     "source_date": "2025-01-01",
     "target": "Chabot",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_chabot_dagobah"
   },
   {
     "type": "cite",
@@ -5429,7 +6795,9 @@
     "source_date": "2025-01-01",
     "target": "Chen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_chen_colnet"
   },
   {
     "type": "cite",
@@ -5437,7 +6805,9 @@
     "source_date": "2025-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -5445,15 +6815,9 @@
     "source_date": "2025-01-01",
     "target": "Cremaschi",
     "target_date": "2019-01-01",
-    "value": 1
-  },
-  {
-    "type": "cite",
-    "source": "Cremaschi",
-    "source_date": "2025-01-01",
-    "target": "Cremaschi",
-    "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_cremaschi_semantic"
   },
   {
     "type": "cite",
@@ -5461,7 +6825,9 @@
     "source_date": "2025-01-01",
     "target": "Kruit",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_kruit_extracting"
   },
   {
     "type": "cite",
@@ -5469,7 +6835,9 @@
     "source_date": "2025-01-01",
     "target": "Morikawa",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_morikawa_semantic"
   },
   {
     "type": "cite",
@@ -5477,7 +6845,9 @@
     "source_date": "2025-01-01",
     "target": "Nguyen",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_nguyen_mtab"
   },
   {
     "type": "cite",
@@ -5485,7 +6855,9 @@
     "source_date": "2025-01-01",
     "target": "Steenwinckel",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_steenwinckel_csv2kg"
   },
   {
     "type": "cite",
@@ -5493,7 +6865,9 @@
     "source_date": "2025-01-01",
     "target": "Thawani",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2019_thawani_entity"
   },
   {
     "type": "cite",
@@ -5501,7 +6875,9 @@
     "source_date": "2025-01-01",
     "target": "Hulsebos",
     "target_date": "2019-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_tachioka_cell",
+    "target_id": "2019_hulsebos_sherlock"
   },
   {
     "type": "cite",
@@ -5509,7 +6885,9 @@
     "source_date": "2025-01-01",
     "target": "Abdelmageed",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_abdelmageed_jentab"
   },
   {
     "type": "cite",
@@ -5517,7 +6895,9 @@
     "source_date": "2025-01-01",
     "target": "Azzi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_azzi_amalgam"
   },
   {
     "type": "cite",
@@ -5525,7 +6905,9 @@
     "source_date": "2025-01-01",
     "target": "Chen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_chen_linkingpark"
   },
   {
     "type": "cite",
@@ -5533,7 +6915,9 @@
     "source_date": "2025-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_cremaschi_a"
   },
   {
     "type": "cite",
@@ -5541,7 +6925,9 @@
     "source_date": "2025-01-01",
     "target": "Cremaschi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_cremaschi_mantistable"
   },
   {
     "type": "cite",
@@ -5549,7 +6935,9 @@
     "source_date": "2025-01-01",
     "target": "Eslahi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_eslahi_annotating"
   },
   {
     "type": "cite",
@@ -5557,7 +6945,9 @@
     "source_date": "2025-01-01",
     "target": "Huynh",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -5565,7 +6955,9 @@
     "source_date": "2025-01-01",
     "target": "Kim",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_kim_generating"
   },
   {
     "type": "cite",
@@ -5573,7 +6965,9 @@
     "source_date": "2025-01-01",
     "target": "Nguyen",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_nguyen_mtab4wikidata"
   },
   {
     "type": "cite",
@@ -5581,7 +6975,9 @@
     "source_date": "2025-01-01",
     "target": "Shigapov",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_shigapov_bbw"
   },
   {
     "type": "cite",
@@ -5589,7 +6985,9 @@
     "source_date": "2025-01-01",
     "target": "Tyagi",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_tyagi_lexma"
   },
   {
     "type": "cite",
@@ -5597,7 +6995,9 @@
     "source_date": "2025-01-01",
     "target": "Zhang",
     "target_date": "2020-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2020_zhang_novel"
   },
   {
     "type": "cite",
@@ -5605,7 +7005,9 @@
     "source_date": "2025-01-01",
     "target": "Avogadro",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2021_avogadro_mantistable"
   },
   {
     "type": "cite",
@@ -5613,7 +7015,9 @@
     "source_date": "2025-01-01",
     "target": "Baazouzi",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2021_baazouzi_kepler-asi"
   },
   {
     "type": "cite",
@@ -5621,7 +7025,9 @@
     "source_date": "2025-01-01",
     "target": "Huynh",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2021_huynh_dagobah"
   },
   {
     "type": "cite",
@@ -5629,7 +7035,9 @@
     "source_date": "2025-01-01",
     "target": "Nguyen",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2021_nguyen_semtab"
   },
   {
     "type": "cite",
@@ -5637,7 +7045,9 @@
     "source_date": "2025-01-01",
     "target": "Steenwinckel",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2021_steenwinckel_magic"
   },
   {
     "type": "cite",
@@ -5645,7 +7055,9 @@
     "source_date": "2025-01-01",
     "target": "Yang",
     "target_date": "2021-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2021_yang_gbmtab"
   },
   {
     "type": "cite",
@@ -5653,7 +7065,9 @@
     "source_date": "2025-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_bar_llm-driven",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -5661,7 +7075,9 @@
     "source_date": "2025-01-01",
     "target": "Chen",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2022_chen_linkingpark"
   },
   {
     "type": "cite",
@@ -5669,7 +7085,9 @@
     "source_date": "2025-01-01",
     "target": "Cremaschi",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2022_cremaschi_s-elbat"
   },
   {
     "type": "cite",
@@ -5677,7 +7095,9 @@
     "source_date": "2025-01-01",
     "target": "Deng",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2022_deng_turl"
   },
   {
     "type": "cite",
@@ -5685,7 +7105,9 @@
     "source_date": "2025-01-01",
     "target": "Huynh",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2022_huynh_from"
   },
   {
     "type": "cite",
@@ -5693,7 +7115,9 @@
     "source_date": "2025-01-01",
     "target": "Liu",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2022_liu_radar"
   },
   {
     "type": "cite",
@@ -5701,7 +7125,9 @@
     "source_date": "2025-01-01",
     "target": "Suhara",
     "target_date": "2022-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2022_suhara_annotating"
   },
   {
     "type": "cite",
@@ -5709,7 +7135,9 @@
     "source_date": "2025-01-01",
     "target": "Dasoulas",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2023_dasoulas_torchictab"
   },
   {
     "type": "cite",
@@ -5717,7 +7145,9 @@
     "source_date": "2025-01-01",
     "target": "Korini",
     "target_date": "2023-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_cremaschi_steellm",
+    "target_id": "2023_korini_column"
   },
   {
     "type": "cite",
@@ -5725,7 +7155,9 @@
     "source_date": "2025-01-01",
     "target": "Zhang",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_bar_llm-driven",
+    "target_id": "2024_zhang_tablellama"
   },
   {
     "type": "cite",
@@ -5733,6 +7165,8 @@
     "source_date": "2025-01-01",
     "target": "Zhang",
     "target_date": "2024-01-01",
-    "value": 1
+    "value": 1,
+    "source_id": "2025_tachioka_cell",
+    "target_id": "2024_zhang_tablellama"
   }
 ]

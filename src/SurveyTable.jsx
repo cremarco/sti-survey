@@ -1417,42 +1417,34 @@ function SurveyTable({ data = [] }) {
       cell: (info) => <ValidationCell value={info.getValue()} isMissing={isRequiredFieldMissing(info.row.original, 'validation')} />,
       enableSorting: false,
     }),
-    columnHelper.accessor(row => row.doi, {
-      id: "doi",
-      header: () => <span>{getSchemaLabel('doi', 'DOI')}</span>,
+    columnHelper.accessor(row => row.doi || row.publicationUrl, {
+      id: "publication",
+      header: () => <span>Publication</span>,
       cell: (info) => {
-        const doiValue = info.getValue();
-        const isMissing = isRequiredFieldMissing(info.row.original, 'doi');
-        
-        if (isMissing) {
-          return <span className="bg-red-500/20 text-red-200 px-2 py-1 rounded">MISSING</span>;
-        }
-        
-        if (!doiValue || doiValue.trim() === "") {
-          return <span className="text-neutral-500 text-[10px]">-</span>;
-        }
-        
-        // Ensure DOI has proper protocol
-        const doiUrl = doiValue.startsWith('http') ? doiValue : `https://doi.org/${doiValue}`;
-        
+        const paper = info.row.original;
+        const url = paper.doi && !paper.doi.startsWith('http')
+          ? `https://doi.org/${paper.doi}` : info.getValue();
+        if (!url) return <span aria-label="Unavailable">—</span>;
+        const linkClass = "text-blue-400 hover:text-blue-300 underline text-[10px] break-all";
         return (
-          <a 
-            href={doiUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300 underline text-[10px] break-all"
-            title="Open DOI link"
-          >
-            {doiValue}
-          </a>
+          <div className="flex flex-col gap-1">
+            <a href={url} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              {paper.doi ? paper.doi.replace(/^https?:\/\/(?:dx\.)?doi\.org\//i, '') : 'Publication record'}
+            </a>
+            {paper.relatedResource && (
+              <a href={paper.relatedResource.url} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                {paper.relatedResource.label}
+              </a>
+            )}
+          </div>
         );
       },
       enableSorting: false,
     }),
     // Citations column
-    columnHelper.accessor(row => Array.isArray(row.citations?.references) ? row.citations.references.length : 0, {
+    columnHelper.accessor(row => (Array.isArray(row.citations) ? row.citations : row.citations?.references)?.length ?? 0, {
       id: "referencesCount",
-      header: () => <span>{getSchemaLabel('citations', 'Citations')}</span>,
+      header: () => <span>Bibliographic references</span>,
       cell: (info) => {
         const referencesCount = info.getValue();
         const alignClass = info.column.columnDef.meta?.align === 'center' ? 'flex justify-center' : '';

@@ -60,43 +60,26 @@ function CitationMap() {
     const outerRadius = innerRadius + 10;
     const chordPadAngle = 8 / innerRadius;
 
-    /**
-     * Helper function to format year from date string
-     */
-    const formatYear = (str) => {
-      const parsed = Date.parse(str);
-      if (Number.isNaN(parsed)) return null;
-      const date = new Date(parsed);
-      return date.getFullYear();
-    };
-
-    const toPaperLabel = (author, dateString) => {
-      const year = formatYear(dateString);
-      if (!author || !Number.isFinite(year)) return null;
-      return `${author} ${year}`;
-    };
-
-    const citeEdges = data.filter((d) => d.type === 'cite');
-    const evolveEdges = data.filter((d) => d.type === 'evolve');
-
-    // Compute unique names for the chord diagram
-    // Build unique names from citation edges and sort by year ascending (then by label)
-    const allNames = d3.union(
-      citeEdges.map((d) => toPaperLabel(d.source, d.source_date)).filter(Boolean),
-      citeEdges.map((d) => toPaperLabel(d.target, d.target_date)).filter(Boolean)
-    );
-    const getYearFromLabel = (name) => {
-      const lastSpace = name.lastIndexOf(' ');
-      const y = Number(name.slice(lastSpace + 1));
-      return Number.isFinite(y) ? y : Number.POSITIVE_INFINITY;
-    };
-    const names = Array.from(allNames).sort((a, b) => {
-      const ya = getYearFromLabel(a);
-      const yb = getYearFromLabel(b);
-      if (ya !== yb) return ya - yb;
-      return a.localeCompare(b);
-    });
-    const index = new Map(names.map((name, i) => [name, i]));
+    const citeEdges = data.filter((edge) => edge.type === 'cite');
+    const evolveEdges = data.filter((edge) => edge.type === 'evolve');
+    const papers = new Map();
+    const key = (edge, side) => edge[`${side}_id`] || `${edge[side]} ${edge[`${side}_date`]}`;
+    for (const edge of citeEdges) {
+      for (const side of ['source', 'target']) {
+        const id = key(edge, side);
+        const year = Number(String(edge[`${side}_date`]).slice(0, 4));
+        papers.set(id, { id, year, author: edge[side] });
+      }
+    }
+    const ordered = [...papers.values()].sort((a, b) => a.year - b.year
+      || a.author.localeCompare(b.author) || a.id.localeCompare(b.id));
+    const groups = d3.group(ordered, (paper) => `${paper.author} ${paper.year}`);
+    const paperLabels = new Map();
+    for (const [label, group] of groups) {
+      group.forEach((paper, i) => paperLabels.set(paper.id, group.length === 1 ? label : `${label} (${i + 1})`));
+    }
+    const names = ordered.map((paper) => paperLabels.get(paper.id));
+    const index = new Map(ordered.map((paper, i) => [paper.id, i]));
 
     if (names.length === 0) {
       const emptyMessage = document.createElement('div');
@@ -110,24 +93,14 @@ function CitationMap() {
     // Map for 'evolve' type relationships
     const evolveMap = new Map();
     evolveEdges.forEach((datum) => {
-      const targetLabel = toPaperLabel(datum.target, datum.target_date);
-      const sourceLabel = toPaperLabel(datum.source, datum.source_date);
-      if (!targetLabel || !sourceLabel) return;
-      const targetIndex = index.get(targetLabel);
-      if (targetIndex === undefined) return;
-      evolveMap.set(targetIndex, sourceLabel);
+      const targetIndex = index.get(key(datum, 'target'));
+      const sourceLabel = paperLabels.get(key(datum, 'source'));
+      if (targetIndex !== undefined && sourceLabel) evolveMap.set(targetIndex, sourceLabel);
     });
 
-    // Build adjacency matrix for chord diagram
     const matrix = Array.from(index, () => new Array(names.length).fill(0));
-    for (const { source, target, source_date, target_date, value } of citeEdges) {
-      const sourceLabel = toPaperLabel(source, source_date);
-      const targetLabel = toPaperLabel(target, target_date);
-      if (!sourceLabel || !targetLabel) continue;
-      const sourceIndex = index.get(sourceLabel);
-      const targetIndex = index.get(targetLabel);
-      if (sourceIndex === undefined || targetIndex === undefined) continue;
-      matrix[sourceIndex][targetIndex] += Number.isFinite(value) ? value : 1;
+    for (const edge of citeEdges) {
+      matrix[index.get(key(edge, 'source'))][index.get(key(edge, 'target'))] += edge.value ?? 1;
     }
 
     // D3 generators for chord diagram
@@ -198,8 +171,8 @@ function CitationMap() {
       const highlightTarget = 'hignette 2007';
       const highlightName = names.find((n) => n.toLowerCase() === highlightTarget);
       if (highlightName !== undefined) {
-        const hi = index.get(highlightName);
-        if (hi !== undefined) {
+        const hi = names.indexOf(highlightName);
+        if (hi >= 0) {
           labels
             .filter((d) => d.index === hi)
             .each(function() {
